@@ -1,0 +1,9 @@
+ParamName;Suffix;Comments
+diffuse;;ParamName is the name of the material parameter that should be autobound to textures.
+diffusemap;;Suffix is the ending of the texture file name that we will look for.
+normal;n;
+normalmap;n;The names will be matched following way:
+specular;s;If mesh name is 'model__b1.w2mesh' and the suffix is non-empty, then
+specularmap;s;'model__b1_suffix.xbm' or 'model__suffix.xbm' will be matched.
+alpha;a;If suffix is empty, then
+alphamap;a;'model__b1.xbm' or 'model.xbm' will be matched. 

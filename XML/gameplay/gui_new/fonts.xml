@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<fonts fontlib="gfxfontlib">
+  <lang name="EN" fontlib="gameplay/gui_new/swf/witcher3/fonts_en.redswf">
+		<NormalFont font="PF Din Text Cond Pro"/>
+		<ItalicFont font="PF Din Text Cond Pro" italic="1"/>
+		<BoldFont font="PF Din Text Cond Pro" bold="1"/>
+		<CreditsFont font="PF Din Text Cond Pro"/>
+	</lang>
+	<lang name="RU" fontlib="gameplay/gui_new/swf/witcher3/fonts_ru.redswf">
+		<NormalFont font="PF Din Text Cond Pro"/>
+		<ItalicFont font="PF Din Text Cond Pro" italic="1"/>
+		<BoldFont font="PF Din Text Cond Pro" bold="1"/>
+		<CreditsFont font="PF Din Text Cond Pro"/>
+	</lang>
+	<lang name="AR" fontlib="gameplay/gui_new/swf/witcher3/fonts_ar.redswf">
+		<NormalFont font="Arial"/>
+		<ItalicFont font="Arial"/>
+		<BoldFont font="Arial"/>
+		<CreditsFont font="PF Din Text Cond Pro"/>
+	</lang>
+	<lang name="ZH" glyphcache="1" fontlib="gameplay/gui_new/swf/witcher3/fonts_zh.redswf">
+		<NormalFont font="Noto Sans TC Regular"/>
+		<ItalicFont font="Noto Sans TC Regular"/>
+		<BoldFont font="Noto Sans TC Regular"/>
+		<CreditsFont font="PFDinTextCondPro-Regular"/>
+	</lang>
+	<lang name="CN" glyphcache="1" fontlib="gameplay/gui_new/swf/witcher3/fonts_cn.redswf">
+		<NormalFont font="文鼎UD晶熙黑体G30_D"/>
+		<ItalicFont font="文鼎UD晶熙黑体G30_D"/>
+		<BoldFont font="文鼎UD晶熙黑体G30_D"/>
+		<CreditsFont font="PFDinTextCondPro-Regular"/>
+	</lang>
+	<lang name="JP" glyphcache="1" fontlib="gameplay/gui_new/swf/witcher3/fonts_jp.redswf">
+		<NormalFont font="DFMinchoP-W5"/>
+		<ItalicFont font="DFMinchoP-W5" />
+		<BoldFont font="DFMinchoP-W5"/>
+		<CreditsFont font="PF Din Text Cond Pro"/>
+	</lang>
+	<lang name="KR" fontlib="gameplay/gui_new/swf/witcher3/fonts_kr.redswf">
+		<NormalFont font="나눔명조"/>
+		<ItalicFont font="나눔명조"/>
+		<BoldFont font="나눔명조 Bold"/>
+		<CreditsFont font="PFDinTextCondPro-Regular"/>
+	</lang>
+	<lang name="PL" ref="EN"/>
+	<lang name="DE" ref="EN"/>
+	<lang name="FR" ref="EN"/>
+	<lang name="IT" ref="EN"/>
+	<lang name="ES" ref="EN"/>
+	<lang name="BR" ref="EN"/>
+	<lang name="ESMX" ref="EN"/>
+	<lang name="CZ" ref="EN"/>
+	<lang name="HU" ref="EN"/>
+	<lang name="TR" ref="EN"/>
+	<lang name="DEBUG" ref="EN"/>
+</fonts>

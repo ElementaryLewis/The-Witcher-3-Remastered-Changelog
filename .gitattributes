@@ -1,2 +1,1 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+*.ws text diff working-tree-encoding=UTF-8 eol=LF
