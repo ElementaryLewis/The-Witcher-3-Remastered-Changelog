@@ -43,13 +43,13 @@ For instance:
 | [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/d0e37d82188654cd5e4abb2f4ff70edfcc097688 "CSV 4.04 vs 4.04a_REDkit") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
 | [5.00]( "CSV 4.04b vs 5.00") | [5.XX]( "CSV 5.00 vs 5.XX") | 2026/XX/XX |
 
-### W3Strings
+### W3STRINGS
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
 | [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/aded0c0885c208f68b068defe18c4638db187e98 "W3Strings 4.03 vs 4.04") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
 | [5.00]( "W3Strings 4.04b vs 5.00") | [5.XX]( "W3Strings 5.00 vs 5.XX") | 2026/XX/XX |
 
-### Bundled Non-Text
+### BUNDLED NON-TEXT
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
 | [4.04b](https://raw.githubusercontent.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/refs/heads/main/CR2W_summary/CR2W_changed-list.txt "Bundled 1.32 vs 4.00") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
