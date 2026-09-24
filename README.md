@@ -57,6 +57,6 @@ For instance:
 
 
 #### Our Discord Servers:
-[![alt text](https://imgur.com/LWEWdbN.png) "Wolven Workshop"](https://discord.gg/xPBgHs42Cb)		[![alt text](https://imgur.com/hC5nTJY.png) "Brothers In Arms"](https://discord.gg/nb9N4vjKGR)
+[![Wolven Workshop](https://i.postimg.cc/fTfh832X/LWEWdb-N-Imgur.png)](https://discord.gg/xPBgHs42Cb)[![Brothers In Arms](https://i.postimg.cc/TYJXty7g/h-C5n-TJY-Imgur.png)](https://discord.gg/nb9N4vjKGR)
 
 ###### This repository is not affiliated with CD Projekt RED. All files belong to the CD Projekt company.
