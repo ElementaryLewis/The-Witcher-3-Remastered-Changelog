@@ -1,23 +1,61 @@
-# Witcher-3-Next-Gen-Changelog
-Changelog of the Witcher 3 Next -Gen patch
+# The Witcher 3 Remastered Changelog
+Changelog of The Witcher 3: Wild Hunt - Remastered.
 
 # Description
-HHello Witcher 3 community.
-The Next-Gen version is finally available since 14th December 2022. As we were expecting, CDPR changed much more content but we don't know exactly which files or how they change it.
+GitHub repository to survey every The Witcher 3 game update from Next-Gen 4.04 to Remastered 5.00 and forward.
+This is meant as a resource for modders, helping them to know which files were changed and what the changes are, so they can update their mods for the Remastered version if needed.
 
-That's what this changelog does. With the contribution of many modders, we were prepared to find all the difference between Classic 1.32 and Next-Gen version. So this useful information will help everyone to update their mods for the free update Next Gen Patch.
+**All files are encoded in UFT-8 (with or without BOM)! They were previously UFT-16 LE BOM in Next-Gen version.**
+For the purpose of creating a comparison commit, most but not all "false positive" changes were removed.
+For instance:
 
-The changelog is divided into:
-Scripts
-XML
-CSV
-CR2W
-CR2W Non Text
-Texture
-W3Strings
-RTTI
+*Next-Gen*
+```
+/** 	THE WITCHER® is a trademark of CD PROJEKT S. A.
+<?xml version="1.0" encoding="UTF-16"?>
+```
+*Remastered*
+```
+/** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
+<?xml version="1.0" encoding="UTF-8"?>
+```
 
-The purpose of this project is to preserve the mod library of the Witcher 3 as much as possible. We don't want to waste all the work they did and so the changelog will help to update their mods for the current Next-Gen version.
+## List of changelog commits
 
-# Mod creators attention!
-If you want to contribute on our works, you may joins our Discord server "Wolven Workshop": https://discord.gg/MfnWCPP5wZ.
+### SCRIPTS 
+| PREVIOUS VERSIONS    | NEW VERSION          | DATE RELEASE |
+| -------------------- |:--------------------:| ------------:|
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04 vs 4.04a_REDkit") | [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04b vs 5.00") | 2026/09/29 |
+| [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04b vs 5.00") | [5.XX]( "Scripts 5.00 vs 5.XX") | 2026/XX/XX |
+
+
+### XML
+| PREVIOUS VERSIONS    | NEW VERSION          | DATE RELEASE |
+| -------------------- |:--------------------:| ------------:|
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/15e2b662b3a9145e7d24e72c4e8ab37aac0f2db3 "XML 4.02 vs 4.03") | [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04b vs 5.00") | 2026/09/29 |
+| [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "XML 4.04b vs 5.00") | [5.XX]( "XML 5.00 vs 5.XX") | 2026/XX/XX |
+
+### CSV
+| PREVIOUS VERSIONS    | NEW VERSION          | DATE RELEASE |
+| -------------------- |:--------------------:| ------------:|
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/d0e37d82188654cd5e4abb2f4ff70edfcc097688 "CSV 4.04 vs 4.04a_REDkit") | [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04b vs 5.00") | 2026/09/29 |
+| [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "CSV 4.04b vs 5.00") | [5.XX]( "CSV 5.00 vs 5.XX") | 2026/XX/XX |
+
+### W3Strings
+| PREVIOUS VERSIONS    | NEW VERSION          | DATE RELEASE |
+| -------------------- |:--------------------:| ------------:|
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/aded0c0885c208f68b068defe18c4638db187e98 "W3Strings 4.03 vs 4.04") | [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04b vs 5.00") | 2026/09/29 |
+| [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "W3Strings 4.04b vs 5.00") | [5.XX]( "W3Strings 5.00 vs 5.XX") | 2026/XX/XX |
+
+### Bundled Non-Text
+| PREVIOUS VERSIONS    | NEW VERSION          | DATE RELEASE |
+| -------------------- |:--------------------:| ------------:|
+| [4.04b](https://raw.githubusercontent.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/refs/heads/main/CR2W_summary/CR2W_changed-list.txt "Bundled 1.32 vs 4.00") | [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04b vs 5.00") | 2026/09/29 |
+| [5.00](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Bundled 4.04b vs 5.00") | [5.XX]( "Bundled 5.00 vs 5.XX") | 2026/XX/XX |
+
+
+#### Our Discord Servers:
+[![](https://imgur.com/LWEWdbN.png) "Wolven Workshop"](https://discord.gg/xPBgHs42Cb)
+[![](https://imgur.com/hC5nTJY.png) "Brothers In Arms"](https://discord.gg/nb9N4vjKGR)
+
+###### This repository is not affiliated with CD Projekt RED. All files belong to the CD Projekt company.
