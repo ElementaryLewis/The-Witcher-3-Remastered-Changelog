@@ -437,31 +437,14 @@ import abstract class W3AbilityManager extends IScriptable
 	
 	public function DrainStamina(action : EStaminaActionType, optional fixedCost : float, optional fixedDelay : float, optional abilityName : name, optional dt : float, optional costMult : float) : float
 	{
-		var cost, delay, avoidanceMult 			: float;
-		var signSkillAvoidanceLevel				: int;
-		var signSkillAvoidanceActive			: bool;
-		var minAvoidance, maxAvoidance 			: SAbilityAttributeValue;
+		var cost, delay : float;
 
 		GetStaminaActionCost(action, cost, delay, fixedCost, fixedDelay, abilityName, dt, costMult);
 		
 		
 		if(cost > 0)
 		{
-			
-			avoidanceMult = 1;
-			if (IsSkillSign(SkillNameToEnum(abilityName)))
-			{
-				signSkillAvoidanceLevel = thePlayer.GetSkillLevel( S_Magic_s39 );
-				signSkillAvoidanceActive = signSkillAvoidanceLevel >= 1 && thePlayer.HasBuff( EET_Avoidance ) && thePlayer.CanUseSkill(S_Magic_s39);
-				if (signSkillAvoidanceActive)
-				{
-					theGame.GetDefinitionsManager().GetAbilityAttributeValue('magic_s39', 'stamina_cost_reduction', minAvoidance, maxAvoidance);
-					avoidanceMult = 1 - ( minAvoidance.valueMultiplicative * signSkillAvoidanceLevel );
-					
-				}
-			}
-
-			InternalReduceStat(BCS_Stamina, cost * avoidanceMult);
+			InternalReduceStat(BCS_Stamina, cost);
 			owner.StartStaminaRegen();
 		}
 		
@@ -575,7 +558,7 @@ import abstract class W3AbilityManager extends IScriptable
 		
 		if(GetStat(BCS_Vitality) <= 0 && UsesVitality())
 		{
-
+			owner.SignalGameplayEvent( 'Death' );
 			owner.SetAlive(false);
 		}
 		
@@ -590,7 +573,7 @@ import abstract class W3AbilityManager extends IScriptable
 		
 		if(GetStat(BCS_Essence) <= 0 && UsesEssence())
 		{
-
+			owner.SignalGameplayEvent( 'Death' );
 			owner.SetAlive(false);
 		}
 		

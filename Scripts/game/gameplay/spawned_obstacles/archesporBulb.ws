@@ -5,16 +5,16 @@
 /***********************************************************************/
 class W3ArchesporBulb extends CNewNPC
 {
-	protected var parentEntity : CNewNPC;
-	protected var entitiesInRange : array< CGameplayEntity >;
+	private var parentEntity : CNewNPC;
+	private var entitiesInRange : array< CGameplayEntity >;
 	private var isDestroyed : bool;
-	protected var hitsTaken : int;
+	private var hitsTaken : int;
 	private var lastHitTimestamp : float;
 	private var hitCooldown : float;
 	
-	protected var damageRadius : float;
-	protected var damageVal : float;
-	protected var hitsToDeath : int;
+	private var damageRadius : float;
+	private var damageVal : float;
+	private var hitsToDeath : int;
 	
 	default lastHitTimestamp = 0.0;
 	default hitCooldown = 0.5;
@@ -112,14 +112,14 @@ class W3ArchesporBulb extends CNewNPC
 		DisableEntity();
 	}
 	
-	protected function DisableEntity()
+	private function DisableEntity()
 	{
 		RemoveTag( 'archespor_base' ); 
 		RefreshBaseEntitiesList();
 		thePlayer.OnBecomeUnawareOrCannotAttack( this );
 	}
 	
-	protected function DealExplosionDamage()
+	private function DealExplosionDamage()
 	{
 		var damage : W3DamageAction;
 		var i : int;
@@ -174,7 +174,7 @@ class W3ArchesporBulb extends CNewNPC
 		}
 	}
 	
-	protected function SetIsDestroyed( destroyAfter : float )
+	private function SetIsDestroyed( destroyAfter : float )
 	{
 		isDestroyed = true;
 		
@@ -197,27 +197,27 @@ class W3ArchesporBulb extends CNewNPC
 		}
 	}
 	
-	protected function IsDestroyed() : bool
+	private function IsDestroyed() : bool
 	{
 		return isDestroyed;
 	}
 	
-	protected function ShouldExplode() : bool
+	private function ShouldExplode() : bool
 	{
 		return HasTag( 'suicideBulb' );
 	}
 	
-	protected function ShouldExplodeImmediately() : bool
+	private function ShouldExplodeImmediately() : bool
 	{
 		return HasTag( 'immediateExplode' );
 	}
 
-	protected function IsCurrentlyUsed() : bool
+	private function IsCurrentlyUsed() : bool
 	{
 		return HasTag( 'currentlyUsedBase' );
 	}
 	
-	protected function RefreshBaseEntitiesList()
+	private function RefreshBaseEntitiesList()
 	{
 		parentEntity.SignalGameplayEventParamObject( 'RefreshBaseEntitiesList', this );
 	}

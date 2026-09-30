@@ -10,7 +10,7 @@ class W3QuestCond_DialogChoiceCondition extends CQuestScriptedCondition
 	
 	function Evaluate() : bool
 	{	
-		var flags, value : int;
+		var flags, set : int;
 		
 		
 		if(!theGame.IsDialogOrCutscenePlaying() || theGame.isCutscenePlaying)
@@ -20,15 +20,15 @@ class W3QuestCond_DialogChoiceCondition extends CQuestScriptedCondition
 		if(onOptionSelected)
 		{
 			
-			value = GameplayFactsQuerySum('dialog_used_choice_is_set');
+			set = GameplayFactsQuerySum('dialog_used_choice_is_set');
 		}
 		else
 		{
 			
-			value = GameplayFactsQuerySum('dialog_choice_is_set');
+			set = GameplayFactsQuerySum('dialog_choice_is_set');
 		}
 		
-		if(value <= 0)
+		if(set <= 0)
 			return false;		
 		
 		if(dialogChoice == 0)

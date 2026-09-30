@@ -7,51 +7,13 @@ class W3Potion_Cat extends CBaseGameplayEffect
 {
 	private saved var highlightObjectsRange, highlightEnemiesRange : float;
 	private var witcher : W3PlayerWitcher;				
+	private var isScreenFxActive : bool;
 	private var timeSinceLastHighlight, timeSinceLastEnemyHighlight : float;
 	private const var HIGHLIGHT_REFRESH_DT, ENEMY_HIGHLIGHT_DT : float;
-	protected var isScreenFxActive : bool;
-	
-	protected var blendTime : float;
-	protected var brightness : float;
-	protected var range : float;
-	protected var fogDensity : float;
-
-	protected var tintNear : Vector;
-	protected var tintFar : Vector;
-	protected var desaturation : float;
-
-	protected var highlightColor : Vector;
-	protected var highlightInterior : float;
-	protected var highlightBlurSize : float;
-
-	default blendTime = 1.f;
-	default brightness = 350.f;
-	default range = 200.f;
-	default fogDensity = 0.5f;
-
-	default desaturation = 0.2f;
-
-	default highlightInterior = 0.05f;
-	default highlightBlurSize = 1.5f;
 	
 	default effectType = EET_Cat;
 	default HIGHLIGHT_REFRESH_DT = 0.5;
 	default ENEMY_HIGHLIGHT_DT = 1.0f;
-
-	protected function SetDefaultVectors()
-	{
-		
-		tintNear = Vector( 0.1f, 0.12f, 0.13f, 0.6f );
-		tintFar = Vector( 0.075f, 0.1f, 0.11f, 0.6f );
-		highlightColor = Vector( 0.5f, 0.2f, 0.2f, 1.f );
-	}
-
-	public function Init( params : SEffectInitInfo )
-	{
-		super.Init( params );
-
-		SetDefaultVectors();
-	}
 	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
@@ -138,7 +100,7 @@ class W3Potion_Cat extends CBaseGameplayEffect
 		super.OnEffectRemoved();
 	}
 	
-	public function EnableScreenFx(en : bool)
+	private final function EnableScreenFx(en : bool)
 	{
 		var buffs : array< CBaseGameplayEffect >;
 		var i : int;
@@ -146,15 +108,13 @@ class W3Potion_Cat extends CBaseGameplayEffect
 		
 		if(en)
 		{
-			EnableCatViewFx( blendTime );	
-
-			SetTintColorsCatViewFx( tintNear, tintFar, desaturation );
-			SetBrightnessCatViewFx( brightness );
-			SetViewRangeCatViewFx( range );
-			SetFogDensityCatViewFx( fogDensity );
-
+			EnableCatViewFx( 1.0f );	
+			SetTintColorsCatViewFx(Vector(0.1f,0.12f,0.13f,0.6f),Vector(0.075f,0.1f,0.11f,0.6f),0.2f);
+			SetBrightnessCatViewFx(350.0f);
+			SetViewRangeCatViewFx(200.0f);
 			SetPositionCatViewFx( Vector(0,0,0,0) , true );	
-			SetHightlightCatViewFx( highlightColor, highlightInterior, highlightBlurSize );
+			SetHightlightCatViewFx( Vector(0.5f,0.2f,0.2f,1.f),0.05f,1.5f);
+			SetFogDensityCatViewFx( 0.5 );
 			isScreenFxActive = true;
 		}
 		else
@@ -168,12 +128,11 @@ class W3Potion_Cat extends CBaseGameplayEffect
 				catBuff = (W3Potion_Cat) buffs[i];
 				if( catBuff && catBuff != this && catBuff.isScreenFxActive )
 				{
-					catBuff.EnableScreenFx( true ); 
 					return;
 				}
 			}			
 			
-			DisableCatViewFx( blendTime );
+			DisableCatViewFx( 1.0f );
 		}
 	}
 	

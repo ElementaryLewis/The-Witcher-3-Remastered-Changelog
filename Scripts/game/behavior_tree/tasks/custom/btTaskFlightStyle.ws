@@ -157,3 +157,4 @@ class CBTTaskFlightStyleDef extends IBehTreeTaskDefinition
 	default BackToRegularChance = 1.0;
 	default altitude = 4.f;
 }
+

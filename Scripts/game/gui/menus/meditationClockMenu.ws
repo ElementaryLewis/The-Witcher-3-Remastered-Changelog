@@ -3,11 +3,6 @@
 /** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
-class W3MeditationTimeInitData extends W3MenuInitData
-{
-	public var m_fadeInTime : float;
-}
-
 class CR4MeditationClockMenu extends CR4MenuBase
 {
 	private var m_fxSetBlockMeditation		 	: CScriptedFlashFunction;
@@ -15,86 +10,59 @@ class CR4MeditationClockMenu extends CR4MenuBase
 	private var m_fxSetBonusMeditationTime	 	: CScriptedFlashFunction;
 	private var m_fxSetGeraltBackgroundVisible	: CScriptedFlashFunction;
 	private var m_fxSet24HRFormat			 	: CScriptedFlashFunction;
-	private var m_fxSetCurrentTime			 	: CScriptedFlashFunction;
-	private var m_fxMeditationConfirmed		 	: CScriptedFlashFunction;
-	private var m_fxFadeOutGeraltBackground		: CScriptedFlashFunction;
-	private var m_fxFadeInEverything		 	: CScriptedFlashFunction;
-	private var m_fxMovePanelXTo		 		: CScriptedFlashFunction;	
 	
 	private var canMeditateWait				 	: bool;
 	private var isGameTimePaused			 	: bool;
-
-	private var m_commonMenuRef					: CR4CommonMenu;
 	
 	private var BONUS_MEDITATION_TIME : int;
 	default BONUS_MEDITATION_TIME = 1;
 
-	private var m_sleepMode : bool; default m_sleepMode = false;
-	private var GERALT_FADE_TIME : float; default GERALT_FADE_TIME = 0.3;
-	private var PANEL_MOVE_TIME : float; default PANEL_MOVE_TIME = 0.6;
-
 	event  OnConfigUI()
 	{	
+		var commonMenu : CR4CommonMenu;
 		var locCode : string;
 		var initData : W3SingleMenuInitData;
-		var timeInitData : W3MeditationTimeInitData;
-		var witcherPlayer : W3PlayerWitcher;
-		witcherPlayer = GetWitcherPlayer();
 		
 		super.OnConfigUI();
-
-		m_commonMenuRef = (CR4CommonMenu)m_parentMenu;
 		
-		witcherPlayer.MeditationClockStart(this);
+		GetWitcherPlayer().MeditationClockStart(this);
+		SendCurrentTimeToAS();
 		m_fxSetBlockMeditation = m_flashModule.GetMemberFlashFunction( "SetBlockMeditation" );
 		m_fxSet24HRFormat = m_flashModule.GetMemberFlashFunction( "Set24HRFormat" );
 		m_fxSetGeraltBackgroundVisible = m_flashModule.GetMemberFlashFunction( "setGeraltBackgroundVisible" );
 		m_fxSetBonusMeditationTime = m_flashModule.GetMemberFlashFunction( "setBonusMeditationTime" );
-		m_fxSetCurrentTime  = m_flashModule.GetMemberFlashFunction( "setCurrentTime" );
-		m_fxMeditationConfirmed = m_flashModule.GetMemberFlashFunction( "meditationConfirmed" );
-		m_fxFadeOutGeraltBackground = m_flashModule.GetMemberFlashFunction( "fadeOutGeraltBackground" );
-		m_fxFadeInEverything = m_flashModule.GetMemberFlashFunction( "fadeInEverything" );
-		m_fxMovePanelXTo = m_flashModule.GetMemberFlashFunction( "movePanelXTo" );
 		
 		m_fxSetBonusMeditationTime.InvokeSelfOneArg( FlashArgInt( BONUS_MEDITATION_TIME ) );
-		SendCurrentTimeToAS();
+		
 		
 		
 		
 		theGame.Unpause("menus");		
 		
 		initData = (W3SingleMenuInitData)GetMenuInitData();
-
-		if(initData)
-			m_sleepMode = true;
-
-		if(!initData)
-		{
-			timeInitData = (W3MeditationTimeInitData)GetMenuInitData();
-
-			if(timeInitData)
-			{
-				m_fxFadeInEverything.InvokeSelfOneArg(FlashArgNumber(timeInitData.m_fadeInTime)); 
-			}
-		}
 		
 		if( initData && initData.isBonusMeditationAvailable )
 		{
 			SetMeditationBonuses();
 		}
 		
-		UpdateMeditationAccess();
+		if(GetWitcherPlayer().CanMeditate() && GetWitcherPlayer().CanMeditateWait(true) || ( initData && initData.ignoreMeditationCheck ) )
+		{
+			canMeditateWait = true;
+			isGameTimePaused = false;			
+		}
+		else if(theGame.IsGameTimePaused())
+		{
+			canMeditateWait = false;
+			isGameTimePaused = true;
+		}
 		
 		if (canMeditateWait) 
 		{
-			if (m_commonMenuRef)
+			commonMenu = (CR4CommonMenu)m_parentMenu;
+			if (commonMenu)
 			{
-				
-				
-
-				
-				if(m_commonMenuRef.GetMeditationMode() && !m_sleepMode)
-					MoveMeditationPanel(0);
+				commonMenu.SetMeditationMode(true);
 			}
 			
 			m_fxSetGeraltBackgroundVisible.InvokeSelfOneArg(FlashArgBool(false)); 
@@ -110,74 +78,33 @@ class CR4MeditationClockMenu extends CR4MenuBase
 		
 		if(GameplayFactsQuerySum("GamePausedNotByUI") > 0 && !thePlayer.IsInCombat())
 		{
-			witcherPlayer.MeditationRestoring(0);				
+			GetWitcherPlayer().MeditationRestoring(0);				
 		}	
 		
 		
 		
-			
+			theGame.Pause("menus");
 		
-
-		witcherPlayer.SetMeditationAnimSpeedCauserId( thePlayer.SetAnimationSpeedMultiplier( 10.f, witcherPlayer.GetMeditationAnimSpeedCauserId() ) );
-		theGame.SetTimeScale( 0.1f, theGame.GetTimescaleSource( ETS_Meditation ), theGame.GetTimescalePriority( ETS_Meditation ), false, true );
-	}
-
-	private function UpdateMeditationAccess():void
-	{
-		var initData : W3SingleMenuInitData;
-		initData = (W3SingleMenuInitData)GetMenuInitData();
-
-		if(GetWitcherPlayer().CanMeditate() && GetWitcherPlayer().CanMeditateWait(true) || ( initData && initData.ignoreMeditationCheck ) )
-		{
-			canMeditateWait = true;
-			isGameTimePaused = false;			
-		}
-		else if(theGame.IsGameTimePaused())
-		{
-			canMeditateWait = false;
-			isGameTimePaused = true;
-		}
 	}
 	
 	event  OnClosingMenu()
 	{
-		var medd : W3PlayerWitcherStateMeditation;
-		var witcherPlayer : W3PlayerWitcher;
-		witcherPlayer = GetWitcherPlayer();
-
+		var commonMenu : CR4CommonMenu;
+		
 		theGame.GetGuiManager().SendCustomUIEvent( 'ClosedMeditationClockMenu' );
 		
-		if (m_commonMenuRef)
+		commonMenu = (CR4CommonMenu)m_parentMenu;
+		if (commonMenu)
 		{
-			m_commonMenuRef.SetSkipFadeOnClose( true );
-			m_commonMenuRef.SetMeditationMode(false, 0.2);
-
-			if ( !m_commonMenuRef.m_had_meditation )	
-			{
-				medd = (W3PlayerWitcherStateMeditation)thePlayer.GetCurrentState();
-				if ( medd )
-				{
-					if ( !medd.IsSitting() )
-						m_commonMenuRef.StopMeditation();
-				}
-				else
-				{
-					m_commonMenuRef.StopMeditation();
-				}
-
-				theGame.Pause("menus");
-			}
+			commonMenu.SetMeditationMode(false);
 			
-			if( m_commonMenuRef.GetIsPlayerMeditatingInBed() )
+			if( commonMenu.GetIsPlayerMeditatingInBed() )
 			{
-				witcherPlayer.ManageSleeping();
+				GetWitcherPlayer().ManageSleeping();
 			}
 		}
 		
-		witcherPlayer.MeditationClockStop();
-
-		witcherPlayer.ResetMeditationAnimSpeed();
-		theGame.RemoveTimeScale( theGame.GetTimescaleSource( ETS_Meditation ) );
+		GetWitcherPlayer().MeditationClockStop();
 	}
 	
 	event  OnCloseMenu()
@@ -187,8 +114,13 @@ class CR4MeditationClockMenu extends CR4MenuBase
 			MeditatingEnd();
 		}
 		
-		GetWitcherPlayer().ResetMeditationAnimSpeed();
 		theGame.RemoveAllTimeScales(); 
+		
+		if (!theGame.IsPaused())
+		{
+			theGame.Pause("menus");
+		}
+		
 
 		
 		CloseMenu();
@@ -339,16 +271,6 @@ class CR4MeditationClockMenu extends CR4MenuBase
 		
 		m_flashValueStorage.SetFlashArray( "meditation.bonus", flashArray );
 	}
-
-	public function MovePanelXTo(x:float, time:float)
-	{
-		m_fxMovePanelXTo.InvokeSelfTwoArgs(FlashArgNumber(x), FlashArgNumber(time));
-	}
-
-	public function MoveMeditationPanel(time : float)
-	{
-		MovePanelXTo(682 - 1920 / 6, time); 
-	}
 	
 	function SetButtons()
 	{
@@ -369,31 +291,20 @@ class CR4MeditationClockMenu extends CR4MenuBase
 		var  timeHours : int = GetCurrentDayTime( "hours" );
 		var  timeMinutes : int = GetCurrentDayTime( "minutes" );
 		
-		
-		m_fxSetCurrentTime.InvokeSelfTwoArgs( FlashArgInt(timeHours), FlashArgInt(timeMinutes) );
+		m_flashValueStorage.SetFlashInt( "meditation.clock.hours", timeHours );
+		m_flashValueStorage.SetFlashInt( "meditation.clock.minutes", timeMinutes );
 	}
 	
 	event  OnMeditate( dayTime : float )
 	{
 		var medd : W3PlayerWitcherStateMeditation;
 		
-		if(isGameTimePaused)
-		{
-			theGame.Unpause("MeditationLock");
-			
-			UpdateMeditationAccess();
-			if(!canMeditateWait)
-				theGame.Pause("MeditationLock");
-		}
-
 		if (!canMeditateWait)
 		{
 			ShowDisallowedNotification();			
 		}
 		else
-		{	
-			m_fxMeditationConfirmed.InvokeSelf();
-
+		{		
 			if (theGame.IsPaused())
 			{
 				theGame.Unpause("menus");
@@ -406,40 +317,29 @@ class CR4MeditationClockMenu extends CR4MenuBase
 				LogChannel('CLOCK',"	** OnMeditate ** ");
 				if(dayTime == GameTimeHours(theGame.GetGameTime()))
 					return false;
-
 				
 				medd = (W3PlayerWitcherStateMeditation)thePlayer.GetCurrentState();
-				medd.MeditationWait(CeilF(dayTime), m_commonMenuRef.m_had_meditation ? 0.f : 1.f);	
+				medd.MeditationWait(CeilF(dayTime));
 				
 				
 				StartWaiting();
-				if(!m_sleepMode)
-				{
-					m_fxFadeOutGeraltBackground.InvokeSelfOneArg(FlashArgNumber(GERALT_FADE_TIME));
-					MoveMeditationPanel(PANEL_MOVE_TIME);
-				}
-				m_commonMenuRef.SetMeditationMode(true, 1, m_sleepMode);
 			}
 		}
 	} 
 	
+	event  OnMeditateBlocked()
+	{
+		ShowDisallowedNotification();
+	}
+	
 	event  OnStopMeditate()
 	{
 		var waitt : W3PlayerWitcherStateMeditationWaiting;
-		var medd : W3PlayerWitcherStateMeditation;
-		var currentStateName : name;
-		currentStateName = thePlayer.GetCurrentStateName();
 	
-		if ( currentStateName == 'Meditation' )
-		{
-			medd = (W3PlayerWitcherStateMeditation)thePlayer.GetCurrentState();
-			if ( medd )
-				medd.StopRequested( true );
-		}
-		else if ( currentStateName == 'MeditationWaiting' )
+		if(thePlayer.GetCurrentStateName() == 'MeditationWaiting')
 		{
 			waitt = (W3PlayerWitcherStateMeditationWaiting)thePlayer.GetCurrentState();
-			if ( waitt )
+			if(waitt)
 				waitt.RequestWaitStop();
 		}
 		
@@ -487,7 +387,6 @@ class CR4MeditationClockMenu extends CR4MenuBase
 	{
 		theGame.GetCityLightManager().SetUpdateEnabled( false );
 		m_flashValueStorage.SetFlashBool( "meditation.clock.blocked", true );
-		m_flashValueStorage.SetFlashBool( "meditation.clock.block.easy", true );
 		SetMenuNavigationEnabled(false);
 	}
 	

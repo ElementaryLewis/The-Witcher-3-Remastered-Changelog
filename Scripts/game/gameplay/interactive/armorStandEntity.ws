@@ -193,3 +193,8 @@ class W3ArmorStand extends W3HouseDecorationBase
 	}		
 
 }
+
+
+	
+
+	

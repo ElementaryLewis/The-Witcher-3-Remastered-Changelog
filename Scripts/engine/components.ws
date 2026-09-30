@@ -5,10 +5,6 @@
 /***********************************************************************/
 import class CComponent extends CNode
 {
-	import var isStreamed: Bool;
-
-	import function ApplyForceToPhysicalObject();
-
 	
 	import final function GetEntity() : CEntity;
 	
@@ -61,16 +57,6 @@ struct SAnimMultiplyCauser
 
 import class CInteractionAreaComponent extends CComponent
 {
-	import var rangeMin: Float;
-    import var rangeMax: Float;
-    import var rangeAngle: Uint32;
-    import var height: Float;
-    import var isPlayerOnly: Bool;
-    import var isEnabled: Bool;
-    import var manualTestingOnly: Bool;
-    import var checkLineOfSight: Bool;
-    import var alwaysVisibleRange: Float;
-    import var lineOfSightOffset: Vector;
 	import var performScriptedTest : bool;
 
 	import final function GetRangeMin() : float;
@@ -88,9 +74,6 @@ import class CInteractionAreaComponent extends CComponent
 
 import class CInteractionComponent extends CInteractionAreaComponent
 {
-	import var actionName: String;
-    import var checkCameraVisibility: Bool;
-    import var reportToScript: Bool;
 	import protected var isEnabledInCombat : bool;
 	import protected var shouldIgnoreLocks : bool;
 	
@@ -193,29 +176,11 @@ import class CInteractionComponent extends CInteractionAreaComponent
 
 import class CAnimatedComponent extends CComponent
 {
-	import var ragdoll: CRagdoll;
-	import var ragdollCollisionType: CPhysicalCollision;
-	import var skeleton: CSkeleton;
-	import var animationSets: array<CSkeletalAnimationSet>;
-	import var behaviorInstanceSlots: array<SBehaviorGraphInstanceSlot>;
-	import var useExtractedMotion: Bool;
-	import var stickRagdollToCapsule: Bool;
-	import var includedInAllAppearances: Bool;
-	import var savable: Bool;
-	import var defaultBehaviorAnimationSlotNode: CName;
-	import var isFrozenOnStart: Bool;
-	import var defaultSpeedConfigKey: CName;
-	import var overrideBudgetedTickDistance: Float;
-	import var overrideDisableTickDistance: Float;
-	import var runtimeBehaviorInstanceSlots: array<SBehaviorGraphInstanceSlot>;
-
 	var nextFreeAnimMultCauserId : int;
 		default nextFreeAnimMultCauserId = 0;
 	
 	var animationMultiplierCausers : array<SAnimMultiplyCauser>;
 	
-	import function GetMoveDirWorldSpace();
-
 	
 	import final latent function ActivateBehaviors( names : array< name > ) : bool;
 	
@@ -252,9 +217,6 @@ import class CAnimatedComponent extends CComponent
 	
 	
 	import final function SetAnimationTimeMultiplier( mult : float );
-
-	
-	import final function PlayAnimationOnSkeleton(animation : name, optional time : float, optional replace : bool, optional looped : bool, optional weight : float);
 		
 	
 	public function SetAnimationSpeedMultiplier(mul : float) : int
@@ -372,8 +334,6 @@ import class CAnimatedComponent extends CComponent
 
 import class CDropPhysicsComponent extends CComponent
 {
-	import var dropSetups: array<CDropPhysicsSetup>;
-
 	import final function DropMeshByName( meshName : string,
 										  optional direction : Vector ,
      								      optional curveName : name  ) : bool;
@@ -422,26 +382,12 @@ import class CDismembermentComponent extends CComponent
 
 import class CBoundedComponent extends CComponent
 {
-	import var boundingBox: Box;
-
 	
 	import final function GetBoundingBox() : Box;
 }
 
 import class CAreaComponent extends CBoundedComponent
 {
-	import var height: Float;
-	import var color: Color;
-	import var terrainSide: EAreaTerrainSide;
-	import var clippingMode: EAreaClippingMode;
-	import var clippingAreaTags: TagList;
-	import var saveShapeToLayer: Bool;
-	import var localPoints: array<Vector>;
-	import var worldPoints: array<Vector>;
-
-	import function GetLocalPoints();
-	import function GetBoudingAreaRadius();
-
 	
 	
 	
@@ -459,13 +405,6 @@ import class CAreaComponent extends CBoundedComponent
 
 import class CDrawableComponent extends CBoundedComponent
 {
-	
-	
-	import var renderingPlane: ERenderingPlane;
-
-	import function EnableLightChannels(flag: bool);
-	import function AreLightChannelsEnabled() : bool;
-	
 	
 	import final function IsVisible() : bool;
 	
@@ -491,11 +430,6 @@ import class CDrawableComponent extends CBoundedComponent
 
 import class CRigidMeshComponent extends CStaticMeshComponent
 {
-	import var motionType: EMotionType;
-	import var linearDamping: Float;
-	import var angularDamping: Float;
-	import var linearVelocityClamp: Float;
-
 	
 	import function EnableBuoyancy( enable : bool ) : bool;
 }
@@ -506,14 +440,6 @@ import class CRigidMeshComponent extends CStaticMeshComponent
 
 import class CDecalComponent extends CDrawableComponent
 {
-	import var diffuseTexture: CBitmapTexture;
-	import var specularity: Float;
-	import var specularColor: Color;
-	import var normalThreshold: Float;
-	import var autoHideDistance: Float;
-	import var verticalFlip: Bool;
-	import var horizontalFlip: Bool;
-	import var fadeTime: Float;
 }
 
 
@@ -522,11 +448,6 @@ import class CDecalComponent extends CDrawableComponent
 
 import class CNormalBlendComponent extends CComponent
 {
-	import var useMainTick: Bool;
-	import var sourceMaterial: IMaterial;
-	import var sourceNormalTexture: ITexture;
-	import var normalBlendMaterial: CMaterialInstance;
-	import var normalBlendAreas: array<Vector>;
 }
 
 
@@ -535,8 +456,6 @@ import class CNormalBlendComponent extends CComponent
 
 import class CSpriteComponent extends CComponent
 {
-	import var isVisible: Bool;
-	import var icon: CBitmapTexture;
 }
 
 
@@ -585,12 +504,6 @@ enum ETriggerChannels
 
 import class CTriggerAreaComponent extends CAreaComponent
 {
-	import var isEnabled: Bool;
-	
-	
-	import var triggerPriority: Uint32;
-	import var enableCCD: Bool;
-
 	
 	import final function SetChannelMask( includedChannels, excludedChannes : int );
 	
@@ -653,12 +566,6 @@ import class CTriggerAreaComponent extends CAreaComponent
 
 import class CTriggerActivatorComponent extends CComponent
 {
-	import var radius: Float;
-	import var height: Float;
-	
-	import var enableCCD: Bool;
-	import var maxContinousDistance: Float;
-	
 	
 	import final function SetRadius( radius : float );
 	
@@ -696,4 +603,69 @@ import class CCombatDataComponent extends CComponent
 	
 	import final function ForceTicketImmediateImportanceUpdate( ticketName : name );
 	
+}
+
+
+
+
+
+import class CDestructionSystemComponent extends CDrawableComponent
+{
+	import final function GetFractureRatio() : float;
+	import final function ApplyFracture() : bool;
+	import final function IsDestroyed() : bool;
+	import final function IsObstacleDisabled() : bool;
+	
+	
+	public function GetObjectBoundingVolume( out box : Box ) : bool
+	{
+		
+		box = GetBoundingBox();
+		if ( box.Min != box.Max )
+		{
+			return true;
+		}
+		
+		return GetPhysicalObjectBoundingVolume( box );
+	}	
+}
+
+
+
+
+
+import class CDestructionComponent extends CMeshTypeComponent
+{
+	import final function ApplyFracture() : bool;
+	import final function IsDestroyed() : bool;
+	import final function IsObstacleDisabled() : bool;
+	
+	
+	public function GetObjectBoundingVolume( out box : Box ) : bool
+	{
+		
+		box = GetBoundingBox();
+		if ( box.Min != box.Max )
+		{
+			return true;
+		}
+		
+		return GetPhysicalObjectBoundingVolume( box );
+	}	
+}
+
+import class CSoundAmbientAreaComponent extends CSoftTriggerAreaComponent
+{
+
+}
+
+
+
+
+
+import class CClothComponent extends CMeshTypeComponent
+{
+	import final function SetSimulated( value : bool );
+	import final function SetMaxDistanceScale( scale : float );
+	import final function SetFrozen( frozen : bool );
 }

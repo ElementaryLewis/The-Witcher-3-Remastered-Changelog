@@ -59,3 +59,4 @@ class CBTTaskSimpleEventDef extends IBehTreeTaskDefinition
 		}
 	}
 }
+

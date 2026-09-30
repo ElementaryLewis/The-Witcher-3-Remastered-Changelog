@@ -41,7 +41,7 @@ class CR4CommonIngameMenu extends CR4MenuBase
 			
 			theGame.GetGuiManager().RequestMouseCursor(true);
 			
-			if (theInput.IsMousePresent())
+			if (theInput.LastUsedPCInput())
 			{
 				theGame.MoveMouseTo(0.17, 0.36);
 			}

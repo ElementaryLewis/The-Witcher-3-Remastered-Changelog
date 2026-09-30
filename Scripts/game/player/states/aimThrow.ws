@@ -15,7 +15,6 @@ state AimThrow in CR4Player extends ExtendedMovable
 	
 	private var prevState		 : name;
 
-
 	event OnEnterState( prevStateName : name )
 	{
 		prevState = prevStateName;
@@ -24,18 +23,13 @@ state AimThrow in CR4Player extends ExtendedMovable
 		
 		CreateNoSaveLock();
 		
-
-
+		theInput.SetContext( 'ThrowHold' );
 		parent.lastAxisInputIsMovement = true;
 		parent.SetCombatIdleStance( 1.f );
 		
 		camera = (CCustomCamera)theCamera.GetTopmostCameraObject();
-		
-
-			theInput.SetContext( 'ThrowHold' );
-			theGame.GetGameCamera().ChangePivotDistanceController('AimThrow');
-			theGame.GetGameCamera().ChangePivotRotationController('AimThrow');			
-
+		theGame.GetGameCamera().ChangePivotDistanceController('AimThrow');
+		theGame.GetGameCamera().ChangePivotRotationController('AimThrow');
 		
 		camera.EnableScreenSpaceCorrection( false );
 		
@@ -60,7 +54,7 @@ state AimThrow in CR4Player extends ExtendedMovable
 	{
 		
 		
-		if( !parent.inv.IsItemRangedWeapon( parent.GetSelectedItemId() ) )
+		if( !parent.inv.IsItemCrossbow( parent.GetSelectedItemId() ) )
 			virtual_parent.SetIsThrowingItemWithAim(true);			
 		else
 		{
@@ -107,7 +101,7 @@ state AimThrow in CR4Player extends ExtendedMovable
 		
 		
 		
-		camera.fov = parent.GetExplorationCameraFov();
+		camera.fov = 60.f;
 		
 		camera.EnableScreenSpaceCorrection( true );
 		
@@ -169,13 +163,10 @@ state AimThrow in CR4Player extends ExtendedMovable
 		var followPosition : Vector;
 		
 		var enableAimingLookAt : bool;
-
-
+		
 		theGame.GetGameCamera().ChangePivotRotationController( 'AimThrow' );
 		theGame.GetGameCamera().ChangePivotPositionController( 'Default' );
-
-
-			theGame.GetGameCamera().ChangePivotDistanceController( 'AimThrow' );
+		theGame.GetGameCamera().ChangePivotDistanceController( 'AimThrow' );
 		
 		
 		moveData.pivotRotationController = theGame.GetGameCamera().GetActivePivotRotationController();
@@ -184,7 +175,7 @@ state AimThrow in CR4Player extends ExtendedMovable
 	
 		moveData.pivotPositionController.SetDesiredPosition( virtual_parent.GetWorldPosition(), 100.f );
 		
-		if ( parent.inv.IsItemRangedWeapon( parent.GetSelectedItemId() ) )
+		if ( parent.inv.IsItemCrossbow( parent.GetSelectedItemId() ) )
 		{
 			
 			
@@ -194,9 +185,7 @@ state AimThrow in CR4Player extends ExtendedMovable
 			
 			rawToCamHeadingDiff = AngleDistance( parent.rawPlayerHeading, moveData.pivotRotationValue.Yaw );
 
-
 			if ( !parent.bLAxisReleased )
-
 			{
 				if ( rawToCamHeadingDiff > -45 && rawToCamHeadingDiff < 45 )
 				{
@@ -250,8 +239,6 @@ state AimThrow in CR4Player extends ExtendedMovable
 				  
 			}
 			
-
-
 			if ( parent.rangedWeapon && parent.rangedWeapon.GetCurrentStateName() == 'State_WeaponReload' )
 			{
 				
@@ -265,18 +252,14 @@ state AimThrow in CR4Player extends ExtendedMovable
 
 			DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( camOffsetVec.X, camOffsetVec.Y, camOffsetVec.Z ), 0.2f, dt );
 			
+			virtual_parent.oTCameraOffset = 17.f;
+			virtual_parent.oTCameraPitchOffset = 5.f;
 			
-
-			{
-				virtual_parent.oTCameraOffset = 17.f;
-				virtual_parent.oTCameraPitchOffset = 5.f;
-			}
 			
-
+			
 			{
 				heading = VecHeading(theCamera.GetCameraDirection());
 				angledist = AngleDistance( heading, VecHeading(thePlayer.GetHeadingVector()) );
-				
 				if ( angledist < -50 || angledist > 25 )
 				{
 					isRotating = true;
@@ -304,11 +287,9 @@ state AimThrow in CR4Player extends ExtendedMovable
 					isRotating = false;
 				}
 			}
-
 			
 			
 		}
-
 		else
 		{
 			virtual_parent.oTCameraOffset = 32.f;
@@ -318,10 +299,10 @@ state AimThrow in CR4Player extends ExtendedMovable
 			
 			heading = VecHeading(theCamera.GetCameraDirection());
 			angledist = AngleDistance( heading, VecHeading(thePlayer.GetHeadingVector()) );
+			
 				
 			
-			
-			
+
 			if ( moveData.pivotRotationValue.Pitch < -20 )
 				enableAimingLookAt =  false;
 

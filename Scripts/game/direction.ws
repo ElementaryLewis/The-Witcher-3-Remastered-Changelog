@@ -65,3 +65,5 @@ function VectorToDirection( vec : Vector ) : EDirection
 	rot = VecToRotation( vec );
 	return AngleToDirection( -rot.Yaw );		
 }
+
+

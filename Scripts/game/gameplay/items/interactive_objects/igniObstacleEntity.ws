@@ -82,3 +82,4 @@ state SecondLevelDegradation in W3IgniObstacleEntity
 	{		
 	}
 }
+

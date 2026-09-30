@@ -61,16 +61,12 @@ statemachine class W3SyncAnimationManager
 	public var dlcFinishersLeftSide			: array< CR4FinisherDLC >;
 	public var dlcFinishersRightSide		: array< CR4FinisherDLC >;
 	
-	var blockedActionsPettingDog					: array<EInputActionBlock>;
-	
 	public function CreateNewSyncInstance( out index : int ) : CAnimationManualSlotSyncInstance
 	{
 		var newSyncInstance : CAnimationManualSlotSyncInstance;
 		
 		newSyncInstance = new CAnimationManualSlotSyncInstance in this;
 		syncInstances.PushBack( newSyncInstance );
-		
-		InitializeBlockActionsPettingDog();
 		
 		index = syncInstances.Size() - 1;
 		
@@ -88,48 +84,6 @@ statemachine class W3SyncAnimationManager
 	{
 		syncInstances.Remove( instance );
 	}
-	
-	function InitializeBlockActionsPettingDog( )
-	{
-		blockedActionsPettingDog.PushBack(EIAB_CallHorse);
-		blockedActionsPettingDog.PushBack(EIAB_Movement);
-		blockedActionsPettingDog.PushBack(EIAB_Fists);
-		blockedActionsPettingDog.PushBack(EIAB_Jump);
-		blockedActionsPettingDog.PushBack(EIAB_RunAndSprint);
-		blockedActionsPettingDog.PushBack(EIAB_UsableItem);
-		blockedActionsPettingDog.PushBack(EIAB_Dodge);
-		blockedActionsPettingDog.PushBack(EIAB_Roll);
-		blockedActionsPettingDog.PushBack(EIAB_SwordAttack);
-		blockedActionsPettingDog.PushBack(EIAB_Sprint);
-		blockedActionsPettingDog.PushBack(EIAB_Explorations);
-		blockedActionsPettingDog.PushBack(EIAB_Counter);
-		blockedActionsPettingDog.PushBack(EIAB_LightAttacks);
-		blockedActionsPettingDog.PushBack(EIAB_HeavyAttacks);
-		blockedActionsPettingDog.PushBack(EIAB_SpecialAttackLight);
-		blockedActionsPettingDog.PushBack(EIAB_SpecialAttackHeavy);
-		blockedActionsPettingDog.PushBack(EIAB_MeditationWaiting);
-	}
-	
-	public function BlockActionsPettingDog( block : bool )
-	{
-		var i : int;
-		
-		if ( blockedActionsPettingDog.Size() > 0 )
-		{
-			for ( i = 0 ; i < blockedActionsPettingDog.Size() ; i += 1 )
-			{
-				if ( block )
-				{
-					thePlayer.BlockAction( blockedActionsPettingDog[i], 'PettingDog' );
-				}
-				else
-				{
-					thePlayer.UnblockAction( blockedActionsPettingDog[i], 'PettingDog' );
-				}
-			}
-		}
-	}
-	
 	
 	public function SetupSimpleSyncAnim( syncAction : name, master, slave : CEntity ) : bool
 	{
@@ -271,13 +225,13 @@ statemachine class W3SyncAnimationManager
 				slaveSequencePart.disableProxyCollisions = true;
 				
 				
-				
+		
 				
 				
 				
 				slaveDef.parts.PushBack( slaveSequencePart );
 				slaveDef.entity							= slave;
-				
+		
 				slaveDef.manualSlotName					= 'FinisherSlot';
 				slaveDef.freezeAtEnd					= false;
 				
@@ -1191,13 +1145,13 @@ statemachine class W3SyncAnimationManager
 				slaveSequencePart.disableProxyCollisions = true;
 				
 				
-				
+		
 				
 				
 				
 				slaveDef.parts.PushBack( slaveSequencePart );
 				slaveDef.entity							= slave;
-				
+		
 				slaveDef.manualSlotName					= 'GAMEPLAY_SLOT';
 				slaveDef.freezeAtEnd					= true;
 				
@@ -1489,15 +1443,13 @@ statemachine class W3SyncAnimationManager
 		var rot : EulerAngles;
 		
 		var finisherAnim : bool;
-		var ignoreMasterFinisherAnim 				: bool; 
 		var pos : Vector;
 		
 		var syncAnimName	: name;
 		
 		var node, node1 : CNode; 
 		var rot0, rot1 : EulerAngles;
-
-
+		
 		syncInstance = CreateNewSyncInstance( instanceIndex );
 		
 		
@@ -1819,138 +1771,7 @@ statemachine class W3SyncAnimationManager
 				slaveDef.freezeAtEnd					= false;
 				
 				break;
-			}
-			case 'PetDogLie':
-			{
-				BlockActionsPettingDog(true);
-				rot = slave.GetWorldRotation();
-				pos = GetActorPosition( slave );
-				
-				
-				masterSequencePart.animation			= 'man_geralt_stand_pet_dog_lying';
-				masterSequencePart.syncType				= AMST_SyncBeginning;
-				masterSequencePart.syncEventName		= 'SyncEvent';
-				masterSequencePart.shouldSlide			= true;
-				masterSequencePart.shouldRotate			= true;
-				masterSequencePart.finalPosition		= slave.GetWorldPosition() - 1.12f * VecNormalize( VecFromHeading( rot.Yaw + 180 )) + 0.25f * VecNormalize( VecFromHeading( rot.Yaw + 90 ));
-				masterSequencePart.finalHeading			= rot.Yaw + 190;
-				masterSequencePart.blendInTime			= 0.2f;
-				masterSequencePart.blendOutTime			= 0.2f;
-				masterSequencePart.sequenceIndex		= 0;
-				
-				masterDef.parts.PushBack( masterSequencePart );
-				masterDef.entity						= master;
-				masterDef.manualSlotName				= 'GAMEPLAY_SLOT';
-				masterDef.freezeAtEnd					= false;
-				masterDef.raiseForceEventOnEnd			= 'ForceIdle';
-				
-				
-				slaveSequencePart.animation				= 'geralt_stand_pet_dog_lying_to_idle';
-				slaveSequencePart.syncType				= AMST_SyncBeginning;
-				slaveSequencePart.syncEventName			= 'SyncEvent';
-				slaveSequencePart.shouldSlide			= false;
-				slaveSequencePart.blendInTime			= 0.3f;
-				slaveSequencePart.blendOutTime			= 0.2f;
-				slaveSequencePart.sequenceIndex			= 0;
-				
-				slaveDef.parts.PushBack( slaveSequencePart );
-				slaveDef.entity			= slave;
-				slaveDef.manualSlotName	= 'GAMEPLAY_SLOT';
-				slaveDef.freezeAtEnd	= false;
-				slaveDef.raiseEventOnEnd = 'Lie';
-				
-				masterEntity = (CGameplayEntity)master;
-				slaveEntity = (CGameplayEntity)slave;
-				
-				break;
-			}
-			case 'PetDog':
-			{
-				BlockActionsPettingDog(true);
-				rot = slave.GetWorldRotation();
-				pos = GetActorPosition( slave );
-				
-				
-				masterSequencePart.animation			= 'man_geralt_stand_pet_dog';
-				masterSequencePart.syncType				= AMST_SyncBeginning;
-				masterSequencePart.syncEventName		= 'SyncEvent';
-				masterSequencePart.shouldSlide			= true;
-				masterSequencePart.shouldRotate			= true;
-				masterSequencePart.finalPosition		= slave.GetWorldPosition() - 1.05f * VecNormalize( VecFromHeading( rot.Yaw + 180 )) + 0.1f * VecNormalize( VecFromHeading( rot.Yaw + 90 ));
-				masterSequencePart.finalHeading			= rot.Yaw + 190;
-				masterSequencePart.blendInTime			= 0.2f;
-				masterSequencePart.blendOutTime			= 0.2f;
-				masterSequencePart.sequenceIndex		= 0;
-				
-				masterDef.parts.PushBack( masterSequencePart );
-				masterDef.entity						= master;
-				masterDef.manualSlotName				= 'GAMEPLAY_SLOT';
-				masterDef.freezeAtEnd					= false;
-				masterDef.raiseForceEventOnEnd			= 'ForceIdle';
-				
-				
-				slaveSequencePart.animation				= 'geralt_stand_pet_dog';
-				slaveSequencePart.syncType				= AMST_SyncBeginning;
-				slaveSequencePart.syncEventName			= 'SyncEvent';
-				slaveSequencePart.shouldSlide			= false;
-				slaveSequencePart.blendInTime			= 0.3f;
-				slaveSequencePart.blendOutTime			= 0.3f;
-				slaveSequencePart.sequenceIndex			= 0;
-				
-				slaveDef.parts.PushBack( slaveSequencePart );
-				slaveDef.entity			= slave;
-				slaveDef.manualSlotName	= 'GAMEPLAY_SLOT';
-				slaveDef.freezeAtEnd	= false;
-				
-				masterEntity = (CGameplayEntity)master;
-				slaveEntity = (CGameplayEntity)slave;
-				
-				break;
-			}
-			case 'PetWildDog':
-			{
-				BlockActionsPettingDog(true);
-				rot = slave.GetWorldRotation();
-				pos = GetActorPosition( slave );
-				
-				
-				masterSequencePart.animation			= 'man_geralt_stand_pet_wild_dog';
-				masterSequencePart.syncType				= AMST_SyncBeginning;
-				masterSequencePart.syncEventName		= 'SyncEvent';
-				masterSequencePart.shouldSlide			= true;
-				masterSequencePart.shouldRotate			= true;
-				masterSequencePart.finalPosition		= slave.GetWorldPosition() - 1.5f * VecNormalize( VecFromHeading( rot.Yaw + 180 )) - 0.0 * VecNormalize( VecFromHeading( rot.Yaw + 90 ));
-				masterSequencePart.finalHeading			= rot.Yaw + 180;
-				masterSequencePart.blendInTime			= 0.2f;
-				masterSequencePart.blendOutTime			= 0.2f;
-				masterSequencePart.sequenceIndex		= 0;
-				
-				masterDef.parts.PushBack( masterSequencePart );
-				masterDef.entity						= master;
-				masterDef.manualSlotName				= 'GAMEPLAY_SLOT';
-				masterDef.freezeAtEnd					= false;
-				masterDef.raiseForceEventOnEnd			= 'ForceIdle';
-				
-				
-				slaveSequencePart.animation				= 'geralt_stand_pet_wild_dog';
-				slaveSequencePart.syncType				= AMST_SyncBeginning;
-				slaveSequencePart.syncEventName			= 'SyncEvent';
-				slaveSequencePart.shouldSlide			= false;
-				slaveSequencePart.blendInTime			= 0.3f;
-				slaveSequencePart.blendOutTime			= 0.3f;
-				slaveSequencePart.sequenceIndex			= 0;
-				
-				slaveDef.parts.PushBack( slaveSequencePart );
-				slaveDef.entity			= slave;
-				slaveDef.manualSlotName	= 'GAMEPLAY_SLOT';
-				slaveDef.freezeAtEnd	= false;
-				
-				masterEntity = (CGameplayEntity)master;
-				slaveEntity = (CGameplayEntity)slave;
-				
-				break;
-			}
-
+			}	
 			
 			default : 
 			{
@@ -1975,7 +1796,7 @@ statemachine class W3SyncAnimationManager
 		{
 			actorMaster.SignalGameplayEventParamInt( 'SetupSyncInstance', instanceIndex );
 			actorMaster.SignalGameplayEventParamInt( 'SetupSequenceIndex', sequenceIndex );
-			if ( finisherAnim && !ignoreMasterFinisherAnim)
+			if ( finisherAnim )
 				actorMaster.SignalGameplayEvent( 'PlayFinisherSyncedAnim' );
 			else
 				actorMaster.SignalGameplayEvent( 'PlaySyncedAnim' );
@@ -2002,8 +1823,6 @@ statemachine class W3SyncAnimationManager
 			else
 				actorSlave.SignalGameplayEvent( 'PlaySyncedAnim' );
 		}
-
-
 		
 		
 		
@@ -2080,13 +1899,7 @@ statemachine class W3SyncAnimationManager
 					syncAnimsNames.PushBack( dlcFinishersLeftSide[i].finisherAnimName );
 					syncAnimsNames.PushBack( dlcFinishersLeftSide[i].finisherAnimName );
 				}
-			}
-
-			
-			syncAnimsNames.PushBack('man_finisher_sword_v3_lp_remaster');
-			syncAnimsNames.PushBack('man_finisher_sword_v3_lp_remaster');
-			syncAnimsNames.PushBack('man_finisher_sword_v3_lp_remaster');
-			syncAnimsNames.PushBack('man_finisher_sword_v3_lp_remaster');
+			}			
 		}
 		else
 		{
@@ -2116,19 +1929,6 @@ statemachine class W3SyncAnimationManager
 					syncAnimsNames.PushBack( dlcFinishersRightSide[i].finisherAnimName );
 					syncAnimsNames.PushBack( dlcFinishersRightSide[i].finisherAnimName );
 				}
-			}
-
-			
-			syncAnimsNames.PushBack( 'man_finisher_sword_v2_rp_remaster' );
-			syncAnimsNames.PushBack( 'man_finisher_sword_v2_rp_remaster' );
-			syncAnimsNames.PushBack( 'man_finisher_sword_v2_rp_remaster' );
-
-			if ( thePlayer.CanUseSkill( S_Magic_s33 ) )
-			{
-				syncAnimsNames.PushBack( 'man_finisher_aard_01_rp_remaster' );
-				syncAnimsNames.PushBack( 'man_finisher_aard_01_rp_remaster' );
-				syncAnimsNames.PushBack( 'man_finisher_aard_01_rp_remaster' );
-				syncAnimsNames.PushBack( 'man_finisher_aard_01_rp_remaster' );
 			}
 		}
 		return syncAnimsNames[ RandRange( syncAnimsNames.Size(),  0 ) ];
@@ -2261,7 +2061,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_06_lp':	finisherCameraAnimName = 'man_finisher_06_lp_camera_right'; break;
 					case 'man_finisher_07_lp':	finisherCameraAnimName = 'man_finisher_07_lp_camera_right'; break;
 					case 'man_finisher_08_lp':	finisherCameraAnimName = 'man_finisher_08_lp_camera_right'; break;
-					case 'man_finisher_sword_v3_lp_remaster':	finisherCameraAnimName = 'man_finisher_sword_v3_lp_remaster_camera_right'; break;
 					default : finisherCameraAnimName = 'man_finisher_02_lp_camera_right'; checkDLCs = true; break;
 				}
 			}
@@ -2274,7 +2073,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_06_lp':	finisherCameraAnimName = 'man_finisher_06_lp_camera_back'; break;
 					case 'man_finisher_07_lp':	finisherCameraAnimName = 'man_finisher_07_lp_camera_back'; break;
 					case 'man_finisher_08_lp':	finisherCameraAnimName = 'man_finisher_08_lp_camera_back'; break;
-					case 'man_finisher_sword_v3_lp_remaster':	finisherCameraAnimName = 'man_finisher_sword_v3_lp_remaster_camera_back'; break;
 					default : finisherCameraAnimName = 'man_finisher_02_lp_camera_back'; checkDLCs = true; break;
 				}
 			}
@@ -2287,7 +2085,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_06_lp':	finisherCameraAnimName = 'man_finisher_06_lp_camera_left'; break;
 					case 'man_finisher_07_lp':	finisherCameraAnimName = 'man_finisher_07_lp_camera_left'; break;
 					case 'man_finisher_08_lp':	finisherCameraAnimName = 'man_finisher_08_lp_camera_left'; break;
-					case 'man_finisher_sword_v3_lp_remaster':	finisherCameraAnimName = 'man_finisher_sword_v3_lp_remaster_camera_left'; break;
 					default : finisherCameraAnimName = 'man_finisher_02_lp_camera_left'; checkDLCs = true; break;
 				}
 			}
@@ -2300,7 +2097,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_06_lp':	finisherCameraAnimName = 'man_finisher_06_lp_camera_front'; break;
 					case 'man_finisher_07_lp':	finisherCameraAnimName = 'man_finisher_07_lp_camera_front'; break;
 					case 'man_finisher_08_lp':	finisherCameraAnimName = 'man_finisher_08_lp_camera_front'; break;
-					case 'man_finisher_sword_v3_lp_remaster':	finisherCameraAnimName = 'man_finisher_sword_v3_lp_remaster_camera_front'; break;
 					default : finisherCameraAnimName = 'man_finisher_02_lp_camera_front'; checkDLCs = true; break;
 				}
 			}
@@ -2318,8 +2114,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_01_rp':	finisherCameraAnimName = 'man_finisher_01_rp_camera_right'; break;
 					case 'man_finisher_03_rp':	finisherCameraAnimName = 'man_finisher_03_rp_camera_right'; break;
 					case 'man_finisher_05_rp':	finisherCameraAnimName = 'man_finisher_05_rp_camera_right'; break;
-					case 'man_finisher_aard_01_rp_remaster': finisherCameraAnimName = 'man_finisher_aard_01_rp_remaster_camera_right'; break;
-					case 'man_finisher_sword_v2_rp_remaster': finisherCameraAnimName = 'man_finisher_sword_v2_rp_remaster_camera_right'; break;
 					default : finisherCameraAnimName = 'man_finisher_01_rp_camera_right'; checkDLCs = true; break;
 				}
 			}
@@ -2330,8 +2124,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_01_rp':	finisherCameraAnimName = 'man_finisher_01_rp_camera_back'; break;
 					case 'man_finisher_03_rp':	finisherCameraAnimName = 'man_finisher_03_rp_camera_back'; break;
 					case 'man_finisher_05_rp':	finisherCameraAnimName = 'man_finisher_05_rp_camera_back'; break;
-					case 'man_finisher_aard_01_rp_remaster': finisherCameraAnimName = 'man_finisher_aard_01_rp_remaster_camera_back'; break;
-					case 'man_finisher_sword_v2_rp_remaster': finisherCameraAnimName = 'man_finisher_sword_v2_rp_remaster_camera_back'; break;
 					default : finisherCameraAnimName = 'man_finisher_01_rp_camera_back'; checkDLCs = true; break;
 				}
 			}
@@ -2342,8 +2134,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_01_rp':	finisherCameraAnimName = 'man_finisher_01_rp_camera_left'; break;
 					case 'man_finisher_03_rp':	finisherCameraAnimName = 'man_finisher_03_rp_camera_left'; break;
 					case 'man_finisher_05_rp':	finisherCameraAnimName = 'man_finisher_05_rp_camera_left'; break;
-					case 'man_finisher_aard_01_rp_remaster': finisherCameraAnimName = 'man_finisher_aard_01_rp_remaster_camera_left'; break;
-					case 'man_finisher_sword_v2_rp_remaster': finisherCameraAnimName = 'man_finisher_sword_v2_rp_remaster_camera_left'; break;
 					default : finisherCameraAnimName = 'man_finisher_01_rp_camera_left'; checkDLCs = true; break;
 				}
 			}
@@ -2354,8 +2144,6 @@ statemachine class W3SyncAnimationManager
 					case 'man_finisher_01_rp':	finisherCameraAnimName = 'man_finisher_01_rp_camera_front'; break;
 					case 'man_finisher_03_rp':	finisherCameraAnimName = 'man_finisher_03_rp_camera_front'; break;
 					case 'man_finisher_05_rp':	finisherCameraAnimName = 'man_finisher_05_rp_camera_front'; break;
-					case 'man_finisher_aard_01_rp_remaster': finisherCameraAnimName = 'man_finisher_aard_01_rp_remaster_camera_front'; break;
-					case 'man_finisher_sword_v2_rp_remaster': finisherCameraAnimName = 'man_finisher_sword_v2_rp_remaster_camera_front'; break;
 					default : finisherCameraAnimName = 'man_finisher_01_rp_camera_front'; checkDLCs = true; break;
 				}
 			}
@@ -2364,7 +2152,7 @@ statemachine class W3SyncAnimationManager
 			{
 				GetDLCFinisherCameraAnimName( finisherAnimName, FinisherRight, i, finisherCameraAnimName ); 
 			}
-		}
+		}	
 		
 		return finisherCameraAnimName;
 	}
@@ -2510,7 +2298,6 @@ state Active in W3SyncAnimationManager
 		parent.slaveEntity.OnSyncAnimEnd();
 		
 		
-		parent.BlockActionsPettingDog(false);
 		thePlayer.UnblockAction(EIAB_Interactions, 'SyncManager' );
 		thePlayer.UnblockAction(EIAB_FastTravel, 'SyncManager' );
 		thePlayer.BlockAllActions( 'BTTaskPlaySyncAnim', false );

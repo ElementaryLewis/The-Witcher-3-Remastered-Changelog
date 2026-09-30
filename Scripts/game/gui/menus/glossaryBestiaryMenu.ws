@@ -364,8 +364,6 @@ class CR4GlossaryBestiaryMenu extends CR4ListBaseMenu
 		for( i = 0; i < itemsNames.Size(); i += 1 )
 		{
 			curName = itemsNames[i];
-
-
 			
 			TryGetSignData(curName, curLocName, curIconPath);
 			if (curLocName == "")
@@ -385,7 +383,6 @@ class CR4GlossaryBestiaryMenu extends CR4ListBaseMenu
 			l_flashObject.SetMemberFlashInt( "price", 0 ); 		
 			l_flashObject.SetMemberFlashString( "userData", "");
 			l_flashObject.SetMemberFlashString( "category", "" );
-			l_flashObject.SetMemberFlashString("itemName", NameToString(curName));
 			l_flashArray.PushBackFlashObject(l_flashObject);
 		}
 		
@@ -474,28 +471,6 @@ class CR4GlossaryBestiaryMenu extends CR4ListBaseMenu
 	{
 		
 		
-	}
-
-	event  OnCloseMenu()
-	{
-		var commonMenu : CR4CommonMenu;
-		var glossaryMainMenu : CR4GlossaryMainMenu;
-		
-		commonMenu = (CR4CommonMenu)m_parentMenu;
-		glossaryMainMenu = (CR4GlossaryMainMenu)m_parentMenu;
-		
-		if( commonMenu )
-		{
-			commonMenu.ChildRequestCloseMenu();
-		}
-		if(glossaryMainMenu)
-		{
-			glossaryMainMenu.ChildRequestCloseMenu();
-		}
-		
-		theSound.SoundEvent( 'gui_global_quit' );
-		
-		CloseMenu();
 	}
 }
 

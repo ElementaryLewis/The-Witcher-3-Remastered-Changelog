@@ -35,10 +35,12 @@ class W3FastTravelEntity extends CR4FastTravelEntity
 	
 	event OnInteractionActivated( interactionComponentName : string, activator : CEntity )
 	{
+		theGame.GetSecondScreenManager().SendFastTravelEnable();
 	}
 	
 	event OnInteractionDeactivated( interactionComponentName : string, activator : CEntity )
 	{
+		theGame.GetSecondScreenManager().SendFastTravelDisable();
 	}
 	
 	event OnInteraction( actionName : string, activator : CEntity )

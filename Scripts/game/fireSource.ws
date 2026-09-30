@@ -58,4 +58,6 @@ class W3FireSource extends CGameplayEntity
 		}
 		thePlayer.AddEffectDefault(EET_Burning, this, 'environment');		
 	}
-}
+}	
+
+

@@ -58,3 +58,4 @@ class CBTTaskNpcRiderDef extends IBehTreeTaskDefinition
 		listenToGameplayEvents.PushBack( 'iAmOnTheHorse' );
 	}
 }
+

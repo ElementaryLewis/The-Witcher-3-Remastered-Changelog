@@ -65,3 +65,5 @@ import class CActionMoveAnimationProxy extends CObject
 	import function IsFinished() : bool;
 	import function WillBeFinished( time : float ) : bool;
 }
+
+

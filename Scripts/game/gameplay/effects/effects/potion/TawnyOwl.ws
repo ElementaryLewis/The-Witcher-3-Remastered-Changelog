@@ -28,10 +28,16 @@ class W3Potion_TawnyOwl extends W3RegenEffect
 					if ( thePlayer.CanUseSkill(S_Alchemy_s03) )
 					{
 						toxicityThreshold = thePlayer.GetStatMax(BCS_Toxicity);
-						toxicityThreshold *= GetWitcherPlayer().GetAlchemyS03Threshold();
+						toxicityThreshold *= 1 - CalculateAttributeValue( thePlayer.GetSkillAttributeValue(S_Alchemy_s03, 'toxicity_threshold', false, true) ) * GetWitcherPlayer().GetSkillLevel(S_Alchemy_s03);
 					}
-					isActive = false;
-					
+					if(isPotionEffect && target == thePlayer && thePlayer.CanUseSkill(S_Alchemy_s03) && thePlayer.GetStat(BCS_Toxicity, true) > toxicityThreshold)
+					{
+						
+					}
+					else
+					{
+						isActive = false;		
+					}
 				}
 			}
 			OnUpdate(deltaTime);	

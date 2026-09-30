@@ -94,7 +94,7 @@ class CExplorationStateRoll extends CExplorationStateAbstract
 			m_ExplorationO.m_MoverO.StopVerticalMovement();
 			m_ExplorationO.m_MoverO.StopAllMovement();
 			
-			
+			theGame.VibrateControllerLight();	
 		}
 		
 		

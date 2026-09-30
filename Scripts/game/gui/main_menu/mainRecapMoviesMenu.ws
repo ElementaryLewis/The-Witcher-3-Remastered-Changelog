@@ -137,19 +137,12 @@ class CR4RecapMoviesMenu extends CR4MenuBase
 	}
 		
 	function SetButtons()
-	{
+	{	
 		var ButtonsDef	: array<SMenuButtonDef>;
-		var padNavCode : string = "gamepad_X";
-
-		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
-		{
-			padNavCode = "escape-gamepad_B";
-		}
-
 		m_defaultInputBindings.Clear();
 		if( m_MovieData[m_CurrentMovieID].isSkipable )
 		{
-			AddInputBinding("panel_button_dialogue_skip", padNavCode, 32 );
+			AddInputBinding("panel_button_dialogue_skip", "gamepad_X", 32 );
 		}
 		UpdateInputFeedback();
 	}	

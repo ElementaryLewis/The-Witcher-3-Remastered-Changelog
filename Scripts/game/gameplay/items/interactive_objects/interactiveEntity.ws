@@ -3,7 +3,7 @@
 /** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
-import class CInteractiveEntity extends CR4MapPinEntity
+class CInteractiveEntity extends CR4MapPinEntity
 {	
 	protected editable saved 	var bIsEnabled			: bool;
 	protected					var bIsActive 			: bool;	
@@ -189,3 +189,5 @@ class CScheduledUsableEntity extends CUsableEntity
 		}
 	}
 }
+
+

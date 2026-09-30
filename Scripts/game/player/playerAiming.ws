@@ -20,15 +20,13 @@ statemachine class PlayerAiming
 	protected var tracePosFrom 	: Vector;
 	public var thrownBombImpactRadius : float;
 	protected var aimedTarget 	: CActor;
-	protected var boltFriendlyTraceRadius : float;
 	
-
 	protected var collisionGroupsNames 	: array<name>;			
 	
 	public function Initialize( p : CR4Player )
 	{
 		owner = p;
-
+		
 		
 		collisionGroupsNames.PushBack( 'RigidBody' );
 		collisionGroupsNames.PushBack( 'Character' );		
@@ -76,21 +74,9 @@ statemachine class PlayerAiming
 		OnStartAiming( t );
 	}
 	
-	
-	public function StartAimingFake( flag : bool)
-	{
-		thrownBombImpactRadius = 0;
-		OnStartAimingFake( flag );
-	}
-	
 	public function StopAiming()
 	{
 		OnStopAiming();
-	}
-	
-	public function StopAimingFake()
-	{
-		OnStopAimingFake();
 	}
 	
 	public function RemoveAimingSloMo()
@@ -127,8 +113,6 @@ statemachine class PlayerAiming
 	event OnStopAiming(){}
 	event OnAddAimingSloMo(){}
 	event OnRemoveAimingSloMo(){}
-	event OnStartAimingFake(flag : bool ) {}
-	event OnStopAimingFake() {}
 }
 
 state Waiting in PlayerAiming
@@ -137,24 +121,11 @@ state Waiting in PlayerAiming
 	{
 		parent.throwable = t;
 		
-		if ( (W3BoltProjectile)( parent.throwable ) ) 
-		{
-			parent.boltFriendlyTraceRadius = 0.2f;
+		if ( (W3BoltProjectile)( parent.throwable ) )
 			parent.aimType = AT_Bolt;
-		}
-
 		else
-		{
 			parent.aimType = AT_Bomb;
-		}
 			
-		parent.GotoState( 'Aiming' );
-	}
-
-	event OnStartAimingFake( flag : bool  )
-	{
-		parent.aimType = AT_Bolt;
-
 		parent.GotoState( 'Aiming' );
 	}
 }
@@ -164,7 +135,7 @@ state Aiming in PlayerAiming
 	protected const var SLOWMO_SPEED : float;
 	private var AIM_ENTITY_DISPLACEMENT : float;			
 	
-	default SLOWMO_SPEED = 0.6f;
+	default SLOWMO_SPEED = 0.6;
 	default AIM_ENTITY_DISPLACEMENT = 0.035f;	
 
 	var aimEntity 				: CEntity;	
@@ -198,7 +169,6 @@ state Aiming in PlayerAiming
 
 				
 			}
-
 			
 			startTime = theGame.GetEngineTimeAsSeconds();
 			Aim();
@@ -220,11 +190,8 @@ state Aiming in PlayerAiming
 	
 	entry function Aim()
 	{
-
-
 		parent.SetCleanupFunction( 'AimCleanup' );	
-		thePlayer.SetIsAiming( true );
-
+		
 		while( true )
 		{
 			if ( parent.aimType == AT_Bolt )
@@ -241,7 +208,8 @@ state Aiming in PlayerAiming
 			if( theGame.GetEngineTimeAsSeconds() >= startTime + 0.5 )
 				break;
 		}
-
+		
+		SloMo();
 		
 		while( !stopAiming )
 		{
@@ -257,7 +225,6 @@ state Aiming in PlayerAiming
 			Sleep( 0.0001f );
 		}
 
-		thePlayer.SetIsAiming( false );
 		AimCleanup();
 		parent.ClearCleanupFunction();
 		parent.GotoState( 'Waiting' );
@@ -268,16 +235,9 @@ state Aiming in PlayerAiming
 		stopAiming = true;
 	}
 	
-	event OnStopAimingFake()
-	{
-		stopAiming = true;
-
-	}
-	
 	event OnRemoveAimingSloMo()
 	{
 		RemoveSloMo();
-
 	}
 	
 	var cachedCamDirection 	: Vector;
@@ -329,7 +289,7 @@ state Aiming in PlayerAiming
 		parent.owner.GetVisualDebug().AddSphere( 'UpdateThrowPositionBolt', 0.1f, parent.throwPos, true, Color( 100, 0, 100 ), 0.2f );
 		
 		
-		FindActorsAtLine( tracePosFromInitial, maxRangePos, parent.boltFriendlyTraceRadius, rayCastResults, parent.collisionGroupsNames );
+		FindActorsAtLine( tracePosFromInitial, maxRangePos, 0.2f, rayCastResults, parent.collisionGroupsNames );
 		size = rayCastResults.Size();
 
 		for ( i = 0; i < size; i += 1 )
@@ -640,36 +600,21 @@ state Aiming in PlayerAiming
 		
 		if (!(parent.owner))
 			return;
-
-
-
+	
 		speed = SLOWMO_SPEED;
-		
-		if ( (W3ThrowingKnife)( parent.throwable ) )
-			speed = ((W3ThrowingKnife)(parent.throwable)).slomoStrength;
 		
 		RemoveSloMo();
 		
-
-			if (parent.aimType == AT_Bolt && parent.owner.CanUseSkill(S_Sword_s13) )
-				speed -= CalculateAttributeValue( ((CR4Player)parent.owner).GetSkillAttributeValue(S_Sword_s13, 'slowdown_mod', false, true) ) * parent.owner.GetSkillLevel(S_Sword_s13);
-			else if (parent.aimType == AT_Bomb && parent.owner.CanUseSkill(S_Alchemy_s09) )
-				speed -= CalculateAttributeValue( ((CR4Player)parent.owner).GetSkillAttributeValue(S_Alchemy_s09, 'slowdown_mod', false, true) ) * parent.owner.GetSkillLevel(S_Alchemy_s09);
-
-			
-			if(parent.aimType == AT_Bolt && parent.owner.CanUseSkill(S_Sword_s32))
-				speed -= speed * CalculateAttributeValue( ((CR4Player)parent.owner).GetSkillAttributeValue(S_Sword_s32, 'slowdown_mod', false, true) ) * parent.owner.GetSkillLevel(S_Sword_s32);
-
+		if (parent.aimType == AT_Bolt && parent.owner.CanUseSkill(S_Sword_s13) )
+			speed -= CalculateAttributeValue( ((CR4Player)parent.owner).GetSkillAttributeValue(S_Sword_s13, 'slowdown_mod', false, true) ) * parent.owner.GetSkillLevel(S_Sword_s13);
+		else if (parent.aimType == AT_Bomb && parent.owner.CanUseSkill(S_Alchemy_s09) )
+			speed -= CalculateAttributeValue( ((CR4Player)parent.owner).GetSkillAttributeValue(S_Alchemy_s09, 'slowdown_mod', false, true) ) * parent.owner.GetSkillLevel(S_Alchemy_s09);
 		
 		
-		theSound.SoundEvent( "gui_slowmo_start" );
+			theSound.SoundEvent( "gui_slowmo_start" );
+	
 		theGame.SetTimeScale(speed, theGame.GetTimescaleSource(ETS_ThrowingAim), theGame.GetTimescalePriority(ETS_ThrowingAim), false );
 		speedMultCasuserId = parent.owner.SetAnimationSpeedMultiplier( 1/speed * 0.5 );		
-		
-		if ( (W3ThrowingKnife)( parent.throwable ) )
-			((W3ThrowingKnife)( parent.throwable )).SetMultCasuser( speedMultCasuserId );
-		
-		LogItems("CurrentSLOMO <" + speedMultCasuserId + ">>");
 	}
 	
 	function RemoveSloMo()

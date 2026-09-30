@@ -164,8 +164,6 @@ class W3TooltipComponent
 		
 		var ammo, ammoBonus : float;
 		var additionalRarityDescription : string;
-
-		var transmogAppearance : name;
 		
 		var definitionsMgr : CDefinitionsManagerAccessor;
 		
@@ -211,7 +209,8 @@ class W3TooltipComponent
 			craftSchematic = GetSchematicDataFromXML(itemName); 
 			craftItemName = craftSchematic.craftedItemName;
 		}
-		else if (categoryName == 'alchemy_recipe')
+		else
+		if (categoryName == 'alchemy_recipe')
 		{
 			alchRecipe = GetRecipeDataFromXML(itemName);
 			craftItemName = alchRecipe.cookedItemName;
@@ -275,7 +274,7 @@ class W3TooltipComponent
 		
 		if (categoryName == 'gwint')
 		{
-			additionalDescription += GetGwintCardDescription( itemName );
+			additionalDescription += GetGwintCardDescription(GetWitcherPlayer().GetGwentCardIndex(itemName));
 		}
 		
 		if (itemInvComponent.ItemHasTag(item, 'ReadableItem') && itemInvComponent.IsBookRead(item))
@@ -455,9 +454,7 @@ class W3TooltipComponent
 		{
 			uniqueDescription = GetAerondightTooltipDescription( itemInvComponent, item );
 		}
-
-
-
+		
 		
 		if( itemInvComponent.ItemHasTag( item, 'sq304_unique_sword' ) )
 		{
@@ -469,8 +466,6 @@ class W3TooltipComponent
 		{
 			uniqueDescription =  GetLocStringByKeyExt( 'item_desc_sq304_sword' );
 		}
-
-
 		
 		uniqueDescription += additionalDescription;
 		
@@ -550,11 +545,8 @@ class W3TooltipComponent
 		AddOilInfo(item, itemInvComponent, tooltipData);
 		AddSocketsInfo(item, itemInvComponent, socketsList);
 		
-		if(weightValue != 0)
-		{
-			tmpStr = FloatToStringPrec( weightValue, 2 );
-			addGFxItemStat(propsList, "weight", tmpStr, "attribute_name_weight");
-		}
+		tmpStr = FloatToStringPrec( weightValue, 2 );
+		addGFxItemStat(propsList, "weight", tmpStr, "attribute_name_weight");
 		
 		durMult = 1;
 		if ( isArmorOrWeapon && !itemInvComponent.IsItemBolt( item ) )
@@ -635,8 +627,8 @@ class W3TooltipComponent
 		if( compareItemInv.IsIdValid( compareWithItem ) )
 		{
 			tooltipData.SetMemberFlashString( "EquippedTitle", GetLocStringByKeyExt( "panel_blacksmith_equipped" ) );
-		}
-
+		}	
+		
 		tooltipData.SetMemberFlashUInt("ItemId", ItemToFlashUInt(item));
 		tooltipData.SetMemberFlashString("ItemType", typeDesc);
 		tooltipData.SetMemberFlashString("ItemRarity", GetItemRarityDescription(item, itemInvComponent, rarityColor ) + additionalRarityDescription );
@@ -658,23 +650,8 @@ class W3TooltipComponent
 		
 		tooltipData.SetMemberFlashBool("CanBeCompared", canBeCompared);
 		tooltipData.SetMemberFlashBool("EnableFullScreenInfo", isArmorOrWeapon);
-
-		transmogAppearance = itemInvComponent.GetItemTemplateOverride(item);
-		if(transmogAppearance) {
-			tooltipData.SetMemberFlashString( "TransmogText", GetTransmogItemLabel(itemInvComponent.GetItemLocalizedNameByName(transmogAppearance)));
-			tooltipData.SetMemberFlashString("IconPath", itemInvComponent.GetItemIconPathByName(transmogAppearance) );
-		}
 		
 		return tooltipData;
-	}
-
-	public function GetTransmogItemLabel(itemName : string) : string
-	{
-		var transmogItemLabel : string; 
-
-		transmogItemLabel = GetLocStringByKeyExt("panel_reforge_tooltip_name");
-		transmogItemLabel = StrReplace(transmogItemLabel, "{x}", StrUpper(GetLocStringByKeyExt(itemName)));
-		return transmogItemLabel;
 	}
 	
 	private function addRecipeInfo( item: SItemUniqueId, itemInvComponent : CInventoryComponent, out description : string )
@@ -1320,7 +1297,7 @@ class W3TooltipComponent
 						}
 						else
 						{
-							equippedItemData = GetBaseItemData(equipedItemId, m_playerInv, isShopItem, itemId, m_itemInv);
+							equippedItemData = GetBaseItemData(equipedItemId, m_playerInv, isShopItem, itemId, m_playerInv);
 						}
 						selectedItemData.SetMemberFlashObject("equippedItemData", equippedItemData);
 					}
@@ -1653,21 +1630,19 @@ class W3TooltipComponent
 		return "";
 	}
 	
-	private function GetGwintCardDescription( itemName: name ):string
+	private function GetGwintCardDescription(cardIndex:int):string
 	{
 		var cardString : string;
-		var gwintManager : CR4GwintManager = theGame.GetGwintManager();
+		var gwintManager : CR4GwintManager;
 		var cardDefinition : SCardDefinition;
-		var cardDefinitions : array<SCardDefinition>;
 		var tempStr : string;
-		var cardName: name;
 		var abilityName : string;
 		var abilityDescription : string;
-		var i: int;
-
-		cardName = gwintManager.GetCardNameFromItemName(itemName);
 		
-		if ( !gwintManager.GetGwentCard( cardName, cardDefinition ) )
+		gwintManager = theGame.GetGwintManager();
+		cardDefinition = gwintManager.GetCardDefinition(cardIndex);
+		
+		if (cardDefinition.index == -1)
 		{
 			return "Failed to get card definition";
 		}
@@ -1698,7 +1673,7 @@ class W3TooltipComponent
 		
 		cardString += "<br/>" + GetLocStringByKeyExt("gwint_tooltip_card_type") + ": ";
 		
-		if (theGame.GetGwintManager().IsKingCard(cardDefinition)) 
+		if (cardDefinition.index >= 1000) 
 		{
 			cardString += "<font color='#7b7877'>" + GetLocStringByKeyExt("gwint_tooltip_card_type_leader") + "</font>";
 			
@@ -1916,7 +1891,7 @@ class W3TooltipComponent
 			cardString += "<br/>" + GetLocStringByKeyExt("gwint_tut_unitcardspecialability_title") + ": " + "<font color='#7b7877'>" + abilityName + "<br/>" + abilityDescription + "</font>";
 		}
 		
-		if (gwintManager.HasCardInCollection(cardName))
+		if (gwintManager.HasCardInCollection(cardIndex))
 		{
 			cardString += "<br/><font color = '#1E8823'>" + GetLocStringByKeyExt("panel_alchemy_exception_already_cooked") + "</font>";
 		}

@@ -115,6 +115,7 @@ class CR4HudModuleDebugFastMenu extends CR4HudModuleBase
 		}
 		else
 		{
+			theGame.GetSecondScreenManager().SendGameMenuClose();
 			theGame.Unpause( "FastMenu" );
 			theInput.RestoreContext( 'FastMenu', false );
 		}

@@ -130,3 +130,4 @@ class CBTTaskSetAttitudeDef extends IBehTreeTaskDefinition
 		}
 	}
 }
+

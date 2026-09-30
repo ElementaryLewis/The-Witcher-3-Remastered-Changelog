@@ -502,11 +502,7 @@ state SailingPassive in CR4Player extends UseGenericVehicle
 	}
 	
 	event OnGameCameraPostTick( out moveData : SCameraMovementData, dt : float )
-	{	
-		
-		if (thePlayer.IsQuestCameraRequestActive())
-			theGame.GetGameCamera().SetAllowAutoRotation(true);
-
+	{
 		if ( super.OnGameCameraPostTick( moveData, dt ) )
 			return true;
 	}

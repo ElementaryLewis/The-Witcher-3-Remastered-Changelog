@@ -41,12 +41,6 @@ class W3QuestCond_ItemAmmo extends CQuestScriptedCondition
 
 	function RegisterAmmoListener( flag : bool )
 	{
-		if (ammoListener && flag)
-			return;
-	
-		if (!ammoListener && !flag)
-			return;
-		
 		if ( flag )
 		{
 			ammoListener = new W3QuestCond_ItemAmmo_AmmoListener in this;
@@ -69,13 +63,6 @@ class W3QuestCond_ItemAmmo extends CQuestScriptedCondition
 		{
 			return;
 		}
-		
-		if (inventoryListener && flag)
-			return;
-	
-		if (!inventoryListener && !flag)
-			return;
-			
 		if ( flag )
 		{
 			inventoryListener = new W3QuestCond_ItemAmmo_InventoryListener in this;

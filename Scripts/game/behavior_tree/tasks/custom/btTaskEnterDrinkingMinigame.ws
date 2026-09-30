@@ -76,3 +76,4 @@ class CBTTaskEnterDrinkingMinigameDef extends IBehTreeTaskDefinition
 		}
 	}
 }
+

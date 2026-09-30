@@ -246,3 +246,7 @@ class CCameraParametersSet
 		}
 	}
 }
+
+
+
+

@@ -98,3 +98,4 @@ class CBTTaskPlayScreamSoundDef extends IBehTreeTaskDefinition
 	default minFrequency = -1;
 	default maxFrequency = -1;
 }
+

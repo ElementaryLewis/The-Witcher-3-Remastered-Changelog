@@ -157,6 +157,9 @@ class W3PopupData extends CObject
 				tut.highlightAreas.PushBack( highlight );
 				
 				theGame.GetTutorialSystem().DisplayTutorial( tut );
+				
+				
+				theGame.GetTutorialSystem().uiHandler.AddNewBooksTutorial();
 			}
 		}
 		LogChannel('UI', "W3PopupData::OnShown");
@@ -387,10 +390,6 @@ class QuantityPopupData extends SliderPopupData
 			{
 				blacksmithRef.HandleActionConfirmation(false);
 			}
-			if(inventoryRef)
-			{
-				inventoryRef.OnUpdateGFxButtonsList(); 
-			}
 			ClosePopup();
 		}
 		else
@@ -460,11 +459,7 @@ class QuantityPopupData extends SliderPopupData
 						updateInfiniteBolts = true;
 					}
 					
-					 if (!inventoryRef.FinalDropItem(itemId, currentValue))
-					{
-						ClosePopup();
-						return;
-					}
+					inventoryRef.FinalDropItem(itemId, currentValue);
 					
 					if (currentValue == maxValue)
 					{
@@ -495,7 +490,6 @@ class QuantityPopupData extends SliderPopupData
 			}
 			
 			inventoryRef.UpdateAllItemData();
-			inventoryRef.OnUpdateGFxButtonsList(); 
 			
 			
 			
@@ -977,3 +971,4 @@ class PaintingPopup extends TextPopupData
 		return "PaintingPopupRef";
 	}
 }
+

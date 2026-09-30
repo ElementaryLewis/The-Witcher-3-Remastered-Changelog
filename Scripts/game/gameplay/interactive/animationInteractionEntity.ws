@@ -180,3 +180,6 @@ class W3AnimationInteractionEntity extends CR4MapPinEntity
 		thePlayer.PlayerStopAction( interactionAnim );		
 	}
 }
+
+
+

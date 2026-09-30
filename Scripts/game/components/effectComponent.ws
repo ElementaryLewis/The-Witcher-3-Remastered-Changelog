@@ -9,3 +9,4 @@ import class CR4EffectComponent extends CComponent
 	
 	import final function StopEffect();
 }
+

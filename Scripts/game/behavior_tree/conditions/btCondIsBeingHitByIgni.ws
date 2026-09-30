@@ -16,3 +16,21 @@ class CBTCondIsBeingHitByIgniDef extends IBehTreeConditionalTaskDefinition
 {
 	default instanceClass = 'CBTCondIsBeingHitByIgni';
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

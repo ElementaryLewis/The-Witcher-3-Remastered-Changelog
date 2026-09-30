@@ -237,7 +237,7 @@ statemachine class WeaponHolster
 		else
 		{
 			inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-			disableAutoSheathe = inGameConfigWrapper.GetVarValue( 'Accessibility', 'DisableAutomaticSwordSheathe' );
+			disableAutoSheathe = inGameConfigWrapper.GetVarValue( 'Gameplay', 'DisableAutomaticSwordSheathe' );
 			
 			if( disableAutoSheathe )
 			{
@@ -554,7 +554,6 @@ state SelectingWeapon in WeaponHolster
 		}	
 		
 		
-
 		
 		thePlayer.SetBehaviorVariable( 'holsterReadyToSkip', 0.0f, true );
 		
@@ -730,7 +729,6 @@ state SelectingWeapon in WeaponHolster
 		actionBlockingExceptions.PushBack(EIAB_Slide);
 		actionBlockingExceptions.PushBack(EIAB_ThrowBomb);
 		actionBlockingExceptions.PushBack(EIAB_Crossbow);
-
 		actionBlockingExceptions.PushBack(EIAB_UsableItem);
 		actionBlockingExceptions.PushBack(EIAB_RadialMenu);
 		actionBlockingExceptions.PushBack(EIAB_OpenInventory);

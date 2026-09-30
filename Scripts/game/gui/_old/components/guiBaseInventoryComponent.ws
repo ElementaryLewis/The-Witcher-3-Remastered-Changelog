@@ -329,8 +329,6 @@ abstract class W3GuiBaseInventoryComponent
 		var bRead : bool;
 		var tmp: bool;
 		var chargesCount:int;
-
-		var transmogAppearance : name;
 		
 		uiData = _inv.GetInventoryItemUIData( item );
 		slotType = GetItemEquippedSlot( item );
@@ -455,7 +453,6 @@ abstract class W3GuiBaseInventoryComponent
 		flashObject.SetMemberFlashBool( "isWeaponUpgrade",  _inv.ItemHasTag(item, 'WeaponUpgrade') );
 		flashObject.SetMemberFlashBool( "isArmorRepairKit", _inv.ItemHasTag(item, 'ArmorReapairKit') );
 		flashObject.SetMemberFlashBool( "isWeaponRepairKit", _inv.ItemHasTag(item, 'WeaponReapairKit') );
-		flashObject.SetMemberFlashBool( "isSharpener", _inv.ItemHasTag(item, 'Sharpstone') );
 		flashObject.SetMemberFlashBool( "isDye", _inv.IsItemDye( item ) );
 		flashObject.SetMemberFlashBool( "isMask", _inv.IsItemMask( item ) ); 
 		
@@ -518,16 +515,6 @@ abstract class W3GuiBaseInventoryComponent
 		
 		
 		flashObject.SetMemberFlashString( "category", _inv.GetItemCategory(item) );
-
-		transmogAppearance = _inv.GetItemTemplateOverride(item);
-		if(_inv.HasTransmogAppearance(item)) {
-			flashObject.SetMemberFlashBool( "transmog", true );
-			flashObject.SetMemberFlashString("iconPath", _inv.GetItemIconPathByName(transmogAppearance) );
-			if(!theGame.GetDefinitionsManager().CanItemBeColoredByName(transmogAppearance))
-			{
-				flashObject.SetMemberFlashString( "itemColor", "" );
-			}
-		}
 		
 	}
 	
@@ -940,3 +927,5 @@ abstract class W3GuiBaseInventoryComponent
 	}
 	
 }
+
+

@@ -482,8 +482,6 @@ class CAIPhilippaReactionsTree extends CAINpcReactionsTree
 };
 
 
-
-
 class CAIBruxaCommonerReactionTree extends CAINpcReactionsTree
 {
 	function Init()
@@ -1287,3 +1285,29 @@ class CAIRunOnlyScaredTree extends CAIScaredSubTree
 {
 	default aiTreeName = "resdef:ai\reactions/npc_scared_run_only_reaction";
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

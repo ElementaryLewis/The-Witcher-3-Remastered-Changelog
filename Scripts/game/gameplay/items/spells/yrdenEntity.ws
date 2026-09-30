@@ -11,29 +11,12 @@ struct SYrdenEffects
 	editable var activateEffect : name;
 }
 
-struct SYrdenEffectSettings
-{
-	editable var effectEntityTemplate : CEntityTemplate;
-	editable var rangeModifier : float;
-	editable var count : int;
-	editable var calculateCountFromSpacing : bool;
-	editable var desiredSpacing : float;
-	editable var randomLocationDeviation : float;
-	editable var randomAngleDeviation : float;
-
-	default rangeModifier = 1;
-	default count = 8;
-	default desiredSpacing = 0.5;
-}
-
 statemachine class W3YrdenEntity extends W3SignEntity
 {
 	editable var effects		: array< SYrdenEffects >;
 	editable var projTemplate	: CEntityTemplate;
 	editable var projDestroyFxEntTemplate : CEntityTemplate;
 	editable var runeTemplates	: array< CEntityTemplate >;
-	editable var radialEffects : array<SYrdenEffectSettings>;
-	editable var centerRuneTemplate	: CEntityTemplate;
 
 	public var validTargetsInArea, allActorsInArea : array< CActor >; 
 	protected var flyersInArea	: array< CNewNPC >;
@@ -132,10 +115,7 @@ statemachine class W3YrdenEntity extends W3SignEntity
 	
 	protected function GetSignStats()
 	{
-		var chargesAtt, trapDurationAtt, fortifiedSignsAtt : SAbilityAttributeValue;
-		var player : CR4Player;
-		var rangeAttr : SAbilityAttributeValue;
-		var rangeMult : float;
+		var chargesAtt, trapDurationAtt : SAbilityAttributeValue;
 	
 		super.GetSignStats();
 		
@@ -145,28 +125,11 @@ statemachine class W3YrdenEntity extends W3SignEntity
 		trapDurationAtt = owner.GetSkillAttributeValue(skillEnum, 'trap_duration', false, true);
 		baseModeRange = CalculateAttributeValue( owner.GetSkillAttributeValue(skillEnum, 'range', false, true) );
 		
-		
-		if ( thePlayer.CanUseSkill( S_Magic_s42 ) )
-		{
-			rangeAttr = thePlayer.GetSkillAttributeValue( S_Magic_s42, 'range', false, true );
-			rangeMult = 1 + ( rangeAttr.valueMultiplicative * thePlayer.GetSkillLevel( S_Magic_s42 ) );
-			baseModeRange *= rangeMult;
-		}
-
 		trapDurationAtt += owner.GetActor().GetTotalSignSpellPower(skillEnum);
 		trapDurationAtt.valueMultiplicative -= 1;	
 		
 		charges = (int)CalculateAttributeValue(chargesAtt);
 		trapDuration = CalculateAttributeValue(trapDurationAtt);
-		
-		
-		player = (CR4Player)owner.GetActor();
-		if(player.CanUseSkill(S_Magic_s36))
-		{
-			fortifiedSignsAtt = player.GetSkillAttributeValue(S_Magic_s36, 'duration', false, true);
-			trapDuration *= 1 + fortifiedSignsAtt.valueMultiplicative * player.GetSkillLevel(S_Magic_s36);
-		}
-
 	}
 	
 	event OnStarted()
@@ -182,8 +145,7 @@ statemachine class W3YrdenEntity extends W3SignEntity
 			player.AddTimer('ResetPadBacklightColorTimer', 2);
 		}
 		
-			
-			
+		PlayEffect( 'cast_yrden' );
 		
 		if ( owner.ChangeAspect( this, S_Magic_s03 ) )
 		{
@@ -204,8 +166,6 @@ statemachine class W3YrdenEntity extends W3SignEntity
 		var witcher : W3PlayerWitcher;
 		var trigger : CComponent;
 		var min, max : SAbilityAttributeValue;
-		var rangeAttr : SAbilityAttributeValue;
-		var rangeMult : float;
 		
 		witcher = GetWitcherPlayer();
 		witcher.yrdenEntities.PushBack(this);
@@ -218,18 +178,6 @@ statemachine class W3YrdenEntity extends W3SignEntity
 			
 			trigger = GetComponent( "Slowdown" );
 			scale = trigger.GetLocalScale() * min.valueAdditive;			
-			
-			trigger.SetScale( scale );
-		}
-
-		
-		if ( thePlayer.CanUseSkill( S_Magic_s42 ) )
-		{
-			rangeAttr = thePlayer.GetSkillAttributeValue( S_Magic_s42, 'range', false, true );
-			rangeMult = 1 + ( rangeAttr.valueMultiplicative * thePlayer.GetSkillLevel( S_Magic_s42 ) );
-			
-			trigger = GetComponent( "Slowdown" );
-			scale = trigger.GetLocalScale() * rangeMult;			
 			
 			trigger.SetScale( scale );
 		}
@@ -284,10 +232,6 @@ statemachine class W3YrdenEntity extends W3SignEntity
 		if(!isAlternate && owner.CanUseSkill(S_Magic_s10) && owner.GetSkillLevel(S_Magic_s10) >= 2)
 		{
 			maxCount += 1;
-		}
-		else if (!isAlternate && owner.CanUseSkill(S_Magic_s42))
-		{
-			maxCount += owner.GetSkillLevel(S_Magic_s42);
 		}
 		
 		for(i=size-1; i>=0; i-=1)
@@ -896,7 +840,7 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 	private function CleanUp()
 	{
 		var i, size : int;
-
+		
 		size = parent.validTargetsInArea.Size();
 		for( i = 0; i < size; i += 1 )
 		{
@@ -908,8 +852,6 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 			virtual_parent.fxEntities[i].StopAllEffects();
 			virtual_parent.fxEntities[i].DestroyAfter( 5.f );
 		}
-		
-
 	}
 	
 	event OnThrowing()
@@ -945,19 +887,14 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 	
 	private function CreateTrap()
 	{
-		var i, j, size, count : int;
+		var i, size : int;
 		var worldPos : Vector;
 		var isSetBonus2Active : bool;
 		var worldRot : EulerAngles;
-		var polarAngle, yrdenRange, unitAngle, traceResultDistance : float;
-		var runePositionLocal, runePositionGlobal, traceResult : Vector;
+		var polarAngle, yrdenRange, unitAngle : float;
+		var runePositionLocal, runePositionGlobal : Vector;
 		var entity : CEntity;
 		var min, max : SAbilityAttributeValue;
-
-		var traceResultHeights : array<float>;
-		var lowestResult : float;
-
-		var effectSettings : SYrdenEffectSettings;
 		
 		isSetBonus2Active = GetWitcherPlayer().IsSetBonusActive( EISB_Gryphon_2 );
 		worldPos = virtual_parent.GetWorldPosition();
@@ -965,14 +902,13 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 		yrdenRange = virtual_parent.baseModeRange;
 		size = virtual_parent.runeTemplates.Size();
 		unitAngle = 2 * Pi() / size;
-
+		
 		if( isSetBonus2Active )
 		{
 			virtual_parent.PlayEffect( 'ability_gryphon_set' );
 			theGame.GetDefinitionsManager().GetAbilityAttributeValue( 'GryphonSetBonusYrdenEffect', 'trigger_scale', min, max );
 			yrdenRange *= min.valueAdditive;
 		}
-		
 		
 		for( i=0; i<size; i+=1 )
 		{
@@ -989,53 +925,6 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 			entity = theGame.CreateEntity( virtual_parent.runeTemplates[i], runePositionGlobal, worldRot );
 			virtual_parent.fxEntities.PushBack( entity );
 		}
-
-		
-		size = virtual_parent.radialEffects.Size();
-		for( i=0; i<size; i+=1 )
-		{
-			effectSettings = virtual_parent.radialEffects[i];
-			if(effectSettings.calculateCountFromSpacing)
-			{
-				count = (int)((2.f * Pi() * yrdenRange) / effectSettings.desiredSpacing);
-			}
-			else
-			{
-				count = effectSettings.count;
-			}
-
-			unitAngle = 2 * Pi() / count;
-			for( j=0; j<count; j+=1 )
-			{
-				polarAngle = unitAngle * j;
-				if(effectSettings.randomAngleDeviation > 0)
-				{
-					polarAngle += RandRangeF(effectSettings.randomAngleDeviation, -effectSettings.randomAngleDeviation);
-				}
-
-				runePositionLocal.X = yrdenRange * effectSettings.rangeModifier * CosF( polarAngle );
-				runePositionLocal.Y = yrdenRange * effectSettings.rangeModifier * SinF( polarAngle );
-				runePositionLocal.Z = 0.f;
-				
-				if(effectSettings.randomLocationDeviation > 0)
-				{
-					runePositionLocal.X += RandRangeF(effectSettings.randomLocationDeviation, -effectSettings.randomLocationDeviation);
-					runePositionLocal.Y += RandRangeF(effectSettings.randomLocationDeviation, -effectSettings.randomLocationDeviation);
-				}
-
-				runePositionGlobal = worldPos + runePositionLocal;			
-				runePositionGlobal = TraceFloor( runePositionGlobal );
-				runePositionGlobal.Z += 0.05f;		
-				
-				entity = theGame.CreateEntity( virtual_parent.radialEffects[i].effectEntityTemplate, runePositionGlobal, worldRot );
-				virtual_parent.fxEntities.PushBack( entity );
-			}
-		}
-
-		
-		traceResult = TraceFloor( worldPos );
-		entity = theGame.CreateEntity( virtual_parent.centerRuneTemplate, traceResult, worldRot );
-		virtual_parent.fxEntities.PushBack( entity );
 	}
 	
 	entry function YrdenSlowdown_Loop()
@@ -1177,7 +1066,6 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 		{
 			parent.UpdateGryphonSetBonusYrdenBuff();
 		}
-
 	}
 	
 	event OnAreaExit( area : CTriggerAreaComponent, activator : CComponent )
@@ -1213,7 +1101,6 @@ state YrdenSlowdown in W3YrdenEntity extends Active
 		{
 			parent.UpdateGryphonSetBonusYrdenBuff();
 		}
-
 	}
 }
 

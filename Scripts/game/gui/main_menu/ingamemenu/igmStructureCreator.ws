@@ -8,15 +8,6 @@ class IngameMenuStructureCreator
 	public var parentMenu 				: CR4IngameMenu;
 	public var m_flashValueStorage		: CScriptedFlashValueStorage;
 	public var m_flashConstructor 		: CScriptedFlashObject;
-
-	private function IsRunningModdedGame():bool
-	{
-		var modList : array<string>;
-
-		theGame.GetModHandlerSystem().GetStartupModNames( modList );
-
-		return modList.Size() > 0;
-	}
 	
 	protected function CreateMenuItem(id : string, label : string, tag : int, type : int, createEmptyChildList : bool, optional listTitle : string) : CScriptedFlashObject
 	{
@@ -62,6 +53,9 @@ class IngameMenuStructureCreator
 		var l_DataFlashObject 		: CScriptedFlashObject;
 		var l_subDataFlashObject	: CScriptedFlashObject;
 		var l_titleString			: string;
+		var b_GogWithSubMenus       : bool;
+		
+		b_GogWithSubMenus = false;
 		
 		l_DataFlashArray = m_flashValueStorage.CreateTempFlashArray();
 		
@@ -77,9 +71,7 @@ class IngameMenuStructureCreator
 			
 			
 			{
-				l_DataFlashObject = CreateMenuItem("NewGameTopLevel", "panel_newgame", NameToFlashUInt('NewGame'), IGMActionType_MenuHolder, false, "panel_newgame");
-				l_DataFlashObject.SetMemberFlashBool("isNewGameAndModded", IsRunningModdedGame());
-				l_DataFlashObject.SetMemberFlashBool( "unavailable", theGame.GetModHandlerSystem().HasUninstalledMods() );
+				l_DataFlashObject = CreateMenuItem("NewGame", "panel_newgame", NameToFlashUInt('NewGame'), IGMActionType_MenuHolder, false, "panel_newgame");
 				l_ChildMenuFlashArray = CreateNewGameListArray();
 			}
 			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
@@ -142,7 +134,7 @@ class IngameMenuStructureCreator
 			}
 			
 			
-			if ( !theGame.IsDialogOrCutscenePlaying() && (theGame.GetGwintManager().GetHasDoneTutorial() || FactsQuerySum("standalone_ep1") > 0 || FactsQuerySum("standalone_ep2") > 0 || FactsQuerySum("standalone_ep3") > 0|| FactsQuerySum("NewGamePlus") > 0))  
+			if ( !theGame.IsDialogOrCutscenePlaying() && (theGame.GetGwintManager().GetHasDoneTutorial() || theGame.GetGwintManager().HasLootedCard()))  
 			{
 				l_DataFlashObject = CreateMenuItem("mainmenu_Gwent", "panel_mainmenu_gwent", NameToFlashUInt('Gwent'), IGMActionType_Gwint, true);
 				l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
@@ -150,69 +142,23 @@ class IngameMenuStructureCreator
 			
 			
 		}
-
 		
-		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
-		{	
-				l_DataFlashObject = CreateMenuItem("mainmenu_SwitchFeatures", "menu_panel_console_features_switch2_title", NameToFlashUInt('SwitchFeatures'), IGMActionType_SwitchFeatures, true);
-				l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
-		}
-
 		
-		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
-		{	
-			if(theGame.IsPatternTutorial())
+		if (parentMenu.isMainMenu)
+		{
+			if (b_GogWithSubMenus)
 			{
-				l_DataFlashObject = CreateMenuItem("mainmenu_LeaveTutorial", "menuitem_leave_tutorial", NameToFlashUInt('LeaveTutorial'), IGMActionType_LeaveTutorial, true);
-				l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
+				l_DataFlashObject = CreateMenuItem("mainmenu_cloud", "ui_gog_my_rewards", NameToFlashUInt('CloudSaves'), IGMActionType_MenuHolder, false);
+				l_ChildMenuFlashArray = CreateCloudSavesSubElements();
+				l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
 			}
 			else
 			{
-				l_DataFlashObject = CreateMenuItem("mainmenu_ReplayTutorial", "menuitem_replay_tutorial", NameToFlashUInt('ReplayTutorial'), IGMActionType_ReplayTutorial, true);
-				if(!parentMenu.isMainMenu)
-				{
-					l_DataFlashObject.SetMemberFlashBool("unavailable", theGame.AreSavesLocked());
-				}
-				else
-				{
-					l_DataFlashObject.SetMemberFlashBool("unavailable",false);
-				}
-				l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);	
+				l_DataFlashObject = CreateMenuItem("mainmenu_cloud", "ui_gog_my_rewards", NameToFlashUInt('CloudSaves'), IGMActionType_Gog, true);
 			}
-		}		
-		
-		
-		if (parentMenu.isMainMenu)
-		{
-				l_DataFlashObject = CreateMenuItem("mainmenu_mods", "panel_mainmenu_mods", NameToFlashUInt('Mods'), IGMActionType_ModMenu, true); 
-				l_DataFlashObject.SetMemberFlashBool( "unavailable", !theGame.GetModHandlerSystem().IsModioActive() );
-				l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
-		}
-		
-		
-		
-		if (parentMenu.isMainMenu)
-		{
-			l_DataFlashObject = CreateMenuItem("mainmenu_patchnotes", "menu_panel_patchnotes", NameToFlashUInt('PatchNotes'), IGMActionType_PatchNotes, true);
 			l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
 		}
-
 		
-
-		if (parentMenu.isMainMenu)
-		{
-			l_DataFlashObject = CreateMenuItem("credits", "panel_mainmenu_extras_credits", CreditsIndex_Wither3, IGMActionType_MenuHolder, true, "panel_mainmenu_extras_credits");
-			l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
-			IngameMenu_FillCreditsSubGroup(m_flashValueStorage, l_ChildMenuFlashArray);
-			
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			
-			l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
-		}
-
-		
-
-
 		
 		
 		
@@ -244,7 +190,7 @@ class IngameMenuStructureCreator
 			
 		}
 		
-		if (theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK)
+		if (theGame.GetPlatform() == Platform_PC)
 		{
 			
 			l_DataFlashObject = CreateMenuItem("button_closeGame", "menu_main_quit", NameToFlashUInt('CloseGame'), IGMActionType_CloseGame, true);
@@ -252,7 +198,7 @@ class IngameMenuStructureCreator
 			
 		}
 	
-		if (theGame.DebugQuestMenuEnable())
+		if ( parentMenu.isMainMenu && theGame.IsDebugQuestMenuEnabled() && !theGame.IsFinalBuild() )
 		{
 			
 			l_DataFlashObject = CreateMenuItem("debug_menu", "DBG Quest Menu", NameToFlashUInt('DebugMenu'), IGMActionType_DebugStartQuest, true);
@@ -273,7 +219,7 @@ class IngameMenuStructureCreator
 		
 		
 		l_DataFlashObject = CreateMenuItem("NewGame", "new_game_tw3", NameToFlashUInt('NewGame'), IGMActionType_MenuHolder, false, "newgame_difficulty");
-		l_ChildMenuFlashArray = CreateNewGameSubMenuListArray(0);
+		l_ChildMenuFlashArray = CreateDifficultyListArray(0);
 		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
 		l_DataFlashObject.SetMemberFlashString( "description", GetLocStringByKeyExt("panel_mainmenu_start_newgame_description") );
 		
@@ -284,67 +230,93 @@ class IngameMenuStructureCreator
 		
 		{
 			l_DataFlashObject = CreateMenuItem("NewGame", "new_game_ep1", NameToFlashUInt('NewGameEP1'), IGMActionType_MenuHolder, false, "newgame_difficulty");
-			l_ChildMenuFlashArray = CreateNewGameSubMenuListArray(IGMC_EP1_Save);
+			l_ChildMenuFlashArray = CreateDifficultyListArray(IGMC_EP1_Save);
 			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
 			l_DataFlashObject.SetMemberFlashString( "description", GetLocStringByKeyExt("panel_mainmenu_start_ep1_description") );
+			l_DataFlashObject.SetMemberFlashBool( "unavailable", !( theGame.CanStartStandaloneDLC('ep1') && theGame.GetDLCManager().IsEP1Available() && theGame.IsContentAvailable('content12') ) );
 			
 			l_optionChildList.PushBackFlashObject(l_DataFlashObject);
 		}
+		
 		
 		{
 			l_DataFlashObject = CreateMenuItem("NewGame", "new_game_ep2", NameToFlashUInt('NewGameEP2'), IGMActionType_MenuHolder, false, "newgame_difficulty");
-			l_ChildMenuFlashArray = CreateNewGameSubMenuListArray(IGMC_EP2_Save);
+			l_ChildMenuFlashArray = CreateDifficultyListArray(IGMC_EP2_Save);
 			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
 			l_DataFlashObject.SetMemberFlashString( "description", GetLocStringByKeyExt("panel_mainmenu_start_ep2_description") );
+			l_DataFlashObject.SetMemberFlashBool( "unavailable", !( theGame.CanStartStandaloneDLC('bob_000_000') && theGame.GetDLCManager().IsEP2Available() && theGame.IsContentAvailable('content12') ) );
 			
 			l_optionChildList.PushBackFlashObject(l_DataFlashObject);
 		}
+		
+		
 		
 		{
 			l_DataFlashObject = CreateMenuItem("NewGame", "newgame_plus", NameToFlashUInt('NewGamePlus'), IGMActionType_MenuHolder, false, "newgame_difficulty");
-			l_ChildMenuFlashArray = CreateNewGameSubMenuListArray(IGMC_New_game_plus);
+			l_ChildMenuFlashArray = CreateDifficultyListArray(IGMC_New_game_plus);
 			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
 			l_DataFlashObject.SetMemberFlashString( "description", GetLocStringByKeyExt("panel_mainmenu_start_ngplus_description") );
+			l_DataFlashObject.SetMemberFlashBool( "unavailable", !( theGame.GetDLCManager().IsNewGamePlusAvailable() ) );
 			
 			l_optionChildList.PushBackFlashObject(l_DataFlashObject);
 		}
 		
-		
-
-
-
-		
-		
-		return l_optionChildList;
-	}
-			
-	protected function CreateNewGameSubMenuListArray( initialTag:int ) : CScriptedFlashArray
-	{
-		var l_optionChildList : CScriptedFlashArray  = m_flashValueStorage.CreateTempFlashArray();
-		
-		
-		
-		
-		
-		
-
-		AddDifficultyOptionItem(initialTag, EDM_Easy, l_optionChildList);
-		AddDifficultyOptionItem(initialTag, EDM_Medium, l_optionChildList);
-		AddDifficultyOptionItem(initialTag, EDM_Hard, l_optionChildList);
-		AddDifficultyOptionItem(initialTag, EDM_Hardcore, l_optionChildList);
 		
 		return l_optionChildList;
 	}
 	
-	protected function AddDifficultyOptionItem( tag:int, difficulty:EDifficultyMode, parentArray:CScriptedFlashArray ):void
+	protected function CreateCloudSavesSubElements() : CScriptedFlashArray
 	{
-		var l_ChildMenuFlashArray	: CScriptedFlashArray = m_flashValueStorage.CreateTempFlashArray();
-		var l_DataFlashObject 		: CScriptedFlashObject = m_flashValueStorage.CreateTempFlashObject();
+		var l_optionChildList 	: CScriptedFlashArray;
+		var l_DataFlashObject	: CScriptedFlashObject;
+		var l_ChildMenuFlashArray	: CScriptedFlashArray;
+		
+		l_optionChildList = m_flashValueStorage.CreateTempFlashArray();
+		l_DataFlashObject = CreateMenuItem("cloud_gog", "Sign in", NameToFlashUInt('CloudSteam'), IGMActionType_Gog, true);
+		l_optionChildList.PushBackFlashObject(l_DataFlashObject);
+		
+		
+		
+		
+		return l_optionChildList;
+	}
+			
+	protected function CreateDifficultyListArray(initialTag:int) : CScriptedFlashArray
+	{
+		var l_optionChildList : CScriptedFlashArray;
+		
+		l_optionChildList = m_flashValueStorage.CreateTempFlashArray();
+		
+		AddDifficulyOptionItem(initialTag, EDM_Easy, l_optionChildList);
+		AddDifficulyOptionItem(initialTag, EDM_Medium, l_optionChildList);
+		AddDifficulyOptionItem(initialTag, EDM_Hard, l_optionChildList);
+		AddDifficulyOptionItem(initialTag, EDM_Hardcore, l_optionChildList);
+		
+		return l_optionChildList;
+	}
+	
+	protected function AddDifficulyOptionItem(tag:int, difficulty:EDifficultyMode, parentArray:CScriptedFlashArray):void
+	{
+		var l_ChildMenuFlashArray	: CScriptedFlashArray;
+		var l_DataFlashObject 		: CScriptedFlashObject;
 		var displayName				: string;
 		var descriptionText			: string;
-
 		
-
+		var lastHolder 				: bool;
+		
+		if ((tag & IGMC_EP2_Save) == IGMC_EP2_Save)
+		{
+			lastHolder = true;
+		}
+		else if ((tag & IGMC_EP1_Save) == IGMC_EP1_Save)
+		{
+			lastHolder = true;
+		}
+		else
+		{
+			lastHolder = false;
+		}
+		
 		switch (difficulty)
 		{
 		case EDM_Easy:
@@ -367,216 +339,76 @@ class IngameMenuStructureCreator
 		
 		tag += difficulty;
 		
+		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
 		l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_Tutorials");
 		l_DataFlashObject.SetMemberFlashUInt(  "tag", tag );
 		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt(displayName) );
 		l_DataFlashObject.SetMemberFlashString(  "description", GetLocStringByKeyExt(descriptionText) );
-		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
-
 		
 		
-		l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_tutorials") );
-
-		AddNewgameTutorialOption(tag, l_ChildMenuFlashArray);
+		if (lastHolder)
+		{
+			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_NewGame );
+		}
+		else
+		{
+			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
+		}
 		
-		
+		l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
+		if ((tag & IGMC_New_game_plus) == IGMC_New_game_plus)
+		{
+			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
+			AddNewgameSimulateImportOption(tag, l_ChildMenuFlashArray);
+		}
+		else if (!lastHolder)
+		{
+			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_tutorials") );
+			AddNewgameTutorialOption(tag, l_ChildMenuFlashArray);
+		}
 		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
 		
 		parentArray.PushBackFlashObject(l_DataFlashObject);
 	}
-
-	function IsBardsBalladTag(tag:int) : bool
-	{
-		
-		
-		return (tag & EDM_Easy) == EDM_Easy && (tag & EDM_Medium) != EDM_Medium;
-	}
-
-	function IsEp1SaveGame(tag:int) : bool
-	{
-		return (tag & IGMC_EP1_Save) == IGMC_EP1_Save;
-	}
-
-	function IsEp2SaveGame(tag:int) : bool
-	{
-		return (tag & IGMC_EP2_Save) == IGMC_EP2_Save;
-	}
-
-
-
-	function IsNewGamePlus(tag:int) : bool
-	{
-		return (tag & IGMC_New_game_plus) == IGMC_New_game_plus;
-	}
-
+	
 	protected function AddNewgameTutorialOption(tag : int, parentArray : CScriptedFlashArray) : void
 	{
 		var l_ChildMenuFlashArray	: CScriptedFlashArray;
 		var l_DataFlashObject 		: CScriptedFlashObject;
 		var currentTag : int;
-		var type : InGameMenuActionType = IGMActionType_NewGame;
-		var needsBardsBallad : bool = IsBardsBalladTag(tag);
-
-
 		
 		
 		
+		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
+		l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_Tutorials");
+		l_DataFlashObject.SetMemberFlashUInt(  "tag", 1 );
+		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_on") );
+		l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
+		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
+		
+		l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
 		currentTag = tag;
 		currentTag += IGMC_Tutorials_On;
-
-		if(needsBardsBallad)
-		{
-			l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-			l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_Tutorials");
-			l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
-			l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_on") );
-			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("panel_mainmenu_bard_title") );
-			
-			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
-			l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
-			AddNewgameBardsBalladOption(currentTag, l_ChildMenuFlashArray);
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			
-			parentArray.PushBackFlashObject(l_DataFlashObject);
-		}
-		else
-		{
-			l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-			l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_BardsBallad");
-			l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
-			l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_on") );
-			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
-			
-			
-			if ( !(IsEp1SaveGame(tag) || IsEp2SaveGame(tag) 
-
-			) )
-			{
-				l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
-				l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
-				AddNewgameSimulateImportOption(currentTag, l_ChildMenuFlashArray);
-				l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			}
-			else
-			{
-				l_DataFlashObject.SetMemberFlashUInt( "type", type );
-			}
-			
-			parentArray.PushBackFlashObject(l_DataFlashObject);
-		}
-		
-		
-		
-		currentTag = tag;
-
-		if(needsBardsBallad)
-		{
-			l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-			l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_Tutorials");
-			l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
-			l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_off") );
-			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("panel_mainmenu_bard_title") );
-
-			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
-			l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
-			AddNewgameBardsBalladOption(currentTag, l_ChildMenuFlashArray);
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-
-			parentArray.PushBackFlashObject(l_DataFlashObject);
-		}
-		else
-		{
-			l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-			l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_Tutorials");
-			l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
-			l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_off") );
-			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
-			l_DataFlashObject.SetMemberFlashUInt( "type", type );
-
-			if ( !(IsEp1SaveGame(tag) || IsEp2SaveGame(tag) 
-
-			) )
-			{
-				l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
-				l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
-				AddNewgameSimulateImportOption(currentTag, l_ChildMenuFlashArray);
-				l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-				l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
-			}
-			else
-			{
-				l_DataFlashObject.SetMemberFlashUInt( "type", type );
-			}
-
-			parentArray.PushBackFlashObject(l_DataFlashObject);
-		}
-	}
-
-	protected function AddNewgameBardsBalladOption(tag : int, parentArray : CScriptedFlashArray) : void
-	{
-		var l_ChildMenuFlashArray	: CScriptedFlashArray;
-		var l_DataFlashObject 		: CScriptedFlashObject;
-		var currentTag : int;
-		var type : InGameMenuActionType = IGMActionType_NewGame;
-
-
-		
-		
-		
-		currentTag = tag;
-		currentTag += IGMC_BardsBallad_On;
-
-		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-		l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_BardsBallad");
-		l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
-		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_common_yes") );
-		l_DataFlashObject.SetMemberFlashString(  "description", GetLocStringByKeyExt("panel_mainmenu_bard_desc") );
-		l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
-		
-		
-		if ( !(IsEp1SaveGame(tag) || IsEp2SaveGame(tag) 
-
-		) )
-		{
-			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
-			l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
-			AddNewgameSimulateImportOption(currentTag, l_ChildMenuFlashArray);
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-		}
-		else
-		{
-			l_DataFlashObject.SetMemberFlashUInt( "type", type );
-		}
+		AddNewgameSimulateImportOption(currentTag, l_ChildMenuFlashArray);
+		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
 		
 		parentArray.PushBackFlashObject(l_DataFlashObject);
 		
 		
 		
+		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
+		l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_Tutorials");
+		l_DataFlashObject.SetMemberFlashUInt(  "tag", 0 );
+		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_off") );
+		l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
+		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
+		
+		l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
 		currentTag = tag;
 
-		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-		l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_BardsBallad");
-		l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
-		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_common_no") );
-		l_DataFlashObject.SetMemberFlashString(  "description", GetLocStringByKeyExt("panel_mainmenu_bard_desc") );
-		l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
-		l_DataFlashObject.SetMemberFlashUInt( "type", type );
-
-		if ( !(IsEp1SaveGame(tag) || IsEp2SaveGame(tag) 
-
-		) )
-		{
-			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
-			l_ChildMenuFlashArray = m_flashValueStorage.CreateTempFlashArray();
-			AddNewgameSimulateImportOption(currentTag, l_ChildMenuFlashArray);
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_import") );
-		}
-		else
-		{
-			l_DataFlashObject.SetMemberFlashUInt( "type", type );
-		}
-
+		AddNewgameSimulateImportOption(currentTag, l_ChildMenuFlashArray);
+		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
+		
 		parentArray.PushBackFlashObject(l_DataFlashObject);
 	}
 	
@@ -595,12 +427,10 @@ class IngameMenuStructureCreator
 		
 		currentTag = tag;
 		currentTag += IGMC_Simulate_Import;
-
 		l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
 		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_on") );
 		
-		
-		if ( IsNewGamePlus(tag) )
+		if ((tag & IGMC_New_game_plus) == IGMC_New_game_plus)
 		{
 			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
 			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_plus") );
@@ -622,12 +452,10 @@ class IngameMenuStructureCreator
 		l_DataFlashObject.SetMemberFlashString( "id", "mainmenu_simulate_off");
 		
 		currentTag = tag;
-		
 		l_DataFlashObject.SetMemberFlashUInt(  "tag", currentTag );
 		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_option_value_off") );	
 		
-		
-		if ( IsNewGamePlus(tag) )
+		if ((tag & IGMC_New_game_plus) == IGMC_New_game_plus)
 		{
 			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
 			l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("newgame_plus") );
@@ -643,7 +471,7 @@ class IngameMenuStructureCreator
 		parentArray.PushBackFlashObject(l_DataFlashObject);
 		
 		
-		if (theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK)
+		if (theGame.GetPlatform() == Platform_PC)
 		{
 			theGame.ListW2SavedGames( savesToImport );
 			
@@ -787,88 +615,5 @@ class IngameMenuStructureCreator
 		
 		
 		return l_optionChildList;
-	}
-
-	function IngameMenu_FillCreditsSubGroup(flashStorageUtility : CScriptedFlashValueStorage, rootFlashArray:CScriptedFlashArray):void
-	{
-		var l_ChildMenuFlashArray	: CScriptedFlashArray;
-		var l_DataFlashObject 		: CScriptedFlashObject;
-		
-		
-		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
-		l_DataFlashObject.SetMemberFlashString( "id", "credits_witcher");
-		l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Wither3 );
-		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("TW3") );	
-		
-		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
-		
-		l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
-		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-		
-		rootFlashArray.PushBackFlashObject(l_DataFlashObject);
-		
-		
-		if (theGame.GetDLCManager().IsEP1Available())
-		{
-			
-			l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
-			l_DataFlashObject.SetMemberFlashString( "id", "credits_heart_of_stone");
-			l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Ep1 );
-			l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("dlc_hearts_of_stone") );	
-			
-			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
-			
-			l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			
-			rootFlashArray.PushBackFlashObject(l_DataFlashObject);
-			
-		}
-		
-		if ( theGame.GetDLCManager().IsEP2Available() )
-		{
-			
-			l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
-			l_DataFlashObject.SetMemberFlashString( "id", "credits_blood_and_wine");
-			l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Ep2 );
-			l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("dlc_blood_and_wine") );	
-			
-			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
-			
-			l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			
-			rootFlashArray.PushBackFlashObject(l_DataFlashObject);
-			
-		}
-		
-		
-		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
-		l_DataFlashObject.SetMemberFlashString( "id", "credits_witcher_ng" );
-		l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Witcher3_NG );
-		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("nge_credits_title") );	
-		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
-			
-		l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
-		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			
-		rootFlashArray.PushBackFlashObject(l_DataFlashObject);
-		
-
-		
-		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
-		l_DataFlashObject.SetMemberFlashString( "id", "credits_witcher_re" );
-		l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Witcher3_RE );
-		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("tw3re_credits_title") );	
-		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
-			
-		l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
-		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			
-		rootFlashArray.PushBackFlashObject(l_DataFlashObject);
-		
-
-
-
 	}
 }

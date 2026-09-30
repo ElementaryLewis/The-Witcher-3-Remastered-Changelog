@@ -3,11 +3,6 @@
 /** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
-quest function LeaveTutorialReplay()
-{
-	theGame.LeaveTutorialReplay();
-}
-
 quest function TutorialScript(scriptName : name, tutorialMessageName : name)
 {
 	var uitut : SUITutorial;
@@ -226,7 +221,18 @@ quest function TutorialScript(scriptName : name, tutorialMessageName : name)
 	else if(scriptName == 'bestiary_ON')
 	{
 		
+		uitut.menuName = 'CommonMenu';
+		uitut.tutorialStateName = 'IngameMenuBestiary';
+		uitut.triggerCondition = EUITTC_OnMenuOpen;
+		uitut.priority = 20;
+		theGame.GetTutorialSystem().uiHandler.RegisterUIHint(uitut);
 		
+		
+		uitut.menuName = 'GlossaryParent';
+		uitut.tutorialStateName = 'BestiaryGlossarySubmenu';
+		uitut.triggerCondition = EUITTC_OnMenuOpen;
+		uitut.priority = 1;
+		theGame.GetTutorialSystem().uiHandler.RegisterUIHint(uitut);
 		
 		
 		uitut.menuName = 'GlossaryBestiaryMenu';
@@ -277,7 +283,7 @@ quest function TutorialScript(scriptName : name, tutorialMessageName : name)
 	}
 	else if(scriptName == 'characterDev')
 	{
-		uitut.menuName = 'CharacterMenuDupe';
+		uitut.menuName = 'CharacterMenu';
 		uitut.tutorialStateName = 'CharacterDevelopment';
 		uitut.triggerCondition = EUITTC_OnMenuOpen;
 		uitut.priority = 10;
@@ -310,7 +316,7 @@ function TutorialScript2(scriptName : name, tutorialMessageName : name)
 	
 	if(scriptName == 'charDevMutagens')
 	{
-		uitut.menuName = 'CharacterMenuDupe';
+		uitut.menuName = 'CharacterMenu';
 		uitut.tutorialStateName = 'CharDevMutagens';
 		uitut.triggerCondition = EUITTC_OnMenuOpen;
 		uitut.priority = 20;
@@ -364,7 +370,7 @@ function TutorialScript2(scriptName : name, tutorialMessageName : name)
 	}
 	else if(scriptName == 'specialAttacks')
 	{
-		uitut.menuName = 'CharacterMenuDupe';
+		uitut.menuName = 'CharacterMenu';
 		uitut.tutorialStateName = 'SpecialAttacks';
 		uitut.triggerCondition = EUITTC_OnMenuOpen;
 		uitut.priority = 30;
@@ -372,7 +378,7 @@ function TutorialScript2(scriptName : name, tutorialMessageName : name)
 	}
 	else if(scriptName == 'alternateSigns')
 	{
-		uitut.menuName = 'CharacterMenuDupe';
+		uitut.menuName = 'CharacterMenu';
 		uitut.tutorialStateName = 'AlternateSigns';
 		uitut.triggerCondition = EUITTC_OnMenuOpen;
 		uitut.priority = 40;
@@ -604,7 +610,6 @@ function TutorialScript3(scriptName : name, tutorialMessageName : name)
 		tutSystem.ActivateJournalEntry('TutorialJournalFastTravel');
 		
 		
-		tutSystem.MarkMessageAsSeen('TutorialFocus');
 		tutSystem.MarkMessageAsSeen('TutorialFocusClues');
 	}
 }
@@ -733,6 +738,8 @@ function TutorialMessagesEnable(optional enable : bool)
 	{
 		inGameConfigWrapper.SetVarValue('Gameplay', 'HudTutorialEnabled', "true");
 	}
+	
+	theGame.SaveUserSettings();
 }
 
 exec function tut_scr(scriptName : name)

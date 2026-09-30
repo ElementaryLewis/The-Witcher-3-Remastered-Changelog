@@ -82,7 +82,7 @@ statemachine class CMajorPlaceOfPowerEntity extends CInteractiveEntity
 		
 		if ( area == (CTriggerAreaComponent)this.GetComponent( "VoiceSetTrigger" ) &&  isPlaceOfPowerInIdle && !thePlayer.IsCombatMusicEnabled() && !thePlayer.IsInNonGameplayCutscene() )
 		{
-			
+			theGame.VibrateController( 0, 0.3f, 1.0f ); 
 			GetWitcherPlayer().GetMedallion().Activate( true, 5.0f );
 			
 			if ( CanPlayVoiceSet() )
@@ -114,33 +114,6 @@ statemachine class CMajorPlaceOfPowerEntity extends CInteractiveEntity
 		else
 			return false;
 	}
-
-	function StopMeditationAction()
-	{
-		var currentStateName : name;
-
-		if ( !thePlayer )
-			return;
-		
-		currentStateName = thePlayer.GetCurrentStateName();
-		if ( currentStateName == 'MeditationWaiting' || currentStateName == 'Meditation' )
-			return;
-		
-		thePlayer.PlayerStopAction( PEA_Meditation );
-		DelayUnblockMeditation();
-	}
-
-	function BlockMeditation()
-	{
-		thePlayer.RemoveTimer( 'PlaceOfPowerUnblockMeditation' );
-		thePlayer.BlockAction( EIAB_OpenMeditation, 'PlaceOfPower' );
-	}
-
-	function DelayUnblockMeditation()
-	{
-		thePlayer.RemoveTimer( 'PlaceOfPowerUnblockMeditation' );
-		thePlayer.AddTimer( 'PlaceOfPowerUnblockMeditation', 5.f );
-	}
 }
 
 state PlaceOfPower_Idle in CMajorPlaceOfPowerEntity
@@ -150,7 +123,8 @@ state PlaceOfPower_Idle in CMajorPlaceOfPowerEntity
 		parent.isPlaceOfPowerInIdle = true;
 		
 		parent.PlayEffect( parent.fxOnIdle );
-		parent.StopMeditationAction();
+		if(thePlayer)
+			thePlayer.PlayerStopAction( PEA_Meditation );
 		parent.isRecharging = false;
 		
 		if ( !parent.skillPointGranted )
@@ -186,7 +160,6 @@ state PlaceOfPower_Channeling in CMajorPlaceOfPowerEntity
 		var channelPerc : float;
 		
 		thePlayer.PlayerStartAction( PEA_Meditation );
-		parent.BlockMeditation();
 		while( true )
 		{
 			SleepOneFrame();
@@ -196,7 +169,7 @@ state PlaceOfPower_Channeling in CMajorPlaceOfPowerEntity
 				if( channelingStartTime + parent.channelingTime > theGame.GetEngineTimeAsSeconds() )
 				{
 					channelPerc = (theGame.GetEngineTimeAsSeconds() - channelingStartTime) / parent.channelingTime;
-					
+					theGame.VibrateController(channelPerc, channelPerc, 0.0001); 
 					
 					continue;
 				}
@@ -217,8 +190,6 @@ state PlaceOfPower_Channeling in CMajorPlaceOfPowerEntity
 	{
 		theGame.GetGuiManager().DisableHudHoldIndicator();
 		parent.StopEffect( parent.fxOnChannel );
-
-		parent.DelayUnblockMeditation();
 	}
 }
 
@@ -227,12 +198,10 @@ state PlaceOfPower_Activated in CMajorPlaceOfPowerEntity
 	event OnEnterState( prevStateName : name )
 	{	
 		parent.PlayEffect( parent.fxOnSuccess );
-		parent.BlockMeditation();
 		
 		GrantSkillPointIfPossible();
 		GrantBuff();
-		parent.StopMeditationAction();
-
+		thePlayer.PlayerStopAction( PEA_Meditation );
 		theGame.GetCommonMapManager().SetEntityMapPinDisabled( parent.entityName, true );
 
 		parent.GotoState( 'PlaceOfPower_Recharging' );
@@ -251,12 +220,6 @@ state PlaceOfPower_Activated in CMajorPlaceOfPowerEntity
 	private function GrantBuff()
 	{
 		var params : SCustomEffectParams;
-		var shrineBuffs : array<EEffectType>;
-		var activeShrineBuff : W3Effect_Shrine;
-		var activeShrineBuffs : array<W3Effect_Shrine>;
-		var activeShrineBuffTimes : array<float>;
-		var maxShrineBuffsAllowed : int;
-		var i, minIndex : int;
 	
 		
 		if( GetWitcherPlayer().CanUseSkill( S_Perk_14 ) )
@@ -272,42 +235,6 @@ state PlaceOfPower_Activated in CMajorPlaceOfPowerEntity
 		params.creator = parent;
 		params.sourceName = parent.buffUniqueName;
 		params.duration = parent.buffDuration;
-
-		
-		
-		if( GetWitcherPlayer().CanUseSkill( S_Perk_36 ) )
-		{
-			shrineBuffs = GetMinorShrineBuffs();
-
-			for ( i = 0; i < shrineBuffs.Size(); i += 1 )
-			{
-				if ( shrineBuffs[i] == params.effectType )
-					continue;
-
-				activeShrineBuff = (W3Effect_Shrine)thePlayer.GetBuff( shrineBuffs[i] );
-				if ( activeShrineBuff )
-				{
-					activeShrineBuffs.PushBack( activeShrineBuff );
-					activeShrineBuffTimes.PushBack( activeShrineBuff.GetDurationLeft() );
-				}
-			}
-
-			maxShrineBuffsAllowed = (int) ( thePlayer.GetSkillLevel( S_Perk_36 ) * CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Perk_36, 'max_active', false, false ) ) );
-			if ( maxShrineBuffsAllowed > 0 )
-			{
-				while ( activeShrineBuffs.Size() >= maxShrineBuffsAllowed )
-				{
-					
-					minIndex = ArrayFindMinF( activeShrineBuffTimes );
-					thePlayer.RemoveAllBuffsOfType( activeShrineBuffs[minIndex].GetEffectType() );
-
-					activeShrineBuffs.EraseFast( minIndex );
-					activeShrineBuffTimes.EraseFast( minIndex );
-				}
-			}
-
-			params.duration = parent.buffDuration + thePlayer.GetSkillLevel( S_Perk_36 ) * CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Perk_36, 'duration', false, false ) );
-		}
 		
 		thePlayer.AddEffectCustom( params );
 		

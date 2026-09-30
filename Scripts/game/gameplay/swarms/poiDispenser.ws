@@ -266,3 +266,5 @@ state Inactive in W3POIDispenser
 		parent.AddTimer('DespawnAllPOIs', parent.onExitDespawnAllAfter, false );
 	}
 }
+
+

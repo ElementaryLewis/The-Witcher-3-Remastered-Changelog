@@ -218,3 +218,4 @@ class CBTTaskSearchForRiftDef extends IBehTreeTaskDefinition
 	default range = 20;
 	default searchOnlyForActiveRifts = true;
 }
+

@@ -66,7 +66,7 @@ abstract class W3SignProjectile extends CProjectileTrajectory
 			victim = NULL;
 			
 		
-		if ( (signSkill != S_Magic_s02) && (signSkill != S_Magic_s28) && (!victim || !victim.IsAlive()) )
+		if ( (signSkill != S_Magic_s02) && (!victim || !victim.IsAlive()) )
 		{
 			return false;
 		}

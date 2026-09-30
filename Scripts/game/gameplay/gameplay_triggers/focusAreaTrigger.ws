@@ -162,3 +162,4 @@ class W3FocusAreaTrigger extends CGameplayEntity
 	}
 	
 }
+

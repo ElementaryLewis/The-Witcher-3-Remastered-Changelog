@@ -250,3 +250,5 @@ class CBTTaskSpawnObjectDef extends IBehTreeTaskDefinition
 	hint offsetInLocalSpace = "Turns the offset to local space of the spawnNode object";
 	hint randomizeOffset = "Randomizes each axis of the offset from 0 to spawnPositionOffset range";
 }
+
+

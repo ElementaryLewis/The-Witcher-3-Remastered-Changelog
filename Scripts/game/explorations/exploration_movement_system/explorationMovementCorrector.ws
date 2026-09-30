@@ -1298,3 +1298,4 @@ class NavigationCorrection
 		return true;
 	}
 };
+

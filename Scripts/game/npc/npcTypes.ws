@@ -18,10 +18,9 @@ enum EFinisherDeathType
 	EFDT_Head,
 	EFDT_Torso,
 	EFDT_ArmLeft,
-	EFDT_ArmRight,
+	EFDT_ArmRight,	
 	EFDT_LegLeft,
-	EFDT_LegRight,
-
+	EFDT_LegRight,		
 }
 
 
@@ -57,7 +56,7 @@ enum EBehaviorGraph
 	EBG_Combat_1Handed_Axe,
 	EBG_Combat_1Handed_Blunt,
 	EBG_Combat_1Handed_Any,
-	EBG_Combat_2Handed_Any,
+	EBG_Combat_2Handed_Any,	
 	EBG_Combat_2Handed_Sword,
 	EBG_Combat_2Handed_Hammer,
 	EBG_Combat_2Handed_Axe,
@@ -75,11 +74,11 @@ enum EBehaviorGraph
 	EBG_Combat_WildHunt_Caranthir_Second_Stage,
 	EBG_Combat_WildHunt_Eredin,
 	EBG_Combat_Olgierd,
-
 	EBG_Combat_Caretaker,
 	EBG_Combat_Dettlaff_Vampire,
 	EBG_Combat_Gregoire,
 	EBG_Combat_Dettlaff_Minion
+	
 }
 
 
@@ -131,7 +130,7 @@ enum ECriticalStateType
 	ECST_Frozen,
 	ECST_Tornado,
 	ECST_Trap,
-
+	
 }
 
 
@@ -139,21 +138,20 @@ function CalculateCriticalStateTypePriority(type : ECriticalStateType) : int
 {
 	
 	switch(type)
-	{
+	{	
 		case ECST_Frozen :				return 130;
 		case ECST_Ragdoll :				return 125;
 		case ECST_Tornado : 			return 120;
 		case ECST_HeavyKnockdown :		return 115;
 		case ECST_Knockdown :			return 105;
 		case ECST_Trap :				return 100;
-
 		case ECST_Paralyzed :			return 95;
 		case ECST_Immobilize :			return 90;
 		case ECST_Stagger :				return 80;
 		case ECST_CounterStrikeHit :	return 75;
 		case ECST_LongStagger :			return 70;
 		case ECST_Pull :				return 60;
-		case ECST_BurnCritical :		return 50;
+		case ECST_BurnCritical :		return 50;		
 		case ECST_Swarm :				return 40;
 		case ECST_Confusion :			return 30;
 		case ECST_Hypnotized :			return 20;
@@ -212,8 +210,7 @@ enum EAttackType
 enum EChargeAttackType
 {
 	ECAT_Knockdown,
-	ECAT_Stagger,
-	ECAT_Hit
+	ECAT_Stagger
 }
 
 enum EDodgeType
@@ -233,7 +230,7 @@ enum EDodgeDirection
 	EDD_Back,
 	EDD_Left,
 	EDD_Right,
-	EDD_Forward
+	EDD_Forward	
 }
 
 enum ETurnDirection
@@ -275,7 +272,7 @@ enum ENPCRightItemType
 	RIT_Sword,
 	RIT_Torch,
 	RIT_Crossbow
-
+	
 }
 
 enum ENPCLeftItemType
@@ -366,53 +363,52 @@ function BehGraphIntToName( graphEnum : int ) : name
 	switch( graphEnum )
 	{
 		case EBG_Combat_Shield 							: return 'Shield';
-
+		
 		case EBG_Combat_1Handed_Sword 					: return 'sword_1handed';
 		case EBG_Combat_1Handed_Axe 					: return 'sword_1handed';
 		case EBG_Combat_1Handed_Blunt 					: return 'sword_1handed';
 		case EBG_Combat_1Handed_Any 					: return 'sword_1handed';
-
+		
 		case EBG_Combat_2Handed_Sword 					: return 'sword_2handed';
-
+		
 		case EBG_Combat_2Handed_Any 					: return 'TwoHanded';
 		case EBG_Combat_2Handed_Hammer 					: return 'TwoHanded';
 		case EBG_Combat_2Handed_Axe 					: return 'TwoHanded';
 		case EBG_Combat_2Handed_Halberd 				: return 'TwoHanded';
 		case EBG_Combat_2Handed_Spear 					: return 'TwoHanded';
 		case EBG_Combat_2Handed_Staff 					: return 'TwoHanded';
-
-
+		
+		
 		case EBG_Combat_Fists 							: return 'FistFight';
-
+		
 		case EBG_Combat_Bow 							: return 'Bow';
 		case EBG_Combat_Crossbow						: return 'Bow';
-
+		
 		case EBG_Combat_Witcher							: return 'Witcher';
-
+		
 		case EBG_Combat_Sorceress						: return 'Sorceress';
-
+		
 		case EBG_Combat_WildHunt_Imlerith				: return 'Imlerith';
 		case EBG_Combat_WildHunt_Imlerith_Second_Stage	: return 'ImlerithSecondStage';
 		case EBG_Combat_WildHunt_Caranthir				: return 'Caranthir';
 		case EBG_Combat_WildHunt_Caranthir_Second_Stage : return 'CaranthirSecondStage';
 		case EBG_Combat_WildHunt_Eredin					: return 'Eredin';
-
+		
 		case EBG_Combat_Olgierd							: return 'Olgierd';
-
-
+		
 		case EBG_Combat_Caretaker						: return 'Exploration';
-
+		
 		case EBG_Combat_Dettlaff_Vampire				: return 'DettlaffVampire';
-
+		
 		case EBG_Combat_Gregoire						: return 'Exploration';
-
+		
 		case EBG_Combat_Dettlaff_Minion					: return 'DettlaffMinion';
-
+		
 		case EBG_None									: return 'None';
-
+		
 		default 										: return '';
 	}
-
+	
 	return 'None';
 }
 
@@ -430,3 +426,5 @@ import class CMonsterParam extends CGameplayEntityParam
 	import var canBeHitByFists : bool;
 	import var canBeStrafed : bool;
 };
+
+

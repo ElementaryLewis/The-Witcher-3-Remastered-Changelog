@@ -119,16 +119,8 @@ class CR4ListBaseMenu extends CR4MenuBase
 	
 	protected function HandleMenuLoaded():void
 	{
-		var journalInitData : W3JournalInitData;
 		super.HandleMenuLoaded();
-
-		journalInitData = (W3JournalInitData)GetMenuInitData();
-
-		if(journalInitData)
-			OnEntrySelected(journalInitData.questTag);
-		else
-			OnEntrySelected(currentTag);
-		
+		OnEntrySelected(currentTag);
 	}
 
 	function PopulateData() 

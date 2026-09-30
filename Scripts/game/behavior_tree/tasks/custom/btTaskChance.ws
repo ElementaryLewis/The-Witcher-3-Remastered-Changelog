@@ -86,3 +86,4 @@ class CBTTaskChanceDef extends IBehTreeTaskDefinition
 	hint chance = "while scaleWithNumberOfOpponents this is a chance for 1 opponent";
 	hint frequency = "how often we Roll the virtual dice";
 }
+

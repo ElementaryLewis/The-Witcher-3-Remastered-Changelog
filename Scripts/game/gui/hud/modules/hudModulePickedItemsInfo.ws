@@ -60,3 +60,4 @@ class CR4HudModulePickedItemsInfo extends CR4HudModuleBase
 		
 	}
 }
+

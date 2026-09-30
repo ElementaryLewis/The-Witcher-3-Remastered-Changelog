@@ -7,13 +7,11 @@ import state UseVehicle in CPlayer extends Base
 {
 	event OnEnterState( prevStateName : name )
 	{
-
 		
 	}
 	
 	event OnLeaveState( nextStateName : name )
 	{
-
 		
 	}
 	
@@ -434,7 +432,7 @@ state UseGenericVehicle in CR4Player extends UseVehicle
 		
 		if ( parent.IsCameraLockedToTarget() )
 		{
-			DampFloatSpring( camera.fov, fovVel, parent.GetExplorationCameraFov(), 1.0, dt );
+			DampFloatSpring( camera.fov, fovVel, 60.0, 1.0, dt );
 			playerToTargetVector = parent.GetDisplayTarget().GetWorldPosition() - parent.GetWorldPosition();
 			playerToTargetDist = VecLength( playerToTargetVector );
 			
@@ -464,10 +462,6 @@ state UseGenericVehicle in CR4Player extends UseVehicle
 			parent.OnGameCameraPostTick( moveData, dt );
 			return true;			
 		}
-
-		
-		if (thePlayer.IsQuestCameraRequestActive())
-			return parent.OnGameCameraPostTick( moveData, dt );	
 	}	
 }
 

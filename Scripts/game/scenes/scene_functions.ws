@@ -452,15 +452,6 @@ storyscene function SetTattoo( player: CStoryScenePlayer, hasTattoo : bool )
 }
 
 
-storyscene function SetScar( player: CStoryScenePlayer, hasScar : bool )
-{
-	var acs : array< CComponent >;
-	
-	acs = thePlayer.GetComponentsByClassName( 'CHeadManagerComponent' );
-	( ( CHeadManagerComponent ) acs[0] ).SetScar( hasScar );
-}
-
-
 storyscene function BlockBeardGrowth( player: CStoryScenePlayer, optional block : bool )
 {
 	var acs : array< CComponent >;
@@ -481,21 +472,6 @@ storyscene function SetCustomHead( player: CStoryScenePlayer, head : name, barbe
 	
 	acs = thePlayer.GetComponentsByClassName( 'CHeadManagerComponent' );
 	( ( CHeadManagerComponent ) acs[0] ).SetCustomHead( head );
-}
-
-
-storyscene function SetCustomHeadNum( player: CStoryScenePlayer, num : int, barberSystem : bool )
-{
-	var acs : array< CComponent >;
-	var head : name;
-
-	acs = thePlayer.GetComponentsByClassName( 'CHeadManagerComponent' );
-	head = ( ( CHeadManagerComponent ) acs[0] ).SetCustomHeadNum( num );
-
-	if( barberSystem )
-	{
-		thePlayer.RememberCustomHead( head );
-	}
 }
 
 
@@ -1187,7 +1163,7 @@ storyscene function FadeIn_S( player: CStoryScenePlayer, fadeTime : float )
 }
 
 
-storyscene function NGE_EP1Hack_S(player: CStoryScenePlayer, value : bool)
+storyscene function NGE_EP1Hack_S(player: CStoryScenePlayer, set : bool)
 {
 	var hud : CR4ScriptedHud;
 	var dialogModule : CR4HudModuleDialog;
@@ -1198,7 +1174,7 @@ storyscene function NGE_EP1Hack_S(player: CStoryScenePlayer, value : bool)
 		dialogModule = hud.GetDialogModule();		
 		if (dialogModule)
 		{
-			dialogModule.SetEP1Hack(value);
+			dialogModule.SetEP1Hack(set);
 		}
 	}
 	

@@ -57,3 +57,4 @@ class W3ActorLatentActionFollow extends W3ActorLatentActionFollowPlayer
 		return action;
 	}
 };
+

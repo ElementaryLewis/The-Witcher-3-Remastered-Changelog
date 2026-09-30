@@ -64,7 +64,7 @@ class CAINpcBase extends CAIBaseTree
 	default aiTreeName = "resdef:ai\npc_base";
 
 	editable inlined var params : CAINpcDefaults;
-
+	
 	function Init()
 	{
 		params = new CAINpcDefaults in this;
@@ -74,19 +74,19 @@ class CAINpcBase extends CAIBaseTree
 
 
 class CAINpcDefaults extends CAIDefaults
-{
+{	
 	editable inlined var npcGroupType 					: CAINPCGroupTypeRedefinition;
 	editable inlined var combatTree 					: CAINpcCombat;
 	editable inlined var idleTree 						: CAIIdleTree;
 	editable inlined var deathTree	 					: CAIDeathTree;
 	editable inlined var reactionTree 					: CAINpcReactionsTree;
 	editable inlined var softReactionTree 				: CAISoftReactionTree;
-
+	
 	editable var hasDrinkingMinigame 	: bool;
 	editable var morphInCombat 			: bool;
 	default hasDrinkingMinigame = false;
 	var tempNpcGroupType : ENPCGroupType;
-
+	
 	function Init()
 	{
 		combatTree = new CAINpcCombat in this;
@@ -102,20 +102,20 @@ class CAINpcDefaults extends CAIDefaults
 class CAINpcRiderBase extends CAIBaseTree
 {
 	default aiTreeName = "resdef:ai\npc_rider_base";
-
+	
 	editable inlined var params : CAINpcRiderDefaults;
-
+	
 	function Init()
 	{
 		params = new CAINpcRiderDefaults in this;
 		params.OnCreated();
 	}
 };
-
+ 
 
 
 class CAINpcRiderDefaults extends CAIDefaults
-{
+{	
 	editable inlined var npcGroupType 		: CAINPCGroupTypeRedefinition;
 	editable inlined var combatTree 		: CAINpcCombat;		  
 	editable inlined var riderCombatTree 	: CAINpcRiderCombat;  
@@ -127,11 +127,11 @@ class CAINpcRiderDefaults extends CAIDefaults
 
 	editable var hasDrinkingMinigame 		: bool;
 	default hasDrinkingMinigame = false;
-
+	
 	function Init()
 	{
 		var stdStyle : CAINpcCombatStyle;
-
+		
 		combatTree = new CAINpcCombat in this;
 		combatTree.OnCreated();
 		riderCombatTree = new CAINpcRiderCombat in this;
@@ -139,7 +139,7 @@ class CAINpcRiderDefaults extends CAIDefaults
 		
 		
 		
-
+		
 		deathTree = new CAINpcDeath in this;
 		deathTree.OnCreated();
 		
@@ -158,7 +158,7 @@ class CAINpcRiderCombat extends CAICombatTree
 	default aiTreeName = "resdef:ai\combat/npc_rider_combat";
 
 	editable inlined var params : CAINpcRiderCombatParams;
-
+	
 	function Init()
 	{
 		params = new CAINpcRiderCombatParams in this;
@@ -170,12 +170,12 @@ class CAINpcRiderCombat extends CAICombatTree
 class CAINpcRiderCombatParams extends CAICombatParameters
 {
 	editable var reachabilityTolerance : float;
-
+	
 	default reachabilityTolerance = 2.0f;
 
 	function Init()
 	{
-
+		
 	}
 }
 
@@ -203,7 +203,7 @@ class CAIRiderCombatDecoratorSimple extends CAICombatDecoratorTree
 
 
 
-class CAIRiderCombatDecoratorGeneric extends CAICombatDecoratorGeneric
+class CAIRiderCombatDecoratorGeneric extends CAICombatDecoratorGeneric 
 {
 	default aiTreeName = "resdef:ai\npc_rider_guard_encounter_combat";
 };
@@ -214,7 +214,7 @@ class CAIRiderCombatDecoratorGeneric extends CAICombatDecoratorGeneric
 abstract class CAINpcIdle extends CAIIdleTree
 {
 	editable inlined var params : CAINpcIdleParams;
-
+	
 	function Init()
 	{
 		params = new CAINpcIdleParams in this;
@@ -257,7 +257,7 @@ class CAINpcActiveIdle extends CAIIdleTree
 	default delayWorkOnFailure					= 10.0;
 	default delayWorkOnSuccess					= 10.0;
 	default delayWorkOnInterruption				= 1.0;
-
+	
 	function Init()
 	{
 		params = new CAINpcActiveIdleParams in this;
@@ -286,15 +286,15 @@ class CAIWanderWithHistory extends CAIWanderTree
 	default aiTreeName = "resdef:ai\idle/npc_wander_history";
 
 	editable inlined var params : CAINpcHistoryWanderParams;
-
 	
 	
 	
 	
-
 	
 	
-
+	
+	
+	
 	function Init()
 	{
 		params = new CAINpcHistoryWanderParams in this;
@@ -326,7 +326,7 @@ class CAIWanderRandom extends CAIWanderTree
 	default aiTreeName = "resdef:ai\idle/npc_wander_random";
 
 	editable inlined var params : CAINpcRandomWanderParams;
-
+	
 	function Init()
 	{
 		params = new CAINpcRandomWanderParams in this;
@@ -346,11 +346,11 @@ class CAILeadPackWander extends CAIDynamicWander
 	public editable var followers			: int;
 	public editable var canWanderRun		: bool;
 	public editable var chanceToRun			: float;
-
+	
 	default leaderRegroupEvent 	= 'LeaderMoves';
 	default followers 			= -1;
 	default aiTreeName 			= "resdef:ai\idle/lead_pack_wandering";
-
+	
 
 	function Init()
 	{
@@ -365,7 +365,7 @@ class CAIDynamicWander extends CAIWanderTree
 	default aiTreeName = "resdef:ai\idle/dynamic_wander";
 
 	var params : CAIDynamicWanderParams;
-
+	
 	editable var dynamicWanderArea 				: EntityHandle;
 	editable var dynamicWanderUseGuardArea		: Bool;
 	editable var dynamicWanderIdleDuration 		: Float;
@@ -373,15 +373,15 @@ class CAIDynamicWander extends CAIWanderTree
 	editable var dynamicWanderMoveDuration		: Float;
 	editable var dynamicWanderMoveChance		: Float;
 	editable var dynamicWanderMinimalDistance 	: float;
-
-
+	
+	
 	default dynamicWanderUseGuardArea		= true;
 	default dynamicWanderIdleDuration 		= 0.0;
 	default dynamicWanderIdleChance 		= 1.0;
 	default dynamicWanderMoveDuration		= 60.0;
 	default dynamicWanderMoveChance			= 1.0;
 	default dynamicWanderMinimalDistance 	= 0;
-
+	
 	function OnPostLoad() : bool
 	{
 		if ( params )
@@ -391,9 +391,9 @@ class CAIDynamicWander extends CAIWanderTree
 			dynamicWanderIdleChance = params.dynamicWanderIdleChance;
 			dynamicWanderMoveDuration = params.dynamicWanderMoveDuration;
 			dynamicWanderMoveChance	= params.dynamicWanderMoveChance;
-
+			
 			params = NULL;
-
+			
 			return true;
 		}
 		return false;
@@ -407,7 +407,7 @@ class CAIDynamicWanderParams extends CAINpcWanderParams
 	editable var dynamicWanderIdleChance 	: Float;
 	editable var dynamicWanderMoveDuration	: Float;
 	editable var dynamicWanderMoveChance	: Float;
-
+	
 	default dynamicWanderIdleDuration 	= 0.0;
 	default dynamicWanderIdleChance 	= 1.0;
 	default dynamicWanderMoveDuration	= 60.0;
@@ -425,17 +425,14 @@ class CAIAmphibiousDynamicWander extends CAIDynamicWander
 }
 
 
-
-
-
 class CAIDynamicFlyingWander extends CAISubTree
 {
 	default aiTreeName = "resdef:ai\idle/dynamic_flying_wander";
-
-	editable var chanceToTakeOff 				: float;
-	editable var chanceToLand 					: float;
+	
+	editable var chanceToTakeOff 				: float;	
+	editable var chanceToLand 					: float;	
 	editable var landingGroundOffset			: float;
-	editable var onSpotLanding 					: bool;
+	editable var onSpotLanding 					: bool;	
 	editable var minFlyDistance					: float;
 	editable var maxFlyDistance					: float;
 	editable var minHeight						: float;
@@ -443,7 +440,7 @@ class CAIDynamicFlyingWander extends CAISubTree
 	editable var proximityToAllowTakeOff		: float;
 	editable var proximityToForceTakeOff		: float;
 	editable var distanceFromPlayerToLand		: float;
-
+	
 	default chanceToTakeOff 				= 50.0;
 	default chanceToLand 					= 10.0;
 	default landingGroundOffset 			= 7.0;
@@ -460,8 +457,8 @@ class CAIDynamicFlyingWander extends CAISubTree
 class CAISirenDynamicWander extends CAISubTree
 {
 	default aiTreeName = "resdef:ai\idle/dynamic_siren_wander";
-
-	editable var chanceToTakeOff 				: float;
+	
+	editable var chanceToTakeOff 				: float;	
 	editable var chanceToLand 					: float;
 	editable var chanceToDive 					: float;
 	editable var minFlyDistance					: float;
@@ -471,7 +468,7 @@ class CAISirenDynamicWander extends CAISubTree
 	editable var proximityToAllowTakeOff		: float;
 	editable var proximityToForceTakeOff		: float;
 	editable var distanceFromPlayerToLand		: float;
-
+	
 	default chanceToTakeOff 			= 20.0;
 	default chanceToLand 				= 10.0;
 	default chanceToDive 				= 10.0;
@@ -488,11 +485,11 @@ class CAISirenDynamicWander extends CAISubTree
 class CAIFollowPartyMemeberTree extends CAIIdleTree
 {
 	default aiTreeName = "resdef:ai\idle/npc_walk_side_by_side_party";
-
+	
 	editable var followPartyMember : name;
 	editable var followDistance : float;
 	editable var moveType : EMoveType;
-
+	
 	default followDistance = 2.0;
 	default moveType = MT_Walk;
 }
@@ -504,11 +501,11 @@ class CAIFollowPartyMemberSideBySideTree extends CAIFollowPartyMemeberTree
 {
 	editable var useCustomSteeringGraph : bool;
 	editable var customSteeringGraph : CMoveSteeringBehavior;
-
+	
 	function Init()
 	{
 		super.Init();
-
+		
 		useCustomSteeringGraph = true;
 		customSteeringGraph = LoadSteeringGraph( "gameplay/behaviors/npc/steering/action/follow_side_by_side.w2steer" );
 		followDistance = 0.0;
@@ -530,7 +527,7 @@ class CAIPatrol extends CAIWanderTree
 class CAINpcWork extends CAISubTree
 {
 	default aiTreeName = "resdef:ai\idle/npc_work";
-
+	
 	editable inlined var actionPointSelector 	: CActionPointSelector;
 	editable var spawnToWork					: bool;
 
@@ -558,10 +555,10 @@ class CAINpcWorkParams extends CAISubTreeParameters
 class CAINpcWorkIdle extends CAIIdleTree
 {
 	default aiTreeName = "resdef:ai\idle/npc_work_idle";
-
+	
 	editable inlined var actionPointSelector 	: CActionPointSelector;
 	editable var actionPointMoveType			: EMoveType;
-
+	
 	default actionPointMoveType = MT_Walk;
 
 	var params : CAINpcWorkIdleParams;
@@ -577,7 +574,7 @@ class CAINpcWorkIdleParams extends CAIIdleParameters
 {
 	editable inlined var actionPointSelector 	: CActionPointSelector;
 	editable var actionPointMoveType			: EMoveType;
-
+	
 	default actionPointMoveType = MT_Walk;
 }
 
@@ -612,7 +609,7 @@ class CAIFollowLeaderTree extends IAIIdleFormationTree
 	default aiTreeName 								= "resdef:ai\idle/follow_leader";
 
 	editable var leaderName 						: name;
-
+	
 	editable var disableGestures 					: bool;
 	editable var removePlayedAnimationFromPool		: bool;
 	editable var gossipGesturesOnly 				: bool;
@@ -623,14 +620,14 @@ class CAIFollowLeaderTree extends IAIIdleFormationTree
 	editable var stopGestureOnDeactivate 			: bool;
 	editable var dontOverrideRightHand 				: bool;
 	editable var dontOverrideLeftHand 				: bool;
-
+	
 	default disableGestures 						= true;
 	default removePlayedAnimationFromPool 			= true;
 	default cooldownBetweenGesture 					= 2.0f;
 	default chanceToPlayGesture 					= 1.0f;
 	default stopGestureOnDeactivate 				= true;
 	default onlyOneActorGesticulatingAtATime 		= true;
-
+	
 	hint removePlayedAnimationFromPool = "prevents repeating of the same animations in row";
 	hint gossipGesturesOnly = "plays simple, short animations";
 	hint stopGestureOnDeactivate = "stops gesture animation on deactivation of ai tree";
@@ -646,14 +643,14 @@ class CAIFollowLeaderParameters extends CAIIdleParameters
 class CAILeadFormationTree extends IAIIdleFormationTree
 {
 	default aiTreeName = "resdef:ai\idle/formation_lead";
-
+	
 	editable var leadFormationSteeringGraph : CMoveSteeringBehavior;
 	editable inlined var leadSubtree : CAIIdleTree;
-
+	
 	function Init()
 	{
 		super.Init();
-
+	
 		leadFormationSteeringGraph = LoadSteeringGraph( "gameplay/behaviors/npc/formation/steering_leader/leader_default.w2steer" );
 	}
 };
@@ -666,11 +663,11 @@ class CAIIdleSpontanousFormationTree extends IAIIdleFormationTree
 	editable var leaderSteering : CMoveSteeringBehavior;
 	editable inlined var leadFormationTree : CAIIdleTree;
 	editable inlined var loneWolfTree : CAIIdleTree;
-
+	
 	function Init()
 	{
 		super.Init();
-
+		
 		leaderSteering = LoadSteeringGraph( "gameplay/behaviors/npc/formation/steering_leader/leader_default.w2steer" );
 	}
 };
@@ -683,7 +680,7 @@ class CAIIdleSpontanousFormationTree extends IAIIdleFormationTree
 class CAINpcIdleHorseRider extends CAIRiderIdle
 {
 	default aiTreeName = "resdef:ai\idle/npc_idle_horserider";
-
+	
 	function Init()
 	{
 		params = new CAINpcIdleHorseRiderParams in this;
@@ -702,7 +699,7 @@ class CAINpcDeath extends CAIDeathTree
 	default aiTreeName = "resdef:ai\death/death";
 
 	editable inlined var params : CAINpcDeathParams;
-
+	
 	function Init()
 	{
 		params = new CAINpcDeathParams in this;
@@ -728,7 +725,7 @@ class CAINpcDeathParams extends CAIDeathParameters
 	editable var disableCollisionOnAnimDelay	: float;
 	editable var destroyAfterAnimDelay 			: float;
 	editable var disableRagdollAfter 			: float;
-
+	
 	default destroyAfterAnimDelay 		= -1;
 	default createReactionEvent			= 'NPCDeath';
 	default fxName 						= 'death';
@@ -766,7 +763,7 @@ class CAINpcUnconsciousParams extends CAIDeathParameters
 {
 	editable var unconsciousDuration : float;
 	editable var unconsciousGetUpDist : float;
-
+	
 	default unconsciousDuration = 20.0;
 	default unconsciousGetUpDist = 30.0;
 };
@@ -788,7 +785,7 @@ class CAIDefeated extends CAIDeathTree
 class CAIDefeatedParams extends CAIDeathParameters
 {
 	editable inlined var localDeathTree 	: CAIDeathTree;
-	editable inlined var unconsciousTree 	: CAINpcUnconsciousTree;
+	editable inlined var unconsciousTree 	: CAINpcUnconsciousTree;	
 	function Init()
 	{
 		localDeathTree = new CAINpcDeath in this;
@@ -805,7 +802,7 @@ class CAIBruxaNpcDeath extends CAIDeathTree
 	default aiTreeName = "dlc\bob\data\gameplay\trees\death_bruxa_spawn.w2behtree";
 
 	editable inlined var params : CAINpcBruxaDeathParams;
-
+	
 	function Init()
 	{
 		params = new CAINpcBruxaDeathParams in this;
@@ -837,7 +834,7 @@ class CAINpcCriticalState extends CAICombatActionTree
 	default aiTreeName = "resdef:ai\npc_critical_state";
 
 	editable inlined var params : CAINpcCriticalStateParams;
-
+	
 	function Init()
 	{
 		params = new CAINpcCriticalStateParams in this;
@@ -856,7 +853,7 @@ class CAINpcCriticalStateFlying extends CAICombatActionTree
 	default aiTreeName = "resdef:ai\npc_critical_state_flying";
 
 	editable inlined var params : CAINpcCriticalStateParams;
-
+	
 	function Init()
 	{
 		params = new CAINpcCriticalStateParams in this;
@@ -894,7 +891,7 @@ class CAIGenericFlee extends CAIFleeTree
 
 
 class CGoatDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -909,7 +906,7 @@ class CGoatDynamicWander extends CAIDynamicWander
 
 
 class CCatDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -924,7 +921,7 @@ class CCatDynamicWander extends CAIDynamicWander
 
 
 class CRoosterDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -937,7 +934,7 @@ class CRoosterDynamicWander extends CAIDynamicWander
 }
 
 class CRamDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -952,7 +949,7 @@ class CRamDynamicWander extends CAIDynamicWander
 
 
 class CGooseDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -967,7 +964,7 @@ class CGooseDynamicWander extends CAIDynamicWander
 
 
 class CSheepDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -982,7 +979,7 @@ class CSheepDynamicWander extends CAIDynamicWander
 
 
 class CPigDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -998,7 +995,7 @@ class CPigDynamicWander extends CAIDynamicWander
 
 
 class CCowDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -1013,7 +1010,7 @@ class CCowDynamicWander extends CAIDynamicWander
 
 
 class CDogDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -1028,7 +1025,7 @@ class CDogDynamicWander extends CAIDynamicWander
 
 
 class CDeerDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -1045,7 +1042,7 @@ class CDeerDynamicWander extends CAIDynamicWander
 
 
 class CHareDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -1059,7 +1056,7 @@ class CHareDynamicWander extends CAIDynamicWander
 
 
 class CTamedHorseDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();
@@ -1069,7 +1066,7 @@ class CTamedHorseDynamicWander extends CAIDynamicWander
 
 
 class CWildHorseDynamicWander extends CAIDynamicWander
-{
+{	
 	function Init()
 	{
 		super.Init();

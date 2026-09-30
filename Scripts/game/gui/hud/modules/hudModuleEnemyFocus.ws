@@ -354,10 +354,6 @@ class CR4HudModuleEnemyFocus extends CR4HudModuleBase
 
 			
 			l_currentHealthPercentage = CeilF( 100 * l_target.GetHealthPercents() );	
-			if ( l_target.IsAlive() && l_currentHealthPercentage < 1 ) 
-			{
-				l_currentHealthPercentage = 1;
-			}						
 			if ( m_lastHealthPercentage != l_currentHealthPercentage )
 			{
 				m_lastHealthPercentage = l_currentHealthPercentage;	
@@ -562,9 +558,9 @@ class CR4HudModuleEnemyFocus extends CR4HudModuleBase
 		}
 	}
 	
-	public function SetShowHardLock( value : bool )
+	public function SetShowHardLock( set : bool )
 	{
-		m_fxSetShowHardLock.InvokeSelfOneArg( FlashArgBool( value ) );
+		m_fxSetShowHardLock.InvokeSelfOneArg( FlashArgBool( set ) );
 	}
 	
 	protected function UpdateScale( scale : float, flashModule : CScriptedFlashSprite ) : bool 
@@ -608,7 +604,6 @@ class CR4HudModuleEnemyFocus extends CR4HudModuleBase
 					case 'QuestAvailable':
 					case 'QuestAvailableHoS':
 					case 'QuestAvailableBaW':
-					case 'QuestAvailableLy':
 						questIcon = "QuestGiverSide";
 						break;
 					case 'MonsterQuest':
@@ -637,12 +632,13 @@ exec function dodgeFeedback()
 	}
 }
 
-exec function hardlock( value : bool )
+exec function hardlock( set : bool )
 {
 	var hud : CR4ScriptedHud;
 	var module : CR4HudModuleEnemyFocus;
 
 	hud = (CR4ScriptedHud)theGame.GetHud();
 	module = (CR4HudModuleEnemyFocus)hud.GetHudModule("EnemyFocusModule");
-	module.SetShowHardLock( value );
+	module.SetShowHardLock( set );
 }
+

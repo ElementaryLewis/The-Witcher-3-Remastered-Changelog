@@ -5,32 +5,32 @@
 /***********************************************************************/
 class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 {
-	public var onActivate 							: bool;
-	public var onAnimEvent 							: bool;
-	public var dealDamage							: bool;
-	public var soundEventOnCollidedActor 			: name;
-	public var destroyObstacleOnCollision 			: bool;
-	public var raiseEventOnObstacleCollision 		: name;
-	public var chargeType							: EChargeAttackType;
-	public var forceCriticalEffect 					: bool;
-	public var forceCriticalEffectNpcOnly 			: bool;
-	public var completeOnCollisionWithObstacle 		: bool;
-	public var unavailableForOneFrameOnInterval 	: float;
+	public var onActivate 						: bool;
+	public var onAnimEvent 						: bool;
+	public var dealDamage						: bool;
+	public var soundEventOnCollidedActor 		: name;
+	public var destroyObstacleOnCollision 		: bool;
+	public var raiseEventOnObstacleCollision 	: name;
+	public var chargeType						: EChargeAttackType;
+	public var forceCriticalEffect 				: bool;
+	public var forceCriticalEffectNpcOnly 		: bool;
+	public var completeOnCollisionWithObstacle 	: bool;
+	public var unavailableForOneFrameOnInterval : float;
 	
-	protected var bCollisionWithActor 				: bool;
-	protected var bCollisionWithObstacle 			: bool;
-	protected var bCollisionWithObstacleProbe 		: bool;
-	protected var activated							: bool;
-	protected var xmlDamageName						: name;
-	protected var collidedActor 					: CActor;
-	protected var collidedEntity					: CGameplayEntity;
-	protected var collidedProbedEntity				: CGameplayEntity;
-	protected var activationTimeStamp 				: float;
-	protected var actorCollisionTimeStamp 			: float;
-	protected var objectCollisionTimeStamp 			: float;
-	protected var objectProbeCollisionTimeStamp 	: float;
-	protected var intervalCheckTimeStamp			: float;
-	protected var hadForceCriticalStates 			: bool; 
+	private var bCollisionWithActor 			: bool;
+	private var bCollisionWithObstacle 			: bool;
+	private var bCollisionWithObstacleProbe 	: bool;
+	private var activated						: bool;
+	private var xmlDamageName					: name;
+	private var collidedActor 					: CActor;
+	private var collidedEntity					: CGameplayEntity;
+	private var collidedProbedEntity			: CGameplayEntity;
+	private var activationTimeStamp 			: float;
+	private var actorCollisionTimeStamp 		: float;
+	private var objectCollisionTimeStamp 		: float;
+	private var objectProbeCollisionTimeStamp 	: float;
+	private var intervalCheckTimeStamp			: float;
+	private var hadForceCriticalStates 			: bool; 
 	
 	default bCollisionWithActor 				= false;
 	default bCollisionWithObstacle 				= false;
@@ -81,7 +81,6 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 				collidedEntity = NULL;
 				bCollisionWithObstacle = false;
 			}
-			
 			if ( bCollisionWithObstacleProbe && GetLocalTime() > objectProbeCollisionTimeStamp + 0.5 )
 			{
 				bCollisionWithObstacleProbe = false;
@@ -92,7 +91,6 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 				collidedActor = NULL;
 				bCollisionWithActor = false;
 			}
-			
 			SleepOneFrame();
 		}
 		
@@ -129,7 +127,6 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 			bCollisionWithObstacleProbe = true;
 			objectProbeCollisionTimeStamp = GetLocalTime();
 			tempEntity = (CGameplayEntity)GetEventParamObject();
-			
 			if ( tempEntity )
 			{
 				collidedProbedEntity = tempEntity;
@@ -164,13 +161,13 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 				collidedEntity = collidedProbedEntity;
 			}
 			
+			
 			if ( destroyObstacleOnCollision )
 			{
-				if ( collidedEntity )
+				if( collidedEntity )
 				{
 					components = collidedEntity.GetComponentsByClassName( 'CDestructionComponent' );
-					
-					if ( components.Size() > 0 )
+					if( components.Size() > 0 )
 					{
 						for ( i = 0 ; i < components.Size() ; i += 1 )
 						{
@@ -197,25 +194,22 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 		else if ( activated && !bCollisionWithActor && eventName == 'CollisionWithActor' )
 		{
 			collidedActor = (CActor)GetEventParamObject();
-			
 			if ( IsRequiredAttitudeBetween( npc, collidedActor, true ) )
 			{
 				if ( IsNameValid( soundEventOnCollidedActor ) )
 				{
 					collidedActor.SoundEvent( soundEventOnCollidedActor );
 				}
-				
 				actorCollisionTimeStamp = GetLocalTime();
 				bCollisionWithActor = true;
-				
 				if ( !dealDamage )
 				{
-					if ( chargeType == ECAT_Knockdown )
+					if( chargeType == ECAT_Knockdown )
 						params.effectType = EET_KnockdownTypeApplicator;
-					else if ( chargeType == ECAT_Stagger )
+					else if( chargeType == ECAT_Stagger )
 						params.effectType = EET_Stagger;
 					
-					if ( params.effectType != EET_Undefined )
+					if( params.effectType != EET_Undefined )
 					{
 						params.creator = npc;
 						params.duration = 0.5;
@@ -242,9 +236,7 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 								npc.AddAbility( 'ForceCriticalEffectsAnim' );
 							}
 						}
-						
 						collidedActor.AddEffectCustom( params );
-						
 						if ( forceCriticalEffectNpcOnly && !hadForceCriticalStates )
 						{
 							npc.RemoveAbility( 'ForceCriticalEffectsAnimNPCOnly' );
@@ -253,7 +245,7 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 						{
 							npc.RemoveAbility( 'ForceCriticalEffectsAnim' );
 						}
-					}
+					}				
 				}
 				else
 				{
@@ -265,7 +257,6 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 							skillName = 'attack_super_heavy';
 							attackName = 'attack_super_heavy';
 							break;
-							
 						case ECAT_Stagger:
 							skillName = 'attack_stagger';
 							attackName = 'attack_stagger';
@@ -295,25 +286,7 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 						}
 					}
 					
-					action.Init(
-						npc,
-						collidedActor,
-						NULL,
-						npc.GetInventory().GetItemFromSlot( 'r_weapon' ),
-						attackName,
-						npc.GetName(),
-						EHRT_None,
-						false,
-						false,
-						skillName,
-						AST_Jab,
-						ASD_UpDown,
-						true,
-						false,
-						false,
-						false
-					);
-					
+					action.Init( npc, collidedActor, NULL, npc.GetInventory().GetItemFromSlot( 'r_weapon' ), attackName, npc.GetName(), EHRT_None, false, false, skillName, AST_Jab, ASD_UpDown, true, false, false, false );
 					theGame.damageMgr.ProcessAction( action );
 					
 					if ( forceCriticalEffectNpcOnly && !hadForceCriticalStates )
@@ -328,9 +301,9 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 					delete action;
 				}
 			}
-			
 			return true;
 		}
+		
 		
 		return false;
 	}
@@ -339,26 +312,23 @@ class CBTTaskCollisionMonitor extends CBTTaskPlayAnimationEventDecorator
 	{
 		var res : bool;
 		
-		res = super.OnAnimEvent( animEventName, animEventType, animInfo );
+		res = super.OnAnimEvent(animEventName,animEventType,animInfo);
 		
 		if ( onAnimEvent )
 		{
-			if (
-				animEventName == 'attackStart'
-				|| ( animEventName == 'Knockdown' && animEventType == AET_Duration )
-				|| ( animEventName == 'Stagger' && animEventType == AET_Duration )
-			)
+			if ( animEventName == 'attackStart' || ( animEventName == 'Knockdown' && animEventType == AET_Duration )
+			|| ( animEventName == 'Stagger' && animEventType == AET_Duration ) )
 			{
 				activationTimeStamp = GetLocalTime();
 				activated = true;
 				return true;
 			}
+			
 		}
 		
 		return res;
 	}
 }
-
 
 class CBTTaskCollisionMonitorDef extends CBTTaskPlayAnimationEventDecoratorDef
 {
@@ -391,15 +361,16 @@ class CBTTaskCollisionMonitorDef extends CBTTaskPlayAnimationEventDecoratorDef
 
 class CBTTaskReactionToCollision extends CBTTaskCollisionMonitor
 {
-	public var waitTimeout							: float;
-	public var activationTimeout					: float;
-	public var knockdownDuration					: float;
 	
-	protected var timeStamp							: float;
-	protected var receivedEvent 					: bool;
-	protected var isInCorrectBehGraphNode 			: bool;
-	protected var activationScriptEvent 			: name;
-	protected var deactivateScriptEvent 			: name;
+	public var waitTimeout 						: float;
+	public var activationTimeout 				: float;
+	public var knockdownDuration 				: float;
+	
+	private var timeStamp 						: float;
+	private var receivedEvent 					: bool;
+	private var isInCorrectBehGraphNode 		: bool;
+	private var activationScriptEvent 			: name;
+	private var deactivateScriptEvent 			: name;
 	
 	default activationScriptEvent 				= 'ReactionToCollisionStart';
 	default deactivateScriptEvent 				= 'ReactionToCollisionEnd';
@@ -408,7 +379,7 @@ class CBTTaskReactionToCollision extends CBTTaskCollisionMonitor
 	{
 		GetNPC().ActivateSignalBehaviorGraphNotification( activationScriptEvent );		
 		GetNPC().ActivateSignalBehaviorGraphNotification( deactivateScriptEvent );		
-	}
+	}	
 	
 	function IsAvailable() : bool
 	{
@@ -433,22 +404,18 @@ class CBTTaskReactionToCollision extends CBTTaskCollisionMonitor
 		
 		while ( true )
 		{
-			if ( GetLocalTime() >= timeStamp + knockdownDuration && !res )
+			if ( GetLocalTime() >= timeStamp + knockdownDuration  && !res )
 			{
 				GetNPC().SetBehaviorVariable( 'AttackEnd', 1.0, true );
 				res = true;
 			}
-			
-			if (
-				( GetLocalTime() >= timeStamp + 1.0 && !isInCorrectBehGraphNode )
-				|| GetLocalTime() >= timeStamp + waitTimeout
-			)
+			if ( ( GetLocalTime() >= timeStamp + 1.0 && !isInCorrectBehGraphNode ) || GetLocalTime() >= timeStamp + waitTimeout )
 			{
 				return BTNS_Completed;
 			}
-			
 			SleepOneFrame();
 		}
+		
 		
 		return BTNS_Completed;
 	}
@@ -456,39 +423,34 @@ class CBTTaskReactionToCollision extends CBTTaskCollisionMonitor
 	function OnDeactivate()
 	{
 		GetNPC().SetBehaviorVariable( 'AttackEnd', 1.0, true );
-
-
-
 		receivedEvent = false;
 		isInCorrectBehGraphNode = false;
 	}
 	
-	function OnListenedGameplayEvent( eventName : CName ) : bool
+	function OnListenedGameplayEvent( eventName: CName ) : bool
 	{
-		if ( eventName == 'ReactionToCollision' )
+		if( eventName == 'ReactionToCollision' )
 		{
-
-			
 			receivedEvent = true;
 			timeStamp = GetLocalTime();
 		}
-		else if ( eventName == deactivateScriptEvent )
+		else if( eventName == deactivateScriptEvent )
 		{
 			isInCorrectBehGraphNode = false;
 		}
-		else if ( eventName == activationScriptEvent )
+		else if( eventName == activationScriptEvent )
 		{
 			isInCorrectBehGraphNode = true;
 		}
 		
 		return true;
-	}
+	}	
 }
-
 
 class CBTTaskReactionToCollisionDef extends CBTTaskCollisionMonitorDef
 {
 	default instanceClass 							= 'CBTTaskReactionToCollision';
+	
 	
 	editable var waitTimeout 						: float;
 	editable var activationTimeout 					: float;
@@ -496,6 +458,7 @@ class CBTTaskReactionToCollisionDef extends CBTTaskCollisionMonitorDef
 	
 	private var activationScriptEvent 				: name;
 	private var deactivateScriptEvent 				: name;
+	
 	
 	default waitTimeout 							= 5.0f;
 	default activationTimeout 						= 1.0f;
@@ -506,7 +469,6 @@ class CBTTaskReactionToCollisionDef extends CBTTaskCollisionMonitorDef
 	function InitializeEvents()
 	{
 		super.InitializeEvents();
-		
 		listenToGameplayEvents.PushBack( 'ReactionToCollision' );
 		listenToGameplayEvents.PushBack( activationScriptEvent );
 		listenToGameplayEvents.PushBack( deactivateScriptEvent );

@@ -152,7 +152,7 @@ import class W3Boat extends CGameplayEntity
 	}
 	
 	public function SetCanBeDestroyed( val : bool )	{ canBeDestroyed = val; }
-	public function GetCanBeDestroyed() : bool		{ return canBeDestroyed && !theGame.GetInGameConfigWrapper().GetVarValue('Accessibility', 'DisableDurabilityBoat'); }
+	public function GetCanBeDestroyed() : bool		{ return canBeDestroyed; }
 
 	
 	

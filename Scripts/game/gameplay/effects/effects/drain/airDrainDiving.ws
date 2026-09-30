@@ -19,11 +19,6 @@ class W3Effect_AirDrainDive extends CBaseGameplayEffect
 		var drain : float;
 		var statee : CR4PlayerStateSwimming;
 		var val : SAbilityAttributeValue;
-		var inGameConfigWrapper : CInGameConfigWrapper;
-		var isAccessibilityAirDrainDisabled : bool;
-		
-		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();			
-		isAccessibilityAirDrainDisabled = inGameConfigWrapper.GetVarValue('Accessibility', 'NoAirDrain') == "true";
 		
 		super.OnUpdate(deltaTime);
 			
@@ -36,7 +31,7 @@ class W3Effect_AirDrainDive extends CBaseGameplayEffect
 		
 		if(target.GetStat(BCS_Air) <= 0)
 		{
-			if ( !target.HasBuff(EET_Drowning) && !isAccessibilityAirDrainDisabled )
+			if ( !target.HasBuff(EET_Drowning) )
 				target.AddEffectDefault(EET_Drowning,NULL,"NoAir");
 		}
 		else
@@ -62,9 +57,6 @@ class W3Effect_AirDrainDive extends CBaseGameplayEffect
 			{
 				drain *= effectValueMultInIdle.valueAdditive;
 			}
-			
-			if ( isAccessibilityAirDrainDisabled )
-				drain = 0;
 			
 			effectManager.CacheStatUpdate(BCS_Air, -drain);
 		}

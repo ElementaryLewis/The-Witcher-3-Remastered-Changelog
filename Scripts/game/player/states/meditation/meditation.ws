@@ -5,36 +5,30 @@
 /***********************************************************************/
 state Meditation in W3PlayerWitcher extends MeditationBase
 {
+	private var meditationPointHeading : float;				
+	private var meditationHeadingSet : bool;				
 	private var stopRequested : bool;						
 	private var isSitting : bool;							
 	
 	
 	private var closeUIOnStop : bool;						
-	private var isLeavingState : bool;				
+	private var cameraIsLeavingState : bool;				
 	private var isEntryFunctionLocked : bool;				
 	private var scheduledGoToWaiting : bool;				
-	private var waitBeforeGoToWaiting : float;				
 	private var changedContext : bool;						
-	private var waitForStandUpFinish : bool;
-	private var fallCancel : bool;
-	private var rotationRequested : bool;
 	
 		default scheduledGoToWaiting = false;
-		default waitForStandUpFinish = true;
 	
 	
 
 	event OnEnterState( prevStateName : name )
 	{
-		parent.AddAnimEventCallback('AllowRotation', 'OnAnimEvent_AllowRotation');
+		parent.AddAnimEventCallback('OpenUI','OnAnimEvent_OpenUI');
 		
 		super.OnEnterState(prevStateName);
 		
-		parent.ResetMeditationPointHeading();
-		isLeavingState = false;
-		rotationRequested = false;
-		waitBeforeGoToWaiting = 0.f;
-		parent.SetMeditationCameraHeadingMult( 0.5f );
+		meditationHeadingSet = false;
+		cameraIsLeavingState = false;
 		
 		if(prevStateName != 'MeditationWaiting')
 		{
@@ -42,75 +36,62 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 			closeUIOnStop = false;
 		}
 		
+		
+		thePlayer.OnMeleeForceHolster( true );
+		thePlayer.OnRangedForceHolster( true );
+		
 		InitState(prevStateName);
 	}
 	
 	event OnLeaveState( nextStateName : name )
 	{
-		var inv 	     			: CInventoryComponent;
-		
 		
 		if(nextStateName != 'MeditationWaiting')
 		{
 			FactsAdd('MeditationWaitFinished', 1, 1);					
 		}
-
-		virtual_parent.BlockAllActions('Meditation', false);
+			
+		
+		virtual_parent.UnblockAction(EIAB_DrawWeapon, 'Meditation');
 		
 		virtual_parent.SetBehaviorVariable( 'MeditateAbort', 0 );
-
-
 		
 		super.OnLeaveState(nextStateName);
 		
 		
-		theSound.SoundEvent("gui_meditation_close");
-
-		theGame.GetGameCamera().EnableManualControl( true );
 	}
 	
 	entry function InitState(prevStateName : name)
 	{
 		var actionSuccess : bool;
-
-		var floor : Vector;
-		var currentPos : Vector;
-
-		var blockExceptions : array<EInputActionBlock>;
-
-		var commonMenuRef 	: CR4CommonMenu;
-
+		
 		virtual_parent.LockEntryFunction( true );
 		isEntryFunctionLocked = true;
 		
 		virtual_parent.SetBehaviorVariable('MeditateAbort', 0);		
-
-		
-		blockExceptions.PushBack(EIAB_RadialMenu);
-		blockExceptions.PushBack(EIAB_OpenMeditation);
-		blockExceptions.PushBack(EIAB_OpenFastMenu);
-		blockExceptions.PushBack(EIAB_OpenGlossary);
-		virtual_parent.BlockAllActions('Meditation', true, blockExceptions, true);
-
-		
-		virtual_parent.OnMeleeForceHolster(true);
-		virtual_parent.OnRangedForceHolster(true);
-
-		if ( virtual_parent.IsCurrentlyUsingItemL() )
-			virtual_parent.HideUsableItem();
 		
 		if(prevStateName != 'MeditationWaiting')
 		{
-			menuNotYetOpen = true;
 			isSitting = false;
-			SetWaitForStand( true );
+			
+			
+			virtual_parent.BlockAllActions('Meditation', true, ,false);
 						
 			
-			while( !parent.IsMeditationHeadingSet() )
+			while(!meditationHeadingSet)
 			{
-				SleepOneFrame();
+				Sleep(0.1);
 			}
-
+			
+			
+			virtual_parent.BlockAction(EIAB_DrawWeapon, 'Meditation', false);
+			virtual_parent.OnMeleeForceHolster(true);
+			virtual_parent.OnRangedForceHolster(true);
+			
+			
+			virtual_parent.BlockAllActions('Meditation', false);
+			virtual_parent.BlockAction(EIAB_DrawWeapon, 'Meditation', false);
+			
 			if(!theGame.GetGuiManager().IsAnyMenu())
 			{
 				changedContext = true;
@@ -124,37 +105,8 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 			if( !((W3WitcherBed)theGame.GetEntityByTag( 'witcherBed' )).GetWasUsed() )
 			{
 				
-				currentPos = virtual_parent.GetWorldPosition();
-				floor = TraceFloor( currentPos );
-				if ( currentPos.Z - floor.Z > 0.2 && !virtual_parent.IsOnBoat() )
-				{
-					actionSuccess = false;
-					fallCancel = true;
-				}
-				else
-				{
-					commonMenuRef = theGame.GetGuiManager().GetCommonMenu();
-					if ( commonMenuRef )
-					{
-						if ( commonMenuRef.m_had_meditation )
-						{
-							
-							virtual_parent.SetBehaviorVariable('MeditateWithIgnite', 0);
-							actionSuccess = virtual_parent.PlayerStartAction(PEA_Meditation);
-						}
-						else
-						{
-							actionSuccess = true;
-						}
-					}
-					else	
-					{
-						
-						virtual_parent.SetBehaviorVariable('MeditateWithIgnite', 0);
-						actionSuccess = virtual_parent.PlayerStartAction(PEA_Meditation);
-						menuNotYetOpen = true;
-					}
-				}
+				virtual_parent.SetBehaviorVariable('MeditateWithIgnite', 0);
+				actionSuccess = virtual_parent.PlayerStartAction(PEA_Meditation);
 			}
 			else
 			{
@@ -178,11 +130,25 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 		
 		if(!actionSuccess)
 		{
-			SetWaitForStand( false );
 			StopRequested(true);
 		}
 		
-		Loop();
+		
+		if(scheduledGoToWaiting)
+		{
+			scheduledGoToWaiting = false;
+			virtual_parent.PushState('MeditationWaiting');
+		}
+		else
+		{
+			Loop();
+		}
+	}
+	
+	public function SetMeditationPointHeading(head : float)
+	{
+		meditationPointHeading = head;
+		meditationHeadingSet = true;
 	}
 	
 	public function IsSitting() : bool
@@ -193,13 +159,11 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 	event OnAnimEvent_OpenUI( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
 	{
 		var mutagen : CBaseGameplayEffect;
-
-		super.OnAnimEvent_OpenUI( animEventName, animEventType, animInfo );
 		
 		if( !stopRequested )	
 		{
 			isSitting = true;
-			isLeavingState = false;
+			cameraIsLeavingState = false;
 						
 			
 			if(thePlayer.HasBuff(EET_Mutagen06))
@@ -210,31 +174,8 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 			
 			
 			
-			OpenUI( 2.f );
+			theGame.RequestMenuWithBackground( 'MeditationClockMenu', 'CommonMenu' );
 		}
-	}
-
-	event OnAnimEvent_AllowRotation( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
-	{
-		
-
-		var movementAdjustor	: CMovementAdjustor;
-		var ticket 				: SMovementAdjustmentRequestTicket;
-		var customRotationName 	: name;
-
-		if ( rotationRequested )
-			return true;
-
-		customRotationName = 'Meditation';
-	
-		movementAdjustor = parent.GetMovingAgentComponent().GetMovementAdjustor();
-		ticket = movementAdjustor.GetRequest( customRotationName );
-		movementAdjustor.Cancel( ticket );
-		ticket = movementAdjustor.CreateNewRequest( customRotationName );
-		movementAdjustor.ReplaceRotation( ticket );
-		movementAdjustor.BindToEventAnimInfo( ticket, animInfo );
-		movementAdjustor.RotateTo( ticket, parent.GetMeditationPointHeading() );
-		rotationRequested = true;
 	}
 	
 	
@@ -250,14 +191,7 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 	{
 		while(!stopRequested)
 		{
-			if ( scheduledGoToWaiting )
-			{
-				SleepIgnoreTimeScale( waitBeforeGoToWaiting );
-				scheduledGoToWaiting = false;
-				if ( !stopRequested )
-					virtual_parent.PushState('MeditationWaiting');
-			}
-			SleepIgnoreTimeScale( 0.2f );
+			Sleep(0.2);
 		}
 		StopMeditation();
 	}
@@ -267,14 +201,17 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 	{
 		var commonMenuRef 	: CR4CommonMenu;
 		var l_bed			: W3WitcherBed;
-		var stopPlayerAction: bool;
 	
-		isLeavingState = true;
+		cameraIsLeavingState = true;
 		
 		
 		if(closeUIOnStop)
 		{
-			CloseUI();
+			commonMenuRef = theGame.GetGuiManager().GetCommonMenu();
+			if (commonMenuRef)
+			{
+				commonMenuRef.CloseMenu();
+			}
 		}		
 	
 		virtual_parent.SetBehaviorVariable('HasCampfire', 0);
@@ -283,10 +220,7 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 		
 		if( !l_bed.GetWasUsed() )
 		{
-			if ( virtual_parent.GetPlayerAction() == PEA_Meditation )
-			{
-				virtual_parent.PlayerStopAction( PEA_Meditation );
-			}
+			virtual_parent.PlayerStopAction(PEA_Meditation);
 		}
 		else
 		{
@@ -295,7 +229,6 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 		
 		if( l_bed.GetWasUsed() )
 		{
-			waitForStandUpFinish = false;
 			l_bed.SetWasUsed( false );
 		}
 		
@@ -310,69 +243,57 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 		{
 			theInput.RestoreContext('Meditation', false);
 		}
-
-		if ( waitForStandUpFinish )
-		{
-			
-			virtual_parent.WaitForBehaviorNodeDeactivation( 'PlayerActionEnd', 3);
-		}
-
-		if ( fallCancel )		
-			SleepOneFrame();
+								
+		
+		virtual_parent.WaitForBehaviorNodeDeactivation( 'PlayerActionEnd', 10);
 		
 		if(virtual_parent.GetCurrentStateName() == 'Meditation')
 			virtual_parent.PopState(true);		
 	}
 	
 	
-	public function MeditationWait(targetHour : int, optional delay : float)
+	public function MeditationWait(targetHour : int)
 	{
-		var l_bed : W3WitcherBed;
-		l_bed = (W3WitcherBed)theGame.GetEntityByTag( 'witcherBed' );
-
 		LogChannel( 'CLOCK', "MeditationWait, targetHour "+targetHour);
 		virtual_parent.SetWaitTargetHour(targetHour);
 		
 		
 		if(!isEntryFunctionLocked)
-		{
-			if ( virtual_parent.GetPlayerAction() != PEA_Meditation && !l_bed.GetWasUsed() )
-			{
-				virtual_parent.SetBehaviorVariable('MeditateWithIgnite', 0);
-				virtual_parent.PlayerStartAction(PEA_Meditation);
-			}
-
-			RequestGoToWait( delay );
-		}
-		else
-		{
-			if ( delay <= 0 )
-				delay = 0.01f;
-
-			RequestGoToWait( delay );
-		}
-	}
-
-	private function RequestGoToWait( optional delay : float )
-	{
-		if ( delay <= 0 )
-		{
 			virtual_parent.PushState('MeditationWaiting');
-		}
 		else
-		{
-			waitBeforeGoToWaiting = delay;
 			scheduledGoToWaiting = true;
-		}
 	}
 		
 	
-
+	
 	event OnGameCameraTick( out moveData : SCameraMovementData, dt : float )
 	{
-		if( !isLeavingState )
+		var rotation : EulerAngles = parent.GetWorldRotation();
+		
+		
+		if(parent.GetExplCamera())
+		{	
+			return true;
+		}
+		
+		
+		theGame.GetGameCamera().ChangePivotRotationController( 'Exploration' );
+		theGame.GetGameCamera().ChangePivotDistanceController( 'Default' );
+		theGame.GetGameCamera().ChangePivotPositionController( 'Default' );
+		
+		moveData.pivotDistanceController = theGame.GetGameCamera().GetActivePivotDistanceController();
+		moveData.pivotPositionController = theGame.GetGameCamera().GetActivePivotPositionController();
+		moveData.pivotRotationController = theGame.GetGameCamera().GetActivePivotRotationController();		
+		
+		if(!cameraIsLeavingState)
 		{
+			moveData.pivotRotationController.SetDesiredHeading( rotation.Yaw + 180.f, 0.1f );
+			moveData.pivotRotationController.SetDesiredPitch(-15, 0.3);
+			moveData.pivotPositionController.offsetZ = 0.5;
+			moveData.pivotDistanceController.SetDesiredDistance( 3.8f );
+			
 			super.OnGameCameraTick(moveData, dt);
+
 			return true;
 		}
 		
@@ -383,42 +304,21 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 	{
 		var rotation : EulerAngles = parent.GetWorldRotation();
 		
-		if( isLeavingState )
-		{
-			if( parent.GetExplCamera() )	
-			{
-				moveData.pivotDistanceController.SetDesiredDistance( 1.5f, 0.25f );
-			}
-			else if ( parent.IsModernExplorationCamera() )
-			{
-				moveData.pivotDistanceController.SetDesiredDistance( 2.25f, 0.25f );
-			}
-			moveData.pivotRotationController.SetDesiredHeading( rotation.Yaw, 0.5f );
+		
+		if(parent.GetExplCamera())
+		{	
+			moveData.pivotPositionController.SetDesiredPosition( parent.GetWorldPosition(), 15.f );
+			moveData.pivotDistanceController.SetDesiredDistance( 1.5f );
+		
+			moveData.pivotPositionController.offsetZ = 1.3f;
+			DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.5f, -0.3f, 0.25f ), 1.5f, dt );
+			return true;
 		}
-	}
-
-	event OnPlayerTickTimer( deltaTime : float )
-	{
-		super.OnPlayerTickTimer( deltaTime );
-
-		if ( !virtual_parent.bLAxisReleased )
+		
+		
+		if( cameraIsLeavingState )
 		{
-			StopRequested( true );
+			moveData.pivotRotationController.SetDesiredHeading( rotation.Yaw, 0.1f );
 		}
-
-		if ( virtual_parent.substateManager.m_InputO.IsJumpPressed() )
-		{
-			StopRequested( true );
-		}
-	}
-
-	function IsLeavingState() : bool
-	{
-		return isLeavingState;
-	}
-
-	function SetWaitForStand( val : bool )
-	{
-		waitForStandUpFinish = val;
 	}
 }

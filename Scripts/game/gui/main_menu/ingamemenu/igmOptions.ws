@@ -12,22 +12,9 @@ enum IgmOptionsAmbientOcclusion
 
 enum IgmOptionsAntiAliasing
 {
-	IGMOPT_AA_XESS = 3,
-	IGMOPT_AA_DLSS = 4
+	IGMOPT_AA_XESS = 4,	
+	IGMOPT_AA_DLSS = 5
 };
-
-
-
-
-
-function IngameMenu_IsPTHairAvailable() : bool
-{
-	return theGame.GetRTSupported()
-		&& theGame.GetHardwareLinearSweptSpheresSupport()
-		&& theGame.GetHairWorksEnabled()
-		&& theGame.GetPTEnabled()
-		&& theGame.GetDLSSRREnabled();
-}
 
 function IngameMenu_GetOptionTypeFromString(optionType:string): InGameMenuActionType
 {
@@ -103,32 +90,8 @@ function IngameMenu_FillOptionsSubMenuData(flashStorageUtility : CScriptedFlashV
 	
 	IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "panel_", "audio", l_optionChildList, groupParentArray);
 	IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "panel_", "option_controllerhelp", l_optionChildList, groupParentArray);
+		
 	
-	
-	if (theGame.GetPlatform() == Platform_Switch2_Ounce)
-	{
-		IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "", "panel_option_controllerhelp.option_category_general", l_optionChildList, groupParentArray);
-		if (GetObjectFromArrayWithLabel(l_optionChildList, "id", "panel_option_controllerhelp", groupRootObject))
-		{
-			groupOptionArray = groupRootObject.GetMemberFlashArray("subElements");
-			
-			l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
-			l_DataFlashObject.SetMemberFlashString( "id", "option_control_scheme");
-			l_DataFlashObject.SetMemberFlashUInt( "tag", NameToFlashUInt('controllerhelp') );
-			l_DataFlashObject.SetMemberFlashString( "label", GetLocStringByKeyExt("menu_option_control_scheme") );	
-			l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_ControllerHelp );	
-			
-			l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
-			l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
-			
-			groupOptionArray.PushBackFlashObject(l_DataFlashObject);
-		}
-		IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "", "panel_option_controllerhelp.option_category_handheld", l_optionChildList, groupParentArray);
-		IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "", "panel_option_controllerhelp.option_category_procontroller", l_optionChildList, groupParentArray);
-		IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "", "panel_option_controllerhelp.option_category_dualgrip", l_optionChildList, groupParentArray);
-		IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "", "panel_option_controllerhelp.option_category_mousesensor", l_optionChildList, groupParentArray);
-	}
-	else 
 	{
 		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
 		l_DataFlashObject.SetMemberFlashString( "id", "option_control_scheme");
@@ -148,7 +111,7 @@ function IngameMenu_FillOptionsSubMenuData(flashStorageUtility : CScriptedFlashV
 	}
 	
 	
-	if (theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK)
+	if (theGame.GetPlatform() == Platform_PC)
 	{
 		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
 		l_DataFlashObject.SetMemberFlashString( "id", "option_keybinds");
@@ -164,7 +127,7 @@ function IngameMenu_FillOptionsSubMenuData(flashStorageUtility : CScriptedFlashV
 	}
 	
 	IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "panel_", "gameplay", l_optionChildList, groupParentArray);
-	if (theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK)
+	if (theGame.GetPlatform() == Platform_PC)
 	{
 		videoDisplayName = "video";
 	}
@@ -194,7 +157,7 @@ function IngameMenu_FillOptionsSubMenuData(flashStorageUtility : CScriptedFlashV
 	
 	IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "panel_", videoDisplayName + ".postprocess", l_optionChildList, groupParentArray);
 		
-	if (theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK)
+	if (theGame.GetPlatform() == Platform_PC)
 	{
 		IngameMenu_FetchAndGenerateGroupMenuObject(flashStorageUtility, "panel_", "video.general", l_optionChildList, groupParentArray);
 	}
@@ -261,6 +224,22 @@ function IngameMenu_FillOptionsSubMenuData(flashStorageUtility : CScriptedFlashV
 		}
 		
 
+		
+		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
+		l_DataFlashObject.SetMemberFlashString( "id", "credits");
+		l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Wither3 );
+		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("panel_mainmenu_extras_credits") );	
+		
+		l_DataFlashObject.SetMemberFlashString( "listTitle", GetLocStringByKeyExt("panel_mainmenu_extras_credits") );
+		l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
+
+		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_MenuHolder );
+		IngameMenu_FillCreditsSubGroup(flashStorageUtility, l_ChildMenuFlashArray);
+		
+		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
+		
+		l_optionChildList.PushBackFlashObject(l_DataFlashObject);
+		
 	}
 	else
 	{
@@ -270,11 +249,6 @@ function IngameMenu_FillOptionsSubMenuData(flashStorageUtility : CScriptedFlashV
 			groupOptionArray = groupRootObject.GetMemberFlashArray("subElements");
 			IngameMenu_AddDifficultyOption(flashStorageUtility, groupOptionArray);
 			IngameMenu_AddGwentDifficultyOption(flashStorageUtility, groupOptionArray);
-		}
-		if (GetObjectFromArrayWithLabel(l_optionChildList, "id", "option_accessibility", groupRootObject) && !theGame.IsFinalBuild())
-		{
-			groupOptionArray = groupRootObject.GetMemberFlashArray("subElements");
-			IngameMenu_AddAccessibilityGodModeOption(flashStorageUtility, groupOptionArray);
 		}
 		
 	}
@@ -286,6 +260,73 @@ function IngameMenu_FillOptionsSubMenuData(flashStorageUtility : CScriptedFlashV
 	
 	
 	return l_optionChildList;
+}
+
+function IngameMenu_FillCreditsSubGroup(flashStorageUtility : CScriptedFlashValueStorage, rootFlashArray:CScriptedFlashArray):void
+{
+	var l_ChildMenuFlashArray	: CScriptedFlashArray;
+	var l_DataFlashObject 		: CScriptedFlashObject;
+	
+	
+	l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
+	l_DataFlashObject.SetMemberFlashString( "id", "credits_witcher");
+	l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Wither3 );
+	l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("TW3") );	
+	
+	l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
+	
+	l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
+	l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
+	
+	rootFlashArray.PushBackFlashObject(l_DataFlashObject);
+	
+	
+	if (theGame.GetDLCManager().IsEP1Available())
+	{
+		
+		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
+		l_DataFlashObject.SetMemberFlashString( "id", "credits_heart_of_stone");
+		l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Ep1 );
+		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("dlc_hearts_of_stone") );	
+		
+		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
+		
+		l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
+		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
+		
+		rootFlashArray.PushBackFlashObject(l_DataFlashObject);
+		
+	}
+	
+	if ( theGame.GetDLCManager().IsEP2Available() )
+	{
+		
+		l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
+		l_DataFlashObject.SetMemberFlashString( "id", "credits_blood_and_wine");
+		l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Ep2 );
+		l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("dlc_blood_and_wine") );	
+		
+		l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
+		
+		l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
+		l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
+		
+		rootFlashArray.PushBackFlashObject(l_DataFlashObject);
+		
+	}
+	
+		
+	l_DataFlashObject = flashStorageUtility.CreateTempFlashObject();
+	l_DataFlashObject.SetMemberFlashString( "id", "credits_witcher_ng" );
+	l_DataFlashObject.SetMemberFlashUInt(  "tag", CreditsIndex_Witcher3_NG );
+	l_DataFlashObject.SetMemberFlashString(  "label", GetLocStringByKeyExt("nge_credits_title") );	
+	l_DataFlashObject.SetMemberFlashUInt( "type", IGMActionType_Credits );	
+		
+	l_ChildMenuFlashArray = flashStorageUtility.CreateTempFlashArray();
+	l_DataFlashObject.SetMemberFlashArray( "subElements", l_ChildMenuFlashArray );
+		
+	rootFlashArray.PushBackFlashObject(l_DataFlashObject);
+	
 }
 
 function IngameMenu_FillArrayFromConfigGroup(flashStorageUtility : CScriptedFlashValueStorage, groupID:int, rootFlashArray:CScriptedFlashArray, isMainMenu : bool ):void
@@ -479,7 +520,6 @@ function IngameMenu_FetchDropdownOptions(
 	var currentOptionType	: int;
 	var numValidOptions		: int;
 	var noLocalization 		: bool;
-	var noLocalizationName 	: bool;
 	var customNames			: bool;
 	var customDisplayName	: bool;
 	var optionObject		: CScriptedFlashObject;
@@ -499,7 +539,6 @@ function IngameMenu_FetchDropdownOptions(
 		numOptionValues = inGameConfigWrapper.GetVarOptionsNum(groupName, optionName);
 		optionDisplayType = inGameConfigWrapper.GetVarDisplayType(groupName, optionName);
 		noLocalization = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'nonLocalized');
-		noLocalizationName = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'nonLocalizedName');
 		customNames = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'customNames');
 		customDisplayName = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'customDisplayName');
 		
@@ -520,14 +559,7 @@ function IngameMenu_FetchDropdownOptions(
 			}
 			else
 			{
-				if (noLocalizationName)
-				{
-					optionObject.SetMemberFlashString( "label", optionDisplayName );
-				}
-				else
-				{
-					optionObject.SetMemberFlashString( "label", inGameMenu_TryLocalize("option_" + optionDisplayName) );
-				}
+				optionObject.SetMemberFlashString( "label", inGameMenu_TryLocalize("option_" + optionDisplayName) );
 			}
 						
 			optionObject.SetMemberFlashUInt( "type", IngameMenu_GetOptionTypeFromString(optionDisplayType) );
@@ -605,117 +637,8 @@ function IngameMenu_FetchDropdownOptions(
 	}
 }
 
-function IsAutohealEnabled() : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-
-	return inGameConfigWrapper.GetVarValue('Accessibility', 'LowHPAutoHealOn') == "true";
-}
-
-function IsEnableIfAutoheal(groupName:name, optionName:name) : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-	
-	return inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfAutohealEnabled');
-}
-
-function IsModernCombatEnabled() : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-
-	return inGameConfigWrapper.GetVarValue('Gameplay', 'CombatStyle') == "1";
-}
-
-function IsXeLLEnabled() : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-
-	return inGameConfigWrapper.GetVarValue('Graphics', 'XeLowLatency') == "1";
-}
-
-function IsEnableIfXeLL(groupName:name, optionName:name) : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-	
-	return inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfXeLL');
-}
-
-function IsDisableIfXeLL(groupName:name, optionName:name) : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-	
-	return inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfXeLL');
-}
-
-function IsDisableIfReflex(groupName:name, optionName:name) : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-	
-	return inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfReflex');
-}
-
-function IsXessLowLatencyEnabled() : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-
-	return inGameConfigWrapper.GetVarValue('Graphics', 'XeLowLatency') == "true";
-}
-
-function IsDisableIfXessLowLatency(groupName:name, optionName:name) : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-	
-	return inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfXessLowLatency');
-}
-
-function IsXessFGEnabled() : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-
-	return inGameConfigWrapper.GetVarValue('Graphics', 'XessFrameGeneration') == "1";
-}
-
-function IsDisableIfXessFG(groupName:name, optionName:name) : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-	
-	return inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfXessFG');
-}
-
-function IsEnableIfXessFG(groupName:name, optionName:name) : bool
-{
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-	
-	return inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfXessFG');
-}
-
 function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashValueStorage, groupID:int, groupName:name, groupRootObject : CScriptedFlashObject):bool
 {
-	
 	var groupDisplayName	: string;
 	var groupOptionArray	: CScriptedFlashArray;
 	var optionObject		: CScriptedFlashObject;
@@ -735,7 +658,6 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 	var currentOptionType	: int;
 	var numValidOptions		: int;
 	var noLocalization 		: bool;
-	var noLocalizationName 	: bool;
 	var nonLocalizedExceptFirst : bool;
 	var customNames			: bool;
 	var customDisplayName	: bool;
@@ -749,94 +671,40 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 
 	
 	var isHDRSupported        : bool;
-	var isHDREnabled	      : bool;
 	var isIntelGPU		  	  : bool;
 	var isRTEnabled  		  : bool;
 	var isRTSupported  		  : bool;
 	var isHairWorksEnabled	  : bool;
 	var isFSREnabled		  : bool;
-	var isFSR4Supported		  : bool;
-	var isFSRFramegenSupported	  : bool;
-	var isFSRFramegenEnabled	  : bool;
-	var isAMDAntiLagSupported : bool;
-	var isAMDAntiLagEnabled	  : bool;
 	var isDLSSEnabled		  : bool;
 	var isXESSEnabled		  : bool;
-	var isXESSFGEnabled		  : bool;
-	var isXELLEnabled		  : bool;
 	var isRTAOEnabled		  : bool;
-	var isGTAOEnabled		  : bool;
 	var isRTREnabled 		  : bool;
-	var isRTShadowsEnabled	  : bool;
-	var isPTEnabled			  : bool;
 	var isDLSSGEnabled	  	  : bool;
-	var isDLSSGEnabledDynamic : bool;
 	var isDLSSGSupported	  : bool;
-	var isDLSSGVSyncSupported : bool;
 	var isReflexSupported	  : bool;
-	var isReflexEnabled	 	  : bool;
-	var isDLSSRREnabled	  	  : bool;
-	var isDLSSRRSupported	  : bool;
-	var isLinearSweptSpheresSupported : bool;
 	var isMotionBlurEnabled   : bool;
-	var isMouserConnected	  : bool;
 
-	var isPs5Pro	  		  	: bool;
-	var isPSSREnabled	      	: bool;
-	var isPreviewOptionsEnabled	: bool;
-
-	var isNewHorseControlsEnabled	: bool;
-
-	var enableIfHDRSupported: bool;
-	var enableIfHDREnabled	: bool;
-	var enableIfSDREnabled	: bool;
+	var enableIfHDR			: bool;
 	var enableIfRT		  	: bool;
 	var enableIfRTSupported	: bool;
 	var enableIfHairWorks	: bool;
 	var enableIfFSR		  	: bool;
-	var enableIfFSR4		  : bool;
 	var disableIfFSR		: bool;
-	var enableIfFSRFramegenSupported : bool;
-	var disableIfFSRFramegen : bool;
-	var enableIfAMDAntiLagSupported : bool;
-	var disableIfAMDAntiLag : bool;
 	var enableIfXESS		: bool;
 	var disableIfXESS		: bool;
 	var enableIfDLSS		: bool;
 	var disableIfDLSS		: bool;
 	var disableIfRTAO		: bool;
 	var disableIfRTR		: bool;
-	var disableIfPT			: bool;
-	var enableIfPT			: bool;
-	var enableIfPTHair		: bool;
-	var disableIfRTShadows  : bool;
 	var enableIfDLSSGSupported	: bool;
 	var enableIfReflexSupported	: bool;
-	var enableIfDLSSRRSupported : bool;
-	var enableIfLinearSweptSpheresSupported : bool;
 	var disableIfDLSSG			: bool;
-	var enableIfDLSSG			: bool;
 	var disableIfDLSSGAndSet1	: bool;
-	var disableIfDLSSGDynamic	: bool;
-	var enableIfDLSSGDynamic	: bool;
-	var enableIfGTAO			: bool;
 	var disableIfIntelGPU    	: bool;
 	var enableIfMotionBlur		: bool;
-	var enableIfMouserSupported : bool;
-	var enableIfMods			: bool;
-	var enableIfModernCombat	: bool;
-	var disableIfModernCombat	: bool;
-
-	var enableIfIsPs5Pro	  		  	: bool;
-	var enableIfPSSREnabled	      		: bool;
-	var enableIfPreviewOptionsEnabled	: bool;
-
-	var enableIfNewHorseControls	: bool;
 	
 	var inGameConfigWrapper	: CInGameConfigWrapper;
-	var forceDisplay : bool; 
-	
-	forceDisplay = false;
 	
 	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
 	
@@ -847,44 +715,20 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 	groupDisplayName = StrReplaceAll(inGameConfigWrapper.GetGroupDisplayName(groupName), ".", "_");
 
 	isHDRSupported = theGame.GetHDRSupported();
-	isHDREnabled = theGame.GetHDREnabled();
 	isIntelGPU = theGame.IsIntelGPU();
 	isRTEnabled = theGame.GetRTEnabled();
 	isRTSupported = theGame.GetRTSupported();
 	isHairWorksEnabled = theGame.GetHairWorksEnabled();
 	isFSREnabled = theGame.GetFSREnabled();
-	isFSR4Supported = theGame.GetFSRVersion() != "" && StrLeft(theGame.GetFSRVersion(), 1) == "4";
-	isFSRFramegenSupported = theGame.GetFSRFramegenSupported();
-	isFSRFramegenEnabled = theGame.GetFSRFramegenEnabled();
-	isAMDAntiLagSupported = theGame.GetAMDAntiLagSupported();
-	isAMDAntiLagEnabled = theGame.GetAMDAntiLagEnabled();
 	isDLSSEnabled = theGame.GetDLSSEnabled();
 	isRTAOEnabled = theGame.GetRTAOEnabled();
-	isGTAOEnabled = theGame.GetGTAOEnabled();
 	isRTREnabled = theGame.GetRTREnabled();
-	isRTShadowsEnabled = theGame.GetRTShadowsEnabled();
-	isPTEnabled = theGame.GetPTEnabled();
 	isDLSSGEnabled = theGame.GetDLSSGEnabled();
-	isDLSSGEnabledDynamic = theGame.GetDLSSGEnabledDynamic();
 	isDLSSGSupported = theGame.GetDLSSGSupported();
-	isDLSSGVSyncSupported = theGame.GetDLSSGVSyncSupported();
 	isReflexSupported = theGame.GetReflexSupported();
-	isReflexEnabled = theGame.GetReflexEnabled();
-	isDLSSRREnabled = theGame.GetDLSSRREnabled();
-	isDLSSRRSupported = theGame.GetDLSSRRSupported();
-	isLinearSweptSpheresSupported = theGame.GetHardwareLinearSweptSpheresSupport();
 	isMotionBlurEnabled = theGame.GetMotionBlurEnabled();
 	isXESSEnabled = theGame.GetXESSEnabled();
-	isXESSFGEnabled = theGame.GetXESSFGEnabled();
-	isXELLEnabled = theGame.GetXELLEnabled();
-	isMouserConnected = theInput.GetIsMouserConnected();
-
-	isPs5Pro = theGame.GetIsPs5Pro();
-	isPSSREnabled = theGame.GetPSSREnabled();
-	isPreviewOptionsEnabled = theGame.GetPreviewOptionsEnabled();
-
-	isNewHorseControlsEnabled = theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true";
-
+	
 	presetNum = inGameConfigWrapper.GetGroupPresetsNum(groupName);
 	if (presetNum > 0)
 	{
@@ -926,76 +770,38 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 		numOptionValues = inGameConfigWrapper.GetVarOptionsNum(groupName, optionName);
 		optionDisplayType = inGameConfigWrapper.GetVarDisplayType(groupName, optionName);
 		noLocalization = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'nonLocalized');
-		noLocalizationName = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'nonLocalizedName');
 		nonLocalizedExceptFirst = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'nonLocalizedExceptFirst'); 
 		customNames = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'customNames');
 		customDisplayName = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'customDisplayName');
 		streamable = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'streamable');
 		optionalEntry = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'optional');
 
-		enableIfHDRSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfHDR');
-		enableIfHDREnabled = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfHDREnabled');
-		enableIfSDREnabled = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfSDREnabled');
+		enableIfHDR = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfHDR');
 		enableIfRT = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfRT');
 		enableIfRTSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfRTSupported');
 		enableIfHairWorks = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfHairWorks');
 		enableIfFSR = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfFSR');
-		enableIfFSR4 = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfFSR4');
 		disableIfFSR = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfFSR');
-		enableIfFSRFramegenSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfFSRFramegenSupported');
-		disableIfFSRFramegen = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfFSRFramegen');
-		enableIfAMDAntiLagSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfAMDAntiLagSupported');
-		disableIfAMDAntiLag = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfAMDAntiLag');
 		enableIfDLSS = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfDLSS');
 		disableIfDLSS = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfDLSS');
 		enableIfXESS = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfXESS');
 		disableIfXESS = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfXESS');
 		disableIfRTAO = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfRTAO');
 		disableIfRTR = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfRTR');
-		disableIfPT = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfPT');
-		enableIfPT = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfPT');
-		enableIfPTHair = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfPTHair');
-		disableIfRTShadows = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfRTShadows');
 		enableIfDLSSGSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfDLSSGSupported');
 		enableIfReflexSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfReflexSupported');
-		enableIfDLSSRRSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfDLSSRRSupported');
-		enableIfLinearSweptSpheresSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfLinearSweptSpheresSupported');
 		disableIfDLSSG = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfDLSSG');
-		enableIfDLSSG = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfDLSSG');
 		disableIfDLSSGAndSet1 = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfDLSSGAndSet1');
-		disableIfDLSSGDynamic = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfDLSSGDynamic');
-		enableIfDLSSGDynamic = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfDLSSGDynamic');
-		enableIfGTAO = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfGTAO');
 		disableIfIntelGPU = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfIntelGPU');
 		enableIfMotionBlur = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfMotionBlur');
-		enableIfMouserSupported = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfMouserSupported');
-		enableIfMods = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfMods');
-		enableIfModernCombat = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfModernCombat');
-		disableIfModernCombat = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'disableIfModernCombat');
-
-		enableIfIsPs5Pro = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfIsPs5Pro');
-		enableIfPSSREnabled = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfPSSREnabled');
-		enableIfPreviewOptionsEnabled = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfPreviewOptionsEnabled');
-
-		enableIfNewHorseControls = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfNewHorseControls');
-
-	
-		if( optionName == 'DeveloperMode' || (enableIfHDREnabled && !isHDREnabled) || (enableIfSDREnabled && isHDREnabled) )
+		
+		if( optionName == 'DeveloperMode' )
 			continue;
-			
 		
-		if ( optionName == 'Virtual_DLSSG_Count' )
-			forceDisplay = true;
-		else
-			forceDisplay = false;
-
-		
-		if ( inGameConfigWrapper.IsVarVisible(groupName, optionName) &&
-			( !enableIfPreviewOptionsEnabled || isPreviewOptionsEnabled ) &&
-			((optionDisplayType != "OPTIONS" || numOptionValues > 1) &&
+		if ( inGameConfigWrapper.IsVarVisible(groupName, optionName) && 
+			(optionDisplayType != "OPTIONS" || numOptionValues > 1) &&
 			(optionDisplayType != "STEPPER" || numOptionValues > 1) &&
-			((optionalEntry && IngameMenu_IsOptionalEntryActive(optionName)) || !optionalEntry)
-			|| forceDisplay	) )
+			((optionalEntry && IngameMenu_IsOptionalEntryActive(optionName)) || !optionalEntry) )
 		{
 			optionDisplayName = inGameConfigWrapper.GetVarDisplayName(groupName, optionName);
 			
@@ -1010,40 +816,18 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 			}
 			else
 			{
-				if (noLocalizationName)
-				{
-					optionObject.SetMemberFlashString( "label", optionDisplayName );
-				}
-				else
-				{
-					optionObject.SetMemberFlashString( "label", inGameMenu_TryLocalize("option_" + optionDisplayName) );
-				}
+				optionObject.SetMemberFlashString( "label", inGameMenu_TryLocalize("option_" + optionDisplayName) );
 			}
 
 			startingValue = optionValue;
 			if (disableIfDLSSGAndSet1 && isDLSSGEnabled) optionValue = "1";
 			if (enableIfRTSupported && !isRTSupported) optionValue = "0"; 
-			if (enableIfHDRSupported && !isHDRSupported) optionValue = "0"; 
-			if (enableIfLinearSweptSpheresSupported && !isLinearSweptSpheresSupported) optionValue = "0"; 
-			if (enableIfPTHair && !IngameMenu_IsPTHairAvailable()) optionValue = "0"; 
+			if (enableIfHDR && !isHDRSupported) optionValue = "0"; 
 			if (optionName == 'Virtual_HairWorksLevel' && disableIfIntelGPU && isIntelGPU) optionValue = "0"; 
-			if (optionName == 'Virtual_Reflex' && !isReflexSupported) optionValue = "0"; 
-			if (optionName == 'Virtual_FSRFramegen' && !isFSRFramegenSupported) optionValue = "0"; 
-			if (optionName == 'AMDAntiLag' && !isAMDAntiLagSupported) optionValue = "0"; 
-
+						
 			optionObject.SetMemberFlashUInt( "type", IngameMenu_GetOptionTypeFromString(optionDisplayType) );
 			optionObject.SetMemberFlashUInt( "tag", NameToFlashUInt(optionName) );
 			optionObject.SetMemberFlashString( "current", optionValue);
-
-			if(inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'XFormat'))
-			{
-				optionObject.SetMemberFlashString("currentFormat", "{n}x");
-			}
-			else if (inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'PercFormat'))
-			{
-				optionObject.SetMemberFlashString("currentFormat", "{n}%");
-			}
-
 			optionObject.SetMemberFlashString( "startingValue", startingValue);
 			optionObject.SetMemberFlashInt( "groupID", groupID );
 			optionObject.SetMemberFlashBool( "checkHardwareCursor", optionName == 'UIMouseSensitivity' || optionName == 'MouseSensitivity' );
@@ -1055,51 +839,20 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 				(enableIfRTSupported && !isRTSupported) ||
 				(enableIfHairWorks && !isHairWorksEnabled) ||
 				(enableIfFSR && !isFSREnabled) ||
-				(enableIfFSR4 && !isFSR4Supported) ||
 				(disableIfFSR && isFSREnabled) ||
-				(enableIfFSRFramegenSupported && !isFSRFramegenSupported) ||
-				(disableIfFSRFramegen && isFSRFramegenEnabled) ||
-				(enableIfAMDAntiLagSupported && !isAMDAntiLagSupported) ||
-				(disableIfAMDAntiLag && isAMDAntiLagEnabled) ||
 				(enableIfDLSS && !isDLSSEnabled) ||
 				(disableIfDLSS && isDLSSEnabled) ||
 				(enableIfXESS && !isXESSEnabled) ||
 				(disableIfXESS && isXESSEnabled) ||
 				(disableIfRTAO && isRTAOEnabled) ||
-				(enableIfGTAO && !isGTAOEnabled) ||
 				(disableIfRTR && isRTREnabled) ||
-				(disableIfPT && isPTEnabled) ||
-				(enableIfPT && !isPTEnabled) ||
-				(enableIfPTHair && !IngameMenu_IsPTHairAvailable()) ||
-				(disableIfRTShadows && isRTShadowsEnabled) ||
 				(disableIfDLSSGAndSet1 && isDLSSGEnabled) ||
 				(disableIfDLSSG && isDLSSGEnabled) ||
-				(optionName == 'VSync' && isDLSSGEnabled && !isDLSSGVSyncSupported) ||
-				(enableIfDLSSG && !isDLSSGEnabled) ||
-				(disableIfDLSSGDynamic && isDLSSGEnabledDynamic) ||
-				(enableIfDLSSGDynamic && !isDLSSGEnabledDynamic) ||
 				(enableIfDLSSGSupported && !isDLSSGSupported) ||
 				(enableIfReflexSupported && !isReflexSupported) ||
-				(enableIfDLSSRRSupported && !isDLSSRRSupported) ||
-				(enableIfLinearSweptSpheresSupported && !isLinearSweptSpheresSupported) ||
 				(disableIfIntelGPU && isIntelGPU) ||
-				(enableIfHDRSupported && !isHDRSupported) ||
-				(enableIfMotionBlur && !isMotionBlurEnabled) ||
-				(enableIfMouserSupported && !isMouserConnected) ||
-				(enableIfMods && !theGame.AreModsEnabled()) ||
-				(enableIfModernCombat && !IsModernCombatEnabled()) ||
-				(disableIfModernCombat && IsModernCombatEnabled()) ||
-				(IsEnableIfAutoheal(groupName, optionName) && !IsAutohealEnabled()) ||	
-				(enableIfIsPs5Pro && !isPs5Pro) ||
-				(enableIfPSSREnabled && !isPSSREnabled) ||
-				(IsEnableIfXeLL(groupName, optionName) && !isXELLEnabled) ||
-				(IsDisableIfXeLL(groupName, optionName) && isXELLEnabled) ||
-				(IsDisableIfReflex(groupName, optionName) && isReflexEnabled) ||
-				(IsDisableIfXessFG(groupName, optionName) && isXESSFGEnabled) ||
-				(IsEnableIfXessFG(groupName, optionName) && !isXESSFGEnabled) ||
-				(IsDisableIfXessLowLatency(groupName, optionName) && IsXessLowLatencyEnabled()) ||
-				(forceDisplay && numOptionValues == 1) ||
-				(enableIfNewHorseControls && !isNewHorseControlsEnabled)
+				(enableIfHDR && !isHDRSupported) ||
+				(enableIfMotionBlur && !isMotionBlurEnabled)
 			);
 			optionObject.SetMemberFlashBool( "indent", inGameConfigWrapper.DoVarHasTag( groupName, optionName, 'indent' ) );
 			
@@ -1117,12 +870,6 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 			for (option_it = 0; option_it < numOptionValues; option_it += 1)
 			{
 				optionVarValue = inGameConfigWrapper.GetVarOption(groupName, optionName, option_it);
-
-				enableIfFSR4 = inGameConfigWrapper.DoOptionHasTag(groupName, optionName, option_it, 'enableIfFSR4');
-				if( enableIfFSR4 && !isFSR4Supported )
-				{
-					continue;
-				}
 				
 				if( streamable )
 				{
@@ -1292,44 +1039,6 @@ function IngameMenu_AddGwentDifficultyOption(flashStorageUtility : CScriptedFlas
 	listToAddToo.PushBackFlashObject(optionObject);
 }
 
-function IngameMenu_AddAccessibilityGodModeOption(flashStorageUtility : CScriptedFlashValueStorage, listToAddToo:CScriptedFlashArray):void
-{
-	var optionObject 		: CScriptedFlashObject;
-	var optionFlashArray	: CScriptedFlashArray;
-	var startValue 			: string;
-	var immortalLevel		: int;
-	var optionValue			: string;
-	
-	var inGameConfigWrapper	: CInGameConfigWrapper;
-	
-	immortalLevel = AIM_None;
-	if (thePlayer.IsImmortalityModeSetByChannel(AIM_Immortal, AIC_Cheat))
-		immortalLevel = AIM_Immortal;
-	else if (thePlayer.IsImmortalityModeSetByChannel(AIM_Invulnerable, AIC_Cheat))
-		immortalLevel = AIM_Invulnerable;
-
-	startValue = "" + immortalLevel;
-	
-	optionObject = flashStorageUtility.CreateTempFlashObject();
-	optionObject.SetMemberFlashString( "id", "GodMode");
-	optionObject.SetMemberFlashString( "label", "[DEBUG] GodMode Type:" );
-	optionObject.SetMemberFlashUInt( "type", IGMActionType_List );
-	optionObject.SetMemberFlashUInt( "tag", NameToFlashUInt('GodMode') );
-	optionObject.SetMemberFlashString( "current", startValue);
-	optionObject.SetMemberFlashString( "startingValue", startValue);
-	optionObject.SetMemberFlashInt( "groupID", inGameConfigWrapper.GetGroupIdx('Accessibility') );
-	
-	optionFlashArray = flashStorageUtility.CreateTempFlashArray();
-	
-	optionFlashArray.PushBackFlashString("Nothing");
-	optionFlashArray.PushBackFlashString("Immortal");
-	optionFlashArray.PushBackFlashString("Invulnerable");
-	
-	optionObject.SetMemberFlashArray( "subElements", optionFlashArray );
-	
-	listToAddToo.PushBackFlashObject(optionObject);
-}
-
 function IngameMenu_ChangePresetValue(groupId:name, targetPresetIndex:int, parentMenu:CR4IngameMenu):void
 {
 	var inGameConfigWrapper	: CInGameConfigWrapper;
@@ -1340,7 +1049,7 @@ function IngameMenu_ChangePresetValue(groupId:name, targetPresetIndex:int, paren
 	
 	if (parentMenu)
 	{
-		parentMenu.UpdatePresetOptions(groupId, false);
+		parentMenu.UpdateOptions(groupId, false);
 	}
 }
 
@@ -1428,7 +1137,7 @@ function IngameMenu_AdditionalOptionValueChangeHandling(  groupName:name, option
 		entriesArray = flashStorageUtility.CreateTempFlashArray();
 		numOptionValues = inGameConfigWrapper.GetVarOptionsNum( groupName, optionName );
 		
-		for( optionId = 0; optionId < numOptionValues; optionId += 1 )
+		for( optionId = 0; it < numOptionValues; optionId += 1 )
 		{
 			entriesNum = inGameConfigWrapper.GetEntriesNumForOption( groupName, optionName, optionId );
 			for( it = 0; it < entriesNum; it += 1 )

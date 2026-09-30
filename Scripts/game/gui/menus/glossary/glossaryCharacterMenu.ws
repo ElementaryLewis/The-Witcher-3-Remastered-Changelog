@@ -44,7 +44,11 @@ class CR4GlossaryCharacterMenu extends CR4ListBaseMenu
 		
 		l_character = (CJournalCharacter)m_journalManager.GetEntryByTag( tag );
 		str = thePlayer.ProcessGlossaryImageOverride( l_character.GetImagePath(), tag );
-		if( str != "" )
+		if( str == "" )
+		{
+			m_flashValueStorage.SetFlashString("glossary.characters.sublist.image","empty_texture.PNG");
+		}
+		else
 		{
 			m_flashValueStorage.SetFlashString("glossary.characters.sublist.image",str);
 		}

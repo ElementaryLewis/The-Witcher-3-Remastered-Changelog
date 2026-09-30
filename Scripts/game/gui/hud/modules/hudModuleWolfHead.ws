@@ -109,18 +109,6 @@ class CR4HudModuleWolfHead extends CR4HudModuleBase
 		
 		UpdateCoatOfArms();
 	}
-
-	event  OnTapStats()
-	{
-		if ( theGame.IsBlackscreenOrFading() || theGame.IsDialogOrCutscenePlaying() )
-		{
-			return false;
-		}
-		
-		SetAlwaysDisplayed( true );
-		
-		return true;
-	}
 	
 	public function DisplayMutationFeedback( value : EMutationFeedbackType )
 	{
@@ -214,12 +202,12 @@ class CR4HudModuleWolfHead extends CR4HudModuleBase
 			if ( l_curStamina <= 0 )
 			{
 				thePlayer.SoundEvent("gui_no_stamina");
-				
+				theGame.VibrateControllerVeryLight(); 
 			}
 			else if ( l_curStamina >= l_curMaxStamina && playStaminaSoundCue )
 			{
 				thePlayer.SoundEvent("gui_stamina_recharged");
-				
+				theGame.VibrateControllerVeryLight(); 
 				playStaminaSoundCue = false;
 			}
 		}
@@ -455,3 +443,6 @@ exec function coa( val : bool )
 		}
 	}
 }
+
+
+

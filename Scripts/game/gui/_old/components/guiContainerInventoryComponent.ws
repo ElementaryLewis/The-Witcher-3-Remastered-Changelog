@@ -126,3 +126,5 @@ class W3GuiContainerInventoryComponent extends W3CommonContainerInventoryCompone
 		return false;
 	}
 }
+
+

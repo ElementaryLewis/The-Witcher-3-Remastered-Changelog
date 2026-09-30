@@ -163,22 +163,6 @@ class W3EffectItem extends CItemEntity
 }
 
 
-enum EUsableItemType
-{
-	UI_Torch,
-	UI_Horn,
-	UI_Bell,
-	UI_OilLamp,
-	UI_Mask,
-	UI_FiendLure,
-	UI_Meteor,
-	UI_None,
-	UI_Censer,
-	UI_Apple,
-	UI_Cookie,
-	UI_Basket,
-
-}
 
 class W3UsableItem extends CItemEntity
 {

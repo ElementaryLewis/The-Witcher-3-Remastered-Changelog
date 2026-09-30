@@ -48,4 +48,4 @@ class W3Effect_Mutation11Buff extends CBaseGameplayEffect
 		
 		super.OnEffectRemoved();
 	}
-}
+}	

@@ -22,9 +22,6 @@ class BTTaskAdditiveHitListener extends IBehTreeTask
 	private var counterChance 					: float;
 	private var counterStaminaCost 				: float;
 	
-	private var ignoreCounterForTask			: bool;
-	default ignoreCounterForTask = false;
-	
 	default timeStamp = 0;
 	
 	
@@ -58,7 +55,7 @@ class BTTaskAdditiveHitListener extends IBehTreeTask
 				}
 			}
 		}
-		if ( !npc.IsHuman() && GetActor().GetMovingAgentComponent().GetName() != "wild_hunt_base" && hitCounter >= hitsToCounter   )
+		if ( !npc.IsHuman() && GetActor().GetMovingAgentComponent().GetName() != "wild_hunt_base" && hitCounter >= hitsToCounter  )
 		{
 			if( Roll( counterChance ) && npc.GetStat( BCS_Stamina ) >= counterStaminaCost )
 			{
@@ -118,23 +115,13 @@ class BTTaskAdditiveHitListener extends IBehTreeTask
 		var owner 	: CNewNPC = GetNPC();
 		var data 	: CDamageData;
 		
-		if ( eventName == 'IgnoreCounter' )
-		{
-			ignoreCounterForTask = true;
-		}
-		
-		if ( eventName == 'DisableIgnoreCounter' )
-		{
-			ignoreCounterForTask = false;
-		}
-		
 		
 		if ( eventName == 'BeingHit' && timeStamp + 0.4 <= GetLocalTime() )
 		{
 			data = (CDamageData) GetEventParamBaseDamage();
 			if ( data.additiveHitReactionAnimRequested )
 			{
-				if ( processCounter && !ignoreCounterForTask)
+				if ( processCounter )
 				{
 					damageIsMelee = data.isActionMelee;
 					if ( !increaseHitCounterOnlyOnMeleeDmg || (increaseHitCounterOnlyOnMeleeDmg && damageIsMelee) )
@@ -167,8 +154,6 @@ class BTTaskAdditiveHitListener extends IBehTreeTask
 	{
 		var npc 				: CNewNPC = GetNPC();
 		var playerToOwnerAngle 	: float;
-		
-		
 		
 		
 		if ( manageIgnoreSignsEvents )
@@ -216,3 +201,4 @@ class BTTaskAdditiveHitListenerDef extends IBehTreeTaskDefinition
 		listenToGameplayEvents.PushBack( 'IgnoreSignsEnd' );
 	}
 }
+

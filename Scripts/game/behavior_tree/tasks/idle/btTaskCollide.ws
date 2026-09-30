@@ -53,10 +53,6 @@ class CBTTaskCollideWithCharacter extends IBehTreeTask
 	var	ignoreBumpOnBothStopped		: bool;		default	ignoreBumpOnBothStopped		= true;
 	var ignoreMinCoefToGoAway		: float; 	default	ignoreMinCoefToGoAway		= 0.5f;
 	var ignoreMinSpeedSqr			: float; 	default	ignoreMinSpeedSqr			= 0.3f;
-
-	
-	var useSpecificAngle			: bool;		default useSpecificAngle			= false;
-	var reactionAngle				: float;	default reactionAngle				= 0.f;
 	
 	default isAvailable = false;
 	
@@ -183,9 +179,8 @@ class CBTTaskCollideWithCharacter extends IBehTreeTask
 		var direction	: EAttackDirection;
 		var pushValue	: ENPCCollisionStance;
 		var baseName	: string;
-		var horseComp	: W3HorseComponent;
 		
-
+		
 		
 		otherIsHorse	= false;
 		
@@ -201,14 +196,6 @@ class CBTTaskCollideWithCharacter extends IBehTreeTask
 		{	
 			otherIsPlayer	= collidedActor == ( CActor ) thePlayer;			
 			otherIsHorse	= IsOtherAHorse();
-			Log("Bump :: otherIsPlayer:" + otherIsPlayer + "; otherIsHorse:" + otherIsHorse + " [" + collidedActor + "]");
-			if (otherIsHorse)
-			{
-				horseComp = ( W3HorseComponent )thePlayer.GetUsedVehicle().GetComponentByClassName( 'W3HorseComponent' );
-				reactionAngle = horseComp.reactionAngle;
-				useSpecificAngle = reactionAngle != 0.f;
-				Log("Bump :: reactionAngle:" + reactionAngle + "; useSpecificAngle:" + useSpecificAngle + " [" + horseComp + "]");
-			}
 		}
 		
 		
@@ -222,10 +209,7 @@ class CBTTaskCollideWithCharacter extends IBehTreeTask
 		}
 		
 		
-		if (useSpecificAngle)
-			angle 	= reactionAngle;
-		else
-			angle	= GetAngleToMove( fromOther );
+		angle		= GetAngleToMove( fromOther );
 		
 		
 		direction	= GetDirectionToMove( angle );	

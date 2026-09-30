@@ -23,11 +23,6 @@ state MountHorse in CR4Player extends MountTheVehicle
 		thePlayer.AddBuffImmunity( EET_Pull, 'HorseRidingBuffImmunity', true );
 		
 		horseComp = (W3HorseComponent)vehicle;
-
-		if( vehicle.GetEntity().HasTag( 'carriage_horse' ) ) 
-		{
-			thePlayer.SetBehaviorVariable( 'isRidingCart', 1.f, true );
-		}
 		
 		if( horseComp )
 		{
@@ -44,11 +39,7 @@ state MountHorse in CR4Player extends MountTheVehicle
 			instantMount = true;
 		}
 		
-		if ( !IsMountsRemasterEnabled() )
-		{
-			
-			theGame.ActivateHorseCamera( true, instantMount ? 0.f : 0.4f, instantMount );
-		}
+		theGame.ActivateHorseCamera( true, 0.f, instantMount );
 		
 		if ( (W3ReplacerCiri)thePlayer )
 		{
@@ -77,14 +68,16 @@ state MountHorse in CR4Player extends MountTheVehicle
 	
 	private var mountAnimStarted : bool;
 	
+	const var MOUNT_TIMEOUT : float;
+	default MOUNT_TIMEOUT = 5.0;
+	
 	entry function ProcessMountHorse()
 	{
 		var riderData 			: CAIStorageRiderData;
 		var distance			: float;
 		var contextSwitchOffset	: float;
 		var mountStartTimestamp : float;
-		var mountTimeout : float;
-
+		
 		parent.SetCleanupFunction( 'MountCleanup' );
 		
 		mountAnimStarted = false;
@@ -109,11 +102,6 @@ state MountHorse in CR4Player extends MountTheVehicle
 		
 		SleepOneFrame();
 		
-		mountTimeout = 5.0;
-		if (horseComp.useEarlyExploration)
-		{
-			mountTimeout = 10.0;
-		}
 		mountStartTimestamp = theGame.GetEngineTimeAsSeconds();
 		while( true )
 		{
@@ -125,7 +113,7 @@ state MountHorse in CR4Player extends MountTheVehicle
 			{
 			
 			}
-			else if ( riderData.ridingManagerMountError == true || mountStartTimestamp + mountTimeout < theGame.GetEngineTimeAsSeconds() )
+			else if ( riderData.ridingManagerMountError == true || mountStartTimestamp + MOUNT_TIMEOUT < theGame.GetEngineTimeAsSeconds() )
 			{
 				OnMountingFailed();
 				parent.PopState();
@@ -148,7 +136,7 @@ state MountHorse in CR4Player extends MountTheVehicle
 	{	
 		super.OnMountingFailed();
 
-		theGame.ActivateHorseCamera( false, 0.2f );	
+		theGame.ActivateHorseCamera( false, 0.f );	
 	}
 	
 	event OnMountAnimStarted()
@@ -156,18 +144,9 @@ state MountHorse in CR4Player extends MountTheVehicle
 		mountAnimStarted = true;
 	}
 	
-	event OnMountAnimCancelled()
-	{
-		mountAnimStarted = false;
-	}
-
 	event OnHorseRidingOn()
 	{
-		
-		if ( !horseComp.useEarlyExploration || horseComp.GetCurrentStateName() != 'Exploration' )
-		{
-			horseComp.PushState( 'Exploration' );
-		}
+		horseComp.PushState( 'Exploration' );
 	}
 	
 	event OnDeath( damageAction : W3DamageAction )
@@ -175,13 +154,5 @@ state MountHorse in CR4Player extends MountTheVehicle
 		parent.ActionCancelAll();
 		
 		parent.OnDeath( damageAction );
-	}
-
-	event OnGameCameraPostTick( out moveData : SCameraMovementData, dt : float )
-	{
-		
-		
-
-		return super.OnGameCameraPostTick( moveData, dt );
 	}
 }

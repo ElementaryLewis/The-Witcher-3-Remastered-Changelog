@@ -7,7 +7,6 @@ import class CR4PhotomodeEffects extends CObject
 {
 	private var photomodeMenu : CR4PhotomodeMenu;
 	
-	import final function HaveChangesBeenMade() : bool;
 	import final function SetEnabled( value : bool );
 	import final function SetDofEnabled( value : bool );
 	import final function SetAperture( value : float );
@@ -32,20 +31,6 @@ import class CR4PhotomodeEffects extends CObject
 	import final function GetFilmGrain() : float;
 	import final function SetVignette( value : float );
 	import final function GetVignette() : float;
-	import final function SetWeather( value : string );
-	import final function GetWeather() : string;
-	import final function RestoreWeather();
-	import final function SetTimeOfDay( value : float );
-	import final function GetTimeOfDay() : float;
-	import final function GetEnvDef( out definition : CEnvironmentDefinition );
-	import final function SetEnvDefUsingPath( definition : string );
-	import final function SetEnvDefNull();
-	
-	import final function GetEditableCharacterList(maxDist : float, out list : array<CActor>);
-	import final function GetCharacterAppearanceList(char : CActor, out list : array<name>);
-	import final function SetPhotomodeTickTime(time : float);
-	import final function SetPhotomodeClothsSimulationTime(time : float);
-	import final function SetPhotomodeCustomAspect(customAspect:bool, xRatio:int, yRatio:int);
 	
 	public function SetPhotomodeMenu( menu : CR4PhotomodeMenu )
 	{

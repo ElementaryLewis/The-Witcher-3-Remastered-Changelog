@@ -241,7 +241,7 @@ class W3Action_Attack extends W3DamageAction
 	
 	public function GetPowerStatValue() : SAbilityAttributeValue
 	{
-		var min, max, result, horseDamageBonus, tempAttr : SAbilityAttributeValue;
+		var min, max, result, horseDamageBonus : SAbilityAttributeValue;
 		var witcherAttacker : W3PlayerWitcher;
 		var temp : name;
 		var actorVictim, actorAttacker : CActor;
@@ -312,20 +312,6 @@ class W3Action_Attack extends W3DamageAction
 			if(witcherAttacker.HasRecentlyCountered() && witcherAttacker.CanUseSkill(S_Sword_s11))
 			{
 				result += witcherAttacker.GetSkillAttributeValue(S_Sword_s11, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s11);
-			}
-
-			
-			if((witcherAttacker.HasRecentlyCountered() || witcherAttacker.HasRecentlyDodged()) && witcherAttacker.CanUseSkill(S_Sword_s31) && attackName != 'counter_attack_light')
-			{
-				tempAttr = witcherAttacker.GetSkillAttributeValue(S_Sword_s31, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s31);
-				if(attackName == 'bolt')
-				{
-					
-					tempAttr.valueMultiplicative *= CalculateAttributeValue(witcherAttacker.GetSkillAttributeValue(S_Sword_s31, 'crossbow_multiplier', false, true));
-					tempAttr.valueAdditive += result.valueAdditive;
-				}
-
-				result += tempAttr;
 			}
 			
 			

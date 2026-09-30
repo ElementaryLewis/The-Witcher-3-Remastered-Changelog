@@ -67,7 +67,7 @@ class CR4UIRescaleMenu extends CR4MenuBase
 	event  OnRefreshActiveUserDisplayName()
 	{
 		var username 			: string;
-		
+
 		username = FixStringForFont(theGame.GetActiveUserDisplayName());
 		m_fxSetCurrentUsername.InvokeSelfOneArg(FlashArgString(username));
 	}

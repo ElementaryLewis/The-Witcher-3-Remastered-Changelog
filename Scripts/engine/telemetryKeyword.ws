@@ -24,7 +24,6 @@ import class CR4TelemetryScriptProxy extends CObject
 	import final function XDPPrintUserStats( statisticName : String );
 	import final function XDPPrintUserAchievement( achievementName : String );
 	import final function TelemetryConsentChanged(telemetryConsent : bool);
-	import final function MarketingConsentChanged(marketingConsent : bool);
 	import final function WasConsentWindowShown() : bool;
 	import final function MarkShownConsentWindow();
 	

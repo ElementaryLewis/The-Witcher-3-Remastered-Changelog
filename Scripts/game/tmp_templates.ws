@@ -2354,3 +2354,7 @@ function spawnt_internal(nam : string, optional quantity : int, optional distanc
 		
 	}
 }
+
+
+
+

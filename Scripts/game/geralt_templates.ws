@@ -56,7 +56,7 @@ function fb3_internal(optional level :int, optional path : name, optional clearI
 	var lm : W3PlayerWitcher;
 	var exp, prevLvl, currLvl : int;
 	
-	
+	GetWitcherPlayer().Debug_ClearCharacterDevelopment(true);
 
 	if(clearInv)
 	{

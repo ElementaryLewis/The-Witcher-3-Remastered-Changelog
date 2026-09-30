@@ -94,3 +94,6 @@ class W3SwordStand extends W3HouseDecorationBase
 	
 	
 }
+
+
+	

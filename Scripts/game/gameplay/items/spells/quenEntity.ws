@@ -76,14 +76,13 @@ statemachine class W3QuenEntity extends W3SignEntity
 		if(owner.GetActor() == thePlayer && !damageData.IsDoTDamage() && !damageData.WasDodged())
 		{
 			thePlayer.OnShieldHit();
-			
+
 		}
 	}
 		
 	protected function GetSignStats()
 	{
-		var min, max, fortifiedSignsAtt : SAbilityAttributeValue;
-		var player : CR4Player;
+		var min, max : SAbilityAttributeValue;
 		
 		super.GetSignStats();
 		
@@ -105,14 +104,6 @@ statemachine class W3QuenEntity extends W3SignEntity
 		else
 		{
 			dischargePercent = 0;
-		}
-
-		
-		player = (CR4Player)owner.GetActor();
-		if(player.CanUseSkill(S_Magic_s36))
-		{
-			fortifiedSignsAtt = player.GetSkillAttributeValue(S_Magic_s36, 'duration', false, true);
-			shieldDuration *= 1 + fortifiedSignsAtt.valueMultiplicative * player.GetSkillLevel(S_Magic_s36);
 		}
 	}
 	
@@ -371,8 +362,8 @@ state Expired in W3QuenEntity
 			
 		parent.DestroyAfter( 1.f );		
 		
-		
-			
+		if(parent.owner.GetActor() == thePlayer)
+			theGame.VibrateControllerVeryHard();	
 	}
 }
 
@@ -383,9 +374,9 @@ state ShieldActive in W3QuenEntity extends Active
 	{
 		var level : int;
 		
-		if(caster.CanUseSkill(S_Magic_s13))
+		if(caster.CanUseSkill(S_Magic_s15))
 		{
-			level = caster.GetSkillLevel(S_Magic_s13);
+			level = caster.GetSkillLevel(S_Magic_s15);
 			if(level == 1)
 				return parent.effects[0].lastingEffectUpg1;
 			else if(level == 2)
@@ -774,15 +765,15 @@ state QuenChanneled in W3QuenEntity extends Channeling
 	private function ProcessQuenCollisionForRiders()
 	{
 		var mac	: CMovingPhysicalAgentComponent;
-		var collisionData 						: SCollisionData;
-		var collisionNum 						: int;
-		var i 									: int;
-		var npc									: CNewNPC;
-		var riderActor 							: CActor;
-		var collidedWithRider 					: bool;
-		var horseComp 							: W3HorseComponent;
-		var riderToPlayerHeading, riderHeading 	: float;
-		var angleDist 							: float;
+		var collisionData : SCollisionData;
+		var collisionNum : int;
+		var i : int;
+		var npc	: CNewNPC;
+		var riderActor : CActor;
+		var collidedWithRider : bool;
+		var horseComp : W3HorseComponent;
+		var riderToPlayerHeading, riderHeading : float;
+		var angleDist : float;
 		
 		mac	= (CMovingPhysicalAgentComponent)thePlayer.GetMovingAgentComponent();
 		if( !mac )
@@ -808,8 +799,6 @@ state QuenChanneled in W3QuenEntity extends Channeling
 					if( horseComp.user )
 						collidedWithRider = true;
 				}
-				
-
 			}
 			
 			if( collidedWithRider )

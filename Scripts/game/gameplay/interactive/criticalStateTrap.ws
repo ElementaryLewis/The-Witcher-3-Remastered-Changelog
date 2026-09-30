@@ -104,3 +104,4 @@ class W3CriticalStateTrap extends CInteractiveEntity
 		DestroyAfter( 2.0f );
 	}
 }
+

@@ -137,3 +137,4 @@ class W3Effect_Bleeding3 extends W3DamageOverTimeEffect
 		}		
 	}
 }
+

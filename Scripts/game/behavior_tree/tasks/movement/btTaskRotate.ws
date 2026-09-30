@@ -116,3 +116,5 @@ class CBTTaskRotateToEnemyDef extends IBehTreeTaskDefinition
 	default toleranceAngle = 20;
 	default rotateOnRotateEvent = true;
 }
+
+

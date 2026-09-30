@@ -13,29 +13,11 @@ class  W3InventoryItemContext extends W3UIContext
 	protected var invSecondComponentRef	 : CInventoryComponent;
 	protected var contextMenuPosition_x  : float;
 	protected var contextMenuPosition_y  : float;
-
-	protected var commonDropPadNavCode : string;
-	protected var previewItemPadNavCode : string;
-	protected var consumePadNavCode : string;
-	protected var q705UseItemPadNavCode : string;
 	
 	public  function Init(ownerManager:W3ContextManager)
 	{
 		super.Init(ownerManager);		
 		invComponentRef = invMenuRef.GetCurrentInventory(GetInvalidUniqueId());
-
-		commonDropPadNavCode	= "gamepad_Y";
-		previewItemPadNavCode	= "gamepad_X";
-		consumePadNavCode		= "gamepad_X";
-		q705UseItemPadNavCode	= "gamepad_X";
-
-		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
-		{
-			commonDropPadNavCode	= "gamepad_X";
-			previewItemPadNavCode	= "gamepad_Y";
-			consumePadNavCode		= "gamepad_Y";
-			q705UseItemPadNavCode	= "gamepad_Y";
-		}
 	}
 	
 	public function SetSecondInventoryComponentRef(ref : CInventoryComponent):void
@@ -118,7 +100,6 @@ class  W3InventoryItemContext extends W3UIContext
 		var language : string;
 		var audioLanguage : string;
 		var result : bool;
-		var isSwitchPlatform : bool;
 		
 		isItemValid = invComponentRef.IsIdValid(currentItemId);
 		
@@ -134,10 +115,8 @@ class  W3InventoryItemContext extends W3UIContext
 		
 		super.HandleUserFeedback(keyName);
 		itemsCount = invComponentRef.GetItemQuantity( currentItemId );
-		isSwitchPlatform = theGame.GetPlatform() == Platform_Switch2_Ounce;
 		
-		if ( ( isSwitchPlatform && keyName == "gamepad_Y" ) ||		
-			( !isSwitchPlatform && keyName == "gamepad_X" ) )		
+		if( keyName == "gamepad_X" )
 		{
 			isArmorOrWeapon = invComponentRef.IsItemAnyArmor( currentItemId ) || invComponentRef.IsItemWeapon( currentItemId );
 			
@@ -156,8 +135,8 @@ class  W3InventoryItemContext extends W3UIContext
 			if( invComponentRef.ItemHasTag(currentItemId, 'Edibles') || invComponentRef.ItemHasTag(currentItemId, 'Drinks') || invComponentRef.ItemHasTag(currentItemId, 'Consumable'))
 			{
 				invMenuRef.OnConsumeItem(currentItemId);
-			}
-			else if (invComponentRef.ItemHasTag(currentItemId, 'Potion'))
+			} else
+			if (invComponentRef.ItemHasTag(currentItemId, 'Potion'))
 			{
 				if (GetWitcherPlayer().ToxicityLowEnoughToDrinkPotion(EES_Potion1,currentItemId))	
 				{
@@ -215,27 +194,23 @@ class  W3InventoryItemContext extends W3UIContext
 			
 			updateInputFeedback();
 		}
-		else if (keyName == "enter-gamepad_A")
+		else
+		if (keyName == "enter-gamepad_A")
 		{
-			
-			
-			
-			
-			
-			
-			if ( IsPadBindingExist(keyName) )
+			if (!theInput.LastUsedPCInput() || IsPadBindingExist(keyName)) 
 			{
 				execurePrimaryAction();
 			}
 		}
-		else if ( ( isSwitchPlatform && keyName == "gamepad_X" ) ||		
-				( !isSwitchPlatform && keyName == "gamepad_Y" ) )		
+		else
+		if (keyName == "gamepad_Y")
 		{
 			invMenuRef.OnDropItem(currentItemId, itemsCount);
 			
 			
 		}
-		else if (keyName == "gamepad_L2")
+		else
+		if (keyName == "gamepad_L2")
 		{
 			itemCategory = invComponentRef.GetItemCategory(currentItemId); 
 			isSchematic = itemCategory == 'alchemy_recipe' || itemCategory == 'crafting_schematic';
@@ -314,11 +289,11 @@ class W3InventoryGridContext extends W3InventoryItemContext
 					{
 						if( invMenuRef.IsItemInPreview( currentItemId ) )
 						{
-							AddInputBinding( "panel_button_unpreview_item", previewItemPadNavCode, IK_X, true );
+							AddInputBinding( "panel_button_unpreview_item", "gamepad_X", IK_X, true );
 						}
 						else
 						{
-							AddInputBinding( "panel_button_preview_item", previewItemPadNavCode, IK_X, true );
+							AddInputBinding( "panel_button_preview_item", "gamepad_X", IK_X, true );
 						}
 					}
 
@@ -328,7 +303,7 @@ class W3InventoryGridContext extends W3InventoryItemContext
 					}
 					else if( invComponentRef.GetItemName( currentItemId ) == 'q705_tissue_extractor' )
 					{
-						AddInputBinding("panel_button_hud_interaction_useitem", q705UseItemPadNavCode, IK_X, true);
+						AddInputBinding("panel_button_hud_interaction_useitem", "gamepad_X", IK_X, true);
 					}
 					else if (invComponentRef.ItemHasTag(currentItemId, 'Painting'))
 					{
@@ -349,7 +324,7 @@ class W3InventoryGridContext extends W3InventoryItemContext
 						
 						if (!cantUse)
 						{
-							AddInputBinding("panel_button_inventory_consume", consumePadNavCode, IK_E, true);
+							AddInputBinding("panel_button_inventory_consume", "gamepad_X", IK_E, true);
 						}
 						if ( invComponentRef.GetItemName( currentItemId ) != 'q111_imlerith_acorn'  && !invComponentRef.ItemHasTag( currentItemId, 'NoEquip' ) ) 
 						{
@@ -384,10 +359,6 @@ class W3InventoryGridContext extends W3InventoryItemContext
 							AddInputBinding("panel_button_hud_interaction_useitem", "enter-gamepad_A", IK_E, true);
 						}
 					}
-					else if ( invComponentRef.ItemHasTag(currentItemId, 'Sharpstone') )
-					{
-						AddInputBinding("panel_button_hud_interaction_useitem", "enter-gamepad_A", IK_E, true);
-					}
 					break;
 				case IMS_Shop:
 					if (!isBodkinBolt)
@@ -416,12 +387,12 @@ class W3InventoryGridContext extends W3InventoryItemContext
 			}
 			if (canDrop && !isQuestItem && !isBodkinBolt && currentInventoryState != IMS_Shop)
 			{
-				AddInputBinding("panel_button_common_drop", commonDropPadNavCode, IK_R, true);
+				AddInputBinding("panel_button_common_drop", "gamepad_Y", IK_R, true);
 			}
 			if (invComponentRef.CanBeCompared(currentItemId))
 			{
 				buttonLabel = GetHoldLabel() + " " + GetLocStringByKeyExt("panel_common_compare");
-				AddInputBinding(buttonLabel, "gamepad_L2", -1, true, true, true);
+				AddInputBinding(buttonLabel, "gamepad_L2", -1, true, true);
 			}
 		}
 		
@@ -462,10 +433,6 @@ class W3InventoryGridContext extends W3InventoryItemContext
 							 invComponentRef.ItemHasTag(currentItemId, 'ArmorReapairKit'))
 					{
 						invMenuRef.OnRepairItem(currentItemId);
-					}
-					else if (invComponentRef.ItemHasTag(currentItemId, 'Sharpstone'))
-					{
-						invMenuRef.OnUseSharpstone(currentItemId);
 					}
 					else if (invComponentRef.ItemHasTag(currentItemId, 'SteelOil') || 
 						 invComponentRef.ItemHasTag(currentItemId, 'SilverOil'))
@@ -553,7 +520,7 @@ class W3ExternalGridContext extends W3InventoryItemContext
 				if (invComponentRef.CanBeCompared(currentItemId))
 				{
 					buttonLabel = GetHoldLabel() + " " + GetLocStringByKeyExt("panel_common_compare");
-					AddInputBinding(buttonLabel, "gamepad_L2", -1, true, true, true);
+					AddInputBinding(buttonLabel, "gamepad_L2", -1, true, true);
 				}
 				else
 				if (isSchematic)
@@ -575,13 +542,7 @@ class W3ExternalGridContext extends W3InventoryItemContext
 		{
 			if (keyName == "enter-gamepad_A")
 			{
-				
-				
-				
-				
-				
-				
-				if ( IsPadBindingExist(keyName) )
+				if (!theInput.LastUsedPCInput() || IsPadBindingExist(keyName)) 
 				{
 					execurePrimaryAction();
 				}
@@ -632,7 +593,7 @@ class W3InventoryPaperdollContext extends W3InventoryItemContext
 		var canDrop 	    : bool;
 		var isQuestItem     : bool;
 		var isSingletonItem : bool;
-		var isHorseItem 	: bool;
+		var isHorseItem 	: bool;		
 		
 		m_inputBindings.Clear();
 		m_contextBindings.Clear();
@@ -660,10 +621,7 @@ class W3InventoryPaperdollContext extends W3InventoryItemContext
 		
 		if (invComponentRef.IsIdValid(currentItemId) && !isBodkinBolt )
 		{
-			if ( canDrop && !isQuestItem && !isSingletonItem && !isHorseItem && !IsMultipleSlot(currentSlot) && currentSlot != EES_Bolt )
-			{
-				AddInputBinding("panel_button_common_drop", commonDropPadNavCode, IK_R, true);
-			}
+			if ( canDrop && !isQuestItem && !isSingletonItem && !isHorseItem && !IsMultipleSlot(currentSlot) && currentSlot != EES_Bolt ) AddInputBinding("panel_button_common_drop", "gamepad_Y", IK_R, true);
 			AddInputBinding("panel_button_inventory_unequip", "enter-gamepad_A", IK_Space, true);
 		}
 		else if (invSecondComponentRef && invSecondComponentRef.IsIdValid(currentItemId))
@@ -673,18 +631,15 @@ class W3InventoryPaperdollContext extends W3InventoryItemContext
 		
 		if( invMenuRef.IsSlotInPreview( currentSlot ) )
 		{
-			AddInputBinding( "panel_button_unpreview_item", previewItemPadNavCode, IK_X, true );
-		}
+			AddInputBinding( "panel_button_unpreview_item", "gamepad_X", IK_X, true );
+		}		
 		
 		m_managerRef.updateInputFeedback();
 	}
 	
 	public  function HandleUserFeedback( keyName : string ):void
 	{
-		var isSwitchPlatform : bool = theGame.GetPlatform() == Platform_Switch2_Ounce;
-
-		if( ( isSwitchPlatform && keyName == "gamepad_Y" ) ||		
-			( !isSwitchPlatform && keyName == "gamepad_X" ) )		
+		if( keyName == "gamepad_X" )
 		{
 			
 			if( invMenuRef.IsSlotInPreview( currentSlot ) )

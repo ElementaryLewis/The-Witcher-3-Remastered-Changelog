@@ -120,3 +120,4 @@ state DismountBoat in CPlayer extends DismountTheVehicle
 		parent.RaiseForceEvent( 'Death' );
 	}
 }
+	

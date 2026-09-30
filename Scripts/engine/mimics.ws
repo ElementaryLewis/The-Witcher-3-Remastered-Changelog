@@ -20,3 +20,8 @@ enum EPlayerGameplayMimicMode
 	PGMM_Combat,
 	PGMM_Inventory,
 }
+
+
+
+
+

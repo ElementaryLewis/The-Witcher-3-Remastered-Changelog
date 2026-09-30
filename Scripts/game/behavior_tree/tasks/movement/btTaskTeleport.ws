@@ -731,7 +731,7 @@ class CBTTaskTeleport extends TaskTeleportAction
 	
 	public var newPosition								: Vector;
 	public var rotated 									: bool;
-	public var animDelay 								: float;
+	
 	
 	
 	
@@ -742,7 +742,6 @@ class CBTTaskTeleport extends TaskTeleportAction
 	default alreadyTeleported = false;
 	default teleportEventName = 'Vanish';
 	default appearRaiseEventName = 'Appear';
-	default animDelay = 4.f;
 	
 	function IsAvailable() : bool
 	{
@@ -1021,7 +1020,7 @@ class CBTTaskTeleport extends TaskTeleportAction
 		
 		if( IsNameValid( appearRaiseEventName ) )
 		{
-			npc.WaitForBehaviorNodeDeactivation( appearRaiseEventName, animDelay );
+			npc.WaitForBehaviorNodeDeactivation( appearRaiseEventName, 4.f );
 		}
 		
 		nextTeleTime = GetLocalTime() + cooldown;
@@ -1334,8 +1333,7 @@ class CBTTaskTeleportDef extends TaskTeleportActionDef
 	editable var raiseEventName 						: name;
 	editable var raiseEventImmediately 					: bool;
 	editable var shouldPlayHitAnim						: bool; 
-	editable var sendRotationEventAboveTeleportDist 	: float;
- 	editable var animDelay 								: float;
+	editable var sendRotationEventAboveTeleportDist 	: float; 	
 	
 	default minDistance 								= 3.0;
 	default maxDistance 								= 5.0;
@@ -1351,7 +1349,6 @@ class CBTTaskTeleportDef extends TaskTeleportActionDef
 	default disableGameplayVisibility 					= true;
 	default sendRotationEventAboveTeleportDist 			= 3.5;
 	default enableCollisionsOnDeactivate 				= true;
-	default animDelay = 2.f;
 	
 	hint slideInsteadOfTeleport = "slide duration = delayReappearance value";
 };
@@ -1700,7 +1697,7 @@ class CBTTaskTeleportDecorator extends CBTTaskTeleport
 		
 		if( IsNameValid( appearRaiseEventName ) )
 		{
-			npc.WaitForBehaviorNodeDeactivation( appearRaiseEventName, animDelay);
+			npc.WaitForBehaviorNodeDeactivation( appearRaiseEventName, 2.f );
 		}
 		
 		nextTeleTime = GetLocalTime() + cooldown;
@@ -2516,215 +2513,4 @@ class CBTTaskFlyingSwarmTeleportAttackDef extends CBTTaskFlyingSwarmTeleportDef
 	default despawnAfterAttackTime = 3;
 	
 	default instanceClass = 'CBTTaskFlyingSwarmTeleportAttack';
-};
-
-
-struct BTTaskTeleportCachedConditions
-{
-	editable var teleportToActorHeading 							: bool;
-	editable var teleportAwayFromActorHeading						: bool;
-	editable var teleportInFrontOfTarget							: bool;
-	editable var teleportInFrontOfOwner 							: bool;
-	editable var teleportOutsidePlayerFOV							: bool;
-	editable var teleportWithinPlayerFOV							: bool;
-	editable var teleportBehindTarget								: bool;	
-}
-
-class CBTTaskTeleportClearConditions extends TaskTeleportAction
-{
-	public var conditionsToReset : array<name>;
-
-	private var cachedCond 			: BTTaskTeleportCachedConditions;
-
-	latent function Main() 	: EBTNodeStatus
-	{
-		var npc 			: CNewNPC = GetNPC();
-		var newPosition 	: Vector;
-		var res 			: bool;
-		var node 			: CNode;
-		var i				: int; 
-		
-		npc.SetCanPlayHitAnim( false );
-
-		if( dontTeleportOutsideGuardArea )
-		{
-			guardArea = npc.GetGuardArea();
-		}
-		
-		if ( setIsTeleportingFlag )
-		{
-			npc.SetIsTeleporting( true );
-			if ( setInvulnerable )
-				npc.SetImmortalityMode( AIM_Invulnerable, AIC_Combat );
-		}
-		
-		if( teleportType == TT_ToNode )
-		{
-			if( nodeTag == 'None' )
-				return BTNS_Failed;
-				
-			node = theGame.GetNodeByTag( nodeTag );
-			
-			if( node )
-			{
-				newPosition = node.GetWorldPosition();
-				res  = true;
-			}
-		}
-		else
-		{
-			res = FindSuitablePoint( newPosition, searchingTimeout );
-		}
-		
-		if ( !res )
-		{
-			paramsOverriden = true;
-
-			for (i = 0; i < conditionsToReset.Size(); i += 1)
-				ResetCondVariable(conditionsToReset[i], false);
-			
-			res = FindSuitablePoint( newPosition, 0.1f );
-
-			if (!res)
-				return BTNS_Failed;
-		}
-	
-		PerformTeleport( newPosition );
-		
-		alreadyTeleported = true;
-		
-		return BTNS_Completed;
-	}
-
-	function OnDeactivate()
-	{
-		var i : int;
-
-		if (paramsOverriden)
-		{
-			for (i = 0; i < conditionsToReset.Size(); i += 1)
-				ResetCondVariable(conditionsToReset[i], true);
-
-			paramsOverriden = false;
-		}
-		
-		GetNPC().SetCanPlayHitAnim( true );
-
-		super.OnDeactivate();
-	}
-
-	private function ResetCondVariable(varName : name, restoreState : bool)
-	{
-		switch (varName)
-		{
-			case 'teleportToActorHeading':
-			{
-				if (restoreState)
-				{
-					teleportToActorHeading = cachedCond.teleportToActorHeading;
-				}
-				else
-				{
-					cachedCond.teleportToActorHeading = teleportToActorHeading;
-					teleportToActorHeading = false;
-				}
-				return;
-			}
-
-			case 'teleportAwayFromActorHeading':
-			{
-				if (restoreState)
-				{
-					teleportAwayFromActorHeading = cachedCond.teleportAwayFromActorHeading;
-				}
-				else
-				{
-					cachedCond.teleportAwayFromActorHeading = teleportAwayFromActorHeading;
-					teleportAwayFromActorHeading = false;
-				}
-				return;
-			}
-
-			case 'teleportInFrontOfTarget':
-			{
-				if (restoreState)
-				{
-					teleportInFrontOfTarget = cachedCond.teleportInFrontOfTarget;
-				}
-				else
-				{
-					cachedCond.teleportInFrontOfTarget = teleportInFrontOfTarget;
-					teleportInFrontOfTarget = false;
-				}
-				return;
-			}
-
-			case 'teleportInFrontOfOwner':
-			{
-				if (restoreState)
-				{
-					teleportInFrontOfOwner = cachedCond.teleportInFrontOfOwner;
-				}
-				else
-				{
-					cachedCond.teleportInFrontOfOwner = teleportInFrontOfOwner;
-					teleportInFrontOfOwner = false;
-				}
-				return;
-			}
-
-			case 'teleportOutsidePlayerFOV':
-			{
-				if (restoreState)
-				{
-					teleportOutsidePlayerFOV = cachedCond.teleportOutsidePlayerFOV;
-				}
-				else
-				{
-					cachedCond.teleportOutsidePlayerFOV = teleportOutsidePlayerFOV;
-					teleportOutsidePlayerFOV = false;
-				}
-				return;
-			}
-
-			case 'teleportWithinPlayerFOV':
-			{
-				if (restoreState)
-				{
-					teleportWithinPlayerFOV = cachedCond.teleportWithinPlayerFOV;
-				}
-				else
-				{
-					cachedCond.teleportWithinPlayerFOV = teleportWithinPlayerFOV;
-					teleportWithinPlayerFOV = false;
-				}
-				return;
-			}
-
-			case 'teleportBehindTarget':
-			{
-				if (restoreState)
-				{
-					teleportBehindTarget = cachedCond.teleportBehindTarget;
-				}
-				else
-				{
-					cachedCond.teleportBehindTarget = teleportBehindTarget;
-					teleportBehindTarget = false;
-				}
-				return;
-			}
-		}
-
-		LogChannel('AITasks', "btTaskTeleportClearConditions INVALID CONDITION NAME");
-	}
-}
-
-class CBTTaskTeleportClearConditionsDef extends TaskTeleportActionDef
-{
-	default instanceClass = 'CBTTaskTeleportClearConditions';
-
-	editable var conditionsToReset : array<name>;
-
-	hint conditionsToReset = "Cleanups set variables after searching timeout. See btTaskTeleport.ws (2535) for a list of handled variables.";
 };

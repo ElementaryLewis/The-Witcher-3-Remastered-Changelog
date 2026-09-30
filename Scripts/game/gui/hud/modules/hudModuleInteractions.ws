@@ -375,23 +375,12 @@ class CR4HudModuleInteractions extends CR4HudModuleBase
 	
 	function GetInteractionScreenPosition( interactionEntity : CEntity, interactionComponent : CInteractionComponent, out screenPos : Vector, optional normalized : bool ) : bool
 	{
-		var targetEntity			: CGameplayEntity;
-
 		if ( !interactionEntity )
 		{
 			return false;
 		}
-
-		targetEntity = (CGameplayEntity)interactionEntity;
 		
-		if( targetEntity && targetEntity.iconUseComponent )
-		{
-			if ( GetBaseScreenPosition( screenPos, interactionEntity, interactionComponent, , , normalized ) )
-			{
-				return true;
-			}
-		}
-		else if( (CActor)interactionEntity )
+		if( (CActor)interactionEntity )
 		{
 			if ( GetBaseScreenPosition( screenPos, interactionEntity, , , , normalized ) )
 			{
@@ -728,3 +717,4 @@ exec function yen2()
 	module = (CR4HudModuleOneliners)hud.GetHudModule("OnelinersModule");
 	module.OnRemoveOneliner( 12345 );
 }
+

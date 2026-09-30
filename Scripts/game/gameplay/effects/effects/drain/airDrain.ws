@@ -14,11 +14,6 @@ class W3Effect_AirDrain extends CBaseGameplayEffect
 	event OnUpdate(deltaTime : float)
 	{
 		var drain : float;
-		var inGameConfigWrapper : CInGameConfigWrapper;
-		var isAccessibilityAirDrainDisabled : bool;
-		
-		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();			
-		isAccessibilityAirDrainDisabled = inGameConfigWrapper.GetVarValue('Accessibility', 'NoAirDrain') == "true";
 		
 		super.OnUpdate(deltaTime);
 		
@@ -31,15 +26,11 @@ class W3Effect_AirDrain extends CBaseGameplayEffect
 	
 		if(target.GetStat(BCS_Air) <= 0)
 		{
-			if (!isAccessibilityAirDrainDisabled)
-				target.AddEffectDefault(EET_Choking,target,"NoAir");
+			target.AddEffectDefault(EET_Choking,target,"NoAir");
 		}
 		else
 		{
 			drain = MaxF(0, deltaTime * ( effectValue.valueAdditive + effectValue.valueMultiplicative * target.GetStatMax(BCS_Air) ) );
-
-			if ( isAccessibilityAirDrainDisabled )
-				drain = 0;
 			
 			effectManager.CacheStatUpdate(BCS_Air, -drain);
 		}

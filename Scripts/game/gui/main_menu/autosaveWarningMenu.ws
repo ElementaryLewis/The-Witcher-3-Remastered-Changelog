@@ -31,7 +31,6 @@ class CR4AutosaveWarningMenu extends CR4MenuBase
 		{
 		case Platform_Xbox1:
 		case Platform_PC:
-		case Platform_PC_GDK:
 		case Platform_Xbox_SCARLETT_ANACONDA:
 		case Platform_Xbox_SCARLETT_LOCKHART:
 			m_fxSetAutosaveMessage.InvokeSelfOneArg(FlashArgString(GetLocStringByKeyExt("error_message_autosave_x1")));
@@ -41,10 +40,7 @@ class CR4AutosaveWarningMenu extends CR4MenuBase
 			break;
 		case Platform_PS5:
 			m_fxSetAutosaveMessage.InvokeSelfOneArg(FlashArgString(GetLocStringByKeyExt("error_message_autosave_ps5")));
-			break;
-		case Platform_Switch2_Ounce:
-			m_fxSetAutosaveMessage.InvokeSelfOneArg(FlashArgString(GetLocStringByKeyExt("error_message_autosave_switch")));
-			break;
+			break;	
 		}
 	}
 	

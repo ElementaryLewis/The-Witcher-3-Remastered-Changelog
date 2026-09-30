@@ -96,3 +96,4 @@ class CMoveSCIsSmallCreature extends CMoveSCScriptedCondition
 		return false;
 	}
 };
+

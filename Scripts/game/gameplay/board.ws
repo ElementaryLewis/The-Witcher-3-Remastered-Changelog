@@ -275,7 +275,7 @@ statemachine class W3NoticeBoard extends CR4MapPinEntity
 		}
 		if ( count > 0 && mapManager.CanShowKnownEntities() )
 		{
-			mapManager.UpdateHud('notdiscoveredpoi', 'notdiscoveredpoi');
+			mapManager.UpdateHud('notdiscoveredpoi');
 		}
 	}
 	

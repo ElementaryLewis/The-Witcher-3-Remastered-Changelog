@@ -37,18 +37,18 @@ state Alchemy in W3TutorialManagerUIHandler extends TutHandlerBaseState
 			selectRecipe = SELECT_THUNDERBOLT;
 			
 			
-			if(ShouldProcessTutorial(INGREDIENTS))
-				theGame.GetTutorialSystem().uiHandler.LockLeaveMenu(true);
-			else 
-				theGame.GetTutorialSystem().ForcedAlchemyCleanup();
+			theGame.GetTutorialSystem().uiHandler.LockLeaveMenu(true);
 			
 			
 			AddThunderBoltIngredients();
-
 			
-
-			
-			
+			theGame.GetTutorialSystem().UnmarkMessageAsSeen(INGREDIENTS);
+			theGame.GetTutorialSystem().UnmarkMessageAsSeen(COOKED_ITEM_DESC);
+			theGame.GetTutorialSystem().UnmarkMessageAsSeen(CATEGORIES);
+			theGame.GetTutorialSystem().UnmarkMessageAsSeen(SELECT_THUNDERBOLT);
+			theGame.GetTutorialSystem().UnmarkMessageAsSeen(COOK);
+			theGame.GetTutorialSystem().UnmarkMessageAsSeen(POTIONS);
+			theGame.GetTutorialSystem().UnmarkMessageAsSeen(PREPARATION_GO_TO);
 		}
 		else
 		{
@@ -56,7 +56,6 @@ state Alchemy in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		}
 		
 		ShowHint( INGREDIENTS, POS_ALCHEMY_X, POS_ALCHEMY_Y, , GetHighlightAlchemyIngredients() );
-		theGame.GetTutorialSystem().MarkMessageAsSeen(INGREDIENTS);
 	}
 			
 	event OnLeaveState( nextStateName : name )
@@ -97,31 +96,23 @@ state Alchemy in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		if(hintName == INGREDIENTS)
 		{
 			ShowHint( COOKED_ITEM_DESC, POS_ALCHEMY_X, POS_ALCHEMY_Y, , GetHighlightAlchemyItemDesc() );
-			theGame.GetTutorialSystem().MarkMessageAsSeen(COOKED_ITEM_DESC);
 		}
 		else if(hintName == COOKED_ITEM_DESC)
 		{
 			ShowHint( CATEGORIES, POS_ALCHEMY_X, POS_ALCHEMY_Y, , GetHighlightAlchemyList() );
-			theGame.GetTutorialSystem().MarkMessageAsSeen(CATEGORIES);
 		}
 		else if(hintName == CATEGORIES)
 		{
 			if(currentlySelectedRecipe == requiredRecipeName)
-			{
 				ShowHint(COOK, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Infinite);
-				theGame.GetTutorialSystem().MarkMessageAsSeen(COOK);
-			}
 			else
-			{
 				ShowHint(selectRecipe, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Infinite);
-				theGame.GetTutorialSystem().MarkMessageAsSeen(selectRecipe);
-			}
 		}
 		else if(hintName == POTIONS)
 		{		
 			if(isForcedTunderbolt)
 			{
-				
+				ShowHint(PREPARATION_GO_TO, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Infinite);
 			
 				
 				thePlayer.UnblockAction(EIAB_OpenInventory, 'tut_forced_preparation');
@@ -131,11 +122,9 @@ state Alchemy in W3TutorialManagerUIHandler extends TutHandlerBaseState
 				menu = (CR4AlchemyMenu) ((CR4MenuBase)theGame.GetGuiManager().GetRootMenu()).GetLastChild();
 				if( menu && !menu.IsInShop() )
 				{
-					
+					ShowHint(PREPARATION_GO_TO, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Infinite);
 				}
 			}
-			theGame.GetTutorialSystem().MarkMessageAsSeen(PREPARATION_GO_TO);
-			theGame.GetTutorialSystem().uiHandler.LockLeaveMenu(false);
 		}
 	}
 	

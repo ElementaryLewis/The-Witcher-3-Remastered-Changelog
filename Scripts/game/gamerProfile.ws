@@ -420,7 +420,7 @@ class W3GamerProfile
 					entityMapPins = theGame.GetCommonMapManager().GetEntityMapPins( areaMapPins[ i ].worldPath );
 					for ( j = 0; j < entityMapPins.Size(); j += 1 )
 					{
-						if(entityMapPins[j].entityType == allFTs[k].type && entityMapPins[j].entityName == allFTs[k].tag && areaMapPins[i].areaName == allFTs[k].area)
+						if(entityMapPins[j].entityType == allFTs[k].type && entityMapPins[j].entityName == allFTs[k].tag && areaMapPins[i].areaType == allFTs[k].area)
 						{
 							LogAchievements( SpaceFill(allFTs[k].tag,35,ESFM_JustifyLeft) + " in   " + SpaceFill(allFTs[k].area,30,ESFM_JustifyLeft) + " at:   x=" + SpaceFill(RoundMath(entityMapPins[j].entityPosition.X),5,ESFM_JustifyRight) + ", y=" + SpaceFill(RoundMath(entityMapPins[j].entityPosition.Y),5,ESFM_JustifyRight) + ", z=" + SpaceFill(RoundMath(entityMapPins[j].entityPosition.Z),5,ESFM_JustifyRight) );
 							goto = true;
