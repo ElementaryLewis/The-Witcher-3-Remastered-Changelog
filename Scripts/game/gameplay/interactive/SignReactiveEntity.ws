@@ -152,4 +152,3 @@ class CSignReactiveEntity extends W3MonsterClue
 	
 	
 }
-

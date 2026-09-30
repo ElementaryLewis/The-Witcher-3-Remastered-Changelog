@@ -717,4 +717,3 @@ exec function yen2()
 	module = (CR4HudModuleOneliners)hud.GetHudModule("OnelinersModule");
 	module.OnRemoveOneliner( 12345 );
 }
-

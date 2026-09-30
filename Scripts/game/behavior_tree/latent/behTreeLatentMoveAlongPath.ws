@@ -128,6 +128,3 @@ class W3ActorLatentActionMoveAlongPathAwareOfTail extends W3ActorLatentActionMov
 		return action;
 	}
 }
-
-
-

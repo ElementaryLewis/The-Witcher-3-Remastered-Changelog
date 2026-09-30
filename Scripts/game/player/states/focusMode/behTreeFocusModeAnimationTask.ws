@@ -159,4 +159,3 @@ class CBehTreeTaskFocusModeHandlerDef extends IBehTreeTaskDefinition
 		listenToGameplayEvents.PushBack( 'CombatFocusMode' );
 	}
 }
-

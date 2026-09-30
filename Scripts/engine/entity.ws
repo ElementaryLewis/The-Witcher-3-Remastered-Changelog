@@ -516,6 +516,3 @@ import function EntityHandleSet( handle : EntityHandle, entity : CEntity );
 
 import function PreloadEffectForEntityTemplate( entityTemplate : CEntityTemplate, effectName : name ) : bool;
 import function PreloadEffectForAnimationForEntityTemplate( entityTemplate : CEntityTemplate, animName : name ) : bool;
-
-
-

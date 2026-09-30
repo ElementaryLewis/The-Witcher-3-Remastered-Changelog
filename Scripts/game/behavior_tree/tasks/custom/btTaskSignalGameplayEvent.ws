@@ -72,4 +72,3 @@ class CBTTaskSignalGameplayEventDef extends IBehTreeTaskDefinition
 	editable var onTaggedEntity	: bool;
 	editable var tagToFind		: name;
 }
-

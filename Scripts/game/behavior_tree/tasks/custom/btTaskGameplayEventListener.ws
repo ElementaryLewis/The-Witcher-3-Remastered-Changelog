@@ -139,4 +139,3 @@ class BTTaskMultipleGameplayEventListenerDef extends IBehTreeTaskDefinition
 		}
 	}
 }
-

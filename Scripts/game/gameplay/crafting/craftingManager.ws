@@ -320,4 +320,3 @@ function getCraftingSchematicFromName(schematicName : name):SCraftingSchematic
 		
 	return schem;
 }
-

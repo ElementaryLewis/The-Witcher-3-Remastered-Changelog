@@ -130,5 +130,3 @@ class W3GuiShopInventoryComponent extends W3GuiBaseInventoryComponent
 		return _inv.GetItemName(item);
 	}
 }
-
-

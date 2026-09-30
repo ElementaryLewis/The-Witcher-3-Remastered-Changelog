@@ -4930,4 +4930,3 @@ exec function IsFireSource( tag : name )
 	
 	LogChannel('SD', "" + npc.IsAtWorkDependentOnFireSource() );
 }	
-

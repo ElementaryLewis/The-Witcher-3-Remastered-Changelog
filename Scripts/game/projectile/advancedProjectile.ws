@@ -2246,4 +2246,3 @@ class W3AirDrainProjectile extends W3AdvancedProjectile
 		
 	}
 }
-

@@ -94,4 +94,3 @@ class CBTTaskPlayHorseBumpSoundDef extends IBehTreeTaskDefinition
 {
 	default instanceClass = 'CBTTaskPlayHorseBumpSound';
 }
-

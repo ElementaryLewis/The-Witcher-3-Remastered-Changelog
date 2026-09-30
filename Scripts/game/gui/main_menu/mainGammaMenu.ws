@@ -110,4 +110,3 @@ exec function gammamenu()
 	theGame.SetMenuToOpen( '' );
 	theGame.RequestMenu('MainGammaMenu');
 }
-

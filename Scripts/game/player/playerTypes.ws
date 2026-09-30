@@ -949,6 +949,3 @@ enum EHorseMode
 	EHM_Devil,
 	EHM_Unicorn
 }
-
-
- 

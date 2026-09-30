@@ -321,7 +321,3 @@ class CBTCompleteOnHitDef extends IBehTreeTaskDefinition
 	private editable var onlyIfCanPlayHitAnim : bool;
 	
 }
-
-
-
-

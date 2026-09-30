@@ -96,4 +96,3 @@ class BTTaskSetAdditiveHitFlagDef extends IBehTreeTaskDefinition
 	hint overrideOnly = "reset to the previous value on deactivate";
 	hint overrideOnly = "reset to the previous value on deactivate";
 }
-

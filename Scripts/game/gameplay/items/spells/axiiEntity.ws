@@ -548,4 +548,3 @@ state AxiiChanneled in W3AxiiEntity extends Channeling
 		}
 	}
 }
-

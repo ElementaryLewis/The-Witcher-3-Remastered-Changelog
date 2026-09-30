@@ -107,4 +107,3 @@ class CBTTaskActivateOnlyOnceDef extends IBehTreeTaskDefinition
 		}
 	}
 }
-

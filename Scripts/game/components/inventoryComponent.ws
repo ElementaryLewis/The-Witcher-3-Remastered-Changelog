@@ -5924,7 +5924,3 @@ function PlayItemConsumeSound( item : SItemUniqueId ) : void
 		theSound.SoundEvent('gui_inventory_eat');
 	}
 }
-
-
-
-

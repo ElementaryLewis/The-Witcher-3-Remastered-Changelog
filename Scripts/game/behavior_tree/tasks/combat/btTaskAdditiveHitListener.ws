@@ -201,4 +201,3 @@ class BTTaskAdditiveHitListenerDef extends IBehTreeTaskDefinition
 		listenToGameplayEvents.PushBack( 'IgnoreSignsEnd' );
 	}
 }
-

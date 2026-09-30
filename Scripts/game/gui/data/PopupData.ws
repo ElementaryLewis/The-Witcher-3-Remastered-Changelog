@@ -971,4 +971,3 @@ class PaintingPopup extends TextPopupData
 		return "PaintingPopupRef";
 	}
 }
-

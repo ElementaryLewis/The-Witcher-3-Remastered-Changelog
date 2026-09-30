@@ -17,4 +17,3 @@ exec function ToggleAll(toggle:bool)
 {
 	theGame.GetCityLightManager().DebugToggleAll(toggle);
 }
-

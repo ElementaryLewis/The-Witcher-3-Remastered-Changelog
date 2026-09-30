@@ -554,5 +554,3 @@ state Inactive in W3FoodDispenser
 		parent.RemoveTimer( 'SpawnFood' );
 	}
 }
-
-

@@ -142,4 +142,3 @@ class ConstVectorDamper
 		return GetValue();
 	}
 }
-

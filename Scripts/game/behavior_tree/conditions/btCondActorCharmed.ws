@@ -22,21 +22,3 @@ class CBTCondActorCharmedDef extends IBehTreeConditionalTaskDefinition
 {
 	default instanceClass = 'CBTCondActorCharmed';
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

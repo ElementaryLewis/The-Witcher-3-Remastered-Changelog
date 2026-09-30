@@ -641,4 +641,3 @@ exec function hardlock( set : bool )
 	module = (CR4HudModuleEnemyFocus)hud.GetHudModule("EnemyFocusModule");
 	module.SetShowHardLock( set );
 }
-

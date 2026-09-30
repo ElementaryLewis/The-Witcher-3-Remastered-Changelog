@@ -125,5 +125,3 @@ class CBTTaskIdleDef extends IBehTreeTaskDefinition
 	default toleranceAngle = 12;
 	default checkRotation = true;
 }
-
-

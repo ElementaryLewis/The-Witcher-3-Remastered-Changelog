@@ -475,5 +475,3 @@ function DoStorySceneGameplayAction( out callbackInfo : SStorySceneGameplayActio
 		}
 	}
 }
-
-

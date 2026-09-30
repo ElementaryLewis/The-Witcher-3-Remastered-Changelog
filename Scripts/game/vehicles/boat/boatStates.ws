@@ -49,4 +49,3 @@ state Cutscene in CBoatComponent
 		parent.PopState( false );
 	}
 }
-

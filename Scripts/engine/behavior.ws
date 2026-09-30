@@ -32,5 +32,3 @@ enum EComboAttackResponse
 	CAR_ParryFront,
 	CAR_ParryBack,
 };
-
-

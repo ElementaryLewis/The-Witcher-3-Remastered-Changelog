@@ -401,5 +401,3 @@ state Destroying in W3IllusionaryObstacle
 		parent.DestroyObstacle( 0.01f );
 	}
 }
-
-

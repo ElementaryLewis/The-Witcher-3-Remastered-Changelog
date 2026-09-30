@@ -279,4 +279,3 @@ class W3Reputation
 		
 		LogChannel( 'Reputation', "Buy price multiplier: " + buyPriceMultiplier + ", sell price multiplier: " + sellPriceMultiplier + "." );
 	} 
-	

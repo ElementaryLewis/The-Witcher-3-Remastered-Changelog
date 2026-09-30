@@ -54,4 +54,3 @@ class CBTTaskIsAngryDef extends IBehTreeReactionTaskDefinition
 {
 	default instanceClass = 'CBTTaskIsAngry';
 }
-

@@ -426,5 +426,3 @@ import class CMonsterParam extends CGameplayEntityParam
 	import var canBeHitByFists : bool;
 	import var canBeStrafed : bool;
 };
-
-

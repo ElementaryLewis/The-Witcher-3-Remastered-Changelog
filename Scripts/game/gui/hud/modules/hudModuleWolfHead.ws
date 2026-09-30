@@ -443,6 +443,3 @@ exec function coa( val : bool )
 		}
 	}
 }
-
-
-

@@ -927,5 +927,3 @@ abstract class W3GuiBaseInventoryComponent
 	}
 	
 }
-
-

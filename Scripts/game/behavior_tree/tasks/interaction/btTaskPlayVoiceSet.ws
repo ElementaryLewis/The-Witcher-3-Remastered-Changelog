@@ -102,4 +102,3 @@ class CBTTaskPlayVoiceSetDef extends IBehTreeTaskDefinition
 	hint playAfterXtimes = "Only works with playOnDeactivate";
 
 }
-
