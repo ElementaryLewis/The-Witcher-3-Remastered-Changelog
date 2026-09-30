@@ -46,8 +46,8 @@ For instance:
 ### W3STRINGS
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/aded0c0885c208f68b068defe18c4638db187e98 "W3Strings 4.03 vs 4.04") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
-| [5.00b]( "W3Strings 4.04b vs 5.00b") | [5.XX]( "W3Strings 5.00b vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/aded0c0885c208f68b068defe18c4638db187e98 "W3Strings 4.03 vs 4.04") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/5bc023261fb9f51593c698623886b98664cae0d2 "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/5bc023261fb9f51593c698623886b98664cae0d2 "W3Strings 4.04b vs 5.00b") | [5.XX]( "W3Strings 5.00b vs 5.XX") | 2026/XX/XX |
 
 ### BUNDLED NON-TEXT
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
