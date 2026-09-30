@@ -48,3 +48,4 @@
     <Attitude GroupName1="mq7020_beau" GroupName2="player" AttitudeValue="Neutral" />
     <Attitude GroupName1="mq7007_statues_hostile" GroupName2="player" AttitudeValue="Hostile" />
 </Attitudes>
+

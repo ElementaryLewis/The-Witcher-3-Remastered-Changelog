@@ -665,3 +665,4 @@
     <reward name="cg_sjusta_the_tailor" 							level="0"	experience="25" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="ach_SwiftJustice" 								level="0"	experience="0" 		gold="0" 	achievement="31" 	script="" comment="" />	
 </redxml>
+

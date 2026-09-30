@@ -5,3 +5,4 @@
 	<res alias="TutorialRunewords" 						path="gameplay\journal\tutorial\runewords.journal"/>
 	<res alias="TutorialRunewords2" 					path="gameplay\journal\tutorial\runewords2.journal"/>
 </resources>
+

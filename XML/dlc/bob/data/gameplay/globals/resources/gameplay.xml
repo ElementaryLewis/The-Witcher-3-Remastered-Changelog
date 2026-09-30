@@ -334,3 +334,4 @@
 	<!-- player inventories for preview -->
 	<res alias="preview_inventory_red_wolf_1" 				path="dlc\bob\data\characters\npc_entities\player_entities\geralt\geralt_inventory_debug\geralt_inventory_debug__red_wolf_lvl1.w2ent" />
 </resources>
+

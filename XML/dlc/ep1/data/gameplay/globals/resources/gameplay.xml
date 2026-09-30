@@ -90,3 +90,4 @@
 	<res alias="glyphword_1"								path="dlc\ep1\data\fx\glyphword\glyphword_reflection\glyphword_refraction_hit.w2ent" />
 	<res alias="runeword_4"									path="dlc\ep1\data\fx\runeword\runeword_4\runeword_4.w2ent" />
 </resources>
+

@@ -6,3 +6,4 @@
     <Attitude GroupName1="q601_ofir_mage" GroupName2="player" AttitudeValue="Hostile" />
     <Attitude GroupName1="q603_mob_thugs" GroupName2="player" AttitudeValue="Neutral" />
 </Attitudes>
+
