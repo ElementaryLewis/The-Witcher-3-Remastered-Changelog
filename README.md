@@ -40,8 +40,8 @@ For instance:
 ### CSV
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/d0e37d82188654cd5e4abb2f4ff70edfcc097688 "CSV 4.04 vs 4.04a_REDkit") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
-| [5.00b]( "CSV 4.04b vs 5.00b") | [5.XX]( "CSV 5.00b vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/d0e37d82188654cd5e4abb2f4ff70edfcc097688 "CSV 4.04 vs 4.04a_REDkit") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7907fdbb70f3fd2609b787eba84478ab498caefb "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7907fdbb70f3fd2609b787eba84478ab498caefb "CSV 4.04b vs 5.00b") | [5.XX]( "CSV 5.00b vs 5.XX") | 2026/XX/XX |
 
 ### W3STRINGS
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
