@@ -18,9 +18,9 @@
 	<res alias="geralt_inventory_release"					path="characters\player_entities\geralt\geralt_inventory_release.w2ent" />
 	
 	<!-- signs for witchers npcs-->
-	<res alias="aard"										path="gameplay\templates\signs\pc_aard.w2ent"/>
-	<res alias="igni"										path="gameplay\templates\signs\pc_igni.w2ent"/>
-	<res alias="quen"										path="gameplay\templates\signs\pc_quen.w2ent"/>
+	<res alias="aard"										path="gameplay\templates\signs\pc_aard_w3re.w2ent"/>
+	<res alias="igni"										path="gameplay\templates\signs\pc_igni_w3re.w2ent"/>
+	<res alias="quen"										path="gameplay\templates\signs\pc_quen_w3re.w2ent"/>
 	
 	<res alias="aard_mq1060"								path="gameplay\templates\signs\pc_aard_mq1060.w2ent"/>
 	<res alias="igni_mq1060"								path="gameplay\templates\signs\pc_igni_mq1060.w2ent"/>
@@ -415,9 +415,11 @@
 	<res alias="TutorialSelectYrden" 						path="gameplay\journal\tutorial\selectyrden.journal"/>
 	<res alias="TutorialSelectYrden_pad" 					path="gameplay\journal\tutorial\selectyrdenpad.journal"/>
 	<res alias="TutorialSignCast" 							path="gameplay\journal\tutorial\signcast.journal"/>	
+	<res alias="TutorialSignCastMotionControls"				path="gameplay\journal\tutorial\signcastmotioncontrols.journal"/>	
 	<res alias="TutorialJournalSignCast" 					path="gameplay\journal\tutorial\jesigncast.journal"/>	
 	<res alias="TutorialJournalSignCast_pad"				path="gameplay\journal\tutorial\jesigncastpad.journal"/>	
 	<res alias="TutorialSignCastVesemir" 					path="gameplay\journal\tutorial\signcastonvesemir.journal"/>
+	<res alias="TutorialSignCastVesemirMotionControls"		path="gameplay\journal\tutorial\signcastvesemirmotioncontrols.journal"/>
 	<res alias="TutorialQuen" 								path="gameplay\journal\tutorial\quen.journal"/>
 	<res alias="TutorialQuenWaitForHit" 					path="gameplay\journal\tutorial\quenbraceforimpact.journal"/>
 	<res alias="TutorialIgni" 								path="gameplay\journal\tutorial\igni.journal"/>	
@@ -428,8 +430,10 @@
 	<res alias="TutorialSelectPetard" 						path="gameplay\journal\tutorial\selectpetard.journal"/>
 	<res alias="TutorialSelectPetard_pad" 					path="gameplay\journal\tutorial\selectpetardpad.journal"/>
 	<res alias="TutorialPetards" 							path="gameplay\journal\tutorial\throwpetard.journal"/>
+	<res alias="TutorialPetardsMotionControls" 				path="gameplay\journal\tutorial\throwpetardmotioncontrols.journal"/>
 	<res alias="TutorialThrowGoToArea" 						path="gameplay\journal\tutorial\throwgotoarea.journal"/>	
 	<res alias="TutorialThrowHold" 							path="gameplay\journal\tutorial\throwhold.journal"/>
+	<res alias="TutorialThrowHoldGyroscope" 				path="gameplay\journal\tutorial\tutorialthrowholdgyroscope.journal"/>
 	<res alias="TutorialJournalPetards"						path="gameplay\journal\tutorial\jethrowpetard.journal"/>
 	<res alias="TutorialFreestyleCombat" 					path="gameplay\journal\tutorial\freestylecombat.journal"/>
 	<res alias="TutorialFreestyleCombat_pad"				path="gameplay\journal\tutorial\freestylecombatpad.journal"/>
@@ -446,10 +450,12 @@
 	<res alias="TutorialHorseSpeed0_pad" 					path="gameplay\journal\tutorial\horsespeed0pad.journal"/>
 	<res alias="TutorialHorseSpeed1" 						path="gameplay\journal\tutorial\horsespeed1.journal"/>
 	<res alias="TutorialHorseSpeed2" 						path="gameplay\journal\tutorial\horsespeed2.journal"/>	
+	<res alias="TutorialHorseSpeed2MotionControls"			path="gameplay\journal\tutorial\horsespeed2motioncontrols.journal"/>	
 	<res alias="TutorialHorseStamina" 						path="gameplay\journal\tutorial\horsestamina.journal"/>
 	<res alias="TutorialHorseRoad" 							path="gameplay\journal\tutorial\horseroad.journal"/>
 	<res alias="TutorialJournalHorseStamina" 				path="gameplay\journal\tutorial\jehorsestamina.journal"/>
 	<res alias="TutorialHorseSummon" 						path="gameplay\journal\tutorial\horsesummon.journal"/>
+	<res alias="TutorialHorseSummonMotionControls" 			path="gameplay\journal\tutorial\tutorialhorsesummonmotioncontrols.journal"/>
 	<res alias="TutorialHorseSummon_pad" 					path="gameplay\journal\tutorial\horsesummonpad.journal"/>
 	<res alias="TutorialHorseSummonBridge" 					path="gameplay\journal\tutorial\horsesummonbridge.journal"/>
 	<res alias="TutorialHorseSummonBridge_pad"				path="gameplay\journal\tutorial\horsesummonbridgepad.journal"/>
@@ -484,6 +490,7 @@
 	<res alias="TutorialBestiary"							path="gameplay\journal\tutorial\bestiaryexplanation.journal"/>
 	<res alias="TutorialBestiaryClose"						path="gameplay\journal\tutorial\bestiaryclose.journal"/>
 	<res alias="TutorialHorseStop" 							path="gameplay\journal\tutorial\horsestop.journal"/>
+	<res alias="TutorialHorseStopMotionControls" 			path="gameplay\journal\tutorial\tutorialhorsestopmotioncontrols.journal"/>
 	<res alias="TutorialHorseDismount" 						path="gameplay\journal\tutorial\horsedismount.journal"/>
 	
 	<!-- inn -->
@@ -526,6 +533,7 @@
 	<res alias="TutorialSelectCrossbow"		 				path="gameplay\journal\tutorial\selectcrossbow.journal"/>
 	<res alias="TutorialSelectCrossbow_pad" 				path="gameplay\journal\tutorial\selectcrossbowpad.journal"/>
 	<res alias="TutorialCrossbow" 							path="gameplay\journal\tutorial\crossbow.journal"/>
+	<res alias="TutorialCrossbowMotionControls"				path="gameplay\journal\tutorial\crossbowmotioncontrols.journal"/>
 	<res alias="TutorialJournalCrossbow" 					path="gameplay\journal\tutorial\jecrossbow.journal"/>
 	<res alias="TutorialFocusSoundClues" 					path="gameplay\journal\tutorial\focussoundclues.journal"/>
 	
@@ -874,6 +882,8 @@
 	<res alias="TutorialPotionCanEquip3Thunderbolt" 		path="gameplay\journal\tutorial\potioncanequip3thunderbolt.journal"/>
 	<res alias="TutorialPotionCanEquip3Thunderbolt_pad"		path="gameplay\journal\tutorial\potioncanequip3thunderboltpad.journal"/>
 	<res alias="TutorialPotionEquipped"						path="gameplay\journal\tutorial\potionequipped.journal"/>
+	<res alias="TutorialPotionEquippedPrimaryMotionControls" path="gameplay\journal\tutorial\tutorialpotionequippedprimarymotioncontrols.journal"/>
+	<res alias="TutorialPotionEquippedSecondaryMotionControls"	path="gameplay\journal\tutorial\tutorialpotionequippedsecondarymotioncontrols.journal"/>
 	<res alias="TutorialPotionAmmo"							path="gameplay\journal\tutorial\potionammo.journal"/>
 	<!-- journal -->
 	<res alias="TutorialJournalPotions"						path="gameplay\journal\tutorial\jepotions.journal"/>
@@ -962,10 +972,10 @@
 	<res alias="TutorialMapOpenMap_pad" 					path="gameplay\journal\tutorial\mapopenmappad.journal"/>	
 	<res alias="TutorialMapOpenMap" 						path="gameplay\journal\tutorial\mapopenmap.journal"/>	
 	<res alias="TutorialMapDescription" 					path="gameplay\journal\tutorial\mapdescription.journal"/>	
+	<res alias="TutorialMapDescription_pad" 				path="gameplay\journal\tutorial\mapdescriptionpad.journal"/>	
 	<res alias="TutorialMapJumpToObjective" 				path="gameplay\journal\tutorial\mapjumptoobjective.journal"/>	
 	<res alias="TutorialMapJumpToObjective_pad" 			path="gameplay\journal\tutorial\mapjumptoobjectivepad.journal"/>	
 	<res alias="TutorialMapNavigate" 						path="gameplay\journal\tutorial\mapnavigate.journal"/>	
-	<res alias="TutorialMapNavigate_pad" 					path="gameplay\journal\tutorial\mapnavigatepad.journal"/>	
 	<res alias="TutorialMapQuestPins" 						path="gameplay\journal\tutorial\mapquestpins.journal"/>	
 	
 	<!-- world map new -->
@@ -985,6 +995,22 @@
 	<res alias="TutorialMapFiltersPinJumping" 				path="gameplay\journal\tutorial\mapfilterspinjumping.journal"/>
 	<res alias="TutorialMapFiltersPinJumping_pad" 			path="gameplay\journal\tutorial\mapfilterspinjumpingpad.journal"/>
 	
+	<!-- switch tutorials -->
+
+	<res alias="TutorialJournalGyro"							path="gameplay\journal\tutorial\tutorialjournalgyro.journal"/>
+	<res alias="TutorialJournalMouser"							path="gameplay\journal\tutorial\tutorialjournalmouser.journal"/>
+	<res alias="TutorialJournalTouch"							path="gameplay\journal\tutorial\tutorialjournaltouch.journal"/>	
+	<res alias="TutorialJournalMotionPatternDetails"			path="gameplay\journal\tutorial\tutorialjournalmotionpatterndetails.journal"/>
+	<res alias="TutorialJournalMotionPatternBombs"				path="gameplay\journal\tutorial\tutorialjournalmotionpatternbombs.journal"/>
+	<res alias="TutorialJournalMotionPatternSignCast"			path="gameplay\journal\tutorial\tutorialjournalmotionpatternsigncast.journal"/>
+	<res alias="TutorialJournalMotionPatternHorseAcceleration"	path="gameplay\journal\tutorial\tutorialJournalmotionpatternhorseacceleration.journal"/>
+	<res alias="TutorialJournalMotionPatternHorseStop"			path="gameplay\journal\tutorial\tutorialjournalmotionpatternhorsestop.journal"/>
+	<res alias="TutorialJournalMotionPatternHorseSummon"		path="gameplay\journal\tutorial\tutorialjournalmotionpatternhorsesummon.journal"/>
+	<res alias="TutorialJournalMotionPatternPotion1"			path="gameplay\journal\tutorial\tutorialjournalmotionpatternpotion1.journal"/>
+	<res alias="TutorialJournalMotionPatternPotion2"			path="gameplay\journal\tutorial\tutorialjournalmotionpatternpotion2.journal"/>
+	<res alias="TutorialJournalMotionPatternCrossbow"			path="gameplay\journal\tutorial\tutorialjournalmotionpatterncrossbow.journal"/>
+	<res alias="PlaystyleDualGrip"								path="gameplay\journal\tutorial\playstyledualgrip.journal"/>
+
 	<!-- wrong sword -->
 	<res alias="TutorialWrongSwordSteel" 					path="gameplay\journal\tutorial\wrongswordsteel.journal"/>
 	<res alias="TutorialWrongSwordSilver" 					path="gameplay\journal\tutorial\wrongswordsilver.journal"/>	
@@ -1009,6 +1035,9 @@
 	<res alias="deckpanelMERGEDNEW" 						path="gameplay\journal\tutorial\deckpanelmergednew.journal"/>
 	<res alias="leadercardsMERGED" 							path="gameplay\journal\tutorial\leadercardsmerged.journal"/>
 	<res alias="deckcompositionNEW" 						path="gameplay\journal\tutorial\deckcompositionnew.journal"/>
+	
+	<res alias="TutorialReminderDeath1"						path="gameplay\journal\tutorial\w3rereminder1.journal"/>
+	<res alias="TutorialReminderDeath2"						path="gameplay\journal\tutorial\w3rereminder2.journal"/>
 	
 <!-- animals -->
 	<res alias="bat"										path="characters\npc_entities\animals\bat.w2ent" />	
@@ -1050,17 +1079,43 @@
 	
 	<!-- humans -->
 	
-	<res alias="witcher"									path="gameplay\templates\characters\npcs\test_enemies\enemy_witcher.w2ent" />	
-	
+	<res alias="witcher"									path="gameplay\templates\characters\npcs\test_enemies\enemy_witcher.w2ent" />		
+	<res alias="geraltnpc"									path="quests\secondary_npcs\dudu_geralt.w2ent" />
 	<res alias="vesemir"									path="quests\main_npcs\vesemir.w2ent" />
-	<res alias="yennefer"									path="characters\npc_entities\main_npc\yennefer.w2ent" />
-	<res alias="triss"										path="characters\npc_entities\main_npc\triss.w2ent" chunk="content4"/>
-	<res alias="keira"										path="characters\npc_entities\main_npc\keira_metz.w2ent" chunk="content4" />
-	<res alias="grenn"										path="quests\secondary_npcs\bandit_grenn.w2ent"  chunk="content4" />
+	<res alias="lambert"									path="quests\secondary_npcs\lambert.w2ent" />
+	<res alias="eskel"										path="characters\npc_entities\main_npc\eskel.w2ent" />
+	<res alias="letho"										path="characters\npc_entities\secondary_npc\letho.w2ent" />
+
+	<res alias="triss"										path="characters\npc_entities\main_npc\triss.w2ent" chunk="content4" />
+	<res alias="yennefer"									path="characters\npc_entities\main_npc\yennefer.w2ent" chunk="content4" />
 	<res alias="cirilla"									path="quests\main_npcs\cirilla.w2ent" chunk="content4" />
+	<res alias="dandelion"									path="characters\npc_entities\main_npc\dandelion.w2ent" chunk="content4" />
+	<res alias="priscilla"									path="quests\secondary_npcs\priscilla.w2ent" chunk="content4" />
 	<res alias="zoltan"										path="quests\secondary_npcs\zoltan_chivay.w2ent" chunk="content4" />
-	
+	<res alias="shani"										path="dlc\ep1\data\quests\main_npcs\shani.w2ent" chunk="content4" />
+	<res alias="olgierdvoneverec"							path="dlc\ep1\data\quests\main_npcs\olgierd.w2ent" chunk="content4" />
+	<res alias="gaunter"									path="dlc\ep1\data\quests\main_npcs\mr_mirror_ep1.w2ent" chunk="content4" />
+
+	<res alias="red_baron"									path="characters\npc_entities\main_npc\baron.w2ent" chunk="content4" />
+	<res alias="roche"										path="characters\npc_entities\main_npc\roche.w2ent" chunk="content4" />
+	<res alias="ves"										path="characters\npc_entities\secondary_npc\ves.w2ent" chunk="content4" />
+	<res alias="merchant"									path="gameplay\community\shops_and_craftsmen\traveling_merchants\traveling_merchant_01.w2ent" chunk="content4" />
+	<res alias="emhyr"										path="characters\npc_entities\main_npc\emhyr.w2ent" chunk="content4" />
+	<res alias="radovid"									path="quests\main_npcs\radovid.w2ent" chunk="content4" />
+	<res alias="djikstra"									path="characters\npc_entities\main_npc\djikstra.w2ent" chunk="content4" />
+	<res alias="grenn"										path="quests\secondary_npcs\bandit_grenn.w2ent"  chunk="content4" />	
+	<res alias="crach"										path="characters\npc_entities\main_npc\crach_an_craite.w2ent" chunk="content4" />
+	<res alias="anna_henrietta"								path="dlc\bob\data\quests\main_npcs\anna_henrietta.w2ent" chunk="content4" />
+	<res alias="syanna"										path="dlc\bob\data\characters\npc_entities\main_npc\syanna.w2ent" chunk="content4" />
+
+	<res alias="avallac_h"									path="characters\npc_entities\main_npc\avallach.w2ent" chunk="content4" />
+	<res alias="uma"										path="characters\npc_entities\main_npc\uma.w2ent" chunk="content4" />
+	<res alias="bart"										path="quests\secondary_npcs\bart_the_troll.w2ent" chunk="content4" />
+	<res alias="johnny"										path="quests\secondary_npcs\godling_johnny.w2ent" chunk="content4" />
+
 	<res alias="sorceress"									path="gameplay\templates\characters\npcs\test_enemies\enemy_sorceress.w2ent" chunk="content4" />
+	<res alias="philippa"									path="quests\secondary_npcs\philippa_eilhart.w2ent" chunk="content4" />
+	<res alias="keira"										path="characters\npc_entities\main_npc\keira_metz.w2ent" chunk="content4" />
 
 	<res alias="fists"										path="gameplay\templates\characters\npcs\test_enemies\enemy_fists_easy.w2ent" chunk="content4" />	
 	<res alias="fists_medium"								path="gameplay\templates\characters\npcs\test_enemies\enemy_fists_medium.w2ent" chunk="content4" />	
@@ -1609,6 +1664,7 @@
 	<res alias="ai\scripted_actions/move_to_point" path="gameplay\trees\scripted_actions/move_to_point.w2behtree" />
 	<res alias="ai\scripted_actions/play_animation" path="gameplay\trees\scripted_actions/play_animation.w2behtree" />
 	<res alias="ai\scripted_actions/play_animation_slot" path="gameplay\trees\scripted_actions/play_animation_slot.w2behtree" />
+	<res alias="ai\scripted_actions/play_animation_slot_teleport" path="gameplay\trees\scripted_actions/play_animation_slot_teleport.w2behtree" />
 	<res alias="ai\scripted_actions\hands_behind_back_overlay" path="gameplay\trees\scripted_actions\hands_behind_back_overlay.w2behtree" />
 	<res alias="ai\scripted_actions/play_effect" path="gameplay\trees\scripted_actions/play_effect.w2behtree" />
 	<res alias="ai\scripted_actions/play_voice_set" path="gameplay\trees\scripted_actions/play_voice_set.w2behtree" />
@@ -1624,6 +1680,7 @@
 	<res alias="ai\scripted_actions/sailor_dismount_boat" path="gameplay\trees\scripted_actions/sailor_dismount_boat.w2behtree" />
 	<res alias="ai\scripted_actions/sailor_mount_boat" path="gameplay\trees\scripted_actions/sailor_mount_boat.w2behtree" />
 	<res alias="ai\scripted_actions/sailor_move_along_path" path="gameplay\trees\scripted_actions/sailor_move_along_path.w2behtree" />
+	<res alias="ai\scripted_actions/sailor_follow_path" path="gameplay\trees\scripted_actions/sailor_follow_path.w2behtree" />
 	<res alias="ai\scripted_actions/sailor_move_to" path="gameplay\trees\scripted_actions/sailor_move_to.w2behtree" />
 	<res alias="ai\scripted_actions/sailor_race_along_path" path="gameplay\trees\scripted_actions/sailor_race_along_path.w2behtree" />
 	<res alias="ai\scripted_actions/walk_to_target" path="gameplay\trees\scripted_actions/walk_to_target.w2behtree" />
@@ -1674,6 +1731,70 @@
 	<res alias="preview_inventory_viper" 					path="characters\player_entities\geralt\geralt_inventory_debug\geralt_inventory_debug__viper.w2ent" />
 	
 	<res alias="inventory_background" 						path="gameplay\gui\inventory\inventory_background.xbm" />
+	
+	<!-- photomode -->
+	<res alias="decoration_set_rich_table_e"				path="environment\decorations\decoration_sets\rich\tables\decoration_set_rich_table_e.w2ent" />
+	<res alias="sit_2_mw_playing_dice_table_ap"				path="dlc\bob\data\gameplay\community\actionpoints\resting\sit_2_mw_playing_dice_table_ap.w2ent" />
+	<res alias="q106_item__elven_lamp"						path="items\quest_items\q106\q106_item__elven_lamp.w2ent" />
+	<res alias="q705_item__white_roses_bouquet"				path="dlc\bob\data\items\quest_items\q705\q705_item__white_roses_bouquet.w2ent" />
+	<res alias="sword__ciri"								path="items\weapons\unique\sword__ciri.w2ent" />
+	<res alias="q402_item__epic_sword"						path="items\quest_items\q402\q402_item__epic_sword.w2ent" />
+	<res alias="sq301_item__fox_mask_01"					path="items\quest_items\sq301\sq301_item__fox_mask_01.w2ent" />
+	<res alias="sq701_item__victory_laurels"				path="dlc\bob\data\items\quest_items\sq701\sq701_item__victory_laurels.w2ent" />
+	<res alias="q206_dining_table_bench_four"				path="quests\part_2\quest_files\q206_berserkers\actionpoints\q206_dining_table_bench_four.w2ent" />
+	<res alias="decoration_set_rich_table_b"				path="environment\decorations\decoration_sets\rich\tables\decoration_set_rich_table_b.w2ent" />
+	<res alias="wooden_bath_px"								path="environment\decorations\furniture\wooden_bath\wooden_bath_px.w2ent" />
+	<res alias="q604_bench"									path="dlc\ep1\data\quests\quest_files\q604_mansion\entites\q604_bench.w2ent" />
+	<res alias="deco_gen_camp_bench_a"						path="dlc\bob\data\environment\decorations\gameplay\generic\decoration_set\camp\deco_gen_camp_bench_a.w2ent" />
+	<res alias="sit_w_music_lute_rich_chair_ap"				path="dlc\bob\data\gameplay\community\actionpoints\work\sit_w_music_lute_rich_chair_ap.w2ent" />
+	<res alias="sit_c_chair_ap"								path="dlc\bob\data\gameplay\community\actionpoints\resting\sit_c_chair_ap.w2ent" />
+	<res alias="cs_601_stump_immo"							path="dlc\ep1\data\items\cutscenes\cs601_woodstump\cs_601_stump_immo.w2ent" />
+	<res alias="sq301_item__geralt_mask_01"					path="items\quest_items\sq301\sq301_item__geralt_mask_01.w2ent" />
+	<res alias="sq301_item__geralt_mask_02"					path="items\quest_items\sq301\sq301_item__geralt_mask_02.w2ent" />
+	<res alias="sq301_item__geralt_mask_03"					path="items\quest_items\sq301\sq301_item__geralt_mask_03.w2ent" />
+	<res alias="q703_item__mandragora_mask_geralt"			path="dlc\bob\data\items\quest_items\q703\q703_item__mandragora_mask_geralt.w2ent" />
+	<res alias="q703_mandragora_mask_female"				path="dlc\bob\data\items\quest_items\q703\q703_mandragora_mask_female.w2ent" />
+	<res alias="q208_item__royal_crown"						path="items\quest_items\q208\q208_item__royal_crown.w2ent" />
+	<res alias="concealment_kit"							path="dlc\ep1\data\items\quest_items\q603\concealment_kit.w2ent" />
+	<res alias="q403_item__flowers_bouquet_vesemir_burial"	path="items\quest_items\q403\q403_item__flowers_bouquet_vesemir_burial.w2ent" />
+	<res alias="rose_dry_bouquet_a"							path="dlc\bob\data\environment\decorations\gameplay\rich_district\misc\rich_flowers\rose_dry_bouquet_a.w2ent" />
+	<res alias="q106_item__communicator"					path="items\quest_items\q106\q106_item__communicator.w2ent" />
+	<res alias="bottle_open"								path="items\work\bottle_01\bottle_open.w2ent" />
+	<res alias="q701_grain_cup"								path="dlc\bob\data\items\quest_items\q701\q701_grain_cup.w2ent" />
+	<res alias="q206_full_wine_chalice"						path="quests\part_2\quest_files\q206_berserkers\entities\q206_full_wine_chalice.w2ent" />
+	<res alias="vodka_cup"									path="dlc\ep1\data\items\work\vodka_cup\vodka_cup.w2ent" />
+	<res alias="beer_mug_px"								path="environment\decorations\housework\dishes\beer_mug\beer_mug_px.w2ent" />
+	<res alias="bonfire_medium"								path="environment\decorations\light_sources\bonfire_large\bonfire_medium.w2ent" />
+	<res alias="campfire_01"								path="environment\decorations\light_sources\campfire\campfire_01.w2ent" />
+	<res alias="q104_item__keira_lamp"						path="items\quest_items\q104\q104_item__keira_lamp.w2ent" />
+	<res alias="candleholder_small_melted"					path="environment\decorations\light_sources\candles\candleholder_small_melted.w2ent" />
+	<res alias="candle_med_a"								path="environment\decorations\light_sources\candles\candle_med_a.w2ent" />
+	<res alias="candle_small_group_melted_b"				path="environment\decorations\light_sources\candles\candle_small_group_melted_b.w2ent" />
+	<res alias="candle_large_group_caves"					path="environment\decorations\light_sources\candles\candle_large_group_caves.w2ent" />
+	<res alias="skull_pile_organised_px"					path="environment\decorations\votive\skull_piles\skull_pile_organised_px.w2ent" />
+	<res alias="skull_pile_random_px"						path="environment\decorations\votive\skull_piles\skull_pile_random_px.w2ent" />
+	<res alias="q104_clue_keira_skull"						path="quests\part_1\quest_files\q104_mine\objects\q104_clue_keira_skull.w2ent" />
+	<res alias="horse_skull__unique_spiral"					path="gameplay\containers\_container_definitions\autogen\horse_skull__unique_spiral.w2ent" />
+	<res alias="i_01__nekker_skull"							path="characters\models\monsters\nekker\i_01__nekker_skull.w2ent" />
+	<res alias="witch_pot_px"								path="environment\decorations\votive\witches\witch_pot_px.w2ent" />
+	<res alias="q402_item__jar_with_a_wisp"					path="items\quest_items\q402\q402_item__jar_with_a_wisp.w2ent" />
+	<res alias="mh701_item_sharely_lure_potion"				path="dlc\bob\data\items\quest_items\mh701\mh701_item_sharely_lure_potion.w2ent" />
+	<res alias="old_paper"									path="items\work\old_paper_02\old_paper.w2ent" />
+	<res alias="poi_car_a_05_loot_fluff"					path="dlc\bob\data\living_world\quests\caroberta_woods\poi_car_a_05\poi_car_a_05_loot_fluff.w2ent" />
+	<res alias="q002_item__world_map_on_a_table"			path="items\quest_items\q002\q002_item__world_map_on_a_table.w2ent" />
+	<res alias="q304_dandelion_diary_entity"				path="quests\part_1\quest_files\q304_dandelion\entities\q304_dandelion_diary_entity.w2ent" />
+	<res alias="book_decorative_px"							path="environment\decorations\housework\books\book_decorative_px.w2ent" />
+	<res alias="q206_item__rich_envelope"					path="items\quest_items\q206\q206_item__rich_envelope.w2ent" />
+	<res alias="caranthil_staff"							path="items\weapons\unique\caranthil_staff.w2ent" />
+	<res alias="eredin_sword"								path="items\weapons\unique\eredin_sword.w2ent" />
+	<res alias="young_ciri_sword"							path="items\weapons\unique\young_ciri_sword.w2ent" />
+	<res alias="q304_item__wooden_training_sword"			path="items\quest_items\q304\q304_item__wooden_training_sword.w2ent" />
+	<res alias="vesemir_silver_sword"						path="items\weapons\unique\vesemir_silver_sword.w2ent" />
+	<res alias="vesemir_steel_sword"						path="items\weapons\unique\vesemir_steel_sword.w2ent" />
+	<res alias="steel_legendary_glory_of_the_north"			path="items\weapons\swords\steel_swords_legendary\steel_legendary_glory_of_the_north.w2ent" />
+	<res alias="silver_legendary_breath_of_the_north"		path="items\weapons\swords\silver_swords_legendary\silver_legendary_breath_of_the_north.w2ent" />
+	<res alias="steel_legendary_tor_lara"					path="items\weapons\swords\steel_swords_legendary\steel_legendary_tor_lara.w2ent" />
+	<res alias="silver_legendary_tor_zirael"				path="items\weapons\swords\silver_swords_legendary\silver_legendary_tor_zirael.w2ent" />
 	
 	<!-- misc -->
 	<res alias="boat" 										path="environment\decorations\ships\basic\geralt_boat\gameplay_boat\gameplay_boat_base.w2ent" />

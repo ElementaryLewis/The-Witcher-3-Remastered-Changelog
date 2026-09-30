@@ -347,7 +347,7 @@
 		price							="57"
 		weight							="0.1"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_silver_sword_schematic"
+		localisation_key_name			="item_name_newgame_netflix_silver_sword_schematic"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -363,7 +363,7 @@
 		price							="147"
 		weight							="0.1"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_silver_sword_schematic_1"
+		localisation_key_name			="item_name_newgame_netflix_silver_sword_schematic_1"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -379,7 +379,7 @@
 		price							="245"
 		weight							="0.1"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_silver_sword_schematic_2"
+		localisation_key_name			="item_name_newgame_netflix_silver_sword_schematic_2"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -395,7 +395,7 @@
 		category						="crafting_schematic"
 		price							="80"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_armor_schematic"
+		localisation_key_name			="item_name_newgame_netflix_armor_dlc_schematic"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -410,7 +410,7 @@
 		category						="crafting_schematic"
 		price							="151"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_armor_schematic_1"
+		localisation_key_name			="item_name_newgame_netflix_armor_dlc_schematic_1"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -425,7 +425,7 @@
 		category						="crafting_schematic"
 		price							="538"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_armor_schematic_2"
+		localisation_key_name			="item_name_newgame_netflix_armor_dlc_schematic_2"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -444,7 +444,7 @@
 		category						="crafting_schematic"
 		price							="29"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_gloves_schematic"
+		localisation_key_name			="item_name_newgame_netflix_gloves_dlc_schematic"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -459,7 +459,7 @@
 		category						="crafting_schematic"
 		price							="46"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_gloves_schematic_1"
+		localisation_key_name			="item_name_newgame_netflix_gloves_dlc_schematic_1"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -474,7 +474,7 @@
 		category						="crafting_schematic"
 		price							="116"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_gloves_schematic_2"
+		localisation_key_name			="item_name_newgame_netflix_gloves_dlc_schematic_2"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -490,7 +490,7 @@
 		category						="crafting_schematic"
 		price							="31"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_pants_schematic"
+		localisation_key_name			="item_name_newgame_netflix_pants_dlc_schematic"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -505,7 +505,7 @@
 		category						="crafting_schematic"
 		price							="89"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_pants_schematic_1"
+		localisation_key_name			="item_name_newgame_netflix_pants_dlc_schematic_1"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -520,7 +520,7 @@
 		category						="crafting_schematic"
 		price							="276"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_pants_schematic_2"
+		localisation_key_name			="item_name_newgame_netflix_pants_dlc_schematic_2"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -536,7 +536,7 @@
 		category						="crafting_schematic"
 		price							="30"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_boots_schematic"
+		localisation_key_name			="item_name_newgame_netflix_boots_dlc_schematic"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -551,7 +551,7 @@
 		category						="crafting_schematic"
 		price							="58"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_boots_schematic_1"
+		localisation_key_name			="item_name_newgame_netflix_boots_dlc_schematic_1"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>
@@ -566,7 +566,7 @@
 		category						="crafting_schematic"
 		price							="213"
 		stackable						="100"
-		localisation_key_name			="item_name_netflix_boots_schematic_2"
+		localisation_key_name			="item_name_newgame_netflix_boots_dlc_schematic_2"
 		localisation_key_description	="item_desc_crafting_schematic"
 		icon_path						="icons/inventory/quests/ico_recipe.png"
 	>

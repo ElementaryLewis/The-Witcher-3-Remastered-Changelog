@@ -74,7 +74,7 @@
 				<frost_resistance type="base" always_random="false" min="0" max="0" />
 				<frost_resistance_perc type="base" min="0.8" max="0.8" />
 				<force_resistance type="base" always_random="false" min="0" max="0" />
-				<force_resistance_perc type="base" min="" max="" />
+				<force_resistance_perc type="base" min="0" max="0" />
 				<shock_resistance type="base" always_random="false" min="0" max="0" />
 				<shock_resistance_perc type="base" min="0" max="0" />
 				<poison_resistance type="base" always_random="false" min="0" max="0" />

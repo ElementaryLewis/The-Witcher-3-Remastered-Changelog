@@ -12,6 +12,12 @@
 		<BoldFont font="PF Din Text Cond Pro" bold="1"/>
 		<CreditsFont font="PF Din Text Cond Pro"/>
 	</lang>
+	<lang name="UA" fontlib="gameplay/gui_new/swf/witcher3/fonts_ua.redswf">
+		<NormalFont font="PF Din Text Cond Pro"/>
+		<ItalicFont font="PF Din Text Cond Pro" italic="1"/>
+		<BoldFont font="PF Din Text Cond Pro" bold="1"/>
+		<CreditsFont font="PF Din Text Cond Pro"/>
+	</lang>
 	<lang name="AR" fontlib="gameplay/gui_new/swf/witcher3/fonts_ar.redswf">
 		<NormalFont font="Arial"/>
 		<ItalicFont font="Arial"/>
@@ -31,10 +37,10 @@
 		<CreditsFont font="PFDinTextCondPro-Regular"/>
 	</lang>
 	<lang name="JP" glyphcache="1" fontlib="gameplay/gui_new/swf/witcher3/fonts_jp.redswf">
-		<NormalFont font="DFMinchoP-W5"/>
-		<ItalicFont font="DFMinchoP-W5" />
-		<BoldFont font="DFMinchoP-W5"/>
-		<CreditsFont font="PF Din Text Cond Pro"/>
+		<NormalFont font="ＤＦ華康明朝体W5"/>
+		<ItalicFont font="ＤＦ華康明朝体W5" />
+		<BoldFont font="ＤＦ華康明朝体W5"/>
+		<CreditsFont font="PFDinTextCondPro-Regular"/>
 	</lang>
 	<lang name="KR" fontlib="gameplay/gui_new/swf/witcher3/fonts_kr.redswf">
 		<NormalFont font="나눔명조"/>

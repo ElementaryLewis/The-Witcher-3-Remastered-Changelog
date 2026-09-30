@@ -1,0 +1,5842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redxml>
+	<definitions>
+		<gwint_decks>
+
+			<!--northernPlayerDeck -->
+			<deck_collection name="North">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="ves" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="dethmold" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="redanian" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="siegfried" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="ves" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="dethmold" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="redanian" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="siegfried" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="ves" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="dethmold" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="redanian" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="siegfried" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="gwint_card_scorch" difficulty="5" />
+					<card name="gwint_card_scorch" difficulty="7" />
+					<card name="gwint_card_philippa" difficulty="9" />
+					<card name="gwint_card_esterad" difficulty="11" />
+					<card name="gwint_card_dijkstra" difficulty="11" />
+					<card name="gwint_card_natalis" difficulty="14" />
+					<card name="gwint_card_dandelion" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!--nilfgardPlayerDeck -->
+			<deck_collection name="Nilf">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_copper" specialCard="">
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_copper" specialCard="">
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_copper" specialCard="">
+				</deck>
+
+				<dynamicCards>
+				</dynamicCards>
+			</deck_collection>
+
+			<!--scotialPlayerDeck -->
+			<deck_collection name="scotial">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_copper" specialCard="">
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_copper" specialCard="">
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_copper" specialCard="">
+				</deck>
+
+				<dynamicCards>
+				</dynamicCards>
+			</deck_collection>
+
+			<!--nmlPlayerDeck -->
+			<deck_collection name="nml">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_bronze" specialCard="">
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_bronze" specialCard="">
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_bronze" specialCard="">
+				</deck>
+
+				<dynamicCards>
+				</dynamicCards>
+			</deck_collection>
+
+			<!--skePlayerDeck -->
+			<deck_collection name="ske">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="Crach_an_Craite" specialCard="">
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="Crach_an_Craite" specialCard="">
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="Crach_an_Craite" specialCard="">
+				</deck>
+
+				<dynamicCards>
+				</dynamicCards>
+			</deck_collection>
+
+			<!--tutorialDeck -->
+			<deck_collection name="tutorialDeck">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="ves" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="dethmold" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="redanian" />
+					<card name="ballista" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="kaedweni_siege3" />
+					<card name="siegfried" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="ves" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="dethmold" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="redanian" />
+					<card name="ballista" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="kaedweni_siege3" />
+					<card name="siegfried" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="ves" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="dethmold" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="redanian" />
+					<card name="ballista" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="kaedweni_siege3" />
+					<card name="siegfried" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="gwint_card_scorch" difficulty="5" />
+					<card name="gwint_card_scorch" difficulty="7" />
+					<card name="gwint_card_philippa" difficulty="9" />
+					<card name="gwint_card_esterad" difficulty="11" />
+					<card name="gwint_card_dijkstra" difficulty="11" />
+					<card name="gwint_card_natalis" difficulty="14" />
+					<card name="gwint_card_dandelion" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Northern Realm deck #0 -->
+			<deck_collection name="CardProdigy">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_copper" specialCard="vernon">
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<!-- difficulty 1 -->
+					<card name="horn" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="gwint_card_siegfried" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_copper" specialCard="vernon">
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="crinfrid" />
+					<card name="crinfrid" />
+					<card name="crinfrid" />
+					<card name="catapult" />
+					<card name="catapult" />
+					<card name="ballista" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<!-- difficulty 1 -->
+					<card name="horn" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="gwint_card_siegfried" />
+					<!-- difficulty 2 -->
+					<card name="horn" />
+					<card name="horn" />
+					<card name="gwint_card_scorch" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="gwint_card_siegfried" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_copper" specialCard="vernon">
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<!-- difficulty 1 -->
+					<card name="horn" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="gwint_card_siegfried" />
+					<!-- difficulty 2 -->
+					<card name="horn" />
+					<card name="horn" />
+					<card name="gwint_card_scorch" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="gwint_card_siegfried" />
+					<!-- difficulty 3 -->
+					<card name="horn" />
+					<card name="dummy" />
+					<card name="gwint_card_scorch" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="yennefer" />
+				</deck>
+
+				<dynamicCards>
+					<card name="gwint_card_scorch" difficulty="5" />
+					<card name="gwint_card_scorch" difficulty="7" />
+					<card name="gwint_card_philippa" difficulty="9" />
+					<card name="gwint_card_esterad" difficulty="11" />
+					<card name="gwint_card_dijkstra" difficulty="11" />
+					<card name="gwint_card_natalis" difficulty="14" />
+					<card name="gwint_card_dandelion" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Dijkstra -->
+			<deck_collection name="Dijkstra">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_bronze" specialCard="esterad">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="emiel" />
+					<card name="thaler" />
+					<card name="keira" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="fog" />
+					<card name="yarpen" />
+					<card name="redanian2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_bronze" specialCard="esterad">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="emiel" />
+					<card name="thaler" />
+					<card name="keira" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="fog" />
+					<card name="yarpen" />
+					<card name="redanian2" />
+					<!-- difficulty 2 -->
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_bronze" specialCard="esterad">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="emiel" />
+					<card name="thaler" />
+					<card name="keira" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="fog" />
+					<card name="yarpen" />
+					<card name="redanian2" />
+					<!-- difficulty 2 -->
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 3 -->
+					<card name="dummy" />
+					<card name="natalis" />
+					<card name="yennefer" />
+				</deck>
+
+				<dynamicCards>
+					<card name="scorch" difficulty="5" />
+					<card name="scorch" difficulty="7" />
+					<card name="mysterious_elf" difficulty="9" />
+					<card name="natalis" difficulty="11" />
+					<card name="dijkstra" difficulty="11" />
+					<card name="stennis" difficulty="14" />
+					<card name="dandelion" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Baron -->
+			<deck_collection name="Baron">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_copper" specialCard="dijkstra">
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="thaler" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="stennis" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="catapult" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_copper" specialCard="dijkstra">
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="thaler" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="stennis" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="catapult" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<!-- difficulty 1 -->
+					<card name="yarpen" />
+					<card name="zoltan" />
+					<card name="rain" />
+					<!-- difficulty 2 -->
+					<card name="scorch" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_copper" specialCard="dijkstra">
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="thaler" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="stennis" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="catapult" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<!-- difficulty 1 -->
+					<card name="yarpen" />
+					<card name="zoltan" />
+					<card name="rain" />
+					<!-- difficulty 2 -->
+					<card name="scorch" />
+					<!-- difficulty 3 -->
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="natalis" />
+				</deck>
+
+				<dynamicCards>
+					<card name="horn" difficulty="5" />
+					<card name="vesemir" difficulty="7" />
+					<card name="trebuchet" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="dandelion" difficulty="11" />
+					<card name="villen" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Roche -->
+			<deck_collection name="Roche">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_silver" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="clear_sky" />
+					<card name="yarpen" />
+					<card name="redanian2" />
+					<!-- common -->
+					<card name="natalis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="redanian" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_silver" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="clear_sky" />
+					<card name="yarpen" />
+					<card name="redanian2" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="redanian2" />
+					<!-- common -->
+					<card name="natalis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="redanian" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_silver" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="clear_sky" />
+					<card name="yarpen" />
+					<card name="redanian2" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="redanian2" />
+					<!-- difficulty 3 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="yennefer" />
+					<!-- common -->
+					<card name="natalis" />
+					<card name="trebuchet" />
+					<card name="trebuchet2" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="poor_infantry3" />
+					<card name="redanian" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="scorch" difficulty="7" />
+					<card name="cirigog" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="vesemir" difficulty="11" />
+					<card name="dandelion" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Sjusta -->
+			<deck_collection name="Sjusta">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_gold" specialCard="">
+					<card name="dummy" />
+					<card name="scorch" />
+					<!-- difficulty 1 -->
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="yarpen" />
+					<!-- common -->
+					<card name="dandelion" />
+					<card name="zoltan" />
+					<card name="ves" />
+					<card name="dijkstra" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="stennis" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_gold" specialCard="">
+					<card name="dummy" />
+					<card name="scorch" />
+					<!-- difficulty 1 -->
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="yarpen" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="yarpen" />
+					<!-- common -->
+					<card name="dandelion" />
+					<card name="zoltan" />
+					<card name="ves" />
+					<card name="dijkstra" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="stennis" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_gold" specialCard="">
+					<card name="dummy" />
+					<card name="scorch" />
+					<!-- difficulty 1 -->
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="yarpen" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="yarpen" />
+					<!-- difficulty 3 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<!-- common -->
+					<card name="dandelion" />
+					<card name="zoltan" />
+					<card name="ves" />
+					<card name="dijkstra" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="stennis" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="crinfrid3" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="scorch" difficulty="7" />
+					<card name="yennefer" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="vesemir" difficulty="11" />
+					<card name="cirigog" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Stjepan -->
+			<deck_collection name="Stjepan">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_silver" specialCard="yennefer">
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="fog" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="rain" />
+					<card name="sweers" />
+					<!-- common -->
+					<card name="assire" />
+					<card name="cynthia" />
+					<card name="fringilla" />
+					<card name="rainfarn" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="vattier" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_silver" specialCard="yennefer">
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="fog" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="rain" />
+					<card name="sweers" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="sweers" />
+					<!-- common -->
+					<card name="assire" />
+					<card name="cynthia" />
+					<card name="fringilla" />
+					<card name="rainfarn" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="vattier" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_silver" specialCard="yennefer">
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="fog" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="rain" />
+					<card name="sweers" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="sweers" />
+					<!-- difficulty 3 -->
+					<card name="dummy" />
+					<!-- common -->
+					<card name="assire" />
+					<card name="cynthia" />
+					<card name="fringilla" />
+					<card name="rainfarn" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="vattier" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="archer_support" difficulty="7" />
+					<card name="scorch" difficulty="9" />
+					<card name="archer_support2" difficulty="11" />
+					<card name="vesemir" difficulty="11" />
+					<card name="dandelion" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- CrossroadsDeck -->
+			<deck_collection name="CrossroadsInnkeeper">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_bronze" specialCard="menno">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="morteisen" />
+					<card name="rotten" />
+					<!-- common -->
+					<card name="renuald" />
+					<card name="shilard" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="impera_brigade4" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+					<card name="siege_support" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_bronze" specialCard="menno">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="morteisen" />
+					<card name="rotten" />
+					<!-- difficulty 2 -->
+					<card name="scorch" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="morteisen" />
+					<card name="rotten" />
+					<!-- common -->
+					<card name="renuald" />
+					<card name="shilard" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="impera_brigade4" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+					<card name="siege_support" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_bronze" specialCard="menno">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="morteisen" />
+					<card name="rotten" />
+					<!-- difficulty 2 -->
+					<card name="scorch" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="morteisen" />
+					<card name="rotten" />
+					<!-- difficulty 3 -->
+					<card name="scorch" />
+					<card name="fog" />
+					<!-- common -->
+					<card name="renuald" />
+					<card name="shilard" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="impera_brigade4" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+					<card name="siege_support" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="dummy" difficulty="7" />
+					<card name="horn" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="zoltan" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="cirigog" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Boat Builder -->
+			<deck_collection name="BoatBuilder">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_gold" specialCard="letho">
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="rain" />
+					<card name="morteisen" />
+					<!-- common -->
+					<card name="moorvran" />
+					<card name="assire" />
+					<card name="stefan" />
+					<card name="vattier" />
+					<card name="cahir" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="nausicaa" />
+					<card name="combat_engineer" />
+					<card name="siege_support" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_gold" specialCard="letho">
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="rain" />
+					<card name="morteisen" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="rain" />
+					<card name="morteisen" />
+					<!-- common -->
+					<card name="moorvran" />
+					<card name="assire" />
+					<card name="stefan" />
+					<card name="vattier" />
+					<card name="cahir" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="nausicaa" />
+					<card name="combat_engineer" />
+					<card name="siege_support" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_gold" specialCard="letho">
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="rain" />
+					<card name="morteisen" />
+					<!-- difficulty 2 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="rain" />
+					<card name="morteisen" />
+					<!-- difficulty 3 -->
+					<card name="dummy" />
+					<card name="horn" />
+					<!-- common -->
+					<card name="moorvran" />
+					<card name="assire" />
+					<card name="stefan" />
+					<card name="vattier" />
+					<card name="cahir" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="nausicaa" />
+					<card name="combat_engineer" />
+					<card name="siege_support" />
+				</deck>
+
+				<dynamicCards>
+					<card name="impera_brigade3" difficulty="5" />
+					<card name="impera_brigade4" difficulty="7" />
+					<card name="nausicaa2" difficulty="9" />
+					<card name="nausicaa3" difficulty="11" />
+					<card name="young_emissary" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="dandelion" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Markiza Serenity -->
+			<deck_collection name="MarkizaSerenity">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_copper" specialCard="moorvran">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="rainfarn" />
+					<!-- common -->
+					<card name="letho" />
+					<card name="assire" />
+					<card name="fringilla" />
+					<card name="renuald" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="cahir" />
+					<card name="puttkammer" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_copper" specialCard="moorvran">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="rainfarn" />
+					<!-- difficulty 2 -->
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="rainfarn" />
+					<!-- common -->
+					<card name="letho" />
+					<card name="assire" />
+					<card name="fringilla" />
+					<card name="renuald" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="cahir" />
+					<card name="puttkammer" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_copper" specialCard="moorvran">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<!-- difficulty 1 -->
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="rainfarn" />
+					<!-- difficulty 2 -->
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="rainfarn" />
+					<!-- difficulty 3 -->
+					<card name="frost" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<!-- common -->
+					<card name="letho" />
+					<card name="assire" />
+					<card name="fringilla" />
+					<card name="renuald" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="cahir" />
+					<card name="puttkammer" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="black_archer" difficulty="5" />
+					<card name="dummy" difficulty="7" />
+					<card name="zoltan" difficulty="9" />
+					<card name="dandelion" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="cirigog" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Gremista -->
+			<deck_collection name="Gremista">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_copper" specialCard="moorvran">
+					<card name="frost" />
+
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="sweers" />
+
+					<card name="emiel" />
+					<card name="tibor" />
+					<card name="albrich" />
+					<card name="rainfarn" />
+					<card name="vanhemar" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer2" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+					<card name="siege_support" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_copper" specialCard="moorvran">
+					<card name="frost" />
+
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="sweers" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="sweers" />
+
+					<card name="emiel" />
+					<card name="tibor" />
+					<card name="albrich" />
+					<card name="rainfarn" />
+					<card name="vanhemar" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer2" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+					<card name="siege_support" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_copper" specialCard="moorvran">
+					<card name="frost" />
+
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="sweers" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="sweers" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="clear_sky" />
+					<card name="combat_engineer" />
+					<card name="tibor" />
+
+					<card name="emiel" />
+					<card name="tibor" />
+					<card name="albrich" />
+					<card name="rainfarn" />
+					<card name="vanhemar" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer2" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+					<card name="siege_support" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="dandelion" difficulty="7" />
+					<card name="cirigog" difficulty="9" />
+					<card name="vesemir" difficulty="11" />
+					<card name="yennefer" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="mysterious_elf" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Zoltan -->
+			<deck_collection name="Zoltan">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_bronze" specialCard="eithne">
+					<card name="scorch" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="mahakam3" />
+					<card name="vrihedd_cadet" />
+
+					<card name="isengrim" />
+					<card name="ida" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_bronze" specialCard="eithne">
+					<card name="scorch" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="mahakam3" />
+					<card name="vrihedd_cadet" />
+
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="mahakam3" />
+					<card name="vrihedd_cadet" />
+
+					<card name="isengrim" />
+					<card name="ida" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_bronze" specialCard="eithne">
+					<card name="scorch" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="mahakam3" />
+					<card name="vrihedd_cadet" />
+
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="mahakam3" />
+					<card name="vrihedd_cadet" />
+
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="isengrim" />
+
+					<card name="isengrim" />
+					<card name="ida" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="vesemir" difficulty="7" />
+					<card name="yennefer" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="mysterious_elf" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Lambert -->
+			<deck_collection name="Lambert">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_copper" specialCard="triss">
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="clear_sky" />
+
+					<card name="toruviel" />
+					<card name="riordain" />
+
+					<card name="yennefer" />
+					<card name="isengrim" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="havcaaren_support" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="mahakam3" />
+					<card name="mahakam4" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="dol_archer" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_copper" specialCard="triss">
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="clear_sky" />
+
+					<card name="toruviel" />
+					<card name="riordain" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+
+					<card name="yennefer" />
+					<card name="isengrim" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="havcaaren_support" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="mahakam3" />
+					<card name="mahakam4" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="dol_archer" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_copper" specialCard="triss">
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="clear_sky" />
+
+					<card name="toruviel" />
+					<card name="riordain" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="saskia" />
+
+					<card name="yennefer" />
+					<card name="isengrim" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="havcaaren_support" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="mahakam3" />
+					<card name="mahakam4" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="dol_archer" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<dynamicCards>
+					<card name="vesemir" difficulty="5" />
+					<card name="dandelion" difficulty="7" />
+					<card name="havcaaren_support3" difficulty="9" />
+					<card name="scorch" difficulty="11" />
+					<card name="zoltan" difficulty="11" />
+					<card name="villen" difficulty="14" />
+					<card name="cirigog" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Thaler -->
+			<deck_collection name="Thaler">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_silver" specialCard="geralt">
+					<card name="clear_sky" />
+
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="toruviel" />
+
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="ciaran" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dol_scout3" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="vrihedd_cadet" />
+					<card name="dol_archer" />
+					<card name="havcaaren_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_silver" specialCard="geralt">
+					<card name="clear_sky" />
+
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="toruviel" />
+
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="ciaran" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dol_scout3" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="vrihedd_cadet" />
+					<card name="dol_archer" />
+					<card name="havcaaren_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_silver" specialCard="geralt">
+					<card name="clear_sky" />
+
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="toruviel" />
+
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="frost" />
+					<card name="rain" />
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="eithne" />
+
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="ciaran" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dol_scout3" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="vrihedd_cadet" />
+					<card name="dol_archer" />
+					<card name="havcaaren_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="dwarf3" difficulty="5" />
+					<card name="villen" difficulty="7" />
+					<card name="havcaaren_support3" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="milva" difficulty="14" />
+					<card name="zoltan" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Vimme -->
+			<deck_collection name="VimmeVivaldi">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_bronze" specialCard="vesemir">
+					<card name="clear_sky" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="horn" />
+
+					<card name="fog" />
+					<card name="toruviel" />
+
+					<card name="saskia" />
+					<card name="dennis" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="mahakam3" />
+					<card name="mahakam4" />
+					<card name="mahakam5" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_bronze" specialCard="vesemir">
+					<card name="clear_sky" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="horn" />
+
+					<card name="fog" />
+					<card name="toruviel" />
+
+					<card name="horn" />
+					<card name="fog" />
+
+					<card name="saskia" />
+					<card name="dennis" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="mahakam3" />
+					<card name="mahakam4" />
+					<card name="mahakam5" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_bronze" specialCard="vesemir">
+					<card name="clear_sky" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="horn" />
+
+					<card name="fog" />
+					<card name="toruviel" />
+
+					<card name="horn" />
+					<card name="fog" />
+
+					<card name="horn" />
+					<card name="isengrim" />
+
+					<card name="saskia" />
+					<card name="dennis" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="mahakam2" />
+					<card name="mahakam3" />
+					<card name="mahakam4" />
+					<card name="mahakam5" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="dummy" difficulty="5" />
+					<card name="dandelion" difficulty="7" />
+					<card name="dummy" difficulty="9" />
+					<card name="mysterious_elf" difficulty="11" />
+					<card name="triss" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="emiel" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- ScoiaTrader -->
+			<deck_collection name="ScoiaTrader">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_copper" specialCard="ciri">
+					<card name="clear_sky" />
+					<card name="horn" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="toruviel" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="toruviel" />
+					<card name="riordain" />
+					<card name="ciaran" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="elf_skirmisher3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_copper" specialCard="ciri">
+					<card name="clear_sky" />
+					<card name="horn" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="toruviel" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="toruviel" />
+					<card name="riordain" />
+					<card name="ciaran" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="elf_skirmisher3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_copper" specialCard="ciri">
+					<card name="clear_sky" />
+					<card name="horn" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="toruviel" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="rain" />
+					<card name="isengrim" />
+					<card name="saskia" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="toruviel" />
+					<card name="riordain" />
+					<card name="ciaran" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="elf_skirmisher3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="scorch" difficulty="5" />
+					<card name="scorch" difficulty="7" />
+					<card name="vesemir" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="villen" difficulty="14" />
+					<card name="mysterious_elf" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Crach -->
+			<deck_collection name="Crach">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_bronze" specialCard="draug">
+					<card name="horn" />
+					<card name="fog" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="gargoyle" />
+					<card name="grave_hag" />
+					<card name="fire_elemental" />
+					<card name="wyvern" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_bronze" specialCard="draug">
+					<card name="horn" />
+					<card name="fog" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="gargoyle" />
+					<card name="grave_hag" />
+					<card name="fire_elemental" />
+					<card name="wyvern" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_bronze" specialCard="draug">
+					<card name="horn" />
+					<card name="fog" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="horn" />
+					<card name="dummy" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="leshen" />
+					<card name="fire_elemental" />
+
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="gargoyle" />
+					<card name="grave_hag" />
+					<card name="fire_elemental" />
+					<card name="wyvern" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+				</deck>
+
+				<dynamicCards>
+					<card name="arachas2" difficulty="5" />
+					<card name="arachas3" difficulty="7" />
+					<card name="vesemir" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="cirigog" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Lugos -->
+			<deck_collection name="LugosTheMad">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_copper" specialCard="katakan">
+					<card name="dummy" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="kayran" />
+					<card name="plague_maiden" />
+					<card name="werewolf" />
+					<card name="earth_elemental" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="frightener" />
+					<card name="cockatrice" />
+					<card name="grave_hag" />
+					<card name="fogling" />
+					<card name="nekker" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="bruxa" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_copper" specialCard="katakan">
+					<card name="dummy" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="botchling" />
+
+					<card name="kayran" />
+					<card name="plague_maiden" />
+					<card name="werewolf" />
+					<card name="earth_elemental" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="frightener" />
+					<card name="cockatrice" />
+					<card name="grave_hag" />
+					<card name="fogling" />
+					<card name="nekker" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="bruxa" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_copper" specialCard="katakan">
+					<card name="dummy" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="dummy" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="botchling" />
+
+					<card name="fog" />
+					<card name="rain" />
+					<card name="dummy" />
+					<card name="clear_sky" />
+					<card name="leshen" />
+					<card name="fire_elemental" />
+
+					<card name="kayran" />
+					<card name="plague_maiden" />
+					<card name="werewolf" />
+					<card name="earth_elemental" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="frightener" />
+					<card name="cockatrice" />
+					<card name="grave_hag" />
+					<card name="fogling" />
+					<card name="nekker" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="bruxa" />
+				</deck>
+
+				<dynamicCards>
+					<card name="garkain" difficulty="5" />
+					<card name="scorch" difficulty="7" />
+					<card name="horn" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="vesemir" difficulty="11" />
+					<card name="scorch" difficulty="14" />
+					<card name="cirigog" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Hermit -->
+			<deck_collection name="Hermit">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_copper" specialCard="crone_weavess">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="draug" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_brewess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_copper" specialCard="crone_weavess">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="dummy" />
+
+					<card name="draug" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_brewess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_copper" specialCard="crone_weavess">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="dummy" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+					<card name="leshen" />
+					<card name="fire_elemental" />
+
+					<card name="draug" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_brewess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<dynamicCards>
+					<card name="katakan" difficulty="5" />
+					<card name="fire_elemental" difficulty="7" />
+					<card name="scorch" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="dandelion" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Olivier -->
+			<deck_collection name="Olivier">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_copper" specialCard="">
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+					<card name="wyvern" />
+
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="plague_maiden" />
+					<card name="griffin" />
+					<card name="ice_giant" />
+					<card name="grave_hag" />
+					<card name="fire_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_copper" specialCard="">
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+					<card name="wyvern" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+					<card name="wyvern" />
+
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="plague_maiden" />
+					<card name="griffin" />
+					<card name="ice_giant" />
+					<card name="grave_hag" />
+					<card name="fire_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_copper" specialCard="">
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+					<card name="wyvern" />
+
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="botchling" />
+					<card name="endrega" />
+					<card name="wyvern" />
+
+					<card name="horn" />
+					<card name="horn" />
+					<card name="clear_sky" />
+					<card name="kayran" />
+					<card name="draug" />
+
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="plague_maiden" />
+					<card name="griffin" />
+					<card name="ice_giant" />
+					<card name="grave_hag" />
+					<card name="fire_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="dummy" difficulty="7" />
+					<card name="dummy" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="vesemir" difficulty="11" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+					<card name="dandelion" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Mousesack -->
+			<deck_collection name="Mousesack">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_silver" specialCard="leshen">
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="earth_elemental" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_silver" specialCard="leshen">
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="earth_elemental" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_silver" specialCard="leshen">
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="botchling" />
+					<card name="endrega" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="fog" />
+					<card name="clear_sky" />
+					<card name="kayran" />
+					<card name="fire_elemental" />
+
+					<card name="earth_elemental" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="dandelion" difficulty="7" />
+					<card name="zoltan" difficulty="9" />
+					<card name="triss" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="scorch" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Shani -->
+			<deck_collection name="Shani">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_platinium" specialCard="olgierd">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="dummy" />
+
+					<card name="toruviel" />
+					<card name="ciaran" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_platinium" specialCard="olgierd">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="dummy" />
+
+					<card name="toruviel" />
+					<card name="ciaran" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="isengrim" />
+					<card name="iorveth" />
+					<card name="yennefer" />
+					<card name="mysterious_elf" />
+
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_platinium" specialCard="olgierd">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="dummy" />
+
+					<card name="toruviel" />
+					<card name="ciaran" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="isengrim" />
+					<card name="iorveth" />
+					<card name="yennefer" />
+					<card name="mysterious_elf" />
+
+					<card name="scorch" />
+					<card name="cirigog" />
+					<card name="eithne" />
+					<card name="saskia" />
+
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="horn" difficulty="5" />
+					<card name="vesemir" difficulty="7" />
+					<card name="triss" difficulty="11" />
+					<card name="dandelion" difficulty="11" />
+					<card name="villen" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- Olgierd -->
+			<deck_collection name="Olgierd">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_platinium" specialCard="toad">
+					<card name="scorch" />
+
+					<card name="fog" />
+					<card name="griffin" />
+					<card name="frightener" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+
+					<card name="kayran" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_platinium" specialCard="toad">
+					<card name="scorch" />
+
+					<card name="fog" />
+					<card name="griffin" />
+					<card name="frightener" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+
+					<card name="dummy" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="arachas3" />
+					<card name="crone_brewess" />
+					<card name="mysterious_elf" />
+					<card name="draug" />
+					<card name="leshen" />
+
+					<card name="kayran" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_platinium" specialCard="toad">
+					<card name="scorch" />
+
+					<card name="fog" />
+					<card name="griffin" />
+					<card name="frightener" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+
+					<card name="dummy" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="arachas3" />
+					<card name="crone_brewess" />
+					<card name="mysterious_elf" />
+					<card name="draug" />
+					<card name="leshen" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="cirigog" />
+
+					<card name="kayran" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="bruxa" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="dandelion" difficulty="7" />
+					<card name="zoltan" difficulty="9" />
+					<card name="yennefer" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="scorch" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- GamblerDeck -->
+			<deck_collection name="Gambler">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_platinium" specialCard="mrmirror">
+					<card name="scorch" />
+
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="puttkammer" />
+
+					<card name="black_archer2" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="zerri" />
+					<card name="young_emissary2" />
+					<card name="mrmirror_foglet" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_platinium" specialCard="mrmirror">
+					<card name="scorch" />
+
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="puttkammer" />
+
+					<card name="clear_sky" />
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="letho" />
+					<card name="stefan" />
+					<card name="mrmirror_foglet" />
+					<card name="young_emissary" />
+					<card name="heavy_zerri" />
+					<card name="moorvran" />
+
+					<card name="black_archer2" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="zerri" />
+					<card name="young_emissary2" />
+					<card name="mrmirror_foglet" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_platinium" specialCard="mrmirror">
+					<card name="scorch" />
+
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="puttkammer" />
+
+					<card name="clear_sky" />
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="letho" />
+					<card name="stefan" />
+					<card name="mrmirror_foglet" />
+					<card name="young_emissary" />
+					<card name="heavy_zerri" />
+					<card name="moorvran" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="menno" />
+					<card name="vattier" />
+					<card name="mrmirror_foglet" />
+					<card name="yennefer" />
+					<card name="siege_support" />
+
+					<card name="black_archer2" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="archer_support" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="zerri" />
+					<card name="young_emissary2" />
+					<card name="mrmirror_foglet" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="1" />
+					<card name="mysterious_elf" difficulty="4" />
+					<card name="dandelion" difficulty="4" />
+					<card name="impera_brigade4" difficulty="6" />
+					<card name="triss" difficulty="6" />
+					<card name="geraltgog" difficulty="8" />
+					<card name="roach" difficulty="8" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- HalflingsDeck -->
+			<deck_collection name="Halflings">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="frost" />
+					<card name="kaedweni_siege3" />
+
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="frost" />
+					<card name="kaedweni_siege3" />
+
+					<card name="kaedweni_siege3" />
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="vernon" />
+					<card name="philippa" />
+					<card name="thaler" />
+					<card name="dijkstra" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="frost" />
+					<card name="kaedweni_siege3" />
+
+					<card name="kaedweni_siege3" />
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="vernon" />
+					<card name="philippa" />
+					<card name="thaler" />
+					<card name="dijkstra" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+
+					<card name="horn" />
+					<card name="esterad" />
+					<card name="natalis" />
+					<card name="cirigog" />
+
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="zoltan" difficulty="2" />
+					<card name="kaedweni_siege2" difficulty="5" />
+					<card name="dandelion" difficulty="6" />
+					<card name="triss" difficulty="8" />
+					<card name="geraltgog" difficulty="8" />
+					<card name="roach" difficulty="8" />
+					<card name="villen" difficulty="8" />
+					<card name="yennefer" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- CircusGwentAddictDeck -->
+			<deck_collection name="CircusGwentAddict">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_platinium" specialCard="schirru">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="scorch" />
+
+					<card name="clear_sky" />
+					<card name="fog" />
+					<card name="toruviel" />
+					<card name="riordain" />
+
+					<card name="mysterious_elf" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_platinium" specialCard="schirru">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="scorch" />
+
+					<card name="clear_sky" />
+					<card name="fog" />
+					<card name="toruviel" />
+					<card name="riordain" />
+
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="havcaaren_medic3" />
+					<card name="eithne" />
+					<card name="cirigog" />
+
+					<card name="mysterious_elf" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_platinium" specialCard="schirru">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="scorch" />
+
+					<card name="clear_sky" />
+					<card name="fog" />
+					<card name="toruviel" />
+					<card name="riordain" />
+
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="havcaaren_medic3" />
+					<card name="eithne" />
+					<card name="cirigog" />
+
+					<card name="dummy" />
+					<card name="saskia" />
+					<card name="isengrim" />
+
+					<card name="mysterious_elf" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="5" />
+					<card name="dandelion" difficulty="7" />
+					<card name="zoltan" difficulty="9" />
+					<card name="yennefer" difficulty="11" />
+					<card name="emiel" difficulty="11" />
+					<card name="scorch" difficulty="14" />
+					<card name="geraltgog" difficulty="14" />
+					<card name="roach" difficulty="14" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NKEasy -->
+			<deck_collection name="NKEasy">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="zoltan" />
+					<card name="thaler" />
+					<card name="ves" />
+					<card name="siegfried" />
+					<card name="yarpen" />
+					<card name="dijkstra" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="trebuchet" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="crinfrid" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="zoltan" />
+					<card name="thaler" />
+					<card name="ves" />
+					<card name="siegfried" />
+					<card name="yarpen" />
+					<card name="dijkstra" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="trebuchet" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="crinfrid" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_copper" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="vernon" />
+					<card name="yennefer" />
+
+					<card name="zoltan" />
+					<card name="thaler" />
+					<card name="ves" />
+					<card name="siegfried" />
+					<card name="yarpen" />
+					<card name="dijkstra" />
+					<card name="keira" />
+					<card name="sile" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="trebuchet" />
+					<card name="poor_infantry" />
+					<card name="poor_infantry2" />
+					<card name="crinfrid" />
+					<card name="redanian" />
+					<card name="redanian2" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NKNormal -->
+			<deck_collection name="NKNormal">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_bronze" specialCard="">
+					<card name="fog" />
+					<card name="horn" />
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="natalis" />
+					<card name="thaler" />
+					<card name="ves" />
+					<card name="siegfried" />
+					<card name="dijkstra" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="trebuchet2" />
+					<card name="trebuchet" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_bronze" specialCard="">
+					<card name="fog" />
+					<card name="horn" />
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="fog" />
+					<card name="horn" />
+					<card name="vernon" />
+
+					<card name="natalis" />
+					<card name="thaler" />
+					<card name="ves" />
+					<card name="siegfried" />
+					<card name="dijkstra" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="trebuchet2" />
+					<card name="trebuchet" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_bronze" specialCard="">
+					<card name="fog" />
+					<card name="horn" />
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="fog" />
+					<card name="horn" />
+					<card name="vernon" />
+
+					<card name="vernon" />
+					<card name="yennefer" />
+
+					<card name="natalis" />
+					<card name="thaler" />
+					<card name="ves" />
+					<card name="siegfried" />
+					<card name="dijkstra" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+					<card name="trebuchet2" />
+					<card name="trebuchet" />
+					<card name="crinfrid" />
+					<card name="crinfrid2" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="kaedweni_siege2" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="dandelion" difficulty="12" />
+					<card name="triss" difficulty="13" />
+					<card name="cirigog" difficulty="15" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NKHard -->
+			<deck_collection name="NKHard">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_silver" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="triss" />
+					<card name="dandelion" />
+					<card name="vernon" />
+					<card name="natalis" />
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="thaler" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="keira" />
+					<card name="trebuchet2" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_silver" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="yennefer" />
+					<card name="cirigog" />
+
+					<card name="triss" />
+					<card name="dandelion" />
+					<card name="vernon" />
+					<card name="natalis" />
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="thaler" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="keira" />
+					<card name="trebuchet2" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_silver" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="clear_sky" />
+
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="yennefer" />
+					<card name="cirigog" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="villen" />
+					<card name="yennefer" />
+					<card name="cirigog" />
+
+					<card name="triss" />
+					<card name="dandelion" />
+					<card name="vernon" />
+					<card name="natalis" />
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="thaler" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="keira" />
+					<card name="trebuchet2" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="ballista2" />
+					<card name="kaedweni_siege" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NilfEasy -->
+			<deck_collection name="NilfEasy">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_copper" specialCard="young_emissary">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="albrich" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="renuald" />
+					<card name="rotten" />
+					<card name="shilard" />
+					<card name="sweers" />
+					<card name="vanhemar" />
+					<card name="vattier" />
+					<card name="vreemde" />
+					<card name="puttkammer" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_copper" specialCard="young_emissary">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="albrich" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="renuald" />
+					<card name="rotten" />
+					<card name="shilard" />
+					<card name="sweers" />
+					<card name="vanhemar" />
+					<card name="vattier" />
+					<card name="vreemde" />
+					<card name="puttkammer" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_copper" specialCard="young_emissary">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<!-- Difficulty 3 -->
+					<card name="horn" />
+					<card name="dummy" />
+					<card name="villen" />
+					<card name="yennefer" />
+
+					<card name="albrich" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="renuald" />
+					<card name="rotten" />
+					<card name="shilard" />
+					<card name="sweers" />
+					<card name="vanhemar" />
+					<card name="vattier" />
+					<card name="vreemde" />
+					<card name="puttkammer" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NilfNormal -->
+			<deck_collection name="NilfNormal">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_bronze" specialCard="">
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="menno" />
+					<card name="tibor" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_bronze" specialCard="">
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="clear_sky" />
+					<card name="letho" />
+					<card name="archer_support" />
+					<card name="vattier" />
+
+					<card name="menno" />
+					<card name="tibor" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_bronze" specialCard="">
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="clear_sky" />
+					<card name="letho" />
+					<card name="archer_support" />
+					<card name="vattier" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="clear_sky" />
+					<card name="yennefer" />
+					<card name="letho" />
+					<card name="archer_support" />
+					<card name="vattier" />
+
+					<card name="menno" />
+					<card name="tibor" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="12" />
+					<card name="moorvran" difficulty="13" />
+					<card name="geraltgog" difficulty="15" />
+					<card name="roach" difficulty="15" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NilfHard -->
+			<deck_collection name="NilfHard">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_silver" specialCard="young_emissary2">
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_silver" specialCard="young_emissary2">
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="vattier" />
+					<card name="letho" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_silver" specialCard="young_emissary2">
+					<card name="fog" />
+					<card name="frost" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="vattier" />
+					<card name="letho" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="vattier" />
+					<card name="letho" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="yennefer" />
+
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="impera_brigade2" />
+					<card name="impera_brigade3" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+					<card name="nausicaa3" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- ScoiaEasy -->
+			<deck_collection name="ScoiaEasy">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_copper" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="toruviel" />
+					<card name="riordain" />
+					<card name="ciaran" />
+					<card name="havcaaren_support" />
+					<card name="vrihedd_brigade" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="vrihedd_cadet" />
+					<card name="dol_archer" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_copper" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="toruviel" />
+					<card name="riordain" />
+					<card name="ciaran" />
+					<card name="havcaaren_support" />
+					<card name="vrihedd_brigade" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="vrihedd_cadet" />
+					<card name="dol_archer" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_copper" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="eithne" />
+					<card name="yennefer" />
+
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="toruviel" />
+					<card name="riordain" />
+					<card name="ciaran" />
+					<card name="havcaaren_support" />
+					<card name="vrihedd_brigade" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="mahakam" />
+					<card name="elf_skirmisher" />
+					<card name="elf_skirmisher2" />
+					<card name="vrihedd_cadet" />
+					<card name="dol_archer" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- ScoiaNormal -->
+			<deck_collection name="ScoiaNormal">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_bronze" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="mysterious_elf" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_bronze" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="clear_sky" />
+					<card name="rain" />
+					<card name="saskia" />
+					<card name="isengrim" />
+
+					<card name="mysterious_elf" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_bronze" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="clear_sky" />
+					<card name="rain" />
+					<card name="saskia" />
+					<card name="isengrim" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+					<card name="rain" />
+					<card name="saskia" />
+					<card name="isengrim" />
+
+					<card name="mysterious_elf" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="dol_scout" />
+					<card name="dol_scout2" />
+					<card name="dwarf" />
+					<card name="dwarf2" />
+					<card name="dwarf3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="dandelion" difficulty="12" />
+					<card name="villen" difficulty="13" />
+					<card name="cirigog" difficulty="15" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- ScoiaHard -->
+			<deck_collection name="ScoiaHard">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_silver" specialCard="">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="fog" />
+
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="eithne" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_silver" specialCard="">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="fog" />
+
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="cirigog" />
+					<card name="saskia" />
+					<card name="isengrim" />
+
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="eithne" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_silver" specialCard="">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="fog" />
+
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="cirigog" />
+					<card name="saskia" />
+					<card name="isengrim" />
+
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="cirigog" />
+					<card name="saskia" />
+					<card name="isengrim" />
+					<card name="yennefer" />
+
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="eithne" />
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="vrihedd_brigade" />
+					<card name="vrihedd_brigade2" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic2" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NMLEasy -->
+			<deck_collection name="NMLEasy">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_bronze" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="forktail" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="plague_maiden" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="botchling" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="endrega" />
+					<card name="harpy" />
+					<card name="cockatrice" />
+					<card name="gargoyle" />
+					<card name="celaeno_harpy" />
+					<card name="arachas_behemoth" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="ekkima" />
+					<card name="ghoul" />
+					<card name="crone_brewess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_bronze" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="forktail" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="plague_maiden" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="botchling" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="endrega" />
+					<card name="harpy" />
+					<card name="cockatrice" />
+					<card name="gargoyle" />
+					<card name="celaeno_harpy" />
+					<card name="arachas_behemoth" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="ekkima" />
+					<card name="ghoul" />
+					<card name="crone_brewess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_bronze" specialCard="">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+
+					<card name="crone_weavess" />
+					<card name="yennefer" />
+
+					<card name="forktail" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="plague_maiden" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="botchling" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="endrega" />
+					<card name="harpy" />
+					<card name="cockatrice" />
+					<card name="gargoyle" />
+					<card name="celaeno_harpy" />
+					<card name="arachas_behemoth" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="ekkima" />
+					<card name="ghoul" />
+					<card name="crone_brewess" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NMLNormal -->
+			<deck_collection name="NMLNormal">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_copper" specialCard="">
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="dummy" />
+
+					<card name="fog" />
+					<card name="horn" />
+					<card name="scorch" />
+
+					<card name="imlerith" />
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_copper" specialCard="">
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="dummy" />
+
+					<card name="fog" />
+					<card name="horn" />
+					<card name="scorch" />
+
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="draug" />
+
+					<card name="imlerith" />
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_copper" specialCard="">
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="dummy" />
+
+					<card name="fog" />
+					<card name="horn" />
+					<card name="scorch" />
+
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="draug" />
+
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="yennefer" />
+					<card name="draug" />
+
+					<card name="imlerith" />
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="fiend" />
+					<card name="griffin" />
+					<card name="werewolf" />
+					<card name="frightener" />
+					<card name="ice_giant" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="arachas3" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<dynamicCards>
+					<card name="kayran" difficulty="12" />
+					<card name="mysterious_elf" difficulty="13" />
+					<card name="villen" difficulty="15" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NMLHard -->
+			<deck_collection name="NMLHard">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_gold" specialCard="">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="fog" />
+					<card name="frost" />
+					<card name="scorch" />
+
+					<card name="mysterious_elf" />
+					<card name="kayran" />
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas2" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_brewess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_gold" specialCard="">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="fog" />
+					<card name="frost" />
+					<card name="scorch" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="villen" />
+					<card name="imlerith" />
+					<card name="crone_weavess" />
+					<card name="arachas" />
+
+					<card name="mysterious_elf" />
+					<card name="kayran" />
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas2" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_brewess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_gold" specialCard="">
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="fog" />
+					<card name="frost" />
+					<card name="scorch" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="villen" />
+					<card name="imlerith" />
+					<card name="crone_weavess" />
+					<card name="arachas" />
+
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="villen" />
+					<card name="imlerith" />
+					<card name="crone_weavess" />
+					<card name="arachas" />
+					<card name="yennefer" />
+
+					<card name="mysterious_elf" />
+					<card name="kayran" />
+					<card name="leshen" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas2" />
+					<card name="nekker" />
+					<card name="nekker2" />
+					<card name="nekker3" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="ghoul" />
+					<card name="ghoul2" />
+					<card name="ghoul3" />
+					<card name="crone_brewess" />
+					<card name="crone_whispess" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- SkelEasy -->
+			<deck_collection name="SkelEasy">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="king_bran" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="skellige_storm" />
+					<card name="skellige_storm" />
+					<card name="draig" />
+					<card name="holger_blackhand" />
+					<card name="madman_lugos" />
+					<card name="donar_an_hindar" />
+					<card name="blueboy_lugos" />
+					<card name="svanrige" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_brokvar_archer" />
+					<card name="clan_brokvar_archer" />
+					<card name="clan_dimun_pirate" />
+					<card name="mysterious_elf" />
+					<card name="mrmirror" />
+					<card name="mrmirror_foglet" />
+					<card name="mrmirror_foglet" />
+					<card name="cow" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="king_bran" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="skellige_storm" />
+					<card name="skellige_storm" />
+					<card name="draig" />
+					<card name="holger_blackhand" />
+					<card name="madman_lugos" />
+					<card name="donar_an_hindar" />
+					<card name="blueboy_lugos" />
+					<card name="svanrige" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_brokvar_archer" />
+					<card name="clan_brokvar_archer" />
+					<card name="clan_dimun_pirate" />
+					<card name="mysterious_elf" />
+					<card name="mrmirror" />
+					<card name="mrmirror_foglet" />
+					<card name="mrmirror_foglet" />
+					<card name="cow" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="king_bran" specialCard="">
+					<card name="frost" />
+					<card name="frost" />
+					<card name="skellige_storm" />
+					<card name="skellige_storm" />
+
+					<card name="mushroom" />
+					<card name="ermion" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="yennefer" />
+					<card name="cerys" />
+					<card name="mysterious_elf" />
+
+					<card name="draig" />
+					<card name="holger_blackhand" />
+					<card name="madman_lugos" />
+					<card name="donar_an_hindar" />
+					<card name="blueboy_lugos" />
+					<card name="svanrige" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_an_craite_warrior" />
+					<card name="clan_brokvar_archer" />
+					<card name="clan_brokvar_archer" />
+					<card name="clan_dimun_pirate" />
+					<card name="mysterious_elf" />
+					<card name="mrmirror" />
+					<card name="mrmirror_foglet" />
+					<card name="mrmirror_foglet" />
+					<card name="cow" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- SkelNormal -->
+			<deck_collection name="SkelNormal">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="clear_sky" />
+					<card name="cock" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="draig" />
+					<card name="dandelion" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="clear_sky" />
+					<card name="cock" />
+
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="ermion" />
+					<card name="cerys" />
+					<card name="mysterious_elf" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="draig" />
+					<card name="dandelion" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="clear_sky" />
+					<card name="cock" />
+
+					<card name="dummy" />
+					<card name="scorch" />
+					<card name="ermion" />
+					<card name="cerys" />
+					<card name="mysterious_elf" />
+
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="cerys" />
+					<card name="olgierd" />
+					<card name="birna_bran" />
+					<card name="mysterious_elf" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="draig" />
+					<card name="dandelion" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<dynamicCards>
+					<card name="dandelion" difficulty="12" />
+					<card name="villen" difficulty="13" />
+					<card name="cirigog" difficulty="15" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- SkelHard -->
+			<deck_collection name="SkelHard">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="mushroom" />
+					<card name="mushroom" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+
+					<card name="fog" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="cerys" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="mushroom" />
+					<card name="mushroom" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+
+					<card name="fog" />
+
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="cirigog" />
+					<card name="cow" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="cerys" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="mushroom" />
+					<card name="mushroom" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+
+					<card name="fog" />
+
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="cirigog" />
+					<card name="cow" />
+
+					<card name="olgierd" />
+					<card name="draig" />
+					<card name="birna_bran" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="cerys" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NilfPrologue -->
+			<deck_collection name="NilfPrologue">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_copper" specialCard="vreemde">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="albrich" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="renuald" />
+					<card name="rotten" />
+					<card name="sweers" />
+					<card name="sweers" />
+					<card name="vanhemar" />
+					<card name="puttkammer" />
+					<card name="puttkammer" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_copper" specialCard="vreemde">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="albrich" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="renuald" />
+					<card name="rotten" />
+					<card name="sweers" />
+					<card name="sweers" />
+					<card name="vanhemar" />
+					<card name="puttkammer" />
+					<card name="puttkammer" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_copper" specialCard="vreemde">
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="albrich" />
+					<card name="cynthia" />
+					<card name="morteisen" />
+					<card name="rainfarn" />
+					<card name="renuald" />
+					<card name="rotten" />
+					<card name="sweers" />
+					<card name="sweers" />
+					<card name="vanhemar" />
+					<card name="puttkammer" />
+					<card name="puttkammer" />
+					<card name="zerri" />
+					<card name="impera_brigade" />
+					<card name="nausicaa" />
+					<card name="nausicaa2" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NKTournament -->
+			<deck_collection name="NKTournament">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="clear_sky" />
+					<card name="yarpen" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="thaler" />
+
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="thaler" />
+
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="zoltan" difficulty="2" />
+					<card name="kaedweni_siege2" difficulty="5" />
+					<card name="dandelion" difficulty="6" />
+					<card name="triss" difficulty="8" />
+					<card name="geraltgog" difficulty="8" />
+					<card name="roach" difficulty="8" />
+					<card name="villen" difficulty="8" />
+					<card name="cirigog" difficulty="10" />
+					<card name="yennefer" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NilfTournament -->
+			<deck_collection name="NilfTournament">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="clear_sky" />
+					<card name="albrich" />
+					<card name="morteisen" />
+					<card name="rotten" />
+
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="vattier" />
+					<card name="letho" />
+					<card name="archer_support" />
+
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="vattier" />
+					<card name="letho" />
+					<card name="archer_support" />
+
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="1" />
+					<card name="mysterious_elf" difficulty="4" />
+					<card name="dandelion" difficulty="4" />
+					<card name="impera_brigade4" difficulty="6" />
+					<card name="triss" difficulty="6" />
+					<card name="geraltgog" difficulty="8" />
+					<card name="roach" difficulty="8" />
+					<card name="yennefer" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- ScoiaTournament -->
+			<deck_collection name="ScoiaTournament">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="toruviel" />
+					<card name="ciaran" />
+					<card name="dwarf" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="scorch" />
+					<card name="saskia" />
+					<card name="isengrim" />
+					<card name="havcaaren_medic2" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="fog" />
+					<card name="rain" />
+
+					<card name="scorch" />
+					<card name="saskia" />
+					<card name="isengrim" />
+					<card name="havcaaren_medic2" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="1" />
+					<card name="dandelion" difficulty="2" />
+					<card name="eithne" difficulty="6" />
+					<card name="triss" difficulty="8" />
+					<card name="emiel" difficulty="8" />
+					<card name="geraltgog" difficulty="10" />
+					<card name="roach" difficulty="10" />
+					<card name="cirigog" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NMLTournament -->
+			<deck_collection name="NMLTournament">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_silver" specialCard="kayran">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+
+					<card name="botchling" />
+					<card name="botchling" />
+
+					<card name="imlerith" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_silver" specialCard="kayran">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="leshen" />
+					<card name="crone_whispess" />
+
+					<card name="imlerith" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_silver" specialCard="kayran">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="rain" />
+					<card name="rain" />
+					<card name="clear_sky" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="leshen" />
+					<card name="crone_whispess" />
+
+					<card name="imlerith" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+				</deck>
+
+				<dynamicCards>
+					<card name="horn" difficulty="1" />
+					<card name="triss" difficulty="3" />
+					<card name="dandelion" difficulty="4" />
+					<card name="scorch" difficulty="4" />
+					<card name="villen" difficulty="6" />
+					<card name="emiel" difficulty="7" />
+					<card name="zoltan" difficulty="8" />
+					<card name="geraltgog" difficulty="10" />
+					<card name="roach" difficulty="10" />
+					<card name="mysterious_elf" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- ScoiaTournament2 -->
+			<deck_collection name="ScoiaTournament2">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="francesca_gold" specialCard="">
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+
+					<card name="toruviel" />
+					<card name="ciaran" />
+					<card name="dwarf" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="francesca_gold" specialCard="">
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+
+					<card name="saskia" />
+					<card name="isengrim" />
+					<card name="havcaaren_medic2" />
+					<card name="schirru" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="francesca_gold" specialCard="">
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="rain" />
+
+					<card name="saskia" />
+					<card name="isengrim" />
+					<card name="havcaaren_medic2" />
+					<card name="schirru" />
+
+					<card name="iorveth" />
+					<card name="dennis" />
+					<card name="milva" />
+					<card name="ida" />
+					<card name="filavandrel" />
+					<card name="yaevinn" />
+					<card name="barclay" />
+					<card name="havcaaren_support" />
+					<card name="havcaaren_support2" />
+					<card name="havcaaren_support3" />
+					<card name="havcaaren_medic" />
+					<card name="havcaaren_medic3" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="1" />
+					<card name="dandelion" difficulty="2" />
+					<card name="eithne" difficulty="6" />
+					<card name="triss" difficulty="8" />
+					<card name="emiel" difficulty="8" />
+					<card name="geraltgog" difficulty="10" />
+					<card name="roach" difficulty="10" />
+					<card name="cirigog" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NMLTournament2 -->
+			<deck_collection name="NMLTournament2">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="eredin_silver" specialCard="kayran">
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="clear_sky" />
+					<card name="skellige_storm" />
+					<card name="skellige_storm" />
+
+					<card name="botchling" />
+					<card name="botchling" />
+
+					<card name="imlerith" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="eredin_silver" specialCard="kayran">
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="clear_sky" />
+					<card name="skellige_storm" />
+					<card name="skellige_storm" />
+
+					<card name="horn" />
+					<card name="leshen" />
+					<card name="crone_whispess" />
+					<card name="mysterious_elf" />
+
+					<card name="imlerith" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="eredin_silver" specialCard="kayran">
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="clear_sky" />
+					<card name="skellige_storm" />
+					<card name="skellige_storm" />
+
+					<card name="horn" />
+					<card name="leshen" />
+					<card name="crone_whispess" />
+					<card name="mysterious_elf" />
+
+					<card name="imlerith" />
+					<card name="earth_elemental" />
+					<card name="arachas_behemoth" />
+					<card name="arachas" />
+					<card name="arachas2" />
+					<card name="ekkima" />
+					<card name="bruxa" />
+					<card name="fleder" />
+					<card name="garkain" />
+					<card name="katakan" />
+					<card name="crone_brewess" />
+					<card name="crone_weavess" />
+				</deck>
+
+				<dynamicCards>
+					<card name="horn" difficulty="1" />
+					<card name="triss" difficulty="3" />
+					<card name="dandelion" difficulty="4" />
+					<card name="scorch" difficulty="4" />
+					<card name="villen" difficulty="6" />
+					<card name="geraltgog" difficulty="10" />
+					<card name="roach" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NKTournament2 -->
+			<deck_collection name="NKTournament2">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="clear_sky" />
+					<card name="yarpen" />
+					<card name="sabrina" />
+					<card name="sheldon" />
+
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="thaler" />
+
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="foltest_gold" specialCard="mysterious_elf">
+					<card name="scorch" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="frost" />
+					<card name="frost" />
+					<card name="fog" />
+
+					<card name="scorch" />
+					<card name="horn" />
+					<card name="thaler" />
+
+					<card name="esterad" />
+					<card name="philippa" />
+					<card name="dijkstra" />
+					<card name="stennis" />
+					<card name="trebuchet" />
+					<card name="catapult" />
+					<card name="catapult2" />
+					<card name="ballista" />
+					<card name="blue_stripes" />
+					<card name="blue_stripes" />
+					<card name="siege_tower" />
+					<card name="dun_banner_medic" />
+				</deck>
+
+				<dynamicCards>
+					<card name="zoltan" difficulty="2" />
+					<card name="kaedweni_siege2" difficulty="5" />
+					<card name="dandelion" difficulty="6" />
+					<card name="triss" difficulty="8" />
+					<card name="geraltgog" difficulty="8" />
+					<card name="roach" difficulty="8" />
+					<card name="villen" difficulty="8" />
+					<card name="cirigog" difficulty="10" />
+					<card name="yennefer" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- NilfTournament2 -->
+			<deck_collection name="NilfTournament2">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="emhyr_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="clear_sky" />
+					<card name="albrich" />
+					<card name="morteisen" />
+					<card name="rotten" />
+
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="emhyr_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="vattier" />
+					<card name="letho" />
+					<card name="archer_support" />
+
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="emhyr_gold" specialCard="">
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="clear_sky" />
+
+					<card name="dummy" />
+					<card name="dummy" />
+					<card name="horn" />
+					<card name="vattier" />
+					<card name="letho" />
+					<card name="archer_support" />
+
+					<card name="menno" />
+					<card name="moorvran" />
+					<card name="tibor" />
+					<card name="fringilla" />
+					<card name="shilard" />
+					<card name="stefan" />
+					<card name="archer_support2" />
+					<card name="black_archer" />
+					<card name="black_archer2" />
+					<card name="heavy_zerri" />
+					<card name="zerri" />
+					<card name="young_emissary" />
+					<card name="young_emissary2" />
+				</deck>
+
+				<dynamicCards>
+					<card name="villen" difficulty="1" />
+					<card name="mysterious_elf" difficulty="4" />
+					<card name="dandelion" difficulty="4" />
+					<card name="impera_brigade4" difficulty="6" />
+					<card name="triss" difficulty="6" />
+					<card name="geraltgog" difficulty="8" />
+					<card name="roach" difficulty="10" />
+					<card name="yennefer" difficulty="10" />
+				</dynamicCards>
+			</deck_collection>
+
+			<!-- SkelTournament2 -->
+			<deck_collection name="SkelTournament2">
+
+				<!-- Difficulty Easy -->
+				<deck difficulty="1" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="fog" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="cerys" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<!-- Difficulty Normal -->
+				<deck difficulty="2" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="cirigog" />
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="olgierd" />
+					<card name="draig" />
+					<card name="birna_bran" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="cerys" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<!-- Difficulty Hard -->
+				<deck difficulty="3" leaderCard="Crach_an_Craite" specialCard="">
+					<card name="frost" />
+					<card name="horn" />
+					<card name="horn" />
+					<card name="scorch" />
+					<card name="scorch" />
+					<card name="dummy" />
+
+					<card name="cirigog" />
+					<card name="geraltgog" />
+					<card name="roach" />
+					<card name="olgierd" />
+					<card name="draig" />
+					<card name="birna_bran" />
+
+					<card name="yennefer" />
+					<card name="villen" />
+					<card name="mysterious_elf" />
+					<card name="dandelion" />
+					<card name="cerys" />
+					<card name="berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="young_berserker" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="light_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="war_drakkar" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+					<card name="clan_drummond_shieldmaiden" />
+				</deck>
+
+				<dynamicCards>
+
+				</dynamicCards>
+			</deck_collection>
+		</gwint_decks>
+	</definitions>
+</redxml>

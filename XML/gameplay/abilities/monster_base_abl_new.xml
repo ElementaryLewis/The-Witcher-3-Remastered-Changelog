@@ -142,8 +142,13 @@
 	   <ability name="PrologModifier">
         <tags> "base" </tags>
         <attack_power type="mult" always_random="false" min="-0.3" max="-0.3" />
+      </ability>
+
+	  <ability name="Q502_Scarab">
       </ability>	
 		
+	  <ability name="ChainHitImmune">
+      </ability>
 	  
     </abilities>
 	

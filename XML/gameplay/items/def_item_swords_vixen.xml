@@ -59,7 +59,7 @@
 				localisation_key_description	="item_desc_ngu_hwando_steel_sword"
 				icon_path						="icons/inventory/weapons/vixen_steel_64x128.png"
 			>
-				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon
+				<tags>							PlayerSteelWeapon, Weapon, sword1h, mod_weapon, Intact
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Steel Vixen _Stats</a>
@@ -130,7 +130,7 @@
 				localisation_key_description	="item_desc_ngu_hwando_silver_sword"
 				icon_path						="icons/inventory/weapons/vixen_silver_64x128.png"
 			>
-				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon
+				<tags>							PlayerSilverWeapon, Weapon, sword1h, mod_weapon, Intact
 				</tags>
 				<base_abilities>				<a>Default weapon _Stats</a>
 												<a>Silver Vixen _Stats</a>

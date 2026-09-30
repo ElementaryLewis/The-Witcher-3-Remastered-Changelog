@@ -155,13 +155,13 @@
 			<frost_resistance type="base" always_random="false" min="0" max="0" />
 			<frost_resistance_perc type="base" min="0" max="0" />
 			<force_resistance type="base" always_random="false" min="0" max="0" />
-			<force_resistance_perc type="base" min="" max="" />
+			<force_resistance_perc type="base" min="0" max="0" />
 			<shock_resistance type="base" always_random="false" min="0" max="0" />
 			<shock_resistance_perc type="base" min="0" max="0" />
 			<poison_resistance type="base" always_random="false" min="0" max="0" />
 			<poison_resistance_perc type="base" min="0" max="0" />
 			<bleeding_resistance_perc type="base" min="0" max="0" />
-			<will_resistance_perc type="base" min="" max="0" />
+			<will_resistance_perc type="base" min="0" max="0" />
 			<burning_resistance_perc type="base" min="0" max="0" />
 		  </ability>
 		 
@@ -305,7 +305,7 @@
 			<will_resistance_perc 			type="add" min="0.3" max="0.3" />
 			<burning_resistance_perc type="base" min="0.2" max="0.2" />
 			<force_resistance type="base" always_random="false" min="0.3" max="0.3" />
-			<force_resistance_perc type="base" min="" max="" />
+			<force_resistance_perc type="base" min="0" max="0" />
 			<poison_resistance_perc type="base" min="1" max="1" />
 		</ability>	
 		
@@ -320,7 +320,7 @@
 			<will_resistance_perc 			type="add" min="0.8" max="0.8" />
 			<burning_resistance_perc type="base" min="0.3" max="0.3" />
 			<force_resistance type="base" always_random="false" min="0.8" max="0.8" />
-			<force_resistance_perc type="base" min="" max="" />
+			<force_resistance_perc type="base" min="0" max="0" />
 			<poison_resistance_perc type="base" min="1" max="1" />
 		</ability>		
 		

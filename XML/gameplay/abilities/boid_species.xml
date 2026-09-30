@@ -392,6 +392,47 @@
 								</sound>
 							</soundConfig>-->
 						</boidSpeciesDef>
+						<!-- Base Sheep species -->
+						<boidSpeciesDef species_name			= "Sheep" 	type_name				= "HumbleCritterLair"
+										maxVelocity 			= "9.0"
+										turnRatio				= "90" 		individualRandomization	= "0.4"
+										actorsRangeDesired		= "4" 		actorsRangeMax			= "9"
+										actorsGravity			= "-3.0"
+										fireRangeMin			= "1" 		fireRangeMax			= "9" 					fireRepultion			= "5"
+										mutualUndesiredDensity	= "2.5" 	mutualRepultion			= "0.75"
+										hungerRatio				= "11.2211" eatingTime				= "3" 					hungerGravity 			= "0.5"
+										wanderTime				= "4.5" 	wanderGravity			= "0.15"
+										wallsDistance			= "4" 		wallsRepulsion			= "3"
+										panicSpeedBoost			= "15" 		panicActorsGravity		= "-12" 					actorRangeMultWhenPanic	= "3"
+										burnResistance			= "0.1" 	postPanicDeathChance	= "0.0"
+										attackRange				= "2.0" 	hasAttackBehaviour		= "false"
+										updateTime				= "0.10"
+										boidScaleMin			= "0.7" 	boidScaleMax			= "1.2"
+										boidTemplate			= "characters\npc_entities\animals\boids\boid_sheep.w2ent" 
+										>								
+							<boidStates>
+								 <state state_name="idle">
+									<anim anim_name="sheep_walk" loop = "true"/>
+								</state> 
+								<state state_name="move">
+									<anim anim_name="sheep_walk" speedVariation="0.2" loop="true"/>
+								</state>
+								<state state_name="attack">
+									<anim anim_name="sheep_walk" loop="true" speedVariation="0.2"/>
+								</state>
+								<state state_name="death">
+									<anim anim_name="sheep_walk" loop="true" fx_name="death_fx" speedVariation="0.5" />
+								</state>
+								<state state_name="flee" doubleSpeed = "true" >
+									<anim anim_name="sheep_walk" loop="true" speedVariation="0.2" />
+								</state> 
+							</boidStates>
+							<!-- Points of interest configuration -->
+							<POIConfig type_name="Player" gravity="-10.0" state_name="flee" radius="12.0" />
+							<POIConfig type_name="CrittersSpawn" gravity="0.0"/>
+							<POIConfig type_name="Fire" gravity="-2.0"/>
+							<POIConfig type_name="Food" gravity="0.5"/>
+						</boidSpeciesDef>
 					</subSpecies>
 				</boidSpeciesDef>
 				<!-- Base bird species-->
@@ -928,6 +969,29 @@
 							<subSpecies>
 								<boidSpeciesDef species_name					= "LeshyCrows" 	type_name			= "FlyingCritterLair"
 												boidTemplate					= "characters\npc_entities\animals\boids\boid_crow.w2ent"
+												boidScaleMin					= "0.5" 	boidScaleMax		= "0.6"
+												waterSurfaceCollisionForce = "0.0">
+									<soundConfig>
+										<sound startEvent="animals_crow_swarm" 	stopEvent="animals_crow_swarm_end" 	countParam="swarm_count_crows" distanceParam="swarm_distance_crows"  yawParam="swarm_yaw"  pitchParam="swarm_pitch">
+											<filter type_name = "or">
+												<filter groupState_name="idle" />
+												<filter groupState_name="circle" />
+												<filter groupState_name="teleport"/>
+												<filter groupState_name="shield"/>
+											</filter>
+										</sound>
+										<sound startEvent="animals_crow_swarm_leseh_attack" 	stopEvent="animals_crow_swarm_leseh_attack_end" 	countParam="swarm_count_crows" distanceParam="swarm_distance_crows"  yawParam="swarm_yaw"  pitchParam="swarm_pitch">
+											<filter type_name = "or">
+												<filter groupState_name="attackPlayer" />
+												<filter groupState_name="shieldToAttackPlayer"/>
+											</filter>
+										</sound>
+									</soundConfig>
+								</boidSpeciesDef>
+							</subSpecies>
+							<subSpecies>
+								<boidSpeciesDef species_name					= "GuardianBirds" 	type_name			= "FlyingCritterLair"
+												boidTemplate					= "characters\npc_entities\animals\boids\boid_sparrow.w2ent"
 												boidScaleMin					= "0.5" 	boidScaleMax		= "0.6"
 												waterSurfaceCollisionForce = "0.0">
 									<soundConfig>

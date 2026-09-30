@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <redxml>
-	<custom>
+	<definitions>
 		<gwint_card_definitions_final>
 
-<!--
-============================================= SPECIAL CARDS (Shared between all factions) =====================================================
--->
+<!--============================================= SPECIAL CARDS (Shared between all factions) =========================-->
 
 		<card   index="0"
-		    title="gwint_name_dummy"
+			title="gwint_name_dummy" name="dummy"
 			description="gwint_desc_dummy"
 			power="0"
 			picture="spc_dummy"
@@ -28,7 +26,7 @@
 		</card>
 
 		<card   index="1"
-		    title="gwint_name_horn"	
+			title="gwint_name_horn"	 name="horn"
 			description="gwint_desc_horn"
 			power="0"
 			picture="spc_horn"
@@ -49,7 +47,7 @@
 		</card>
 
 		<card   index="2"
-		    title="gwint_name_scorch"
+			title="gwint_name_scorch" name="scorch"
 			description="gwint_desc_scorch"
 			power="0"
 			picture="spc_scorch"
@@ -68,7 +66,7 @@
 		</card>
 
 		<card   index="3"
-		    title="gwint_name_frost"	
+			title="gwint_name_frost"	 name="frost"
 			description="gwint_desc_frost"
 			power="0"
 			picture="spc_frost"
@@ -82,7 +80,7 @@
 		</card>
 
 		<card   index="4"
-		    title="gwint_name_fog"
+		    title="gwint_name_fog" name="fog"
 			description="gwint_desc_fog"
 			power="0"
 			picture="spc_fog"
@@ -96,7 +94,7 @@
 		</card>
 
 		<card   index="5"
-		    title="gwint_name_rain"	
+		    title="gwint_name_rain"	 name="rain"
 			description="gwint_desc_rain"
 			power="0"
 			picture="spc_rain"
@@ -110,7 +108,7 @@
 		</card>
 
 		<card   index="6"
-		    title="gwint_name_clear_sky"
+		    title="gwint_name_clear_sky" name="clear_sky"
 			description="gwint_desc_clear_sky"
 			power="0"
 			picture="spc_clearsky"
@@ -123,17 +121,15 @@
 			</effect_flags>
 		</card>
 
-<!--
-============================================= NEUTRAL CARDS =====================================================
--->
+<!--============================================= NEUTRAL CARDS =======================================================-->
 
 		<card   index="7"
-		    title="gwint_name_geralt"
+			title="gwint_name_geralt" name="geralt"
 			description="gwint_desc_geralt"
 			power="15"
 			picture="neu_geralt"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_geralt_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_geralt_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -146,12 +142,12 @@
 		</card>
 
 		<card   index="8"
-		    title="gwint_name_vesemir"
+			title="gwint_name_vesemir" name="vesemir"
 			description="gwint_desc_vesemir"
 			power="6"
 			picture="neu_vesemir"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_vesemir_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_vesemir_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -163,12 +159,12 @@
 		</card>
 						
 		<card   index="9"
-		    title="gwint_name_yennefer"
+			title="gwint_name_yennefer" name="yennefer"
 			description="gwint_desc_yennefer"
 			power="7"
 			picture="neu_yennefer"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_yennefer_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_yennefer_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -181,12 +177,12 @@
 		</card>
 							
 		<card   index="10"							
-		    title="gwint_name_ciri"
+			title="gwint_name_ciri" name="ciri"
 			description="gwint_desc_ciri"
 			power="15"
 			picture="neu_ciri"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_ciri_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_ciri_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -199,12 +195,12 @@
 		</card>
 							
 		<card   index="11"							
-		    title="gwint_name_triss"
+			title="gwint_name_triss" name="triss"
 			description="gwint_desc_triss"
 			power="7"
 			picture="neu_triss"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_triss_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_triss_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -217,12 +213,12 @@
 		</card>
 							
 		<card   index="12"							
-		    title="gwint_name_dandelion"
+			title="gwint_name_dandelion" name="dandelion"
 			description="gwint_desc_dandelion"
 			power="2"
 			picture="neu_dandelion"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_dandelion_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_dandelion_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<!-- <flag name="TYPE_ROW_MODIFIER" /> #J confusing way to set stuff up, horn effect should be built with this in mind -->
@@ -236,12 +232,12 @@
 		</card>
 							
 		<card   index="13"							
-		    title="gwint_name_zoltan"
+			title="gwint_name_zoltan" name="zoltan"
 			description="gwint_desc_zoltan"
 			power="5"
 			picture="neu_zoltan"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_zoltan_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_zoltan_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -253,12 +249,12 @@
 		</card>
 							
 		<card   index="14"							
-		    title="gwint_name_emiel"
+			title="gwint_name_emiel" name="emiel"
 			description="gwint_desc_emiel"
 			power="5"
 			picture="neu_emiel"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_emiel_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_emiel_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -267,16 +263,15 @@
 			<effect_flags>
 				<flag name="EFFECT_NONE" />
 			</effect_flags>
-		</card>
-							
+		</card>		
 							
 		<card   index="15"							
-		    title="gwint_name_villen"
+			title="gwint_name_villen" name="villen"
 			description="gwint_desc_villen"
 			power="7"
 			picture="neu_villen"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_villen_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_villen_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -287,13 +282,14 @@
 			</effect_flags>
 		</card>
 		
-		<card   index="16"							
-		    title="Mysterious elf"
+		<card   index="16"		 name="mysterious_elf"					
+			title="Mysterious elf"
+			item="gwint_card_avallach"
 			description="gwint_desc_avallach"
 			power="0"
 			picture="neu_avallach"
-            dlcPictureFlag_name="dlc8"
-            dlcPicture="neu_avallach_dlc"
+			dlcPictureFlag_name="dlc8"
+			dlcPicture="neu_avallach_dlc"
 			faction_index="F_NEUTRAL" >
 			<type_flags>
 				<flag name="TYPE_CREATURE" />
@@ -307,7 +303,7 @@
 		</card>
 
 		<card   index="17"							
-		    title="gwint_name_olgierd"
+			title="gwint_name_olgierd" name="olgierd"
 			description="gwint_desc_olgierd"
 			power="6"
 			picture="neu_olgierd"
@@ -323,7 +319,7 @@
 		</card>
 
 		<card   index="18"							
-		    title="gwint_name_mrmirror"
+			title="gwint_name_mrmirror" name="mrmirror"
 			description="gwint_desc_mrmirror"
 			power="2"
 			picture="neu_mrmirror"
@@ -336,13 +332,13 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="18"/>
-				<card id="19"/>
+				<flag name="mrmirror"/>
+				<flag name="mrmirror_foglet"/>
 			</summonFlags>
 		</card>
 
 		<card   index="19"							
-		    title="gwint_name_mrmirror_foglet"
+			title="gwint_name_mrmirror_foglet" name="mrmirror_foglet"
 			description="gwint_desc_mrmirror_foglet"
 			power="4"
 			picture="neu_mrmirror_foglet"
@@ -355,13 +351,13 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<!-- <card id="18"/> -->
-				<card id="19"/>
+				<!-- <flag name="18"/> -->
+				<flag name="mrmirror_foglet"/>
 			</summonFlags>
 		</card>
 
 		<card   index="20"							
-		    title="gwint_name_cow"
+			title="gwint_name_cow" name="cow"
 			description="gwint_desc_cow"
 			power="0"
 			picture="neu_cow"
@@ -374,12 +370,13 @@
 				<flag name="EFFECT_SUICIDE_SUMMON" />
 			</effect_flags>
 			<summonFlags>
-				<card id="21"/>
+				<flag name="cow_czart"/>
 			</summonFlags>
 		</card>
 
 		<card   index="21"							
-		    title="gwint_name_cow_czart"
+			title="gwint_name_cow_czart" name="cow_czart"
+			item=""
 			description="gwint_desc_cow_czart"
 			power="8"
 			picture="neu_czart"
@@ -394,7 +391,7 @@
 		</card>
 
 		<card   index="22"
-		    title="gwint_name_mushroom"	
+			title="gwint_name_mushroom"	 name="mushroom"
 			description="gwint_desc_mushroom"
 			power="0"
 			picture="spc_mushroom"
@@ -411,7 +408,7 @@
 		</card>
 
 		<card   index="23"
-		    title="gwint_name_skellige_storm"	
+			title="gwint_name_skellige_storm"	 name="skellige_storm"
 			description="gwint_desc_skellige_storm"
 			power="0"
 			picture="spc_skellige_storm"
@@ -425,9 +422,9 @@
 			</effect_flags>
 		</card>
 
-
 		<card   index="26"
-			title="gwint_name_geralt"
+			title="gwint_name_geralt" name="geraltGOG"
+			item=""
 			description="gwint_desc_geralt"
 			power="15"
 			picture="neu_geralt"
@@ -443,12 +440,13 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="28"/>
+				<flag name="roach"/>
 			</summonFlags>
 		</card>
 
 		<card   index="27"							
-			title="gwint_name_ciri"
+			title="gwint_name_ciri" name="ciriGOG"
+			item=""
 			description="gwint_desc_ciri"
 			power="15"
 			picture="neu_ciri"
@@ -464,12 +462,12 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="28"/>
+				<flag name="roach"/>
 			</summonFlags>
 		</card>
 							
 		<card   index="28"							
-			title="map_location_horse"
+			title="map_location_horse" name="roach"
 			description="gwint_desc_roach"
 			power="3"
 			picture="gog_roach"
@@ -479,17 +477,12 @@
 				<flag name="TYPE_MELEE" />
 			</type_flags>
 		</card>
-							
 
-<!--
-=============================================		
-============================================= N.KINGDOM CARDS =====================================================
-=============================================		
--->
+<!--============================================= N.KINGDOM CARDS =====================================================-->
 
 		<card   index="100"							
-		    title="gwint_name_vernon"
-		    description="gwint_desc_vernon"
+			title="gwint_name_vernon" name="vernon"
+			description="gwint_desc_vernon"
 			power="10"
 			picture="nor_vernon"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -504,8 +497,8 @@
 		</card>
 		
 		<card   index="101"							
-		    title="gwint_name_natalis"
-		    description="gwint_desc_natalis"
+			title="gwint_name_natalis" name="natalis"
+			description="gwint_desc_natalis"
 			power="10"
 			picture="nor_natalis"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -520,8 +513,8 @@
 		</card>
 		
 		<card   index="102"							
-		    title="gwint_name_esterad"
-		    description="gwint_desc_esterad"
+			title="gwint_name_esterad" name="esterad"
+			description="gwint_desc_esterad"
 			power="10"
 			picture="nor_esterad"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -536,8 +529,8 @@
 		</card>
 		
 		<card   index="103"							
-		    title="gwint_name_philippa"
-		    description="gwint_desc_philippa"
+			title="gwint_name_philippa" name="philippa"
+			description="gwint_desc_philippa"
 			power="10"
 			picture="nor_philippa"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -552,8 +545,8 @@
 		</card>
 		
 		<card   index="105"							
-		    title="gwint_name_thaler"
-		    description="gwint_desc_thaler"
+			title="gwint_name_thaler" name="thaler"
+			description="gwint_desc_thaler"
 			power="1"
 			picture="nor_thaler"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -568,8 +561,9 @@
 		</card>
 							
 		<card   index="106"							
-		    title="gwint_name_ves"
-		    description="gwint_desc_ves"
+			title="gwint_name_ves" name="ves"
+			description="gwint_desc_ves"
+			item=""
 			power="5"
 			picture="nor_ves"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -583,8 +577,9 @@
 		</card>
 							
 		<card   index="107"							
-		    title="gwint_name_siegfried"
-		    description="gwint_desc_siegfried"
+			title="gwint_name_siegfried" name="siegfried"
+			description="gwint_desc_siegfried"
+			item=""
 			power="5"
 			picture="nor_siegfried"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -598,8 +593,9 @@
 		</card>	
 		
 		<card   index="108"							
-		    title="gwint_name_yarpen"
-		    description="gwint_desc_yarpen"
+			title="gwint_name_yarpen" name="yarpen"
+			item=""
+			description="gwint_desc_yarpen"
 			power="2"
 			picture="nor_yarpen"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -613,8 +609,8 @@
 		</card>
 							
 		<card   index="109"							
-		    title="gwint_name_dijkstra"
-		    description="gwint_desc_dijkstra"
+			title="gwint_name_dijkstra" name="dijkstra"
+			description="gwint_desc_dijkstra"
 			power="4"
 			picture="nor_dijktra"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -629,8 +625,9 @@
 		</card>
 							
 		<card   index="111"							
-		    title="gwint_name_keira"
-		    description="gwint_desc_keira"
+			title="gwint_name_keira" name="keira"
+			item=""
+			description="gwint_desc_keira"
 			power="5"
 			picture="nor_keira"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -644,8 +641,9 @@
 		</card>
 							
 		<card   index="112"							
-		    title="gwint_name_sile"
-		    description="gwint_desc_sile"
+			title="gwint_name_sile" name="sile"
+			item=""
+			description="gwint_desc_sile"
 			power="5"
 			picture="nor_sheala"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -659,8 +657,9 @@
 		</card>
 							
 		<card   index="113"							
-		    title="gwint_name_sabrina"
-		    description="gwint_desc_sabrina"
+			title="gwint_name_sabrina" name="sabrina"
+			description="gwint_desc_sabrina"
+			item=""
 			power="4"
 			picture="nor_sabrina"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -674,8 +673,9 @@
 		</card>
 							
 		<card   index="114"							
-		    title="gwint_name_sheldon"
-		    description="gwint_desc_sheldon"
+			title="gwint_name_sheldon" name="sheldon"
+			description="gwint_desc_sheldon"
+			item=""
 			power="4"
 			picture="nor_sheldon"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -689,8 +689,9 @@
 		</card>
 		
 		<card   index="115"							
-		    title="gwint_name_dethmold"
-		    description="gwint_desc_dethmold"
+			title="gwint_name_dethmold" name="dethmold"
+			description="gwint_desc_dethmold"
+			item=""
 			power="6"
 			picture="nor_dethmold"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -704,8 +705,9 @@
 		</card>
 		
 		<card   index="116"							
-		    title="gwint_name_stennis"
-		    description="gwint_desc_stennis"
+			title="gwint_name_stennis" name="stennis"
+			item=""
+			description="gwint_desc_stennis"
 			power="5"
 			picture="nor_stennis"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -718,11 +720,11 @@
 				<flag name="EFFECT_DRAW_X2" />
 			</effect_flags>
 		</card>
-
 		
 		<card   index="120"							
-		    title="gwint_name_trebuchet"
-		    description="gwint_desc_trebuchet"
+			title="gwint_name_trebuchet" name="trebuchet"
+			item=""
+			description="gwint_desc_trebuchet"
 			power="6"
 			picture="nor_trebuchet"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -736,8 +738,9 @@
 		</card>
 							
 		<card   index="121"							
-		    title="gwint_name_trebuchet"
-		    description="gwint_desc_trebuchet"
+			title="gwint_name_trebuchet" name="trebuchet2"
+			item=""
+			description="gwint_desc_trebuchet"
 			power="6"
 			picture="nor_trebuchet_1"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -751,8 +754,9 @@
 		</card>
 							
 		<card   index="125"							
-		    title="gwint_name_poor_infantry"
-		    description="gwint_desc_poor_infantry"
+			title="gwint_name_poor_infantry" name="poor_infantry"
+			description="gwint_desc_poor_infantry"
+			item=""
 			power="1"
 			picture="nor_poor_infantry"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -764,15 +768,16 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="125"/>
-				<card id="126"/>
-				<card id="127"/>
+				<flag name="poor_infantry"/>
+				<flag name="poor_infantry2"/>
+				<flag name="poor_infantry3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="126"							
-		    title="gwint_name_poor_infantry"
-		    description="gwint_desc_poor_infantry"
+			title="gwint_name_poor_infantry" name="poor_infantry2"
+			item=""
+			description="gwint_desc_poor_infantry"
 			power="1"
 			picture="nor_poor_infantry"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -784,15 +789,16 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="125"/>
-				<card id="126"/>
-				<card id="127"/>
+				<flag name="poor_infantry"/>
+				<flag name="poor_infantry2"/>
+				<flag name="poor_infantry3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="127"							
-		    title="gwint_name_poor_infantry"
-		    description="gwint_desc_poor_infantry"
+			title="gwint_name_poor_infantry" name="poor_infantry3"
+			item=""
+			description="gwint_desc_poor_infantry"
 			power="1"
 			picture="nor_poor_infantry"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -804,15 +810,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="125"/>
-				<card id="126"/>
-				<card id="127"/>
+				<flag name="poor_infantry"/>
+				<flag name="poor_infantry2"/>
+				<flag name="poor_infantry3"/>
 			</summonFlags>
 		</card>
 							
 		<card   index="130"							
-		    title="gwint_name_crinfrid"
-		    description="gwint_desc_crinfrid"
+			title="gwint_name_crinfrid" name="crinfrid"
+			description="gwint_desc_crinfrid"
 			power="5"
 			picture="nor_crinfrid"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -824,15 +830,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="130"/>
-				<card id="131"/>
-				<card id="132"/>
+				<flag name="crinfrid"/>
+				<flag name="crinfrid2"/>
+				<flag name="crinfrid3"/>
 			</summonFlags>
 		</card>
 							
 		<card   index="131"							
-		    title="gwint_name_crinfrid"
-		    description="gwint_desc_crinfrid"
+			title="gwint_name_crinfrid" name="crinfrid2"
+			description="gwint_desc_crinfrid"
 			power="5"
 			picture="nor_crinfrid"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -844,15 +850,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="130"/>
-				<card id="131"/>
-				<card id="132"/>
+				<flag name="crinfrid"/>
+				<flag name="crinfrid2"/>
+				<flag name="crinfrid3"/>
 			</summonFlags>
 		</card>
 							
 		<card   index="132"							
-		    title="gwint_name_crinfrid"
-		    description="gwint_desc_crinfrid"
+			title="gwint_name_crinfrid" name="crinfrid3"
+			description="gwint_desc_crinfrid"
 			power="5"
 			picture="nor_crinfrid"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -864,15 +870,16 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="130"/>
-				<card id="131"/>
-				<card id="132"/>
+				<flag name="crinfrid"/>
+				<flag name="crinfrid2"/>
+				<flag name="crinfrid3"/>
 			</summonFlags>
 		</card>
 							
 		<card   index="135"							
-		    title="gwint_name_redanian"
-		    description="gwint_desc_redanian"
+			title="gwint_name_redanian" name="redanian"
+			description="gwint_desc_redanian"
+			item=""
 			power="1"
 			picture="nor_redania"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -884,11 +891,11 @@
 				<flag name="EFFECT_NONE" />
 			</effect_flags>
 		</card>
-		
 							
 		<card   index="136"							
-		    title="gwint_name_redanian"
-		    description="gwint_desc_redanian"
+			title="gwint_name_redanian" name="redanian2"
+			description="gwint_desc_redanian"
+			item=""
 			power="1"
 			picture="nor_redania_1"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -902,8 +909,8 @@
 		</card>
 							
 		<card   index="140"							
-		    title="gwint_name_catapult"
-		    description="gwint_desc_catapult"
+			title="gwint_name_catapult" name="catapult"
+			description="gwint_desc_catapult"
 			power="8"
 			picture="nor_catapult_1"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -915,14 +922,14 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="140"/>
-				<card id="141"/>
+				<flag name="catapult"/>
+				<flag name="catapult2"/>
 			</summonFlags>
 		</card>
 							
 		<card   index="141"							
-		    title="gwint_name_catapult"
-		    description="gwint_desc_catapult"
+			title="gwint_name_catapult" name="catapult2"
+			description="gwint_desc_catapult"
 			power="8"
 			picture="nor_catapult_1"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -934,14 +941,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="140"/>
-				<card id="141"/>
+				<flag name="catapult"/>
+				<flag name="catapult2"/>
 			</summonFlags>
 		</card>
 							
 		<card   index="145"							
-		    title="gwint_name_ballista"
-		    description="gwint_desc_ballista"
+			title="gwint_name_ballista" name="ballista"
+			description="gwint_desc_ballista"
+			item=""
 			power="6"
 			picture="nor_ballista"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -955,8 +963,9 @@
 		</card>
 		
 		<card   index="146"							
-		    title="gwint_name_ballista"
-		    description="gwint_desc_ballista"
+			title="gwint_name_ballista" name="ballista2"
+			item=""
+			description="gwint_desc_ballista"
 			power="6"
 			picture="nor_ballista_1"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -969,10 +978,10 @@
 			</effect_flags>
 		</card>
 
-
 		<card   index="150"							
-		    title="gwint_name_kaedweni_siege"
-		    description="gwint_desc_kaedweni_siege"
+			title="gwint_name_kaedweni_siege" name="kaedweni_siege"
+			item=""
+			description="gwint_desc_kaedweni_siege"
 			power="1"
 			picture="nor_kaedwen_siege"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -986,8 +995,9 @@
 		</card>
 
 		<card   index="151"							
-		    title="gwint_name_kaedweni_siege"
-		    description="gwint_desc_kaedweni_siege"
+			title="gwint_name_kaedweni_siege" name="kaedweni_siege2"
+			item=""
+			description="gwint_desc_kaedweni_siege"
 			power="1"
 			picture="nor_kaedwen_siege_1"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -1001,8 +1011,9 @@
 		</card>
 
 		<card   index="152"							
-		    title="gwint_name_kaedweni_siege"
-		    description="gwint_desc_kaedweni_siege"
+			title="gwint_name_kaedweni_siege" name="kaedweni_siege3"
+			description="gwint_desc_kaedweni_siege"
+			item=""
 			power="1"
 			picture="nor_kaedwen_siege_2"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -1017,8 +1028,8 @@
 
 
 		<card   index="160"							
-		    title="gwint_name_blue_stripes"
-		    description="gwint_desc_blue_stripes"
+			title="gwint_name_blue_stripes" name="blue_stripes"
+			description="gwint_desc_blue_stripes"
 			power="4"
 			picture="nor_blue_stripes"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -1030,13 +1041,13 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="160"/>
+				<flag name="blue_stripes"/>
 			</summonFlags>
 		</card>
 
 		<card   index="170"							
-		    title="gwint_name_siege_tower"
-		    description="gwint_desc_siege_tower"
+			title="gwint_name_siege_tower" name="siege_tower"
+			description="gwint_desc_siege_tower"
 			power="6"
 			picture="nor_siege_tower"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -1050,8 +1061,9 @@
 		</card>
 
 		<card   index="175"							
-		    title="gwint_name_dun_banner_medic"
-		    description="gwint_desc_dun_banner_medic"
+			title="gwint_name_dun_banner_medic" name="dun_banner_medic"
+			description="gwint_desc_dun_banner_medic"
+			item=""
 			power="5"
 			picture="nor_banner_nurse"
 			faction_index="F_NORTHERN_KINGDOM" >
@@ -1064,15 +1076,10 @@
 			</effect_flags>
 		</card>
 
-
-<!--
-=============================================	
-============================================= NILFGAARD CARDS =====================================================
-=============================================	
--->
+<!--============================================= NILFGAARD CARDS =====================================================-->
 
 		<card   index="200"					
-			title="gwint_name_letho"
+			title="gwint_name_letho" name="letho"
 			description="gwint_desc_letho"
 			power="10"
 			picture="nil_letho"
@@ -1088,7 +1095,7 @@
 		</card>
 
 		<card   index="201"					
-			title="gwint_name_menno"
+			title="gwint_name_menno" name="menno"
 			description="gwint_desc_menno"
 			power="10"
 			picture="nil_menno"
@@ -1104,7 +1111,7 @@
 		</card>
 
 		<card   index="202"					
-			title="gwint_name_moorvran"
+			title="gwint_name_moorvran" name="moorvran"
 			description="gwint_desc_moorvran"
 			power="10"
 			picture="nil_moorvran"
@@ -1120,7 +1127,7 @@
 		</card>
 
 		<card   index="203"
-			title="gwint_name_tibor"
+			title="gwint_name_tibor" name="tibor"
 			description="gwint_desc_tibor"
 			power="10"
 			picture="nil_tibor"
@@ -1134,11 +1141,10 @@
 				<flag name="EFFECT_NONE" />
 			</effect_flags>
 		</card>
-
 		
 		<card   index="205"					
-		    title="gwint_name_albrich"
-		    description="gwint_desc_albrich"
+			title="gwint_name_albrich" name="albrich"
+			description="gwint_desc_albrich"
 			power="2"
 			picture="nil_albrich"
 			faction_index="F_NILFGAARD" >
@@ -1152,8 +1158,8 @@
 		</card>
 		
 		<card   index="206"					
-		    title="gwint_name_assire"
-		    description="gwint_desc_assire"
+			title="gwint_name_assire" name="assire"
+			description="gwint_desc_assire"
 			power="6"
 			picture="nil_assire"
 			faction_index="F_NILFGAARD" >
@@ -1167,8 +1173,8 @@
 		</card>
 		
 		<card   index="207"					
-		    title="gwint_name_cynthia"
-		    description="gwint_desc_cynthia"
+			title="gwint_name_cynthia" name="cynthia"
+			description="gwint_desc_cynthia"
 			power="4"
 			picture="nil_cynthia"
 			faction_index="F_NILFGAARD" >
@@ -1179,11 +1185,10 @@
 			<effect_flags>
 				<flag name="EFFECT_NONE" />
 			</effect_flags>
-		</card>
-							
+		</card>				
 
 		<card   index="208"					
-			title="gwint_name_fringilla"
+			title="gwint_name_fringilla" name="fringilla"
 			description="gwint_desc_fringilla"
 			power="6"
 			picture="nil_fringilla"
@@ -1198,7 +1203,7 @@
 		</card>
 
 		<card   index="209"					
-			title="gwint_name_morteisen"
+			title="gwint_name_morteisen" name="morteisen"
 			description="gwint_desc_morteisen"
 			power="3"
 			picture="nil_morteisen"
@@ -1213,7 +1218,7 @@
 		</card>
 			
 		<card   index="210"				
-			title="gwint_name_rainfarn"
+			title="gwint_name_rainfarn" name="rainfarn"
 			description="gwint_desc_rainfarn"
 			power="4"
 			picture="nil_rainfarn"
@@ -1228,7 +1233,7 @@
 		</card>
 
 		<card   index="211"				
-			title="gwint_name_renuald"
+			title="gwint_name_renuald" name="renuald"
 			description="gwint_desc_renuald"
 			power="5"
 			picture="nil_renuald"
@@ -1243,7 +1248,7 @@
 		</card>
 
 		<card   index="212"					
-			title="gwint_name_rotten"
+			title="gwint_name_rotten" name="rotten"
 			description="gwint_desc_rotten"
 			power="3"
 			picture="nil_rotten"
@@ -1258,7 +1263,7 @@
 		</card>
 
 		<card   index="213"					
-			title="gwint_name_shilard"
+			title="gwint_name_shilard" name="shilard"
 			description="gwint_desc_shilard"
 			power="7"
 			picture="nil_shilard"
@@ -1274,7 +1279,7 @@
 		</card>
 		
 		<card   index="214"					
-			title="gwint_name_stefan"
+			title="gwint_name_stefan" name="stefan"
 			description="gwint_desc_stefan"
 			power="9"
 			picture="nil_stefan"
@@ -1290,7 +1295,7 @@
 		</card>
 
 		<card   index="215"
-			title="gwint_name_sweers"
+			title="gwint_name_sweers" name="sweers"
 			description="gwint_desc_sweers"
 			power="2"
 			picture="nil_sweers"
@@ -1305,7 +1310,7 @@
 		</card>
 
 		<card   index="217"					
-			title="gwint_name_vanhemar"
+			title="gwint_name_vanhemar" name="vanhemar"
 			description="gwint_desc_vanhemar"
 			power="4"
 			picture="nil_vanhemar"
@@ -1320,7 +1325,7 @@
 		</card>
 
 		<card   index="218"										
-			title="gwint_name_vattier"
+			title="gwint_name_vattier" name="vattier"
 			description="gwint_desc_vattier"
 			power="4"
 			picture="nil_vattier"
@@ -1336,7 +1341,7 @@
 		</card>
 
 		<card   index="219"					
-			title="gwint_name_vreemde"
+			title="gwint_name_vreemde" name="vreemde"
 			description="gwint_desc_vreemde"
 			power="2"
 			picture="nil_vreemde"
@@ -1351,7 +1356,7 @@
 		</card>
 		
 		<card   index="220"					
-			title="gwint_name_cahir"
+			title="gwint_name_cahir" name="cahir"
 			description="gwint_desc_cahir"
 			power="6"
 			picture="nil_cahir"
@@ -1366,7 +1371,7 @@
 		</card>
 		
 		<card   index="221"					
-			title="gwint_name_puttkammer"
+			title="gwint_name_puttkammer" name="puttkammer"
 			description="gwint_desc_puttkammer"
 			power="3"
 			picture="nil_puttkammer"
@@ -1381,8 +1386,8 @@
 		</card>
 							
 		<card   index="230"					
-		    title="gwint_name_archer_support"
-		    description="gwint_desc_archer_support"
+			title="gwint_name_archer_support" name="archer_support"
+			description="gwint_desc_archer_support"
 			power="1"
 			picture="nil_archer_support"
 			faction_index="F_NILFGAARD" >
@@ -1396,7 +1401,7 @@
 		</card>
 		
 		<card   index="231"					
-			title="gwint_name_archer_support"
+			title="gwint_name_archer_support" name="archer_support2"
 			description="gwint_desc_archer_support"
 			power="1"
 			picture="nil_archer_support_1"
@@ -1411,8 +1416,8 @@
 		</card>
 
 		<card   index="235"					
-		    title="gwint_name_black_archer"
-		    description="gwint_desc_black_archer"
+			title="gwint_name_black_archer" name="black_archer"
+			description="gwint_desc_black_archer"
 			power="10"
 			picture="nil_black_archer"
 			faction_index="F_NILFGAARD" >
@@ -1426,8 +1431,8 @@
 		</card>
 		
 		<card   index="236"					
-		    title="gwint_name_black_archer"
-		    description="gwint_desc_black_archer"
+			title="gwint_name_black_archer" name="black_archer2"
+			description="gwint_desc_black_archer"
 			power="10"
 			picture="nil_black_archer_1"
 			faction_index="F_NILFGAARD" >
@@ -1442,7 +1447,7 @@
 
 
 		<card   index="240"					
-			title="gwint_name_heavy_zerri"
+			title="gwint_name_heavy_zerri" name="heavy_zerri"
 			description="gwint_desc_heavy_zerri"
 			power="10"
 			picture="nil_heavy_zerri"
@@ -1457,7 +1462,7 @@
 		</card>
 		
 		<card   index="241"					
-			title="gwint_name_zerri"
+			title="gwint_name_zerri" name="zerri"
 			description="gwint_desc_zerri"
 			power="5"
 			picture="nil_zerri"
@@ -1473,7 +1478,7 @@
 
 
 		<card   index="245"					
-			title="gwint_name_impera_brigade"
+			title="gwint_name_impera_brigade" name="impera_brigade"
 			description="gwint_desc_impera_brigade"
 			power="3"
 			picture="nil_impera_brigade"
@@ -1486,15 +1491,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="245"/>
-				<card id="246"/>
-				<card id="247"/>
-				<card id="248"/>
+				<flag name="impera_brigade"/>
+				<flag name="impera_brigade2"/>
+				<flag name="impera_brigade3"/>
+				<flag name="impera_brigade4"/>
 			</summonFlags>
 		</card>
 
 				<card   index="246"					
-			title="gwint_name_impera_brigade"
+			title="gwint_name_impera_brigade" name="impera_brigade2"
 			description="gwint_desc_impera_brigade"
 			power="3"
 			picture="nil_impera_brigade"
@@ -1507,15 +1512,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="245"/>
-				<card id="246"/>
-				<card id="247"/>
-				<card id="248"/>
+				<flag name="impera_brigade"/>
+				<flag name="impera_brigade2"/>
+				<flag name="impera_brigade3"/>
+				<flag name="impera_brigade4"/>
 			</summonFlags>
 		</card>
 
-				<card   index="247"					
-			title="gwint_name_impera_brigade"
+		<card   index="247"					
+			title="gwint_name_impera_brigade" name="impera_brigade3"
 			description="gwint_desc_impera_brigade"
 			power="3"
 			picture="nil_impera_brigade"
@@ -1528,15 +1533,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="245"/>
-				<card id="246"/>
-				<card id="247"/>
-				<card id="248"/>
+				<flag name="impera_brigade"/>
+				<flag name="impera_brigade2"/>
+				<flag name="impera_brigade3"/>
+				<flag name="impera_brigade4"/>
 			</summonFlags>
 		</card>
 
-				<card   index="248"					
-			title="gwint_name_impera_brigade"
+		<card   index="248"					
+			title="gwint_name_impera_brigade" name="impera_brigade4"
 			description="gwint_desc_impera_brigade"
 			power="3"
 			picture="nil_impera_brigade"
@@ -1549,15 +1554,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="245"/>
-				<card id="246"/>
-				<card id="247"/>
-				<card id="248"/>
+				<flag name="impera_brigade"/>
+				<flag name="impera_brigade2"/>
+				<flag name="impera_brigade3"/>
+				<flag name="impera_brigade4"/>
 			</summonFlags>
 		</card>
 
 		<card   index="250"					
-			title="gwint_name_nausicaa"
+			title="gwint_name_nausicaa" name="nausicaa"
 			description="gwint_desc_nausicaa"
 			power="2"
 			picture="nil_nauzicaa_2"
@@ -1570,15 +1575,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="250"/>
-				<card id="251"/>
-				<card id="252"/>
+				<flag name="nausicaa"/>
+				<flag name="nausicaa2"/>
+				<flag name="nausicaa3"/>
 			</summonFlags>
 		</card>
 
 
 		<card   index="251"					
-			title="gwint_name_nausicaa"
+			title="gwint_name_nausicaa" name="nausicaa2"
 			description="gwint_desc_nausicaa"
 			power="2"
 			picture="nil_nauzicaa_2"
@@ -1591,14 +1596,14 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="250"/>
-				<card id="251"/>
-				<card id="252"/>
+				<flag name="nausicaa"/>
+				<flag name="nausicaa2"/>
+				<flag name="nausicaa3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="252"					
-			title="gwint_name_nausicaa"
+			title="gwint_name_nausicaa" name="nausicaa3"
 			description="gwint_desc_nausicaa"
 			power="2"
 			picture="nil_nauzicaa_2"
@@ -1611,14 +1616,14 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="250"/>
-				<card id="251"/>
-				<card id="252"/>
+				<flag name="nausicaa"/>
+				<flag name="nausicaa2"/>
+				<flag name="nausicaa3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="255"					
-			title="gwint_name_combat_engineer"
+			title="gwint_name_combat_engineer" name="combat_engineer"
 			description="gwint_desc_combat_engineer"
 			power="6"
 			picture="nil_siege_engineer"
@@ -1633,7 +1638,7 @@
 		</card>
 
 		<card   index="260"					
-			title="gwint_name_young_emissary"
+			title="gwint_name_young_emissary" name="young_emissary"
 			description="gwint_desc_young_emisary"
 			power="5"
 			picture="nil_young_emissary"
@@ -1646,13 +1651,13 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="261"/>
-				<card id="260"/>
+				<flag name="young_emissary"/>
+				<flag name="young_emissary2"/>
 			</summonFlags>
 		</card>
 
 		<card   index="261"					
-			title="gwint_name_young_emissary"
+			title="gwint_name_young_emissary" name="young_emissary2"
 			description="gwint_desc_young_emisary"
 			power="5"
 			picture="nil_young_emissary_1"
@@ -1665,13 +1670,13 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="260"/>
-				<card id="261"/>
+				<flag name="young_emissary"/>
+				<flag name="young_emissary2"/>
 			</summonFlags>
 		</card>
 
 		<card   index="265"					
-			title="gwint_name_siege_support"
+			title="gwint_name_siege_support" name="siege_support"
 			description="gwint_desc_siege_support"
 			power="0"
 			picture="nil_siege_support"
@@ -1685,17 +1690,11 @@
 			</effect_flags>
 		</card>
 
+<!--============================================= SCOIA'TEL CARDS =====================================================-->
 
-
-
-<!--
-=============================================	
-============================================= SCOIA'TEL CARDS =====================================================
-=============================================
--->
 		<card   index="300"				
-		    title="gwint_name_eithne"
-		    description="gwint_desc_eithne"
+			title="gwint_name_eithne" name="eithne"
+			description="gwint_desc_eithne"
 			power="10"
 			picture="sco_eithne"
 			faction_index="F_SCOIATAEL" >
@@ -1710,8 +1709,8 @@
 		</card>
 		
 		<card   index="301"				
-		    title="gwint_name_saskia"
-		    description="gwint_desc_saskia"
+			title="gwint_name_saskia" name="saskia"
+			description="gwint_desc_saskia"
 			power="10"
 			picture="sco_saskia"
 			faction_index="F_SCOIATAEL" >
@@ -1726,8 +1725,8 @@
 		</card>
 
 		<card   index="302"				
-		    title="gwint_name_isengrim"
-		    description="gwint_desc_isengrim"
+			title="gwint_name_isengrim" name="isengrim"
+			description="gwint_desc_isengrim"
 			power="10"
 			picture="sco_isengrim"
 			faction_index="F_SCOIATAEL" >
@@ -1742,8 +1741,8 @@
 		</card>
 		
 		<card   index="303"				
-		    title="gwint_name_iorveth"
-		    description="gwint_desc_iorveth"
+			title="gwint_name_iorveth" name="iorveth"
+			description="gwint_desc_iorveth"
 			power="10"
 			picture="sco_iorveth"
 			faction_index="F_SCOIATAEL" >
@@ -1758,8 +1757,8 @@
 		</card>
 		
 		<card   index="305"							
-		    title="gwint_name_dennis"
-		    description="gwint_desc_dennis"
+			title="gwint_name_dennis" name="dennis"
+			description="gwint_desc_dennis"
 			power="6"
 			picture="sco_dennis"
 			faction_index="F_SCOIATAEL" >
@@ -1773,8 +1772,8 @@
 		</card>
 		
 		<card   index="306"				
-		    title="gwint_name_milva"
-		    description="gwint_desc_milva"
+			title="gwint_name_milva" name="milva"
+			description="gwint_desc_milva"
 			power="10"
 			picture="sco_milva"
 			faction_index="F_SCOIATAEL" >
@@ -1788,8 +1787,8 @@
 		</card>
 
 		<card   index="307"				
-		    title="gwint_name_ida"
-		    description="gwint_desc_ida"
+			title="gwint_name_ida" name="ida"
+			description="gwint_desc_ida"
 			power="6"
 			picture="sco_ida"
 			faction_index="F_SCOIATAEL" >
@@ -1803,8 +1802,8 @@
 		</card>
 
 		<card   index="308"				
-		    title="gwint_name_filavandrel"
-		    description="gwint_desc_filavandrel"
+			title="gwint_name_filavandrel" name="filavandrel"
+			description="gwint_desc_filavandrel"
 			power="6"
 			picture="sco_filavandrel"
 			faction_index="F_SCOIATAEL" >
@@ -1819,8 +1818,8 @@
 		</card>
 
 		<card   index="309"				
-		    title="gwint_name_yaevinn"
-		    description="gwint_desc_yaevinn"
+			title="gwint_name_yaevinn" name="yaevinn"
+			description="gwint_desc_yaevinn"
 			power="6"
 			picture="sco_yaevinn"
 			faction_index="F_SCOIATAEL" >
@@ -1835,8 +1834,8 @@
 		</card>
 
 		<card   index="310"				
-		    title="gwint_name_toruviel"
-		    description="gwint_desc_toruviel"
+			title="gwint_name_toruviel" name="toruviel"
+			description="gwint_desc_toruviel"
 			power="2"
 			picture="sco_toruviel"
 			faction_index="F_SCOIATAEL" >
@@ -1850,8 +1849,8 @@
 		</card>
 
 		<card   index="311"				
-		    title="gwint_name_riordain"
-		    description="gwint_desc_riordain"
+			title="gwint_name_riordain" name="riordain"
+			description="gwint_desc_riordain"
 			power="1"
 			picture="sco_riordain"
 			faction_index="F_SCOIATAEL" >
@@ -1865,8 +1864,8 @@
 		</card>
 
 		<card   index="312"				
-		    title="gwint_name_ciaran"
-		    description="gwint_desc_ciaran"
+			title="gwint_name_ciaran" name="ciaran"
+			description="gwint_desc_ciaran"
 			power="3"
 			picture="sco_ciaran"
 			faction_index="F_SCOIATAEL" >
@@ -1881,8 +1880,8 @@
 		</card>
 		
 		<card   index="313"				
-		    title="gwint_name_barclay"
-		    description="gwint_desc_barclay"
+			title="gwint_name_barclay" name="barclay"
+			description="gwint_desc_barclay"
 			power="6"
 			picture="sco_barclay"
 			faction_index="F_SCOIATAEL" >
@@ -1897,8 +1896,9 @@
 		</card>
 
 		<card   index="320"				
-		    title="gwint_name_havcaaren_support"
-		    description="gwint_desc_havcaaren_support"
+			title="gwint_name_havcaaren_support" name="havcaaren_support"
+			item="gwint_card_havekar_support"
+			description="gwint_desc_havcaaren_support"
 			power="5"
 			picture="sco_havekar_support"
 			faction_index="F_SCOIATAEL" >
@@ -1910,15 +1910,16 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="321"/>
-				<card id="322"/>
-				<card id="320"/>
+				<flag name="havcaaren_support"/>
+				<flag name="havcaaren_support2"/>
+				<flag name="havcaaren_support3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="321"				
-		    title="gwint_name_havcaaren_support"
-		    description="gwint_desc_havcaaren_support"
+			title="gwint_name_havcaaren_support" name="havcaaren_support2"
+			item="gwint_card_havekar_support2"
+			description="gwint_desc_havcaaren_support"
 			power="5"
 			picture="sco_havekar_support_1"
 			faction_index="F_SCOIATAEL" >
@@ -1930,15 +1931,16 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="320"/>
-				<card id="322"/>
-				<card id="321"/>
+				<flag name="havcaaren_support"/>
+				<flag name="havcaaren_support2"/>
+				<flag name="havcaaren_support3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="322"				
-		    title="gwint_name_havcaaren_support"
-		    description="gwint_desc_havcaaren_support"
+			title="gwint_name_havcaaren_support" name="havcaaren_support3"
+			item="gwint_card_havekar_support3"
+			description="gwint_desc_havcaaren_support"
 			power="5"
 			picture="sco_havekar_support_2"
 			faction_index="F_SCOIATAEL" >
@@ -1950,15 +1952,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="320"/>
-				<card id="321"/>
-				<card id="322"/>
+				<flag name="havcaaren_support"/>
+				<flag name="havcaaren_support2"/>
+				<flag name="havcaaren_support3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="325"				
-		    title="gwint_name_vrihedd_brigade"
-		    description="gwint_desc_vrihedd_brigade"
+			title="gwint_name_vrihedd_brigade" name="vrihedd_brigade"
+			description="gwint_desc_vrihedd_brigade"
 			power="5"
 			picture="sco_vrihedd_brigade"
 			faction_index="F_SCOIATAEL" >
@@ -1973,8 +1975,8 @@
 		</card>
 
 		<card   index="326"				
-		    title="gwint_name_vrihedd_brigade"
-		    description="gwint_desc_vrihedd_brigade"
+			title="gwint_name_vrihedd_brigade" name="vrihedd_brigade2"
+			description="gwint_desc_vrihedd_brigade"
 			power="5"
 			picture="sco_vrihedd_brigade_1"
 			faction_index="F_SCOIATAEL" >
@@ -1989,8 +1991,9 @@
 		</card>
 
 		<card   index="330"				
-		    title="gwint_name_dol_scout"
-		    description="gwint_desc_dol_scout"
+			title="gwint_name_dol_scout" name="dol_scout"
+			item="gwint_card_dol_infantry"
+			description="gwint_desc_dol_scout"
 			power="6"
 			picture="sco_dol_infantry"
 			faction_index="F_SCOIATAEL" >
@@ -2005,8 +2008,9 @@
 		</card>
 				
 		<card   index="331"				
-		    title="gwint_name_dol_scout"
-		    description="gwint_desc_dol_scout"
+			title="gwint_name_dol_scout" name="dol_scout2"
+			item="gwint_card_dol_infantry2"
+			description="gwint_desc_dol_scout"
 			power="6"
 			picture="sco_dol_infantry_1"
 			faction_index="F_SCOIATAEL" >
@@ -2021,8 +2025,9 @@
 		</card>
 		
 		<card   index="332"				
-		    title="gwint_name_dol_scout"
-		    description="gwint_desc_dol_scout"
+			title="gwint_name_dol_scout" name="dol_scout3"
+			item="gwint_card_dol_infantry3"
+			description="gwint_desc_dol_scout"
 			power="6"
 			picture="sco_dol_infantry_2"
 			faction_index="F_SCOIATAEL" >
@@ -2037,8 +2042,9 @@
 		</card>
 
 		<card   index="335"				
-		    title="gwint_name_dwarf"
-		    description="gwint_desc_dwarf"
+			title="gwint_name_dwarf" name="dwarf"
+			item="gwint_card_dol_dwarf"
+			description="gwint_desc_dwarf"
 			power="3"
 			picture="sco_dwarf"
 			faction_index="F_SCOIATAEL" >
@@ -2050,15 +2056,16 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="336"/>
-				<card id="337"/>
-				<card id="335"/>
+				<flag name="dwarf"/>
+				<flag name="dwarf2"/>
+				<flag name="dwarf3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="336"				
-		    title="gwint_name_dwarf"
-		    description="gwint_desc_dwarf"
+			title="gwint_name_dwarf" name="dwarf2"
+			item="gwint_card_dol_dwarf2"
+			description="gwint_desc_dwarf"
 			power="3"
 			picture="sco_dwarf_1"
 			faction_index="F_SCOIATAEL" >
@@ -2070,15 +2077,16 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="335"/>
-				<card id="337"/>
-				<card id="336"/>
+				<flag name="dwarf"/>
+				<flag name="dwarf2"/>
+				<flag name="dwarf3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="337"				
-		    title="gwint_name_dwarf"
-		    description="gwint_desc_dwarf"
+			title="gwint_name_dwarf" name="dwarf3"
+			item="gwint_card_dol_dwarf3"
+			description="gwint_desc_dwarf"
 			power="3"
 			picture="sco_dwarf_2"
 			faction_index="F_SCOIATAEL" >
@@ -2090,15 +2098,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="335"/>
-				<card id="336"/>
-				<card id="337"/>
+				<flag name="dwarf"/>
+				<flag name="dwarf2"/>
+				<flag name="dwarf3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="340"				
-		    title="gwint_name_mahakam"
-		    description="gwint_desc_mahakam"
+			title="gwint_name_mahakam" name="mahakam"
+			description="gwint_desc_mahakam"
 			power="5"
 			picture="sco_mahakam"
 			faction_index="F_SCOIATAEL" >
@@ -2112,8 +2120,8 @@
 		</card>
 
 		<card   index="341"				
-		    title="gwint_name_mahakam"
-		    description="gwint_desc_mahakam"
+			title="gwint_name_mahakam" name="mahakam2"
+			description="gwint_desc_mahakam"
 			power="5"
 			picture="sco_mahakam_1"
 			faction_index="F_SCOIATAEL" >
@@ -2127,8 +2135,8 @@
 		</card>
 
 		<card   index="342"				
-		    title="gwint_name_mahakam"
-		    description="gwint_desc_mahakam"
+			title="gwint_name_mahakam" name="mahakam3"
+			description="gwint_desc_mahakam"
 			power="5"
 			picture="sco_mahakam_2"
 			faction_index="F_SCOIATAEL" >
@@ -2143,8 +2151,8 @@
 		
 
 		<card   index="343"				
-		    title="gwint_name_mahakam"
-		    description="gwint_desc_mahakam"
+			title="gwint_name_mahakam" name="mahakam4"
+			description="gwint_desc_mahakam"
 			power="5"
 			picture="sco_mahakam_3"
 			faction_index="F_SCOIATAEL" >
@@ -2158,8 +2166,8 @@
 		</card>
 
 		<card   index="344"				
-		    title="gwint_name_mahakam"
-		    description="gwint_desc_mahakam"
+			title="gwint_name_mahakam" name="mahakam5"
+			description="gwint_desc_mahakam"
 			power="5"
 			picture="sco_mahakam_4"
 			faction_index="F_SCOIATAEL" >
@@ -2173,8 +2181,8 @@
 		</card>
 
 		<card   index="350"				
-		    title="gwint_name_elf_skirmisher"
-		    description="gwint_desc_elf_skirmisher"
+			title="gwint_name_elf_skirmisher" name="elf_skirmisher"
+			description="gwint_desc_elf_skirmisher"
 			power="2"
 			picture="sco_elf_skirmisher"
 			faction_index="F_SCOIATAEL" >
@@ -2186,15 +2194,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="351"/>
-				<card id="352"/>
-				<card id="350"/>
+				<flag name="elf_skirmisher"/>
+				<flag name="elf_skirmisher2"/>
+				<flag name="elf_skirmisher3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="351"				
-		    title="gwint_name_elf_skirmisher"
-		    description="gwint_desc_elf_skirmisher"
+			title="gwint_name_elf_skirmisher" name="elf_skirmisher2"
+			description="gwint_desc_elf_skirmisher"
 			power="2"
 			picture="sco_elf_skirmisher_1"
 			faction_index="F_SCOIATAEL" >
@@ -2206,15 +2214,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="350"/>
-				<card id="352"/>
-				<card id="351"/>
+				<flag name="elf_skirmisher"/>
+				<flag name="elf_skirmisher2"/>
+				<flag name="elf_skirmisher3"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="352"				
-		    title="gwint_name_elf_skirmisher"
-		    description="gwint_desc_elf_skirmisher"
+			title="gwint_name_elf_skirmisher" name="elf_skirmisher3"
+			description="gwint_desc_elf_skirmisher"
 			power="2"
 			picture="sco_elf_skirmisher_2"
 			faction_index="F_SCOIATAEL" >
@@ -2226,15 +2234,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="350"/>
-				<card id="351"/>
-				<card id="352"/>
+				<flag name="elf_skirmisher"/>
+				<flag name="elf_skirmisher2"/>
+				<flag name="elf_skirmisher3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="355"				
-		    title="gwint_name_vrihedd_cadet"
-		    description="gwint_desc_vrihedd_cadet"
+			title="gwint_name_vrihedd_cadet" name="vrihedd_cadet"
+			description="gwint_desc_vrihedd_cadet"
 			power="4"
 			picture="sco_vrihedd_cadet"
 			faction_index="F_SCOIATAEL" >
@@ -2248,8 +2256,8 @@
 		</card>
 
 		<card   index="360"				
-		    title="gwint_name_dol_archer"
-		    description="gwint_desc_dol_archer"
+			title="gwint_name_dol_archer" name="dol_archer"
+			description="gwint_desc_dol_archer"
 			power="4"
 			picture="sco_dol_archer"
 			faction_index="F_SCOIATAEL" >
@@ -2263,8 +2271,9 @@
 		</card>
 
 		<card   index="365"				
-		    title="gwint_name_havcaaren_medic"
-		    description="gwint_desc_havcaaren_medic"
+			title="gwint_name_havcaaren_medic" name="havcaaren_medic"
+			item="gwint_card_havekar_nurse"
+			description="gwint_desc_havcaaren_medic"
 			power="0"
 			picture="sco_havekar_nurse"
 			faction_index="F_SCOIATAEL" >
@@ -2279,8 +2288,9 @@
 		
 
 		<card   index="366"				
-		    title="gwint_name_havcaaren_medic"
-		    description="gwint_desc_havcaaren_medic"
+			title="gwint_name_havcaaren_medic" name="havcaaren_medic2"
+			item="gwint_card_havekar_nurse2"
+			description="gwint_desc_havcaaren_medic"
 			power="0"
 			picture="sco_havekar_nurse_1"
 			faction_index="F_SCOIATAEL" >
@@ -2295,8 +2305,9 @@
 		
 
 		<card   index="367"				
-		    title="gwint_name_havcaaren_medic"
-		    description="gwint_desc_havcaaren_medic"
+			title="gwint_name_havcaaren_medic" name="havcaaren_medic3"
+			item="gwint_card_havekar_nurse3"
+			description="gwint_desc_havcaaren_medic"
 			power="0"
 			picture="sco_havekar_nurse_2"
 			faction_index="F_SCOIATAEL" >
@@ -2311,8 +2322,8 @@
 
 
 		<card   index="368"				
-		    title="gwint_name_schirru"
-		    description="gwint_desc_schirru"
+			title="gwint_name_schirru" name="schirru"
+			description="gwint_desc_schirru"
 			power="8"
 			picture="sco_schirru"
 			faction_index="F_SCOIATAEL" >
@@ -2325,15 +2336,11 @@
 			</effect_flags>
 		</card>
 
+<!--============================================= NO MAN'S LAND CARDS =================================================-->
 
-<!--
-=============================================					
-============================================= NO MAN'S LAND CARDS =====================================================		
-=============================================			
--->
 		<card   index="400"					
-		    title="gwint_name_draug"
-		    description="gwint_desc_draug"
+			title="gwint_name_draug" name="draug"
+			description="gwint_desc_draug"
 			power="10"
 			picture="nml_draug"
 			faction_index="F_NO_MANS_LAND" >
@@ -2348,8 +2355,8 @@
 		</card>
 
 		<card   index="401"					
-		    title="gwint_name_kayran"
-		    description="gwint_desc_kayran"
+			title="gwint_name_kayran" name="kayran"
+			description="gwint_desc_kayran"
 			power="8"
 			picture="nml_kayran"
 			faction_index="F_NO_MANS_LAND" >
@@ -2365,8 +2372,8 @@
 		</card>
 		
 		<card   index="402"					
-		    title="gwint_name_imlerith"
-		    description="gwint_desc_imlerith"
+			title="gwint_name_imlerith" name="imlerith"
+			description="gwint_desc_imlerith"
 			power="10"
 			picture="nml_imlerith"
 			faction_index="F_NO_MANS_LAND" >
@@ -2381,8 +2388,8 @@
 		</card>
 
 		<card   index="403"					
-		    title="gwint_name_leshen"
-		    description="gwint_desc_leshen"
+			title="gwint_name_leshen" name="leshen"
+			description="gwint_desc_leshen"
 			power="10"
 			picture="nml_leshan"
 			faction_index="F_NO_MANS_LAND" >
@@ -2395,11 +2402,10 @@
 				<flag name="EFFECT_NONE" />
 			</effect_flags>
 		</card>
-
 			
 		<card   index="405"							
-		    title="gwint_name_forktail"
-		    description="gwint_desc_forktail"
+			title="gwint_name_forktail" name="forktail"
+			description="gwint_desc_forktail"
 			power="5"
 			picture="nml_forktail"
 			faction_index="F_NO_MANS_LAND" >
@@ -2413,8 +2419,8 @@
 		</card>
 
 		<card   index="407"					
-		    title="gwint_name_earth_elemental"
-		    description="gwint_desc_earth_elemental"
+			title="gwint_name_earth_elemental" name="earth_elemental"
+			description="gwint_desc_earth_elemental"
 			power="6"
 			picture="nml_earth_elemental"
 			faction_index="F_NO_MANS_LAND" >
@@ -2428,8 +2434,8 @@
 		</card>
 
 		<card   index="410"					
-		    title="gwint_name_fiend"
-		    description="gwint_desc_fiend"
+			title="gwint_name_fiend" name="fiend"
+			description="gwint_desc_fiend"
 			power="6"
 			picture="nml_fiend"
 			faction_index="F_NO_MANS_LAND" >
@@ -2443,8 +2449,8 @@
 		</card>
 
 		<card   index="413"
-		    title="gwint_name_plague_maiden"
-		    description="gwint_desc_plague_maiden"
+			title="gwint_name_plague_maiden" name="plague_maiden"
+			description="gwint_desc_plague_maiden"
 			power="5"
 			picture="nml_mighty_maiden"
 			faction_index="F_NO_MANS_LAND" >
@@ -2458,8 +2464,8 @@
 		</card>
 
 		<card   index="415"					
-		    title="gwint_name_griffin"
-		    description="gwint_desc_griffin"
+			title="gwint_name_griffin" name="griffin"
+			description="gwint_desc_griffin"
 			power="5"
 			picture="nml_gryffin"
 			faction_index="F_NO_MANS_LAND" >
@@ -2473,8 +2479,8 @@
 		</card>
 
 		<card   index="417"					
-		    title="gwint_name_werewolf"
-		    description="gwint_desc_werewolf"
+			title="gwint_name_werewolf" name="werewolf"
+			description="gwint_desc_werewolf"
 			power="5"
 			picture="nml_werewolf"
 			faction_index="F_NO_MANS_LAND" >
@@ -2482,14 +2488,11 @@
 				<flag name="TYPE_CREATURE" />
 				<flag name="TYPE_MELEE" />
 			</type_flags>
-			<effect_flags>
-				<flag name="EFFECT_NONE" />
-			</effect_flags>
 		</card>
 
 		<card   index="420"					
-		    title="gwint_name_botchling"
-		    description="gwint_desc_botchling"
+			title="gwint_name_botchling" name="botchling"
+			description="gwint_desc_botchling"
 			power="4"
 			picture="nml_poroniec"
 			faction_index="F_NO_MANS_LAND" >
@@ -2503,8 +2506,8 @@
 		</card>
 
 		<card   index="423"					
-		    title="gwint_name_frightener"
-		    description="gwint_desc_frightener"
+			title="gwint_name_frightener" name="frightener"
+			description="gwint_desc_frightener"
 			power="5"
 			picture="nml_frightener"
 			faction_index="F_NO_MANS_LAND" >
@@ -2518,8 +2521,8 @@
 		</card>
 
 		<card   index="425"					
-		    title="gwint_name_ice_giant"
-		    description="gwint_desc_ice_giant"
+			title="gwint_name_ice_giant" name="ice_giant"
+			description="gwint_desc_ice_giant"
 			power="5"
 			picture="nml_frost_giant"
 			faction_index="F_NO_MANS_LAND" >
@@ -2533,8 +2536,8 @@
 		</card>
 
 		<card   index="427"					
-		    title="gwint_name_endrega"
-		    description="gwint_desc_endrega"
+			title="gwint_name_endrega" name="endrega"
+			description="gwint_desc_endrega"
 			power="2"
 			picture="nml_endrega"
 			faction_index="F_NO_MANS_LAND" >
@@ -2548,8 +2551,8 @@
 		</card>
 
 		<card   index="430"					
-		    title="gwint_name_harpy"
-		    description="gwint_desc_harpy"
+			title="gwint_name_harpy" name="harpy"
+			description="gwint_desc_harpy"
 			power="2"
 			picture="nml_harpy"
 			faction_index="F_NO_MANS_LAND" >
@@ -2564,8 +2567,8 @@
 		</card>
 
 		<card   index="433"					
-		    title="gwint_name_cockatrice"
-		    description="gwint_desc_cockatrice"
+			title="gwint_name_cockatrice" name="cockatrice"
+			description="gwint_desc_cockatrice"
 			power="2"
 			picture="nml_cockatrice"
 			faction_index="F_NO_MANS_LAND" >
@@ -2579,8 +2582,8 @@
 		</card>
 
 		<card   index="435"					
-		    title="gwint_name_gargoyle"
-		    description="gwint_desc_gargoyle"
+			title="gwint_name_gargoyle" name="gargoyle"
+			description="gwint_desc_gargoyle"
 			power="2"
 			picture="nml_gargoyle"
 			faction_index="F_NO_MANS_LAND" >
@@ -2594,8 +2597,8 @@
 		</card>
 
 		<card   index="437"					
-		    title="gwint_name_celaeno_harpy"
-		    description="gwint_desc_celaeno_harpy"
+			title="gwint_name_celaeno_harpy" name="celaeno_harpy"
+			description="gwint_desc_celaeno_harpy"
 			power="2"
 			picture="nml_celaeno_harpy"
 			faction_index="F_NO_MANS_LAND" >
@@ -2611,8 +2614,8 @@
 
 
 		<card   index="440"					
-		    title="gwint_name_grave_hag"
-		    description="gwint_desc_grave_hag"
+			title="gwint_name_grave_hag" name="grave_hag"
+			description="gwint_desc_grave_hag"
 			power="5"
 			picture="nml_gravehag"
 			faction_index="F_NO_MANS_LAND" >
@@ -2626,8 +2629,8 @@
 		</card>
 
 		<card   index="443"					
-		    title="gwint_name_fire_elemental"
-		    description="gwint_desc_fire_elemental"
+			title="gwint_name_fire_elemental" name="fire_elemental"
+			description="gwint_desc_fire_elemental"
 			power="6"
 			picture="nml_fire_elemental"
 			faction_index="F_NO_MANS_LAND" >
@@ -2641,8 +2644,8 @@
 		</card>
 
 		<card   index="445"					
-		    title="gwint_name_fogling"
-		    description="gwint_desc_fogling"
+			title="gwint_name_fogling" name="fogling"
+			description="gwint_desc_fogling"
 			power="2"
 			picture="nml_fogling"
 			faction_index="F_NO_MANS_LAND" >
@@ -2656,8 +2659,8 @@
 		</card>
 
 		<card   index="447"					
-		    title="gwint_name_wyvern"
-		    description="gwint_desc_wyvern"
+			title="gwint_name_wyvern" name="wyvern"
+			description="gwint_desc_wyvern"
 			power="2"
 			picture="nml_wyvern"
 			faction_index="F_NO_MANS_LAND" >
@@ -2671,8 +2674,8 @@
 		</card>
 		
 		<card   index="450"					
-		    title="gwint_name_arachas_behemoth"
-		    description="gwint_desc_arachas_behemoth"
+			title="gwint_name_arachas_behemoth" name="arachas_behemoth"
+			description="gwint_desc_arachas_behemoth"
 			power="6"
 			picture="nml_arachas_behemoth"
 			faction_index="F_NO_MANS_LAND" >
@@ -2684,16 +2687,16 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="451"/>
-				<card id="452"/>
-				<card id="453"/>
-				<card id="450"/>
+				<flag name="arachas_behemoth"/>
+				<flag name="arachas"/>
+				<flag name="arachas2"/>
+				<flag name="arachas3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="451"					
-		    title="gwint_name_arachas"
-		    description="gwint_desc_arachas"
+			title="gwint_name_arachas" name="arachas"
+			description="gwint_desc_arachas"
 			power="4"
 			picture="nml_arachas"
 			faction_index="F_NO_MANS_LAND" >
@@ -2705,16 +2708,16 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 				<summonFlags>
-				<!-- <card id="450"/> -->
-				<card id="452"/>
-				<card id="453"/>
-				<card id="451"/>
+				<!-- <flag name="arachas_behemoth"/> -->
+				<flag name="arachas"/>
+				<flag name="arachas2"/>
+				<flag name="arachas3"/>
 				</summonFlags>
 		</card>
 		
 		<card   index="452"					
-		    title="gwint_name_arachas"
-		    description="gwint_desc_arachas"
+			title="gwint_name_arachas" name="arachas2"
+			description="gwint_desc_arachas"
 			power="4"
 			picture="nml_arachas_1"
 			faction_index="F_NO_MANS_LAND" >
@@ -2726,17 +2729,17 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 				<summonFlags>
-					<!-- <card id="450"/> -->
-					<card id="451"/>
-					<card id="453"/>
-					<card id="452"/>
+					<!-- <flag name="arachas_behemoth"/> -->
+					<flag name="arachas"/>
+					<flag name="arachas2"/>
+					<flag name="arachas3"/>
 				</summonFlags>
 		</card>
 		
 		
 		<card   index="453"					
-		    title="gwint_name_arachas"
-		    description="gwint_desc_arachas"
+			title="gwint_name_arachas" name="arachas3"
+			description="gwint_desc_arachas"
 			power="4"
 			picture="nml_arachas_2"
 			faction_index="F_NO_MANS_LAND" >
@@ -2748,16 +2751,16 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 				<summonFlags>
-					<!-- <card id="450"/> -->
-					<card id="451"/>
-					<card id="452"/>
-					<card id="453"/>
+					<!-- <flag name="arachas_behemoth"/> -->
+					<flag name="arachas"/>
+					<flag name="arachas2"/>
+					<flag name="arachas3"/>
 				</summonFlags>
 		</card>
 		
 		<card   index="455"					
-		    title="gwint_name_nekker"
-		    description="gwint_desc_nekker"
+			title="gwint_name_nekker" name="nekker"
+			description="gwint_desc_nekker"
 			power="2"
 			picture="nml_nekker"
 			faction_index="F_NO_MANS_LAND" >
@@ -2769,15 +2772,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="456"/>
-				<card id="457"/>
-				<card id="455"/>
+				<flag name="nekker"/>
+				<flag name="nekker2"/>
+				<flag name="nekker3"/>
 			</summonFlags>
 		</card>		
 		
 		<card   index="456"					
-		    title="gwint_name_nekker"
-		    description="gwint_desc_nekker"
+			title="gwint_name_nekker" name="nekker2"
+			description="gwint_desc_nekker"
 			power="2"
 			picture="nml_nekker_1"
 			faction_index="F_NO_MANS_LAND" >
@@ -2789,15 +2792,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="455"/>
-				<card id="457"/>
-				<card id="456"/>
+				<flag name="nekker"/>
+				<flag name="nekker2"/>
+				<flag name="nekker3"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="457"					
-		    title="gwint_name_nekker"
-		    description="gwint_desc_nekker"
+			title="gwint_name_nekker" name="nekker3"
+			description="gwint_desc_nekker"
 			power="2"
 			picture="nml_nekker_2"
 			faction_index="F_NO_MANS_LAND" >
@@ -2809,15 +2812,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="455"/>
-				<card id="456"/>
-				<card id="457"/>
+				<flag name="nekker"/>
+				<flag name="nekker2"/>
+				<flag name="nekker3"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="460"					
-		    title="gwint_name_ekkima"
-		    description="gwint_desc_ekkima"
+			title="gwint_name_ekkima" name="ekkima"
+			description="gwint_desc_ekkima"
 			power="4"
 			picture="nml_ekkima"
 			faction_index="F_NO_MANS_LAND" >
@@ -2829,17 +2832,17 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="461"/>
-				<card id="462"/>
-				<card id="463"/>
-				<card id="464"/>
-				<card id="460"/>
+				<flag name="ekkima"/>
+				<flag name="fleder"/>
+				<flag name="garkain"/>
+				<flag name="bruxa"/>
+				<flag name="katakan"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="461"					
-		    title="gwint_name_fleder"
-		    description="gwint_desc_fleder"
+			title="gwint_name_fleder" name="fleder"
+			description="gwint_desc_fleder"
 			power="4"
 			picture="nml_fleder"
 			faction_index="F_NO_MANS_LAND" >
@@ -2851,17 +2854,17 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="460"/>
-				<card id="462"/>
-				<card id="463"/>
-				<card id="464"/>
-				<card id="461"/>
+				<flag name="ekkima"/>
+				<flag name="fleder"/>
+				<flag name="garkain"/>
+				<flag name="bruxa"/>
+				<flag name="katakan"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="462"					
-		    title="gwint_name_garkain"
-		    description="gwint_desc_garkain"
+			title="gwint_name_garkain" name="garkain"
+			description="gwint_desc_garkain"
 			power="4"
 			picture="nml_garkain"
 			faction_index="F_NO_MANS_LAND" >
@@ -2873,17 +2876,17 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="461"/>
-				<card id="460"/>
-				<card id="463"/>
-				<card id="464"/>
-				<card id="462"/>
+				<flag name="ekkima"/>
+				<flag name="fleder"/>
+				<flag name="garkain"/>
+				<flag name="bruxa"/>
+				<flag name="katakan"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="463"					
-		    title="gwint_name_bruxa"
-		    description="gwint_desc_bruxa"
+			title="gwint_name_bruxa" name="bruxa"
+			description="gwint_desc_bruxa"
 			power="4"
 			picture="nml_bruxa"
 			faction_index="F_NO_MANS_LAND" >
@@ -2895,17 +2898,17 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="461"/>
-				<card id="462"/>
-				<card id="460"/>
-				<card id="464"/>
-				<card id="463"/>
+				<flag name="ekkima"/>
+				<flag name="fleder"/>
+				<flag name="garkain"/>
+				<flag name="bruxa"/>
+				<flag name="katakan"/>
 			</summonFlags>
 		</card>
 		
 		<card  index="464"					
-		    title="gwint_name_katakan"
-		    description="gwint_desc_katakan"
+			title="gwint_name_katakan" name="katakan"
+			description="gwint_desc_katakan"
 			power="5"
 			picture="nml_karakan"
 			faction_index="F_NO_MANS_LAND" >
@@ -2917,17 +2920,17 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="461"/>
-				<card id="462"/>
-				<card id="463"/>
-				<card id="460"/>
-				<card id="464"/>
+				<flag name="ekkima"/>
+				<flag name="fleder"/>
+				<flag name="garkain"/>
+				<flag name="bruxa"/>
+				<flag name="katakan"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="470"
-		    title="gwint_name_ghoul"
-		    description="gwint_desc_ghoul"
+			title="gwint_name_ghoul" name="ghoul"
+			description="gwint_desc_ghoul"
 			power="1"
 			picture="nml_ghoul"
 			faction_index="F_NO_MANS_LAND" >
@@ -2939,15 +2942,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="471"/>
-				<card id="472"/>
-				<card id="470"/>
+				<flag name="ghoul"/>
+				<flag name="ghoul2"/>
+				<flag name="ghoul3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="471"
-		    title="gwint_name_ghoul"
-		    description="gwint_desc_ghoul"
+			title="gwint_name_ghoul" name="ghoul2"
+			description="gwint_desc_ghoul"
 			power="1"
 			picture="nml_ghoul_1"
 			faction_index="F_NO_MANS_LAND" >
@@ -2959,15 +2962,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="470"/>
-				<card id="472"/>
-				<card id="471"/>
+				<flag name="ghoul"/>
+				<flag name="ghoul2"/>
+				<flag name="ghoul3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="472"
-		    title="gwint_name_ghoul"
-		    description="gwint_desc_ghoul"
+			title="gwint_name_ghoul" name="ghoul3"
+			description="gwint_desc_ghoul"
 			power="1"
 			picture="nml_ghoul_2"
 			faction_index="F_NO_MANS_LAND" >
@@ -2979,15 +2982,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="470"/>
-				<card id="471"/>
-				<card id="472"/>
+				<flag name="ghoul"/>
+				<flag name="ghoul2"/>
+				<flag name="ghoul3"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="475"					
-		    title="gwint_name_crone_brewess"
-		    description="gwint_desc_crone_brewess"
+			title="gwint_name_crone_brewess" name="crone_brewess"
+			description="gwint_desc_crone_brewess"
 			power="6"
 			picture="nml_witch_velen"
 			faction_index="F_NO_MANS_LAND" >
@@ -2999,15 +3002,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="476"/>
-				<card id="477"/>
-				<card id="475"/>
+				<flag name="crone_brewess"/>
+				<flag name="crone_weavess"/>
+				<flag name="crone_whispess"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="476"					
-		    title="gwint_name_crone_weavess"
-		    description="gwint_desc_crone_weavess"
+			title="gwint_name_crone_weavess" name="crone_weavess"
+			description="gwint_desc_crone_weavess"
 			power="6"
 			picture="nml_witch_velen_1"
 			faction_index="F_NO_MANS_LAND" >
@@ -3019,15 +3022,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="475"/>
-				<card id="477"/>
-				<card id="476"/>
+				<flag name="crone_brewess"/>
+				<flag name="crone_weavess"/>
+				<flag name="crone_whispess"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="477"					
-		    title="gwint_name_crone_whispess"
-		    description="gwint_desc_crone_whispess"
+			title="gwint_name_crone_whispess" name="crone_whispess"
+			description="gwint_desc_crone_whispess"
 			power="6"
 			picture="nml_witch_velen_2"
 			faction_index="F_NO_MANS_LAND" >
@@ -3039,15 +3042,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="475"/>
-				<card id="476"/>
-				<card id="477"/>
+				<flag name="crone_brewess"/>
+				<flag name="crone_weavess"/>
+				<flag name="crone_whispess"/>
 			</summonFlags>
 		</card>
 
 		<card   index="478"					
-		    title="gwint_name_toad"
-		    description="gwint_desc_toad"
+			title="gwint_name_toad" name="toad"
+			description="gwint_desc_toad"
 			power="7"
 			picture="nml_toad"
 			faction_index="F_NO_MANS_LAND" >
@@ -3059,20 +3062,13 @@
 				<flag name="EFFECT_RANGED_SCORCH" />
 			</effect_flags>
 		</card>
-		
 
-
-<!--
-=============================================					
-============================================= SKELLIGE CARDS =====================================================		
-=============================================			
--->
-
-
+<!--============================================= SKELLIGE CARDS ======================================================-->
 
 		<card   index="500"							
-		    title="gwint_name_hemdal"
-		    description="gwint_desc_hemdal"
+			title="gwint_name_hemdal" name="hemdal"
+			item=""
+			description="gwint_desc_hemdal"
 			power="11"
 			picture="ske_hemdal"
 			faction_index="F_SKELLIGE" >
@@ -3087,8 +3083,8 @@
 		</card>
 
 		<card   index="501"							
-		    title="gwint_name_hjalmar"
-		    description="gwint_desc_hjalmar"
+			title="gwint_name_hjalmar" name="hjalmar"
+			description="gwint_desc_hjalmar"
 			power="10"
 			picture="ske_hjalmar"
 			faction_index="F_SKELLIGE" >
@@ -3103,8 +3099,8 @@
 		</card>
 
 		<card   index="502"							
-		    title="gwint_name_cerys"
-		    description="gwint_desc_cerys"
+			title="gwint_name_cerys" name="cerys"
+			description="gwint_desc_cerys"
 			power="10"
 			picture="ske_cerys"
 			faction_index="F_SKELLIGE" >
@@ -3117,15 +3113,15 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="526"/>
-				<card id="527"/>
-				<card id="523"/>
+				<flag name="clan_drummond_shieldmaiden"/>
+				<flag name="clan_drummond_shieldmaiden2"/>
+				<flag name="clan_drummond_shieldmaiden3"/>
 			</summonFlags>
 		</card>
 
 		<card   index="503"							
-		    title="gwint_name_ermion"
-		    description="gwint_desc_ermion"
+			title="gwint_name_ermion" name="ermion"
+			description="gwint_desc_ermion"
 			power="8"
 			picture="ske_ermion"
 			faction_index="F_SKELLIGE" >
@@ -3140,8 +3136,8 @@
 		</card>
 
 		<card   index="504"							
-		    title="gwint_name_draig"
-		    description="gwint_desc_draig"
+			title="gwint_name_draig" name="draig"
+			description="gwint_desc_draig"
 			power="2"
 			picture="ske_draig"
 			faction_index="F_SKELLIGE" >
@@ -3155,8 +3151,8 @@
 		</card>
 
 		<card   index="505"							
-		    title="gwint_name_holger_blackhand"
-		    description="gwint_desc_holger_blackhand"
+			title="gwint_name_holger_blackhand" name="holger_blackhand"
+			description="gwint_desc_holger_blackhand"
 			power="4"
 			picture="ske_holger_blackhand"
 			faction_index="F_SKELLIGE" >
@@ -3170,8 +3166,8 @@
 		</card>
 
 		<card   index="506"							
-		    title="gwint_name_madman_lugos"
-		    description="gwint_desc_madman_lugos"
+			title="gwint_name_madman_lugos" name="madman_lugos"
+			description="gwint_desc_madman_lugos"
 			power="6"
 			picture="ske_madman_lugos"
 			faction_index="F_SKELLIGE" >
@@ -3185,8 +3181,8 @@
 		</card>
 
 		<card   index="507"							
-		    title="gwint_name_donar_an_hindar"
-		    description="gwint_desc_donar_an_hindar"
+			title="gwint_name_donar_an_hindar" name="donar_an_hindar"
+			description="gwint_desc_donar_an_hindar"
 			power="4"
 			picture="ske_donar_an_hindar"
 			faction_index="F_SKELLIGE" >
@@ -3200,8 +3196,8 @@
 		</card>
 
 		<card   index="508"							
-		    title="gwint_name_udalryk"
-		    description="gwint_desc_udalryk"
+			title="gwint_name_udalryk" name="udalryk"
+			description="gwint_desc_udalryk"
 			power="4"
 			picture="ske_udalryk"
 			faction_index="F_SKELLIGE" >
@@ -3215,8 +3211,8 @@
 		</card>
 
 		<card   index="509"							
-		    title="gwint_name_birna_bran"
-		    description="gwint_desc_birna_bran"
+			title="gwint_name_birna_bran" name="birna_bran"
+			description="gwint_desc_birna_bran"
 			power="2"
 			picture="ske_birna_bran"
 			faction_index="F_SKELLIGE" >
@@ -3230,8 +3226,8 @@
 		</card>
 
 		<card   index="510"							
-		    title="gwint_name_blueboy_lugos"
-		    description="gwint_desc_blueboy_lugos"
+			title="gwint_name_blueboy_lugos" name="blueboy_lugos"
+			description="gwint_desc_blueboy_lugos"
 			power="6"
 			picture="ske_blueboy_lugos"
 			faction_index="F_SKELLIGE" >
@@ -3245,8 +3241,8 @@
 		</card>
 
 		<card   index="511"							
-		    title="gwint_name_svanrige"
-		    description="gwint_desc_svanrige"
+			title="gwint_name_svanrige" name="svanrige"
+			description="gwint_desc_svanrige"
 			power="4"
 			picture="ske_svanrige"
 			faction_index="F_SKELLIGE" >
@@ -3260,8 +3256,8 @@
 		</card>
 
 		<card   index="512"							
-		    title="gwint_name_olaf"
-		    description="gwint_desc_olaf"
+			title="gwint_name_olaf" name="olaf"
+			description="gwint_desc_olaf"
 			power="12"
 			picture="ske_olaf"
 			faction_index="F_SKELLIGE" >
@@ -3276,8 +3272,8 @@
 		</card>
 
 		<card   index="513"							
-		    title="gwint_name_berserker"
-		    description="gwint_desc_berserker"
+			title="gwint_name_berserker" name="berserker"
+			description="gwint_desc_berserker"
 			power="4"
 			picture="ske_berserker"
 			faction_index="F_SKELLIGE" >
@@ -3289,13 +3285,14 @@
 				<flag name="EFFECT_MORPH" />
 			</effect_flags>
 			<summonFlags>
-				<card id="514"/>
+				<flag name="berserker_bear"/>
 			</summonFlags>
 		</card>
 
 		<card   index="514"							
-		    title="gwint_name_berserker_bear"
-		    description="gwint_desc_berserker_bear"
+			title="gwint_name_berserker_bear" name="berserker_bear"
+			description="gwint_desc_berserker_bear"
+			item=""
 			power="14"
 			picture="ske_berserker_bear"
 			faction_index="F_SKELLIGE" >
@@ -3309,8 +3306,8 @@
 		</card>
 
 		<card   index="515"							
-		    title="gwint_name_young_berserker"
-		    description="gwint_desc_young_berserker"
+			title="gwint_name_young_berserker" name="young_berserker"
+			description="gwint_desc_young_berserker"
 			power="2"
 			picture="ske_young_berserker"
 			faction_index="F_SKELLIGE" >
@@ -3322,13 +3319,14 @@
 				<flag name="EFFECT_MORPH" />
 			</effect_flags>
 			<summonFlags>
-				<card id="516"/>
+				<flag name="young_berserker_bear"/>
 			</summonFlags>
 		</card>
 
 		<card   index="516"							
-		    title="gwint_name_young_berserker_bear"
-		    description="gwint_desc_young_berserker_bear"
+			title="gwint_name_young_berserker_bear" name="young_berserker_bear"
+			description="gwint_desc_young_berserker_bear"
+			item=""
 			power="8"
 			picture="ske_young_berserker_bear"
 			faction_index="F_SKELLIGE" >
@@ -3340,13 +3338,13 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="516"/>
+				<flag name="young_berserker_bear"/>
 			</summonFlags>
 		</card>
 
 		<card   index="517"							
-		    title="gwint_name_clan_an_craite_warrior"
-		    description="gwint_desc_clan_an_craite_warrior"
+			title="gwint_name_clan_an_craite_warrior" name="clan_an_craite_warrior"
+			description="gwint_desc_clan_an_craite_warrior"
 			power="6"
 			picture="ske_clan_an_craite_warrior"
 			faction_index="F_SKELLIGE" >
@@ -3358,13 +3356,13 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="517"/>
+				<flag name="clan_an_craite_warrior"/>
 			</summonFlags>
 		</card>
 
 		<card   index="518"							
-		    title="gwint_name_clan_tordarroch_armorsmith"
-		    description="gwint_desc_clan_tordarroch_armorsmith"
+			title="gwint_name_clan_tordarroch_armorsmith" name="clan_tordarroch_armorsmith"
+			description="gwint_desc_clan_tordarroch_armorsmith"
 			power="4"
 			picture="ske_clan_tordarroch_armorsmith"
 			faction_index="F_SKELLIGE" >
@@ -3378,8 +3376,8 @@
 		</card>
 
 		<card   index="519"							
-		    title="gwint_name_clan_heymaey_skald"
-		    description="gwint_desc_clan_heymaey_skald"
+			title="gwint_name_clan_heymaey_skald" name="clan_heymaey_skald"
+			description="gwint_desc_clan_heymaey_skald"
 			power="4"
 			picture="ske_clan_heymaey_skald"
 			faction_index="F_SKELLIGE" >
@@ -3393,8 +3391,8 @@
 		</card>
 
 		<card   index="520"							
-		    title="gwint_name_light_drakkar"
-		    description="gwint_desc_light_drakkar"
+			title="gwint_name_light_drakkar" name="light_drakkar"
+			description="gwint_desc_light_drakkar"
 			power="4"
 			picture="ske_light_drakkar"
 			faction_index="F_SKELLIGE" >
@@ -3406,13 +3404,13 @@
 				<flag name="EFFECT_SUMMON_CLONES" />
 			</effect_flags>
 			<summonFlags>
-				<card id="520"/>
+				<flag name="light_drakkar"/>
 			</summonFlags>
 		</card>
 
 		<card   index="521"							
-		    title="gwint_name_war_drakkar"
-		    description="gwint_desc_war_drakkar"
+			title="gwint_name_war_drakkar" name="war_drakkar"
+			description="gwint_desc_war_drakkar"
 			power="6"
 			picture="ske_war_drakkar"
 			faction_index="F_SKELLIGE" >
@@ -3424,13 +3422,13 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="521"/>
+				<flag name="war_drakkar"/>
 			</summonFlags>
 		</card>
 
 		<card   index="522"							
-		    title="gwint_name_clan_brokvar_archer"
-		    description="gwint_desc_clan_brokvar_archer"
+			title="gwint_name_clan_brokvar_archer" name="clan_brokvar_archer"
+			description="gwint_desc_clan_brokvar_archer"
 			power="6"
 			picture="ske_clan_brokvar_archer"
 			faction_index="F_SKELLIGE" >
@@ -3444,8 +3442,8 @@
 		</card>
 
 		<card   index="523"							
-		    title="gwint_name_clan_drummond_shieldmaiden"
-		    description="gwint_desc_clan_drummond_shieldmaiden"
+			title="gwint_name_clan_drummond_shieldmaiden" name="clan_drummond_shieldmaiden"
+			description="gwint_desc_clan_drummond_shieldmaiden"
 			power="4"
 			picture="ske_clan_drummond_shieldmaiden"
 			faction_index="F_SKELLIGE" >
@@ -3457,15 +3455,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="526"/>
-				<card id="527"/>
-				<card id="523"/>
+				<flag name="clan_drummond_shieldmaiden2"/>
+				<flag name="clan_drummond_shieldmaiden3"/>
+				<flag name="clan_drummond_shieldmaiden"/>
 			</summonFlags>
 		</card>
 
 		<card   index="524"							
-		    title="gwint_name_clan_dimun_pirate"
-		    description="gwint_desc_clan_dimun_pirate"
+			title="gwint_name_clan_dimun_pirate" name="clan_dimun_pirate"
+			description="gwint_desc_clan_dimun_pirate"
 			power="6"
 			picture="ske_clan_dimun_pirate"
 			faction_index="F_SKELLIGE" >
@@ -3479,7 +3477,7 @@
 		</card>
 		
 		<card   index="525"							
-		    title="gwint_name_cock"
+			title="gwint_name_cock" name="cock"
 			description="gwint_desc_cock"
 			power="0"
 			picture="ske_cock"
@@ -3492,13 +3490,13 @@
 				<flag name="EFFECT_SUICIDE_SUMMON" />
 			</effect_flags>
 			<summonFlags>
-				<card id="500"/>
+				<flag name="hemdal"/>
 			</summonFlags>
 		</card>
 		
 		<card   index="526"							
-		    title="gwint_name_clan_drummond_shieldmaiden"
-		    description="gwint_desc_clan_drummond_shieldmaiden"
+			title="gwint_name_clan_drummond_shieldmaiden" name="clan_drummond_shieldmaiden2"
+			description="gwint_desc_clan_drummond_shieldmaiden"
 			power="4"
 			picture="ske_clan_drummond_shieldmaiden_2"
 			faction_index="F_SKELLIGE" >
@@ -3510,15 +3508,15 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="526"/>
-				<card id="527"/>
-				<card id="523"/>
+				<flag name="clan_drummond_shieldmaiden2"/>
+				<flag name="clan_drummond_shieldmaiden3"/>
+				<flag name="clan_drummond_shieldmaiden"/>
 			</summonFlags>
 		</card>		
 		
 		<card   index="527"							
-		    title="gwint_name_clan_drummond_shieldmaiden"
-		    description="gwint_desc_clan_drummond_shieldmaiden"
+			title="gwint_name_clan_drummond_shieldmaiden" name="clan_drummond_shieldmaiden3"
+			description="gwint_desc_clan_drummond_shieldmaiden"
 			power="4"
 			picture="ske_clan_drummond_shieldmaiden_3"
 			faction_index="F_SKELLIGE" >
@@ -3530,13 +3528,12 @@
 				<flag name="EFFECT_SAME_TYPE_MORALE" />
 			</effect_flags>
 			<summonFlags>
-				<card id="526"/>
-				<card id="527"/>
-				<card id="523"/>
+				<flag name="clan_drummond_shieldmaiden2"/>
+				<flag name="clan_drummond_shieldmaiden3"/>
+				<flag name="clan_drummond_shieldmaiden"/>
 			</summonFlags>
 		</card>
-		
 
 		</gwint_card_definitions_final>
-	</custom>
+	</definitions>
 </redxml>

@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redxml>
+	<definitions>
+		<abilities>
+			<!-- ######################## armor stats ######################## -->
+			<ability name="Scarlet Crest Armor _Stats">
+				<weight 						type="base" min="4.77" 		/>
+				<quality 						type="add" 	min="4"			/>
+				<armor 							type="base" min="230" 		/>
+				<slashing_resistance_perc 		type="base" min="0.21"		/>
+				<piercing_resistance_perc 		type="base" min="0.23"		/>
+				<bludgeoning_resistance_perc	type="base" min="0.27"		/>
+				<spell_power_quen 				type="mult" min="0.15"		/>
+				<focus_gain 					type="base" min="0.07" 		/>
+			</ability>
+			
+			<ability name="Scarlet Crest Boots _Stats">			
+				<weight 						type="base" min="1.2" 	/>				
+				<quality 						type="add" 	min="4" 	/>
+				<armor 							type="base" min="87" 	/>
+				<slashing_resistance_perc 		type="base" min="0.03" 	/>
+				<piercing_resistance_perc 		type="base" min="0.06" 	/>
+				<bludgeoning_resistance_perc 	type="base" min="0.10" 	/>
+				<spell_power_quen 				type="mult" min="0.05"	/>
+				<focus_gain 					type="base" min="0.07" 	/>
+			</ability>
+			
+			<ability name="Scarlet Crest Gauntlets _Stats">
+				<weight 						type="base" min="0.9" 	/>
+				<quality 						type="add" 	min="4"		/>
+				<armor 							type="base" min="83"	/>
+				<slashing_resistance_perc 		type="base" min="0.05" 	/>
+				<piercing_resistance_perc 		type="base" min="0.06" 	/>
+				<bludgeoning_resistance_perc 	type="base" min="0.07" 	/>
+				<spell_power_quen 				type="mult" min="0.05"	/>
+				<focus_gain 					type="base" min="0.03" 	/>
+			</ability>
+			
+			<ability name="Scarlet Crest Trousers _Stats">
+				<weight 						type="base" min="1.33" 	/>
+				<quality 						type="add"  min="4"		/>
+				<armor 							type="base" min="87"	/>
+				<slashing_resistance_perc 		type="base" min="0.04" 	/>
+				<piercing_resistance_perc 		type="base" min="0.05" 	/>
+				<bludgeoning_resistance_perc 	type="base" min="0.08" 	/>
+				<spell_power_quen 				type="mult" min="0.10"	/>
+				<focus_gain 					type="base" min="0.05" 	/>
+			</ability>			
+			
+			<!-- ######################## horse items stats ######################## -->
+			<ability name="Fire Horse Saddlebags _Stats">
+				<tags>HorseBag1</tags>
+				<encumbrance type="add" always_random="false" min="110" max="110" />
+				<weight type="base" min="1"/>
+			</ability>
+			
+			<ability name="Fire Horse Blinders _Stats">
+				<panic type="add" always_random="false" min="60" max="60"/>
+			</ability>
+
+			<ability name="Fire Horse Saddle _Stats">
+				<stamina type="add" always_random="false" min="90" max="90"/>
+			</ability>
+			
+		</abilities>
+		
+		<items>
+			<!-- Fire armor -->
+			<item 
+				name							="Scarlet Crest Armor"
+				category						="armor"
+				price							="730"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="1"
+				stackable						="1"
+				grid_size 						="2"
+				ability_mode					="OnMount"
+				equip_template					="t_01_mg__w3r_fire"
+				localisation_key_name 			="item_name_w3r_fire_armor"
+				localisation_key_description 	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/w3r_fire_armor_64x128.png"
+			>	
+				<tags>							Armor, MediumArmor, mod_armor, mod_legendary, noDye
+				</tags>
+				<base_abilities>
+												<a>Scarlet Crest Armor _Stats</a>
+												<a>Default armor _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="3">Hardened leather</parts>
+												<parts count="2">Linen</parts>
+												<parts count="2">Leather squares</parts>
+												<parts count="3">String</parts>
+												<parts count="1">Cotton</parts>
+				</recycling_parts> 	
+				<variants>
+					<variant equip_template="t_01a_mg__w3r_fire" category="gloves"></variant>
+				</variants>				
+			</item>
+			
+			<!-- Fire boots -->
+			<item 
+				name							="Scarlet Crest Boots"
+				category						="boots"
+				price							="177"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_template					="s_01_mg__w3r_fire"
+				localisation_key_name			="item_name_w3r_fire_boots"
+				localisation_key_description	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/w3r_fire_boots_64x128.png"
+			>
+				<tags>							Armor, MediumArmor, mod_armor, mod_legendary, noDye
+				</tags>
+				<base_abilities>
+												<a>Scarlet Crest Boots _Stats</a>
+												<a>Default armor _Stats</a>
+				</base_abilities>
+
+				<recycling_parts>				<parts count="1">Hardened leather</parts>
+												<parts count="1">Cotton</parts>
+												<parts count="2">Leather straps</parts>
+												<parts count="1">String</parts>
+												<parts count="1">Thread</parts>
+												
+				</recycling_parts>
+			</item>
+			
+			<!-- Fire gloves -->
+			<item 
+				name							="Scarlet Crest Gauntlets"
+				category						="gloves"
+				price							="220"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size 						="2"
+				ability_mode					="OnMount"
+				equip_template					="g_01_mg__w3r_fire"
+				localisation_key_name 			="item_name_w3r_fire_gloves"
+				localisation_key_description 	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/w3r_fire_gloves_64x128.png"
+			>
+				<tags>							Armor, MediumArmor, mod_armor, mod_legendary, noDye
+				</tags>
+				<base_abilities>
+												<a>Scarlet Crest Gauntlets _Stats</a>
+												<a>Default armor _Stats</a>
+				</base_abilities>
+				<variants>
+												<variant equip_template="g_01a_mg__w3r_fire">
+													<item>Geralt Shirt</item>
+													<item>Lynx Armor</item>
+												</variant>
+												<variant equip_template="g_01_mg__w3r_fire" category="armor"></variant>
+				</variants>
+				<recycling_parts>				<parts count="2">String</parts>
+												<parts count="1">Leather</parts>
+												<parts count="1">Leather squares</parts>
+												<parts count="2">Cotton</parts>
+												<parts count="1">Leather straps</parts>
+				</recycling_parts>
+			</item>
+			
+			<!-- Fire pants -->
+			<item 
+				name							="Scarlet Crest Trousers"
+				category						="pants"
+				price 							="90"
+				initial_durability				="100"
+				max_durability					="100"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size 						="2"
+				ability_mode					="OnMount"
+				equip_template					="l_01_mg__w3r_fire"
+				localisation_key_name 			="item_name_w3r_fire_pants"
+				localisation_key_description 	="item_category_medium_armor_description"
+				icon_path						="icons/inventory/armors/w3r_fire_pants_64x128.png"
+			>
+				<tags>							Armor, MediumArmor, mod_armor, mod_legendary, noDye
+				</tags>
+				<base_abilities>
+												<a>Scarlet Crest Trousers _Stats</a>
+												<a>Default armor _Stats</a>
+				</base_abilities>
+				<collapse>
+												<category_cond name="armor" collapse="true"/>
+												<item_cond name="Geralt Shirt" collapse="false"/>
+												<item_cond name="Body torso wet" collapse="false"/>
+												<item_cond name="Body torso towel" collapse="false"/>
+												<item_cond name="Body torso 01" collapse="false"/>
+				</collapse>
+				<variants>
+												<variant equip_template="l_01a_mg__w3r_fire" category="boots"></variant>
+				</variants>
+				<recycling_parts>				<parts count="2">Linen</parts>
+												<parts count="2">Leather squares</parts>
+												<parts count="2">Cotton</parts>
+												<parts count="1">Hardened leather</parts>
+												<parts count="2">Thread</parts>
+				</recycling_parts>
+			</item>			
+			
+			<!-- ######################## horse items stats ######################## -->
+			<item
+				name							="Fire Horse Saddlebags"
+				category						="horse_bag"
+				price							="200"
+				weight							="1.56"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				hold_slot						="head"
+				equip_template					="i_01_hd__bags_w3r_fire"
+				localisation_key_name			="item_name_w3r_fire_horsebags"
+				localisation_key_description	="item_desc_w3r_fire_bag"
+				icon_path						="icons/inventory/horse/w3r_fire_horsebags_128x128.png"
+			>
+				<tags>							HorseBag, mod_horse
+				</tags>
+				<base_abilities>				<a>Fire Horse Saddlebags _Stats</a>
+				</base_abilities>
+			</item>
+			
+			<item
+				name							="Fire Horse Blinders"
+				category						="horse_blinder"
+				price							="150"
+				weight							="0.2"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				hold_slot						="head"
+				equip_template					="c_01_hd__champron_w3r_fire"
+				localisation_key_name			="item_name_w3r_fire_blindings"
+				localisation_key_description	="item_desc_w3r_fire_blinder"
+				icon_path						="icons/inventory/horse/w3r_fire_blinders_128x128.png"
+			>
+				<tags>							Blinders, mod_horse
+				</tags>
+				<base_abilities>				<a>Fire Horse Blinders _Stats</a>
+				</base_abilities>
+			</item>
+			
+			<item
+				name							="Fire Horse Saddle"
+				category						="horse_saddle"
+				price							="150"
+				weight							="6.01"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				hold_slot						="head"
+				equip_template					="s_01_hd__saddle_w3r_fire"
+				localisation_key_name			="item_name_w3r_fire_saddle"
+				localisation_key_description	="item_desc_w3r_fire_saddle"
+				icon_path						="icons/inventory/horse/w3r_fire_saddle_128x128.png"
+			>
+				<tags>							Saddle, mod_horse
+				</tags>
+				<base_abilities>				<a>Fire Horse Saddle _Stats</a>
+				</base_abilities>
+				<bound_items>					
+					<item>Horse Harness 0</item>
+					<item>Fire Horse Hair</item>
+					<item>Fire Horse Tail</item>
+				</bound_items>
+			</item>
+			
+			<!-- Technical Items -->
+			<!-- Hair for new horse armor -->
+			<item
+				name							="Fire Horse Hair"
+				category						="horse_hair"
+				ability_mode					="OnMount"
+				equip_template					="h_02_hd__hair_w3r_fire"
+			>
+				<tags>							mod_horse, NoDrop, NoShow
+				</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item
+				name							="Fire Horse Tail"
+				category						="horse_tail"
+				equip_template					="t_01_hd__tail_w3r_fire"
+			>
+				<tags>							HorseTail, NoShowInPlayersInventory
+				</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item
+				name							="Wolf Bandana"
+				category						="mask"
+				price							="1"
+				enhancement_slots				="0"
+				stackable						="1"
+				grid_size						="2"
+				ability_mode					="OnMount"
+				equip_slot						="head"
+				equip_template					="w3r_wolf_mask"
+				localisation_key_name			="item_name_w3r_wolf_mask"
+				localisation_key_description	="item_desc_w3r_wolf_mask"
+				icon_path						="icons/inventory/other/w3r_wolf_mask.png"
+			>
+				<tags>							QuickSlot
+				</tags>
+				<base_abilities>				<a>Geralt_mask _Stats</a>
+				</base_abilities>
+				<recycling_parts>				<parts count="1">Leather squares</parts>
+				</recycling_parts>
+				<bound_items>
+				</bound_items>
+			</item>
+
+			<!-- Hair -->
+			<item name="Rabble rouser Hair" category="hair" equip_template="haircut_w3r_troublemaker_01" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+				<variants>
+					<variant equip_template="c_01_mg__witcher_mask">
+						<item>Geralt mask Nilf</item>
+					</variant>
+					<variant equip_template="haircut_w3r_troublemaker_01">
+						<item>Nilfgaardian Casual Suit 01</item>
+						<item>Nilfgaardian Casual Suit 02</item>
+						<item>Nilfgaardian Casual Suit 03</item>
+						<item>Body torso medalion</item>
+						<item>Body torso wet</item>
+						<item>Body torso wet hires</item>
+						<item>Geralt Shirt</item>
+						<item>Body torso towel</item>
+					</variant>
+					<variant equip_template="haircut_w3r_troublemaker_01" category="mask" all="true">
+						<item>Lynx Armor 4</item>
+					</variant>
+					<variant equip_template="c_08_mg__witcher_lx">
+						<item>Lynx Armor 4</item>
+					</variant>
+					<variant equip_template="haircut_w3r_troublemaker_01" category="armor"></variant>
+				</variants>
+			</item>
+
+			<item name="head_0_scar" category="head" equip_template="h_08_mg__geralt" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_1_scar" category="head" equip_template="h_08_mg__geralt_beard" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_2_scar" category="head" equip_template="h_08_mg__geralt_beard_short.w2ent" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_3_scar" category="head" equip_template="h_08_mg__geralt_beard_medium" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_4_scar" category="head" equip_template="h_08_mg__geralt_beard_long" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_5_scar" category="head" equip_template="h_08_mg__geralt_beard_goatee" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_6_scar" category="head" equip_template="h_08_mg__geralt_beard_chops" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_7_scar" category="head" equip_template="h_08_mg__geralt_beard_anchor" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_robbery_scar" category="head" equip_template="h_08_mg__geralt_robbery" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_0_scar_tattoo" category="head" equip_template="h_08_mg__geralt_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_1_scar_tattoo" category="head" equip_template="h_08_mg__geralt_tattoo_beard" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_2_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_short_tatoo.w2ent" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_3_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_medium_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_4_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_long_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_5_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_goatee_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_6_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_chops_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_7_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_anchor_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_robbery_scar_tattoo" category="head" equip_template="h_08_mg__geralt_robbery_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_0_scar_mark" category="head" equip_template="h_08_mg__geralt_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_1_scar_mark" category="head" equip_template="h_08_mg__geralt_mark_beard" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_2_scar_mark" category="head" equip_template="h_08_mg__geralt_beard_short_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_3_scar_mark" category="head" equip_template="h_08_mg__geralt_beard_medium_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_4_scar_mark" category="head" equip_template="h_08_mg__geralt_beard_long_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_5_scar_mark" category="head" equip_template="h_08_mg__geralt_beard_goatee_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_6_scar_mark" category="head" equip_template="h_08_mg__geralt_beard_chops_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_7_scar_mark" category="head" equip_template="h_08_mg__geralt_beard_anchor_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_robbery_scar_mark" category="head" equip_template="h_08_mg__geralt_robbery_mark" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_0_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_1_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_mark_tattoo_beard" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_2_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_beard_short_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_3_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_beard_medium_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_4_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_beard_long_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_5_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_beard_goatee_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_6_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_beard_chops_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_7_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_beard_anchor_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_robbery_scar_mark_tattoo" category="head" equip_template="h_08_mg__geralt_robbery_mark_tattoo" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_scar_shaving1" category="head" equip_template="h_08_mg__geralt_shave_01" ability_mode="OnMount">
+			<tags>NoShow,NoDrop,Body</tags>
+			<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_scar_shaving2" category="head" equip_template="h_08_mg__geralt_shave_02" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+
+			<item name="head_scar_shaving3" category="head" equip_template="h_08_mg__geralt_shave_03" ability_mode="OnMount">
+				<tags>NoShow,NoDrop,Body</tags>
+				<base_abilities>
+				</base_abilities>
+			</item>
+		</items>
+	</definitions>
+</redxml>
+

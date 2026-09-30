@@ -76,7 +76,7 @@
 		max_durability					="100" 
 		
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
 		<bound_items>					</bound_items>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Armor _Stats</a>
@@ -107,7 +107,7 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Boots _Stats</a>
 		</base_abilities>
@@ -134,7 +134,7 @@
 		initial_durability				="100"
 		max_durability					="100" 
 	>
-		<tags>							Armor,MediumArmor, mod_armor</tags>
+		<tags>							Armor,MediumArmor, mod_armor, Intact</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Gloves _Stats</a>
 		</base_abilities>
@@ -162,7 +162,7 @@
 		initial_durability				="100"
 		max_durability					="100"
 	>
-		<tags>							Armor,MediumArmor, mod_armor
+		<tags>							Armor,MediumArmor, mod_armor, Intact
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>White Tiger Pants _Stats</a>

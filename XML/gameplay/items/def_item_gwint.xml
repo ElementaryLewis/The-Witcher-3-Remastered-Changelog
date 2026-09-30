@@ -8,21 +8,25 @@
 			<ability name="max_card_1">
 				<max_count type="base" min="1"/>
 			</ability>
-			
+
 			<ability name="max_card_2">
 				<max_count type="base" min="2"/>
-			</ability>	
+			</ability>
 
 			<ability name="max_card_3">
 				<max_count type="base" min="3"/>
-			</ability>	
-		</abilities>
-		
-		<items>
-	<!-- Gwint Cards -->
-		<!-- Leaders Cards -->
-		<!-- Nilfgaardian Leaders -->
+			</ability>
 
+			<ability name="max_card_4">
+				<max_count type="base" min="4"/>
+			</ability>
+
+			<ability name="max_card_5">
+				<max_count type="base" min="5"/>
+			</ability>
+		</abilities>
+		<items>
+			<!-- Nilfgaardian Leaders -->
 				<item name="gwint_card_emhyr_platinium" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="70"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_emhyr" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
@@ -38,7 +42,7 @@
 						<a>max_card_0</a> <!-- Given in Mverics quest -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_emhyr_silver" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="55"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_emhyr" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -46,7 +50,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_emhyr_bronze" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_emhyr" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -54,7 +58,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<!-- IN BASE DECK
 				<item name="gwint_card_emhyr_copper" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="45"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_emhyr" localisation_key_description = "gwint_desc_gwint_card" >
@@ -64,13 +68,8 @@
 					</base_abilities>
 				</item>
 				-->
-				
-				
-				
-				
-				
-		<!-- Northern Kingdoms Leaders -->
 
+			<!-- Northern Kingdoms Leaders -->
 				<item name="gwint_card_foltest_platinium" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="70"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_foltest" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
@@ -78,7 +77,7 @@
 						<a>max_card_1</a> <!-- Given from EP1 Merchant -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_foltest_gold" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="60"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_foltest" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -86,7 +85,7 @@
 						<a>max_card_0</a> <!-- Given in Mverics quest -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_foltest_silver" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="55"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_foltest" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -94,7 +93,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_foltest_bronze" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_foltest" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -102,7 +101,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<!-- IN BASE DECK
 				<item name="gwint_card_foltest_copper" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="45"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_foltest" localisation_key_description = "gwint_desc_gwint_card" >
@@ -112,12 +111,8 @@
 					</base_abilities>
 				</item>
 				-->
-				
-				
-				
-				
-		<!-- Scoia'tael Leaders -->
 
+			<!-- Scoia'tael Leaders -->
 				<item name="gwint_card_francesca_platinium" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="70"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_francesca" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
@@ -125,7 +120,7 @@
 						<a>max_card_1</a> <!-- Given by EP1 Merchant -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_francesca_gold" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="60"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_francesca" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -133,7 +128,7 @@
 						<a>max_card_0</a> <!-- Given in Mverics quest -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_francesca_silver" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="55"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_francesca" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -141,7 +136,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_francesca_bronze" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_francesca" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -149,7 +144,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<!-- IN BASE DECK
 				<item name="gwint_card_francesca_copper" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="45"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_francesca" localisation_key_description = "gwint_desc_gwint_card" >
@@ -159,15 +154,8 @@
 					</base_abilities>
 				</item>
 				-->
-				
-				
-				
-				
-				
-				
-				
-		<!-- No Man's Land Leaders -->
 
+			<!-- No Man's Land (Monsters) Leaders -->
 				<item name="gwint_card_eredin_platinium" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="60"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
@@ -175,7 +163,7 @@
 						<a>max_card_1</a> <!-- Given by EP1 Merchant -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_eredin_gold" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="60"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -183,7 +171,7 @@
 						<a>max_card_0</a> <!-- Given in Mverics quest -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_eredin_silver" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="55"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -191,7 +179,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_eredin_bronze" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -199,7 +187,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<!-- IN BASE DECK
 				<item name="gwint_card_eredin_copper" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
@@ -210,13 +198,7 @@
 				</item>
 				-->
 
-				
-				
-				
-				
-		<!-- Skellige Leaders -->	
-				
-				
+			<!-- Skellige Leaders -->
 				<item name="gwint_card_king_bran_bronze" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_skellige.png" localisation_key_name = "gwint_name_king_bran" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT3,EP2Tournament</tags>
@@ -224,6 +206,7 @@
 						<a>max_card_0</a>
 					</base_abilities>
 				</item>
+
 				<!-- Player's base deck
 				<item name="gwint_card_king_bran_copper" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_king_bran" localisation_key_description = "gwint_desc_gwint_card" >
@@ -233,13 +216,8 @@
 					</base_abilities>
 				</item>
 				-->
-				
-				
-				
-				
-				
-		<!-- Nilfgaardian Deck -->
-		
+
+			<!-- Nilfgaardian Cards -->
 				<item name="gwint_card_impera_brigade" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_impera_brigade" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -279,7 +257,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_letho" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_letho" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -287,7 +265,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_archer_support" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_archer_support" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -295,7 +273,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_archer_support2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_archer_support" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -303,7 +281,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_assire" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_assire" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -311,7 +289,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_fringilla" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_fringilla" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -319,6 +297,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
+
 				<item name="gwint_card_nausicaa" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_nausicaa" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -326,6 +305,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
+
 				<item name="gwint_card_nausicaa2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_nilfgaard.png" localisation_key_name = "gwint_name_nausicaa" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -333,6 +313,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
+
 				<item name="gwint_card_nausicaa3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_nausicaa" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -340,6 +321,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
+
 				<item name="gwint_card_stefan" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_stefan" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT4</tags>
@@ -347,7 +329,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_black_archer" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_black_archer" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -355,7 +337,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_siege_support" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_nilfgaard.png" localisation_key_name = "gwint_name_siege_support" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -363,7 +345,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_menno" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_menno" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -371,7 +353,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_moorvran" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_moorvran" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -387,7 +369,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_albrich" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_albrich" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -395,7 +377,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_morteisen" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_morteisen" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -403,7 +385,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_rainfarn" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_rainfarn" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -411,7 +393,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_renuald" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_renuald" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -419,7 +401,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_rotten" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_nilfgaard.png" localisation_key_name = "gwint_name_rotten" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -427,7 +409,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_shilard" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_shilard" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>
@@ -435,7 +417,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_sweers" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_sweers" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -443,7 +425,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_vanhemar" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_vanhemar" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -451,7 +433,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_vattier" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_vattier" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -459,7 +441,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_vreemde" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_vreemde" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -467,7 +449,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_cahir" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_cahir" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
@@ -475,7 +457,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_puttkammer" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_puttkammer" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -483,7 +465,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_black_archer2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_nilfgaard.png" localisation_key_name = "gwint_name_black_archer" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -491,7 +473,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_heavy_zerri" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_nilfgaard.png" localisation_key_name = "gwint_name_heavy_zerri" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -499,7 +481,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_zerri" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_nilfgaard.png" localisation_key_name = "gwint_name_zerri" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -507,7 +489,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_combat_engineer" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_nilfgaard.png" localisation_key_name = "gwint_name_combat_engineer" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -515,7 +497,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_young_emissary" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_young_emissary" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -523,7 +505,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_young_emissary2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_nilfgaard.png" localisation_key_name = "gwint_name_young_emissary" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNlfg,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -531,18 +513,8 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-		<!-- Northern Kingdoms Deck -->
-				
+
+			<!-- Northern Kingdoms Cards -->
 				<item name="gwint_card_natalis" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_natalis" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -550,7 +522,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_esterad" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_esterad" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -558,17 +530,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
-				<!-- CUT FROM GWINT
-				<item name="gwint_card_witch_hunters" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint"
-					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_witch_hunters" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
-				-->
-				
+
 				<item name="gwint_card_catapult" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_catapult" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -584,7 +546,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_siege_tower" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_siege_tower" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -592,33 +554,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
-				<!-- CUT FROM GWINT
-				<item name="gwint_card_ballista_officer" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint"
-					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_ballista" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
-				-->
-				<!-- IN BASE DECK
-				<item name="gwint_card_ballista" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="146"
-					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_ballista" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
-				
-				<item name="gwint_card_siegfried" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_soldier_northern_realms.png" localisation_key_name = "gwint_name_siegfried" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_0</a>
-					</base_abilities>
-				</item>
-				-->
+
 				<item name="gwint_card_blue_stripes" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_blue_stripes" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
@@ -634,6 +570,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
+
 				<item name="gwint_card_crinfrid2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_northern_realms.png" localisation_key_name = "gwint_name_crinfrid" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -641,6 +578,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
+
 				<item name="gwint_card_crinfrid3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_northern_realms.png" localisation_key_name = "gwint_name_crinfrid" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -649,105 +587,132 @@
 					</base_abilities>
 				</item>
 
-				<!-- Player's base deck // Removed "GwintCollectorAchievement" 
-				<item name="gwint_card_stennis" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
-					icon_path="icons/inventory/gwint/ico_gwent_soldier_northern_realms.png" localisation_key_name = "gwint_name_stennis" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_0</a> 
-					</base_abilities>
-				</item>
-
-				<item name="gwint_card_poor_infantry" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_poor_infantry" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
-				-->
-
-				<item name="gwint_card_poor_infantry2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_poor_infantry" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_1</a> <!-- Player's base deck // Removed "GwintCollectorAchievement" -->
-					</base_abilities>
-				</item>
-				
-				<item name="gwint_card_poor_infantry3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_poor_infantry" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_1</a> <!-- Removed "GwintCollectorAchievement" as we count only unique -->
-					</base_abilities>
-				</item>
-				<!-- IN BASE DECK
-				<item name="gwint_card_kaedwen" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_kaedweni_siege" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT6</tags>
-					<base_abilities>
-						<a>max_card_1</a> 
-					</base_abilities>
-				</item>
-				
-				<item name="gwint_card_kaedwen2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_kaedweni_siege" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT6</tags>
-					<base_abilities>
-						<a>max_card_1</a> 
-					</base_abilities>
-				</item>
-				-->
 				<!-- NOT CURRENTLY IN AI DECKS -->
-				<item name="gwint_card_philippa" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
-					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_philippa" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>	
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
-				
-				<item name="gwint_card_vernon" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
-					icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_vernon" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>	
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
-				
-				<!-- Player's base deck // Removed "GwintCollectorAchievement"
-				<item name="gwint_card_dun_banner_medic" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_dun_banner_medic" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>	
-					<base_abilities>
-						<a>max_card_0</a> 
-					</base_abilities>
-				</item>
+					<item name="gwint_card_philippa" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
+						icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_philippa" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_vernon" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
+						icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_vernon" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_thaler" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_thaler" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_dijkstra" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_dijkstra" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+				<!-- CUT FROM GWINT
+					<item name="gwint_card_witch_hunters" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint"
+						icon_path="icons/inventory/gwint/ico_gwent_hero_northern_realms.png" localisation_key_name = "gwint_name_witch_hunters" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_ballista_officer" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint"
+						icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_ballista" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
 				-->
 
-				<item name="gwint_card_thaler" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_thaler" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
-				
-				<item name="gwint_card_dijkstra" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
-					icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_dijkstra" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>	
-					<base_abilities>
-						<a>max_card_1</a>
-					</base_abilities>
-				</item>
+				<!-- IN BASE DECK
+					<item name="gwint_card_ballista" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="146"
+						icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_ballista" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
 
-				
-				
-				
-				
-		<!-- Scoia'tael Deck -->
-				
+					<item name="gwint_card_siegfried" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_soldier_northern_realms.png" localisation_key_name = "gwint_name_siegfried" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_0</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_stennis" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
+						icon_path="icons/inventory/gwint/ico_gwent_soldier_northern_realms.png" localisation_key_name = "gwint_name_stennis" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_0</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_poor_infantry" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_poor_infantry" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_poor_infantry2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_poor_infantry" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_poor_infantry3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_melee_northern_realms.png" localisation_key_name = "gwint_name_poor_infantry" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_kaedwen" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_kaedweni_siege" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT6</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_kaedwen2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_kaedweni_siege" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT6</tags>
+						<base_abilities>
+							<a>max_card_1</a>
+						</base_abilities>
+					</item>
+
+					<item name="gwint_card_dun_banner_medic" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
+						icon_path="icons/inventory/gwint/ico_gwent_siege_northern_realms.png" localisation_key_name = "gwint_name_dun_banner_medic" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardNrkd,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_0</a>
+						</base_abilities>
+					</item>
+				-->
+
+			<!-- Scoia'tael Cards -->
 				<item name="gwint_card_eithne" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_eithne" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -755,7 +720,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_iorveth" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_iorveth" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -763,7 +728,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_barclay" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_barclay" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -771,7 +736,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dennis" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_dennis" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
@@ -779,7 +744,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_milva" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_milva" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT4</tags>
@@ -787,7 +752,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ida" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_ida" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
@@ -795,7 +760,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_filavandrel" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_filavandrel" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
@@ -803,7 +768,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_yaevinn" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_yaevinn" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
@@ -811,7 +776,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_toruviel" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_toruviel" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -819,7 +784,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_riordain" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_riordain" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT1</tags>
@@ -827,7 +792,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ciaran" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_ciaran" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -835,7 +800,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_mahakam" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_mahakam" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -843,7 +808,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_mahakam2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_mahakam" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -851,7 +816,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_mahakam3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_mahakam" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -859,7 +824,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_mahakam4" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_mahakam" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -867,7 +832,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_mahakam5" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_mahakam" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -875,7 +840,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_vrihedd_brigade" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_vrihedd_brigade" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -883,7 +848,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_vrihedd_brigade2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_vrihedd_brigade" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -891,7 +856,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_havekar_support" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_havcaaren_support" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -899,7 +864,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_havekar_support2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_havcaaren_support" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -907,7 +872,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_havekar_support3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_havcaaren_support" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -915,7 +880,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<!-- Alternate Name: gwint_card_dol_scout -->
 				<item name="gwint_card_dol_infantry" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_dol_scout" localisation_key_description = "gwint_desc_gwint_card" >
@@ -924,7 +889,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dol_infantry2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_dol_scout" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -932,7 +897,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dol_infantry3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_dol_scout" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -948,7 +913,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dol_dwarf2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_dwarf" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -956,7 +921,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dol_dwarf3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_scoia_tael.png" localisation_key_name = "gwint_name_dwarf" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -964,7 +929,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_elf_skirmisher" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_elf_skirmisher" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -972,7 +937,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_elf_skirmisher2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_elf_skirmisher" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -980,7 +945,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_elf_skirmisher3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_elf_skirmisher" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -988,7 +953,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_vrihedd_cadet" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_vrihedd_cadet" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -996,7 +961,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dol_archer" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_dol_archer" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1004,7 +969,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_havekar_nurse" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_havcaaren_medic" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1012,7 +977,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_havekar_nurse2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_havcaaren_medic" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1020,7 +985,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_havekar_nurse3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_scoia_tael.png" localisation_key_name = "gwint_name_havcaaren_medic" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1028,7 +993,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_saskia" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price ="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_scoia_tael.png" localisation_key_name = "gwint_name_saskia" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -1036,7 +1001,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_isengrim" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price ="50"
 					icon_path="icons/inventory/gwint/ico_gwent_soldier_scoia_tael.png" localisation_key_name = "gwint_name_isengrim" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSctl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1053,12 +1018,7 @@
 					</base_abilities>
 				</item>
 
-
-				
-				
-				
-		<!-- Monsters Deck -->
-		
+			<!-- No Man's Land (Monsters) Cards -->
 				<item name="gwint_card_draug" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_draug" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -1066,7 +1026,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_kayran" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_kayran" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT7</tags>
@@ -1074,7 +1034,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-		
+
 				<item name="gwint_card_imlerith" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_imlerith" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -1082,7 +1042,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_leshen" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_leshen" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT6</tags>
@@ -1090,7 +1050,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_forktail" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_forktail" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1098,7 +1058,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_earth_elemental" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_no_mans_land.png" localisation_key_name = "gwint_name_earth_elemental" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1106,7 +1066,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_fiend" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_fiend" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1114,7 +1074,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_griffin" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_griffin" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1122,7 +1082,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_plague_maiden" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_plague_maiden" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
@@ -1130,7 +1090,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_werewolf" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_werewolf" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1138,7 +1098,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_botchling" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_botchling" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1146,7 +1106,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_frightener" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_frightener" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1154,7 +1114,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ice_giant" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_no_mans_land.png" localisation_key_name = "gwint_name_ice_giant" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1162,7 +1122,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_endrega" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_endrega" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1170,7 +1130,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_harpy" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_harpy" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1178,7 +1138,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_gargoyle" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_gargoyle" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1186,7 +1146,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_celaeno_harpy" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_celaeno_harpy" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1194,7 +1154,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_fire_elemental" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_no_mans_land.png" localisation_key_name = "gwint_name_fire_elemental" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
@@ -1202,7 +1162,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_arachas_behemoth" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_siege_no_mans_land.png" localisation_key_name = "gwint_name_arachas_behemoth" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
@@ -1210,7 +1170,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_nekker" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_nekker" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1218,7 +1178,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_nekker2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_nekker" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1226,7 +1186,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_nekker3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_nekker" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1234,7 +1194,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ekkima" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_ekkima" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1242,7 +1202,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_crone_whispess" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_crone_whispess" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1250,7 +1210,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_crone_weavess" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_crone_weavess" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
@@ -1258,7 +1218,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_katakan" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_katakan" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
@@ -1274,7 +1234,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_grave_hag" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_grave_hag" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1282,15 +1242,15 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_garkain" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_garkain" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>				
+					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_fleder" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_fleder" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1298,7 +1258,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_arachas" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_arachas" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1306,7 +1266,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_arachas2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_arachas" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1314,7 +1274,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_arachas3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_arachas" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1322,7 +1282,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_fogling" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_fogling" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1330,7 +1290,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_wyvern" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_wyvern" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1338,7 +1298,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ghoul" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_ghoul" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1346,7 +1306,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ghoul2" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_ghoul" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1354,7 +1314,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ghoul3" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_ghoul" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1362,7 +1322,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_crone_brewess" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_no_mans_land.png" localisation_key_name = "gwint_name_crone_brewess" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
@@ -1370,7 +1330,7 @@
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_cockatrice" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_range_no_mans_land.png" localisation_key_name = "gwint_name_cockatrice" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardMstr,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1386,22 +1346,8 @@
 						<a>max_card_1</a> <!-- Should be given as reward -->
 					</base_abilities>
 				</item>
-				
 
-
-
-
-		<!-- Skellige Cards -->
-
-				<!-- UNOBTAINABLE IN GAME
-				<item name="gwint_card_hemdal" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
-					icon_path="icons/inventory/gwint/ico_gwent_melee_skellige.png" localisation_key_name = "gwint_name_hemdal" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardSke,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
-					<base_abilities>
-						<a>max_card_0</a>
-					</base_abilities>
-				</item>
-				-->
+			<!-- Skellige Cards -->
 				<item name="gwint_card_hjalmar" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_skellige.png" localisation_key_name = "gwint_name_hjalmar" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSke,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
@@ -1593,7 +1539,7 @@
 						<a>max_card_1</a> <!-- LOWER THIS VALUE IF YOU PUT IT IN BASE DECK OR AS QUEST REWARD -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_cock" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_skellige.png" localisation_key_name = "gwint_name_cock" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSke,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT4,EP2Tournament</tags>
@@ -1602,99 +1548,105 @@
 					</base_abilities>
 				</item>
 
+				<!-- UNOBTAINABLE IN GAME
+					<item name="gwint_card_hemdal" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
+						icon_path="icons/inventory/gwint/ico_gwent_melee_skellige.png" localisation_key_name = "gwint_name_hemdal" localisation_key_description = "gwint_desc_gwint_card" >
+						<tags>GwintCardSke,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
+						<base_abilities>
+							<a>max_card_0</a>
+						</base_abilities>
+					</item>
+				-->
 
-
-
-		<!-- Neutral Cards -->
-				
+			<!-- Neutral Cards -->
 				<item name="gwint_card_geralt" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_neutral.png" localisation_key_name = "gwint_name_geralt" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT7</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT7</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_gog_geralt" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_neutral.png" localisation_key_name = "gwint_name_geralt" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT7</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT7</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_yennefer" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_neutral.png" localisation_key_name = "gwint_name_yennefer" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_vesemir" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_neutral.png" localisation_key_name = "gwint_name_vesemir" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_ciri" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_neutral.png" localisation_key_name = "gwint_name_ciri" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GwentTournament,GT7</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GwentTournament,GT7</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_gog_ciri" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_neutral.png" localisation_key_name = "gwint_name_ciri" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GwentTournament,GT7</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GwentTournament,GT7</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_triss" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_neutral.png" localisation_key_name = "gwint_name_triss" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dandelion" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_morale_booster_neutral.png" localisation_key_name = "gwint_name_dandelion" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_zoltan" hold_slot="" equip_slot="" template="" stackable="1" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_neutral.png" localisation_key_name = "gwint_name_zoltan" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_emiel" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_neutral.png" localisation_key_name = "gwint_name_emiel" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT2</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_villen" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_melee_neutral.png" localisation_key_name = "gwint_name_villen" localisation_key_description = "gwint_desc_gwint_card" >
-					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>	
+					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT3</tags>
 					<base_abilities>
 						<a>max_card_1</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_avallach" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_hero_neutral.png" localisation_key_name = "Mysterious elf" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardNeutral,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard,GwentTournament,GT5</tags>
@@ -1743,11 +1695,7 @@
 					</base_abilities>
 				</item>
 
-
-
-
-		<!-- Special Cards -->
-		
+			<!-- Special Cards -->
 				<item name="gwint_card_scorch" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
 					icon_path="icons/inventory/gwint/ico_gwent_scorch_neutral.png" localisation_key_name = "gwint_name_scorch" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSpcl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1755,7 +1703,7 @@
 						<a>max_card_3</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_horn" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="10"
 					icon_path="icons/inventory/gwint/ico_gwent_morale_booster_neutral.png" localisation_key_name = "gwint_name_horn" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSpcl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1763,7 +1711,7 @@
 						<a>max_card_3</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_dummy" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_dummy_neutral.png" localisation_key_name = "gwint_name_dummy" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSpcl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
@@ -1771,7 +1719,7 @@
 						<a>max_card_3</a>
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_frost" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_weather_neutral.png" localisation_key_name = "gwint_name_frost" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSpcl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT1</tags>
@@ -1779,7 +1727,7 @@
 						<a>max_card_0</a> <!-- 2 in base deck, 1 from quest // Removed "GwintCollectorAchievement" -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_fog" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_weather_neutral.png" localisation_key_name = "gwint_name_fog" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSpcl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT1</tags>
@@ -1787,7 +1735,7 @@
 						<a>max_card_0</a> <!-- 2 in base deck, 1 from quest // Removed "GwintCollectorAchievement" -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_rain" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_weather_neutral.png" localisation_key_name = "gwint_name_rain" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSpcl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT1</tags>
@@ -1795,7 +1743,7 @@
 						<a>max_card_1</a> <!-- 1 in base deck // Removed "GwintCollectorAchievement" -->
 					</base_abilities>
 				</item>
-				
+
 				<item name="gwint_card_clear_sky" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="20"
 					icon_path="icons/inventory/gwint/ico_gwent_weather_neutral.png" localisation_key_name = "gwint_name_clear_sky" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardSpcl,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard,GwentTournament,GT1</tags>
@@ -1820,7 +1768,6 @@
 						<a>max_card_3</a> <!-- LOWER THIS VALUE IF YOU PUT IT IN BASE DECK OR IN QUEST REWARD -->
 					</base_abilities>
 				</item>
-				
 		</items>
 	</definitions>
 </redxml>

@@ -88,19 +88,6 @@
 		-->
         <book_27 is_ability="true" />
       </ability>
-      <!--################################## SKILL SLOT LINK BONUSES ###################################-->
-      <ability name="SkillLinkBonus_Blue">
-        <spell_power type="mult" min="0.1" />
-      </ability>
-      <ability name="SkillLinkBonus_Green">
-        <vitality type="add" min="200" />
-      </ability>
-      <ability name="SkillLinkBonus_Red">
-        <attack_power type="mult" min="0.1" />
-      </ability>
-      <ability name="SkillLinkBonus_Yellow">
-        <attack_power type="mult" min="0.1" />
-      </ability>
       <!--################################## Swordsman Path ###################################-->
 	  <ability name="sword_adrenalinegain">
         <tags></tags>
@@ -125,7 +112,7 @@
       <!-- Whirl (ult) -->
       <ability name="sword_s1">
         <tags>sword_s1,attack_light</tags>
-        <stamina_cost_per_sec type="add" min="50" />
+        <stamina_cost_per_sec type="add" min="75" />
 		<focus_cost_per_sec_initial type="add" min="1" />
 		<cost_reduction type="mult" min="0.167" />
         <stamina_delay type="add" min="2" />
@@ -135,8 +122,7 @@
       <ability name="sword_s2">
         <tags>sword_s2,attack_heavy</tags>
 		<armor_reduction min="1000" max="1000"/>
-		<critical_hit_chance type="add" min="0.2" />
-		<adrenaline_final_damage_bonus type="mult" min="0.334" />
+		<adrenaline_damage_bonus type="mult" min="0.1" />
 		<stamina_max_dmg_bonus type="mult" min="1.5" />
 		
 		<stamina_cost type="add" min="0" />
@@ -244,7 +230,7 @@
       <!-- All Out -->
       <ability name="sword_s19">
         <tags>sword_s19</tags>
-        <spell_power type="mult" min="1.0" />
+        <spell_power type="mult" min="0.5" />
       </ability>
 	
 	  <!-- Still Mind -->
@@ -258,6 +244,7 @@
         <tags>sword_s21,attack_light</tags>
 		<attack_power type="mult" min="0.1" />
       </ability>
+      
 	
       <!--#################################### Signs Path #####################################-->
 	
@@ -404,6 +391,7 @@
         <tags>magic_s8</tags>
         <max_armor_reduction type="add" min="0.25" />
         <armor type="mult" min="-0.01" />
+        <burn_chance_bonus type="add" min="0.1" />
       </ability>
 	
 	   <!-- Combustible -->
@@ -489,7 +477,7 @@
       <!--################################### Alchemy Path ####################################-->
       <ability name="alchemy_potionduration">
         <tags></tags>
-        <potion_duration type="add" always_random="false" min="0.05" max="0.05" />
+        <potion_duration type="add" always_random="false" min="0.02" max="0.02" />
       </ability>
 	  <!-- Unlockable Skills -->
       <!-- Resistances -->
@@ -507,7 +495,9 @@
 	  <!-- Delayed Recovery -->
       <ability name="alchemy_s3">
         <tags>alchemy_s3</tags>
-        <toxicity_threshold type="add" min="0.15" />
+        <toxicity_threshold_lvl1 type="add" min="0.7" />
+		<toxicity_threshold_lvl2 type="add" min="0.65" />
+		<toxicity_threshold_lvl3 type="add" min="0.55" />
       </ability>
 	
 	  <!-- Side Effect -->
@@ -606,10 +596,15 @@
 	
 	  <ability name="alchemy_s19">
         <tags>alchemy_s19</tags>
-		<synergy_bonus type="add" min="0.16667" />
+		<synergy_bonus type="add" min="0.1" />
       </ability>
 	
 	  <!--################################### Perks ####################################-->
+    <ability name="survival_vitality">
+      <tags></tags>
+      <vitality type="mult" always_random="false" min="0.01" max="0.01" />
+    </ability>
+
 		<ability name="perk_1">
 			<tags>perk_1</tags>
 			<perk_1_day_ability is_ability="true" />
@@ -667,6 +662,413 @@
 			<tags>perk_12, GlobalPassiveBonus</tags>
 			<toxicity type="base" min="30" />
 		</ability>
+
+      <!-- REMASTER SKILLS -->
+      <!-- COMBAT SKILLS -->
+      <!-- Muscle Memory -->
+      <ability name="sword_s22">
+          <tags>sword_s22,attack_light</tags>
+          <damage_increase type="mult" min="0.3" max="0.3" always_random="false" />
+          <trigger_at_attack_count type="base" min="1" max="1" />
+          <duration type="add" min="6" />
+      </ability>
+
+      <!-- Strength Training -->
+      <ability name="sword_s23">
+          <tags>sword_s23,attack_heavy</tags>
+          <damage_increase type="mult" min="0.15" max="0.15" always_random="false" />
+          <trigger_at_attack_count type="base" min="1" max="1" />
+          <duration type="add" min="6" />
+      </ability>
+
+      <!-- Precise Blows -->
+      <ability name="sword_s24">
+          <tags>sword_s24,attack_light</tags>
+          <trigger_chance type="base" min="0.2" max="0.2" always_random="false" />
+          <damage_increase type="mult" min="0.4" max="0.7" />
+          <trigger_at_attack_count type="base" min="4" max="4" />
+          <duration type="add" min="15" />
+      </ability>
+      
+      <!-- Crushing Blows -->
+      <ability name="sword_s25">
+          <tags>sword_s25</tags>
+          <trigger_chance type="base" min="0.2" max="0.2" always_random="false" />
+          <damage_increase type="mult" min="0.5" max="0.5" /> <!-- 50% damage increase if triggered -->
+          <trigger_at_attack_count type="base" min="1" max="1"/>
+          <duration type="add" min="6" />
+      </ability>
+      
+      <!-- Anatomical Knowledge -->
+      <ability name="sword_s26">
+        <tags>sword_s26</tags>
+        <damage_increase type="mult" min="0.1" max="0.1" always_random="false" />
+		<dodge_multiplier type="mult" min="5" max="5" always_random="false" />
+      </ability>
+
+      <!-- Crippling shot -->
+      <ability name="sword_s27">
+        <tags>sword_s27</tags>
+        <duration type="add" min="4" />
+      </ability>
+
+      <!-- Sunder armor -->
+      <ability name="sword_s28">
+        <tags>sword_s28</tags>
+        <armor_reduction_perc type="add" always_random="false" min="0.1" max="0.1" />
+        <duration type="add" min="3" max="6" />
+        <stacking type="base" min="1" max="1"/>
+      </ability>
+
+      <!-- Crippling strikes -->
+      <ability name="sword_s29">
+        <tags>sword_s29</tags>
+        <damage_increase type="mult" min="0.1" max="0.1" />
+        <duration type="add" min="3" max="6" />
+      </ability>
+
+      <!-- Deadly Precision -->
+      <ability name="sword_s30">
+        <tags>sword_s30</tags>
+        <trigger_chance type="base" min="0.05" />
+        <duration type="add" min="3" />
+        <adrenaline_gain type="add" min="0.1" />
+      </ability>
+
+      <!-- Counter Attack -->
+      <ability name="sword_s31">
+        <tags>sword_s31</tags>
+        <attack_power type="mult" min="0.3334" />
+		<crossbow_multiplier type="add" min="2" />
+		<critical_hit_chance type="add" min="1" />
+        <duration type="add" min="4" />
+      </ability>
+
+      <!-- Lightning Reflexes -->
+      <ability name="sword_s32">
+        <tags>sword_s32</tags>
+        <slowdown_mod type="add" min="0.3" />
+		<damage_increase type="add" min="1.5" max="1.5" />
+		<instant_kill_chance type="add" min="0.05" />
+      </ability>
+
+      <!-- Arrow Deflection -->
+      <ability name="sword_s33">
+        <tags>sword_s33</tags>
+		    <damage_increase type="add" min="0.5" />
+			<instant_kill_chance type="add" min="0.15" />
+      </ability>
+
+      <!-- Cold Blood -->
+      <ability name="sword_s34">
+        <tags>sword_s34</tags>
+        <focus_gain_lvl1 type="add" min="0.3" />
+		    <focus_gain_lvl2 type="add" min="0.6" />
+		    <focus_gain_lvl3 type="add" min="1.0" />
+      </ability>
+
+      <!-- Whirl -->
+      <ability name="sword_s35">
+        <tags>sword_s35</tags>
+        <stamina_cost_per_sec type="add" min="75" />
+		<focus_cost_per_sec_initial type="add" min="1" />
+		<cost_reduction type="mult" min="1" /> <!-- computed as cost_reduction * (Level - 1) / (Level + 1), so for cost_reduction == 1 => 0/33%/50%   -->
+        <stamina_delay type="add" min="2" />
+        <cost_reduction_desc_lvl2 type="mult" min="0.33" />
+        <cost_reduction_desc_lvl3 type="mult" min="0.5" />
+      </ability>
+
+      <!-- Fleet Footed -->
+	    <ability name="sword_s36">
+        <tags>sword_s36</tags>
+		    <damage_reduction type="add" min="0.33334" />
+      </ability>
+
+      <!-- SIGN SKILLS -->
+      <!-- Firestream -->
+      <ability name="magic_s28">
+          <tags>magic_s28</tags>
+          <stamina_cost_per_sec type="add" always_random="false" min="50.0" max="50.0" />
+		        <stamina_cost_reduction_after_1 type="mult" min="0.25" />
+          <stamina_delay type="base" min="0.5" />
+          <stamina_delay type="mult" min="2" />
+          <FireDamage type="add" always_random="false" min="30" max="30" />
+		      <channeling_damage type="add" min="70" max="70" />
+          <BurningEffect_FireStream is_ability="true" />
+      </ability>
+
+      <!-- Puppet -->
+      <ability name="magic_s31">
+          <tags>magic_s31</tags>
+          <stamina_cost type="add" always_random="false" min="0" max="0" />
+          <stamina_cost_per_sec type="add" always_random="false" min="22.2" max="22.2" />
+          <!-- duration modified by other skills, no mult as spell power covers that -->
+          <duration type="base" min="9" />
+          <duration_animals type="base" min="18" />
+          <AxiiGuardMeEffect is_ability="true" />
+          <!-- attack power bonus -->
+          <attack_power type="add" min="0.2" />
+      </ability>
+
+      <!-- Shock Wave -->
+      <ability name="magic_s33">
+          <tags>magic_s33</tags>
+          <damage_vitality_percent type="add" min="0.01"/>
+      </ability>
+
+      <!-- Catalyst -->
+      <ability name="magic_s35">
+          <tags>magic_s35, Catalyst</tags>
+          <spell_power_aard_igni type="mult" min="0.3" />
+          <burn_chance_bonus type="add" min="0.1" />
+      </ability>
+
+      <!-- Fortified Signs -->
+      <ability name="magic_s36">
+          <tags>magic_s36</tags>
+          <duration type="mult" min="0.2"/>
+      </ability>
+
+      <!-- Convergence Theory -->
+      <ability name="magic_s37">
+          <tags>magic_s37</tags>
+          <damage_level1 type="add" min="0.05"/>
+		      <damage_level2 type="add" min="0.1"/>
+		      <damage_level3 type="add" min="0.15"/>
+          <duration type="base" min="15"/>
+      </ability>
+
+      <!-- Focus -->
+      <ability name="magic_s38">
+          <tags>magic_s38</tags>
+          <spell_power type="mult" min="0.1" />
+      </ability>
+
+      <!-- Avoidance -->
+      <ability name="magic_s39">
+          <tags>magic_s39</tags>
+          <stamina_cost_reduction type="mult" min="0.2"/>
+      </ability>
+      
+      <!-- Overload -->
+      <ability name="magic_s40">
+          <tags>magic_s40, Overload</tags>
+          <ElementalDamage type="add" min="15" />
+      </ability>
+
+      <!-- Resonance -->
+      <ability name="magic_s41">
+          <tags>magic_s41, Resonance</tags>
+          <sign_intensity_ratio type="add" min="0.1" />
+      </ability>
+
+      <!-- Sustained Glyphs -->
+      <ability name="magic_s42">
+        <tags>magic_s42,Yrden</tags>
+        <!-- +100% -->
+        <charge_count type="add" min="2" />
+        <trap_count type="add" min="1" />
+        <trap_duration type="add" min="5" />
+        <range type="mult" min="0.1" />
+      </ability>
+
+	 <!-- ALCHEMY SKILLS -->
+	 <!-- Debilitating Poison -->
+      <ability name="alchemy_s22">
+          <tags>alchemy_s22, DebilitatingPoison</tags>
+          <defence_bonus type="add" min="0.05"/>
+      </ability>
+	  
+	  <!-- Toxic Shock -->
+      <ability name="alchemy_s23">
+          <tags>alchemy_s23, ToxicShock</tags>
+          <poison_dmg_level_1 type="mult" min="0.25"/>
+          <poison_dmg_level_2 type="mult" min="0.5"/>
+          <poison_dmg_level_3 type="mult" min="0.75"/>
+      </ability>
+	  
+	  <!-- Heightened Tolerance -->
+	    <ability name="alchemy_s24">
+          <tags>alchemy_s24, HeightenedTolerance</tags>
+          <toxicity_to_critical_damage_ratio type="add" min="0.2"/>
+		      <toxicity_threshold type="add" min="0.8"/>
+		      <received_damage_multiplier type="add" min="1.5"/>
+          <critical_hit_damage_bonus type="mult" min="0.3334" />
+      </ability>
+	  
+	  <!-- Volatile Concoction -->
+	  <ability name="alchemy_s25">
+          <tags>alchemy_s25, VolatileConcoction</tags>
+          <bomb_damage_bonus type="add" min="0.001"/>
+      </ability>
+	  
+	  <!-- Wyvern Sting -->
+	  <ability name="alchemy_s26">
+          <tags>alchemy_s26, WyvernSting</tags>
+          <damage_bonus type="add" min="0.05"/>
+          <damage_bonus_immune type="add" min="0.1"/>
+      </ability>
+
+      <!-- Hunter Instinct -->
+      <ability name="alchemy_s27">
+        <tags>alchemy_s27, HunterInstinct</tags>
+        <critical_hit_damage_bonus type="add" min="0.2" />
+      </ability>
+
+      <!-- SURVIVAL SKILLS -->
+      <!-- Cat School Technique -->
+      <ability name="perk_23">
+        <tags>perk_23</tags>
+        <critical_hit_damage_bonus type="mult" min="0.08" max="0.08" />
+        <attack_power_fast_style type="mult" min="0.02" max="0.02" />
+      </ability>
+      <!-- Griffin School Technique -->
+      <ability name="perk_24">
+        <tags>perk_24</tags>
+        <spell_power type="mult" min="0.02" />
+        <staminaRegen type="mult" min="0.002" />
+      </ability>
+      <!-- Bear School Technique -->
+      <ability name="perk_25">
+        <tags>perk_25</tags>
+        <vitality type="mult" min="0.02" />
+        <attack_power_heavy_style type="mult" min="0.02" />
+      </ability>
+
+      <!-- Wolven School Technique -->
+      <ability name="perk_26">
+        <tags>perk_26</tags>
+        <attack_power type="mult" min="0.02" />
+        <spell_power type="mult" min="0.02" />
+      </ability>
+
+      <!-- Manticore School Technique -->
+      <ability name="perk_27">
+        <tags>perk_27</tags>
+        <attack_power_fast_style type="mult" min="0.02" max="0.02" />
+        <attack_power_heavy_style type="mult" min="0.02" max="0.02" />
+        <bomb_dmg_multiplier type="mult" min="0.02" />
+      </ability>
+
+      <!-- Viper School Technique -->
+      <ability name="perk_28">
+        <tags>perk_28</tags>
+        <poison_dmg_multiplier type="mult" min="0.02" />
+        <vitality type="mult" min="0.02" />
+      </ability>
+
+      <!-- Cat's Feast -->
+      <ability name="perk_29">
+        <tags>perk_29</tags>
+        <duration type="add" min="60"/>
+      </ability>
+
+      <!-- Survival Instinct -->
+      <ability name="perk_30">
+        <tags>perk_30, GlobalPassiveBonus</tags>
+        <vitality type="mult" min="0.08" />
+      </ability>
+
+      <!-- Attack is the Best Defense -->
+      <ability name="perk_31">
+        <tags>perk_31</tags>
+        <parry type="add" min="0.03" />
+        <counter type="add" min="0.2" />
+        <dodge type="add" min="0.1" />
+        <roll type="add" min="0.1" />
+      </ability>
+
+      <!-- Metabolism Boost -->
+      <ability name="perk_32">
+        <tags>perk_32</tags>
+        <cost_reduction type="mult" min="0.1" />
+      </ability>
+
+      <!-- Metabolic Control -->
+      <ability name="perk_33">
+        <tags>perk_33, GlobalPassiveBonus</tags>
+        <toxicity type="base" min="10" />
+      </ability>
+
+      <!-- Rage Management -->
+      <ability name="perk_34">
+        <tags>perk_34</tags>
+        <adrenaline_cost type="base" min="2.5" />
+        <cost_reduction_per_level type="base" min="0.5" />
+      </ability>
+
+      <!-- Strong Back -->
+      <ability name="perk_35">
+        <tags>perk_35, GlobalPassiveBonus</tags>
+        <encumbrance type="base" min="20" />
+      </ability>
+
+      <!-- Element of Surprise -->
+      <ability name="perk_44">
+        <tags>perk_44</tags>
+        <duration type="add" min="10"/>
+        <melee_damage_increase type="mult" min="0.1" />
+      </ability>
+
+      <!-- Gorged on Power -->
+      <ability name="perk_36">
+        <tags>perk_36</tags>
+        <duration type="add" min="1800"/>
+        <max_active type="add" min="1" />
+      </ability>
+
+      <!-- Conjunction -->
+      <ability name="perk_37">
+        <tags>perk_37</tags>
+        <damage_multiplier type="add" min="0.03" />
+      </ability>
+
+      <!-- Sun and Stars -->
+      <ability name="perk_38">
+        <tags>perk_38</tags>
+        <perk_38_day_ability is_ability="true" />
+        <perk_38_night_ability is_ability="true" />
+        <vitalityRegen_tooltip type="add" min="10" />
+        <staminaRegen_tooltip type="mult" min="0.01" />
+      </ability>
+      <ability name="perk_38_day_ability">
+        <tags>perk_38, Day, GlobalPassiveBonus</tags>
+        <vitalityRegen type="add" min="10" />
+      </ability>
+      <ability name="perk_38_night_ability">
+        <tags>perk_38, Night, GlobalPassiveBonus</tags>
+        <staminaRegen type="mult" min="0.01" />
+      </ability>
+	  
+	   <!-- Advanced PyroTechnics -->
+      <ability name="perk_39">
+        <tags>perk_39, AdvancedPyroTechnics</tags>
+		<free_bomb type="add" min="0.1" />
+      </ability>
+	  
+	   <!-- Battle Frenzy -->
+      <ability name="perk_40">
+        <tags>perk_40, BattleFrenzy</tags>
+		<critical_hit_chance type="add" min="0.03" />
+      </ability>
+	  
+	   <!-- Gourmet -->
+      <ability name="perk_41">
+        <tags>perk_41, Gourmet</tags>
+		    <duration type="add" min="300"/>
+      </ability>
+	  
+	   <!-- Adrenaline Burst -->
+      <ability name="perk_42">
+        <tags>perk_42, AdrenalineBurst</tags>
+		<focus_gain type="base" min="0.02" />
+      </ability>
+
+        <!-- Synergy -->
+        <ability name="perk_43">
+            <tags>perk_43</tags>
+		    <synergy_bonus type="add" min="0.1" />
+        </ability>
     </abilities>
   </definitions>
   <custom>
@@ -748,7 +1150,15 @@
 		<!-- Critical hits -->
         <skill skill_name="sword_s8"  requiredPointsSpent="6" maxLevel="3" priority="21" guiPositionID="6"  localisationName="skill_name_sword_s8" localisationDescription="skill_desc_sword_s8" localisationDescriptionLevel2="skill_desc_sword_s8" localisationDescriptionLevel3="skill_desc_sword_s8" cost="1" pathType_name="Sword" subpathType_name="Sword_StyleStrong" iconPath="icons\Skills\Sword\sword_s8.png" linkVertical="red" linkLeft="red" linkRight="red" />
 		<!-- Rend -->
-        <skill skill_name="sword_s2"  requiredPointsSpent="12" maxLevel="3" priority="4"  guiPositionID="12" localisationName="skill_name_sword_s2" localisationDescription="skill_desc_sword_s2" localisationDescriptionLevel2="skill_desc_sword_s2" localisationDescriptionLevel3="skill_desc_sword_s2" cost="1" pathType_name="Sword" subpathType_name="Sword_StyleStrong" iconPath="icons\Skills\Sword\sword_s2.png" linkVertical="red" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s2" isUnchangedLegacy="1" gridRow="18" gridColumn="3" requiredPointsSpent="12" maxLevel="3" priority="4"  guiPositionID="12"
+            localisationName="skill_rend_name" localisationDescription="skill_rend_description"
+            localisationDescriptionLevel2="skill_rend_description" localisationDescriptionLevel3="skill_rend_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleStrong" isAlternative="1"
+            iconPath="icons\Skills\Sword\sword_s2.png"
+            iconPathTest="icons\Skills\Sword\skills_rework\rend.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s20,sword_s25,sword_s35</required_skills>
+        </skill>
 		<!-- Sunder Armor -->
         <skill skill_name="sword_s6"  requiredPointsSpent="18" maxLevel="3" priority="15" guiPositionID="17" localisationName="skill_name_sword_s6" localisationDescription="skill_desc_sword_s6" localisationDescriptionLevel2="skill_desc_sword_s6" localisationDescriptionLevel3="skill_desc_sword_s6" cost="1" pathType_name="Sword" subpathType_name="Sword_StyleStrong" iconPath="icons\Skills\Sword\sword_s6.png" linkVertical="red" linkLeft="red" linkRight="red" />
 
@@ -756,7 +1166,12 @@
 		<!-- Arrow Deflection -->
         <skill skill_name="sword_s10" requiredPointsSpent="0"  maxLevel="2" priority="17" guiPositionID="11" localisationName="skill_name_sword_s10" localisationDescriptionNotAcquired="skill_desc_prev_sword_s10" localisationDescription="skill_desc_sword_s10" localisationDescriptionLevel2="skill_desc_sword_s10_2" localisationDescriptionLevel3="skill_desc_sword_s10_3" cost="1" pathType_name="Sword" subpathType_name="Sword_Utility" iconPath="icons\Skills\Sword\sword_s10.png" linkVertical="red" linkLeft="red" linkRight="red" />
 		<!-- Fleet Footed -->
-        <skill skill_name="sword_s9"  requiredPointsSpent="6" maxLevel="1" priority="13" guiPositionID="15" localisationName="skill_name_sword_s9" localisationDescription="skill_desc_sword_s9"  localisationDescriptionLevel2="skill_desc_sword_s9"  localisationDescriptionLevel3="skill_desc_sword_s9"  cost="1" pathType_name="Sword" subpathType_name="Sword_Utility" iconPath="icons\Skills\Sword\sword_s9.png"  linkVertical="red" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s9" requiredPointsSpent="6" maxLevel="1" priority="13" guiPositionID="15"
+            localisationName="skill_name_sword_s9" localisationDescription="skill_desc_sword_s9"
+            localisationDescriptionLevel2="skill_desc_sword_s9" localisationDescriptionLevel3="skill_desc_sword_s9"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Utility"
+            iconPath="icons\Skills\Sword\sword_s9.png"
+            linkVertical="red" linkLeft="red" linkRight="red" />
 		<!-- Counterattack -->
         <skill skill_name="sword_s11" requiredPointsSpent="12" maxLevel="3" priority="13" guiPositionID="25" localisationName="skill_name_sword_s11" localisationDescriptionNotAcquired="skill_desc_prev_sword_s11" localisationDescription="skill_desc_sword_s11" localisationDescriptionLevel2="skill_desc_sword_s11_2" localisationDescriptionLevel3="skill_desc_sword_s11_3" cost="1" pathType_name="Sword" subpathType_name="Sword_Utility" iconPath="icons\Skills\Sword\sword_s3.png" linkVertical="red" linkLeft="red" linkRight="red" />
 		<!-- Overwhelm -->
@@ -774,24 +1189,71 @@
 
         <!-- BATTLE TRANS -->
 		<!-- Resolve -->
-        <skill skill_name="sword_s16" requiredPointsSpent="0"  maxLevel="3" priority="7"  guiPositionID="18" localisationName="skill_name_sword_s16" localisationDescription="skill_desc_sword_s16" localisationDescriptionLevel2="skill_desc_sword_s16" localisationDescriptionLevel3="skill_desc_sword_s16" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s16.png" linkVertical="red" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s16" isUnchangedLegacy="1" gridRow="6" gridColumn="9" requiredPointsSpent="0"  maxLevel="3" priority="7" guiPositionID="18"
+            localisationName="skill_resolve_name" localisationDescription="skill_resolve_description"
+            localisationDescriptionLevel2="skill_resolve_description" localisationDescriptionLevel3="skill_resolve_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" isAlternative="1"
+            iconPath="icons\Skills\Sword\sword_s16.png"
+            iconPathTest="icons\Skills\Sword\skills_rework\resolve.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s33,sword_s34</required_skills>
+        </skill>
 		<!-- Undying -->
-        <skill skill_name="sword_s18" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="27" localisationName="skill_name_sword_s18" localisationDescription="skill_desc_sword_s18" localisationDescriptionLevel2="skill_desc_sword_s18_2" localisationDescriptionLevel3="skill_desc_sword_s18_3" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s18.png" linkVertical="red" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s18" isUnchangedLegacy="1" gridRow="9" gridColumn="6" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="27"
+            localisationName="skill_undying_name" localisationDescription="skill_undying_description_level_1"
+            localisationDescriptionLevel2="skill_undying_description_level_2_3" localisationDescriptionLevel3="skill_undying_description_level_2_3"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" isAlternative="1"
+            iconPath="icons\Skills\Sword\sword_s18.png"
+            iconPathTest="icons\Skills\Sword\skills_rework\undying.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s24,sword_s16</required_skills>
+        </skill>
 		<!-- Still Mind -->
-        <skill skill_name="sword_s20" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="28" localisationName="skill_name_sword_s20" localisationDescription="skill_desc_sword_s20" localisationDescriptionLevel2="skill_desc_sword_s20" localisationDescriptionLevel3="skill_desc_sword_s20" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s20.png" linkVertical="red" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s20" isUnchangedLegacy="1" gridRow="12" gridColumn="3" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="28"
+            localisationName="skill_razor_focus_name" localisationDescription="skill_razor_focus_description"
+            localisationDescriptionLevel2="skill_razor_focus_description" localisationDescriptionLevel3="skill_razor_focus_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" isAlternative="1"
+            iconPath="icons\Skills\Sword\sword_s20.png"
+            iconPathTest="icons\Skills\Sword\skills_rework\razor_focus.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s24</required_skills>
+        </skill>
 		<!-- All Out -->
-        <skill skill_name="sword_s19" requiredPointsSpent="18" maxLevel="3" priority="1"  guiPositionID="37" localisationName="skill_name_sword_s19" localisationDescription="skill_desc_sword_s19" localisationDescriptionLevel2="skill_desc_sword_s19" localisationDescriptionLevel3="skill_desc_sword_s19" cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" iconPath="icons\Skills\Sword\sword_s19.png" linkVertical="red" linkLeft="red" linkRight="red" />
+        <skill skill_name="sword_s19" isUnchangedLegacy="1" gridRow="24" gridColumn="9" requiredPointsSpent="18" maxLevel="3" priority="1" guiPositionID="37"
+            localisationName="skill_flood_of_anger_name" localisationDescription="skill_flood_of_anger_description"
+            localisationDescriptionLevel2="skill_flood_of_anger_description" localisationDescriptionLevel3="skill_flood_of_anger_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_BattleTrance" isAlternative="1"
+            iconPath="icons\Skills\Sword\sword_s19.png"
+            iconPathTest="icons\Skills\Sword\skills_rework\flood_of_anger.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s29,sword_s31</required_skills>
+        </skill>
 
     <!-- SIGNS -->
 		<!-- AARD -->
 		<!-- Dispersion -->
-        <skill skill_name="magic_s20" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="31" localisationName="skill_name_magic_s20" localisationDescriptionNotAcquired="skill_desc_prev_magic_s20" localisationDescription="skill_desc_magic_s20" localisationDescriptionLevel2="skill_desc_magic_s20" localisationDescriptionLevel3="skill_desc_magic_s20" cost="1" pathType_name="Signs" subpathType_name="Signs_Aard" iconPath="icons\Skills\Signs\magic_s20.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
+        <skill skill_name="magic_s20" isUnchangedLegacy="1" gridRow="0" gridColumn="0" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="31"
+            localisationName="skill_far_reaching_aard_name" localisationDescriptionNotAcquired="skill_far_reaching_aard_description"
+            localisationDescription="skill_far_reaching_aard_description" localisationDescriptionLevel2="skill_far_reaching_aard_description"
+            localisationDescriptionLevel3="skill_far_reaching_aard_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Aard"
+            iconPath="icons\Skills\Signs\magic_s20.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\far_reaching_aard.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" />
 		<!-- Wave -->
-        <skill skill_name="magic_s1"  requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="6" localisationName="skill_name_magic_s1"  localisationDescriptionNotAcquired="skill_desc_prev_magic_s1"  localisationDescription="skill_desc_magic_s1"  localisationDescriptionLevel2="skill_desc_magic_s1_2"  localisationDescriptionLevel3="skill_desc_magic_s1_3"  cost="1" pathType_name="Signs" subpathType_name="Signs_Aard" iconPath="icons\Skills\Signs\magic_s1.png"  linkVertical="blue" linkLeft="blue" linkRight="blue" >
-			<modifier_tags>
-				Aard
-			</modifier_tags>
-		</skill>
+        <skill skill_name="magic_s1" isUnchangedLegacy="1" gridRow="3" gridColumn="0" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="6"
+            localisationName="skill_aard_sweep_name" localisationDescriptionNotAcquired="skill_aard_sweep_description_level_1_2"
+            localisationDescription="skill_aard_sweep_description_level_1_2"  localisationDescriptionLevel2="skill_aard_sweep_description_level_1_2"
+            localisationDescriptionLevel3="skill_aard_sweep_description_level_3"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Aard" isAlternative="1"
+            iconPath="icons\Skills\Signs\magic_s1.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\aard_sweep.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s20</required_skills>
+			      <modifier_tags>
+				      Aard
+			      </modifier_tags>
+		    </skill>
 		<!-- Spell Power -->
         <skill skill_name="magic_s12" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="26" localisationName="skill_name_magic_s12" localisationDescriptionNotAcquired="skill_desc_prev_magic_s12" localisationDescription="skill_desc_magic_s12" localisationDescriptionLevel2="skill_desc_magic_s12" localisationDescriptionLevel3="skill_desc_magic_s12" cost="1" pathType_name="Signs" subpathType_name="Signs_Aard" iconPath="icons\Skills\Signs\magic_s6.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
 		<!-- Static Discharge -->
@@ -799,7 +1261,14 @@
 		
 		<!-- IGNI -->
 		<!-- Melt Armor -->
-        <skill skill_name="magic_s8" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="17" localisationName="skill_name_magic_s8" localisationDescriptionNotAcquired="skill_desc_prev_magic_s8" localisationDescription="skill_desc_magic_s8" localisationDescriptionLevel2="skill_desc_magic_s8" localisationDescriptionLevel3="skill_desc_magic_s8" cost="1" pathType_name="Signs" subpathType_name="Signs_Igni" iconPath="icons\Skills\Signs\magic_s8.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
+        <skill skill_name="magic_s8" isUnchangedLegacy="1" gridRow="0" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="20" guiPositionID="17"
+            localisationName="skill_melt_armor_name" localisationDescriptionNotAcquired="skill_melt_armor_description"
+            localisationDescription="skill_melt_armor_description" localisationDescriptionLevel2="skill_melt_armor_description"
+            localisationDescriptionLevel3="skill_melt_armor_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Igni"
+            iconPath="icons\Skills\Signs\magic_s8.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\melt_armor.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" />
 		<!-- Burn -->
         <skill skill_name="magic_s2" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="22" localisationName="skill_name_magic_s2" localisationDescriptionNotAcquired="skill_desc_prev_magic_s2" localisationDescription="skill_desc_magic_s2" localisationDescriptionLevel2="skill_desc_magic_s2_2" localisationDescriptionLevel3="skill_desc_magic_s2_3" cost="1" pathType_name="Signs" subpathType_name="Signs_Igni" iconPath="icons\Skills\Signs\magic_s2.png" linkVertical="blue" linkLeft="blue" linkRight="blue" >
 			<modifier_tags>
@@ -813,23 +1282,61 @@
 		
 		<!-- YRDEN -->
         <!-- Glyph Sustenance -->
-        <skill skill_name="magic_s10" requiredPointsSpent="0"  maxLevel="2" priority="20" guiPositionID="27" localisationName="skill_name_magic_s10" localisationDescription="skill_desc_magic_s10" localisationDescriptionLevel2="skill_desc_magic_s10" localisationDescriptionLevel3="skill_desc_magic_s10" cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" iconPath="icons\Skills\Signs\magic_s10.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
+        <skill skill_name="magic_s10" requiredPointsSpent="0"  maxLevel="2" priority="20" guiPositionID="27"
+            localisationName="skill_name_magic_s10" localisationDescription="skill_desc_magic_s10"
+            localisationDescriptionLevel2="skill_desc_magic_s10" localisationDescriptionLevel3="skill_desc_magic_s10"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden"
+            iconPath="icons\Skills\Signs\magic_s10.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" />
 		<!-- Shock -->
-        <skill skill_name="magic_s3"  requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="31" localisationName="skill_name_magic_s3"  localisationDescriptionNotAcquired="skill_desc_prev_magic_s3"  localisationDescription="skill_desc_magic_s3"  localisationDescriptionLevel2="skill_desc_magic_s3_2"  localisationDescriptionLevel3="skill_desc_magic_s3_3"   cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" iconPath="icons\Skills\Signs\magic_s3.png"  linkVertical="blue" linkLeft="blue" linkRight="blue" >
-			<modifier_tags>
-				Yrden
-			</modifier_tags>
-		</skill>
+        <skill skill_name="magic_s3" isUnchangedLegacy="1" gridRow="3" gridColumn="6" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="31"
+            localisationName="skill_magic_trap_name"  localisationDescriptionNotAcquired="skill_magic_trap_description_level_1"
+            localisationDescription="skill_magic_trap_description_level_1"  localisationDescriptionLevel2="skill_magic_trap_description_level_2_3"
+            localisationDescriptionLevel3="skill_magic_trap_description_level_2_3"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\magic_s3.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\magic_trap.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s42</required_skills>
+			      <modifier_tags>
+				      Yrden
+			      </modifier_tags>
+		      </skill>
 		<!-- Spell Power (Pain) -->
         <skill skill_name="magic_s16" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="32" localisationName="skill_name_magic_s16" localisationDescriptionNotAcquired="skill_desc_prev_magic_s16" localisationDescription="skill_desc_magic_s16" localisationDescriptionLevel2="skill_desc_magic_s16" localisationDescriptionLevel3="skill_desc_magic_s16" cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" iconPath="icons\Skills\Signs\magic_s11.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
 		<!-- Supercharge -->
-        <skill skill_name="magic_s11" requiredPointsSpent="18" maxLevel="3" priority="20" guiPositionID="28" localisationName="skill_name_magic_s11" localisationDescriptionNotAcquired="skill_desc_prev_magic_s11" localisationDescription="skill_desc_magic_s11" localisationDescriptionLevel2="skill_desc_magic_s11" localisationDescriptionLevel3="skill_desc_magic_s11" cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" iconPath="icons\Skills\Signs\magic_s16.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
+        <skill skill_name="magic_s11" isUnchangedLegacy="1" gridRow="6" gridColumn="6" requiredPointsSpent="18" maxLevel="3" priority="20" guiPositionID="28"
+            localisationName="skill_supercharged_glyphs_name" localisationDescriptionNotAcquired="skill_supercharged_glyphs_description"
+            localisationDescription="skill_supercharged_glyphs_description" localisationDescriptionLevel2="skill_supercharged_glyphs_description"
+            localisationDescriptionLevel3="skill_supercharged_glyphs_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\magic_s16.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\supercharged_glyphs.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s28,magic_s3,magic_s4</required_skills>
+        </skill>
 
 		<!-- QUEN -->
 		<!-- Impulse -->
-        <skill skill_name="magic_s13" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="10" localisationName="skill_name_magic_s13" localisationDescriptionNotAcquired="skill_desc_prev_magic_s13" localisationDescription="skill_desc_magic_s13" localisationDescriptionLevel2="skill_desc_magic_s13_2" localisationDescriptionLevel3="skill_desc_magic_s13_3" cost="1" pathType_name="Signs" subpathType_name="Signs_Quen" iconPath="icons\Skills\Signs\magic_s14.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
+        <skill skill_name="magic_s13" isUnchangedLegacy="1" gridRow="0" gridColumn="9" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="10"
+            localisationName="skill_exploding_shield_name" localisationDescriptionNotAcquired="skill_exploding_shield_description"
+            localisationDescription="skill_exploding_shield_description" localisationDescriptionLevel2="skill_exploding_shield_description"
+            localisationDescriptionLevel3="skill_exploding_shield_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Quen"
+            iconPath="icons\Skills\Signs\magic_s14.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\exploding_shield.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" />
 		<!-- Channeling -->
-        <skill skill_name="magic_s4"  requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="5" localisationName="skill_name_magic_s4"  localisationDescriptionNotAcquired="skill_desc_prev_magic_s4"  localisationDescription="skill_desc_magic_s4"  localisationDescriptionLevel2="skill_desc_magic_s4_2"  localisationDescriptionLevel3="skill_desc_magic_s4_3"  cost="1" pathType_name="Signs" subpathType_name="Signs_Quen" iconPath="icons\Skills\Signs\magic_s4.png"  linkVertical="blue" linkLeft="blue" linkRight="blue" />
+        <skill skill_name="magic_s4" isUnchangedLegacy="1" gridRow="3" gridColumn="9" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="5"
+            localisationName="skill_active_shield_name"  localisationDescriptionNotAcquired="skill_active_shield_description_level_1_2"
+            localisationDescription="skill_active_shield_description_level_1_2"  localisationDescriptionLevel2="skill_active_shield_description_level_1_2"
+            localisationDescriptionLevel3="skill_active_shield_description_level_3"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Quen" isAlternative="1"
+            iconPath="icons\Skills\Signs\magic_s4.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\active_shield.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s13</required_skills>
+        </skill>
 		<!-- Spell Power (Resilience) -->
         <skill skill_name="magic_s15" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="15" localisationName="skill_name_magic_s15" localisationDescriptionNotAcquired="skill_desc_prev_magic_s15" localisationDescription="skill_desc_magic_s15" localisationDescriptionLevel2="skill_desc_magic_s15" localisationDescriptionLevel3="skill_desc_magic_s15" cost="1" pathType_name="Signs" subpathType_name="Signs_Quen" iconPath="icons\Skills\Signs\magic_s13.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
 		<!-- Discharge -->
@@ -837,94 +1344,819 @@
 		
 		<!-- AXI -->
 		<!-- Expression -->
-        <skill skill_name="magic_s17" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="7"  localisationName="skill_name_magic_s17" localisationDescriptionNotAcquired="skill_desc_prev_magic_s17" localisationDescription="skill_desc_magic_s17" localisationDescriptionLevel2="skill_desc_magic_s17_2" localisationDescriptionLevel3="skill_desc_magic_s17_3" cost="1" pathType_name="Signs" subpathType_name="Signs_Axi" iconPath="icons\Skills\Signs\magic_s17.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
-		<!-- Guard Me -->
+        <skill skill_name="magic_s17" isUnchangedLegacy="1" requiredPointsSpent="0" gridRow="0" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="20" guiPositionID="7" 
+            localisationName="skill_delusion_name" localisationDescriptionNotAcquired="skill_delusion_description"
+            localisationDescription="skill_delusion_description" localisationDescriptionLevel2="skill_delusion_description"
+            localisationDescriptionLevel3="skill_delusion_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Axi"
+            iconPath="icons\Skills\Signs\magic_s17.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\delusion.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" />
+    <!-- Guard Me -->
         <skill skill_name="magic_s5"  requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="23" localisationName="skill_name_magic_s5"  localisationDescriptionNotAcquired="skill_desc_prev_magic_s5"  localisationDescription="skill_desc_magic_s5"  localisationDescriptionLevel2="skill_desc_magic_s5"  localisationDescriptionLevel3="skill_desc_magic_s5"  cost="1" pathType_name="Signs" subpathType_name="Signs_Axi" iconPath="icons\Skills\Signs\magic_s5.png"  linkVertical="blue" linkLeft="blue" linkRight="blue" />
-		<!-- Spell Power (Demotivate) -->
+    <!-- Spell Power (Demotivate) -->
         <skill skill_name="magic_s18" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="36" localisationName="skill_name_magic_s18" localisationDescriptionNotAcquired="skill_desc_prev_magic_s18" localisationDescription="skill_desc_magic_s18" localisationDescriptionLevel2="skill_desc_magic_s18" localisationDescriptionLevel3="skill_desc_magic_s18" cost="1" pathType_name="Signs" subpathType_name="Signs_Axi" iconPath="icons\Skills\Signs\magic_s18.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
-		<!-- Dominate -->
-        <skill skill_name="magic_s19" requiredPointsSpent="18" maxLevel="3" priority="20" guiPositionID="18" localisationName="skill_name_magic_s19" localisationDescriptionNotAcquired="skill_desc_prev_magic_s19" localisationDescription="skill_desc_magic_s19" localisationDescriptionLevel2="skill_desc_magic_s19_2" localisationDescriptionLevel3="skill_desc_magic_s19_3" cost="1" pathType_name="Signs" subpathType_name="Signs_Axi" iconPath="icons\Skills\Signs\magic_s19.png" linkVertical="blue" linkLeft="blue" linkRight="blue" />
+    <!-- Dominate -->
+        <skill skill_name="magic_s19" isUnchangedLegacy="1" gridRow="9" gridColumn="9" requiredPointsSpent="18" maxLevel="3" priority="20" guiPositionID="18"
+            localisationName="skill_domination_name" localisationDescriptionNotAcquired="skill_domination_description_level_1_2"
+            localisationDescription="skill_domination_description_level_1_2" localisationDescriptionLevel2="skill_domination_description_level_1_2"
+            localisationDescriptionLevel3="skill_domination_description_level_3"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Axi" isAlternative="1"
+            iconPath="icons\Skills\Signs\magic_s19.png"
+            iconPathTest="icons\Skills\Signs\skills_rework\domination.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s3,magic_s4,magic_s31</required_skills>
+        </skill>
 
     <!-- ALCHEMY -->
 		<!-- POTIONS -->
-		<!-- Resistances -->
+		<!-- Resistances (Heightened Tolerance) -->
         <skill skill_name="alchemy_s1" requiredPointsSpent="0"  maxLevel="3" priority="20" guiPositionID="22" localisationName="skill_name_alchemy_s1" localisationDescription="skill_desc_alchemy_s1" localisationDescriptionLevel2="skill_desc_alchemy_s1" localisationDescriptionLevel3="skill_desc_alchemy_s1" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" iconPath="icons\Skills\Alchemy\alchemy_s1.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Refreshment -->
-        <skill skill_name="alchemy_s2" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="12" localisationName="skill_name_alchemy_s2" localisationDescription="skill_desc_alchemy_s2" localisationDescriptionLevel2="skill_desc_alchemy_s2" localisationDescriptionLevel3="skill_desc_alchemy_s2" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" iconPath="icons\Skills\Alchemy\alchemy_s2.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s2"
+            isUnchangedLegacy="1" gridRow="0" gridColumn="2" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="12"
+            localisationName="skill_refreshment_name" localisationDescription="skill_refreshment_description"
+            localisationDescriptionLevel2="skill_refreshment_description" localisationDescriptionLevel3="skill_refreshment_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s2.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\refreshment.png"
+            linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Delayed Recovery -->
-        <skill skill_name="alchemy_s3" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="37" localisationName="skill_name_alchemy_s3" localisationDescription="skill_desc_alchemy_s3" localisationDescriptionLevel2="skill_desc_alchemy_s3" localisationDescriptionLevel3="skill_desc_alchemy_s3" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" iconPath="icons\Skills\Alchemy\alchemy_s3.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s3"
+            isUnchangedLegacy="1" gridRow="15" gridColumn="4" requiredPointsSpent="12" maxLevel="3" priority="20" guiPositionID="37"
+            localisationName="skill_delayed_recovery_name" localisationDescription="skill_delayed_recovery_description"
+            localisationDescriptionLevel2="skill_delayed_recovery_description" localisationDescriptionLevel3="skill_delayed_recovery_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s3.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\delayed_recovery.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s13</required_skills>
+        </skill>
 		<!-- Side Effect -->
-        <skill skill_name="alchemy_s4" requiredPointsSpent="18" maxLevel="3" priority="20" guiPositionID="36" localisationName="skill_name_alchemy_s4" localisationDescription="skill_desc_alchemy_s4" localisationDescriptionLevel2="skill_desc_alchemy_s4" localisationDescriptionLevel3="skill_desc_alchemy_s4" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" iconPath="icons\Skills\Alchemy\alchemy_s4.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s4"
+            isUnchangedLegacy="1" gridRow="24" gridColumn="6" requiredPointsSpent="18" maxLevel="3" priority="20" guiPositionID="36"
+            localisationName="skill_name_alchemy_s4" localisationDescription="skill_side_effects_description"
+            localisationDescriptionLevel2="skill_side_effects_description" localisationDescriptionLevel3="skill_side_effects_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s4.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\side_effects.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s15</required_skills>
+        </skill>
 	
 		<!-- OILS -->
-		<!-- Flexibility -->
-		<skill skill_name="alchemy_s12" requiredPointsSpent="0"  maxLevel="3" priority="36" guiPositionID="11" localisationName="skill_name_alchemy_s12" localisationDescription="skill_desc_alchemy_s12" localisationDescriptionLevel2="skill_desc_alchemy_s12" localisationDescriptionLevel3="skill_desc_alchemy_s12" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils" iconPath="icons\Skills\Alchemy\alchemy_s21.png" linkVertical="green" linkLeft="green" linkRight="green" />
+		<!-- Flexibility (Poisoned Blade) -->
+		    <skill skill_name="alchemy_s12"
+            isUnchangedLegacy="1" gridRow="6" gridColumn="10" requiredPointsSpent="0"  maxLevel="3" priority="36" guiPositionID="11"
+            localisationName="skill_poisoned_blades_name" localisationDescription="skill_poisoned_blades_description"
+            localisationDescriptionLevel2="skill_poisoned_blades_description" localisationDescriptionLevel3="skill_poisoned_blades_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s21.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\poisoned_blades.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s8,alchemy_s16,alchemy_s20</required_skills>
+        </skill>
 		<!-- Protective Coating -->
-        <skill skill_name="alchemy_s5"  requiredPointsSpent="6" maxLevel="3" priority="36" guiPositionID="8"  localisationName="skill_name_alchemy_s5" localisationDescription="skill_desc_alchemy_s5"  localisationDescriptionLevel2="skill_desc_alchemy_s5"  localisationDescriptionLevel3="skill_desc_alchemy_s5"  cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils" iconPath="icons\Skills\Alchemy\alchemy_s5.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s5"
+            isUnchangedLegacy="1" gridRow="9" gridColumn="2" requiredPointsSpent="6" maxLevel="3" priority="36" guiPositionID="8"
+            localisationName="skill_protective_coating_name" localisationDescription="skill_protective_coating_description"
+            localisationDescriptionLevel2="skill_protective_coating_description" localisationDescriptionLevel3="skill_protective_coating_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils"
+            iconPath="icons\Skills\Alchemy\alchemy_s5.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\protective_coating.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s10</required_skills>
+        </skill>
 		<!-- Fixative Formula -->
         <skill skill_name="alchemy_s6"  requiredPointsSpent="12" maxLevel="3" priority="36" guiPositionID="20" localisationName="skill_name_alchemy_s6"  localisationDescriptionNotAcquired="skill_desc_prev_alchemy_s6"  localisationDescription="skill_desc_alchemy_s6"  localisationDescriptionLevel2="skill_desc_alchemy_s6_2"  localisationDescriptionLevel3="skill_desc_alchemy_s6_3"  cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils" iconPath="icons\Skills\Alchemy\alchemy_s6.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Application -->
-        <skill skill_name="alchemy_s7"  requiredPointsSpent="18" maxLevel="3" priority="36" guiPositionID="15" localisationName="skill_name_alchemy_s7" localisationDescription="skill_desc_alchemy_s7"  localisationDescriptionLevel2="skill_desc_alchemy_s7"  localisationDescriptionLevel3="skill_desc_alchemy_s7"  cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils" iconPath="icons\Skills\Alchemy\alchemy_s7.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s7"
+            requiredPointsSpent="18" maxLevel="3" priority="36" guiPositionID="15"
+            localisationName="skill_name_alchemy_s7" localisationDescription="skill_desc_alchemy_s7"
+            localisationDescriptionLevel2="skill_desc_alchemy_s7" localisationDescriptionLevel3="skill_desc_alchemy_s7"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils"
+            iconPath="icons\Skills\Alchemy\alchemy_s7.png"
+            linkVertical="green" linkLeft="green" linkRight="green" />
 	
 		<!-- BOMBS -->
-		<!-- Proximity Bomb -->
+		<!-- Proximity Bomb (Steady Hands)-->
         <skill skill_name="alchemy_s9"  requiredPointsSpent="0"  maxLevel="1" priority="36" guiPositionID="31" localisationName="skill_name_alchemy_s9" localisationDescription="skill_desc_alchemy_s9"  localisationDescriptionLevel2="skill_desc_alchemy_s9"  localisationDescriptionLevel3="skill_desc_alchemy_s9"  cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" iconPath="icons\Skills\Alchemy\alchemy_s9.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Heavy Handed -->
-        <skill skill_name="alchemy_s10" requiredPointsSpent="6" maxLevel="3" priority="37" guiPositionID="26" localisationName="skill_name_alchemy_s10" localisationDescription="skill_desc_alchemy_s10" localisationDescriptionLevel2="skill_desc_alchemy_s10" localisationDescriptionLevel3="skill_desc_alchemy_s10" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" iconPath="icons\Skills\Alchemy\alchemy_s10.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s10"
+            isUnchangedLegacy="1" gridRow="6" gridColumn="2" requiredPointsSpent="6" maxLevel="3" priority="37" guiPositionID="26"
+            localisationName="skill_pyrotechnics_name" localisationDescription="skill_pyrotechnics_description"
+            localisationDescriptionLevel2="skill_pyrotechnics_description" localisationDescriptionLevel3="skill_pyrotechnics_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s10.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\pyrotechnics.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s2,alchemy_s8,alchemy_s14</required_skills>
+        </skill>
 		<!-- Efficiency -->
-        <skill skill_name="alchemy_s8"  requiredPointsSpent="12" maxLevel="3" priority="37" guiPositionID="6"  localisationName="skill_name_alchemy_s8" localisationDescription="skill_desc_alchemy_s8"  localisationDescriptionLevel2="skill_desc_alchemy_s8"  localisationDescriptionLevel3="skill_desc_alchemy_s8"  cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" iconPath="icons\Skills\Alchemy\alchemy_s8.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s8"
+            isUnchangedLegacy="1" gridRow="0" gridColumn="6" requiredPointsSpent="12" maxLevel="3" priority="37" guiPositionID="6"
+            localisationName="skill_efficiency_name" localisationDescription="skill_desc_alchemy_s8"
+            localisationDescriptionLevel2="skill_desc_alchemy_s8" localisationDescriptionLevel3="skill_desc_alchemy_s8"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s8.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\efficiency.png"
+            linkVertical="green" linkLeft="green" linkRight="green" />
 		<!-- Cluster Bomb -->
-        <skill skill_name="alchemy_s11" requiredPointsSpent="18" maxLevel="3" priority="37" guiPositionID="30" localisationName="skill_name_alchemy_s11" localisationDescription="skill_desc_alchemy_s11" localisationDescriptionLevel2="skill_desc_alchemy_s11" localisationDescriptionLevel3="skill_desc_alchemy_s11" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" iconPath="icons\Skills\Alchemy\alchemy_s11.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s11"
+            isUnchangedLegacy="1" gridRow="24" gridColumn="2" requiredPointsSpent="18" maxLevel="3" priority="37" guiPositionID="30"
+            localisationName="skill_cluster_bombs_name" localisationDescription="skill_cluster_bombs_description"
+            localisationDescriptionLevel2="skill_cluster_bombs_description" localisationDescriptionLevel3="skill_cluster_bombs_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s11.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\cluster_bombs.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s25</required_skills>
+        </skill>
 
 		<!-- MUTAGENS -->
 		<!-- Taster -->
-        <skill skill_name="alchemy_s18" requiredPointsSpent="0"  maxLevel="3" priority="37" guiPositionID="17" localisationName="skill_name_alchemy_s18" localisationDescriptionNotAcquired="skill_desc_prev_alchemy_s18" localisationDescription="skill_desc_alchemy_s18" localisationDescriptionLevel2="skill_desc_alchemy_s18_2" localisationDescriptionLevel3="skill_desc_alchemy_s18_3" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" iconPath="icons\Skills\Alchemy\alchemy_s18.png" linkVertical="green" linkLeft="green" linkRight="green" />
-		<!-- Transmutation -->
-        <skill skill_name="alchemy_s13" requiredPointsSpent="6" maxLevel="3" priority="37" guiPositionID="16" localisationName="skill_name_alchemy_s13" localisationDescription="skill_desc_alchemy_s13" localisationDescriptionLevel2="skill_desc_alchemy_s13" localisationDescriptionLevel3="skill_desc_alchemy_s13" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" iconPath="icons\Skills\Alchemy\alchemy_s13.png" linkVertical="green" linkLeft="green" linkRight="green" />
-		<!-- Synergy -->
-        <skill skill_name="alchemy_s19" requiredPointsSpent="12" maxLevel="3" priority="37" guiPositionID="25" localisationName="skill_name_alchemy_s19" localisationDescription="skill_desc_alchemy_s19" localisationDescriptionLevel2="skill_desc_alchemy_s19" localisationDescriptionLevel3="skill_desc_alchemy_s19" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" iconPath="icons\Skills\Alchemy\alchemy_s19.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s18"
+            isUnchangedLegacy="1" gridRow="9" gridColumn="6" requiredPointsSpent="0"  maxLevel="3" priority="37" guiPositionID="17"
+            localisationName="skill_acquired_tolerance_name" localisationDescriptionNotAcquired="skill_acquired_tolerance_description"
+            localisationDescription="skill_acquired_tolerance_description" localisationDescriptionLevel2="skill_acquired_tolerance_description"
+            localisationDescriptionLevel3="skill_acquired_tolerance_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s18.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\acquired_tolerance.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s27</required_skills>
+        </skill>
+    <!-- Transmutation -->
+        <skill skill_name="alchemy_s13"
+            isUnchangedLegacy="1" gridRow="12" gridColumn="6" requiredPointsSpent="6" maxLevel="3" priority="37" guiPositionID="16"
+            localisationName="skill_tissue_transformation_name" localisationDescription="skill_tissue_transformation_description"
+            localisationDescriptionLevel2="skill_tissue_transformation_description" localisationDescriptionLevel3="skill_tissue_transformation_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s13.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\tissue_transform.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s5,alchemy_s18,alchemy_s23</required_skills>
+        </skill>
+    <!-- Synergy -->
+        <skill skill_name="alchemy_s19"
+            requiredPointsSpent="12" maxLevel="3" priority="37" guiPositionID="25"
+            localisationName="skill_name_alchemy_s19" localisationDescription="skill_desc_alchemy_s19"
+            localisationDescriptionLevel2="skill_desc_alchemy_s19" localisationDescriptionLevel3="skill_desc_alchemy_s19"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens"
+            iconPath="icons\Skills\Alchemy\alchemy_s19.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+        </skill>
         <!-- Mutant -->
-        <skill skill_name="alchemy_s14" requiredPointsSpent="18" maxLevel="3" priority="37" guiPositionID="21" localisationName="skill_name_alchemy_s14" localisationDescription="skill_desc_alchemy_s14" localisationDescriptionLevel2="skill_desc_alchemy_s14" localisationDescriptionLevel3="skill_desc_alchemy_s14" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" iconPath="icons\Skills\Alchemy\alchemy_s14.png" linkVertical="green" linkLeft="green" linkRight="green" />
-		
+        <skill skill_name="alchemy_s14"
+            isUnchangedLegacy="1" gridRow="3" gridColumn="0" requiredPointsSpent="18" maxLevel="3" priority="37" guiPositionID="21"
+            localisationName="skill_adaptation_name" localisationDescription="skill_adaptation_description"
+            localisationDescriptionLevel2="skill_adaptation_description" localisationDescriptionLevel3="skill_adaptation_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s14.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\adaptation.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s2</required_skills>
+        </skill>
+
 		<!-- TEST OF GRASSES -->
 		<!-- Frenzy -->
-        <skill skill_name="alchemy_s16" requiredPointsSpent="0"  maxLevel="3" priority="37" guiPositionID="13" localisationName="skill_name_alchemy_s16" localisationDescriptionNotAcquired="skill_desc_prev_alchemy_s16" localisationDescription="skill_desc_alchemy_s16" localisationDescriptionLevel2="skill_desc_alchemy_s16_2" localisationDescriptionLevel3="skill_desc_alchemy_s16_3" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s16.png" linkVertical="green" linkLeft="green" linkRight="green" />
-		<!-- Ignore Pain -->
-        <skill skill_name="alchemy_s20" requiredPointsSpent="6" maxLevel="3" priority="37" guiPositionID="32" localisationName="skill_name_alchemy_s20" localisationDescription="skill_desc_alchemy_s20" localisationDescriptionLevel2="skill_desc_alchemy_s20" localisationDescriptionLevel3="skill_desc_alchemy_s20" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s20.png" linkVertical="green" linkLeft="green" linkRight="green" />
-		<!-- Fast Metabolism -->
-        <skill skill_name="alchemy_s15" requiredPointsSpent="12" maxLevel="3" priority="37" guiPositionID="27" localisationName="skill_name_alchemy_s15" localisationDescription="skill_desc_alchemy_s15" localisationDescriptionLevel2="skill_desc_alchemy_s15" localisationDescriptionLevel3="skill_desc_alchemy_s15" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s15.png" linkVertical="green" linkLeft="green" linkRight="green" />
+        <skill skill_name="alchemy_s16"
+            isUnchangedLegacy="1" gridRow="0" gridColumn="10" requiredPointsSpent="0" maxLevel="3" priority="37" guiPositionID="13"
+            localisationName="skill_frenzy_name" localisationDescriptionNotAcquired="skill_frenzy_description"
+            localisationDescription="skill_frenzy_description" localisationDescriptionLevel2="skill_frenzy_description"
+            localisationDescriptionLevel3="skill_frenzy_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s16.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\frenzy.png"
+            linkVertical="green" linkLeft="green" linkRight="green" />
+    <!-- Ignore Pain -->
+        <skill skill_name="alchemy_s20"
+            isUnchangedLegacy="1" gridRow="3" gridColumn="12" requiredPointsSpent="6" maxLevel="3" priority="37" guiPositionID="32"
+            localisationName="skill_endure_pain_name" localisationDescription="skill_endure_pain_description"
+            localisationDescriptionLevel2="skill_endure_pain_description" localisationDescriptionLevel3="skill_endure_pain_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s20.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\endure_pain.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s16</required_skills>
+        </skill>
+    <!-- Fast Metabolism -->
+        <skill skill_name="alchemy_s15"
+            isUnchangedLegacy="1" gridRow="21" gridColumn="6" requiredPointsSpent="12" maxLevel="3" priority="37" guiPositionID="27"
+            localisationName="skill_fast_metabolism_name" localisationDescription="skill_fast_metabolism_description"
+            localisationDescriptionLevel2="skill_fast_metabolism_description" localisationDescriptionLevel3="skill_fast_metabolism_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\alchemy_s15.png"
+            iconPathTest="icons\Skills\Alchemy\skills_rework\fast_metabolism.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s3,alchemy_s24</required_skills>
+        </skill>
         <!-- Killing Spree -->
         <skill skill_name="alchemy_s17" requiredPointsSpent="18" maxLevel="3" priority="37" guiPositionID="28" localisationName="skill_name_alchemy_s17" localisationDescription="skill_desc_alchemy_s17" localisationDescriptionLevel2="skill_desc_alchemy_s17" localisationDescriptionLevel3="skill_desc_alchemy_s17" cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses" iconPath="icons\Skills\Alchemy\alchemy_s17.png" linkVertical="green" linkLeft="green" linkRight="green" />
 		
 	<!-- PERKS -->
 		<!-- Sun and Stars -->
-        <skill skill_name="perk_1" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="1" localisationName="skill_name_perk_1" localisationDescription="skill_desc_perk_1" cost="1" pathType_name="Perks" subpathType_name="Perks_col1" iconPath="icons\Perks\s_perk_32.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_1" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="1" localisationName="skill_name_perk_1" localisationDescription="skill_desc_perk_1" cost="1" pathType_name="Perks" subpathType_name="Perks_col1" iconPath="icons\Perks\s_perk_32.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		
 		<!-- Steady Shot -->
-        <skill skill_name="perk_2" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="6" localisationName="skill_name_perk_2" localisationDescription="skill_desc_perk_2" cost="1" pathType_name="Perks" subpathType_name="Perks_col1" iconPath="icons\Perks\s_perk_18.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_2" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="6" localisationName="skill_name_perk_2" localisationDescription="skill_desc_perk_2" cost="1" pathType_name="Perks" subpathType_name="Perks_col1" iconPath="icons\Perks\s_perk_18.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		<!-- Hot Hacker
         <skill skill_name="perk_3" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="99" localisationName="skill_name_perk_3" localisationDescription="skill_desc_perk_3" cost="1" pathType_name="Perks" subpathType_name="Perks_col3" iconPath="icons\Perks\s_perk_3.png" linkVertical="" linkLeft="" linkRight="" />
 		-->
 		<!-- To Your Health -->
-        <skill skill_name="perk_4" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="2" localisationName="skill_name_perk_4" localisationDescription="skill_desc_perk_4" cost="1" pathType_name="Perks" subpathType_name="Perks_col2" iconPath="icons\Perks\s_perk_33.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_4" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="2" localisationName="skill_name_perk_4" localisationDescription="skill_desc_perk_4" cost="1" pathType_name="Perks" subpathType_name="Perks_col2" iconPath="icons\Perks\s_perk_33.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		<!-- Cat's Claw -->
-        <skill skill_name="perk_5" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="3" localisationName="skill_name_perk_5" localisationDescription="skill_desc_perk_5" cost="1" pathType_name="Perks" subpathType_name="Perks_col3" iconPath="icons\Perks\s_perk_7.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_5" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="3" localisationName="skill_name_perk_5" localisationDescription="skill_desc_perk_5" cost="1" pathType_name="Perks" subpathType_name="Perks_col3" iconPath="icons\Perks\s_perk_7.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		<!-- Griffon's Gift -->
-        <skill skill_name="perk_6" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="4" localisationName="skill_name_perk_6" localisationDescription="skill_desc_perk_6" cost="1" pathType_name="Perks" subpathType_name="Perks_col4" iconPath="icons\Perks\s_perk_8.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_6" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="4" localisationName="skill_name_perk_6" localisationDescription="skill_desc_perk_6" cost="1" pathType_name="Perks" subpathType_name="Perks_col4" iconPath="icons\Perks\s_perk_8.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		<!-- Bear's Brawn -->
-        <skill skill_name="perk_7" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="5" localisationName="skill_name_perk_7" localisationDescription="skill_desc_perk_7" cost="1" pathType_name="Perks" subpathType_name="Perks_col5" iconPath="icons\Perks\s_perk_9.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_7" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="5" localisationName="skill_name_perk_7" localisationDescription="skill_desc_perk_7" cost="1" pathType_name="Perks" subpathType_name="Perks_col5" iconPath="icons\Perks\s_perk_9.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		<!-- Expertise -->
-        	<skill skill_name="perk_8" isCoreSkill="1" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="99" localisationName="skill_name_perk_8" localisationDescription="skill_desc_perk_8" cost="" pathType_name="" subpathType_name="" iconPath="icons\Perks\s_perk_8.png" linkVertical="" linkLeft="" linkRight="" />
+        	<skill skill_name="perk_8" isCoreSkill="1" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="99" localisationName="skill_name_perk_8" localisationDescription="skill_desc_perk_8" cost="" pathType_name="" subpathType_name="" iconPath="icons\Perks\s_perk_8.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		
 		<!-- Written In Blood -->
-        <skill skill_name="perk_9" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="7" localisationName="skill_name_perk_9" localisationDescription="skill_desc_perk_9" cost="1" pathType_name="Perks" subpathType_name="Perks_col2" iconPath="icons\Perks\s_perk_23.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_9" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="7" localisationName="skill_name_perk_9" localisationDescription="skill_desc_perk_9" cost="1" pathType_name="Perks" subpathType_name="Perks_col2" iconPath="icons\Perks\s_perk_23.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		<!-- Boiling Blood -->
-        <skill skill_name="perk_10" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="8" localisationName="skill_name_perk_10" localisationDescription="skill_desc_perk_10" cost="1" pathType_name="Perks" subpathType_name="Perks_col3" iconPath="icons\Perks\s_perk_17.png" linkVertical="" linkLeft="" linkRight="" />
+        <skill skill_name="perk_10" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="8" localisationName="skill_name_perk_10" localisationDescription="skill_desc_perk_10" cost="1" pathType_name="Perks" subpathType_name="Perks_col3" iconPath="icons\Perks\s_perk_17.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
 		<!-- Blood Into Fire -->
         <skill skill_name="perk_11" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="9" localisationName="skill_name_perk_11" localisationDescription="skill_desc_perk_11" cost="1" pathType_name="Perks" subpathType_name="Perks_col4" iconPath="icons\Perks\s_perk_16.png" linkVertical="" linkLeft="" linkRight="" />
 		<!-- Toxic Block -->
-        <skill skill_name="perk_12" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="10" localisationName="skill_name_perk_12" localisationDescription="skill_desc_perk_12" cost="1" pathType_name="Perks" subpathType_name="Perks_col5" iconPath="icons\Perks\s_perk_30.png" linkVertical="" linkLeft="" linkRight="" />
-      </definitions>
+        <skill skill_name="perk_12" requiredPointsSpent="0" maxLevel="1" priority="0" guiPositionID="10" localisationName="skill_name_perk_12" localisationDescription="skill_desc_perk_12" cost="1" pathType_name="Perks" subpathType_name="Perks_col5" iconPath="icons\Perks\s_perk_30.png" linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
+        
+        <!-- REMASTER PROTOTYPE TREE -->
+        <!-- COMBAT TREE -->
+        <!-- Muscle Memory -->
+        <skill skill_name="sword_s22"
+            isReworked="1" gridRow="0" gridColumn="3" requiredPointsSpent="0"  maxLevel="3" priority="18" guiPositionID="26"
+            localisationName="skill_muscle_memory_name" localisationDescription="skill_muscle_memory_description"
+            localisationDescriptionLevel2="skill_muscle_memory_description_level_2" localisationDescriptionLevel3="skill_muscle_memory_description_level_3"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleFast"
+            iconPath="icons\Skills\Sword\skills_rework\muscle_memory.png"
+            linkVertical="red" linkLeft="red" linkRight="red" />
+		    <!-- Strength Training -->
+        <skill skill_name="sword_s23"
+            isReworked="1" gridRow="3" gridColumn="0" requiredPointsSpent="0" maxLevel="3" priority="16" guiPositionID="16"
+            localisationName="skill_strength_training_name" localisationDescription="skill_strength_training_description"
+            localisationDescriptionLevel2="skill_strength_training_description" localisationDescriptionLevel3="skill_strength_training_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleStrong" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\strength_training.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s22</required_skills>
+        </skill>
+		    <!-- Precise Blows -->
+        <skill skill_name="sword_s24"
+            isReworked="1" gridRow="6" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="3" guiPositionID="32"
+            localisationName="skill_precise_blows_name" localisationDescription="skill_precise_blows_description"
+            localisationDescriptionLevel2="skill_precise_blows_description" localisationDescriptionLevel3="skill_precise_blows_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleFast" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\precise_blows.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s22,sword_s23</required_skills>
+        </skill>
+		    <!-- Crushing Blows -->
+        <skill skill_name="sword_s25"
+            isReworked="1" gridRow="12" gridColumn="0" requiredPointsSpent="0" maxLevel="3" priority="21" guiPositionID="6"
+            localisationName="skill_crushing_blows_name" localisationDescription="skill_crushing_blows_description"
+            localisationDescriptionLevel2="skill_crushing_blows_description" localisationDescriptionLevel3="skill_crushing_blows_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleStrong" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\crushing_blows.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s23</required_skills>
+        </skill>
+        <!-- Anatomical Knowledge -->
+        <skill skill_name="sword_s26"
+            isReworked="1" gridRow="12" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="50" guiPositionID="33"
+            localisationName="skill_anatomical_knowledge_name" localisationDescription="skill_anatomical_knowledge_description"
+            localisationDescriptionLevel2="skill_anatomical_knowledge_description" localisationDescriptionLevel3="skill_anatomical_knowledge_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\anatomical_knowledge.png"
+            linkVertical="yellow" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s34</required_skills>
+        </skill>
+        <!-- Crippling Shot -->
+        <skill skill_name="sword_s27"
+            isReworked="1" gridRow="21" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="50" guiPositionID="7"
+            localisationName="skill_crippling_shot_name" localisationDescription="skill_crippling_shot_description"
+            localisationDescriptionLevel2="skill_crippling_shot_description" localisationDescriptionLevel3="skill_crippling_shot_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\crippling_shot.png"
+            linkVertical="yellow" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s26</required_skills>
+        </skill>
+        <!-- Sunder Armor -->
+        <skill skill_name="sword_s28"
+            isReworked="1" gridRow="21" gridColumn="0" requiredPointsSpent="0" maxLevel="3" priority="50" guiPositionID="17"
+            localisationName="skill_sunder_armor_name" localisationDescription="skill_sunder_armor_description"
+            localisationDescriptionLevel2="skill_sunder_armor_description" localisationDescriptionLevel3="skill_sunder_armor_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleStrong" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\sunder_armor.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s25</required_skills>
+        </skill>
+        <!-- Crippling Strikes -->
+        <skill skill_name="sword_s29"
+            isReworked="1" gridRow="21" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="50" guiPositionID="21"
+            localisationName="skill_crippling_strikes_name" localisationDescription="skill_crippling_strikes_description"
+            localisationDescriptionLevel2="skill_crippling_strikes_description"  localisationDescriptionLevel3="skill_crippling_strikes_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleFast" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\crippling_strikes.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s35</required_skills>
+        </skill>
+        <!-- Deadly Precision -->
+        <skill skill_name="sword_s30"
+            isReworked="1" gridRow="24" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="50" guiPositionID="33"
+            localisationName="skill_deadly_precision_name" localisationDescription="skill_deadly_precision_description"
+            localisationDescriptionLevel2="skill_deadly_precision_description" localisationDescriptionLevel3="skill_deadly_precision_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\deadly_precision.png"
+            linkVertical="yellow" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s2,sword_s29</required_skills>
+        </skill>
+        <!-- Counter Attack -->
+        <skill skill_name="sword_s31"
+            isReworked="1" gridRow="18" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="50" guiPositionID="25"
+            localisationName="skill_counter_attack_name" localisationDescriptionNotAcquired="skill_counter_attack_description"
+            localisationDescription="skill_counter_attack_description" localisationDescriptionLevel2="skill_counter_attack_description"
+            localisationDescriptionLevel3="skill_counter_attack_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Utility" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\counter_attack.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s32,sword_s26,sword_s35</required_skills>
+        </skill>
+        <!-- Lighting Reflexes -->
+        <skill skill_name="sword_s32"
+            isReworked="1" gridRow="12" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="50" guiPositionID="10"
+            localisationName="skill_lightning_reflexes_name" localisationDescription="skill_lightning_reflexes_description"
+            localisationDescriptionLevel2="skill_lightning_reflexes_description" localisationDescriptionLevel3="skill_lightning_reflexes_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\lightning_reflexes.png"
+            linkVertical="yellow" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s16</required_skills>
+        </skill>
+		    <!-- Arrow Deflection -->
+        <skill skill_name="sword_s33"
+            isReworked="1" gridRow="0" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="17" guiPositionID="11"
+            localisationName="skill_arrow_deflection_name" localisationDescriptionNotAcquired="skill_arrow_deflection_description_level_1"
+            localisationDescription="skill_arrow_deflection_description_level_1" localisationDescriptionLevel2="skill_arrow_deflection_description_level_2_3"
+            localisationDescriptionLevel3="skill_arrow_deflection_description_level_2_3"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Utility" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\arrow_deflection.png"
+            linkVertical="red" linkLeft="red" linkRight="red" />
+		    <!-- Cold Blood -->
+		    <skill skill_name="sword_s34"
+            isReworked="1" gridRow="3" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="6" guiPositionID="20"
+            localisationName="skill_cold_blood_name" localisationDescription="skill_cold_blood_description"
+            localisationDescriptionLevel2="skill_cold_blood_description" localisationDescriptionLevel3="skill_cold_blood_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Crossbow" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\cold_blooded.png"
+            linkVertical="yellow" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s33</required_skills>
+        </skill>
+		    <!-- Whirl -->
+        <skill skill_name="sword_s35"
+            isReworked="1" gridRow="15" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="5" guiPositionID="31"
+            localisationName="skill_whirl_name" localisationDescription="skill_whirl_description_level_1"
+            localisationDescriptionLevel2="skill_whirl_description_level_2_3"  localisationDescriptionLevel3="skill_whirl_description_level_2_3"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_StyleFast" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\whirl.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s36</required_skills>
+        </skill>
+        <!-- Fleet Footed -->
+        <skill skill_name="sword_s36"
+            isReworked="1" gridRow="12" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="5" guiPositionID="31"
+            localisationName="skill_fleet_footed_name" localisationDescription="skill_fleet_footed_description"
+            localisationDescriptionLevel2="skill_fleet_footed_description"  localisationDescriptionLevel3="skill_fleet_footed_description"
+            cost="1" pathType_name="Sword" subpathType_name="Sword_Utility" isAlternative="1"
+            iconPath="icons\Skills\Sword\skills_rework\fleet_footed.png"
+            linkVertical="red" linkLeft="red" linkRight="red" >
+            <required_skills>sword_s18</required_skills>
+        </skill>
+		
+        <!-- SIGNS TREE -->
+        <!-- Far Reaching Aard -->
+        <!-- legacy skill used magic_s20 -->
+        <!-- Melt Armor -->
+        <!-- legacy skill used magic_s8 -->
+        <!-- Sustained Glyphs -->
+        <skill skill_name="magic_s42"
+            isReworked="1" gridRow="0" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="8" guiPositionID="8888"
+            localisationName="skill_sustained_glyphs_name" localisationDescriptionNotAcquired="skill_sustained_glyphs_description"
+            localisationDescription="skill_sustained_glyphs_description" localisationDescriptionLevel2="skill_sustained_glyphs_description"
+            localisationDescriptionLevel3="skill_sustained_glyphs_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\sustained_glyphs.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" />
+        <!-- Exlpoding Shield -->
+        <!-- legacy skill used magic_s13 -->
+        <!-- Delusion -->
+        <!-- legacy skill used magic_s17 -->
+
+        <!-- Aard Sweep -->
+        <!-- legacy skill used magic_s1 -->
+        <!-- Firestream -->
+        <skill skill_name="magic_s28"
+            isReworked="1" gridRow="3" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="8" guiPositionID="8888"
+            localisationName="skill_firestream_name" localisationDescriptionNotAcquired="skill_firestream_description_level_1"
+            localisationDescription="skill_firestream_description_level_1" localisationDescriptionLevel2="skill_firestream_description_level_2_3"
+            localisationDescriptionLevel3="skill_firestream_description_level_2_3"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Igni" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\firestream.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s8</required_skills>
+        </skill>
+        <!-- Magic Trap -->
+        <!-- legacy skill used magic_s3 -->
+        <!-- Active Shield -->
+        <!-- legacy skill used magic_s4 -->
+        <!-- Puppet -->
+        <skill skill_name="magic_s31"
+            isReworked="1" gridRow="3" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="11" guiPositionID="11111"
+            localisationName="skill_puppet_name" localisationDescriptionNotAcquired="skill_puppet_description"
+            localisationDescription="skill_puppet_description" localisationDescriptionLevel2="skill_puppet_description"
+            localisationDescriptionLevel3="skill_puppet_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Axi" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\puppet.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s17</required_skills>
+        </skill>
+
+        <!-- Supercharged Glyphs -->
+        <!-- legacy skill used magic_s11 -->
+        <!-- Shock Wave -->
+        <skill skill_name="magic_s33"
+            isReworked="1" gridRow="9" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="13" guiPositionID="13333"
+            localisationName="skill_shock_wave_name" localisationDescriptionNotAcquired="skill_shock_wave_description"
+            localisationDescription="skill_shock_wave_description" localisationDescriptionLevel2="skill_shock_wave_description"
+            localisationDescriptionLevel3="skill_shock_wave_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Aard" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\shock_wave.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s1,magic_s28,magic_s3</required_skills>
+        </skill>
+        <!-- Domination -->
+        <!-- legacy skill used magic_s19 -->
+        
+        <!-- Catalyst -->
+        <skill skill_name="magic_s35"
+            isReworked="1" gridRow="12" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="15" guiPositionID="15555"
+            localisationName="skill_catalyst_name" localisationDescriptionNotAcquired="skill_catalyst_description"
+            localisationDescription="skill_catalyst_description" localisationDescriptionLevel2="skill_catalyst_description"
+            localisationDescriptionLevel3="skill_catalyst_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\catalyst.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s11,magic_s33</required_skills>
+        </skill>
+        <!-- Fortified Signs -->
+        <skill skill_name="magic_s36"
+            isReworked="1" gridRow="12" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="16" guiPositionID="16666"
+            localisationName="skill_fortified_signs_name" localisationDescriptionNotAcquired="skill_fortified_signs_description"
+            localisationDescription="skill_fortified_signs_description" localisationDescriptionLevel2="skill_fortified_signs_description"
+            localisationDescriptionLevel3="skill_fortified_signs_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\fortified_signs.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s11,magic_s19</required_skills>
+        </skill>
+        <!-- Convergence Theory -->
+        <skill skill_name="magic_s37"
+            isReworked="1" gridRow="15" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="17" guiPositionID="17777"
+            localisationName="skill_convergence_theory_name" localisationDescriptionNotAcquired="skill_convergence_theory_description"
+            localisationDescription="skill_convergence_theory_description" localisationDescriptionLevel2="skill_convergence_theory_description"
+            localisationDescriptionLevel3="skill_convergence_theory_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\convergence_theory.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s35,magic_s36</required_skills>
+        </skill>
+
+        <!-- Focus -->
+        <skill skill_name="magic_s38"
+            isReworked="1" gridRow="18" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="18" guiPositionID="18888"
+            localisationName="skill_focus_name" localisationDescriptionNotAcquired="skill_focus_description"
+            localisationDescription="skill_focus_description" localisationDescriptionLevel2="skill_focus_description"
+            localisationDescriptionLevel3="skill_focus_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\focus.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s35</required_skills>
+        </skill>
+        <!-- Avoidance -->
+        <skill skill_name="magic_s39"
+            isReworked="1" gridRow="18" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="19" guiPositionID="19999"
+            localisationName="skill_avoidance_name" localisationDescriptionNotAcquired="skill_avoidance_description"
+            localisationDescription="skill_avoidance_description" localisationDescriptionLevel2="skill_avoidance_description"
+            localisationDescriptionLevel3="skill_avoidance_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\avoidance.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s36</required_skills>
+        </skill>
+        <!-- Overload -->
+        <skill skill_name="magic_s40"
+            isReworked="1" gridRow="21" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="20" guiPositionID="20000"
+            localisationName="skill_overload_name" localisationDescriptionNotAcquired="skill_overload_description"
+            localisationDescription="skill_overload_description" localisationDescriptionLevel2="skill_overload_description"
+            localisationDescriptionLevel3="skill_overload_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\overload.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s37,magic_s38,magic_s39</required_skills>
+        </skill>
+        <!-- Resonance -->
+        <skill skill_name="magic_s41"
+            isReworked="1" gridRow="24" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="21" guiPositionID="21111"
+            localisationName="skill_resonance_name" localisationDescriptionNotAcquired="skill_resonance_description"
+            localisationDescription="skill_resonance_description" localisationDescriptionLevel2="skill_resonance_description"
+            localisationDescriptionLevel3="skill_resonance_description"
+            cost="1" pathType_name="Signs" subpathType_name="Signs_Yrden" isAlternative="1"
+            iconPath="icons\Skills\Signs\skills_rework\resonance.png"
+            linkVertical="blue" linkLeft="blue" linkRight="blue" >
+            <required_skills>magic_s40</required_skills>
+        </skill>
+
+        <!-- ALCHEMY TREE -->
+		    <!-- Debilitating Poison -->
+        <skill skill_name="alchemy_s22"
+            isReworked="1" gridRow="18" gridColumn="10" requiredPointsSpent="0" maxLevel="3" priority="20" guiPositionID="28"
+            localisationName="skill_debilitating_poison_name" localisationDescriptionNotAcquired="skill_debilitating_poison_description"
+            localisationDescription="skill_debilitating_poison_description" localisationDescriptionLevel2="skill_debilitating_poison_description"
+            localisationDescriptionLevel3="skill_debilitating_poison_description" isAlternative="1"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Grasses"
+            iconPath="icons\Skills\Alchemy\skills_rework\debilitating_poison.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s23,alchemy_s24</required_skills>
+        </skill>
+		    <!-- Toxic Shock-->
+		    <skill skill_name="alchemy_s23"
+            isReworked="1" gridRow="9" gridColumn="10" requiredPointsSpent="0" maxLevel="3" priority="36" guiPositionID="31"
+            localisationName="skill_toxic_shock_name" localisationDescription="skill_toxic_shock_description"
+            localisationDescriptionLevel2="skill_toxic_shock_description" localisationDescriptionLevel3="skill_toxic_shock_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Bombs" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\skills_rework\toxic_shock_2.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s12</required_skills>
+        </skill>
+		    <!-- Heightened Tolerance -->
+        <skill skill_name="alchemy_s24"
+            isReworked="1" gridRow="15" gridColumn="8" requiredPointsSpent="0" maxLevel="3" priority="20" guiPositionID="22"
+            localisationName="skill_heightened_tolerance_name" localisationDescription="skill_heightened_tolerance_description"
+            localisationDescriptionLevel2="skill_heightened_tolerance_description" localisationDescriptionLevel3="skill_heightened_tolerance_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\skills_rework\heightened_tolerance.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s13</required_skills>
+          </skill>
+		    <!-- Volatile Concoction -->
+        <skill skill_name="alchemy_s25"
+            isReworked="1" gridRow="18" gridColumn="2" requiredPointsSpent="0" maxLevel="3" priority="36" guiPositionID="20"
+            localisationName="skill_volatile_concoction_name" localisationDescriptionNotAcquired="skill_volatile_concoction_description"
+            localisationDescription="skill_volatile_concoction_description" localisationDescriptionLevel2="skill_volatile_concoction_description"
+            localisationDescriptionLevel3="skill_volatile_concoction_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\skills_rework\volatile_concoction.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s3,alchemy_s5</required_skills>
+        </skill>
+		    <!-- Wyvern Sting -->
+        <skill skill_name="alchemy_s26"
+            isReworked="1" gridRow="24" gridColumn="10" requiredPointsSpent="0" maxLevel="3" priority="20" guiPositionID="37"
+            localisationName="skill_wyvern_sting_name" localisationDescription="skill_wyvern_sting_description"
+            localisationDescriptionLevel2="skill_wyvern_sting_description" localisationDescriptionLevel3="skill_wyvern_sting_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Potions" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\skills_rework\wyvern_sting.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s22</required_skills>
+        </skill>
+        <!-- Hunter Instinct -->
+        <skill skill_name="alchemy_s27"
+            isReworked="1" gridRow="6" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="20" guiPositionID="37"
+            localisationName="skill_hunter_instinct_name" localisationDescription="skill_hunter_instinct_description"
+            localisationDescriptionLevel2="skill_hunter_instinct_description" localisationDescriptionLevel3="skill_hunter_instinct_description"
+            cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Oils" isAlternative="1"
+            iconPath="icons\Skills\Alchemy\skills_rework\hunter_instinct.png"
+            linkVertical="green" linkLeft="green" linkRight="green" >
+            <required_skills>alchemy_s2,alchemy_s8,alchemy_s16</required_skills>
+        </skill>
+		
+        <!-- SURVIVAL TREE -->
+        <!-- Cat School Techniques (old 5) -->
+        <skill skill_name="perk_23"
+            isReworked="1" gridRow="0" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="3"
+            localisationName="skill_cat_school_techniques_name" localisationDescription="skill_cat_school_techniques_description"
+            localisationDescriptionLevel2="skill_cat_school_techniques_description" localisationDescriptionLevel3="skill_cat_school_techniques_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col3" isAlternative="1"
+            iconPath="icons\perks\skills_rework\cat_school_techniques.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
+		    <!-- Griffon School Techniques (old 6) -->
+        <skill skill_name="perk_24"
+            isReworked="1" gridRow="15" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="4"
+            localisationName="skill_griffin_school_techniques_name" localisationDescription="skill_griffin_school_techniques_description"
+            localisationDescriptionLevel2="skill_griffin_school_techniques_description" localisationDescriptionLevel3="skill_griffin_school_techniques_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col4" isAlternative="1"
+            iconPath="icons\perks\skills_rework\griffin_school_techniques.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
+		    <!-- Bear School Techniques (old 7) -->
+        <skill skill_name="perk_25"
+            isReworked="1" gridRow="10" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="5"
+            localisationName="skill_bear_school_techniques_name" localisationDescription="skill_bear_school_techniques_description"
+            localisationDescriptionLevel2="skill_bear_school_techniques_description" localisationDescriptionLevel3="skill_bear_school_techniques_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col5" isAlternative="1"
+            iconPath="icons\perks\skills_rework\bear_school_techniques.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
+	      <!-- Wolven School Techniques (old Steady Shot 2) -->
+        <skill skill_name="perk_26"
+            isReworked="1" gridRow="5" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="6"
+            localisationName="skill_wolven_school_techniques_name" localisationDescription="skill_wolven_school_techniques_description"
+            localisationDescriptionLevel2="skill_wolven_school_techniques_description" localisationDescriptionLevel3="skill_wolven_school_techniques_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col1" isAlternative="1"
+            iconPath="icons\perks\skills_rework\wolven_school_techniques.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" />
+	      <!-- Manticore School Techniques (old Trick Shot 17) -->
+        <skill skill_name="perk_27"
+            isReworked="1" gridRow="20" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="12"
+            localisationName="skill_manticore_school_techniques_name" localisationDescription="skill_manticore_school_techniques_description"
+            localisationDescriptionLevel2="skill_manticore_school_techniques_description" localisationDescriptionLevel3="skill_manticore_school_techniques_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col2" isAlternative="1"
+            iconPath="icons\perks\skills_rework\manticore_school_techniques.png"
+            linkVertical="" linkLeft="" linkRight="" />
+	      <!-- Viper School Techniques (old Combat Fires 16) -->
+  		  <skill skill_name="perk_28"
+            isReworked="1" gridRow="25" gridColumn="6" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="18"
+            localisationName="skill_viper_school_techniques_name" localisationDescription="skill_viper_school_techniques_description"
+            localisationDescriptionLevel2="skill_viper_school_techniques_description" localisationDescriptionLevel3="skill_viper_school_techniques_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col3" isAlternative="1"
+            iconPath="icons\perks\skills_rework\viper_school_techniques.png"
+            linkVertical="" linkLeft="" linkRight="" />
+	  	
+        <!-- Synergy -->
+        <skill skill_name="perk_43"
+            isReworked="1" gridRow="15" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="19"
+            localisationName="skill_synergy_name" localisationDescription="skill_synergy_description"
+            localisationDescriptionLevel2="skill_synergy_description" localisationDescriptionLevel3="skill_synergy_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col4" isAlternative="1"
+            iconPath="icons\perks\skills_rework\synergy.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_32,perk_33,perk_34</required_skills>
+        </skill>
+        <!-- Cat’s Feast -->
+        <!--
+  	  	<skill skill_name="perk_29"
+            isReworked="1" gridRow="4" gridColumn="1" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="19"
+            localisationName="CAT'S FEASt" localisationDescription="CAT'S FEAST"
+            localisationDescriptionLevel2="CAT'S FEAST" localisationDescriptionLevel3="CAT'S FEAST"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col4" isAlternative="1"
+            iconPath="icons\perks\skills_rework\cats_feast.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_42,perk_28,perk_33</required_skills>
+        </skill>
+        -->
+        <!-- Survival Instinct -->
+        <skill skill_name="perk_30"
+            isReworked="1" gridRow="10" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="2"
+            localisationName="skill_survival_instinct_name" localisationDescription="skill_survival_instinct_description"
+            localisationDescriptionLevel2="skill_survival_instinct_description" localisationDescriptionLevel3="skill_survival_instinct_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col2" isAlternative="1"
+            iconPath="icons\perks\skills_rework\survival_instinct.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" >
+            <required_skills>perk_34,perk_38,perk_42</required_skills>
+        </skill>
+        <!-- Attack is the Best Defense -->
+        <skill skill_name="perk_31"
+            isReworked="1" gridRow="8" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="20"
+            localisationName="skill_attack_is_the_best_defense_name" localisationDescription="skill_attack_is_the_best_defense_description"
+            localisationDescriptionLevel2="skill_attack_is_the_best_defense_description" localisationDescriptionLevel3="skill_attack_is_the_best_defense_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col5" isAlternative="1"
+            iconPath="icons\perks\skills_rework\attack_is_the_best_defense.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_23,perk_25,perk_26,perk_35</required_skills>
+        </skill>
+        <!-- Metabolism Boost -->
+        <skill skill_name="perk_32"
+            isReworked="1" gridRow="20" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="11"
+            localisationName="skill_metabolism_boost_name" localisationDescription="skill_metabolism_boost_description"
+            localisationDescriptionLevel2="skill_metabolism_boost_description" localisationDescriptionLevel3="skill_metabolism_boost_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col1" isAlternative="1"
+            iconPath="icons\perks\skills_rework\metabolism_boost.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_28,perk_43</required_skills>
+        </skill>
+        <!-- Metabolic Control -->
+        <skill skill_name="perk_33"
+            isReworked="1" gridRow="18" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="10"
+            localisationName="skill_metabolic_control_name" localisationDescription="skill_metabolic_control_description"
+            localisationDescriptionLevel2="skill_metabolic_control_description" localisationDescriptionLevel3="skill_metabolic_control_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col5" isAlternative="1"
+            iconPath="icons\perks\skills_rework\metabolic_control.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" >
+            <required_skills>perk_24,perk_27,perk_28,perk_43</required_skills>
+        </skill>
+        <!-- Rage Management -->
+        <skill skill_name="perk_34"
+            isReworked="1" gridRow="13" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="7"
+            localisationName="skill_rage_management_name" localisationDescription="skill_rage_management_description"
+            localisationDescriptionLevel2="skill_rage_management_description" localisationDescriptionLevel3="skill_rage_management_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col2" isAlternative="1"
+            iconPath="icons\perks\skills_rework\rage_mgmt.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" >
+            <required_skills>perk_24,perk_25,perk_30,perk_43</required_skills>
+        </skill>
+        <!-- Strong Back -->
+        <skill skill_name="perk_35"
+            isReworked="1" gridRow="10" gridColumn="0" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="15"
+            localisationName="skill_strong_back_name" localisationDescription="skill_strong_back_description"
+            localisationDescriptionLevel2="skill_strong_back_description" localisationDescriptionLevel3="skill_strong_back_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col5" isAlternative="1"
+            iconPath="icons\perks\skills_rework\strong_back.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_31,perk_40,perk_41</required_skills>
+        </skill>
+        <!-- Element of Surprise -->
+        <skill skill_name="perk_44"
+            isReworked="1" gridRow="18" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="16"
+            localisationName="skill_element_of_surprise_name" localisationDescription="skill_element_of_surprise_description"
+            localisationDescriptionLevel2="skill_element_of_surprise_description" localisationDescriptionLevel3="skill_element_of_surprise_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col1" isAlternative="1"
+            iconPath="icons\perks\skills_rework\element_of_surprise_2.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_24,perk_27,perk_28,perk_37</required_skills>
+        </skill>
+        <!-- Gorged on Power -->
+        <!--
+        <skill skill_name="perk_36"
+            isReworked="1" gridRow="7" gridColumn="4" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="16"
+            localisationName="skill_name_perk_14" localisationDescription="GORGED ON POWER"
+            localisationDescriptionLevel2="GORGED ON POWER" localisationDescriptionLevel3="GORGED ON POWER"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col1" isAlternative="1"
+            iconPath="icons\perks\skills_rework\gorged_on_power.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_35,perk_39</required_skills>
+        </skill>
+        -->
+        <!-- Conjunction -->
+        <skill skill_name="perk_37"
+            isReworked="1" gridRow="15" gridColumn="0" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="9"
+            localisationName="skill_conjunction_name" localisationDescription="skill_conjunction_description"
+            localisationDescriptionLevel2="skill_conjunction_description" localisationDescriptionLevel3="skill_conjunction_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col4" isAlternative="1"
+            iconPath="icons\perks\skills_rework\conjunction.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" >
+            <required_skills>perk_39,perk_41,perk_44</required_skills>
+        </skill>
+        <!-- Sun and Stars -->
+        <skill skill_name="perk_38"
+            isReworked="1" gridRow="8" gridColumn="9" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="1"
+            localisationName="skill_sun_and_starts_name" localisationDescription="skill_sun_and_starts_description"
+            localisationDescriptionLevel2="skill_sun_and_starts_description" localisationDescriptionLevel3="skill_sun_and_starts_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col1" isAlternative="1"
+            iconPath="icons\perks\skills_rework\sun_and_stars.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_23,perk_25,perk_26,perk_30</required_skills>
+        </skill>
+
+        <!-- Advanced PyroTechnics -->
+        <skill skill_name="perk_39"
+            isReworked="1" gridRow="20" gridColumn="0" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="13"
+			      localisationName="skill_advanced_pyrotechnics_name" localisationDescription="skill_advanced_pyrotechnics_description"
+            localisationDescriptionLevel2="skill_advanced_pyrotechnics_description" localisationDescriptionLevel3="skill_advanced_pyrotechnics_description"
+			      cost="1" pathType_name="Perks" subpathType_name="Perks_col3" isAlternative="1"
+			      iconPath="icons\Perks\skills_rework\advanced_pyrotechnics.png"
+			      linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_28,perk_37</required_skills>
+        </skill>
+        <!-- Battle Frenzy -->
+	  	  <skill skill_name="perk_40"
+            isReworked="1" gridRow="5" gridColumn="0" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="14"
+			      localisationName="skill_battle_frenzy_name" localisationDescription="skill_battle_frenzy_description"
+            localisationDescriptionLevel2="skill_battle_frenzy_description" localisationDescriptionLevel3="skill_battle_frenzy_description"
+			      cost="1" pathType_name="Perks" subpathType_name="Perks_col4" isAlternative="1"
+			      iconPath="icons\Perks\skills_rework\battle_frenzy.png"
+			      linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_23,perk_35</required_skills>
+        </skill>
+        <!-- Gourmet -->
+        <skill skill_name="perk_41"
+            isReworked="1" gridRow="13" gridColumn="3" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="17"
+            localisationName="skill_gourmet_name" localisationDescription="skill_gourmet_description"
+            localisationDescriptionLevel2="skill_gourmet_description" localisationDescriptionLevel3="skill_gourmet_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col2" isAlternative="1"
+            iconPath="icons\Perks\skills_rework\gourmet.png"
+            linkVertical="" linkLeft="" linkRight="" >
+            <required_skills>perk_24,perk_25,perk_35,perk_37</required_skills>
+        </skill>
+        <!-- Adrenaline Burst -->
+        <skill skill_name="perk_42"
+            isReworked="1" gridRow="5" gridColumn="12" requiredPointsSpent="0" maxLevel="3" priority="0" guiPositionID="8"
+            localisationName="skill_adrenaline_burst_name" localisationDescription="skill_adrenaline_burst_description"
+            localisationDescriptionLevel2="skill_adrenaline_burst_description" localisationDescriptionLevel3="skill_adrenaline_burst_description"
+            cost="1" pathType_name="Perks" subpathType_name="Perks_col3" isAlternative="1"
+            iconPath="icons\Perks\skills_rework\adrenaline_burst.png"
+            linkVertical="yellow" linkLeft="yellow" linkRight="yellow" >
+            <required_skills>perk_23,perk_30</required_skills>
+        </skill>
+    </definitions>
     </skills>
     <skill_slots>
       <slot id="1" unlockedOnLevel="0" group="1" />

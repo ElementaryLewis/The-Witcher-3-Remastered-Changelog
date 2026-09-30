@@ -2,8 +2,12 @@
 <LoadingScreen>
 	<Video>
 		<SkipKey>IK_Pad_X_SQUARE</SkipKey>
+		<SkipKey>IK_Pad_B_CIRCLE</SkipKey>
 		<SkipKey>IK_RightMouse</SkipKey>
+		<SkipKey>IK_JcmsRightClick</SkipKey>
 		<SkipKey>IK_Enter</SkipKey>
 		<SkipKey>IK_Space</SkipKey>
+		<SkipKey>IK_Gesture_Tap</SkipKey>
+		<SkipKey>IK_Gesture_DoubleTap</SkipKey>
 	</Video>
 </LoadingScreen>

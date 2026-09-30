@@ -336,6 +336,31 @@
 		<spell_power_yrden type="mult" min="0.2" />
         <duration type="add" min="1800" max="1800" />
       </ability>
+
+      <ability name="CatalystEffect">
+        <duration type="add" min="1800" max="1800" />
+		<spell_power_aard type="mult" min="0.1" />
+		<spell_power_igni type="mult" min="0.1" />
+      </ability>
+
+      <ability name="ConvergenceTheoryEffect">
+        <duration type="add" min="15" max="15" />
+		    <spell_power type="mult" min="0.05" />
+      </ability>
+
+      <ability name="AvoidanceEffect">
+        <duration type="add" min="6" max="6" />
+		    <stamina_cost type="mult" min="-0.2" />
+      </ability>
+
+      <ability name="UndyingEffect">
+        <duration type="add" min="30" max="30" />
+      </ability>
+
+      <ability name="ElementOfSurpriseEffect">
+        <duration type="add" min="10" max="10" />
+		    <stamina_cost type="mult" min="0.1" />
+      </ability>
 	  
       <ability name="SilverDustEffect_Level1">
         <duration type="add" min="20" />
@@ -397,6 +422,9 @@
       <ability name="WeatherBonusEffect">
         <duration type="add" min="-1" />
       </ability>
+	  <ability name="GourmetEffect">
+        <duration type="add" min="300"/>
+      </ability>
       <ability name="WellFedEffect_Level1">
         <duration type="add" min="30" max="30" />
         <vitalityRegen type="add" min="10" max="10" />
@@ -440,6 +468,10 @@
         <hp_regen_reduction_strength type="add" min="200" />
         <hp_regen_reduction_duration type="add" min="5" />
       </ability>
+      <ability name="CatEffectPerk29">
+        <highlightObjectsRange type="add" min="3"/>
+        <highlightEnemiesRange type="add" min="25"/>
+      </ability>
     </abilities>
   </definitions>
   <custom>
@@ -472,9 +504,15 @@
       <effect name_name="ShrineIgniEffect" 		 	defaultAbilityName_name="ShrineIgniEffect" 			iconType_name="EffectIgni"   	showOnHUD="1" effectNameLocalisationKey_name="skill_name_magic_2" 		/>
       <effect name_name="ShrineQuenEffect" 		 	defaultAbilityName_name="ShrineQuenEffect" 			iconType_name="EffectQuen"   	showOnHUD="1" effectNameLocalisationKey_name="skill_name_magic_4" 		/>
       <effect name_name="ShrineYrdenEffect" 	 	defaultAbilityName_name="ShrineYrdenEffect" 		iconType_name="EffectYrden"  	showOnHUD="1" effectNameLocalisationKey_name="skill_name_magic_3" 		/>
-	  <effect name_name="EnhancedArmorEffect" 	 	defaultAbilityName_name="EnhancedArmorEffect" 		iconType_name="EnhancedArmor"  	showOnHUD="1" effectNameLocalisationKey_name="effect_enhanced_armor"	/>
+	    <effect name_name="CatalystEffect"        defaultAbilityName_name="CatalystEffect"        iconType_name="CatalystIcon"  	showOnHUD="1" effectNameLocalisationKey_name="skill_catalyst_name" />
+      <effect name_name="ConvergenceTheoryEffect" defaultAbilityName_name="ConvergenceTheoryEffect" iconType_name="ConvergenceTheoryIcon" showOnHUD="1" effectNameLocalisationKey_name="skill_convergence_theory_name" />
+      <effect name_name="AvoidanceEffect" defaultAbilityName_name="AvoidanceEffect" iconType_name="AvoidanceIcon" showOnHUD="1" effectNameLocalisationKey_name="skill_avoidance_name" />
+      <effect name_name="UndyingEffect" defaultAbilityName_name="UndyingEffect" iconType_name="UndyingIcon" showOnHUD="1" effectNameLocalisationKey_name="skill_undying_name" />
+      <effect name_name="ElementOfSurpriseEffect" defaultAbilityName_name="ElementOfSurpriseEffect" iconType_name="ElementOfSurpriseIcon" showOnHUD="1" effectNameLocalisationKey_name="skill_element_of_surprise_name" />
+    <effect name_name="EnhancedArmorEffect" 	 	defaultAbilityName_name="EnhancedArmorEffect" 		iconType_name="EnhancedArmor"  	showOnHUD="1" effectNameLocalisationKey_name="effect_enhanced_armor"	/>
 	  <effect name_name="EnhancedWeaponEffect" 	 	defaultAbilityName_name="EnhancedWeaponEffect" 		iconType_name="EnhancedWeapon" 	showOnHUD="1" effectNameLocalisationKey_name="effect_enhanced_weapon"	/>	  
-	
+	    <effect name_name="CatEffectPerk29"        defaultAbilityName_name="CatEffectPerk29"        iconType_name="CatEffectPerk29Icon"  	showOnHUD="1" effectNameLocalisationKey_name="effect_CatEffect" />
+      
       <!-- not displayed on hud-->
       <effect name_name="BoostedEssenceRegen" 			defaultAbilityName_name="BoostedEssenceRegen"      		showOnHUD="0" />
 	  <effect name_name="BoostedStaminaRegen" 			defaultAbilityName_name="BoostedStaminaRegen"      		showOnHUD="0" />
@@ -584,6 +622,12 @@
 	  <effect iconType_name="EffectBear"    	path="icons/inventory/potions/pheromone-bear-64x64.png" />
 	  <effect iconType_name="PopsPotion"    	path="icons/inventory/ingredients/alchemy/alcohol_vodka_pepper_64x64.png" />
 	  <effect iconType_name="Quen"    			path="icons/Skills/core/magic_4.png" />
+    <effect iconType_name="CatalystIcon"    	path="icons/buffs/yrden-sign-intensity-increase.png" />
+    <effect iconType_name="ConvergenceTheoryIcon"	path="icons\buffs\enchant_buff.png" />
+    <effect iconType_name="AvoidanceIcon"    			path="icons\Skills\Signs\skills_rework\avoidance.png" />
+    <effect iconType_name="UndyingIcon"    			path="icons\Skills\Sword\skills_rework\undying.png" />
+    <effect iconType_name="ElementOfSurpriseIcon"   path="icons\perks\skills_rework\element_of_surprise_2.png" />
+    <effect iconType_name="CatEffectPerk29Icon"    	path="icons\perks\skills_rework\cats_feast.png" />
     </effect_icons>
   </custom>
 </redxml>

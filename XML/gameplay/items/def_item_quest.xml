@@ -7492,6 +7492,21 @@
 		<recycling_parts>				<parts count="1">Book</parts>
 		</recycling_parts>
 	</item>
+	
+	<item
+		name							="th807_herb1"
+		category						="misc"
+		price							="1"
+		stackable						="100"
+		localisation_key_name			="item_name_ngu_gear_intro_letter"
+		localisation_key_description	="item_desc_book"
+		icon_path						="icons/inventory/scrolls/scroll1.dds"
+	>
+		<tags>							ReadableItem, mod_book, th807_herb1
+		</tags>
+		<recycling_parts>				<parts count="1">Herb</parts>
+		</recycling_parts>
+	</item>
 
 </items>
 
