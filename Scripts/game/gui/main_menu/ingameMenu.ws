@@ -35,19 +35,29 @@ enum InGameMenuActionType
 	IGMActionType_InstalledDLC		= 27,
 	IGMActionType_Button			= 28,
 	IGMActionType_ToggleRender		= 29,
-	IGMActionType_Gog				= 30,
-	IGMActionType_TelemetryConsent  = 31,
 	IGMActionType_ListWithCondition = 32,
 	IGMActionType_Stepper			= 33,
 	IGMActionType_ToggleStepper		= 34,
 	IGMActionType_Separator			= 35,
-	IGMActionType_SubtleSeparator	= 36,
-	
+	IGMActionType_SubtleSeparator	= 36,	
 	IGMActionType_PurchaseEP1		= 37,
-	IGMActionType_PurchaseEP2		= 38,
+	IGMActionType_PurchaseEP2		= 38,	
+	IGMActionType_ModMenu			= 39,
+	IGMActionType_ReplayTutorial	= 40,	
+	IGMActionType_SwitchFeatures 	= 41,
+	IGMActionType_LeaveTutorial 	= 42,
+
+	IGMActionType_PatchNotes		= 44,
 
 	IGMActionType_Options 			= 100
 };
+
+enum AccessibilityPresets
+{
+	AP_None=0 ,
+	AP_BardsTale=1,
+	AP_Custom=2,
+}
 
 enum GERR 
 {
@@ -68,6 +78,8 @@ enum EIngameMenuConstants
 	IGMC_EP1_Save			=   8192,
 	IGMC_New_game_plus		=   16384,
 	IGMC_EP2_Save			=   32768,
+
+	IGMC_BardsBallad_On		=   131072,
 }
 
 struct newGameConfig
@@ -76,6 +88,7 @@ struct newGameConfig
 	var difficulty : int;
 	var simulate_import : bool;
 	var import_save_index : int;
+	var bardsBalladOn : bool;
 }
 
 
@@ -119,6 +132,7 @@ class CR4IngameMenu extends CR4MenuBase
 	private var m_fxUpdateOptionLabel	: CScriptedFlashFunction;
 	private var m_fxUpdateInputFeedback	: CScriptedFlashFunction;
 	private var m_fxOnSaveScreenshotRdy : CScriptedFlashFunction;
+	private var m_fxOnSetModioBorderVis : CScriptedFlashFunction;
 	private var m_fxSetIgnoreInput		: CScriptedFlashFunction;
 	private var m_fxUpdateSaveSlot		: CScriptedFlashFunction;
 	private var m_fxForceEnterCurEntry	: CScriptedFlashFunction;
@@ -133,7 +147,13 @@ class CR4IngameMenu extends CR4MenuBase
 	private var m_fxSetXESSIsSupported	: CScriptedFlashFunction;
 	private var m_fxSetRTEnabled		: CScriptedFlashFunction;
 	private var m_fxHideErrorWindow		: CScriptedFlashFunction;
-	
+	private var m_fxShowModioLoadIndicator	: CScriptedFlashFunction;
+	private var m_fxHandleImageLoaded			: CScriptedFlashFunction;
+
+	private var m_fxOunceUseStyle			: CScriptedFlashFunction;
+	private var m_fxUpdateBardsBalladText  : CScriptedFlashFunction;
+	private var m_fxShowTelemetryDataRequestPopup		: CScriptedFlashFunction;
+
 	protected var loadConfPopup			: W3ApplyLoadConfirmation;
 	protected var saveConfPopup			: W3SaveGameConfirmation;
 	protected var newGameConfPopup		: W3NewGameConfirmation;
@@ -190,6 +210,25 @@ class CR4IngameMenu extends CR4MenuBase
 	
 	private var lastTimeGetOption 		: int;	default lastTimeGetOption = 0;
 	
+	private var m_igmStateMachine		: CR4IngameMenuModStates;
+	private var m_modLoadingStateMachine: CR4ModMenuModLoadStates;
+	private var m_modVerificationStateMachine : CR4ModVerificationStates;
+	private var cachedVerifData 			:	W3ModVerificationPopupData;
+	private var cachedMarketingData	: W3MarketingPopupData;
+	private var m_popupIndex : int;
+	private var m_lastRequestedSaveInfo : SSavegameInfo;
+	private var m_lastAttemptedSaveId	: int;
+	
+	private var m_modListener : ModMenuEventListener;
+	private var m_shouldOpenModMenuOnLogin : bool; default m_shouldOpenModMenuOnLogin = false;
+	
+	private var m_menuData 	   		: array< SMenuTab >;
+	private var m_ounceUseStyle 		: int;
+
+	
+	private var btPresetMap : map<name, bool>;
+	private var btPresetInitialized : bool; default btPresetInitialized = false;
+
 	event  OnConfigUI()
 	{
 		var initDataObject 		: W3MenuInitData;
@@ -202,10 +241,17 @@ class CR4IngameMenu extends CR4MenuBase
 		var lootPopup			: CR4LootPopup;
 		var ep1StatusText		: string;
 		var ep2StatusText		: string;
+		var ep3StatusText		: string;
 		var width				: int;
 		var height				: int;
 		
 		super.OnConfigUI();
+		
+		m_igmStateMachine = new CR4IngameMenuModStates in this;
+		m_igmStateMachine.SetRef(this);
+		m_modLoadingStateMachine = new CR4ModMenuModLoadStates in this;
+		m_modLoadingStateMachine.SetRefIngameMenu(this);
+		m_modLoadingStateMachine.OnQueryProgress();
 		
 		m_fxNavigateBack = m_flashModule.GetMemberFlashFunction("handleNavigateBack");
 		m_fxSetIsMainMenu = m_flashModule.GetMemberFlashFunction("setIsMainMenu");
@@ -219,6 +265,7 @@ class CR4IngameMenu extends CR4MenuBase
 		m_fxUpdateOptionValue = m_flashModule.GetMemberFlashFunction( "updateOptionValue" );
 		m_fxUpdateOptionLabel = m_flashModule.GetMemberFlashFunction( "updateOptionLabel" );
 		m_fxUpdateInputFeedback = m_flashModule.GetMemberFlashFunction( "updateInputFeedback" );
+		m_fxOnSetModioBorderVis = m_flashModule.GetMemberFlashFunction( "onSetModioBorderVisibility" );
 		m_fxOnSaveScreenshotRdy = m_flashModule.GetMemberFlashFunction( "onSaveScreenshotLoaded" );
 		m_fxSetIgnoreInput = m_flashModule.GetMemberFlashFunction( "setIgnoreInput" );
 		m_fxUpdateSaveSlot = m_flashModule.GetMemberFlashFunction( "updateSaveSlot" );
@@ -234,6 +281,12 @@ class CR4IngameMenu extends CR4MenuBase
 		m_fxSetXESSIsSupported = m_flashModule.GetMemberFlashFunction("XESSIsSupported");
 		m_fxSetRTEnabled = m_flashModule.GetMemberFlashFunction("RTEnabled");
 		m_fxHideErrorWindow = m_flashModule.GetMemberFlashFunction("hideErrorHandlingWindow");
+		m_fxShowModioLoadIndicator = m_flashModule.GetMemberFlashFunction("showModioLoadIndicator");
+		m_fxHandleImageLoaded = m_flashModule.GetMemberFlashFunction( "handleImageLoaded" );
+
+		m_fxOunceUseStyle = m_flashModule.GetMemberFlashFunction("setOunceGamepadType");
+		m_fxUpdateBardsBalladText = m_flashModule.GetMemberFlashFunction("updateBardsBalladText");
+		m_fxShowTelemetryDataRequestPopup = m_flashModule.GetMemberFlashFunction("showTelemetryDataRequestPopup");
 
 		m_structureCreator = new IngameMenuStructureCreator in this;
 		m_structureCreator.parentMenu = this;
@@ -245,6 +298,9 @@ class CR4IngameMenu extends CR4MenuBase
 		disableAccountPicker = false;
 		
 		theGame.LoadHudSettings();
+
+		m_ounceUseStyle = (int) theInput.GetOunceGamepadStyle();
+		m_fxOunceUseStyle.InvokeSelfOneArg(FlashArgInt(m_ounceUseStyle));
 		
 		mInGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
 		inGameConfigBufferedWrapper = theGame.GetGuiManager().GetInGameConfigBufferedWrapper();
@@ -294,7 +350,7 @@ class CR4IngameMenu extends CR4MenuBase
 			}
 			else
 			{
-				ep1StatusText = GetLocStringByKeyExt("expansion_status_available");
+				ep1StatusText = GetLocStringByKeyExt("panel_mainmenu_installing_dlc");
 			}
 			
 			if (theGame.GetDLCManager().IsEP2Available())
@@ -304,10 +360,10 @@ class CR4IngameMenu extends CR4MenuBase
 			else
 			{
 				
-				ep2StatusText = GetLocStringByKeyExt("expansion_status_available");
+				ep2StatusText = GetLocStringByKeyExt("panel_mainmenu_installing_dlc");
 			}			
+
 			
-			m_fxSetExpansionText.InvokeSelfTwoArgs(FlashArgString(ep1StatusText), FlashArgString(ep2StatusText));
 			
 			if (theGame.AreConfigResetInThisSession() && !theGame.HasShownConfigChangedMessage())
 			{
@@ -315,6 +371,8 @@ class CR4IngameMenu extends CR4MenuBase
 				OnPlaySoundEvent("gui_global_denied");
 				theGame.SetHasShownConfigChangedMessage(true);
 			}
+			
+			SetModdedTooltipText();
 		}
 		else if (deathScreenMenu)
 		{
@@ -369,15 +427,8 @@ class CR4IngameMenu extends CR4MenuBase
 				m_fxSetCurrentUsername.InvokeSelfOneArg(FlashArgString(username));
 				
 				m_fxSetVersion.InvokeSelfOneArg(FlashArgString(theGame.GetApplicationVersion()));
-				
-				if( !theGame.IsContentAvailable( 'content12' ) )
-				{
-					theGame.GetGuiManager().RefreshMainMenuAfterContentLoaded();
-				}
 			}
-			
-			theGame.GetSecondScreenManager().SendGameMenuOpen();
-			
+
 			lastSetDifficulty = theGame.GetDifficultyLevel();
 			
 			currentLangValue = mInGameConfigWrapper.GetVarValue('Localization', 'Virtual_Localization_text');
@@ -389,31 +440,37 @@ class CR4IngameMenu extends CR4MenuBase
 			theGame.GetGameLanguageName(audioLanguageName,tempLanguageName);
 			if( tempLanguageName != languageName )
 			{
-				languageName = tempLanguageName;
-				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString(languageName) );
+				UpdateGameLogo();
 			}
 			
 			PopulateMenuData();
-			if(!theTelemetry.WasConsentWindowShown())
-			{
-				ShowTelemetryWindow();
-			}
 		}
 		
 		theGame.GetCurrentViewportResolution( width, height );
 		m_fxUpdateAnchorsAspectRatio.InvokeSelfTwoArgs( FlashArgInt( width ), FlashArgInt( height ) );
 		
 		theInput.RegisterListener( this, 'OnShowDeveloperMode', 'ShowDeveloperMode' );
+		m_modListener = new ModMenuEventListener in this;
+		m_modListener.m_ingameMenu = this;
+
+		DefineSwitchFeatureMenuItem('Gyroscope', "menu_panel_console_features_gyroscope_title", "menu_panel_console_features_gyroscope_description");
+		DefineSwitchFeatureMenuItem('Motion Patterns', "menu_panel_console_features_motionpatterns_title", "menu_panel_console_features_motionpatterns_description");
+		DefineSwitchFeatureMenuItem('Mouse Sensor', "menu_panel_console_features_mouser_title", "menu_panel_console_features_mouser_description");
+		DefineSwitchFeatureMenuItem('Touch Screen', "menu_panel_console_features_touch_title", "menu_panel_console_features_touch_description");
+		
+		SetupSwitchFeatureMenu();
 	}
-	
+
 	event OnRefreshActiveUserDisplayName()
 	{
 		var username 			: string;
-
+		
 		if (isMainMenu)
 		{
 			username = FixStringForFont(theGame.GetActiveUserDisplayName());
 			m_fxSetCurrentUsername.InvokeSelfOneArg(FlashArgString(username));
+			
+			UpdateUserPanelData();
 		}
 	}
 	
@@ -431,6 +488,7 @@ class CR4IngameMenu extends CR4MenuBase
 		var hud 				: CR4ScriptedHud;
 		var ep1StatusText		: string;
 		var ep2StatusText		: string;
+		var ep3StatusText		: string;
 		
 		
 		currentLangValue = mInGameConfigWrapper.GetVarValue('Localization', 'Virtual_Localization_text');
@@ -443,6 +501,7 @@ class CR4IngameMenu extends CR4MenuBase
 		{
 			username = FixStringForFont(theGame.GetActiveUserDisplayName());
 			m_fxSetCurrentUsername.InvokeSelfOneArg(FlashArgString(username));
+			UpdateUserPanelData();
 			
 			PopulateMenuData();
 			
@@ -471,8 +530,8 @@ class CR4IngameMenu extends CR4MenuBase
 		theGame.GetGameLanguageName(audioLanguageName,tempLanguageName);
 		if( tempLanguageName != languageName )
 		{
+			UpdateGameLogo();
 			languageName = tempLanguageName;
-			m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString(languageName) );
 			m_fxUpdateInputFeedback.InvokeSelf();
 			if (overlayPopupRef)
 			{
@@ -490,7 +549,7 @@ class CR4IngameMenu extends CR4MenuBase
 			}
 			else
 			{
-				ep1StatusText = GetLocStringByKeyExt("expansion_status_available");
+				ep1StatusText = GetLocStringByKeyExt("panel_mainmenu_installing_dlc");
 			}
 			
 			if (theGame.GetDLCManager().IsEP2Available())
@@ -500,10 +559,12 @@ class CR4IngameMenu extends CR4MenuBase
 			else
 			{
 				
-				ep2StatusText = GetLocStringByKeyExt("expansion_status_available");
+				ep2StatusText = GetLocStringByKeyExt("panel_mainmenu_installing_dlc");
 			}
 			
-			m_fxSetExpansionText.InvokeSelfTwoArgs(FlashArgString(ep1StatusText), FlashArgString(ep2StatusText));
+
+			
+			m_fxSetExpansionText.InvokeSelfThreeArgs(FlashArgString(ep1StatusText), FlashArgString(ep2StatusText), FlashArgString(ep3StatusText));
 		}
 		setArabicAligmentMode();
 	}
@@ -563,10 +624,10 @@ class CR4IngameMenu extends CR4MenuBase
 		var hud : CR4ScriptedHud;
 		
 		theGame.SetHDRMenuActive(false);
+		theGame.SetHDRMenuFadePercentage(0);
 		
 		SaveChangedSettings();
 		
-		theGame.GetSecondScreenManager().SendGameMenuClose();
 		super.OnClosingMenu();
 		
 		
@@ -693,6 +754,12 @@ class CR4IngameMenu extends CR4MenuBase
 		}
 	}
 	
+	public function ForceSetIgnoreInput(value : bool) : void
+	{
+		ignoreInput = value;
+		m_fxSetIgnoreInput.InvokeSelfOneArg( FlashArgBool(value) );
+	}
+	
 	public function UpdateSaveSlot() : void
 	{
 		m_fxUpdateSaveSlot.InvokeSelf();
@@ -715,9 +782,13 @@ class CR4IngameMenu extends CR4MenuBase
 		SetIgnoreInput(false);
 		CloseCurrentPopup();
 	}
+
+
 	
 	event  OnItemActivated( actionType:int, menuTag:int ) : void
 	{
+		var initData : W3StartupMenuInitData;
+		var currentMenu : CR4Menu;
 		var l_DataFlashArray : CScriptedFlashArray;
 		var manager : CR4GuiManager;
 		
@@ -780,9 +851,9 @@ class CR4IngameMenu extends CR4MenuBase
 			case IGMActionType_List:
 				break;
 			case IGMActionType_Slider:
-				break;
+				break;	
 			case IGMActionType_LoadLastSave:
-				LoadLastSave();
+				LoadLastSave(true);
 				break;
 			case IGMActionType_Close:
 				
@@ -796,12 +867,18 @@ class CR4IngameMenu extends CR4MenuBase
 			case IGMActionType_Help:
 				showHelpPanel();
 				break;
+			case IGMActionType_ModMenu:
+				OpenModMenu();
+				break;
 			case IGMActionType_Options:
 				DLSSSupported();
 				XESSSupported();
 				RTEnabled();
+				validatePTHairOptionValue();
 				
 				developerOptions = m_flashValueStorage.CreateTempFlashArray();
+
+				UpdateBardsBalladTooltipText();
 				
 				showOptionsPanel();
 				
@@ -848,6 +925,7 @@ class CR4IngameMenu extends CR4MenuBase
 					theGame.RequestExit();
 				}
 				break;
+
 			case IGMActionType_KeyBinds:
 				curMenuDepth += 1;
 				SendKeybindData();
@@ -856,24 +934,241 @@ class CR4IngameMenu extends CR4MenuBase
 			case IGMActionType_ToggleRender:
 				ToggleRTEnabled();
 			    break;
-			case IGMActionType_Gog:
-				m_initialSelectionsToIgnore = 1;
-				manager = (CR4GuiManager)theGame.GetGuiManager();
-				if (manager) {
-					manager.GalaxyQRSignInInitiate();
-				}
-				break;
-			case IGMActionType_TelemetryConsent:	
-				ShowTelemetryWindow();
-				break;
 			case IGMActionType_PurchaseEP1:
 				theGame.DisplayStoreExpansionPack('ep1');
 				break;
 			case IGMActionType_PurchaseEP2:
 				theGame.DisplayStoreExpansionPack('bob_000_000');
 				break;
+
+			case IGMActionType_ReplayTutorial:
+				if(isMainMenu)
+				{
+					
+					theGame.ReplayTutorial();
+				}
+				else
+				{	
+					
+					ShowActionConfPopup(IGMActionType_ReplayTutorial, "", GetLocStringByKeyExt("popup_replay_tutorial_save_confirmation"));
+				}
+				break;				
+			case IGMActionType_SwitchFeatures:
+				
+				prepareBigMessageSwitchPopUp();	
+				break;
+			case IGMActionType_LeaveTutorial:
+				theGame.LeaveTutorialReplay();	
+				OnLeaveForceSwitchSettings();
+				break;
+			
+			case IGMActionType_PatchNotes:
+				currentMenu = theGame.GetGuiManager().GetRootMenu();
+				CloseMenu();
+				
+				initData = new W3StartupMenuInitData in theGame.GetGuiManager();
+				
+				initData.requestPage = SPI_PatchNotes;
+				initData.reopenMenu = true;
+				initData.reopenMenuName = currentMenu.GetMenuName();
+				initData.forceShow = true;
+				
+				theGame.RequestMenu( 'StartupExperienceMenu', initData );
+				break;
 			}
 		}
+	}
+
+	public function OnLeaveForceSwitchSettings()
+	{
+		var inGameConfigWrapper	: CInGameConfigWrapper;
+		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+
+		if (theGame.GetPlatform() != Platform_Switch2_Ounce)
+		{
+			return;
+		}
+		
+		inGameConfigWrapper.SetVarValue('Controls_DualGrip', 'MotionPatternsMode', "1");
+		
+		if(FactsDoesExist("altcast_before_switchtutorial"))
+		{
+			if(FactsQueryLatestValue( "altcast_before_switchtutorial" ) == 2)
+			{
+				inGameConfigWrapper.SetVarValue('Gameplay', 'EnableAlternateSignCasting',"1");
+				thePlayer.GetInputHandler().SetIsAltSignCasting(true);
+				FactsSet( "nge_alt_sign_casting_chosen", 1 );
+				LogChannel('DebugTutorial',"RevertAltCastingAfterTutorial actual change On");
+			}
+			else if(FactsQueryLatestValue( "altcast_before_switchtutorial" ) == 1)
+			{
+				inGameConfigWrapper.SetVarValue('Gameplay', 'EnableAlternateSignCasting', "0");
+				thePlayer.GetInputHandler().SetIsAltSignCasting(false);
+				FactsSet( "nge_alt_sign_casting_chosen", 0 );
+				LogChannel('DebugTutorial',"RevertAltCastingAfterTutorial actual change Off");
+			}
+		}		
+	}
+
+	public function CheckSwitchRevertOnQuit()
+	{
+		if (theGame.GetPlatform() != Platform_Switch2_Ounce)
+		{
+			return;
+		}
+		LogChannel('DebugTutorial',"CheckSwitchRevertOnQuit : " + FactsQueryLatestValue( "check_revert_on_quit" ));
+
+		if(FactsDoesExist("check_revert_on_quit"))
+		{
+			if(FactsQueryLatestValue( "check_revert_on_quit" ) == 1)
+			{
+				OnLeaveForceSwitchSettings();
+			}
+		}
+		FactsSet( "check_revert_on_quit", 0 );
+	}
+	
+	
+	
+	
+	
+	
+	
+	public function CreateModLoadFailedPopup(mods: array< SModioModData >, UGCallowed : bool)
+	{
+		var verifData	: W3ModVerificationPopupData;
+		var l_flashObject : CScriptedFlashObject;
+		var GFxButtonsListData : CScriptedFlashArray;
+		var saveIndex : int;
+
+		if ( !UGCallowed )
+		{
+			return;
+		}
+		
+		verifData = new W3ModVerificationPopupData in theGame;
+		verifData.SetModArray(mods);
+		verifData.SetIngameMenu(this);
+		
+		verifData.SetMessageTitle("[[panel_mods_verification_window]]");
+		verifData.SetMessageText("[[panel_mods_failed_desc]]");
+
+		
+		
+		
+		verifData.SetIsOutdated(false);
+		verifData.SetIsLoadingSave(false);
+		verifData.SetIsContinue(false);
+		verifData.SetIsFailed(true);
+		verifData.SetHideCheckbox(true);
+		
+		l_flashObject = verifData.GetGFxData(m_flashValueStorage);
+		GFxButtonsListData = verifData.GetGFxButtons(m_flashValueStorage);
+		l_flashObject.SetMemberFlashArray("ButtonsList", GFxButtonsListData);
+		
+		cachedVerifData = verifData;
+		m_flashValueStorage.SetFlashObject( "ingamemenu.bigMessageMod", l_flashObject );		
+	}
+
+	public function CreateModVerificationPopup(mods: array< SModioModData >, missing : bool, startup: bool, continu: bool, UGCallowed : bool)
+	{
+		var verifData	: W3ModVerificationPopupData;
+		var l_flashObject : CScriptedFlashObject;
+		var GFxButtonsListData : CScriptedFlashArray;
+		var saveIndex : int;
+		
+		verifData = new W3ModVerificationPopupData in theGame;
+		verifData.SetModArray(mods);
+		verifData.SetIngameMenu(this);
+		
+		verifData.SetMessageTitle("[[panel_mods_verification_window]]");
+		if(missing)
+		{
+			verifData.SetMessageText("[[panel_mods_verification_missing_mods_desc]]");
+			verifData.SetReason("[[panel_mods_verification_missing_mods]]");
+			verifData.SetAction("[[panel_mods_verification_subscribe]]");
+		}
+		else
+		{
+			verifData.SetMessageText("[[panel_mods_verification_outdated_mods_desc]]");
+			verifData.SetReason("[[panel_mods_verification_outdated_mods]]");
+			verifData.SetAction("[[panel_mods_verification_disable]]");
+		}
+		verifData.SetIsOutdated(!missing);
+		verifData.SetIsLoadingSave(!startup);
+		verifData.SetIsContinue(continu);
+		verifData.SetIsFailed(false);
+
+		verifData.SetIsUGCallowed(UGCallowed);
+		
+		if(startup)
+		{
+			l_flashObject = verifData.GetGFxData(m_flashValueStorage);
+			GFxButtonsListData = verifData.GetGFxButtons(m_flashValueStorage);
+			l_flashObject.SetMemberFlashArray("ButtonsList", GFxButtonsListData);
+			
+			cachedVerifData = verifData;
+			m_flashValueStorage.SetFlashObject( "ingamemenu.bigMessageMod", l_flashObject );
+		}
+		else
+		{
+			RequestSubMenu( 'PopupMenu' ,verifData );
+		}
+	}
+	
+	public function StartShowCustomDialogMarketing( checkedConsentChoices : int )
+	{
+		var marketData	: W3MarketingPopupData;
+		var l_flashObject : CScriptedFlashObject;
+		var GFxButtonsListData : CScriptedFlashArray;
+
+		marketData = new W3MarketingPopupData in theGame;
+		marketData.Init( checkedConsentChoices );
+		
+		l_flashObject = marketData.GetGFxData( m_flashValueStorage );
+		GFxButtonsListData = marketData.GetGFxButtons( m_flashValueStorage );
+		l_flashObject.SetMemberFlashArray( "ButtonsList", GFxButtonsListData );
+
+		cachedMarketingData = marketData;
+		m_flashValueStorage.SetFlashObject( "ingamemenu.MarketingWindow", l_flashObject );
+
+		theGame.GetMarketingProxy().OnConsentFlowCompleted();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
+	
+		
+	
+	
+				
+	
+	
+	
+			
+	
+	
+	
+	protected function OpenModMenu() : void
+	{
+		m_igmStateMachine.OnLaunchModMenu();
+	}
+
+	public function OnEnsureInternetConnectionFinished( hasConnection : bool )
+	{
+		m_igmStateMachine.OnNetworkConnectionEnsureFinished(hasConnection);
 	}
 
 	event  OnShowSaveGameMenu() : void
@@ -887,16 +1182,42 @@ class CR4IngameMenu extends CR4MenuBase
 	}
 
 	event  OnShowOptionSubmenu( actionType:int, menuTag:int, id:string ) : void
-	{		
-		updateDLSSGOptionChanged();
+	{
 		if (id == "settings_hdr")
 		{
 			theGame.SetHDRMenuActive(true);
+			theGame.SetHDRMenuFadePercentage(1);
 		}
 		else
 		{
 			theGame.SetHDRMenuActive(false);
+			theGame.SetHDRMenuFadePercentage(0);
 		}
+
+		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
+		{
+			UpdateOunceControlSettings();
+		}
+	}
+	
+	public function RefreshTelemetySettingValues() : void
+	{
+		var settingsArray : CScriptedFlashArray;
+		var setting : CScriptedFlashObject;
+
+		var telemetryConsent : bool = mInGameConfigWrapper.GetVarValue('Gameplay', 'TelemetryConsent');
+
+		settingsArray = m_flashValueStorage.CreateTempFlashArray();
+
+		setting = m_flashValueStorage.CreateTempFlashObject();
+			setting.SetMemberFlashUInt( "tag", NameToFlashUInt('TelemetryConsent') );
+			setting.SetMemberFlashString( "current", telemetryConsent );
+		settingsArray.PushBackFlashObject( setting );
+
+		m_flashValueStorage.SetFlashArray( "options.force_update_values", settingsArray );
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+		
+		m_flashValueStorage.SetFlashBool( "options.show_spinner", false );
 	}
 	
 	public function HandleLoadGameFailed():void
@@ -905,18 +1226,63 @@ class CR4IngameMenu extends CR4MenuBase
 		SetIgnoreInput(false);
 	}
 	
+	function ShowQrSignInWindow()
+	{
+		var menuBase 	: CR4MenuBase;
+		var ingameMenu 	: CR4IngameMenu;
+		
+		menuBase = (CR4MenuBase)(theGame.GetGuiManager().GetRootMenu());
+			
+		if (menuBase){
+			ingameMenu = (CR4IngameMenu)(menuBase.GetSubMenu());
+			if (ingameMenu)	{
+				ingameMenu.StartShowCustomDialogGalaxySignIn();
+			}
+		}
+	}
+
 	private function StartShowingCustomDialogs()
 	{
 		
 		
 		
-		if (theGame.GetInGameConfigWrapper().GetVarValue('Hidden', 'HasSeenGotyWelcomeMessage') == "false")
-		{
-			theGame.GetInGameConfigWrapper().SetVarValue('Hidden', 'HasSeenGotyWelcomeMessage', "true");
-			theGame.SaveUserSettings();
-
-			prepareBigMessageGOTY( "menu_goty_starting_message_alt" );
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
+		{	
+			Log("Switch feature "+theGame.GetPlatform());
+			if (theGame.GetInGameConfigWrapper().GetVarValue('Hidden', 'HasSeenSwitchFeaturePopUp') != "true")
+			{
+				theGame.GetInGameConfigWrapper().SetVarValue('Hidden', 'HasSeenSwitchFeaturePopUp', "true");
+				theGame.SaveUserSettings();
+				prepareBigMessageSwitchPopUp();
+			}
 		}
+
+		
+		theGame.GetMarketingProxy().OnMainMenuLanding();
+		
+		if(theGame.GetModHandlerSystem() && theGame.GetModHandlerSystem().HasFailedMods() )
+		{
+			prepareBigMessageFailedMods();
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	protected function prepareBigMessage( epIndex : int ):void
@@ -943,55 +1309,93 @@ class CR4IngameMenu extends CR4MenuBase
 		m_flashValueStorage.SetFlashObject( "ingamemenu.bigMessage" + epIndex, l_DataFlashObject );
 	}
 	
-	private function prepareBigMessageGOTY( text : string )
-	{
+	
+	
+	private function prepareBigMessageSwitchPopUp()
+	{	
 		var l_DataFlashObject 		: CScriptedFlashObject;
-		var title1 : string;
-		var content : string;
-		var titleEnd : string;
-
 		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
+		m_flashValueStorage.SetFlashObject("ingamemenu.switchPopUp", l_DataFlashObject);
+	}
+	
+	private function prepareBigMessageMods()
+	{
+		var modArray : array< SModioModID >;
+		theGame.GetModHandlerSystem().GetOutdatedMods(modArray);
+		m_igmStateMachine.GetStartupModList(modArray);
+		theGame.GetGuiManager().OnInitialModVerificationWasShown();
+	}
 
-		title1   = GetLocStringByKey( text );
-		content  = GetLocStringByKey( "menu_goty_starting_message_content" );
-		titleEnd = GetLocStringByKey( "ep1_installed_information_good_luck" );
-
-		l_DataFlashObject.SetMemberFlashInt( "index", 3 );
-		l_DataFlashObject.SetMemberFlashString( "tfTitle1",   title1 );
-		l_DataFlashObject.SetMemberFlashString( "tfContent",  content );
-		l_DataFlashObject.SetMemberFlashString( "tfTitleEnd", titleEnd );
-		
-		m_flashValueStorage.SetFlashObject( "ingamemenu.bigMessage3", l_DataFlashObject );
-
+	private function prepareBigMessageFailedMods()
+	{
+		var modArray : array< SModioModID >;
+		theGame.GetModHandlerSystem().GetFailedMods(modArray);
+		m_igmStateMachine.GetFailedModList(modArray);
 	}
 	
 	public function StartShowCustomDialogGalaxySignIn()
 	{
 		var l_DataFlashObject 		: CScriptedFlashObject;
-		var isPlatformPC		: bool;
+		var usesQrSignIn			: bool;
 		
 		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-		isPlatformPC = (theGame.GetGalaxyPf() == Platform_PC);
+		usesQrSignIn = theGame.UsesQrSignIn();
 		
 		l_DataFlashObject.SetMemberFlashInt( "index", 4 );
-		l_DataFlashObject.SetMemberFlashBool("isPlatformPC", isPlatformPC);
+		l_DataFlashObject.SetMemberFlashBool("isPlatformPC", !usesQrSignIn);
 		l_DataFlashObject.SetMemberFlashString( "tfTitleSignIn", "[[ui_gog_qr_title]]" );
 		l_DataFlashObject.SetMemberFlashString( "tfContentSignInTopA", "[[ui_gog_qr_explain_1]]" );
 		l_DataFlashObject.SetMemberFlashString( "tfContentSignInTopB", "[[ui_gog_qr_explain_2]]" );
-		if (isPlatformPC) {
-			if (theGame.UsesRedLauncher())
-				l_DataFlashObject.SetMemberFlashString( "tfContentSignIn2", "[[ui_gog_red_launcher_signin_instructions]]");
-			else
-				l_DataFlashObject.SetMemberFlashString( "tfContentSignIn2", "[[ui_gog_pc_signin_instructions]]");
-		}
-		else
+		l_DataFlashObject.SetMemberFlashString( "tfContentSignInTopC", "[[ui_gog_qr_explain_3]]" );
+		if (usesQrSignIn)
 		{
 			l_DataFlashObject.SetMemberFlashString( "tfLink1" , "[[ui_gog_qr_pls_wait]]");
 			l_DataFlashObject.SetMemberFlashString( "tfContentSignIn2", "[[ui_gog_qr_use_url]]");
 			l_DataFlashObject.SetMemberFlashString( "tfContentSignIn3", "[[ui_gog_qr_scan_hint]]" );
 		}
+		else
+		{
+			l_DataFlashObject.SetMemberFlashString( "tfContentSignIn2", "[[ui_gog_red_launcher_signin_instructions]]");
+		}
 		
 		m_flashValueStorage.SetFlashObject( "ingamemenu.bigMessage4", l_DataFlashObject );
+	}
+
+	public function StartShowCustomDialogGalaxySignInReminder()
+	{
+		var l_flashObject : CScriptedFlashObject;
+		var content : string;
+		var title : string;
+		var signin : string;
+		var loginInfo : string;
+		var usesQrSignIn : bool;
+		
+		usesQrSignIn = theGame.UsesQrSignIn();
+		
+		title = GetLocStringByKeyExt("panel_cloud_reminder_title");
+		content = GetLocStringByKeyExt("panel_cloud_reminder_body");
+		
+		if(usesQrSignIn)
+		{
+			signin = GetLocStringByKeyExt("panel_cloud_reminder_sign_in");
+		}
+		else
+		{
+			loginInfo = GetLocStringByKeyExt("ui_gog_red_launcher_signin_instructions");
+			
+		}
+
+		l_flashObject = m_flashValueStorage.CreateTempFlashObject();
+		
+		l_flashObject.SetMemberFlashBool("isPlatformPC", !usesQrSignIn);
+		l_flashObject.SetMemberFlashString("TextTitle", title);
+		l_flashObject.SetMemberFlashString("TextContent", content);
+		l_flashObject.SetMemberFlashString("TextSignIn", signin);
+		l_flashObject.SetMemberFlashString("TextLoginInfo", loginInfo);
+			
+		m_flashValueStorage.SetFlashObject( "ingamemenu.ReminderWindow", l_flashObject );
+
+		theGame.GetMarketingProxy().OnConsentFlowCompleted();
 	}
 
 	public function HideErrorWindow()
@@ -999,30 +1403,41 @@ class CR4IngameMenu extends CR4MenuBase
 		m_fxHideErrorWindow.InvokeSelf();
 	}
 
-	public function ShowErrorWindow(error : int)
+	public function ShowErrorWindow( error : int )
 	{
 		var l_DataFlashObject : CScriptedFlashObject;
-		var tfDescription : string ;
+		var errorMessage : string ;
 		
-		l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
 		switch(error)
 		{
 			case RewardsRequestFailed:
 			case QRCodeRequestFailed:
 			case GOGNoInternetConnection:
-				tfDescription = "[[ui_gog_error_no_connection]]";
-				break;
+				errorMessage = "[[ui_gog_error_no_connection]]";
+			break;
 			case RewardsTemporaryFail:
-				tfDescription = "[[ui_gog_error_fault_retry]]";
-				break;
+				errorMessage = "[[ui_gog_error_fault_retry]]";
+			break;
 			default:
-				tfDescription = "[[ui_gog_error_smt_wrong]]";
-				break;
-		}		
-		l_DataFlashObject.SetMemberFlashString("tfTitleError","[[ui_gog_error_popup_title]]");
-		l_DataFlashObject.SetMemberFlashString("tfDescription",tfDescription);
+				errorMessage = "[[ui_gog_error_smt_wrong]]";
+			break;
+		}
 		
-		m_flashValueStorage.SetFlashObject("ingamemenu.ErrorHandleWindow", l_DataFlashObject);
+		
+		if ( curMenuDepth < depthOptions )
+		{
+			l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
+			l_DataFlashObject.SetMemberFlashString( "tfTitleError", "[[ui_gog_error_popup_title]]" );
+			l_DataFlashObject.SetMemberFlashString( "tfDescription", errorMessage );
+			
+			m_flashValueStorage.SetFlashObject( "ingamemenu.ErrorHandleWindow", l_DataFlashObject );
+		}
+		
+		else
+		{
+			showNotification( errorMessage );
+			OnPlaySoundEvent( "gui_global_denied" );
+		}
 	}
 
 	private function SetRewardsCellParams( out dataFObj : CScriptedFlashObject, out rewarr : array< int >, cellName: string, rewID : int )
@@ -1043,82 +1458,17 @@ class CR4IngameMenu extends CR4MenuBase
 		dataFObj.SetMemberFlashString("tf"+cellName+"title", rewTitle);
 		dataFObj.SetMemberFlashString("tf"+cellName+"desc", rewDesc);
 	}
-
-	public function ShowRewardsWindow( out rewarr : array< int > )
-	{		
-		var dataFObj : CScriptedFlashObject;
-		var tfTableTitle : string ;
-		var tfTableDescription : string ;
-		var tfRoachDescription : string ;
-		var isRoachPresent : bool ;
-
 		
-		dataFObj = m_flashValueStorage.CreateTempFlashObject();
-		tfTableTitle = GetLocStringByKeyExt("ui_gog_rewards_table_title");
-		dataFObj.SetMemberFlashString("tfTitleRewards",tfTableTitle);
-		if(theGame.GetPlatform() == Platform_PC)
-			dataFObj.SetMemberFlashString("tfTitleLink","[[ui_gog_link_rewards]]");
-		else
-			dataFObj.SetMemberFlashString("tfTitleLink","");
-		tfTableDescription = GetLocStringByKeyExt("ui_gog_rewards_table_description");
-		dataFObj.SetMemberFlashString("tfTopDescription",tfTableDescription);
-		
-		
-    	
-		
-		
-		
-		
-		
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_1_1", 6);  
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_1_2", 7);  
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_2_1", 8);  
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_2_2", 9);  
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_3_1", 10); 
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_3_2", 11); 
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_4_1", 12); 
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_4_2", 13); 
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_5_1", 14); 
-		SetRewardsCellParams( dataFObj, rewarr, "Cell_5_2", 15); 
-		
-		
-		isRoachPresent = rewarr.Contains(12);
-		if	(isRoachPresent) {
-			tfRoachDescription = GetLocStringByKeyExt("ui_gog_reward_roach_table_desc");
-		} else {
-			tfRoachDescription = "";
-		}
-		dataFObj.SetMemberFlashString("tfRoachDescription",tfRoachDescription);
-
-		
-		m_flashValueStorage.SetFlashObject("ingamemenu.RewardsTableWindow", dataFObj);
-	}
 	
-	private function ShowTelemetryWindow()
-	{
-		var l_DataFlashObject 	: CScriptedFlashObject;
-		var isPlatformPC		: bool = (theGame.GetGalaxyPf() == Platform_PC);
-		
-		if( theGame.isUserSignedIn() )
-		{
-			l_DataFlashObject = m_flashValueStorage.CreateTempFlashObject();
-
-			l_DataFlashObject.SetMemberFlashBool("isPlatformPC", isPlatformPC);
-			l_DataFlashObject.SetMemberFlashString("tfTelemetryTitle","[[ui_gog_tel_consent_title]]");
-			l_DataFlashObject.SetMemberFlashString("tfTelemetryContent","[[ui_gog_tel_consent_big_text]]");
-			l_DataFlashObject.SetMemberFlashString("tfTelemetryContent2","[[ui_gog_tel_consent_question]]");
-			l_DataFlashObject.SetMemberFlashString("tfTelemetryFooter","[[ui_gog_tel_consent_thanks]]");
-			l_DataFlashObject.SetMemberFlashString("tfTelemetryFooter2","CD PROJEKT RED");
-			
-			m_flashValueStorage.SetFlashObject("ingamemenu.TelemetryModalWindow",l_DataFlashObject);
-			
-			theTelemetry.MarkShownConsentWindow();
-		}
-	}
-		
-	protected function LoadLastSave():void
+	
+	protected function LoadLastSave( allowModCheck : bool ) : void
 	{
 		if (theGame.GetGuiManager().GetPopup('MessagePopup') && theGame.GetGuiManager().lastMessageData.messageId == UMID_ControllerDisconnected)
+		{
+			return;
+		}
+		
+		if ( !CheckModdedLastSave( allowModCheck ) )
 		{
 			return;
 		}
@@ -1152,6 +1502,7 @@ class CR4IngameMenu extends CR4MenuBase
 	
 	public function OnActionConfirmed(action:int) : void
 	{
+		var environment : CEnvironmentDefinition;
 		var parentMenu : CR4MenuBase;
 		
 		parentMenu = (CR4MenuBase)GetParent();
@@ -1160,16 +1511,30 @@ class CR4IngameMenu extends CR4MenuBase
 		{
 		case IGMActionType_Quit:
 			{
+				SetInteriorBlending(false, false, 0.5f, 0.5f);
 				parentMenu.OnCloseMenu();
+				CheckSwitchRevertOnQuit();
 				theGame.RequestEndGame();
 				break;
 			}
 		case IGMActionType_CloseGame:
 			{
+				SetInteriorBlending(false, false, 0.5f, 0.5f);
+				CheckSwitchRevertOnQuit();
 				theGame.RequestExit();
 				break;
 			}
+		case IGMActionType_ReplayTutorial:
+			{
+				theGame.ReplayTutorial();
+				break;
+			}			
 		}
+	}
+
+	event  OnConfirm():void
+	{
+		
 	}
 	
 	event  OnPresetApplied(groupId:name, targetPresetIndex:int)
@@ -1186,7 +1551,7 @@ class CR4IngameMenu extends CR4MenuBase
 		if(groupId == 'PostProcess')
 		{
 			UpdateAO2CorrespondRT(theGame.GetRTEnabled(), true);
-			UpdateOptions('PostProcess', false);
+			UpdatePresetOptions('PostProcess', false);
 		}
 
 		updateOptionsDisableState();
@@ -1203,14 +1568,14 @@ class CR4IngameMenu extends CR4MenuBase
 		theTelemetry.MarkShownConsentWindow();
 	}
 	
-	public function UpdateOptions(groupId:name, applyLocks:bool)
+	public function UpdatePresetOptions(groupId:name, applyLocks:bool)
 	{
-		var optionChangeContainer : CScriptedFlashObject;
+		var optionPresetChangeContainer : CScriptedFlashObject;
 		
-		optionChangeContainer = m_flashValueStorage.CreateTempFlashObject();
-		IngameMenu_GatherOptionUpdatedValues(groupId, optionChangeContainer, m_flashValueStorage, applyLocks);
+		optionPresetChangeContainer = m_flashValueStorage.CreateTempFlashObject();
+		IngameMenu_GatherOptionUpdatedValues(groupId, optionPresetChangeContainer, m_flashValueStorage, applyLocks);
 		
-		m_flashValueStorage.SetFlashObject( "ingamemenu.optionValueChanges", optionChangeContainer );
+		m_flashValueStorage.SetFlashObject( "ingamemenu.optionPresetChange", optionPresetChangeContainer );
 		IngameMenu_GatherOptionUpdatedValueList(groupId, m_flashValueStorage);
 	}
 	
@@ -1241,6 +1606,245 @@ class CR4IngameMenu extends CR4MenuBase
 				m_fxUpdateOptionValue.InvokeSelfTwoArgs( FlashArgUInt(NameToFlashUInt('Virtual_SSAOSolution')), FlashArgString('1') );
 			}
 		}
+	}
+
+	public function UpdateOunceControlSettings()
+	{
+		UpdateOunceControlSettingsDisabled();
+		UpdateOunceControlSettingsValues();
+		UpdateOunceControlSettingsVisibility();
+	}
+	
+	public function UpdateOunceGamepadStyle( newStyle : int )
+	{
+		m_ounceUseStyle = newStyle;
+		m_fxOunceUseStyle.InvokeSelfOneArg(FlashArgInt(m_ounceUseStyle));
+	}
+
+	private function UpdateOunceControlSettingsDisabled()
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		var gyroModeEnabled_Handheld : bool = StringToInt(mInGameConfigWrapper.GetVarValue('Controls_Handheld', 'Handheld_GyroAimingMode')) > 0;
+
+		var gyroModeEnabled_ProController : bool = StringToInt(mInGameConfigWrapper.GetVarValue('Controls_ProController', 'ProController_GyroAimingMode')) > 0;
+
+		var patternsModeAllEnabled_DualGrip : bool = StringToInt(mInGameConfigWrapper.GetVarValue('Controls_DualGrip', 'MotionPatternsMode')) == 1; 
+		var gyroModeEnabled_DualGrip : bool = StringToInt(mInGameConfigWrapper.GetVarValue('Controls_DualGrip', 'DualGrip_GyroAimingMode')) > 0;
+
+		var isMouserConnected : bool = theInput.GetIsMouserConnected();
+		var mouserModeEnabled : bool = StringToInt(mInGameConfigWrapper.GetVarValue('Controls_Mouser', 'MouserActivationMode')) > 0 && isMouserConnected;
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		
+		{
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Handheld_GyroTurningAxis') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_Handheld );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Handheld_GyroSensitivity') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_Handheld );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Handheld_GyroDeadzone') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_Handheld );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Handheld_GyroInvertX') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_Handheld );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Handheld_GyroInvertY') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_Handheld );
+			dataArray.PushBackFlashObject( dataObject );
+		}
+
+		
+		{
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('ProController_GyroTurningAxis') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_ProController );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('ProController_GyroSensitivity') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_ProController );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('ProController_GyroDeadzone') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_ProController );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('ProController_GyroInvertX') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_ProController );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('ProController_GyroInvertY') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_ProController );
+			dataArray.PushBackFlashObject( dataObject );
+		}
+
+		
+		{
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DualGrip_GyroTurningAxis') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_DualGrip );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DualGrip_GyroSensitivity') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_DualGrip );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DualGrip_GyroDeadzone') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_DualGrip );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DualGrip_GyroInvertX') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_DualGrip );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DualGrip_GyroInvertY') );
+			dataObject.SetMemberFlashBool( "disabled", !gyroModeEnabled_DualGrip );
+			dataArray.PushBackFlashObject( dataObject );
+		}
+
+		
+		{
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MouserActivationMode') );
+			dataObject.SetMemberFlashBool( "disabled", !isMouserConnected );
+			dataArray.PushBackFlashObject(dataObject);
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MouserControllerScheme') );
+			dataObject.SetMemberFlashBool( "disabled", !mouserModeEnabled );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MouserSensitivityUI') );
+			dataObject.SetMemberFlashBool( "disabled", !mouserModeEnabled );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MouserSensitivityCamera') );
+			dataObject.SetMemberFlashBool( "disabled", !mouserModeEnabled );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MouserInvertX') );
+			dataObject.SetMemberFlashBool( "disabled", !mouserModeEnabled );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MouserInvertY') );
+			dataObject.SetMemberFlashBool( "disabled", !mouserModeEnabled );
+			dataArray.PushBackFlashObject( dataObject );
+		}
+
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+
+	private function UpdateOunceControlSettingsVisibility()
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+		var entriesObject : CScriptedFlashObject;
+
+		 
+		var patternsModeCustom_DualGrip : bool = StringToInt(mInGameConfigWrapper.GetVarValue('Controls_DualGrip', 'MotionPatternsMode')) == 3;
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+		
+		if (!patternsModeCustom_DualGrip)
+		{
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternSign') );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternConsumablePrimary') );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternConsumableSecondary') );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternBomb') );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternCrossbow') );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternHorseSummon') );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternHorseAcceleration') );
+			dataArray.PushBackFlashObject( dataObject );
+
+			dataObject = m_flashValueStorage.CreateTempFlashObject();
+			dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnablePatternHorseStop') );
+			dataArray.PushBackFlashObject( dataObject );
+		}
+
+		if (dataArray.GetLength() > 0)
+		{
+			entriesObject = m_flashValueStorage.CreateTempFlashObject();
+			entriesObject.SetMemberFlashArray( "list", dataArray );
+				
+			m_flashValueStorage.SetFlashObject( "options.remove_entry", entriesObject );
+			theGame.GetGuiManager().ForceProcessFlashStorage();
+		}
+	}
+
+	private function UpdateOunceControlSettingsValues()
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		var patternsModeVal_DualGrip : string = mInGameConfigWrapper.GetVarValue('Controls_DualGrip', 'MotionPatternsMode');
+		var gyroModeVal_DualGrip : string = mInGameConfigWrapper.GetVarValue('Controls_DualGrip', 'DualGrip_GyroAimingMode');
+		var mouserActivationMode : string = mInGameConfigWrapper.GetVarValue('Controls_Mouser', 'MouserActivationMode');
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MotionPatternsMode') );
+		dataObject.SetMemberFlashString( "current", patternsModeVal_DualGrip );
+		dataArray.PushBackFlashObject( dataObject );
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DualGrip_GyroAimingMode') );
+		dataObject.SetMemberFlashString( "current", gyroModeVal_DualGrip );
+		dataArray.PushBackFlashObject( dataObject );
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('MouserActivationMode') );
+		dataObject.SetMemberFlashString( "current", mouserActivationMode );
+		dataArray.PushBackFlashObject( dataObject );
+
+		m_flashValueStorage.SetFlashArray( "options.force_update_values", dataArray );
+
+		theGame.GetGuiManager().ForceProcessFlashStorage();
 	}
 	
 	event  OnCancelOptionValueChange(groupId:int, optionName:name)
@@ -1283,6 +1887,7 @@ class CR4IngameMenu extends CR4MenuBase
 		var hud 				: CR4ScriptedHud;
 		var isValid 			: bool;
 		var isBuffered 			: bool;
+		var value 			: bool;
 				
 		
 		var dialogModule : CR4HudModuleDialog;
@@ -1308,6 +1913,23 @@ class CR4IngameMenu extends CR4MenuBase
 			HandleSpecialValueChanged(optionName, optionValue);
 			return true;
 		}		
+		
+		
+		
+		if( optionName == 'TelemetryConsent' )
+		{
+			m_flashValueStorage.SetFlashBool( "options.show_spinner", true );
+			
+			value = ( optionValue == "true" );
+			OnTelemetryConsentChanged( value );
+			return true;
+		}
+		
+		if( optionName == 'MarketingConsent' )
+		{
+			value = ( optionValue == "true" );
+			theTelemetry.MarketingConsentChanged( value );
+		}
 		
 		
 		if (optionName == 'InvertLockOption')
@@ -1371,18 +1993,16 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		if (optionName == 'EnableAlternateExplorationCamera')
 		{
-			if ( optionValue == "1" )
-				thePlayer.SetExplCamera(true);
-			else
-				thePlayer.SetExplCamera(false);
+			thePlayer.SetExplorationCameraIdConfig( StringToInt( optionValue ) );
 		}
 		
 		if (optionName == 'EnableAlternateCombatCamera')
 		{
-			if ( optionValue == "1" )
-				thePlayer.SetCmbtCamera(true);
-			else
-				thePlayer.SetCmbtCamera(false);
+			if (!thePlayer.IsCmbtCameraForced())
+			{
+				thePlayer.SetCombatCameraDistanceIdConfig( StringToInt( optionValue ) );
+
+			}
 		}
 		
 		if (optionName == 'EnableAlternateHorseCamera')
@@ -1521,18 +2141,6 @@ class CR4IngameMenu extends CR4MenuBase
 			m_fxSetHardwareCursorOn.InvokeSelfOneArg(FlashArgBool(isValid));
 		}
 		
-		if( optionName == 'ConsentTelemetry' )
-		{
-			if ( optionValue =="true" )
-			{
-				OnTelemetryConsentChanged(true);
-			}
-			else
-			{
-				OnTelemetryConsentChanged(false);
-			}
-		}
-		
 		if (optionName == 'SwapAcceptCancel')
 		{
 			swapAcceptCancelChanged = true;
@@ -1595,7 +2203,7 @@ class CR4IngameMenu extends CR4MenuBase
 			
 		theGame.OnConfigValueChanged(optionName, optionValue);
 		
-		if (groupName == 'Hud' || optionName == 'Subtitles')
+		if (groupName == 'Hud' || optionName == 'Subtitles' || optionName == 'LootFeedModule')
 		{
 			hud = (CR4ScriptedHud)theGame.GetHud();
 			
@@ -1644,18 +2252,29 @@ class CR4IngameMenu extends CR4MenuBase
 					mInGameConfigWrapper.SetVarValue('PostProcess', 'Virtual_SSAOSolution', IntToString(IGMOPT_AO_SSAO));
 				}
 			}
+			
 			UpdateAO2CorrespondRT(optionValue == "true", false);
-			UpdateOptions('PostProcess', false);
+			UpdatePresetOptions('PostProcess', false);
 
 			
 			updateRTOptionEnabled(optionValue == "true");
+			updatePTOptionEnabled(theGame.GetPTEnabled());
 			updateRTAOOptionChanged();
 			updateRTROptionChanged();
+			
+			updateDLSSRR( optionValue == "true" && theGame.GetDLSSEnabled() );
+			updatePTHairOptionChanged();
 		}
 		
 		if (optionName == 'AllowMotionBlur')
 		{
 			updateMotionBlurOptionChanged(optionValue == "true");
+		}
+
+		
+		if (optionName == 'AccessibilityPreset')
+		{
+			UpdateBardsBalladTooltipText();
 		}
 
 		
@@ -1675,17 +2294,55 @@ class CR4IngameMenu extends CR4MenuBase
 		if ( optionName == 'Virtual_HairWorksLevel' )
 		{
 			updateHairWorksOptionChanged();
+			updatePTHairOptionChanged();
 		}
 		
 		if( optionName == 'AAMode' )
 		{
-			UpdateOptions('PostProcess', true);
+			UpdatePresetOptions('PostProcess', true);
 			updateAAOptionChanged();
+
+			
+			if ( theGame.GetDLSSEnabled() && theGame.GetRTEnabled() )
+			{
+				updateDLSSRR( true );
+			}
+
+			updatePTHairOptionChanged();
+		}
+
+		if (optionName == 'EnableDLSSRR')
+		{
+			updatePTHairOptionChanged();
+		}
+
+		if (optionName == 'PTEnable')
+		{
+			updatePTOptionEnabled(optionValue == "true");
+			updateRTAOOptionChanged();
+			updateRTROptionChanged();
+			updatePTHairOptionChanged();
+
+			
+			if ( optionValue == "true" && theGame.GetDLSSEnabled() )
+			{
+				updateDLSSRR( true );
+			}
 		}
 
 		if (optionName == 'RTAOEnabled')
 		{
 			updateRTAOOptionChanged();
+		}
+
+		if (optionName == 'SSAOEnabled')
+		{
+			updateSSAOOptionChanged();
+		}
+
+		if (optionName == 'Virtual_RTShadows')
+		{
+			updateRTShadowOptionChanged();
 		}
 
 		if (optionName == 'EnableRtRadiance')
@@ -1705,12 +2362,37 @@ class CR4IngameMenu extends CR4MenuBase
 
 		if (optionName == 'Virtual_DLSSG')
 		{
-			updateDLSSGOptionChanged();
+			updateFGorLLOptionChangedCommon();
 		}
 
 		if (optionName == 'Virtual_Reflex')
 		{
-			updateReflexOptionChanged();
+			updateFGorLLOptionChangedCommon();			
+		}
+		
+		if (optionName == 'XessFrameGeneration')
+		{
+			updateFGorLLOptionChangedCommon();
+		}
+		
+		if (optionName == 'XeLowLatency')
+		{
+			updateFGorLLOptionChangedCommon();
+		}
+
+		if (optionName == 'XeLowLatencyFrameRateControl')
+		{
+			updateFGorLLOptionChangedCommon();
+		}
+
+		if (optionName == 'Virtual_FSRFramegen')
+		{
+			updateFGorLLOptionChangedCommon();
+		}
+
+		if (optionName == 'AMDAntiLag')
+		{
+			updateFGorLLOptionChangedCommon();
 		}
 
 		IngameMenu_AdditionalOptionValueChangeHandling( groupName, optionName, optionValue, m_flashValueStorage );
@@ -1725,8 +2407,159 @@ class CR4IngameMenu extends CR4MenuBase
 		{
 			theGame.UpdateCrossProgressionValue( optionValue );
 		}
+		
+		if ( optionName == 'LowHPAutoHealOn'
+			|| optionName == 'LowHPAutoHealThreshold'
+			|| optionName == 'LowHPAutoHealMultiplier')
+		{
+			updateAutohealOptionChanged();
+		}
+
+		if (!btPresetInitialized)
+			initializeAccessibilityPreset();
+		
+		if(groupName == 'Accessibility'
+			&& checkAccessibilityPresetNeedUpdate(optionName, optionValue == "true"))
+		{
+			updateAccessibilityPresetToCustom();
+		}
+
+		if( optionName == 'AccessibilityPreset' && optionValue != IntToString(AP_Custom))
+		{
+			updateAccessibilityPresetValues( StringToInt(optionValue), true );
+		}
+
+		if(optionName == 'WeightlessItems' && GetWitcherPlayer())
+		{
+			GetWitcherPlayer().UpdateEncumbrance();
+		}
+		
+		if(optionName == 'GodMode')
+		{
+			thePlayer.SetImmortalityMode( optionValue == "0" ? AIM_None : (optionValue == "1" ? AIM_Immortal : AIM_Invulnerable), AIC_Cheat, true);
+		}
+
+		if ( groupName == 'Gameplay' )
+		{
+			if ( optionName == 'Enabled')
+			{
+				updateDisableAllMods();
+			}
+			else if ( optionName == 'EnabledLocal')
+			{
+				updateEnableLocalMods();
+			}
+			else if ( optionName == 'EnabledWorkshop')
+			{
+				updateEnableWorkshopMods();
+			}
+		}
+
+		if ( optionName == 'ModioEnabled')
+		{
+			updateEnableModIo( optionValue );
+		}
+
+		
+		if ( optionName == 'CombatStyle' )
+		{
+			updateCombatStyle( optionValue );
+			thePlayer.SetModernCombat( optionValue );
+		}
+
+		if ( optionName == 'UseMovementForKBM' )
+		{
+			thePlayer.SetMovementTargetingKeyboard( optionValue );
+		}
+
+		if ( optionName == 'TargetLockStyle' )
+		{
+			thePlayer.SetModernTargetLock( optionValue );
+		}
+
+		if ( optionName == 'TargetLockCameraSpeed' )
+		{
+			thePlayer.SetFastLockCamera( optionValue );
+		}
+		
+
+		
+		if ( optionName == 'TargetLockSwitchCooldown' )
+		{
+			thePlayer.SetTargetLockSwitchCooldown( StringToFloat( optionValue ) );
+		}
+
+		if ( optionName == 'UseNewAnimations' )
+		{
+			thePlayer.SetUseNewAnimations( optionValue );
+		}
+
+		if( optionName == 'RemasterLadderAnims' )
+		{
+			thePlayer.SetUseNewLadderAnimations( optionValue );
+		}
+
+		if ( optionName == 'JumpCooldown' )
+		{
+			thePlayer.SetJumpCooldown( StringToFloat( optionValue ) );
+		}
+
+		if ( optionName == 'LandAddCoef' )
+		{
+			thePlayer.SetLandAddCoefVal( StringToFloat( optionValue ) );
+		}
+
+		if ( optionName == 'LandAddTimeCoef' )
+		{
+			thePlayer.SetLandAddTimeCoefVal( StringToFloat( optionValue ) );
+		}
+
+		if ( optionName == 'LandAddTimeCoefFast' )
+		{
+			thePlayer.SetLandAddTimeCoefFast( StringToFloat( optionValue ) );
+		}
+
+		if ( optionName == 'LandAddCoefWalk' )
+		{
+			thePlayer.SetLandAddCoefWalk( StringToFloat( optionValue ) );
+		}
+
+		if ( optionName == 'LandAddTimeCoefWalk' )
+		{
+			thePlayer.SetLandAddTimeCoefWalk( StringToFloat( optionValue ) );
+		}
+
+		
+		if ( optionName == 'ExplCamFov' && thePlayer.IsModernExplorationCamera() )
+		{
+			thePlayer.SetExplorationCameraFov( StringToFloat( optionValue ) );
+		}
+		
+		
+
+		if (optionName == 'UseNewControls')
+		{
+			updateUseNewControlsOptionChanged( optionValue == "true" );
+		}
 	}
 	
+	private function updateUseNewControlsOptionChanged(enabled:bool)
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('SteeringSensitivity') );
+		dataObject.SetMemberFlashBool( "disabled", !enabled);
+		dataArray.PushBackFlashObject(dataObject);
+		
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+
 	private function updateMotionBlurOptionChanged(enabled:bool):void
 	{
 		var dataObject : CScriptedFlashObject;
@@ -1749,13 +2582,15 @@ class CR4IngameMenu extends CR4MenuBase
 		setLocksOnRTChange(theGame.GetRTEnabled());
 		updateHairWorksOptionChanged();
 		updateAAOptionChanged();
+		updatePTHairOptionChanged();
 	}
 
 	private function setLocksOnRTChange(enabled:bool):void
 	{
 		UpdateAO2CorrespondRT(enabled, false);
-		UpdateOptions('PostProcess', true);
+		UpdatePresetOptions('PostProcess', true);
 		updateRTOptionEnabled(enabled);
+		updatePTOptionEnabled(theGame.GetPTEnabled());
 		updateRTAOOptionChanged();
 		updateRTROptionChanged();
 	}
@@ -1763,10 +2598,50 @@ class CR4IngameMenu extends CR4MenuBase
 	private function updateOptionsDisableState():void
 	{
 		updateRTOptionEnabled(theGame.GetRTEnabled());
+		updatePTOptionEnabled(theGame.GetPTEnabled());
 		updateAAOptionChanged();
 		updateHairWorksOptionChanged();
 		updateRTAOOptionChanged();
 		updateRTROptionChanged();
+		updatePTHairOptionChanged();
+	}
+
+	
+	
+	private function validatePTHairOptionValue():bool
+	{
+		var currentValue : string;
+
+		if (IngameMenu_IsPTHairAvailable()) return false;
+
+		
+		currentValue = mInGameConfigWrapper.GetVarValue('Graphics', 'PTHairQualityMode');
+		if (currentValue == "" || currentValue == "0") return false;
+
+		mInGameConfigWrapper.SetVarValue('Graphics', 'PTHairQualityMode', "0");
+		hasChangedOption = true;
+		return true;
+	}
+
+	
+	protected function updatePTHairOptionChanged():void
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		if (validatePTHairOptionValue())
+		{
+			m_fxUpdateOptionValue.InvokeSelfTwoArgs( FlashArgUInt(NameToFlashUInt('PTHairQualityMode')), FlashArgString("0") );
+		}
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('PTHairQualityMode') );
+		dataObject.SetMemberFlashBool( "disabled", !IngameMenu_IsPTHairAvailable() );
+		dataArray.PushBackFlashObject(dataObject);
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+
+		theGame.GetGuiManager().ForceProcessFlashStorage();
 	}
 
 	protected function updateRTOptionEnabled(enabled:bool):void
@@ -1779,6 +2654,11 @@ class CR4IngameMenu extends CR4MenuBase
 		dataArray = m_flashValueStorage.CreateTempFlashArray();
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('PTEnable') );
+		dataObject.SetMemberFlashBool( "disabled", !enabled);
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
 		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('RTGIPreset') );
 		dataObject.SetMemberFlashBool( "disabled", !enabled);
 		dataArray.PushBackFlashObject(dataObject);
@@ -1789,7 +2669,7 @@ class CR4IngameMenu extends CR4MenuBase
 		dataArray.PushBackFlashObject(dataObject);
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
-		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Shadows') );
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_RTShadows') );
 		dataObject.SetMemberFlashBool( "disabled", !enabled);
 		dataArray.PushBackFlashObject(dataObject);
 
@@ -1803,9 +2683,95 @@ class CR4IngameMenu extends CR4MenuBase
 		dataObject.SetMemberFlashBool( "disabled", !enabled);
 		dataArray.PushBackFlashObject(dataObject);
 
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_ShadowsOptionVar') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTShadowsEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_SSREnabled') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTREnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
 		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
 		
 		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+
+	protected function updatePTOptionEnabled(enabled:bool):void
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		if ( !theGame.GetRTSupported() || !theGame.GetRTEnabled()) return; 
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('RTGIPreset') );
+		dataObject.SetMemberFlashBool( "disabled", enabled);
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnableRtRadiance') );
+		dataObject.SetMemberFlashBool( "disabled", enabled);
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_RTShadows') );
+		dataObject.SetMemberFlashBool( "disabled", enabled);
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('RTAOEnabled') );
+		dataObject.SetMemberFlashBool( "disabled", enabled);
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('SSAOEnabled') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTAOEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_GTAOQuality') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTAOEnabled() || !theGame.GetGTAOEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_ShadowsOptionVar') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTShadowsEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_SSREnabled') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTREnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+
+	private function updateDynamicResolutionScalingEnabledOption(out StructGFx : CScriptedFlashArray) : void
+	{
+		var dataObject : CScriptedFlashObject;
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_DynamicResolutionScaling') );
+
+		if ( theGame.GetDLSSEnabled()
+			|| theGame.GetXESSEnabled()
+			|| theGame.GetDLSSGEnabled() )
+		{
+			dataObject.SetMemberFlashString( "current", "false" );
+			dataObject.SetMemberFlashBool( "disabled", true );
+		}
+		else
+		{
+			dataObject.SetMemberFlashBool( "disabled", false );
+		}
+
+		StructGFx.PushBackFlashObject(dataObject);
 	}
 
 	protected function updateAAOptionChanged():void
@@ -1830,16 +2796,40 @@ class CR4IngameMenu extends CR4MenuBase
 		dataObject.SetMemberFlashBool( "disabled", !theGame.GetXESSEnabled());
 		dataArray.PushBackFlashObject(dataObject);
 
-		dataObject = m_flashValueStorage.CreateTempFlashObject();
-		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DynamicResolutionScaling') );
-		dataObject.SetMemberFlashBool( "disabled", theGame.GetDLSSEnabled() || theGame.GetDLSSGEnabled()  || theGame.GetXESSEnabled());
-		dataArray.PushBackFlashObject(dataObject);
+		updateDynamicResolutionScalingEnabledOption( dataArray );
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
 		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_SharpenAmount') );
 		dataObject.SetMemberFlashBool( "disabled", false );
 		dataArray.PushBackFlashObject(dataObject);
+		
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnableDLSSRR') );
+		dataObject.SetMemberFlashBool( "disabled", !theGame.GetDLSSEnabled() || !theGame.GetDLSSRRSupported() || !theGame.GetRTEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
 
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+
+	private function updateDLSSRR( setEnabled : bool ) : void
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnableDLSSRR') );
+		dataObject.SetMemberFlashBool( "disabled", !theGame.GetDLSSEnabled() || !theGame.GetDLSSRRSupported() || !theGame.GetRTEnabled() );
+
+		if ( setEnabled )
+		{
+			dataObject.SetMemberFlashString( "current", "1" );
+		}
+		dataArray.PushBackFlashObject(dataObject);
+		
 		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
 		
 		theGame.GetGuiManager().ForceProcessFlashStorage();
@@ -1876,7 +2866,12 @@ class CR4IngameMenu extends CR4MenuBase
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
 		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('SSAOEnabled') );
-		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTAOEnabled());
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTAOEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_GTAOQuality') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTAOEnabled() || !theGame.GetGTAOEnabled() );
 		dataArray.PushBackFlashObject(dataObject);
 
 		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
@@ -1884,52 +2879,356 @@ class CR4IngameMenu extends CR4MenuBase
 		theGame.GetGuiManager().ForceProcessFlashStorage();
 	}
 
-	protected function updateDLSSGOptionChanged():void
+	protected function updateSSAOOptionChanged():void
 	{
 		var dataObject : CScriptedFlashObject;
 		var dataArray : CScriptedFlashArray;
-		var dlssEnabled : bool;
-		var dlssgEnabled : bool;
-
-		dlssEnabled = theGame.GetDLSSEnabled();
-		dlssgEnabled = theGame.GetDLSSGEnabled();
 
 		dataArray = m_flashValueStorage.CreateTempFlashArray();
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
-		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_Reflex') );
-		dataObject.SetMemberFlashBool( "disabled", dlssgEnabled || !theGame.GetReflexSupported());
-		if (dlssgEnabled)
-		{
-			dataObject.SetMemberFlashString( "current", "1");
-		}
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_GTAOQuality') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTAOEnabled() || !theGame.GetGTAOEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+
+	protected function updateRTShadowOptionChanged():void
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_ShadowsOptionVar') );
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTShadowsEnabled() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+
+	protected function initializeAccessibilityPreset() : void
+	{
+		btPresetMap['LowHPAutoHealOn'] = true;
+		btPresetMap['NoAirDrain'] = true;
+		btPresetMap['DisableDurabilityItem'] = true;
+		btPresetMap['DisableDurabilityBoat'] = true;
+		btPresetMap['WeightlessItems'] = true;
+		btPresetMap['AutoLoot'] = true;
+		btPresetMap['FastBoats'] = true;
+		btPresetMap['HideHerbs'] = true;
+		btPresetMap['HideCorpse'] = true;
+		btPresetMap['DisableAutomaticSwordSheathe'] = false;
+		btPresetMap['AutoApplyBladeOils'] = true;
+
+		btPresetInitialized = true;
+	}
+
+	protected function checkAccessibilityPresetNeedUpdate(optionName : name, optionValue : bool) : bool
+	{
+		var l_curPreset : AccessibilityPresets;
+		var l_btOn : bool;
+		
+		l_curPreset = StringToInt(mInGameConfigWrapper.GetVarValue('Accessibility', 'AccessibilityPreset'));
+		
+		if (l_curPreset == AP_Custom)
+		 return false;
+
+		l_btOn = l_curPreset == AP_BardsTale;
+
+		return btPresetMap.Contains(optionName) && ((btPresetMap[optionName] != optionValue) == l_btOn);
+	}
+
+	protected function updateAccessibilityPresetToCustom() : void
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		mInGameConfigWrapper.SetVarValue('Accessibility', 'AccessibilityPreset', IntToString(AP_Custom));
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('AccessibilityPreset') );
+		dataObject.SetMemberFlashString( "current", IntToString(AP_Custom));
+		dataArray.PushBackFlashObject( dataObject );
+
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+	}
+	
+	protected function updateAccessibilityPresetValues(newPreset : AccessibilityPresets, inSettingsMenu : bool) : void
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+		
+		var i : int;
+		var l_optionName : name;
+		var l_newValue : bool;
+		
+		if (!btPresetInitialized)
+			initializeAccessibilityPreset();
+
+		if (inSettingsMenu)
+			dataArray = m_flashValueStorage.CreateTempFlashArray();
 		else
+			mInGameConfigWrapper.SetVarValue('Accessibility', 'AccessibilityPreset', IntToString(newPreset));
+
+		for (i = 0; i < btPresetMap.Size(); i += 1)
 		{
-			dataObject.SetMemberFlashBool( "resetToStartingValue", true);
+			l_optionName = btPresetMap.Key(i);
+			l_newValue = btPresetMap[l_optionName] == (newPreset == AP_BardsTale);
+
+			mInGameConfigWrapper.SetVarValue('Accessibility', l_optionName, l_newValue ? "true" : "false");
+			if (inSettingsMenu)
+			{
+				dataObject = m_flashValueStorage.CreateTempFlashObject();
+				dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt(l_optionName) );
+				dataObject.SetMemberFlashString( "current", l_newValue );
+				dataArray.PushBackFlashObject( dataObject );
+			}
 		}
+
+		if (inSettingsMenu)
+		{
+			m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+			theGame.GetGuiManager().ForceProcessFlashStorage();
+		}
+
+		updateAutohealOptionChanged();
+	}
+
+	protected function updateFGorLLOptionChangedCommon():void
+	{
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+		var vendorName : string;
+
+		
+		var reflexLLEnabled : bool;
+		var dlssgEnabled : bool;
+		var dlssgEnabledDynamic : bool;
+
+		
+		var fsrFrameGenEnabled : bool;
+		var amdAntiLagEnabled : bool;
+
+		
+		var xeFGEnabled : bool;
+		var xeLLEnabled : bool;
+
+		
+
+		
+		reflexLLEnabled = theGame.GetReflexEnabled();
+		dlssgEnabled = theGame.GetDLSSGEnabled();
+		dlssgEnabledDynamic = theGame.GetDLSSGEnabledDynamic();
+		fsrFrameGenEnabled = theGame.GetFSRFramegenEnabled();
+		amdAntiLagEnabled = theGame.GetAMDAntiLagEnabled();
+		xeFGEnabled = theGame.GetXESSFGEnabled();
+		xeLLEnabled = theGame.GetXELLEnabled();
+		vendorName = "none";
+
+		if (reflexLLEnabled || dlssgEnabled )
+		{
+			
+			vendorName = "nvidia";
+
+			fsrFrameGenEnabled = false;
+			amdAntiLagEnabled = false;
+			xeFGEnabled = false;
+			xeLLEnabled = false;
+		}
+
+		if(fsrFrameGenEnabled || amdAntiLagEnabled)
+		{
+			
+			vendorName = "amd";
+
+			reflexLLEnabled = false;
+			dlssgEnabled = false;
+			dlssgEnabledDynamic = false;
+			xeFGEnabled = false;
+			xeLLEnabled = false;
+		}
+
+		if ( xeLLEnabled || xeFGEnabled )
+		{
+			
+			vendorName = "intel";
+
+			reflexLLEnabled = false;
+			dlssgEnabled = false;
+			dlssgEnabledDynamic = false;
+			fsrFrameGenEnabled = false;
+			amdAntiLagEnabled = false;
+		}
+		
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('XessFrameGeneration') );
+		dataObject.SetMemberFlashString( "current", xeFGEnabled ? "1" : "0" );
+		dataObject.SetMemberFlashBool( "disabled", vendorName == "nvidia" || vendorName == "amd" );
+		dataArray.PushBackFlashObject(dataObject);
+		
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('XeLowLatency') );
+		dataObject.SetMemberFlashString( "current", xeLLEnabled ? "1" : "0" );
+		dataObject.SetMemberFlashBool( "disabled", vendorName == "nvidia" || vendorName == "amd" );
 		dataArray.PushBackFlashObject(dataObject);
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
-		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('VSync') );
-		dataObject.SetMemberFlashBool( "disabled", dlssgEnabled);
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_Reflex') );
+		if ( dlssgEnabled )
+		{
+			dataObject.SetMemberFlashString( "current", "1" );
+		}
+		else if ( !reflexLLEnabled )
+		{
+			dataObject.SetMemberFlashString( "current", "0" );
+		}
+		dataObject.SetMemberFlashBool( "disabled", dlssgEnabled || vendorName == "intel" || vendorName == "amd" || !theGame.GetReflexSupported() );
 		dataArray.PushBackFlashObject(dataObject);
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
-		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('FPSLimit') );
-		dataObject.SetMemberFlashBool( "disabled", dlssgEnabled);
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_DLSSG') );
+		if ( !dlssgEnabled )
+		{
+			dataObject.SetMemberFlashString( "current", "0" );
+		}
+		dataObject.SetMemberFlashBool( "disabled", vendorName == "intel" || vendorName == "amd" || !theGame.GetDLSSGSupported()  );
 		dataArray.PushBackFlashObject(dataObject);
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
-		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('DynamicResolutionScaling') );
-		dataObject.SetMemberFlashBool( "disabled", dlssEnabled || dlssgEnabled);
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_DLSSG_Count') );
+		dataObject.SetMemberFlashBool( "disabled", !dlssgEnabled || dlssgEnabledDynamic );
 		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_FSRFramegen') );
+		dataObject.SetMemberFlashString( "current", fsrFrameGenEnabled ? "1" : "0" );
+		dataObject.SetMemberFlashBool( "disabled", vendorName == "nvidia" || vendorName == "intel" || !theGame.GetFSRFramegenSupported() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('AMDAntiLag') );
+		dataObject.SetMemberFlashString( "current", amdAntiLagEnabled ? "1" : "0" );
+		dataObject.SetMemberFlashBool( "disabled", vendorName == "nvidia" || vendorName == "intel" || !theGame.GetAMDAntiLagSupported() );
+		dataArray.PushBackFlashObject(dataObject);
+
+		updateDynamicResolutionScalingEnabledOption( dataArray );
 
 		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
 		
 		theGame.GetGuiManager().ForceProcessFlashStorage();
 	}
 
-	protected function updateReflexOptionChanged():void
+	
+	protected function updateAutohealOptionChanged():void
+	{
+		var autohealOn : bool;
+		var autohealMultiplier : int;
+		var autohealThreshold : float;
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+		var inGameConfigWrapper : CInGameConfigWrapper;
+		var i : int;
+		var effectsSize : int;
+		var effects : array< CBaseGameplayEffect >;
+		var regenEffect : W3Effect_AutoVitalityRegen;
+		
+		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();	
+		
+		autohealOn = inGameConfigWrapper.GetVarValue('Accessibility', 'LowHPAutoHealOn') == "true";
+		autohealMultiplier = StringToInt(inGameConfigWrapper.GetVarValue('Accessibility', 'LowHPAutoHealMultiplier'));
+		autohealThreshold = StringToFloat(inGameConfigWrapper.GetVarValue('Accessibility', 'LowHPAutoHealThreshold'));
+		
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+		
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('LowHPAutoHealThreshold') );
+		dataObject.SetMemberFlashBool( "disabled", !autohealOn);
+		dataArray.PushBackFlashObject(dataObject);
+		
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('LowHPAutoHealMultiplier') );
+		dataObject.SetMemberFlashBool( "disabled", !autohealOn);
+		dataArray.PushBackFlashObject(dataObject);
+		
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+		
+		
+		
+		effects = thePlayer.GetCurrentEffects();
+		effectsSize = effects.Size();
+		for( i = 0; i < effectsSize; i += 1 )
+		{
+			if(effects[i] && effects[i].GetEffectType() == EET_AutoVitalityRegen)
+			{
+				regenEffect = (W3Effect_AutoVitalityRegen) effects[i];
+				if(regenEffect)
+					regenEffect.RequestValueUpdates();
+			}
+		}
+		
+	}
+	
+	protected function updateEnableModIo( enabled:bool ):void
+	{
+		theGame.GetGuiManager().DisplayModRestartNeededDialog(this, "panel_restart_needed", "mods_enabled_change", MRMT_EnabledChange);
+	}
+	
+	protected function updateDisableAllMods():void
+	{	
+		var dataObject : CScriptedFlashObject;
+		var dataArray : CScriptedFlashArray;
+		var areModsEnabled : bool;
+
+		areModsEnabled = theGame.AreModsEnabled(); 
+
+		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt( 'ModioEnabled' ) );
+		dataObject.SetMemberFlashBool( "disabled", !areModsEnabled );
+		dataArray.PushBackFlashObject( dataObject );
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt( 'EnabledLocal' ) );
+		dataObject.SetMemberFlashBool( "disabled", !areModsEnabled );
+		dataArray.PushBackFlashObject( dataObject );
+		
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt( 'EnabledWorkshop' ) );
+		dataObject.SetMemberFlashBool( "disabled", !areModsEnabled );
+		dataArray.PushBackFlashObject( dataObject );
+
+		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
+		
+		theGame.GetGuiManager().ForceProcessFlashStorage();
+		theGame.GetGuiManager().DisplayModRestartNeededDialog( this, "panel_restart_needed", "mods_enabled_change", MRMT_EnabledChange );
+	}
+
+	protected function updateEnableLocalMods():void
+	{	
+		theGame.GetGuiManager().DisplayModRestartNeededDialog( this, "panel_restart_needed", "mods_enabled_change", MRMT_EnabledChange );
+	}
+
+	protected function updateEnableWorkshopMods():void
+	{	
+		theGame.GetGuiManager().DisplayModRestartNeededDialog( this, "panel_restart_needed", "mods_enabled_change", MRMT_EnabledChange );
+	}
+
+	protected function updateCombatStyle( value: bool ):void
 	{
 		var dataObject : CScriptedFlashObject;
 		var dataArray : CScriptedFlashArray;
@@ -1937,19 +3236,20 @@ class CR4IngameMenu extends CR4MenuBase
 		dataArray = m_flashValueStorage.CreateTempFlashArray();
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
-		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_Reflex') );
-		dataObject.SetMemberFlashBool( "disabled", theGame.GetDLSSGEnabled() || !theGame.GetReflexSupported());
-		if (!theGame.GetDLSSGEnabled())
-		{
-			dataObject.SetMemberFlashBool( "resetStartingValue", true);
-		}
-		dataArray.PushBackFlashObject(dataObject);
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt( 'UseMovementForKBM' ) );
+		dataObject.SetMemberFlashBool( "disabled", !value );
+		dataArray.PushBackFlashObject( dataObject );
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt( 'EnableUberMovement' ) );
+		dataObject.SetMemberFlashBool( "disabled", value );
+		dataArray.PushBackFlashObject( dataObject );
 
 		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
 		
 		theGame.GetGuiManager().ForceProcessFlashStorage();
 	}
-
+	
 	protected function updateRTROptionChanged():void
 	{
 		var dataObject : CScriptedFlashObject;
@@ -1959,7 +3259,7 @@ class CR4IngameMenu extends CR4MenuBase
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
 		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_SSREnabled') );
-		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTREnabled());
+		dataObject.SetMemberFlashBool( "disabled", theGame.GetRTREnabled() );
 		dataArray.PushBackFlashObject(dataObject);
 
 		m_flashValueStorage.SetFlashArray( "options.update_disabled", dataArray );
@@ -1967,9 +3267,14 @@ class CR4IngameMenu extends CR4MenuBase
 		theGame.GetGuiManager().ForceProcessFlashStorage();
 	}
 	
-	event  OnButtonClicked( optionName : name )
+	event  OnButtonClicked( groupId:int, optionName : name )
 	{
-		if ( optionName == 'MoreSpeechLanguages' )
+		var groupName : name = mInGameConfigWrapper.GetGroupName(groupId);
+		if ( groupName == 'Gameplay' && optionName == 'RequestCollectedTelemetry' )
+		{
+			ShowTelemetryDataRequestPopup();
+		}
+		else if ( optionName == 'MoreSpeechLanguages' )
 		{
 			theGame.DisplayStore();
 		}
@@ -1979,7 +3284,7 @@ class CR4IngameMenu extends CR4MenuBase
 	{
 		if (!postprocessEntered && optionName == 'AAMode')
 		{
-			UpdateOptions('PostProcess', true);
+			UpdatePresetOptions('PostProcess', true);
 			postprocessEntered = true;
 			updateAAOptionChanged();
 		}
@@ -1990,7 +3295,7 @@ class CR4IngameMenu extends CR4MenuBase
 			if (value && postprocessRtGreyed == true)
 			{
 				postprocessRtGreyed = false;
-				UpdateOptions('PostProcess', false);
+				UpdatePresetOptions('PostProcess', false);
 			}
 		}
 		else if (value)
@@ -1998,7 +3303,7 @@ class CR4IngameMenu extends CR4MenuBase
 			if (postprocessRtGreyed == false)
 			{
 				postprocessRtGreyed = true;
-				UpdateOptions('PostProcess', true);
+				UpdatePresetOptions('PostProcess', true);
 			}
 		}
 	}
@@ -2030,6 +3335,7 @@ class CR4IngameMenu extends CR4MenuBase
 		var hud : CR4ScriptedHud;
 		
 		theGame.SetHDRMenuActive(false);
+		theGame.SetHDRMenuFadePercentage(0);
 		
 		if (inGameConfigBufferedWrapper.AnyBufferedVarHasTag('refreshViewport'))
 		{
@@ -2059,6 +3365,7 @@ class CR4IngameMenu extends CR4MenuBase
 		var flashObject : CScriptedFlashObject;
 		
 		theGame.SetHDRMenuActive(false);
+		theGame.SetHDRMenuFadePercentage(0);
 		
 		hud = (CR4ScriptedHud)(theGame.GetHud());
 		overlayPopupRef = (CR4OverlayPopup) theGame.GetGuiManager().GetPopup('OverlayPopup');
@@ -2092,6 +3399,8 @@ class CR4IngameMenu extends CR4MenuBase
 			flashObject.SetMemberFlashUInt( "optionTag", NameToFlashUInt( 'Virtual_Localization_speech' ) );
 			flashObject.SetMemberFlashString( "optionSelectedId", currentSpeechLang );	
 			m_flashValueStorage.SetFlashObject( "option.changedId", flashObject );
+		
+			SetModdedTooltipText();
 		}
 		
 		if (swapAcceptCancelChanged)
@@ -2135,15 +3444,23 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		if (!isMainMenu && theGame.GetDifficultyLevel() != lastSetDifficulty && lowestDifficultyUsed > lastSetDifficulty && lowestDifficultyUsed > EDM_Medium)
 		{
-			diffChangeConfPopup = new W3DifficultyChangeConfirmation in this;
-			
-			diffChangeConfPopup.SetMessageTitle("");
-			diffChangeConfPopup.SetMessageText( GetPlatformLocString( "difficulty_change_warning_message", "difficulty_change_warning_message_X1" ) );
-			diffChangeConfPopup.menuRef = this;
-			diffChangeConfPopup.targetDifficulty = lastSetDifficulty;
-			diffChangeConfPopup.BlurBackground = true;
-			
-			RequestSubMenu('PopupMenu', diffChangeConfPopup);
+			if(theGame.GetPlatform() == Platform_Switch2_Ounce)
+			{
+				theGame.SetDifficultyLevel(lastSetDifficulty);
+				theGame.OnDifficultyChanged(lastSetDifficulty);
+			}
+			else
+			{
+				diffChangeConfPopup = new W3DifficultyChangeConfirmation in this;
+				
+				diffChangeConfPopup.SetMessageTitle("");
+				diffChangeConfPopup.SetMessageText( GetPlatformLocString( "difficulty_change_warning_message", "difficulty_change_warning_message_X1" ) );
+				diffChangeConfPopup.menuRef = this;
+				diffChangeConfPopup.targetDifficulty = lastSetDifficulty;
+				diffChangeConfPopup.BlurBackground = true;
+				
+				RequestSubMenu('PopupMenu', diffChangeConfPopup);
+			}
 		}
 		else if (lastSetDifficulty != theGame.GetDifficultyLevel())
 		{
@@ -2244,14 +3561,26 @@ class CR4IngameMenu extends CR4MenuBase
 		m_fxNavigateBack.InvokeSelf();
 	}
 	
-	event  OnLoadGameCalled(type : ESaveGameType, saveListIndex : int)
+	public function GetLastAttemptedSaveIndex() : int
+	{
+		return m_lastAttemptedSaveId;
+	}
+	
+	event  OnLoadGameCalled( type : ESaveGameType, saveListIndex : int )
+	{
+		LoadSave(type, saveListIndex, true );
+	}
+	
+	
+	
+	public function LoadSave(type : ESaveGameType, saveListIndex : int, allowModCheck : bool )
 	{
 		var saveGameRef : SSavegameInfo;
 		var saveGames	: array< SSavegameInfo >;
 		
 		if (ignoreInput)
 		{
-			return false;
+			return;
 		}
 		
 		disableAccountPicker = true;
@@ -2262,7 +3591,13 @@ class CR4IngameMenu extends CR4MenuBase
 		}
 		
 		theGame.ListSavedGames( saveGames );
-		saveGameRef = saveGames[saveListIndex];
+		saveGameRef = saveGames[saveListIndex];	
+		
+		if ( !CheckModdedSave( saveGameRef, allowModCheck ) )
+		{
+			m_lastAttemptedSaveId = saveListIndex;
+			return;
+		}
 		
 		if (panelMode || (isMainMenu && !hasValidAutosaveData()))
 		{
@@ -2292,6 +3627,92 @@ class CR4IngameMenu extends CR4MenuBase
 		}
 	}
 	
+	private function CheckModdedSave( saveGameRef : SSavegameInfo, allowModCheck : bool ) : bool
+	{
+		var enabled, authenticated: bool;
+		var missingModIds : array< SModioModID >;
+		var versionErrorModIds : array< SModioModID >;
+		
+		if ( !theGame.GetModHandlerSystem().IsModdedSave( saveGameRef ) )
+		{
+			return true;
+		}
+
+		
+		
+		
+		
+		
+		if ( !theGame.GetModHandlerSystem().CheckPlatformUGCAllowed( false ) )
+		{
+			ForceSetIgnoreInput( false );
+			OnModioNetworkError();
+			return false;
+		}
+
+		enabled = theGame.GetModHandlerSystem().IsModioEnabled();
+		authenticated = theGame.GetModHandlerSystem().IsAuthenticated();
+		if ( allowModCheck && enabled && authenticated )
+		{
+			if ( !theGame.GetModHandlerSystem().CheckHasAllModsInSave( saveGameRef, missingModIds))
+			{
+				ForceSetIgnoreInput( false );
+				m_igmStateMachine.GetMissingModList( missingModIds, false );
+				return false;
+			}
+			
+			
+			
+			
+			
+			
+		}
+		
+		return true;
+	}
+
+	
+	private function CheckModdedLastSave( allowModCheck : bool ) : bool
+	{
+		var enabled, authenticated: bool;
+		var missingModIds : array< SModioModID >;
+		var versionErrorModIds : array< SModioModID >;
+		
+		if ( !theGame.GetModHandlerSystem().IsModdedLatestSave() )
+		{
+			return true;
+		}
+
+		
+		
+		if ( !theGame.GetModHandlerSystem().CheckPlatformUGCAllowed( false ) )
+		{
+			ForceSetIgnoreInput( false );
+			OnModioNetworkError();
+			return false;
+		}
+
+		enabled = theGame.GetModHandlerSystem().IsModioEnabled();
+		authenticated = theGame.GetModHandlerSystem().IsAuthenticated();
+		if ( allowModCheck && enabled && authenticated )
+		{
+			if ( !theGame.GetModHandlerSystem().CheckHasAllModsInLatestSave( missingModIds))
+			{
+				ForceSetIgnoreInput( false );
+				m_igmStateMachine.GetMissingModList( missingModIds, false );
+				return false;
+			}
+			
+			
+			
+			
+			
+			
+		}
+		
+		return true;
+	}
+
 	public function LoadSaveRequested(saveSlotRef : SSavegameInfo) : void
 	{	
 		var fromDeathScreen : bool;
@@ -2354,6 +3775,8 @@ class CR4IngameMenu extends CR4MenuBase
 						
 						theGame.SetDifficultyLevel(currentNewGameConfig.difficulty);
 						TutorialMessagesEnable(currentNewGameConfig.tutorialsOn);
+						if (currentNewGameConfig.bardsBalladOn)
+							updateAccessibilityPresetValues(AP_BardsTale, false);
 						
 						if ( theGame.RequestNewGame( theGame.GetNewGameDefinitionFilename() ) )
 						{
@@ -2406,6 +3829,8 @@ class CR4IngameMenu extends CR4MenuBase
 			theGame.SetDifficultyLevel(currentNewGameConfig.difficulty);
 			
 			TutorialMessagesEnable(currentNewGameConfig.tutorialsOn);
+			if (currentNewGameConfig.bardsBalladOn)
+				updateAccessibilityPresetValues(AP_BardsTale, false);
 			
 			startGameStatus = theGame.StartNewGamePlus(saveGameRef);
 			
@@ -2441,6 +3866,9 @@ class CR4IngameMenu extends CR4MenuBase
 					break;
 				case NGP_ContentRequired:
 					errorMessage = GetLocStringByKeyExt("newgame_plus_error_contentrequired");
+					break;
+				case NGP_OnNGP:
+					errorMessage = GetLocStringByKeyExt("newgame_plus_error_on_ngp");
 					break;
 				}
 				
@@ -2504,7 +3932,8 @@ class CR4IngameMenu extends CR4MenuBase
 		if (!theGame.IsGalaxyUserSignedIn()) {
 			manager = (CR4GuiManager)theGame.GetGuiManager();
 			if (manager) {
-				manager.GalaxyQRSignInInitiate();
+				m_shouldOpenModMenuOnLogin = false;
+				manager.GalaxyMyRewardsInitiate();
 			}
 		}
 	}
@@ -2513,16 +3942,69 @@ class CR4IngameMenu extends CR4MenuBase
 	{
 		var manager : CR4GuiManager;
 
-		if (!theGame.HasInternetConnection()) {
+		if (!theGame.HasInternetConnection())
+		{
 			ShowErrorWindow( GOGNoInternetConnection );
-		} else if (theGame.IsGalaxyUserSignedIn()) {
+		} 
+		else if (theGame.IsGalaxyUserSignedIn()) 
+		{
 			
 			manager = (CR4GuiManager)theGame.GetGuiManager();
-			if (manager) {
+			if (manager) 
+			{
 				manager.ShowCloudModal();
 				
 			}
 		}
+	}
+	
+	public function OpenModTermsPopup():void
+	{
+		var termsData : W3ModTermsPopupData;
+		var terms : string;
+		var title : string;
+		terms = GetLocStringByKeyExt("panel_mods_message_1");
+		terms = terms + "&#10;&#10;" + GetLocStringByKeyExt("panel_mods_message_2");
+		
+		if(theGame.GetPlatform() == Platform_PS5)
+			terms = terms + "&#10;&#10;" + GetLocStringByKeyExt("panel_mods_message_3");
+		terms = terms + "&#10;&#10;" + GetLocStringByKeyExt("panel_mods_message_4");
+		
+		if(theGame.GetPlatform() == Platform_PS5)
+			terms = terms + "&#10;&#10;" + GetLocStringByKeyExt("panel_mods_message_5_trophies");
+		else if(theGame.GetPlatform() == Platform_Xbox_SCARLETT_LOCKHART || theGame.GetPlatform() == Platform_Xbox_SCARLETT_ANACONDA || theGame.GetPlatform() == Platform_PC_GDK)
+			terms = terms + "&#10;&#10;" + GetLocStringByKeyExt("panel_mods_message_5");
+		
+		title = GetLocStringByKeyExt("panel_mod_menu");
+		
+		termsData = new W3ModTermsPopupData in this;
+		
+		termsData.SetMessageText(terms);
+		termsData.SetMessageTitle(title);
+		
+		termsData.AddCheckBoxText(GetLocStringByKeyExt("panel_mods_checkbox_modio_terms"));
+		termsData.AddCheckBoxText(GetLocStringByKeyExt("panel_mods_checkbox_modio_pp"));
+		termsData.AddCheckBoxText(GetLocStringByKeyExt("panel_mods_checkbox_red_eula"));
+		
+		termsData.AddUrlLink(GetLocStringByKeyExt("panel_mods_link_modio_pp"), MLT_ModioPrivacy);
+		termsData.AddUrlLink(GetLocStringByKeyExt("panel_mods_link_modio_tos"), MLT_ModioTerms);
+		termsData.AddUrlLink(GetLocStringByKeyExt("panel_mods_link_cdpr_ua"), MLT_CDPREula);
+		termsData.AddUrlLink(GetLocStringByKeyExt("panel_mods_link_cdpr_pp"), MLT_CDPRPrivacy);
+		termsData.AddUrlLink(GetLocStringByKeyExt("panel_mods_link_cdpr_cg"), MLT_CDPRFanContent);
+		
+		termsData.SetMenuRef(this);
+		RequestSubMenu('PopupMenu', termsData);
+		LogChannel('MODIO', "Opening Modio Terms Popup");
+	}
+	
+	public function OnModTermsAccepted():void
+	{
+		m_igmStateMachine.OnModTermsAccepted();
+	}
+	
+	event  OnCloudOffRequest()
+	{
+		ShowStartupLoginPage(false);
 	}
 	
 	public function DeleteSave(type : ESaveGameType, saveListIndex : int, isSaveMode:bool)
@@ -2572,7 +4054,7 @@ class CR4IngameMenu extends CR4MenuBase
 	{
 		var l_DataFlashArray : CScriptedFlashArray;
 	
-		if (theGame.GetPlatform() == Platform_PC)
+		if (theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK)
 		{
 			m_fxSetHardwareCursorOn.InvokeSelfOneArg(FlashArgBool(mInGameConfigWrapper.GetVarValue('Rendering', 'HardwareCursor')));
 		}
@@ -2613,10 +4095,28 @@ class CR4IngameMenu extends CR4MenuBase
 			progress = theGame.ProgressToContentAvailable('launch0');
 			theSound.SoundEvent("gui_global_denied");
 			theGame.GetGuiManager().ShowProgressDialog(0, "", "error_message_new_game_not_ready", true, UDB_Ok, progress, UMPT_Content, 'launch0');
+			return;
 		}
+		
+		if ((optionsArray & IGMC_EP2_Save) == IGMC_EP2_Save && !theGame.IsContentAvailable('content12'))
+		{
+			progress = theGame.ProgressToContentAvailable('content12');
+			theSound.SoundEvent("gui_global_denied");
+			theGame.GetGuiManager().ShowProgressDialog(0, "", "error_message_new_game_not_ready", true, UDB_Ok, progress, UMPT_Content, 'content12');
+		}
+		else if ((optionsArray & IGMC_EP1_Save) == IGMC_EP1_Save && !theGame.IsContentAvailable('content12'))
+		{
+			progress = theGame.ProgressToContentAvailable('content12');
+			theSound.SoundEvent("gui_global_denied");
+			theGame.GetGuiManager().ShowProgressDialog(0, "", "error_message_new_game_not_ready", true, UDB_Ok, progress, UMPT_Content, 'content12');
+		}
+
 		else
 		{
 			fetchNewGameConfigFromTag(optionsArray);
+			TutorialMessagesEnable(currentNewGameConfig.tutorialsOn);
+			if (currentNewGameConfig.bardsBalladOn)
+				updateAccessibilityPresetValues(AP_BardsTale, false);
 			
 			if ((optionsArray & IGMC_EP2_Save) == IGMC_EP2_Save)
 			{
@@ -2632,6 +4132,7 @@ class CR4IngameMenu extends CR4MenuBase
 				theGame.EnableUberMovement( true );
 				((CInGameConfigWrapper)theGame.GetInGameConfigWrapper()).SetVarValue( 'Gameplay', 'EnableUberMovement', 1 );
 			}
+
 			else
 			{
 				if (hasValidAutosaveData())
@@ -2665,6 +4166,9 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		maskResult = optionsTag & IGMC_Tutorials_On;
 		currentNewGameConfig.tutorialsOn = (maskResult == IGMC_Tutorials_On);
+
+		maskResult = optionsTag & IGMC_BardsBallad_On;
+		currentNewGameConfig.bardsBalladOn = (maskResult == IGMC_BardsBallad_On);
 		
 		maskResult = optionsTag & IGMC_Import_Save;
 		if (maskResult != IGMC_Import_Save)
@@ -2693,6 +4197,8 @@ class CR4IngameMenu extends CR4MenuBase
 		theGame.SetDifficultyLevel(currentNewGameConfig.difficulty);
 		
 		TutorialMessagesEnable(currentNewGameConfig.tutorialsOn);
+		if (currentNewGameConfig.bardsBalladOn)
+			updateAccessibilityPresetValues(AP_BardsTale, false);
 		
 		StartNewGame();
 	}
@@ -2805,6 +4311,8 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		isShowingSaveList = true;
 		m_flashValueStorage.SetFlashArray( "ingamemenu.importSlots", dataFlashArray );
+		
+		m_flashValueStorage.SetFlashString("mainmenu.saves.tooltip", GetPlatformedSaveTooltipText());
 	}
 	
 	protected function hasValidAutosaveData() : bool
@@ -2853,6 +4361,7 @@ class CR4IngameMenu extends CR4MenuBase
 	
 	public function QRCodeReady(UrlAdres : String):void
 	{
+		LogChannel('JIFIX', "QR Code ready to load: " + UrlAdres);
 		m_fxQRCodeReadyToLoad.InvokeSelfOneArg(FlashArgString(UrlAdres));	
 	}
 
@@ -2912,6 +4421,15 @@ class CR4IngameMenu extends CR4MenuBase
 		}
 	}
 	
+	public function GetPlatformedSaveTooltipText():string
+	{
+		if(theGame.GetPlatform() == Platform_PS5)
+			return GetLocStringByKeyExt("mods_enabled") + " " + GetLocStringByKeyExt("mods_enabled_trophies");
+		else if(theGame.GetPlatform() == Platform_Xbox_SCARLETT_LOCKHART || theGame.GetPlatform() == Platform_Xbox_SCARLETT_ANACONDA || theGame.GetPlatform() == Platform_PC_GDK)
+			return GetLocStringByKeyExt("mods_enabled") + " " + GetLocStringByKeyExt("mods_enabled_achievements");
+		return GetLocStringByKeyExt("mods_enabled");
+	}
+	
 	protected function SendLoadData():void
 	{
 		var l_DataFlashObject : CScriptedFlashObject;
@@ -2936,6 +4454,7 @@ class CR4IngameMenu extends CR4MenuBase
 		{
 			isShowingLoadList = true;
 			m_flashValueStorage.SetFlashArray( "ingamemenu.loadSlots", dataFlashArray );
+			m_flashValueStorage.SetFlashString("mainmenu.saves.tooltip", GetPlatformedSaveTooltipText());
 		}
 	}
 	
@@ -2960,6 +4479,7 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		isShowingSaveList = true;
 		m_flashValueStorage.SetFlashArray( "ingamemenu.saveSlots", dataFlashArray );
+		m_flashValueStorage.SetFlashString("mainmenu.saves.tooltip", GetPlatformedSaveTooltipText());
 		
 		if ( theGame.ShouldShowSaveCompatibilityWarning() )
 		{
@@ -3013,15 +4533,20 @@ class CR4IngameMenu extends CR4MenuBase
 		{
 			targetSaveInfo = saveGames[saveIndex];
 			
+			m_lastRequestedSaveInfo = targetSaveInfo;
 			theGame.RequestScreenshotData(targetSaveInfo);
 		}
 	}
 	
 	event  OnCheckScreenshotDataReady():void
 	{
+		var moddedSave : bool;
+	
 		if (theGame.IsScreenshotDataReady())
 		{
 			m_fxOnSaveScreenshotRdy.InvokeSelf();
+			moddedSave = theGame.GetModHandlerSystem().IsModdedSave(m_lastRequestedSaveInfo);
+			m_fxOnSetModioBorderVis.InvokeSelfOneArg( FlashArgBool(moddedSave) );
 		}
 	}
 	
@@ -3378,6 +4903,550 @@ class CR4IngameMenu extends CR4MenuBase
 		isDeveloperModeEnabled = !isDeveloperModeEnabled;
 		ShowDeveloperMode( isDeveloperModeEnabled );
 	}
+	
+	public function ChangeShowModioIndicator(value:bool):void
+	{
+		m_fxShowModioLoadIndicator.InvokeSelfOneArg(FlashArgBool(value));
+	}
+	
+	public function SetModdedTooltipText():void
+	{
+		var moddedText : string;
+		
+		if (theGame.GetModHandlerSystem().HasUninstalledMods())
+		{
+			moddedText = GetLocStringByKeyExt("mods_mod_uninstalled");
+		}
+		else
+		{
+			moddedText = GetLocStringByKeyExt("mods_enabled");
+			if(theGame.GetPlatform() == Platform_Xbox_SCARLETT_ANACONDA || theGame.GetPlatform() == Platform_Xbox_SCARLETT_LOCKHART || theGame.GetPlatform() == Platform_PC_GDK)
+				moddedText += " " + GetLocStringByKeyExt("mods_enabled_achievements");
+			else if(theGame.GetPlatform() == Platform_PS5)
+				moddedText += " " + GetLocStringByKeyExt("mods_enabled_trophies");
+		}
+
+		m_flashValueStorage.SetFlashString("mod.tooltip.text", moddedText);
+	}
+	
+	event  OnRequestMediaLogo( modid:string, resolution:string )
+	{
+		var data : SModImageLoadData;
+	
+		if(!cachedVerifData || !cachedVerifData.FindModIdFromString(modid, data.m_modid))
+			return false;
+		data.m_resolution = resolution;
+		data.m_type = "logo";
+		
+		if(!m_modVerificationStateMachine)
+		{
+			m_modVerificationStateMachine = new CR4ModVerificationStates in this;
+			m_modVerificationStateMachine.SetRefIngameMenu(this);
+		}
+		
+		m_modVerificationStateMachine.AddImageToList(data);
+	}
+	
+	public function HandleImageLoad( data: SModImageLoadData, path:string)
+	{
+		var modidStr : string;
+		modidStr = theGame.GetModHandlerSystem().ConvertModIDToString(data.m_modid);
+	
+		if(data.m_type != "gallery")
+			m_fxHandleImageLoaded.InvokeSelfFourArgs( FlashArgString(modidStr),FlashArgString(data.m_resolution), FlashArgString(data.m_type), FlashArgString(path));
+		else	
+			m_fxHandleImageLoaded.InvokeSelfFiveArgs( FlashArgString(modidStr),FlashArgString(data.m_resolution), FlashArgString(data.m_type), FlashArgString(path), FlashArgString(data.m_galleryIndex));
+	}
+	
+	event  OnVerificationCheckboxClicked( modid:string, value:bool)
+	{
+		if (cachedVerifData)
+		{
+			cachedVerifData.HandleModEnabledChange(modid, value);
+		}
+	}
+	
+	event  OnSetCheckboxesClicked(index:int, value : bool)
+	{		
+		if(cachedMarketingData)
+			cachedMarketingData.OnCheckboxValueChanged(index, value);
+	}
+	
+	event  OnInputHandled(NavCode:string, KeyCode:int, ActionId:int)
+	{
+		if (cachedMarketingData && cachedMarketingData.valid)
+		{
+			cachedMarketingData.OnUserFeedback(NavCode);
+		}
+		else if(cachedVerifData && cachedVerifData.valid)
+		{
+			cachedVerifData.OnUserFeedback(NavCode);
+		}
+	}
+	
+	public function OnPopupContinueConfirmed():void
+	{
+		LoadLastSave(false);
+	}
+	
+	event  OnLicenseAgreementAccepted():void
+	{
+		theGame.GetInGameConfigWrapper().SetVarValue('Hidden', 'Eula410WasAccepted', "true");
+		theGame.SaveUserSettings();
+	}
+	
+	event  OnLicenseAgreementDeclined():void
+	{
+		
+	}
+	
+	public function CallModVerificationPopup():void
+	{
+		prepareBigMessageMods();
+	}
+
+	public function CallModFailedPopup():void
+	{
+		prepareBigMessageFailedMods();
+	}
+	
+	
+	
+	public function CallMarketingPopup( optional checkedConsentChoices : int ) : void
+	{
+		StartShowCustomDialogMarketing( checkedConsentChoices );
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public function OnManagementEvent( modidScr : SModioModID, modState : EModState )
+	{
+		LogChannel('MODS', "OnManagementEvent was called ");
+	}
+
+	public function OnModioNetworkError()
+	{
+		LogChannel('MODS', "OnModioNetworkError was called ");
+		showNotification(GetLocStringByKeyExt("error_modio_connection"));
+	}
+
+	public function OnModioLocalModsUpdated()
+	{
+		LogChannel('MODS', "OnModioLocalModsUpdated was called ");
+	}
+	
+	public function OnCDPRAccountLoggedIn()
+	{
+		LogChannel('MODS', "OnCDPRAccountLoggedIn was called ");
+		if(m_shouldOpenModMenuOnLogin)
+			OpenModMenu();
+	}
+	
+	public function RequestLinkLoad(link : ETermsLinkType)
+	{
+		m_igmStateMachine.OnOpenLink(link);
+	}
+	
+
+	
+	private function DefineSwitchFeatureMenuItem(itemName:name, itemLabel:string, itemDesc:string, optional parentMenuItem:name, optional menuState:name) : void
+	{
+		var newMenuItem 	: SMenuTab;
+
+		newMenuItem.MenuName = itemName;
+		newMenuItem.MenuLabel = itemLabel;
+		newMenuItem.MenuDesc = itemDesc;
+		newMenuItem.Enabled = true;
+		newMenuItem.Visible = true;
+		newMenuItem.MenuState = menuState;
+		
+		newMenuItem.ParentMenu = parentMenuItem;
+		m_menuData.PushBack(newMenuItem);
+	}
+	
+	private function SetupSwitchFeatureMenu() : void
+	{
+		var l_flashSubArray   : CScriptedFlashArray;
+		
+		l_flashSubArray = m_flashValueStorage.CreateTempFlashArray();
+		GetSwitchFeatureMenuStruct(l_flashSubArray);
+		
+		m_flashValueStorage.SetFlashArray( "panel.switch.setup", l_flashSubArray);
+	}
+	
+	private function GetSwitchFeatureMenuStruct(out StructGFx : CScriptedFlashArray) : void
+	{
+		var i				  : int;
+		var l_flashObject     : CScriptedFlashObject;
+		var CurDataItem : SMenuTab;
+		
+		for ( i = 0; i < m_menuData.Size(); i += 1 )
+		{
+			CurDataItem = m_menuData[i];
+			
+			if (CurDataItem.ParentMenu == '')
+			{
+				l_flashObject = m_flashValueStorage.CreateTempFlashObject();
+				GetSwitchFeatureMenuItem(CurDataItem, l_flashObject);
+				
+				StructGFx.PushBackFlashObject(l_flashObject);
+			}
+		}
+	}
+
+	private function GetSwitchFeatureMenuItem(MenuItemData:SMenuTab, out GFxObjectData:CScriptedFlashObject):void
+	{
+		GFxObjectData.SetMemberFlashUInt("id", NameToFlashUInt(MenuItemData.MenuName));
+		GFxObjectData.SetMemberFlashString("name", NameToString(MenuItemData.MenuName)); 
+		GFxObjectData.SetMemberFlashString("icon", NameToString(MenuItemData.MenuName)); 
+		GFxObjectData.SetMemberFlashString("label", GetLocStringByKeyExt(MenuItemData.MenuLabel));
+		GFxObjectData.SetMemberFlashString("tabDesc", GetLocStringByKeyExt(MenuItemData.MenuDesc));
+		GFxObjectData.SetMemberFlashString("tabNewDesc", "Nothing New");
+		GFxObjectData.SetMemberFlashBool("visible", MenuItemData.Visible);
+		GFxObjectData.SetMemberFlashBool("enabled", MenuItemData.Enabled && !MenuItemData.Restricted);
+		GFxObjectData.SetMemberFlashString("state", MenuItemData.MenuState);
+	}
+
+	private function UpdateGameLogo():void
+	{
+		var audioLanguageName 	: string;
+		var tempLanguageName 	: string;
+		theGame.GetGameLanguageName(audioLanguageName,tempLanguageName);
+		if( tempLanguageName != languageName )
+		{
+			languageName = tempLanguageName;
+			if( languageName == "ZH")
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString("ZHT") );			
+			else if( languageName == "CN")
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString("ZHS") );
+			else if( languageName == "EN" || languageName == "CZ" || languageName == "PL" || languageName == "RU" || languageName == "UA" )
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString(languageName) );
+			else 
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString("REST") );
+		}
+	}
+	
+	private function UpdateBardsBalladTooltipText()
+	{
+		var inGameConfigWrapper	: CInGameConfigWrapper;
+		var value : string;
+	
+		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+
+		value = inGameConfigWrapper.GetVarValue('Accessibility', 'AccessibilityPreset');
+
+		if(value == "0")
+			m_fxUpdateBardsBalladText.InvokeSelfOneArg(FlashArgString(""));
+		else 
+			m_fxUpdateBardsBalladText.InvokeSelfOneArg(FlashArgString("[[accessibility_presets_bardsballad_desc]]"));
+	}
+	
+	public function ShowMyRewardsPanel( out unlockedIds : array< int > ) : void
+	{
+		var flashUnlockedIds : CScriptedFlashArray;
+		var i : int;
+		var len : int;
+		var currentId : int;
+		
+		flashUnlockedIds = m_flashValueStorage.CreateTempFlashArray();
+		
+		len = unlockedIds.Size();
+		for ( i = 0; i < len; i+=1 )
+		{
+			currentId = unlockedIds[ i ];
+			flashUnlockedIds.PushBackFlashInt( currentId );
+		}
+		
+		m_flashValueStorage.SetFlashArray( "ingamemenu.myrewardspanel", flashUnlockedIds );
+		
+		UpdateUserPanelData();
+	}
+	
+	event  OnUserPanelInit()
+	{
+		UpdateUserPanelData();
+	}
+	
+	public function UpdateUserPanelData() : void
+	{
+		var cloudPersona : string;
+		var userName : string;
+		var userNameIcon : int;
+		
+		cloudPersona = theGame.GetGuiManager().GetNamePersona();
+		userName = FixStringForFont(theGame.GetActiveUserDisplayName());
+		
+		userNameIcon = -1;
+		
+		SendUserPanelData( cloudPersona, userNameIcon, userName );
+	}
+	
+	public function SendUserPanelData( cloudPersona : string, userNameIcon : int, userName : string ) : void
+	{
+		var data : CScriptedFlashObject;
+		
+		data = m_flashValueStorage.CreateTempFlashObject();
+
+		data.SetMemberFlashString( "cloudPersona", cloudPersona );
+		data.SetMemberFlashString( "userName", userName );
+		data.SetMemberFlashInt( "userNameIcon", userNameIcon );
+		
+		m_flashValueStorage.SetFlashObject( "userpanel.accountData", data );
+	}
+	
+	public function ShowStartupLoginPage( shouldOpenMods : bool ) : void
+	{
+		var currentMenu : CR4Menu;
+		var initData : W3StartupMenuInitData;
+	
+		m_shouldOpenModMenuOnLogin = shouldOpenMods;
+		
+		currentMenu = theGame.GetGuiManager().GetRootMenu();
+		CloseMenu();
+		
+		initData = new W3StartupMenuInitData in theGame.GetGuiManager();
+		
+		initData.requestPage = SPI_Connect;
+		initData.reopenMenu = true;
+		initData.reopenMenuName = currentMenu.GetMenuName();
+		
+		theGame.RequestMenu( 'StartupExperienceMenu', initData );
+	}
+	
+	event  OnRedAccountButtonActivated()
+	{
+		var isSignedIn : bool;
+		var rewarr : array< int >;
+		
+		isSignedIn = theGame.IsGalaxyUserSignedIn();
+		
+		
+		if (!isSignedIn) 
+		{
+			ShowStartupLoginPage(false);
+		}
+		else
+		{
+			theGame.GetGuiManager().GetGalaxyRewardsList( rewarr );
+			if ( rewarr.Size() != 0 ) 
+			{				
+				ShowMyRewardsPanel( rewarr );
+			}
+			else
+			{
+				Log("No rewards, did you login?");
+			}
+		}
+	}
+	
+	private function ShowTelemetryDataRequestPopup():void
+	{
+		var qrBufferId : string;
+		var description : string;
+		var url : string;
+	
+		qrBufferId = "telemetrydatarequest.qrcode";
+		description = "[[panel_telemetry_scan]]";
+		url = "[[panel_telemetry_view_page]]";
+		
+		m_fxShowTelemetryDataRequestPopup.InvokeSelfThreeArgs( FlashArgString(qrBufferId), FlashArgString(description), FlashArgString(url) );
+	}
+	
+	event  OnTelemetryDataRequestPopupLinkClicked()
+	{
+		theGame.GetGuiManager().GalaxyOpenTelemetryTakeoutLink();
+	}
+}
+
+exec function mm_test_myrewards():void
+{
+	var rewarr : array< int >;
+	var rootMenu : CR4Menu;
+	var ingameMenu : CR4IngameMenu;
+	
+	var cloudPersona : string;
+	var userName : string;
+	var userNameIcon : int;
+	
+	rootMenu = theGame.GetGuiManager().GetRootMenu();
+	if ( rootMenu )
+	{
+		theGame.GetGuiManager().GetGalaxyRewardsList( rewarr );
+		if ( rewarr.Size() == 0) {
+			Log("No rewards, did you login?");
+			return;
+		}
+
+		ingameMenu = (CR4IngameMenu)rootMenu.GetSubMenu();
+		if ( ingameMenu )
+		{
+		
+			rewarr.PushBack(13);
+			rewarr.PushBack(14);
+			rewarr.PushBack(15);
+			rewarr.PushBack(16);
+			rewarr.PushBack(17);
+			rewarr.PushBack(18);
+			rewarr.PushBack(19);
+			rewarr.PushBack(20);
+			rewarr.PushBack(21);
+
+			ingameMenu.ShowMyRewardsPanel( rewarr );
+			
+			cloudPersona = "Geralt_Of_Rivia_99#7420";
+			userName = "Blaviken_Butcher";
+			userNameIcon = 2;
+			ingameMenu.SendUserPanelData( cloudPersona, userNameIcon, userName );
+			
+			return;
+		}
+	}
+
+	Log("Ingame/Main menu must be open");
+}
+
+exec function mm_test_usernamepanel():void
+{
+	var rootMenu : CR4Menu;
+	var ingameMenu : CR4IngameMenu;
+	
+	var cloudPersona : string;
+	var userName : string;
+	var userNameIcon : int;
+	
+	rootMenu = theGame.GetGuiManager().GetRootMenu();
+	if ( rootMenu )
+	{
+		ingameMenu = (CR4IngameMenu)rootMenu.GetSubMenu();
+		if ( ingameMenu )
+		{
+			cloudPersona = "Geralt_Of_Rivia_99#7420";
+			userName = "Blaviken_Butcher";
+			userNameIcon = 2;
+			ingameMenu.SendUserPanelData( cloudPersona, userNameIcon, userName );
+			
+			return;
+		}
+	}
+
+	Log("Ingame/Main menu must be open");
+}
+
+exec function mm_test_usernamepanel2( cloudPersona : string, platform : int, userName : string ):void
+{
+	var rootMenu : CR4Menu;
+	var ingameMenu : CR4IngameMenu;
+	
+	rootMenu = theGame.GetGuiManager().GetRootMenu();
+	if ( rootMenu )
+	{
+		ingameMenu = (CR4IngameMenu)rootMenu.GetSubMenu();
+		if ( ingameMenu )
+		{
+			ingameMenu.SendUserPanelData( cloudPersona, platform, userName );
+			return;
+		}
+	}
+
+	Log("Ingame/Main menu must be open");
+}
+
+
+
+exec function modterms():void
+{
+	var rootMenu : CR4Menu;
+	var ingameMenu : CR4IngameMenu;
+	rootMenu = theGame.GetGuiManager().GetRootMenu();
+	if ( rootMenu )
+	{
+		ingameMenu = (CR4IngameMenu)rootMenu.GetSubMenu();
+		if ( ingameMenu )
+		{
+			ingameMenu.OpenModTermsPopup();
+			return;
+		}
+	}
+
+	Log("Ingame/Main menu most be open");
+}
+
+exec function modverif():void
+{
+	var rootMenu : CR4Menu;
+	var ingameMenu : CR4IngameMenu;
+	rootMenu = theGame.GetGuiManager().GetRootMenu();
+	if ( rootMenu )
+	{
+		ingameMenu = (CR4IngameMenu)rootMenu.GetSubMenu();
+		if ( ingameMenu )
+		{
+			ingameMenu.CallModVerificationPopup();
+			return;
+		}
+	}
+
+	Log("Ingame/Main menu most be open");
+}
+
+exec function modfailed():void
+{
+	var rootMenu : CR4Menu;
+	var ingameMenu : CR4IngameMenu;
+	rootMenu = theGame.GetGuiManager().GetRootMenu();
+	if ( rootMenu )
+	{
+		ingameMenu = (CR4IngameMenu)rootMenu.GetSubMenu();
+		if ( ingameMenu )
+		{
+			ingameMenu.CallModFailedPopup();
+			return;
+		}
+	}
+
+	Log("Ingame/Main menu most be open");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exec function redreminder():void
+{
+	var rootMenu : CR4Menu;
+	var ingameMenu : CR4IngameMenu;
+	rootMenu = theGame.GetGuiManager().GetRootMenu();
+	if ( rootMenu )
+	{
+		ingameMenu = (CR4IngameMenu)rootMenu.GetSubMenu();
+		if ( ingameMenu )
+		{
+			ingameMenu.StartShowCustomDialogGalaxySignInReminder();
+			return;
+		}
+	}
+
+	Log("Ingame/Main menu most be open");
 }
 
 exec function ddd()

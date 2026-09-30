@@ -296,6 +296,8 @@ class CAIDrownerDefaults extends CAIMonsterDefaults
 };
 
 
+
+
 class CAIDrownerUnderwaterDefaults extends CAIDrownerDefaults
 {
 	default ignoreReachability = true;
@@ -675,6 +677,8 @@ class CAIBlackSpiderEP2Defaults extends CAIMonsterDefaults
 		deathTree.params.disableCollisionDelay	= 0;
 	}
 };
+
+
 
 
 class CAIArachasDefaults extends CAIMonsterDefaults
@@ -1076,6 +1080,8 @@ class CAIBoarEP2Defaults extends CAIMonsterDefaults
 };
 
 
+
+
 class CAIPantherDefaults extends CAIMonsterDefaults
 {
 	function Init()
@@ -1254,6 +1260,8 @@ class CAIBansheeDefaults extends CAIMonsterDefaults
 
 
 
+
+
 class CAIMonsterAxii extends CAIAxiiTree
 {
 	default aiTreeName = "resdef:ai\monster_baseaxii";
@@ -1350,6 +1358,8 @@ class CAICowardMonsterTauntParams extends CAIMonsterTauntParams
 	
 	default moveBackDistance 	 = 13;
 };
+
+
 
 
 
@@ -1532,6 +1542,8 @@ class CAISharleyCombatLogicParams extends CAIMonsterCombatLogicParams
 };
 
 
+
+
 class CAIFlyingMonsterCombatLogic extends CAIMonsterCombatLogic
 {
 };
@@ -1667,6 +1679,7 @@ class CAIDrownerCombatLogic extends CAIMonsterCombatLogic
 		params.OnCreated();
 	}
 };
+
 
 
 class CAIGhoulCombatLogic extends CAIMonsterCombatLogic
@@ -1983,6 +1996,8 @@ class CAIBlackSpiderEP2CombatLogic extends CAIMonsterCombatLogic
 };
 
 
+
+
 class CAIArachasCombatLogicParams extends CAIMonsterCombatLogicParams
 {
 	editable var minChargeDist : float;
@@ -2020,6 +2035,8 @@ class CAIBlackSpiderEP2CombatLogicParams extends CAIMonsterCombatLogicParams
 		maxChargeDist = 8.0;
 	}
 };
+
+
 
 
 class CAIArachasDEBUGLogic extends CAIMonsterCombatLogic
@@ -2161,7 +2178,6 @@ class CAIWitch2CombatLogic extends CAIMonsterCombatLogic
 
 
 
-
 class CAIWitchSoloCombatLogic extends CAIMonsterCombatLogic
 {
 	default aiTreeName = "resdef:ai\monsters/monster_witch_solo_logic";
@@ -2233,6 +2249,7 @@ class CAIBoarEP2CombatLogic extends CAIMonsterCombatLogic
 
 
 
+
 class CAIPantherCombatLogic extends CAIMonsterCombatLogic
 {
 	default aiTreeName = "dlc\bob\data\gameplay\trees\monster_panther_logic.w2behtree";
@@ -2255,7 +2272,6 @@ class CAIKikimoreCombatLogic extends CAIMonsterCombatLogic
 		params.OnCreated();
 	}
 };
-
 
 
 class CAIToadCombatLogic extends CAIMonsterCombatLogic
@@ -2370,6 +2386,8 @@ class CAIDettlaffTornadoLogic extends CAIMonsterCombatLogic
 
 
 
+
+
 class CAIMonsterSimpleDamageReactionTree extends CAISubTree
 {
 	default aiTreeName = "resdef:ai\monster_simple_damage_reaction";
@@ -2435,6 +2453,8 @@ class CAIMonsterSpawnParams extends CAISubTreeParameters
 };
 
 
+
+
 class CAIMonsterSpawnDefault extends CAIMonsterSpawn
 {
 	default aiTreeName = "resdef:ai\monster_spawn_default";
@@ -2494,6 +2514,8 @@ class CAIMonsterSpawnLessog extends CAIMonsterSpawn
 		params.OnCreated();
 	}
 };
+
+
 
 
 

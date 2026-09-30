@@ -28,6 +28,20 @@ struct SQuestCameraRequest
 	hint lookAtTag = "Tag of an object that the camera should look at (overrides the yaw and pitch)";
 }
 
+struct SQuestCameraPositionOffsetRequest
+{
+	editable var active 			: bool;
+	editable var distance			: float;
+	editable var requestDistance	: bool;
+	editable var zOffset			: float;
+	editable var lookAtOffset		: Vector;
+	editable var lerpTime			: float;
+	editable var cachedZ			: float;
+	editable var cachedLookAt		: Vector;
+	editable var cachedDistance		: float;
+	editable var restore			: bool;
+}
+
 import struct SCustomCameraPreset
 {
 	import var pressetName 	: name;
@@ -91,6 +105,14 @@ import class CCustomCamera extends CEntity
 
 	import final function SetCollisionOffset( offset : Vector );
 	
+	import final function SetNoclip( enable : bool );
+
+	import final function GetCameraWorldPosition() : Vector;
+	import final function GetCameraWorldRotation() : EulerAngles;
+	import final function GetCameraWorldOffset() : Vector;
+	import final function SetCameraWorldPosition( pos : Vector );
+	import final function SetCameraWorldRotation( rot : EulerAngles );
+	import final function UpdateWithoutInput( force : bool );
 	
 	function ResetCollisionOffset()
 	{
@@ -102,6 +124,11 @@ import class CCustomCamera extends CEntity
 	function SetFov( val : float )
 	{
 		fov = val;
+	}
+
+	function GetFov() : float
+	{
+		return fov;
 	}
 	
 	

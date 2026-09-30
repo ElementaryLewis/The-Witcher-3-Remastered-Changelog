@@ -9,10 +9,11 @@ import class W3Container extends W3LockableEntity
 																			
 	editable 			var skipInventoryPanel		: bool;					
 	editable saved		var focusModeHighlight		: EFocusModeVisibility;
+
 	editable			var factOnContainerOpened	: string;
+
 						var usedByCiri				: bool;
 	editable			var allowToInjectBalanceItems : bool;
-					default allowToInjectBalanceItems = false;					
 	editable			var disableLooting			: bool;
 	
 	editable			var disableStealing			: bool;
@@ -21,7 +22,7 @@ import class W3Container extends W3LockableEntity
 	protected saved 	var checkedForBonusMoney	: bool;					
 	
 	private	saved		var	usedByClueStash 		: EntityHandle;
-	private 			var disableFocusHighlightControl : bool;		
+	private 			var disableFocusHighlightControl : bool;			
 					default disableFocusHighlightControl = false;
 
 	protected optional autobind 	inv							: CInventoryComponent = single;
@@ -30,15 +31,16 @@ import class W3Container extends W3LockableEntity
 	private const var QUEST_HIGHLIGHT_FX : name;							
 	private saved var spoonCollectorTested : bool;
 
-	hint skipInventoryPanel = "If set then the inventory panel will not be shown upon looting";
 	hint isDynamic = "set to true if you want to destroy container when empty";
+	hint skipInventoryPanel = "If set then the inventory panel will not be shown upon looting";
 	hint focusModeHighlight = "FMV_Interactive: White, FMV_Clue: Red";
 	
-	default skipInventoryPanel = false;	
-	default usedByCiri = false;	
+	default skipInventoryPanel = false;
 	default focusModeHighlight = FMV_Interactive;
-	default QUEST_HIGHLIGHT_FX = 'quest_highlight_fx';
+	default usedByCiri = false;
+	default allowToInjectBalanceItems = false;
 	default disableLooting = false;
+	default QUEST_HIGHLIGHT_FX = 'quest_highlight_fx';
 	
 	import function SetIsQuestContainer( isQuest : bool );
 	
@@ -136,6 +138,8 @@ import class W3Container extends W3LockableEntity
 	
 	event OnInteractionActivated( interactionComponentName : string, activator : CEntity )
 	{
+		super.OnInteractionActivated(interactionComponentName, activator);
+
 		UpdateContainer();
 		RebalanceItems();
 		RemoveUnwantedItems();
@@ -145,7 +149,6 @@ import class W3Container extends W3LockableEntity
 			return false;
 		}
 		
-		super.OnInteractionActivated(interactionComponentName, activator);
 		if(activator == thePlayer)
 		{
 			if ( inv && !disableLooting)
@@ -257,7 +260,7 @@ import class W3Container extends W3LockableEntity
 		}
 		
 		
-		if ( !theGame.IsActive() || ( inv && !disableLooting && isEnabled && !inv.IsEmpty( SKIP_NO_DROP_NO_SHOW ) ) )
+		if (!theGame.IsActive() || (inv && !disableLooting && (isEnabled && !inv.IsEmpty(SKIP_NO_DROP_NO_SHOW) || alwaysEnabled)))
 		{
 			if( !disableFocusHighlightControl )
 			{
@@ -319,7 +322,7 @@ import class W3Container extends W3LockableEntity
 			}
 			else
 			{
-				lootInteractionComponent.SetEnabled( inv && !inv.IsEmpty( SKIP_NO_DROP_NO_SHOW ) ) ; 
+				lootInteractionComponent.SetEnabled( inv && (!inv.IsEmpty(SKIP_NO_DROP_NO_SHOW) || alwaysEnabled) ) ; 
 			}
 		}
 		
@@ -558,18 +561,45 @@ import class W3Container extends W3LockableEntity
 	
 	function ProcessLoot()
 	{
+		var l_mergedContainerEntities 		: array<CGameplayEntity>;
+		var l_containerIndex				: int;
+		var l_autoCorpseLoot				: bool;
+
 		if(disableLooting)
 			return;
+
+		
+
+		l_autoCorpseLoot = theGame.GetInGameConfigWrapper().GetVarValue('Accessibility', 'AutoLoot') && (W3ActorRemains)(this) && !HasTag('lootbag');
 			
-		if(skipInventoryPanel || usedByCiri || ((W3Herb)this) ) 
+		if(skipInventoryPanel || usedByCiri || ((W3Herb)this) || l_autoCorpseLoot) 
 		{
 			
 			if( !thePlayer.IsAnyWeaponHeld() && !thePlayer.IsHoldingItemInLHand() )
 				thePlayer.RaiseEvent('LootHerb');
 			
 
-			TakeAllItems();
-			OnContainerClosed();			
+			
+			if (l_autoCorpseLoot && theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'LootMergeEnabled'))
+			{
+				FindGameplayEntitiesInRange(l_mergedContainerEntities, this, 15.0f, 100, '', 0, NULL, 'W3ActorRemains');
+				for	( l_containerIndex = 0 ; l_containerIndex < l_mergedContainerEntities.Size(); l_containerIndex += 1 )
+				{
+					
+					if( !l_mergedContainerEntities[l_containerIndex] || l_mergedContainerEntities[l_containerIndex].HasTag('lootbag') )
+					{
+						continue;
+					}
+
+					((W3Container)l_mergedContainerEntities[l_containerIndex]).TakeAllItems();
+					((W3Container)l_mergedContainerEntities[l_containerIndex]).OnContainerClosed();
+				}
+			}
+			else
+			{
+				TakeAllItems();
+				OnContainerClosed();			
+			}
 		}
 		else
 		{
@@ -957,14 +987,15 @@ import class W3Container extends W3LockableEntity
 		
 	}
 	
-	public function IsEmpty() : bool				{ return !inv || inv.IsEmpty( SKIP_NO_DROP_NO_SHOW ); }
+	public function IsEmpty() : bool				{ return !inv || inv.IsEmpty(SKIP_NO_DROP_NO_SHOW); }
 	
 	public function Enable(e : bool, optional skipInteractionUpdate : bool, optional questForcedEnable : bool)
 	{
-		if( !(e && questForcedEnable) )
+		isEnabled = e || alwaysEnabled;
+		if( !(isEnabled && questForcedEnable) )
 		{
 			
-			if(e && IsEmpty() )
+			if(isEnabled && IsEmpty() )
 			{
 				return;
 			}
@@ -974,7 +1005,7 @@ import class W3Container extends W3LockableEntity
 			}
 		}
 		
-		super.Enable(e, skipInteractionUpdate);
+		super.Enable(isEnabled, skipInteractionUpdate, questForcedEnable);
 	}
 	
 	
@@ -989,7 +1020,7 @@ import class W3Container extends W3LockableEntity
 	
 	protected function DisableIfEmpty() : bool
 	{
-		if(IsEmpty())
+		if(IsEmpty() && !alwaysEnabled)
 		{
 			if( !disableFocusHighlightControl )
 			{

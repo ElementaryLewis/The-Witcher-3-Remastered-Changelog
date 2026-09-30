@@ -18,6 +18,8 @@ import abstract class CActor extends CGameplayEntity
 	protected			var bCanPerformCounter			: bool;
 	private				var lastParryType				: EParryType;
 	private 			var	useAdditiveHits				: bool;
+	private 			var	useAdditiveStunHits			: bool;
+	private 			var	useAdditionalAdditiveStunHits : bool;
 	private				var oneTimeAdditiveHit			: bool;
 	private				var useAdditiveCriticalStateAnim: bool;
 	private 			var criticalCancelAdditiveHit	: bool;
@@ -88,6 +90,8 @@ import abstract class CActor extends CGameplayEntity
 	saved var abilityManager : W3AbilityManager;		
 	
 	private var effectsUpdateTicking : bool;		default effectsUpdateTicking = false;
+
+	private var bRagdollPaused : bool;
 	
 	public function GetIgnoreImmortalDodge() : bool
 	{
@@ -334,10 +338,10 @@ import abstract class CActor extends CGameplayEntity
 		immortalityFlags = immortalityFlagsCopy;
 	}
 	
-	public function GetImmortalityModeChannels( mode : EActorImmortalityMode) : array< EActorImmortalityChanel >
+	public function GetImmortalityModeChannels( mode : EActorImmortalityMode) : array< EActorImmortalityChannel >
 	{
 		var numImmortalityChannels : int;
-		var result : array< EActorImmortalityChanel >;
+		var result : array< EActorImmortalityChannel >;
 		var i : int;
 		var modeOffset : int;
 		var mask : int;
@@ -386,8 +390,29 @@ import abstract class CActor extends CGameplayEntity
 		
 		return result;
 	}
+
+	public function IsImmortalityModeSetByChannel( mode : EActorImmortalityMode, channel : EActorImmortalityChannel ) : bool
+	{
+		var channelInt : int;
+		var _shift8, _shift16 : int;
+		var modeOffset : int;
+
+		if (mode == AIM_None)
+			return false;
+		
+		channelInt = channel;
+		
+		_shift8 = 256; 			
+		_shift16 = 65536;		
+
+		modeOffset =
+			(mode == AIM_Invulnerable) ? _shift16 :
+			(mode == AIM_Immortal) ? _shift8 : 1;
+
+		return immortalityFlags & (modeOffset * channelInt);
+	}
 	
-	public function SetImmortalityMode( mode : EActorImmortalityMode, channel : EActorImmortalityChanel, optional lockMode : bool )			
+	public function SetImmortalityMode( mode : EActorImmortalityMode, channel : EActorImmortalityChannel, optional lockMode : bool )			
 	{
 		var oldMode : EActorImmortalityMode;
 		var channelInt : int;
@@ -458,6 +483,7 @@ import abstract class CActor extends CGameplayEntity
 	{
 		return traverser;
 	}
+
 	timer function UpdateTraverser( time : float , id : int)
 	{
 		if( traverser )
@@ -465,6 +491,7 @@ import abstract class CActor extends CGameplayEntity
 			traverser.Update( time );
 		}
 	}
+
 	
 	
 	event OnStartTraversingExploration( t : CScriptedExplorationTraverser )
@@ -754,6 +781,8 @@ import abstract class CActor extends CGameplayEntity
 	
 	import final function ActionMoveToWithHeadingAsync( target : Vector, heading : float, optional moveType : EMoveType, optional absSpeed : float, optional radius : float, optional failureAction : EMoveFailureAction ) : bool;	
 	
+	import final function ActionMoveToChangeTargetAsync( target : Vector, moveType : EMoveType, absSpeed : float, range : float ) : bool;	
+
 	
 	import final latent function ActionMoveToDynamicNode( target : CNode, moveType : EMoveType, absSpeed : float, range : float, optional keepDistance : bool, optional failureAction : EMoveFailureAction ) : bool;	
 	
@@ -820,6 +849,7 @@ import abstract class CActor extends CGameplayEntity
 	
 	
 	
+	import final function ActionTraverseExploration( exploration : SExplorationQueryToken, optional listener : IScriptable, optional steeringGraphTargetNode : CNode ) : bool;
 	import final latent function ActionExploration( exploration : SExplorationQueryToken, optional listener : IScriptable, optional steeringGraphTargetNode : CNode ) : bool;
 	
 	import final latent function ActionAnimatedSlideToStatic( settings : SAnimatedSlideSettings, target : Vector, heading : float, translation : bool, rotation : bool ) : bool;
@@ -989,6 +1019,10 @@ import abstract class CActor extends CGameplayEntity
 	import final function EnablePhysicalMovement( enable : bool ) : bool;
 	
 	import final function EnableStaticCollisions( enable : bool ) : bool;
+
+	import final function SetShouldFilterObstacles( enable : bool ) : bool;
+
+	import final function SetShouldFilterAutoJumpObstacles( enable : bool ) : bool;
 	
 	import final function EnableDynamicCollisions( enable : bool ) : bool;
 	
@@ -1322,7 +1356,7 @@ import abstract class CActor extends CGameplayEntity
 	
 	import final function IsSpeaking( optional stringId : int ) : bool;
 
-	import final function PlayMimicAnimationAsync( animation : name ) : bool;
+	import final function PlayMimicAnimationAsync( animation : name, optional blendTime : float, optional offset : float ) : bool;
 	
 	final latent function WaitForEndOfSpeach()
 	{
@@ -1614,8 +1648,10 @@ import abstract class CActor extends CGameplayEntity
 			return cachedIsHuman > 0;
 		
 		theGame.GetMonsterParamsForActor(this, monsterCategory, temp2, temp3, canBeTargeted, temp4);
-		
+
+
 		if ( monsterCategory == MC_Human )
+
 			cachedIsHuman = 1;
 		else
 			cachedIsHuman = 0;
@@ -1643,7 +1679,7 @@ import abstract class CActor extends CGameplayEntity
 		if ( cachedIsMan != -1 )
 			return cachedIsMan > 0;
 			
-		if ( GetMovingAgentComponent().GetName() == "man_base" )
+		if ( GetMovingAgentComponent().GetName() == "man_base" || GetMovingAgentComponent().GetName() == "dwarf_base" )
 			cachedIsMan = 1;
 		else
 			cachedIsMan = 0;
@@ -1662,8 +1698,9 @@ import abstract class CActor extends CGameplayEntity
 			return cachedIsMonster > 0;
 		
 		theGame.GetMonsterParamsForActor(this, monsterCategory, temp2, temp3, canBeTargeted, temp4);
-		
+
 		if ( MonsterCategoryIsMonster( monsterCategory ) )
+
 			cachedIsMonster = 1;
 		else
 			cachedIsMonster = 0;
@@ -1784,6 +1821,9 @@ import abstract class CActor extends CGameplayEntity
 	
 	
 	import function ResetLookAtMode( mode : ELookAtMode );
+	
+	
+	import function IsImportantCharacter() : bool;
 	
 	
 
@@ -2029,10 +2069,34 @@ import abstract class CActor extends CGameplayEntity
 		AddTimer('EnableHitAnim', time, false, ,  ,true, true);
 	}
 	
+	final function EnableAdditiveHitsFor( time : float )
+	{
+		useAdditiveStunHits = true;
+		this.SetUseAdditiveHit( true, false );
+		AddTimer('DisableAdditiveHits', time, false, ,  ,true, true);
+	}
+	
 	public final function UseAdditiveHit( ) : bool
 	{
 		return useAdditiveHits;
 	}
+	
+	public final function UseAdditiveStunHit( ) : bool
+	{
+		return useAdditiveStunHits;
+	}
+	
+	public final function UseAdditionalAdditiveStunHit( ) : bool
+	{
+		return useAdditionalAdditiveStunHits;
+	}
+	
+	public final function SetUseAdditionalAdditiveStunHit( _Flag : bool)
+	{
+		useAdditionalAdditiveStunHits = _Flag;
+	}
+	
+	
 	public final function SetUseAdditiveHit( _Flag : bool, optional _CriticalCancelAdditiveHit : bool, optional _OneTimeActivation : bool )
 	{
 		if ( _OneTimeActivation )
@@ -2049,10 +2113,25 @@ import abstract class CActor extends CGameplayEntity
 	{
 		useAdditiveCriticalStateAnim = flag;
 	}
+	
+	function SetDontPlayAdditiveHitAnim()
+	{
+		RemoveTimer('DisableAdditiveHits');
+		if(useAdditiveHits)
+		{
+			if(!useAdditionalAdditiveStunHits)
+			{
+				this.SetUseAdditiveHit( false, false );
+			}
+		}
+		useAdditiveStunHits = false;
+	}
+	
 	function SetCanPlayHitAnim( flag : bool )
 	{
 		RemoveTimer('EnableHitAnim');
 		canPlayHitAnim = flag;
+		
 	}
 	final function CanPlayHitAnim() : bool
 	{
@@ -2194,8 +2273,10 @@ import abstract class CActor extends CGameplayEntity
 	
 	public function HasStaminaToUseAction( action : EStaminaActionType, optional abilityName : name, optional dt :float, optional multiplier : float ) : bool
 	{
-		var ret : bool;
-		var cost : float;
+		var cost, delay, avoidanceMult			: float;
+		var signSkillAvoidanceLevel				: int;
+		var ret, signSkillAvoidanceActive		: bool;
+		var minAvoidance, maxAvoidance 			: SAbilityAttributeValue;
 		
 		ret = false;
 	
@@ -2214,11 +2295,64 @@ import abstract class CActor extends CGameplayEntity
 	
 	public function GetStaminaActionCost(action : EStaminaActionType, optional abilityName : name, optional dt :float) : float
 	{
-		var cost, delay : float;
+		var cost, delay, avoidanceMult 			: float;
+		var signSkillAvoidanceLevel				: int;
+		var signSkillAvoidanceActive			: bool;
+		var minAvoidance, maxAvoidance 			: SAbilityAttributeValue;
 	
 		if(abilityManager && abilityManager.IsInitialized() && IsAlive())
 		{
+			
+			avoidanceMult = 1;
+			signSkillAvoidanceLevel = thePlayer.GetSkillLevel( S_Magic_s39 );
+			signSkillAvoidanceActive = signSkillAvoidanceLevel >= 1 && thePlayer.HasBuff( EET_Avoidance ) && thePlayer.CanUseSkill(S_Magic_s39);
+			if (signSkillAvoidanceActive)
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue('magic_s39', 'stamina_cost_reduction', minAvoidance, maxAvoidance);
+				avoidanceMult = 1 - ( minAvoidance.valueMultiplicative * signSkillAvoidanceLevel );
+			}
+
 			abilityManager.GetStaminaActionCost(action, cost, delay, 0, 0, abilityName, dt);
+			cost *= avoidanceMult;
+			
+			return cost;
+		}
+		
+		return -1;
+	}
+
+	
+	public function GetStaminaActionCostForNormalSign(action : EStaminaActionType, signType : ESignType, optional dt :float) : float
+	{
+		var cost, delay, avoidanceMult 			: float;
+		var signSkillAvoidanceLevel				: int;
+		var signSkillAvoidanceActive			: bool;
+		var minAvoidance, maxAvoidance 			: SAbilityAttributeValue;
+	
+		if(abilityManager && abilityManager.IsInitialized() && IsAlive())
+		{
+			
+			avoidanceMult = 1;
+			signSkillAvoidanceLevel = thePlayer.GetSkillLevel( S_Magic_s39 );
+			signSkillAvoidanceActive = signSkillAvoidanceLevel >= 1 && thePlayer.HasBuff( EET_Avoidance ) && thePlayer.CanUseSkill(S_Magic_s39);
+			if (signSkillAvoidanceActive)
+			{
+				theGame.GetDefinitionsManager().GetAbilityAttributeValue('magic_s39', 'stamina_cost_reduction', minAvoidance, maxAvoidance);
+				avoidanceMult = 1 - ( minAvoidance.valueMultiplicative * signSkillAvoidanceLevel );
+			}
+
+			switch (signType)
+			{
+				case ST_Aard: abilityManager.GetStaminaActionCost(action, cost, delay, 0, 0, 'magic_1', dt); break;
+				case ST_Igni: abilityManager.GetStaminaActionCost(action, cost, delay, 0, 0, 'magic_2', dt); break;
+				case ST_Yrden: abilityManager.GetStaminaActionCost(action, cost, delay, 0, 0, 'magic_3', dt); break;
+				case ST_Quen: abilityManager.GetStaminaActionCost(action, cost, delay, 0, 0, 'magic_4', dt); break;
+				case ST_Axii: abilityManager.GetStaminaActionCost(action, cost, delay, 0, 0, 'magic_5', dt); break;
+				default: abilityManager.GetStaminaActionCost(action, cost, delay, 0, 0, 'magic_1', dt); break;
+			}
+			
+			cost *= avoidanceMult;
+			
 			return cost;
 		}
 		
@@ -2633,6 +2767,7 @@ import abstract class CActor extends CGameplayEntity
 		var hitAnimationPlayType 	: EActionHitAnim;		
 		var animPlayed				: bool;			
 		var attackAction			: W3Action_Attack;
+		var actorAttacker : CActor;
 		var hud : CR4ScriptedHud;
 						
 		
@@ -2715,7 +2850,32 @@ import abstract class CActor extends CGameplayEntity
 			{
 				
 				
-				if( ( useAdditiveHits || oneTimeAdditiveHit ) && !( criticalCancelAdditiveHit && damageAction.IsCriticalHit() ))
+				actorAttacker = (CActor)damageAction.attacker;
+				SetBehaviorVariable( 'bParryHit', 0.0f);
+
+
+				if( actorAttacker.IsHeavyAttack(attackAction.GetAttackName() ) || HasAbility('PlayerPerfectParry') )
+
+				{
+					if ( hitAnimationPlayType == EAHA_ForceYes || (CanPlayHitAnim() && hitAnimationPlayType == EAHA_Default))
+					{
+						animType = ModifyHitSeverityReaction(this, damageAction.GetHitReactionType());
+						if(animType != EHRT_None)
+						{
+							if(HasAbility('PlayerPerfectParry'))
+							{
+								SetBehaviorVariable( 'bParryHit', 1.0f);
+								RemoveAbility('PlayerPerfectParry');
+							}
+							
+							AddAbility('IgnoreNextCounter');
+							
+							PlayHitAnimation(damageAction, animType);
+							animPlayed = true;
+						}
+					}
+				}
+				else if( ( useAdditiveHits || oneTimeAdditiveHit ) && !( criticalCancelAdditiveHit && damageAction.IsCriticalHit() ))
 				{
 					animType = ModifyHitSeverityReaction(this, damageAction.GetHitReactionType());
 					if(animType != EHRT_None)
@@ -2768,6 +2928,8 @@ import abstract class CActor extends CGameplayEntity
 		var playHitReactionSfx : bool;
 		var playHitReactionSfxOverrides : bool;
 		var npcVictim : CNewNPC;
+
+
 		
 		noHitSound = damageAction.SuppressHitSounds();
 		if( !IsAlive() && ( damageAction.IsDoTDamage() || theGame.IsDialogOrCutscenePlaying() ) )
@@ -3118,6 +3280,11 @@ import abstract class CActor extends CGameplayEntity
 		}
 	}
 	
+	function SetHitReactionBone( boneIndex : int )
+	{
+		this.SetBehaviorVariable( 'HitReactionBone', boneIndex );
+	}
+
 	function SetDetailedHitReaction(type : EAttackSwingType, dir : EAttackSwingDirection)
 	{
 		this.SetBehaviorVariable( 'HitSwingDirection',(int)dir);
@@ -4098,12 +4265,17 @@ import abstract class CActor extends CGameplayEntity
 	{
 		criticalStateCounter += 1;
 		totalCriticalStateCounter += 1;
-		AddTimer('ResetCriticalStateCounter',5.0,false);
+		
+
+			AddTimer('ResetCriticalStateCounter',5.0,false);
+
+		
 	}
 	
 	private timer function ResetCriticalStateCounter( deta : float , id : int)
 	{
 		criticalStateCounter = 0;
+
 	}
 
 	
@@ -4179,6 +4351,7 @@ import abstract class CActor extends CGameplayEntity
 		{			
 			
 			hax.PushBack(RR_0);
+			hax.PushBack(RR_5);
 			hax.PushBack(RR_30);
 			hax.PushBack(RR_60);
 			hax.PushBack(RR_90);
@@ -4243,6 +4416,7 @@ import abstract class CActor extends CGameplayEntity
 			case 'RotateEvent':
 			case 'RotateAwayEvent':
 				
+
 				rotationRate = GetRotationRateFromAnimEvent( variant.enumValue );
 				movementAdjustor = GetMovingAgentComponent().GetMovementAdjustor();
 				
@@ -4292,7 +4466,7 @@ import abstract class CActor extends CGameplayEntity
 					AddTimer( 'RestoreOriginalInteractionPriorityTimer', animEventDuration, false, , , true ) ;
 				}
 			break;
-			
+
 			case 'Dismemberment':
 				if ( animEventType == AET_DurationEnd )
 				{
@@ -4701,9 +4875,16 @@ import abstract class CActor extends CGameplayEntity
 	
 	public function TurnOnRagdoll()
 	{
-		SetBehaviorVariable( 'Ragdoll_Weight', 1.f );
-		RaiseEvent( 'Ragdoll' );
+		if (!bRagdollPaused)
+		{
+			SetBehaviorVariable( 'Ragdoll_Weight', 1.f );
+			RaiseEvent( 'Ragdoll' );
+		}
 	}
+
+	public function PauseRagdoll(toggle : bool) { bRagdollPaused = toggle; }
+	public function IsRagdollPaused() : bool { return bRagdollPaused; }
+
 	
 		
 	
@@ -5164,8 +5345,11 @@ import abstract class CActor extends CGameplayEntity
 			if((ShouldProcessTutorial('TutorialCounter') || ShouldProcessTutorial('TutorialDodge')) && GetTarget() == thePlayer && FactsQuerySum("tut_fight_use_slomo") > 0 && !thePlayer.IsCurrentlyDodging())
 			{
 				
-				if(theGame.GetTutorialSystem().AreMessagesEnabled())
+				if(theGame.GetTutorialSystem().AreMessagesEnabled() && FactsQuerySum("tut_fight_used_slomo_count") == 0)
+				{
+					FactsAdd("tut_fight_used_slomo_count");
 					theGame.SetTimeScale(0.001, theGame.GetTimescaleSource(ETS_TutorialFight), theGame.GetTimescalePriority(ETS_TutorialFight) );
+				}
 					
 				
 				FactsAdd("tut_fight_slomo_ON");
@@ -5466,6 +5650,7 @@ import abstract class CActor extends CGameplayEntity
 			{
 				attackAction.SetIsParried(true);
 				SignalGameplayEvent('AttackParried');
+				actor.SignalGameplayEvent('ParryingAttack');
 			}
 			else if(countered)
 			{
@@ -5711,6 +5896,19 @@ import abstract class CActor extends CGameplayEntity
 		}
 		
 		
+		if(damageData.IsActionMelee() && HasAbility( 'CannotBeAttackedFromFront' ) && IsAttackerInFront(damageData.attacker) )
+		{
+			if ( canLog )
+			{
+				LogDMHits("CActor.ReduceDamage: victim attacked from front and immune to this type of strike - no damage will be done", damageData );
+			}
+			damageData.SetAllProcessedDamageAs(0);
+			((CActor)damageData.attacker).ReactToReflectedAttack( this );
+			damageData.ClearEffects();
+			return;
+		}
+		
+		
 		if(damageData.IsActionMelee() && HasAbility( 'VulnerableFromFront' ) && !IsAttackerAtBack(damageData.attacker) )
 		{
 			if ( canLog )
@@ -5721,7 +5919,6 @@ import abstract class CActor extends CGameplayEntity
 			damageData.SetPointResistIgnored( true );
 			return;
 		}
-		
 		
 		
 		if( this.HasAbility( 'EredinInvulnerable' ) && damageData.IsActionWitcherSign() )
@@ -5933,48 +6130,6 @@ import abstract class CActor extends CGameplayEntity
 				}
 			}
 		}
-		
-		if(damageData.victim != thePlayer)
-		{
-			
-			if(!damageData.GetIgnoreImmortalityMode())
-			{
-				if(!((W3PlayerWitcher)this))
-					Log("");
-				
-				
-				if( IsInvulnerable() )
-				{
-					if ( canLog )
-					{
-						LogDMHits("CActor.ReduceDamage: victim Invulnerable - no damage will be dealt", damageData );
-					}
-					damageData.SetAllProcessedDamageAs(0);
-					return;
-				}
-				
-				if(actorAttacker && damageData.DealsAnyDamage() )
-					actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
-				
-				
-				if( IsImmortal() )
-				{
-					if ( canLog )
-					{
-						LogDMHits("CActor.ReduceDamage: victim is Immortal, clamping damage", damageData );
-					}
-					damageData.processedDmg.vitalityDamage = ClampF(damageData.processedDmg.vitalityDamage, 0, GetStat(BCS_Vitality)-1 );
-					damageData.processedDmg.essenceDamage  = ClampF(damageData.processedDmg.essenceDamage, 0, GetStat(BCS_Essence)-1 );
-					return;
-				}
-			}
-			else
-			{
-				
-				if(actorAttacker && damageData.DealsAnyDamage() )
-					actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', damageData );
-			}
-		}
 	}
 	
 	
@@ -6007,6 +6162,20 @@ import abstract class CActor extends CGameplayEntity
 		if( targetToSourceAngle > 90 )
 			return true;
 		
+		return false;
+	}
+	
+	function IsAttackerInFront(attacker : CNode) : bool
+	{
+		var targetToSourceAngle	: float;
+		
+		if(!attacker)
+			return false;
+		
+		targetToSourceAngle = AbsF( NodeToNodeAngleDistance(attacker, this) );		
+		if( targetToSourceAngle <= 90 )
+			return true;
+	
 		return false;
 	}
 	
@@ -6209,6 +6378,12 @@ import abstract class CActor extends CGameplayEntity
 	private timer function EnableHitAnim( time : float , id : int)
 	{
 		SetCanPlayHitAnim(true);
+	}
+	
+		
+	private timer function DisableAdditiveHits( time : float , id : int)
+	{
+		SetDontPlayAdditiveHitAnim();
 	}
 
 	public function SetUsedVehicle(ent : CGameplayEntity)
@@ -6997,6 +7172,11 @@ import abstract class CActor extends CGameplayEntity
 		}	
 		
 		hudModuleDoTScheduledUpdate = false;
+	}
+
+	public function GetCachedDoTDamage() : float
+	{
+		return cachedDoTDamage;
 	}
 	
 	public function ShowFloatingValue(type : EFloatingValueType, value : float, cache : bool, optional stringParam : string)

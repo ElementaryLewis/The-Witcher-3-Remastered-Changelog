@@ -497,4 +497,4 @@ class CEncounterStateRequest extends CScriptedEntityStateChangeRequest
 	}
 };
 
-function ForceCleanupAllEncounters();
+import function ForceCleanupAllEncounters();

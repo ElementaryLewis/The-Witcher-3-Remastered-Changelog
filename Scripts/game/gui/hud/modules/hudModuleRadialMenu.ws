@@ -3,6 +3,11 @@
 /** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
+class W3RadialMenuInitData extends W3MenuInitData
+{
+	
+}
+
 class CR4HudModuleRadialMenu extends CR4HudModuleBase
 {
 	private var m_flashValueStorage 			  : CScriptedFlashValueStorage;	
@@ -200,9 +205,9 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			if( _currentSelection != "" )
 			{
 				HideRadialMenu();
-				thePlayer.OnRadialMenuItemChoose(_currentSelection);
 				
-				EquipLastSelectedItem(); 
+				
+				EquipLastSelectedItem(true); 
 			}
 			else
 			{
@@ -212,6 +217,24 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 	}
 	
 	event  OnActivateSlot(slotName:string, isTabOrBumper:bool, swappingItems:bool) 
+	{
+		var outKeys : array< EInputKey >;
+		var player : W3PlayerWitcher;
+		player = GetWitcherPlayer();
+		
+		
+		if(isTabOrBumper)
+		{
+			if(!swappingItems)
+				EquipLastSelectedItem(true);
+		}
+		else
+			thePlayer.OnRadialMenuItemChoose(slotName);
+		
+		
+	}
+	
+	event  OnActivateSlotRanged(slotName:string, isTabOrBumper:bool, swappingItems:bool) 
 	{
 		var outKeys : array< EInputKey >;
 		var player : W3PlayerWitcher;
@@ -256,7 +279,7 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			{
 				witcher = GetWitcherPlayer();
 				
-				if(witcher.IsActionAllowed(EIAB_OpenMeditation))
+				if(witcher.CanOpenMeditationMenu())
 				{
 					HideRadialMenu();
 					ResetMeditationSavedData();
@@ -273,6 +296,12 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 						
 						return true;
 					}
+				}
+				else if ( witcher.CanReplenishWithoutMeditate() )
+				{
+					thePlayer.DisplayActionDisallowedHudMessage(EIAB_OpenMeditation, , , true );
+					HideRadialMenu();
+					witcher.MeditationRestoring( 0.f );
 				}
 				else
 				{
@@ -321,9 +350,13 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 	{
 		var camera : CCustomCamera;
 		var hud : CR4ScriptedHud;
+
+		var witcherPlayer : W3PlayerWitcher;
 		
 		if( !m_shown && !theGame.IsDialogOrCutscenePlaying())
 		{
+			witcherPlayer = GetWitcherPlayer();
+
 			
 			if(!thePlayer.IsActionAllowed(EIAB_OpenInventory) && !thePlayer.IsCiri())
 			{
@@ -335,7 +368,10 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			thePlayer.RestoreBlockedSlots();
 			
 			
-			theGame.CenterMouse();
+			if (theInput.IsMousePresent())
+			{
+				theGame.CenterMouse();
+			}
 			
 			theGame.ForceUIAnalog(true);
 			theInput.StoreContext( 'RadialMenu' );
@@ -352,7 +388,7 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			UpdateItemsIcons();
 			
 			theGame.SetTimeScale( 0.1, theGame.GetTimescaleSource(ETS_RadialMenu), theGame.GetTimescalePriority(ETS_RadialMenu), false, true);
-			GetWitcherPlayer().SetUITakeInput(true);
+			witcherPlayer.SetUITakeInput(true);
 
 			
 			camera = (CCustomCamera)theCamera.GetTopmostCameraObject();
@@ -367,7 +403,7 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			{
 				theGame.GetTutorialSystem().uiHandler.OnOpenedMenu('RadialMenu');
 			}
-			m_fxSetMeditationButtonEnabledSFF.InvokeSelfOneArg(FlashArgBool(GetWitcherPlayer().IsActionAllowed(EIAB_OpenMeditation)));
+			m_fxSetMeditationButtonEnabledSFF.InvokeSelfOneArg(FlashArgBool(witcherPlayer.CanOpenMeditationMenu() || witcherPlayer.CanReplenishWithoutMeditate()));
 			
 			
 			
@@ -391,7 +427,7 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			
 			ToggleRadialMenuInItemsModule(true);
 			if(!thePlayer.IsCiri())
-				selectedSign = GetWitcherPlayer().GetEquippedSign();
+				selectedSign = witcherPlayer.GetEquippedSign();
 		}
 	}
 	
@@ -747,6 +783,7 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 				
 				itemDataObject.SetMemberFlashString( "name", itemName );
 				itemDataObject.SetMemberFlashString( "description", itemDescription );
+				itemDataObject.SetMemberFlashString( "category", itemCategory );
 				itemDataObject.SetMemberFlashString( "itemIconPath", itemIconPath );
 				itemDataObject.SetMemberFlashBool( "isEquipped", currentItem  == equippedItem  );
 				itemDataObject.SetMemberFlashInt( "charges", chargesCount );
@@ -816,6 +853,30 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 	}
 	
 	
+	event OnOnlyQuickslotEquip( boltItemId : SItemUniqueId )
+	{
+		var inv : CInventoryComponent;
+		var category : name;
+		inv = GetWitcherPlayer().GetInventory();
+		
+		if(!inv.IsIdValid(boltItemId))
+		{
+			
+			GetWitcherPlayer().SelectQuickslotItem( EES_RangedWeapon );
+			return false;
+		}
+		
+		category = inv.GetItemCategory(boltItemId);
+		
+		if(category == 'petard')
+			GetWitcherPlayer().SelectQuickslotItem( EES_Petard1 );
+		else if(category == 'usable')
+			GetWitcherPlayer().SelectQuickslotItem( EES_Quickslot1 );
+		else if(category == 'bolt')
+			GetWitcherPlayer().SelectQuickslotItem( EES_RangedWeapon );
+			
+	}
+	
 	event OnEquipBolt( boltItemId : SItemUniqueId )
 	{
 		var inv : CInventoryComponent;
@@ -879,6 +940,7 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			if ( inv.IsIdValid( equippedBolts ) && !inv.ItemHasTag( equippedBolts, theGame.params.TAG_INFINITE_AMMO ) )
 			{
 				GetWitcherPlayer().UnequipItemFromSlot( EES_Bolt, false );
+				thePlayer.inv.UpdateEquippedBolt();
 			}	
 			
 			UpdateItemsIcons(true);
@@ -886,6 +948,39 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 		else if( thePlayer.inv.IsIdValid( boltItemId ) )
 		{
 			GetWitcherPlayer().EquipItem( boltItemId, EES_Bolt);
+			thePlayer.inv.UpdateEquippedBolt();
+			thePlayer.SetUpdateQuickSlotItems(true);	
+			
+			UpdateItemsIcons(true);
+		}
+	}
+	
+	event OnEquipRanged( rangedItemId : SItemUniqueId )
+	{
+		var inv : CInventoryComponent;
+		var itemCategory   	: string;
+		var lastBoltId		: SItemUniqueId;
+
+		inv = GetWitcherPlayer().GetInventory();
+		lastItemCategory = '';
+
+		if( thePlayer.inv.IsIdValid( rangedItemId ) )
+		{
+			lastItemCategory = 'ranged';
+			itemCategory = inv.GetItemCategory( rangedItemId );
+			
+
+			
+			GetWitcherPlayer().EquipItem( rangedItemId, EES_RangedWeapon);
+			lastSelectedItem = rangedItemId;
+			
+			GetWitcherPlayer().SelectQuickslotItem( EES_RangedWeapon );
+			
+			if(itemCategory == "crossbow" && inv.GetLastEquippedBolt(lastBoltId))
+			{
+				OnEquipBolt(lastBoltId);
+			}
+			
 			thePlayer.SetUpdateQuickSlotItems(true);	
 			
 			UpdateItemsIcons(true);
@@ -897,11 +992,16 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 		var player 		    : W3PlayerWitcher;
 		var inv    		    : CInventoryComponent;
 		var boltsList	    : array<SItemUniqueId>;
+		var crossbowList	: array<SItemUniqueId>;
+
+		var rangedList		: array<SItemUniqueId>;
 		var currentBolt     : SItemUniqueId;
+		var currentRanged     : SItemUniqueId;
 		var equippedBolt    : SItemUniqueId;
 		var equippedItem    : SItemUniqueId;
 		var selectedItem    : SItemUniqueId;
 		var itemsList		: CScriptedFlashArray;
+		var itemsRangedList	: CScriptedFlashArray;
 		var itemDataObject  : CScriptedFlashObject;
 		var containerObject : CScriptedFlashObject;
 		
@@ -930,12 +1030,14 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 		selectedItem = GetWitcherPlayer().GetSelectedItemId();
 		
 		itemsList = m_flashValueStorage.CreateTempFlashArray();
+		itemsRangedList = m_flashValueStorage.CreateTempFlashArray();
 		containerObject = m_flashValueStorage.CreateTempFlashObject();
 		
 		
 		slotName = "Crossbow";
 		containerObject.SetMemberFlashInt( "slotId", radialSlotId );
 		containerObject.SetMemberFlashString( "slotName", slotName );
+		
 		
 		player.GetItemEquippedOnSlot( EES_RangedWeapon, equippedItem );
 		player.GetItemEquippedOnSlot( EES_Bolt, equippedBolt );
@@ -956,6 +1058,8 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			containerObject.SetMemberFlashString( "itemIconPath", itemIconPath );
 			containerObject.SetMemberFlashInt( "quality", itemQuality );
 			containerObject.SetMemberFlashBool( "isEquipped", selectedItem == equippedItem );
+
+
 			
 			lastItemDescription = itemDescription;
 			
@@ -964,20 +1068,28 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 			boltsList = inv.GetItemsByCategory('bolt');
 			count = boltsList.Size();
 			
+			crossbowList = inv.GetItemsByCategory('crossbow');
+
+			rangedList = crossbowList;
+
+			
 			
 			dm = theGame.GetDefinitionsManager();
-			itemName = GetLocStringByKeyExt( dm.GetItemLocalisationKeyName( infiniteBoltItemName ) );
-			itemDescription = GetLocStringByKeyExt( dm.GetItemLocalisationKeyDesc( infiniteBoltItemName ) );
-			itemIconPath = "img://" + dm.GetItemIconPath( infiniteBoltItemName );
-			inv.GetItemId( infiniteBoltItemName );
+
 
 			if ( StrLen( itemName ) )
 			{
-				itemDataObject = m_flashValueStorage.CreateTempFlashObject();
+				itemDescription = GetLocStringByKeyExt( inv.GetItemLocalizedDescriptionByUniqueID( equippedItem ) );
+				itemCategory = inv.GetItemCategory( equippedItem );
+				itemQuality = inv.GetItemQuality( equippedItem );
+				itemIconPath = inv.GetItemIconPathByUniqueID( equippedItem );
 				
+				itemDataObject = m_flashValueStorage.CreateTempFlashObject();
+			
 				itemDataObject.SetMemberFlashString( "name", itemName );
 				itemDataObject.SetMemberFlashString( "description", itemDescription );
 				itemDataObject.SetMemberFlashString( "itemIconPath", itemIconPath );
+				itemDataObject.SetMemberFlashString( "category", itemCategory);
 				itemDataObject.SetMemberFlashBool( "isEquipped", true );
 				itemDataObject.SetMemberFlashInt( "charges", -1 );
 				itemDataObject.SetMemberFlashInt( "id", 0 );
@@ -985,54 +1097,88 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 				itemsList.PushBackFlashObject( itemDataObject );
 			}
 
+
 			if ( !GetWitcherPlayer().ShouldUseInfiniteWaterBolts() )
+
 			{
 			
+				for ( i = 0; i < count; i += 1 )
+				{
+					currentBolt = boltsList[ i ];
+					
+					if ( inv.GetItemLevel( currentBolt ) <= playerLevel )
+					{
+						if ( inv.GetItemName( currentBolt ) == infiniteBoltItemName )
+						{
+							
+							continue;
+						}
+						itemDataObject = m_flashValueStorage.CreateTempFlashObject();
+						itemName = GetLocStringByKeyExt( inv.GetItemLocalizedNameByUniqueID( currentBolt ) );
+						itemDescription = GetLocStringByKeyExt( inv.GetItemLocalizedDescriptionByUniqueID( currentBolt ) );
+						itemCategory = inv.GetItemCategory( currentBolt );
+						itemQuality = inv.GetItemQuality( currentBolt );
+						itemIconPath = "img://" + inv.GetItemIconPathByUniqueID( currentBolt );
+						
+						if( inv.ItemHasTag( currentBolt, theGame.params.TAG_INFINITE_AMMO ) )
+						{
+							chargesCount = -1;
+						}
+						else
+						{
+							chargesCount = inv.GetItemQuantity( currentBolt );
+						}
+						
+						itemDataObject.SetMemberFlashString( "name", itemName );
+						itemDataObject.SetMemberFlashString( "description", itemDescription );
+						itemDataObject.SetMemberFlashString( "itemIconPath", itemIconPath );
+						itemDataObject.SetMemberFlashString( "category", itemCategory);
+						itemDataObject.SetMemberFlashBool( "isEquipped", currentBolt == equippedBolt );
+						itemDataObject.SetMemberFlashInt( "charges", chargesCount );
+						itemDataObject.SetMemberFlashInt( "id", ItemToFlashUInt( currentBolt ) );
+						
+						itemsList.PushBackFlashObject( itemDataObject );
+					}
+				}
+			
+			}
+			
+			
+			count = rangedList.Size();
 			for ( i = 0; i < count; i += 1 )
 			{
-				currentBolt = boltsList[ i ];
+				currentRanged = rangedList[ i ];
 				
-				if ( inv.GetItemLevel( currentBolt ) <= playerLevel )
+				if ( inv.GetItemLevel( currentRanged ) <= playerLevel )
 				{
-					if ( inv.GetItemName( currentBolt ) == infiniteBoltItemName )
-					{
-						
-						continue;
-					}
 					itemDataObject = m_flashValueStorage.CreateTempFlashObject();
-					itemName = GetLocStringByKeyExt( inv.GetItemLocalizedNameByUniqueID( currentBolt ) );
-					itemDescription = GetLocStringByKeyExt( inv.GetItemLocalizedDescriptionByUniqueID( currentBolt ) );
-					itemCategory = inv.GetItemCategory( currentBolt );
-					itemQuality = inv.GetItemQuality( currentBolt );
-					itemIconPath = "img://" + inv.GetItemIconPathByUniqueID( currentBolt );
-					
-					if( inv.ItemHasTag( currentBolt, theGame.params.TAG_INFINITE_AMMO ) )
-					{
-						chargesCount = -1;
-					}
-					else
-					{
-						chargesCount = inv.GetItemQuantity( currentBolt );
-					}
+					itemName = GetLocStringByKeyExt( inv.GetItemLocalizedNameByUniqueID( currentRanged ) );
+					itemDescription = GetLocStringByKeyExt( inv.GetItemLocalizedDescriptionByUniqueID( currentRanged ) );
+					itemCategory = inv.GetItemCategory( currentRanged );
+					itemQuality = inv.GetItemQuality( currentRanged );
+					itemIconPath = "img://" + inv.GetItemIconPathByUniqueID( currentRanged );
 					
 					itemDataObject.SetMemberFlashString( "name", itemName );
 					itemDataObject.SetMemberFlashString( "description", itemDescription );
 					itemDataObject.SetMemberFlashString( "itemIconPath", itemIconPath );
-					itemDataObject.SetMemberFlashBool( "isEquipped", currentBolt == equippedBolt );
-					itemDataObject.SetMemberFlashInt( "charges", chargesCount );
-					itemDataObject.SetMemberFlashInt( "id", ItemToFlashUInt( currentBolt ) );
-					
-					itemsList.PushBackFlashObject( itemDataObject );
+					itemDataObject.SetMemberFlashString( "category", itemCategory );
+					itemDataObject.SetMemberFlashBool( "isEquipped", currentRanged == equippedItem );
+					itemDataObject.SetMemberFlashInt( "charges", -1 );
+					itemDataObject.SetMemberFlashInt( "id", ItemToFlashUInt( currentRanged ) );
+
+					itemsRangedList.PushBackFlashObject( itemDataObject );
 				}
 			}
 			
-			}
+			
 			
 			containerObject.SetMemberFlashArray( "itemsList", itemsList );
+			containerObject.SetMemberFlashArray( "itemsRangedList", itemsRangedList );
 		}
 		else
 		{
 			containerObject.SetMemberFlashArray( "itemsList", itemsList );
+			containerObject.SetMemberFlashArray( "itemsRangedList", itemsRangedList );
 			containerObject.SetMemberFlashBool( "isEmpty", true );
 		}
 		

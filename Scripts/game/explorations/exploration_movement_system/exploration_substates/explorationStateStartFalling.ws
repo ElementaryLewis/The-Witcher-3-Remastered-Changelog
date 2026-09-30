@@ -76,6 +76,7 @@ class CExplorationStateStartFalling extends CExplorationStateAbstract
 		
 		
 		thePlayer.OnRangedForceHolster( true );
+
 		
 		
 		if( prevStateName == 'Idle' )
@@ -113,7 +114,7 @@ class CExplorationStateStartFalling extends CExplorationStateAbstract
 			m_ExplorationO.m_MoverO.SetManualMovement( true );
 		}
 	}
-	
+
 	
 	function StateChangePrecheck( )	: name
 	{

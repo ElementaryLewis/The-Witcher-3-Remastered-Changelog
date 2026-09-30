@@ -55,7 +55,9 @@ import class CMovementAdjustor extends CObject
 	import final function Continuous( ticket : SMovementAdjustmentRequestTicket );
 	
 	import final function DontEnd( ticket : SMovementAdjustmentRequestTicket );
-
+	
+	import final function PredictForDurationOnly( ticket : SMovementAdjustmentRequestTicket );
+	
 	
 	import final function BaseOnNode( ticket : SMovementAdjustmentRequestTicket, onNode : CNode );
 	

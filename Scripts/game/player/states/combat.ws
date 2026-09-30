@@ -127,8 +127,12 @@ state Combat in CR4Player extends ExtendedMovable
 		theTelemetry.LogWithName(TE_STATE_COMBAT);
 		
 		StatsInit();
+		
+
 	}
 	
+
+
 	function StatsInit()
 	{
 		realCombat = thePlayer.IsInCombat();
@@ -365,6 +369,11 @@ state Combat in CR4Player extends ExtendedMovable
 	
 	private var geraltCmbtV, geraltCmbtRightV, geraltCmbtSignV : Vector;
 	
+
+	
+	private var combatCameraDesiredDistance : float; default combatCameraDesiredDistance = 1.5f;
+	private var combatCameraZoomInRequestedTime : float; default combatCameraZoomInRequestedTime = -1;
+	
 	
 	event OnGameCameraPostTick( out moveData : SCameraMovementData, dt : float )
 	{
@@ -381,6 +390,24 @@ state Combat in CR4Player extends ExtendedMovable
 		var target : CActor;
 		var camera : CCustomCamera;
 		var hostileEnemies : array<CActor>;
+
+		
+		var i : int;
+		var now : float;
+		var isOnScreen : bool;
+		var canZoomIn : bool;
+		var shouldZoomOut : bool;
+
+		var zoomSpeed : float;
+
+		var possibleExtraDistance : float;
+		var camMaxDistPosition : Vector;
+
+		var headPos : Vector;
+		var targets : array<CActor>;
+		var height : float;
+		var boneId : int;
+		
 		
 		camera = theCamera.GetTopmostCamera();
 		
@@ -523,9 +550,9 @@ state Combat in CR4Player extends ExtendedMovable
 					if(thePlayer.IsHardLockEnabled())
 					{
 						if(right)
-							moveData.pivotRotationController.SetDesiredHeading( VecHeading(targetPos - pos) - 15, 0.5f );
+							moveData.pivotRotationController.SetDesiredHeading( VecHeading(targetPos - pos) - 15, parent.lockCameraSpeed );
 						else
-							moveData.pivotRotationController.SetDesiredHeading( VecHeading(targetPos - pos) + 15, 0.5f );	
+							moveData.pivotRotationController.SetDesiredHeading( VecHeading(targetPos - pos) + 15, parent.lockCameraSpeed );	
 					}
 					else
 					{
@@ -547,7 +574,7 @@ state Combat in CR4Player extends ExtendedMovable
 				if(target && !thePlayer.IsHardLockEnabled())	
 					moveData.pivotRotationController.SetDesiredPitch( ClampF( -12 + zDiff, -25, 5 ) );
 			}
-			else
+			else if ( !parent.isDynamicCombatCameraEnabled )
 			{
 				targetCapsuleHeight = ( (CMovingPhysicalAgentComponent)target.GetMovingAgentComponent() ).GetCapsuleHeight();
 				
@@ -595,7 +622,7 @@ state Combat in CR4Player extends ExtendedMovable
 			if(!thePlayer.IsCiri() && cachedDodging)
 			{		
 				
-				moveData.pivotDistanceController.SetDesiredDistance( 3.0f );	
+				moveData.pivotDistanceController.SetDesiredDistance( 3.0f );
 				moveData.pivotPositionController.SetDesiredPosition( pos, 25.f );
 				moveData.pivotPositionController.offsetZ = 1.15f;	
 	
@@ -627,7 +654,127 @@ state Combat in CR4Player extends ExtendedMovable
 					moveData.cameraLocalSpaceOffset = LerpV(moveData.cameraLocalSpaceOffset, geraltCmbtRightV + distanceAndHeightOffset, lerpAmount);
 				else
 					moveData.cameraLocalSpaceOffset = LerpV(moveData.cameraLocalSpaceOffset, geraltCmbtV + distanceAndHeightOffset, lerpAmount);
-				moveData.cameraLocalSpaceOffsetVel = Vector(0,0,0);	
+				moveData.cameraLocalSpaceOffsetVel = Vector(0,0,0);
+			}
+
+			
+			if ( parent.isDynamicCombatCameraEnabled )
+			{
+				
+				parent.GetVisibleEnemies( targets );
+				for ( i = 0; i < targets.Size(); i += 1 )
+				{
+					if ( VecDistance2D( targets[i].GetWorldPosition(), parent.GetWorldPosition() ) <= 5 )
+					{
+						AddRecentActorTarget( targets[i] );
+					}
+				}
+
+				if ( recentActorTargets.Size() )
+				{
+					possibleExtraDistance = moveData.pivotDistanceController.maxDist - moveData.pivotDistanceValue;
+					camMaxDistPosition = camPos - ( camera.GetWorldForward() * possibleExtraDistance );
+
+					now = theGame.GetEngineTimeAsSeconds();
+					canZoomIn = true;
+
+					for ( i = recentActorTargets.Size() - 1; i >= 0 ; i = i - 1 )
+					{
+						if ( !recentActorTargets[i].IsAlive() || now - 7.5 > recentActorTargetsTime[i] )
+						{
+							RemoveRecentActorTarget( i );
+							continue;
+						}
+
+						screenPos = Vector( 0, 0, 0 );
+						isOnScreen = theCamera.TestWorldVectorToViewRatio( recentActorTargets[i].GetWorldPosition(), screenPos.X, screenPos.Y, camMaxDistPosition, camera.GetWorldRotation() );
+						if ( !isOnScreen || AbsF( screenPos.X ) > 0.7f || AbsF( screenPos.Y ) > 0.8f )
+						{
+							continue;	
+						}
+
+						screenPos = Vector( 0, 0, 0 );
+						isOnScreen = theCamera.WorldVectorToViewRatio( recentActorTargets[i].GetWorldPosition(), screenPos.X, screenPos.Y ); 
+						if ( !isOnScreen || AbsF( screenPos.X ) > 0.8f || AbsF( screenPos.Y ) > 0.9f )
+						{
+							shouldZoomOut = true;
+							canZoomIn = false;
+						}
+						else if ( AbsF( screenPos.X ) > 0.7f || AbsF( screenPos.Y ) > 0.8f )
+						{
+							canZoomIn = false;
+						}
+
+						
+						pos = recentActorTargets[i].GetWorldPosition();
+						if ( recentActorTargetsHeadHeightCheckTime[i] + 0.2f < now )
+						{
+							targetCapsuleHeight = ( (CMovingPhysicalAgentComponent)recentActorTargets[i].GetMovingAgentComponent() ).GetCapsuleHeight();
+							boneId = recentActorTargets[i].GetHeadBoneIndex();
+
+							if ( boneId > 0 )
+							{
+								headPos = MatrixGetTranslation( target.GetBoneWorldMatrixByIndex( boneId ) );
+								height = headPos.Z + 0.5f - pos.Z;
+								if ( height > targetCapsuleHeight )
+								{
+									AddRecentActorTargetHeadHeight( i, height );
+									recentActorTargetsHeadHeightCheckTime[i] = now;
+								}
+							}
+						}
+
+						screenPos = Vector( 0, 0, 0 );
+
+						height = GetRecentActorTargetHeadHeightMedian( i );
+
+						if ( height > recentActorTargetsMaxHeight[i] )
+						{
+							recentActorTargetsMaxHeight[i] = height;
+						}
+
+						pos.Z += recentActorTargetsMaxHeight[i];
+
+						isOnScreen = theCamera.WorldVectorToViewRatio( pos, screenPos.X, screenPos.Y );
+						if ( !isOnScreen || AbsF( screenPos.X ) > 0.8f || AbsF( screenPos.Y ) > 0.9f )
+						{
+							shouldZoomOut = true;
+							canZoomIn = false;
+						}
+						else if ( AbsF( screenPos.X ) > 0.7f || AbsF( screenPos.Y ) > 0.8f )
+						{
+							canZoomIn = false;
+						}
+					}
+
+					if ( canZoomIn )
+					{
+						if ( combatCameraZoomInRequestedTime == -1 )
+							combatCameraZoomInRequestedTime = theGame.GetEngineTimeAsSeconds();
+						else if ( combatCameraZoomInRequestedTime + 3 < theGame.GetEngineTimeAsSeconds() )
+							combatCameraDesiredDistance = 1.5f;
+					}
+					else
+					{
+						combatCameraZoomInRequestedTime = -1;
+
+						if ( shouldZoomOut )
+							combatCameraDesiredDistance = 5.f;
+						else
+							combatCameraDesiredDistance = moveData.pivotDistanceValue;
+					}
+
+					if ( !parent.IsHardLockEnabled() && !parent.IsCameraLockedToTarget() )
+						moveData.pivotRotationController.SetDesiredHeading( moveData.pivotRotationValue.Yaw, 1.f );
+				}
+				else
+				{
+					combatCameraDesiredDistance = 1.5f;
+				}
+
+				zoomSpeed = 0.5f;
+				moveData.pivotDistanceController.SetDesiredDistance( combatCameraDesiredDistance, zoomSpeed );
+				
 			}
 		}
 		else
@@ -735,6 +882,17 @@ state Combat in CR4Player extends ExtendedMovable
 		{
 			return;
 		}
+		
+		
+		
+		
+		
+		
+		
+		if ( theGame.IsDialogOrCutscenePlaying() )
+		{
+			return;
+		}
 	
 		parent.findMoveTargetDistMin = 10.f;
 		moveTargetNPC = (CNewNPC)(parent.moveTarget);
@@ -806,8 +964,15 @@ state Combat in CR4Player extends ExtendedMovable
 		else if ( stance == PCS_Guarded )
 			stance = PCS_AlertFar;
 			
-		if ( !parent.IsThreatened() )	
-			stance = PCS_Normal;	
+		if( parent.IsQuestCombatHoldActive() ) 
+		{
+			stance = PCS_AlertNear;
+		}
+		else if( !parent.IsThreatened() )
+		{
+			stance = PCS_Normal;
+		}
+
 		
 		if( FactsQuerySum("force_stance_normal") > 0 )
 		{
@@ -1352,7 +1517,7 @@ state Combat in CR4Player extends ExtendedMovable
 		if( targetNPC )
 		{
 			
-			if( targetNPC.IsAttacking() && parent.CanUseSkill(S_Sword_s09) )
+			if( targetNPC.IsAttacking() && ( parent.CanUseSkill(S_Sword_s09) || parent.CanUseSkill(S_Sword_s36) ) )
 			{
 				return true;
 			}
@@ -2145,6 +2310,70 @@ state Combat in CR4Player extends ExtendedMovable
 		parent.RaiseEvent( 'AttackInterrupt' );
 	}	
 
+	
+	var recentActorTargets : array<CActor>;
+	var recentActorTargetsTime : array<float>;
+	var recentActorTargetsMaxHeight : array<float>;
+	var recentActorTargetsHeadHeights : array<array<float>>;
+	var recentActorTargetsHeadHeightCheckTime : array<float>;
+
+	function AddRecentActorTarget( actor : CActor )
+	{
+		var recentActorIndex : int;
+		var headHeights : array<float>;
+
+		recentActorIndex = recentActorTargets.FindFirst( actor );
+		if ( recentActorIndex == - 1 )
+		{
+			recentActorTargets.PushBack( actor );
+			recentActorTargetsTime.PushBack( theGame.GetEngineTimeAsSeconds() );
+			recentActorTargetsMaxHeight.PushBack( ( (CMovingPhysicalAgentComponent)actor.GetMovingAgentComponent() ).GetCapsuleHeight() );
+			recentActorTargetsHeadHeights.PushBack( headHeights );
+			recentActorTargetsHeadHeightCheckTime.PushBack( 0 );
+		}
+		else
+		{
+			recentActorTargetsTime[recentActorIndex] = theGame.GetEngineTimeAsSeconds();
+		}
+	}
+
+	function RemoveRecentActorTarget( index : int )
+	{
+		recentActorTargets.EraseFast( index );
+		recentActorTargetsTime.EraseFast( index );
+		recentActorTargetsMaxHeight.EraseFast( index );
+		recentActorTargetsHeadHeights.EraseFast( index );
+		recentActorTargetsHeadHeightCheckTime.EraseFast( index );
+	} 
+
+	function AddRecentActorTargetHeadHeight( actorIndex : int, height : float )
+	{
+		while ( recentActorTargetsHeadHeights[actorIndex].Size() >= 30 )
+		{
+			recentActorTargetsHeadHeights[actorIndex].PopBack();
+		}
+
+		recentActorTargetsHeadHeights[actorIndex].Insert(0, height);
+	}
+
+	function GetRecentActorTargetHeadHeightMedian( actorIndex : int ) : float
+	{
+		var copyArr : array<float>;
+		var i : int;
+		var medianIndex : int;
+
+		for ( i = 0; i < recentActorTargetsHeadHeights[actorIndex].Size(); i += 1)
+		{
+			copyArr.PushBack( recentActorTargetsHeadHeights[actorIndex][i] );
+		}
+
+		ArraySortFloats( copyArr );
+
+		medianIndex = (int)(copyArr.Size() / 2);
+
+		return copyArr[medianIndex];
+	}
+	
 
 	var wasInCloseCombat : bool;
 	
@@ -2165,6 +2394,41 @@ state Combat in CR4Player extends ExtendedMovable
 		var attackTarget 				: CGameplayEntity;
 		var playerToTargetVec			: Vector;
 		var attackTargetActor			: CActor; 
+
+		var boneId : int;
+		var bonePos : Vector;
+
+		var targetPos : Vector;		
+		
+		
+		var predictTime					: float = 0.2f;
+		
+		var maxCloseAttackDist			: float = 2.75f;
+		var maxCloseAttackWithSlideDist	: float = 3.75f;
+		var maxFarAttackDist			: float = 4.5f;
+		var maxFarAttackWithSlideDist	: float = 5.5f;
+		
+		var slideDistance				: float = 1.1f;
+
+		var debugForceCombatRange		: int;
+		var debugForceCombatSide		: int;
+		var debugForceCombatDirection	: int;
+
+		debugForceCombatRange = StringToInt( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'ForceCombatRange' ) );
+		debugForceCombatSide = StringToInt( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'ForceCombatSide' ) );
+		debugForceCombatDirection = StringToInt( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'ForceCombatDirection' ) );
+
+		if ( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'GapCloserUseNewAnimations' ) )
+		{
+			maxCloseAttackDist = 2.5f;
+			maxCloseAttackWithSlideDist = 3.25f;
+			maxFarAttackDist = 4.f;
+			maxFarAttackWithSlideDist = 5.f;
+		}
+
+		if ( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'UseNewGapClosers' ) )
+			predictTime = StringToFloat( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'GapCloserPredictTime' ) );
+		
 		
 		LogChannel( 'ComboNode', "inGlobalAttackCounter = " + callbackInfo.inGlobalAttackCounter + ", inStringAttackCounter = " + callbackInfo.inStringAttackCounter );	
 		
@@ -2215,7 +2479,7 @@ state Combat in CR4Player extends ExtendedMovable
 					parent.SetHitReactTransScale( 1.f );			
 			}
 		
-			playerToTargetDist = GetPlayerToTargetDistance( true, parent.GetHitReactTransScale(), 0.2f );
+			playerToTargetDist = GetPlayerToTargetDistance( true, parent.GetHitReactTransScale(), predictTime, true, boneId, bonePos );
 			
 			if ( !parent.GetBIsCombatActionAllowed() )
 			{
@@ -2223,22 +2487,38 @@ state Combat in CR4Player extends ExtendedMovable
 				{
 					parent.EnableFindTarget( true );
 					parent.SetSlideTarget( parent.GetTarget() );
-					playerToTargetDist = GetPlayerToTargetDistance( true, parent.GetHitReactTransScale(), 0.2f );	
+					playerToTargetDist = GetPlayerToTargetDistance( true, parent.GetHitReactTransScale(), predictTime, true, boneId, bonePos );	
 				}
 			}	
+
+			if ( boneId > 0 )
+			{
+				targetPos = bonePos;
+			}
+			else
+			{
+				targetPos = parent.slideTarget.GetWorldPosition();
+			}
 			
 			attackTargetActor = (CActor)parent.slideTarget;
 			attackTargetActor.IsAttacked( true );
+
+			AddRecentActorTarget( attackTargetActor );
 			
 			if ( parent.GetPlayerCombatStance() == PCS_AlertNear || parent.GetPlayerCombatStance() == PCS_Guarded )
-				callbackInfo.outRotateToEnemyAngle = VecHeading( parent.slideTarget.GetWorldPosition() - parent.GetWorldPosition() );
+				callbackInfo.outRotateToEnemyAngle = VecHeading( targetPos - parent.GetWorldPosition() );
 			else
 				callbackInfo.outRotateToEnemyAngle = parent.GetCombatActionHeading();
 			
 			if ( (CActor)parent.slideTarget )
-				callbackInfo.outSlideToPosition = ( (CActor)parent.slideTarget ).GetNearestPointInBothPersonalSpaces( parent.GetWorldPosition() );
+			{
+				if ( boneId > 0 )
+					callbackInfo.outSlideToPosition = targetPos;		
+				else
+					callbackInfo.outSlideToPosition = ( (CActor)parent.slideTarget ).GetNearestPointInBothPersonalSpaces( parent.GetWorldPosition() );
+			}
 			else
-				callbackInfo.outSlideToPosition = parent.slideTarget.GetWorldPosition();
+				callbackInfo.outSlideToPosition = targetPos;
 			
 			playerToTargetAngleDiff = AngleDistance( callbackInfo.outRotateToEnemyAngle, parent.GetHeading() );		
 			
@@ -2251,7 +2531,10 @@ state Combat in CR4Player extends ExtendedMovable
 			}
 			else
 			{
-				farAttackMinDist =  2.5f;
+				if ( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'UseNewGapClosers' ) )
+					farAttackMinDist = maxCloseAttackWithSlideDist;
+				else
+					farAttackMinDist = 2.5f;
 				mediumAttackMinDist = 1.f;
 			}
 			
@@ -2267,15 +2550,39 @@ state Combat in CR4Player extends ExtendedMovable
 				callbackInfo.outDistance = ADIST_Large;
 			else if ( playerToTargetDist > parent.softLockDist )
 				callbackInfo.outDistance = ADIST_Medium;
+			else if ( playerToTargetDist > maxFarAttackDist && theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'GapCloserUseNewAnimations' ) )
+				callbackInfo.outDistance = ADIST_ExtraLarge;
 			else if ( playerToTargetDist > farAttackMinDist )
 				callbackInfo.outDistance = ADIST_Large;
+			else if ( playerToTargetDist > maxCloseAttackDist && theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'GapCloserUseNewAnimations' ) )
+				callbackInfo.outDistance = ADIST_MediumLarge;
 			else if ( playerToTargetDist > mediumAttackMinDist )
 				callbackInfo.outDistance = ADIST_Medium;
 			else
-				callbackInfo.outDistance = ADIST_Medium;			
+				callbackInfo.outDistance = ADIST_Medium;
 				
 			if ( parent.slideTarget && (CActor)parent.slideTarget )
 			{
+				if ( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'UseNewGapClosers' ) )
+				{
+					
+					if ( maxCloseAttackDist < playerToTargetDist && playerToTargetDist < maxCloseAttackWithSlideDist )
+					{
+						if ( !theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'GapCloserUseNewAnimations' ) )
+							thePlayer.GetMovingAgentComponent().Slide(VecNormalize(targetPos - parent.GetWorldPosition()) * slideDistance, VecToRotation( targetPos - parent.GetWorldPosition() ), 2.5f);
+					}
+					else if ( maxFarAttackDist < playerToTargetDist && playerToTargetDist < maxFarAttackWithSlideDist )
+					{
+						if ( !theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'GapCloserUseNewAnimations' ) )
+							thePlayer.GetMovingAgentComponent().Slide(VecNormalize(targetPos - parent.GetWorldPosition()) * slideDistance, VecToRotation( targetPos - parent.GetWorldPosition() ), 2.5f);
+					}
+					
+					else if ( playerToTargetDist > maxFarAttackWithSlideDist )
+					{
+						callbackInfo.outDistance = ADIST_Medium;
+					}
+				}
+			
 				if ( ( (CActor)( parent.slideTarget ) ).IsCurrentlyDodging() )
 					callbackInfo.outDistance = ADIST_Medium;
 
@@ -2355,6 +2662,29 @@ state Combat in CR4Player extends ExtendedMovable
 			callbackInfo.outLeftString = false;
 		else
 			callbackInfo.outLeftString = true;
+
+		if ( debugForceCombatRange == 1 )
+			callbackInfo.outDistance = ADIST_Medium;
+		else if ( debugForceCombatRange == 2 )
+			callbackInfo.outDistance = ADIST_MediumLarge;
+		else if ( debugForceCombatRange == 3 )
+			callbackInfo.outDistance = ADIST_Large;
+		else if ( debugForceCombatRange == 4 )
+			callbackInfo.outDistance = ADIST_ExtraLarge;
+		
+		if ( debugForceCombatSide == 1 )
+			callbackInfo.outLeftString = true;
+		else if ( debugForceCombatSide == 2 )
+			callbackInfo.outLeftString = false;
+
+		if ( debugForceCombatDirection == 1 )
+			callbackInfo.outDirection = AD_Front;
+		else if ( debugForceCombatDirection == 2 )
+			callbackInfo.outDirection = AD_Back;
+		else if ( debugForceCombatDirection == 3 )
+			callbackInfo.outDirection = AD_Left;
+		else if ( debugForceCombatDirection == 4 )
+			callbackInfo.outDirection = AD_Right;
 		
 		if ( callbackInfo.inAspectName == 'AttackHeavy' )
 			parent.SetBehaviorVariable( 'playerAttackType', (int)PAT_Heavy );
@@ -2381,7 +2711,7 @@ state Combat in CR4Player extends ExtendedMovable
 		return maxAttackDist;
 	}
 	
-	private function GetPlayerToTargetDistance( getPredictedDistance : bool, translationScale : float,  optional customTime : float  ) : float
+	private function GetPlayerToTargetDistance( getPredictedDistance : bool, translationScale : float,  optional customTime : float, optional checkBones : bool, optional out boneIndex : int, optional out targetPos : Vector ) : float
 	{
 		var predictionTime					: float;
 		var targetCapsuleRadius				: float;
@@ -2394,19 +2724,42 @@ state Combat in CR4Player extends ExtendedMovable
 		var dist							: float;
 		var distPredict						: float;
 		var slideTargetNPC					: CNewNPC;
+
+		var slideTargetPos : Vector;
+		var targetPosOffset : Vector;
+		var actorTarget : CActor;
+		actorTarget = (CActor)(parent.slideTarget);
+
+		boneIndex = 0;
+
+		if ( checkBones && actorTarget )
+		{
+			parent.GetNearestTargetablePositionToPlayer( actorTarget, targetPos, boneIndex );
+		}
 		
-		if ( (CActor)(parent.slideTarget) )
-			targetCapsuleRadius = ((CMovingPhysicalAgentComponent)( (CActor)(parent.slideTarget) ).GetMovingAgentComponent()).GetCapsuleRadius();
+		if ( boneIndex > 0 )
+		{
+			slideTargetPos = targetPos;
+			targetPosOffset = slideTargetPos - parent.slideTarget.GetWorldPosition();
+		}
+		else
+		{
+			slideTargetPos = parent.slideTarget.GetWorldPosition();
+		}
+
+
+		if ( actorTarget )
+			targetCapsuleRadius = ((CMovingPhysicalAgentComponent)( actorTarget ).GetMovingAgentComponent()).GetCapsuleRadius();
 		
 		if ( customTime > 0.f )
 			predictionTime = customTime;
 		else 
 			predictionTime = 0.8f;
 			
-		if ( getPredictedDistance && ( (CActor)(parent.slideTarget) ) && !parent.slideTarget.IsRagdolled() )
+		if ( getPredictedDistance && ( actorTarget ) && !parent.slideTarget.IsRagdolled() )
 		{
 			currentPos = parent.slideTarget.GetWorldPosition();
-			predictedPos = ( (CActor)(parent.slideTarget) ).PredictWorldPosition( predictionTime );
+			predictedPos = ( actorTarget ).PredictWorldPosition( predictionTime );
 			scaledCurrToPredictedVector = ( predictedPos - currentPos ) * translationScale;
 			predictedPos = currentPos + scaledCurrToPredictedVector;
 			capsuleOffsetVec = targetCapsuleRadius * VecNormalize( parent.GetWorldPosition() - parent.slideTarget.GetWorldPosition() );
@@ -2415,7 +2768,9 @@ state Combat in CR4Player extends ExtendedMovable
 		else
 			nearestPoint = parent.slideTarget.GetWorldPosition() + targetCapsuleRadius * VecNormalize( parent.GetWorldPosition() - parent.slideTarget.GetWorldPosition() );
 
-		nearestPointNoPredict = parent.slideTarget.GetWorldPosition() + capsuleOffsetVec;
+		nearestPoint += targetPosOffset;
+
+		nearestPointNoPredict = parent.slideTarget.GetWorldPosition() + capsuleOffsetVec + targetPosOffset;
 		distPredict = VecDistance( parent.GetWorldPosition(), nearestPoint );
 		dist = VecDistance( parent.GetWorldPosition(), nearestPointNoPredict );
 		
@@ -2461,8 +2816,7 @@ state Combat in CR4Player extends ExtendedMovable
 		var targetNearestPoint : Vector;
 		var playerToTargetDist : float;
 		var playerRadius : float;
-		
-		var heading : float;
+		var boneIdx : int;
 		
 		if ( comboAttackA_Target )
 		{
@@ -2491,12 +2845,30 @@ state Combat in CR4Player extends ExtendedMovable
 			if ( updatePosition && comboAttackA_Id != -1 )
 			{
 				if ( (CActor)comboAttackA_Target )
-					targetNearestPoint = ( (CActor)comboAttackA_Target ).GetNearestPointInPersonalSpace( parent.GetWorldPosition() ) ;
-				else 
+				{
+					parent.GetNearestTargetablePositionToPlayer( (CActor)comboAttackA_Target, targetNearestPoint, boneIdx );
+
+					if ( boneIdx < 0 )
+					{
+						targetNearestPoint = ( (CActor)comboAttackA_Target ).GetNearestPointInPersonalSpace( parent.GetWorldPosition() );
+					}
+				}
+				else
+				{
 					targetNearestPoint = comboAttackA_Target.GetWorldPosition();
+				}
 				playerRadius = ((CMovingPhysicalAgentComponent)(parent).GetMovingAgentComponent()).GetCapsuleRadius();
-				slidePosition = playerRadius * VecNormalize( parent.GetWorldPosition() - comboAttackA_Target.GetWorldPosition() ) + targetNearestPoint;
-				slideRotationVector = comboAttackA_Target.GetWorldPosition() - parent.GetWorldPosition();
+				if ( boneIdx > 0 )
+				{
+					slidePosition = targetNearestPoint;
+					slideRotationVector = targetNearestPoint - parent.GetWorldPosition();
+				}
+				else
+				{
+					slidePosition = playerRadius * VecNormalize2D( parent.GetWorldPosition() - comboAttackA_Target.GetWorldPosition() ) + targetNearestPoint;
+					slideRotationVector = comboAttackA_Target.GetWorldPosition() - parent.GetWorldPosition();
+				}
+
 				slideRotation = VecHeading( slideRotationVector );
 				comboPlayer.UpdateTarget( comboAttackA_Id, slidePosition, slideRotation, true, true );
 				

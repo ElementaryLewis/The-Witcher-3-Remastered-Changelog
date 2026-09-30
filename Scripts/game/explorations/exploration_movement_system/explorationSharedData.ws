@@ -24,6 +24,7 @@ class CExplorationSharedData extends CObject
 	
 	protected editable			var	m_BehParamRightFootS		: name;							default	m_BehParamRightFootS		= 'JumpRightFoot';
 	public						var	m_IsRightFootForwardB		: bool;
+	protected editable			var	m_BehClimbRunStartRightFoot	: name;							default	m_BehClimbRunStartRightFoot	= 'ClimbRunStartRightFoot';
 	
 	
 	public						var	m_JumpTypeE 				: EJumpType;
@@ -44,13 +45,22 @@ class CExplorationSharedData extends CObject
 	public						var m_ClimbStateTypeE			: EClimbRequirementType;
 	
 	
+	public 						var m_CanGetOffLadder			: bool;
+	public						var m_jumpedFromLadder          : bool;
+	public 						var m_isJumpedToWaterFinshed	: bool;							default m_isJumpedToWaterFinshed = true;
+	public						var m_canJumpOnLadder			: bool; 						default m_canJumpOnLadder = false;
+	public						var m_canGrabLadder				: bool;							default m_canGrabLadder = false;
+	public 						var m_ladderInProximity			: W3LadderInteraction;
+	public 						var m_ladderGetOffInterrupted	: bool;							default m_ladderGetOffInterrupted = false;
+	public 						var m_activeLadders				: array<W3LadderInteraction>;
+
+	
 	editable					var	m_AirCollisionSideEnabledB	: bool;							default	m_AirCollisionSideEnabledB	= false;
 	
 	
 	public						var	m_SkipLandAnimDistMaxF		: float;						default	m_SkipLandAnimDistMaxF		= 0.64f;
 	public						var	m_SkipLandAnimTimeMaxF		: float;						default	m_SkipLandAnimTimeMaxF		= 0.1f;
-	
-	
+
 	
 	public	editable inlined	var m_SkateGlobalC				: CExplorationSkatingGlobal;
 	
@@ -112,7 +122,15 @@ class CExplorationSharedData extends CObject
 	public						var m_UsepushB					: bool;							default	m_UsepushB					= false;
 	public	 					var	hackKnockBackAlways			: bool;							default	hackKnockBackAlways			= false;
 	
+	protected editable			var	m_BehParamUseRemasterAnims	: name;							default	m_BehParamUseRemasterAnims	= 'UseRemasterAnims';
+	protected editable 			var m_BehParamUseRemasterLadderAnims : name;					default m_BehParamUseRemasterLadderAnims = 'UseRemasterLadderAnims';
+	public	 					var	m_UseRemasterAnimsB			: bool;							default	m_UseRemasterAnimsB			= false;
+	public						var m_UseRemasterLadderAnimsB   : bool;							default m_UseRemasterLadderAnimsB	= false;
+
 	
+	private	editable			var	landAddCoefVal				: float;						default	landAddCoefVal				= 1.f;
+	private	editable			var	landAddTimeCoefVal			: float;						default	landAddTimeCoefVal			= 1.f;
+
 	
 	public function Initialize( manager : CExplorationStateManager )
 	{
@@ -236,20 +254,59 @@ class CExplorationSharedData extends CObject
 	
 	
 	
+	
+	
+
+	
+	public function SetLadderInProximity( ladder : W3LadderInteraction )
+	{
+		m_ladderInProximity = ladder;
+	}
+
 	public function HasToFallFromLadder() : bool
 	{
 		if( GetCurentExplorationType() != ET_Ladder )
 		{
 			return false;
 		}
-		if( m_ExplorationO.m_CollisionManagerO.CheckLandBelow( 0.55, Vector( 0.0f, 0.0f, 0.5f ), true ) )
+		if( !m_jumpedFromLadder  )
 		{
 			return false;
 		}
 		
 		return true;
 	}
+
+	public function SetCanGrabLadder(val : bool)
+	{
+		m_canGrabLadder = val;
+	}
+
+	public function SetCanGetOffLadder(val : bool)
+	{
+		m_CanGetOffLadder = val;
+	}
+
+	public function SetIsJumpToWaterFinished(val : bool)
+	{
+		m_isJumpedToWaterFinshed = val;
+	}
+
+	public function SetJumpedFromLadder(val : bool)
+	{
+		m_jumpedFromLadder = val;
+	}
 	
+	public function SetCanJumpOnLadder(val : bool)
+	{
+		m_canJumpOnLadder = val;
+	}
+
+	public function SetLadderGetOffInterrupted( val : bool )
+	{
+		m_ladderGetOffInterrupted = val;
+	}
+
 	
 	public function GetFallFromCritical() : bool
 	{
@@ -295,8 +352,11 @@ class CExplorationSharedData extends CObject
 		}
 		else
 		{
-			landAddCoef		= 1.0f;
-			landAddTimeCoef	= 1.0f;
+			
+			
+
+			landAddCoef		= landAddCoefVal;
+			landAddTimeCoef	= landAddTimeCoefVal;
 		}
 		landAddAdding	= true;
 		
@@ -512,6 +572,21 @@ class CExplorationSharedData extends CObject
 	{
 		m_ExplorationO.SetBehaviorParamBool( m_BehParamRightFootS, right );
 	}
+
+	
+	public function SetRunStartingFoot( optional reverse : bool )
+	{
+		var rightFoot	: bool;
+		
+		rightFoot	= m_ExplorationO.m_MoverO.IsRightFootForward();
+		
+		if( reverse )
+		{
+			rightFoot	= !rightFoot;
+		}
+
+		m_ExplorationO.SetBehaviorParamBool( m_BehClimbRunStartRightFoot, rightFoot );
+	}
 	
 	
 	
@@ -578,6 +653,44 @@ class CExplorationSharedData extends CObject
 		{
 			thePlayer.SetBehaviorVariable( 'prototypeAnimations', 0.0f );
 		}
+	}
+
+	public function SetUseRemasterAnims( enabled : bool )
+	{
+		m_UseRemasterAnimsB = enabled;
+
+		m_ExplorationO.SetBehaviorParamBool( m_BehParamUseRemasterAnims, m_UseRemasterAnimsB );
+	}
+
+	public function SetUseRemasterLadderAnims( enabled : bool )
+	{
+		m_UseRemasterLadderAnimsB = enabled;
+		m_ExplorationO.SetBehaviorParamBool( m_BehParamUseRemasterLadderAnims, m_UseRemasterLadderAnimsB );
+	}
+
+	public function SetLandAddCoefVal( value : float )
+	{
+		landAddCoefVal = value;
+	}
+
+	public function SetLandAddTimeCoefVal( value : float )
+	{
+		landAddTimeCoefVal = value;
+	}
+
+	public function SetLandAddTimeCoefFast( value : float )
+	{
+		landAddTimeCoefFast = value;
+	}
+
+	public function SetLandAddCoefWalk( value : float )
+	{
+		landAddCoefWalk = value;
+	}
+
+	public function SetLandAddTimeCoefWalk( value : float )
+	{
+		landAddTimeCoefWalk = value;
 	}
 	
 	

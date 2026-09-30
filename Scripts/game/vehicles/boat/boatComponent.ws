@@ -13,9 +13,9 @@ struct ParticleEffectNames
 import statemachine class CBoatComponent extends CVehicleComponent
 {
 	default autoState = 'Idle';
-	private var effects : ParticleEffectNames;
+	protected var effects : ParticleEffectNames;
 	
-	private var boatEntity : W3Boat;
+	protected var boatEntity : W3Boat;
 	private var passenger : CActor;
 	
 	import var mountAnimationFinished : bool;
@@ -161,8 +161,9 @@ import statemachine class CBoatComponent extends CVehicleComponent
 		if( InitializeComponents( boatEntity ) )
 		{
 			InitializeSlots();
-			
-			boatEntity.ApplyAppearance('default');
+
+				
+				boatEntity.ApplyAppearance('default');
 		}
 	}
 	
@@ -228,6 +229,7 @@ import statemachine class CBoatComponent extends CVehicleComponent
 		boatEntity.SoundEvent( "boat_sail_flapping_loop" );
 		enableCustomMastRotation = true;
 		theSound.EnterGameState( ESGS_Boat );
+
 		super.OnMountFinished( entity );
 	}
 	
@@ -664,7 +666,7 @@ import statemachine class CBoatComponent extends CVehicleComponent
 	{
 		if( !boatAnim )
 		{
-			LogBoatFatal( "Entity doesn't have mast_and_steer animated component, modification aborted." );
+			
 			return false;
 		}
 		boatAnim.SetBehaviorVariable( 'upperMastHeight', mastHeight );
@@ -675,7 +677,7 @@ import statemachine class CBoatComponent extends CVehicleComponent
 	{
 		if( !boatAnim )
 		{
-			LogBoatFatal( "Entity doesn't have mast_and_steer animated component, modification aborted." );
+			
 			return false;
 		}
 		boatAnim.SetBehaviorVariable( 'mastAngle', mastAngle );
@@ -728,7 +730,7 @@ import statemachine class CBoatComponent extends CVehicleComponent
 		boatEntity.StopEffectIfActive( effects.backSplash );
 	}
 	
-	private function SwitchEffectsByGear( currentGear : int )
+	protected function SwitchEffectsByGear( currentGear : int )
 	{
 		
 		boatEntity.StopEffectIfActive( effects.rightSplash );
@@ -820,12 +822,14 @@ import statemachine class CBoatComponent extends CVehicleComponent
 		var turnFactorY : float;
 		var turnFactorX : float;
 		
-		
+
 		if( enableCustomMastRotation )
+
 		{
 			turnFactorX	= theInput.GetActionValue( 'GI_AxisLeftX' );
 			turnFactorY	= theInput.GetActionValue( 'GI_AxisLeftY' );
 		}
+
 		
 		if( isMoving )
 		{
@@ -879,6 +883,8 @@ import statemachine class CBoatComponent extends CVehicleComponent
 		thePlayer.GetVisualDebug().AddText( 'fake_wind', ("fake_wind: " + val), fr-1.5f, true, 0, Color(0,255,0), true );
 		return val;
 	}
+
+
 	
 	public function GetSailDir() : float
 	{

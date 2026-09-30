@@ -26,11 +26,11 @@ state SpecialAttacks in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 	public final function OnBoughtSkill(skill : ESkill)
 	{
-		if(skill == S_Sword_s01 || skill == S_Sword_s02)
+		if(skill == S_Sword_s01 || skill == S_Sword_s02 || skill == S_Sword_s35)
 		{
 			ShowHint( SPECIALS, POS_CHAR_DEV_X, 0.47f, ETHDT_Input, , , , true );
 		}
-		else if(skill == S_Magic_s01 || skill == S_Magic_s02 || skill == S_Magic_s03 || skill == S_Magic_s04 || skill == S_Magic_s05)
+		else if(skill == S_Magic_s01 || skill == S_Magic_s02 || skill == S_Magic_s28 || skill == S_Magic_s03 || skill == S_Magic_s04 || skill == S_Magic_s05 || skill == S_Magic_s31)
 		{
 			ShowHint( ALTERNATES, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, ETHDT_Input, , , , true );
 		}

@@ -8,6 +8,10 @@ class W3BlockGameplayActionsTrigger extends CGameplayEntity
 	private editable var blockedActions	: array< EInputActionBlock >;
 	private editable var sourceName 	: name;
 	private editable var sheatheWeaponIfDrawn : bool;
+	private editable var sheatheWeaponIfDrawnNotInCombat : bool;
+
+	hint sheatheWeaponIfDrawn ="Force sheathe weapon";
+	hint sheatheWeaponIfDrawnNotInCombat = "Only sheathe weapon if not in combat";
 
 	event OnAreaEnter( area : CTriggerAreaComponent, activator : CComponent )
 	{	
@@ -22,6 +26,15 @@ class W3BlockGameplayActionsTrigger extends CGameplayEntity
 		}
 		
 		if(sheatheWeaponIfDrawn)
+		{
+			
+			thePlayer.OnMeleeForceHolster(true);
+				
+			
+			thePlayer.DisableCombatState();
+		}
+
+		if(sheatheWeaponIfDrawnNotInCombat && !thePlayer.IsInCombat())
 		{
 			
 			thePlayer.OnMeleeForceHolster(true);
@@ -66,6 +79,7 @@ class W3BlockGameplayActionsTrigger extends CGameplayEntity
 				break;
 			case EIAB_ThrowBomb:
 			case EIAB_Crossbow:
+
 			case EIAB_UsableItem:
 				moduleItemInfo = (CR4HudModuleItemInfo)hud.GetHudModule( "ItemInfoModule" );
 				moduleItemInfo.EnableElement( !block );

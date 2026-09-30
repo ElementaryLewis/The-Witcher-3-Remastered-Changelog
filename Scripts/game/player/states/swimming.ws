@@ -75,7 +75,7 @@ state Swimming in CR4Player extends ExtendedMovable
 	{
 		var item : SItemUniqueId;
 		
-		StateBlockInputActions(false);
+ 		StateBlockInputActions(false);
 		
 		usePredicitonDepth = false;
 		
@@ -119,6 +119,7 @@ state Swimming in CR4Player extends ExtendedMovable
 		parentMAC.SetDiving( false );
 		((W3PlayerWitcher)parent).SetBIsCombatActionAllowed(true);
 		thePlayer.UnblockAction(EIAB_Crossbow,'Diving');
+
 		
 		ResetVariables();
 		
@@ -129,7 +130,9 @@ state Swimming in CR4Player extends ExtendedMovable
 		
 		
 		
-		if ( nextStateName != 'AimThrow')
+
+		if ( nextStateName != 'AimThrow' )
+
 		{
 			GetWitcherPlayer().AddAndEquipInfiniteBolt(true);
 			GetWitcherPlayer().ClearPreviouslyUsedBolt();
@@ -189,7 +192,9 @@ state Swimming in CR4Player extends ExtendedMovable
 		theInput.SetContext( 'Swimming' );
 		
 		StateBlockInputActions(true);
-		
+
+
+
 		
 		TurnOnSwimmingCamera();
 		
@@ -258,7 +263,8 @@ state Swimming in CR4Player extends ExtendedMovable
 			theInput.SetContext('Diving');		
 		}
 		
-		GetWitcherPlayer().AddAndEquipInfiniteBolt(false, true);
+
+			GetWitcherPlayer().AddAndEquipInfiniteBolt(false, true);
 	}
 	
 	
@@ -377,12 +383,15 @@ state Swimming in CR4Player extends ExtendedMovable
 			parent.BlockAction(		EIAB_Signs,			'SwimmingState');
 			parent.BlockAction(		EIAB_CallHorse,		'SwimmingState');
 			parent.BlockAction(		EIAB_ThrowBomb,		'SwimmingState');
+
 		}
 		else
 		{
 			parent.BlockAllActions( 'SwimmingState', false );
 		}
 	}
+
+
 	
 	private function ShouldSpawnWaterSplash( optional prevState : name)
 	{
@@ -639,12 +648,12 @@ state Swimming in CR4Player extends ExtendedMovable
 	
 	public function ShouldDrainStamina() : bool
 	{
-		var currentArea : EAreaName;
+		var currentArea : name;
 		
 		currentArea = theGame.GetCommonMapManager().GetCurrentArea();
 		
 		
-		if ( !IsInTroubledWater() || currentArea == AN_Prologue_Village )
+		if ( !IsInTroubledWater() || currentArea == 'AN_Prologue_Village' )
 			return false;
 		
 		return true;
@@ -652,16 +661,16 @@ state Swimming in CR4Player extends ExtendedMovable
 	
 	public function IsInColdWater() : bool
 	{
-		var currentArea : EAreaName;
+		var currentArea : name;
 		
 		currentArea = theGame.GetCommonMapManager().GetCurrentArea();
 		
 		switch( currentArea )
 		{
-			case AN_Skellige_ArdSkellig:
+			case 'AN_Skellige_ArdSkellig':
 				return true;
 				
-			case AN_Island_of_Myst:
+			case 'AN_Island_of_Myst':
 				return true;
 				
 			default:
@@ -777,6 +786,7 @@ state Swimming in CR4Player extends ExtendedMovable
 				divingEnd = true;
 			
 			thePlayer.UnblockAction(EIAB_Crossbow,'Diving');
+
 			
 			parent.SetBehaviorVariable( 'diving', 0.f);
 			parent.SetBehaviorVariable( 'cameraPitch', 0.f);
@@ -835,10 +845,12 @@ state Swimming in CR4Player extends ExtendedMovable
 			if ( depth > EXIT_DIVING_WATER_LEVEL - 0.8 ) 
 			{
 				thePlayer.BlockAction(EIAB_Crossbow,'Diving');
+
 			}
 			else
 			{
 				thePlayer.UnblockAction(EIAB_Crossbow,'Diving');
+
 			}
 		}
 	}
@@ -1199,6 +1211,7 @@ state Swimming in CR4Player extends ExtendedMovable
 		parent.SetIsInAir(false);
 		divingStarting = false;
 		jumpToWaterInProgress = false;
+		parent.substateManager.m_SharedDataO.SetIsJumpToWaterFinished(true);
 	}
 	
 	

@@ -26,6 +26,7 @@ class CR4CraftingMenu extends CR4ListBaseMenu
 	private var m_fxSetFilters			: CScriptedFlashFunction;
 	private var m_fxSetPinnedRecipe		: CScriptedFlashFunction;
 	private var m_fxSetMerchantCheck	: CScriptedFlashFunction;
+	private var m_fxSetGlossaryMode		: CScriptedFlashFunction;
 		
 	default bCouldCraft 			= false;
 	
@@ -84,6 +85,7 @@ class CR4CraftingMenu extends CR4ListBaseMenu
 		m_fxSetFilters = m_flashModule.GetMemberFlashFunction("SetFiltersValue");
 		m_fxSetPinnedRecipe = m_flashModule.GetMemberFlashFunction("setPinnedRecipe");
 		m_fxSetMerchantCheck = m_flashModule.GetMemberFlashFunction("setMerchantTypeCheck");
+		m_fxSetGlossaryMode = m_flashModule.GetMemberFlashFunction("setGlossaryMode");
 		
 		if(_craftsmanComponent)
 		{
@@ -96,6 +98,7 @@ class CR4CraftingMenu extends CR4ListBaseMenu
 		}
 		
 		m_fxSetCraftingEnabled.InvokeSelfOneArg(FlashArgBool(bCouldCraft));
+		m_fxSetGlossaryMode.InvokeSelfOneArg(FlashArgBool(!bCouldCraft));
 		
 		l_craftingFilters = GetWitcherPlayer().GetCraftingFilters();
 		m_fxSetFilters.InvokeSelfSixArgs(FlashArgString(GetLocStringByKeyExt("gui_panel_filter_has_ingredients")), FlashArgBool(l_craftingFilters.showCraftable), 
@@ -124,17 +127,25 @@ class CR4CraftingMenu extends CR4ListBaseMenu
 		}
 	}
 
-	event  OnCloseMenu() 
+	event  OnCloseMenu()
 	{
 		var commonMenu : CR4CommonMenu;
+		var glossaryMainMenu : CR4GlossaryMainMenu;
 		
 		commonMenu = (CR4CommonMenu)m_parentMenu;
-		if(commonMenu)
+		glossaryMainMenu = (CR4GlossaryMainMenu)m_parentMenu;
+		
+		if( commonMenu )
 		{
 			commonMenu.ChildRequestCloseMenu();
 		}
+		if(glossaryMainMenu)
+		{
+			glossaryMainMenu.ChildRequestCloseMenu();
+		}
 		
-		theSound.SoundEvent( 'gui_global_quit' ); 
+		theSound.SoundEvent( 'gui_global_quit' );
+		
 		CloseMenu();
 	}
 

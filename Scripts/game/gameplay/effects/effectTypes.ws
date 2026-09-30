@@ -62,14 +62,14 @@ struct SEffectInfo
 	editable var effectCustomValue : SAbilityAttributeValue;	
 	editable var effectCustomParam : W3BuffCustomParams;
 	editable var applyChance : float;							
-	
+
 		hint effectDutation = "Set -1 for infinite";
 };
 
 
 struct SEffectCachedDamage
 {
-	saved var dmgType : name;	
+	saved var dmgType : name;
 	saved var attacker : EntityHandle;					
 	saved var carrier : CBaseGameplayEffect;			
 	saved var dmgVal	: float;
@@ -112,9 +112,10 @@ function EffectInteractionSuccessfull( e : EEffectInteract ) : bool
 	{
 		return false;
 	}
-	
+
 	return true;
 }
+
 
 
 
@@ -130,30 +131,30 @@ enum EEffectType
 	EET_AutoStaminaRegen,
 	EET_AutoEssenceRegen,
 	EET_AutoMoraleRegen,
-		
+
 	
 	EET_Confusion,
 	EET_HeavyKnockdown,
 	EET_Hypnotized,
 	EET_Immobilized,
-	EET_Knockdown,	
+	EET_Knockdown,
 	EET_KnockdownTypeApplicator,
 	EET_Frozen,
 	EET_Paralyzed,
 	EET_Stagger,
 	EET_Blindness,
 	EET_PoisonCritical,
-				
+
 	
 	EET_Bleeding,
 	EET_BleedingTracking,
 	EET_Burning,
 	EET_Poison,
 	EET_DoTHPRegenReduce,
-		
+
 	
 	EET_Toxicity,
-		
+
 	
 	EET_BlackBlood,
 	EET_Blizzard,
@@ -170,21 +171,21 @@ EET_Unused1,
 	EET_WhiteHoney,
 	EET_WhiteRaffardDecoction,
 	EET_KillerWhale,
-	
+
 	
 	EET_AxiiGuardMe,
 	EET_IgnorePain,
-	
+
 	
 	EET_StaggerAura,
 	EET_OverEncumbered,
-	EET_Edible,	
+	EET_Edible,
 	EET_LowHealth,
 	EET_Slowdown,
 	EET_Fact,
 	EET_WellFed,
 	EET_SlowdownFrost,
-	
+
 	
 	EET_LongStagger,				
 	EET_WellHydrated,
@@ -196,24 +197,24 @@ EET_Unused1,
 	EET_Pull,						
 	EET_AbilityOnLowHealth,			
 	EET_Oil,
-	EET_CounterStrikeHit,	
+	EET_CounterStrikeHit,
 	EET_Drowning,
-	EET_Snowstorm,	
+	EET_Snowstorm,
 	EET_AutoAirRegen,
-	
+
 	
 	EET_ShrineAard,
 	EET_ShrineAxii,
 	EET_ShrineIgni,
 	EET_ShrineQuen,
 	EET_ShrineYrden,
+
 	
-	
-	EET_Ragdoll,	
-	EET_AutoPanicRegen,	
+	EET_Ragdoll,
+	EET_AutoPanicRegen,
 	EET_VitalityDrain,
-	EET_DoppelgangerEssenceRegen,	
-	EET_FireAura,	
+	EET_DoppelgangerEssenceRegen,
+	EET_FireAura,
 	EET_BoostedEssenceRegen,
 	EET_AirDrain,
 	EET_SilverDust,
@@ -247,7 +248,7 @@ EET_Unused1,
 	EET_Mutagen26,
 	EET_Mutagen27,
 	EET_Mutagen28,
-	
+
 	
 	EET_AirDrainDive,
 	EET_BoostedStaminaRegen,
@@ -270,19 +271,21 @@ EET_Unused1,
 	EET_WolfHour,
 	EET_WeakeningAura,
 	EET_Weaken,
-	
+
 	EET_Tangled,					
 	EET_Runeword8,
 	EET_LynxSetBonus,
 	EET_GryphonSetBonus,
 	EET_GryphonSetBonusYrden,
+	EET_Catalyst,
+	EET_ConvergenceTheory,
 	EET_POIGorA10,
 	EET_Mutation7Buff,
 	EET_Mutation7Debuff,
 	EET_Mutation10,
 	EET_Perk21InternalCooldown,
 	EET_Mutation11Buff,
-	EET_Mutation11Debuff,	
+	EET_Mutation11Debuff,
 	EET_Acid,						
 	EET_WellRested,
 	EET_HorseStableBuff,
@@ -297,17 +300,40 @@ EET_Unused1,
 	EET_Mutation5,
 	EET_ToxicityVenom,
 	EET_BasicQuen,
-	
+
 	
 	EET_ReinaldPhiltre,
-	
+
 	
 	EET_Bleeding1,
 	EET_Bleeding2,
 	EET_Bleeding3,
 	
+
+
 	
+	EET_Placeholder_001,
+	EET_Placeholder_002,
+	EET_Placeholder_003,
+	EET_Placeholder_004,
+	EET_Placeholder_005,
+	EET_Placeholder_006,
+	EET_Placeholder_007,					
+	EET_Placeholder_008,
+	EET_Placeholder_009,     
+	EET_Placeholder_010,		
+	EET_Placeholder_011,		
+	EET_Placeholder_012,
+
+
 	
+	EET_CatPerk29,
+	EET_Resonance,
+	EET_OverloadCooldown,
+	EET_Avoidance,
+	EET_Undying,
+	EET_ElementOfSurprise,
+
 	
 EET_EffectTypesSize,
 EET_ForceEnumTo16Bit = 10000
@@ -317,13 +343,13 @@ EET_ForceEnumTo16Bit = 10000
 function GetMinorShrineBuffs() : array<EEffectType>
 {
 	var ret : array<EEffectType>;
-	
+
 	ret.PushBack(EET_ShrineAard);
 	ret.PushBack(EET_ShrineAxii);
 	ret.PushBack(EET_ShrineIgni);
 	ret.PushBack(EET_ShrineQuen);
 	ret.PushBack(EET_ShrineYrden);
-	
+
 	return ret;
 }
 
@@ -338,14 +364,14 @@ import struct CBuffImmunity
 	import var  immobilize : Bool ;
 	import var  confuse : Bool ;
 	import var  damage : Bool ;
-	
+
 	
 	import var  immunityTo : array<int>;		
 }
 
 
 struct SApplicatorSpawnEffect
-{		
+{
 	saved var spawnAbilityName : name;											
 	saved var spawnType : EEffectType;											
 	saved var spawnFlagsHostile, spawnFlagsNeutral, spawnFlagsFriendly : bool;	
@@ -387,7 +413,7 @@ function ModifyHitSeverityBuff(target : CActor, type : EEffectType) : EEffectTyp
 	var quenEntity : W3QuenEntity;
 
 	severityReduction = RoundMath(CalculateAttributeValue(target.GetAttributeValue('hit_severity')));
-		
+
 	
 	switch(type)
 	{
@@ -397,12 +423,12 @@ function ModifyHitSeverityBuff(target : CActor, type : EEffectType) : EEffectTyp
 		case EET_Stagger :			severity = 1; break;
 		default :					severity = 0; break;
 	}
-	
+
 	
 	severity -= severityReduction;
+
 	
-	
-	if(target.HasAlternateQuen())		
+	if(target.HasAlternateQuen())
 	{
 		if( (CNewNPC)target )
 		{
@@ -423,13 +449,13 @@ function ModifyHitSeverityBuff(target : CActor, type : EEffectType) : EEffectTyp
 			}
 		}
 	}
-	
+
 	
 	if(severity == 4 && target.IsImmuneToBuff(EET_HeavyKnockdown))		severity = 3;
 	if(severity == 3 && target.IsImmuneToBuff(EET_Knockdown))			severity = 2;
 	if(severity == 2 && target.IsImmuneToBuff(EET_LongStagger))			severity = 1;
 	if(severity == 1 && target.IsImmuneToBuff(EET_Stagger))				severity = 0;
-			
+
 	
 	if(severity >= 4)
 		return EET_HeavyKnockdown;
@@ -452,7 +478,7 @@ function IsKnockdownEffectType(type : EEffectType) : bool
 		case EET_LongStagger :
 		case EET_Stagger :
 			return true;
-		default: 
+		default:
 			return false;
 	}
 }
@@ -485,8 +511,9 @@ function IsCriticalEffectType(type : EEffectType) : bool
 		case EET_Snowstorm :
 		case EET_SnowstormQ403 :
 		case EET_KnockdownTypeApplicator :
+
 			return true;
-		default: 
+		default:
 			return false;
 	}
 }
@@ -495,7 +522,7 @@ function IsNegativeEffectType(type : EEffectType) : bool
 {
 	if ( IsCriticalEffectType( type ) )
 		return true;
-		
+
 	switch (type)
 	{
 		case EET_DoTHPRegenReduce :
@@ -511,8 +538,9 @@ function IsNegativeEffectType(type : EEffectType) : bool
 		case EET_SlowdownFrost :
 		case EET_AxiiGuardMe :
 		case EET_YrdenHealthDrain :
+
 			return true;
-		default: 
+		default:
 			return false;
 	}
 }
@@ -521,10 +549,10 @@ function GetBuffCriticalType(buff : CBaseGameplayEffect) : ECriticalStateType
 {
 	var crit : W3CriticalEffect;
 	var critDOT : W3CriticalDOTEffect;
-	
+
 	if(!buff)
 		return ECST_None;
-		
+
 	crit = (W3CriticalEffect)buff;
 	if(crit)
 	{
@@ -536,7 +564,7 @@ function GetBuffCriticalType(buff : CBaseGameplayEffect) : ECriticalStateType
 		if(critDOT)
 			return critDOT.GetCriticalStateType();
 	}
-	
+
 	return ECST_None;
 }
 
@@ -544,10 +572,10 @@ function CriticalBuffIsDestroyedOnInterrupt(buff : CBaseGameplayEffect) : bool
 {
 	var crit : W3CriticalEffect;
 	var critDOT : W3CriticalDOTEffect;
-	
+
 	if(!buff)
 		return false;
-		
+
 	crit = (W3CriticalEffect)buff;
 	if(crit)
 	{
@@ -559,7 +587,7 @@ function CriticalBuffIsDestroyedOnInterrupt(buff : CBaseGameplayEffect) : bool
 		if(critDOT)
 			return critDOT.IsDestroyedOnInterrupt();
 	}
-	
+
 	return false;
 }
 
@@ -568,22 +596,25 @@ function CriticalBuffIsHitAllowed(buff : CBaseGameplayEffect, hit : EHitReaction
 {
 	var crit : W3CriticalEffect;
 	var critDOT : W3CriticalDOTEffect;
-	
+
 	if(!buff)
 		return true;
-		
+
 	crit = (W3CriticalEffect)buff;
 	if(crit)
 	{
+		
+
 		return crit.IsHitAllowed(hit);
 	}
 	else
 	{
 		critDOT = (W3CriticalDOTEffect)buff;
 		if(critDOT)
+			
 			return critDOT.IsHitAllowed(hit);
 	}
-	
+
 	return true;
 }
 
@@ -591,7 +622,7 @@ function IsCriticalEffect(e : CBaseGameplayEffect) : bool
 {
 	if(!e)
 		return false;
-		
+
 	return ((W3CriticalEffect)e) || ((W3CriticalDOTEffect)e) || e.GetEffectType() == EET_KnockdownTypeApplicator;
 }
 
@@ -599,7 +630,7 @@ function IsDoTEffect(e : CBaseGameplayEffect) : bool
 {
 	if(!e)
 		return false;
-		
+
 	return ((W3DamageOverTimeEffect)e) || ((W3CriticalDOTEffect)e);
 }
 
@@ -607,10 +638,10 @@ function CriticalEffectCanPlayAnimation(buff : CBaseGameplayEffect) : bool
 {
 	var crit : W3CriticalEffect;
 	var critDOT : W3CriticalDOTEffect;
-	
+
 	if(!buff)
 		return false;
-		
+
 	crit = (W3CriticalEffect)buff;
 	if(crit)
 	{
@@ -622,7 +653,7 @@ function CriticalEffectCanPlayAnimation(buff : CBaseGameplayEffect) : bool
 		if(critDOT)
 			return critDOT.CanPlayAnimation();
 	}
-	
+
 	return false;
 }
 
@@ -630,10 +661,10 @@ function CriticalBuffDisallowPlayAnimation(buff : CBaseGameplayEffect)
 {
 	var crit : W3CriticalEffect;
 	var critDOT : W3CriticalDOTEffect;
-	
+
 	if(!buff)
 		return;
-		
+
 	crit = (W3CriticalEffect)buff;
 	if(crit)
 	{
@@ -645,7 +676,7 @@ function CriticalBuffDisallowPlayAnimation(buff : CBaseGameplayEffect)
 		if(critDOT)
 			return critDOT.DisallowPlayAnimation();
 	}
-	
+
 	return;
 }
 
@@ -653,10 +684,10 @@ function CriticalBuffUsesFullBodyAnim(buff : CBaseGameplayEffect) : bool
 {
 	var crit : W3CriticalEffect;
 	var critDOT : W3CriticalDOTEffect;
-	
+
 	if(!buff)
 		return false;
-		
+
 	crit = (W3CriticalEffect)buff;
 	if(crit)
 	{
@@ -668,7 +699,7 @@ function CriticalBuffUsesFullBodyAnim(buff : CBaseGameplayEffect) : bool
 		if(critDOT)
 			return critDOT.UsesFullBodyAnim();
 	}
-	
+
 	return false;
 }
 

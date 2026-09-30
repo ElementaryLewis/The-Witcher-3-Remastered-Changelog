@@ -113,8 +113,9 @@ class W3Effect_Knockdown extends W3CriticalEffect
 	
 	protected function CalculateDuration(optional setInitialDuration : bool)
 	{
+
+
 		super.CalculateDuration(setInitialDuration);
-		
 		duration = MaxF(1.f,duration);
 	}
 }

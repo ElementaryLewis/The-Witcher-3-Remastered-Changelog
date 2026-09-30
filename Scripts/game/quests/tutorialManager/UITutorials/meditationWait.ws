@@ -13,7 +13,7 @@ state MeditationWait in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	{
 		super.OnEnterState(prevStateName);
 		
-		ShowHint(WAIT, 0.6, 0.6, ETHDT_Input);
+		ShowHint(WAIT, 0.65, 0.3, ETHDT_Input);
 	}
 		
 	event OnLeaveState( nextStateName : name )

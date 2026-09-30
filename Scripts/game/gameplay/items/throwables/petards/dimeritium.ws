@@ -162,7 +162,8 @@ class W3Dimeritium extends W3Petard
 					{
 						target.BlockAbility(loopParams.disabledAbilities[i].abilityName, true, duration);
 					}
-				}					
+				}
+
 			}
 		}
 	}

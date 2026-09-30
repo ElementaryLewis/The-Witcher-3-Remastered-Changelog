@@ -270,7 +270,7 @@ state Unconscious in CR4Player extends ExtendedMovable
 		itemEnt1 = parent.inv.GetItemEntityUnsafe( cachedID );
 		
 		idLWeapon = inv.GetItemFromSlot('l_weapon');
-		if ( parent.inv.IsIdValid( idLWeapon ) && !parent.inv.IsItemCrossbow( idLWeapon ) )
+		if ( parent.inv.IsIdValid( idLWeapon ) && !parent.inv.IsItemRangedWeapon( idLWeapon ) )
 			itemEnt2 = parent.inv.GetItemEntityUnsafe( idLWeapon );
 	}
 	

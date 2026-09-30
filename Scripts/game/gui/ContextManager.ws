@@ -36,13 +36,14 @@ class W3UIContext extends CObject
 		}
 	}
 	
-	protected function AddInputBinding(label:string, padNavCode:string, optional keyboardNavCode:int, optional useInContextMenu:bool, optional IsLocalized:bool)
+	protected function AddInputBinding(label:string, padNavCode:string, optional keyboardNavCode:int, optional useInContextMenu:bool, optional IsLocalized:bool, optional IsHold:bool)
 	{
 		var bindingDef:SKeyBinding;
 		bindingDef.Gamepad_NavCode = padNavCode;
 		bindingDef.Keyboard_KeyCode = keyboardNavCode;
 		bindingDef.LocalizationKey = label;
 		bindingDef.IsLocalized = IsLocalized;
+		bindingDef.IsHold = IsHold;
 		m_inputBindings.PushBack(bindingDef);
 		if (useInContextMenu)
 		{

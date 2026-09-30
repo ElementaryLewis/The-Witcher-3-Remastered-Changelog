@@ -5,10 +5,37 @@
 /***********************************************************************/
 class W3QuestCond_World extends CQuestScriptedCondition
 {
+	
 	editable var currentArea : EAreaName;		default currentArea = AN_Undefined;
+	
+	editable var currentAreaName : name;		default currentAreaName = '';
 	
 	function Evaluate() : bool
 	{
-		return currentArea == theGame.GetCommonMapManager().GetCurrentArea();
+		var areaName : name = theGame.GetCommonMapManager().GetCurrentArea();
+
+		
+		if ( currentAreaName != '' )
+		{
+			return currentAreaName == areaName;
+		}
+		else
+		{
+			
+			return theGame.GetCommonMapManager().GetDeprecatedAreaName( (int)currentArea ) == areaName;
+		}			
+	}
+}
+
+class W3QuestCond_Area extends CQuestScriptedCondition
+{
+	editable var currentAreaName : name;		default currentAreaName = '';
+	
+	function Evaluate() : bool
+	{
+		var currentArea : CName;
+
+		theGame.GetCommonMapManager().GetCurrentJournalArea( currentArea );
+		return currentAreaName == currentArea;
 	}
 }

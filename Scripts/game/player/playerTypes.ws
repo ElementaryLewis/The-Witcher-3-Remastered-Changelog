@@ -101,6 +101,21 @@ S_UNUSED1,
 	S_Sword_s19,			
 	S_Sword_s20,			
 	S_Sword_s21,			
+	S_Sword_s22,			
+	S_Sword_s23,			
+	S_Sword_s24,			
+	S_Sword_s25,			
+	S_Sword_s26,			
+	S_Sword_s27,			
+	S_Sword_s28,			
+	S_Sword_s29,			
+	S_Sword_s30,			
+	S_Sword_s31,			
+	S_Sword_s32,			
+	S_Sword_s33,			
+	S_Sword_s34,			
+	S_Sword_s35,			
+	S_Sword_s36,			
 	
 	
 	S_Magic_s01,			
@@ -123,8 +138,37 @@ S_UNUSED1,
 	S_Magic_s18,			
 	S_Magic_s19,			
 	S_Magic_s20,			
+	S_Magic_s21,			
+	S_Magic_s22,			
+	S_Magic_s23,			
+	S_Magic_s24,			
+	S_Magic_s25,			
+	S_Magic_s26,			
+	S_Magic_s27,			
+	S_Magic_s28,			
+	S_Magic_s29,			
+	S_Magic_s30,			
+	S_Magic_s31,			
+	S_Magic_s32,			
+	S_Magic_s33,			
+	S_Magic_s34,			
+	S_Magic_s35,			
+	S_Magic_s36,			
+	S_Magic_s37,			
+	S_Magic_s38,			
+	S_Magic_s39,			
+	S_Magic_s40,			
+	S_Magic_s41,			
+	S_Magic_s42,			
+
+	S_Alchemy_s22,			
+	S_Alchemy_s23,			
+	S_Alchemy_s24,			
+	S_Alchemy_s25,			
+	S_Alchemy_s26,			
+	S_Alchemy_s27,			
+
 S_UNUSED2,
-	
 	
 	S_Alchemy_s01,			
 	S_Alchemy_s02,			
@@ -173,7 +217,37 @@ S_UNUSED2,
 	S_Perk_20,				
 	S_Perk_21,				
 	S_Perk_22,				
-	S_Perk_MAX
+
+	
+	S_Perk_23,				
+	S_Perk_24,				
+	S_Perk_25,				
+	S_Perk_26,				
+	S_Perk_27,				
+	S_Perk_28,				
+
+	
+	S_Perk_29,				
+	S_Perk_30,				
+	S_Perk_31,				
+	S_Perk_32,				
+	S_Perk_33,				
+	S_Perk_34,				
+	S_Perk_35,				
+	S_Perk_36,				
+	S_Perk_37,				
+	S_Perk_38,				
+	S_Perk_39,				
+	S_Perk_40,				
+	S_Perk_41,				
+	S_Perk_42,				
+	S_Perk_43,				
+	S_Perk_44,				
+
+
+	S_Perk_MAX,
+
+
 }
 
 enum EItemSetBonus
@@ -192,6 +266,8 @@ enum EItemSetBonus
 	EISB_Vampire,			
 	EISB_Netflix_1,
 	EISB_Netflix_2
+
+	
 }
 
 enum EItemSetType
@@ -205,6 +281,7 @@ enum EItemSetType
 	EIST_Vampire,
 	EIST_Viper,
 	EIST_Netflix
+
 }
 
 function SetItemNameToType( nam : name ) : EItemSetType
@@ -218,6 +295,7 @@ function SetItemNameToType( nam : name ) : EItemSetType
 		case theGame.params.ITEM_SET_TAG_RED_WOLF : 		return EIST_RedWolf ;
 		case theGame.params.ITEM_SET_TAG_VAMPIRE :			return EIST_Vampire ;
 		case theGame.params.ITEM_SET_TAG_VIPER : 			return EIST_Viper;
+
 		case theGame.params.ITEM_SET_TAG_NETFLIX : 			return EIST_Netflix;
 		default: 											return EIST_Undefined;
 	}
@@ -280,6 +358,21 @@ function SkillNameToEnum(n : name) : ESkill
 		case 'sword_s19' :						return S_Sword_s19;
 		case 'sword_s20' :						return S_Sword_s20;
 		case 'sword_s21' :						return S_Sword_s21;
+		case 'sword_s22' :						return S_Sword_s22;
+		case 'sword_s23' :						return S_Sword_s23;
+		case 'sword_s24' :						return S_Sword_s24;
+		case 'sword_s25' :						return S_Sword_s25;
+		case 'sword_s26' :						return S_Sword_s26;
+		case 'sword_s27' :						return S_Sword_s27;
+		case 'sword_s28' :						return S_Sword_s28;
+		case 'sword_s29' :						return S_Sword_s29;
+		case 'sword_s30' :						return S_Sword_s30;
+		case 'sword_s31' :						return S_Sword_s31;
+		case 'sword_s32' :						return S_Sword_s32;
+		case 'sword_s33' :						return S_Sword_s33;
+		case 'sword_s34' :						return S_Sword_s34;
+		case 'sword_s35' :						return S_Sword_s35;
+		case 'sword_s36' :						return S_Sword_s36;
 		
 		case 'magic_s1' :						return S_Magic_s01;
 		case 'magic_s2' :						return S_Magic_s02;
@@ -301,6 +394,28 @@ function SkillNameToEnum(n : name) : ESkill
 		case 'magic_s18' :						return S_Magic_s18;
 		case 'magic_s19' :						return S_Magic_s19;
 		case 'magic_s20' :						return S_Magic_s20;
+		case 'magic_s21' :						return S_Magic_s21;
+		case 'magic_s22' :						return S_Magic_s22;
+		case 'magic_s23' :						return S_Magic_s23;
+		case 'magic_s24' :						return S_Magic_s24;
+		case 'magic_s25' :						return S_Magic_s25;
+		case 'magic_s26' :						return S_Magic_s26;
+		case 'magic_s27' :						return S_Magic_s27;
+		case 'magic_s28' :						return S_Magic_s28;
+		case 'magic_s29' :						return S_Magic_s29;
+		case 'magic_s30' :						return S_Magic_s30;
+		case 'magic_s31' :						return S_Magic_s31;
+		case 'magic_s32' :						return S_Magic_s32;
+		case 'magic_s33' :						return S_Magic_s33;
+		case 'magic_s34' :						return S_Magic_s34;
+		case 'magic_s35' :						return S_Magic_s35;
+		case 'magic_s36' :						return S_Magic_s36;
+		case 'magic_s37' :						return S_Magic_s37;
+		case 'magic_s38' :						return S_Magic_s38;
+		case 'magic_s39' :						return S_Magic_s39;
+		case 'magic_s40' :						return S_Magic_s40;
+		case 'magic_s41' :						return S_Magic_s41;
+		case 'magic_s42' :						return S_Magic_s42;
 		
 		case 'alchemy_s1' :						return S_Alchemy_s01;
 		case 'alchemy_s2' :						return S_Alchemy_s02;
@@ -322,6 +437,12 @@ function SkillNameToEnum(n : name) : ESkill
 		case 'alchemy_s18' :					return S_Alchemy_s18;
 		case 'alchemy_s19' :					return S_Alchemy_s19;
 		case 'alchemy_s20' :					return S_Alchemy_s20;
+		case 'alchemy_s22' :					return S_Alchemy_s22;
+		case 'alchemy_s23' :					return S_Alchemy_s23;
+		case 'alchemy_s24' :					return S_Alchemy_s24;
+		case 'alchemy_s25' :					return S_Alchemy_s25;
+		case 'alchemy_s26' :					return S_Alchemy_s26;
+		case 'alchemy_s27' :					return S_Alchemy_s27;
 		
 		case 'perk_1' :							return S_Perk_01;
 		case 'perk_2' :							return S_Perk_02;
@@ -345,6 +466,30 @@ function SkillNameToEnum(n : name) : ESkill
 		case 'perk_20' :						return S_Perk_20;
 		case 'perk_21' :						return S_Perk_21;
 		case 'perk_22' :						return S_Perk_22;
+		case 'perk_23' :						return S_Perk_23;
+		case 'perk_24' :						return S_Perk_24;
+		case 'perk_25' :						return S_Perk_25;
+		case 'perk_26' :						return S_Perk_26;
+		case 'perk_27' :						return S_Perk_27;
+		case 'perk_28' :						return S_Perk_28;
+		case 'perk_29' :						return S_Perk_29;
+		case 'perk_30' :						return S_Perk_30;
+		case 'perk_31' :						return S_Perk_31;
+		case 'perk_32' :						return S_Perk_32;
+		case 'perk_33' :						return S_Perk_33;
+		case 'perk_34' :						return S_Perk_34;
+		case 'perk_35' :						return S_Perk_35;
+		case 'perk_36' :						return S_Perk_36;
+		case 'perk_37' :						return S_Perk_37;
+		case 'perk_38' :						return S_Perk_38;
+		case 'perk_39' :						return S_Perk_39;
+		case 'perk_40' :						return S_Perk_40;
+		case 'perk_41' :						return S_Perk_41;
+		case 'perk_42' :						return S_Perk_42;
+		case 'perk_43' :						return S_Perk_43;
+		case 'perk_44' :						return S_Perk_44;
+
+
 	
 		default:								return S_SUndefined;
 	}
@@ -363,6 +508,7 @@ function SignEnumToSkillEnum( s : ESignType ) : ESkill
 		default:		return S_SUndefined;
 	}
 }
+
 
 
 function SkillEnumToName(s : ESkill) : name
@@ -407,6 +553,21 @@ function SkillEnumToName(s : ESkill) : name
 		case S_Sword_s19 :						return 'sword_s19';
 		case S_Sword_s20 :						return 'sword_s20';
 		case S_Sword_s21 :						return 'sword_s21';
+		case S_Sword_s22 :						return 'sword_s22';
+		case S_Sword_s23 :						return 'sword_s23';
+		case S_Sword_s24 :						return 'sword_s24';
+		case S_Sword_s25 :						return 'sword_s25';
+		case S_Sword_s26 :						return 'sword_s26';
+		case S_Sword_s27 :						return 'sword_s27';
+		case S_Sword_s28 :						return 'sword_s28';
+		case S_Sword_s29 :						return 'sword_s29';
+		case S_Sword_s30 :						return 'sword_s30';
+		case S_Sword_s31 :						return 'sword_s31';
+		case S_Sword_s32 :						return 'sword_s32';
+		case S_Sword_s33 :						return 'sword_s33';
+		case S_Sword_s34 :						return 'sword_s34';
+		case S_Sword_s35 :						return 'sword_s35';
+		case S_Sword_s36 :						return 'sword_s36';
 		
 		case S_Magic_s01 :						return 'magic_s1';
 		case S_Magic_s02 :						return 'magic_s2';
@@ -428,6 +589,28 @@ function SkillEnumToName(s : ESkill) : name
 		case S_Magic_s18 :						return 'magic_s18';
 		case S_Magic_s19 :						return 'magic_s19';
 		case S_Magic_s20 :						return 'magic_s20';
+		case S_Magic_s21 :						return 'magic_s21';
+		case S_Magic_s22 :						return 'magic_s22';
+		case S_Magic_s23 :						return 'magic_s23';
+		case S_Magic_s24 :						return 'magic_s24';
+		case S_Magic_s25 :						return 'magic_s25';
+		case S_Magic_s26 :						return 'magic_s26';
+		case S_Magic_s27 :						return 'magic_s27';
+		case S_Magic_s28 :						return 'magic_s28';
+		case S_Magic_s29 :						return 'magic_s29';
+		case S_Magic_s30 :						return 'magic_s30';
+		case S_Magic_s31 :						return 'magic_s31';
+		case S_Magic_s32 :						return 'magic_s32';
+		case S_Magic_s33 :						return 'magic_s33';
+		case S_Magic_s34 :						return 'magic_s34';
+		case S_Magic_s35 :						return 'magic_s35';
+		case S_Magic_s36 :						return 'magic_s36';
+		case S_Magic_s37 :						return 'magic_s37';
+		case S_Magic_s38 :						return 'magic_s38';
+		case S_Magic_s39 :						return 'magic_s39';
+		case S_Magic_s40 :						return 'magic_s40';
+		case S_Magic_s41 :						return 'magic_s41';
+		case S_Magic_s42 :						return 'magic_s42';
 		
 		case S_Alchemy_s01 :					return 'alchemy_s1';
 		case S_Alchemy_s02 :					return 'alchemy_s2';
@@ -449,6 +632,12 @@ function SkillEnumToName(s : ESkill) : name
 		case S_Alchemy_s18 :					return 'alchemy_s18';
 		case S_Alchemy_s19 :					return 'alchemy_s19';
 		case S_Alchemy_s20 :					return 'alchemy_s20';
+		case S_Alchemy_s22 :					return 'alchemy_s22';
+		case S_Alchemy_s23 :					return 'alchemy_s23';
+		case S_Alchemy_s24 :					return 'alchemy_s24';
+		case S_Alchemy_s25 :					return 'alchemy_s25';
+		case S_Alchemy_s26 :					return 'alchemy_s26';
+		case S_Alchemy_s27 :					return 'alchemy_s27';
 		
 		case S_Perk_01 :						return 'perk_1';
 		case S_Perk_02 :						return 'perk_2';
@@ -472,6 +661,121 @@ function SkillEnumToName(s : ESkill) : name
 		case S_Perk_20 :						return 'perk_20';
 		case S_Perk_21 :						return 'perk_21';
 		case S_Perk_22 :						return 'perk_22';
+		case S_Perk_23 :						return 'perk_23';
+		case S_Perk_24 :						return 'perk_24';
+		case S_Perk_25 :						return 'perk_25';
+		case S_Perk_26 :						return 'perk_26';
+		case S_Perk_27 :						return 'perk_27';
+		case S_Perk_28 :						return 'perk_28';
+		case S_Perk_29 :						return 'perk_29';
+		case S_Perk_30 :						return 'perk_30';
+		case S_Perk_31 :						return 'perk_31';
+		case S_Perk_32 :						return 'perk_32';
+		case S_Perk_33 :						return 'perk_33';
+		case S_Perk_34 :						return 'perk_34';
+		case S_Perk_35 :						return 'perk_35';
+		case S_Perk_36 :						return 'perk_36';
+		case S_Perk_37 :						return 'perk_37';
+		case S_Perk_38 :						return 'perk_38';
+		case S_Perk_39 :						return 'perk_39';
+		case S_Perk_40 :						return 'perk_40';
+		case S_Perk_41 :						return 'perk_41';
+		case S_Perk_42 :						return 'perk_42';
+		case S_Perk_43 :						return 'perk_43';
+		case S_Perk_44 :						return 'perk_44';
+
+		
+		default:								return '';
+	}
+}
+
+function SkillEnumToRemasterName(s : ESkill) : name
+{
+	switch(s)
+	{
+		case S_Sword_s02 :						return 'Rend';
+		case S_Sword_s16 :						return 'Resolve';
+		case S_Sword_s18 :						return 'Undying';
+		case S_Sword_s19 :						return 'Flood of Anger';
+		case S_Sword_s20 :						return 'Razor Focus';
+		case S_Sword_s22 :						return 'Muscle Memory';
+		case S_Sword_s23 :						return 'Strength Training';
+		case S_Sword_s24 :						return 'Precise Blows';
+		case S_Sword_s25 :						return 'Crushing Blows';
+		case S_Sword_s26 :						return 'Anatomical Knowledge';
+		case S_Sword_s27 :						return 'Crippling Shot';
+		case S_Sword_s28 :						return 'Sunder Armor';
+		case S_Sword_s29 :						return 'Crippling Strikes';
+		case S_Sword_s30 :						return 'Deadly Precision';
+		case S_Sword_s31 :						return 'Counter Attack';
+		case S_Sword_s32 :						return 'Lightning Reflexes';
+		case S_Sword_s33 :						return 'Arrow Deflection';
+		case S_Sword_s34 :						return 'Cold Blood';
+		case S_Sword_s35 :						return 'Whirl';
+		case S_Sword_s36 :						return 'Fleet Footed';
+		
+		case S_Magic_s01 :						return 'Aard Sweep';
+		case S_Magic_s03 :						return 'Magic Trap';
+		case S_Magic_s08 :						return 'Melt Armor';
+		case S_Magic_s11 :						return 'Supercharged Glyphs';
+		case S_Magic_s13 :						return 'Exploding Shield';
+		case S_Magic_s14 :						return 'Active Shield';
+		case S_Magic_s17 :						return 'Delusion';
+		case S_Magic_s19 :						return 'Domination';
+		case S_Magic_s20 :						return 'Far Reaching Aard';
+		case S_Magic_s28 :						return 'Firestream';
+		case S_Magic_s31 :						return 'Puppet';
+		case S_Magic_s33 :						return 'Shock Wave';
+		case S_Magic_s35 :						return 'Catalyst';
+		case S_Magic_s36 :						return 'Fortified Signs';
+		case S_Magic_s37 :						return 'Convergence Theory';
+		case S_Magic_s38 :						return 'Focus';
+		case S_Magic_s39 :						return 'Avoidance';
+		case S_Magic_s40 :						return 'Overload';
+		case S_Magic_s41 :						return 'Resonance';
+		case S_Magic_s42 :						return 'Sustained Glyphs';
+		
+		case S_Alchemy_s02 :					return 'Refreshment';
+		case S_Alchemy_s03 :					return 'Delayed Recovery';
+		case S_Alchemy_s04 :					return 'Side Effects';
+		case S_Alchemy_s05 :					return 'Protective Coating';
+		case S_Alchemy_s08 :					return 'Efficiency';
+		case S_Alchemy_s10 :					return 'Pyrotechnics';
+		case S_Alchemy_s11 :					return 'Cluster Bombs';
+		case S_Alchemy_s12 :					return 'Poisoned Blades';
+		case S_Alchemy_s13 :					return 'Tissue Transformation';
+		case S_Alchemy_s14 :					return 'Adaptation';
+		case S_Alchemy_s15 :					return 'Fast Metabolism';
+		case S_Alchemy_s16 :					return 'Frenzy';
+		case S_Alchemy_s18 :					return 'Acquired Tolerance';
+		case S_Alchemy_s20 :					return 'Endure Pain';
+		case S_Alchemy_s22 :					return 'Debilitating Poison';
+		case S_Alchemy_s23 :					return 'Toxic Shock';
+		case S_Alchemy_s24 :					return 'Heightened Tolerance';
+		case S_Alchemy_s25 :					return 'Volatile Concoction';
+		case S_Alchemy_s26 :					return 'Wyvern Sting';
+		case S_Alchemy_s27 :					return 'Hunter Instinct';
+		
+		case S_Perk_23 :						return 'Cat School Technique';
+		case S_Perk_24 :						return 'Griffin School Technique';
+		case S_Perk_25 :						return 'Bear School Technique';
+		case S_Perk_26 :						return 'Wolven School Technique';
+		case S_Perk_27 :						return 'Manticore School Technique';
+		case S_Perk_28 :						return 'Viper School Technique';
+		case S_Perk_30 :						return 'Survival Instinct';
+		case S_Perk_31 :						return 'Attack is the Best Defense';
+		case S_Perk_32 :						return 'Metabolism Boost';
+		case S_Perk_33 :						return 'Metabolic Control';
+		case S_Perk_34 :						return 'Rage Management';
+		case S_Perk_35 :						return 'Strong Back';
+		case S_Perk_37 :						return 'Conjunction';
+		case S_Perk_38 :						return 'Sun and Stars';
+		case S_Perk_39 :						return 'Advanced Pyrotechnics';
+		case S_Perk_40 :						return 'Battle Frenzy';
+		case S_Perk_41 :						return 'Gourmet';
+		case S_Perk_42 :						return 'Adrenaline Burst';
+		case S_Perk_43 :						return 'Synergy';
+		case S_Perk_44 :						return 'Element of Surprise';
 		
 		default:								return '';
 	}
@@ -612,6 +916,7 @@ enum EPlayerRepelType
 enum ERotationRate
 {
 	RR_0 		= 0,
+	RR_5		= 5,
 	RR_30 		= 30,
 	RR_60 		= 60,
 	RR_90 		= 90,
@@ -642,7 +947,9 @@ enum EThrowStage
 	TS_Loop,
 	TS_End,
 	TS_Stop,
+
 };
+
 
 enum EParryStage
 {
@@ -791,7 +1098,9 @@ enum EInputActionBlock
 	EIAB_OpenMeditation,
 	EIAB_Noticeboards,
 	EIAB_FastTravelGlobal,
-	EIAB_CameraLock
+	EIAB_CameraLock,
+	EIAB_NonPatternAlternatives,	
+
 }
 
 function IsActionCombat(action : EInputActionBlock) : bool
@@ -810,6 +1119,7 @@ function IsActionCombat(action : EInputActionBlock) : bool
 		case EIAB_LightAttacks :
 		case EIAB_HeavyAttacks :
 		case EIAB_Crossbow :
+
 		case EIAB_SpecialAttackLight :
 		case EIAB_SpecialAttackHeavy :
 			return true;
@@ -870,8 +1180,8 @@ enum EPlayerActionToRestore
 	PATR_CastSign,
 	PATR_ThrowBomb,
 	PATR_CallHorse,
-	PATR_None
-	
+	PATR_None,
+
 }
 
 enum EPlayerInteractionLock
@@ -949,3 +1259,15 @@ enum EHorseMode
 	EHM_Devil,
 	EHM_Unicorn
 }
+
+enum EPreciseBlowsCounterId
+{
+	PreciseBlowsCounterId_Fast,
+	PreciseBlowsCounterId_Strong
+};
+
+enum ECrushingBlowsCounterId
+{
+	CrushingBlowsCounterId_SimpleAttack,
+	CrushingBlowsCounterId_BuffedAttack
+};

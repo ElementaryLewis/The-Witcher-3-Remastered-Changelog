@@ -239,7 +239,7 @@ abstract class W3CriticalDOTEffect extends W3DamageOverTimeEffect
 		
 		
 		if(isOnPlayer)
-			theGame.VibrateControllerVeryHard();	
+			theGame.HapticStart( "classic_vibro_large_oneshot" );
 	}
 	
 	event OnEffectRemoved()

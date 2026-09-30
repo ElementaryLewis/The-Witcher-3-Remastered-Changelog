@@ -3,8 +3,53 @@
 /** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
+struct SCameraDistanceParams 
+{
+	
+	var horse_close_default : float;					default horse_close_default = -0.7f; 	
+	var horse_close_gallop : float;						default horse_close_gallop = -0.9f;
+	var horse_close_canter : float;						default horse_close_canter = -0.42f;	
+
+	var horse_far_default : float;						default horse_far_default = 3.5f;
+	var horse_far_gallop : float;						default horse_far_gallop = 4.1f;
+	var horse_far_canter : float;						default horse_far_canter = 4.9f;
+
+	var horse_fov_default : float;						default horse_fov_default = 60.0f;
+	var horse_fov_gallop : float;						default horse_fov_gallop = 60.0f;
+	var horse_fov_canter : float;						default horse_fov_canter = 60.0f;
+
+	
+	var cart_close_default : float;						default cart_close_default = -1.0f;
+	var cart_close_gallop : float;						default cart_close_gallop = -1.6f;
+	var cart_close_canter : float;						default cart_close_canter = -1.9f;
+
+	var cart_far_default : float;						default cart_far_default = 4.5f;
+	var cart_far_gallop : float;						default cart_far_gallop = 6.0f;
+	var cart_far_canter : float;						default cart_far_canter = 7.0f;
+
+	var cart_fov_default : float;						default cart_fov_default = 70.0f;
+	var cart_fov_gallop : float;						default cart_fov_gallop = 80.0f;
+	var cart_fov_canter : float;						default cart_fov_canter = 80.0f;
+}
+
+struct SCamDistConfig
+{
+	var close_default : float;
+	var close_gallop : float;					
+	var close_canter : float;			
+
+	var far_default : float;					
+	var far_gallop : float;						
+	var far_canter : float;
+
+	var fov_default : float;
+	var fov_gallop : float;
+	var fov_canter : float;
+}
+
 state HorseRiding in CR4Player extends UseGenericVehicle
 {
+	private var isCarriage : bool;
 	private var dismountRequest : bool;
 	private var vehicleCombatMgr : W3HorseCombatManager;
 	
@@ -15,9 +60,17 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 	
 	default meleeTicketRequest		= -1;
 	default rangeTicketRequest		= -1;
+	
+	var camDistConfig_horse : SCamDistConfig;
+	var camDistConfig_cart : SCamDistConfig;
 
 	private var initCamera : bool;
 	
+	private var hasInFlightLean		: bool;
+	private var hasPendingLean		: bool;
+	private var pendingLeanDir 	 	: float;
+	private var pendingLeanSpeed 	: float;
+
 	
 	
 	
@@ -35,11 +88,47 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		vehicleCombatMgr.GotoStateAuto();
 		vehicle.SetCombatManager( vehicleCombatMgr );
 		
+		isCarriage = vehicle.GetEntity().HasTag( 'carriage_horse' );
+
 		initCamera = true;
 		
 		CheckForWeapons();
 		
 		ProcessHorseRiding();
+
+		InitCamDistConfigFroomParams();
+	}
+
+	protected function InitCamDistConfigFroomParams()
+	{
+		var camDistParams : SCameraDistanceParams;
+		camDistParams = SCameraDistanceParams();
+
+		
+		camDistConfig_horse.close_default = camDistParams.horse_close_default;
+		camDistConfig_horse.close_gallop = camDistParams.horse_close_gallop;
+		camDistConfig_horse.close_canter = camDistParams.horse_close_canter;
+
+		camDistConfig_horse.far_default = camDistParams.horse_far_default;
+		camDistConfig_horse.far_gallop = camDistParams.horse_far_gallop;
+		camDistConfig_horse.far_canter = camDistParams.horse_far_canter;
+
+		camDistConfig_horse.fov_default = camDistParams.horse_fov_default;
+		camDistConfig_horse.fov_gallop = camDistParams.horse_fov_gallop;
+		camDistConfig_horse.fov_canter = camDistParams.horse_fov_canter;
+
+		
+		camDistConfig_cart.close_default = camDistParams.cart_close_default;
+		camDistConfig_cart.close_gallop = camDistParams.cart_close_gallop;
+		camDistConfig_cart.close_canter = camDistParams.cart_close_canter;
+
+		camDistConfig_cart.far_default = camDistParams.cart_far_default;
+		camDistConfig_cart.far_gallop = camDistParams.cart_far_gallop;
+		camDistConfig_cart.far_canter = camDistParams.cart_far_canter;
+
+		camDistConfig_cart.fov_default = camDistParams.cart_fov_default;
+		camDistConfig_cart.fov_gallop = camDistParams.cart_fov_gallop;
+		camDistConfig_cart.fov_canter = camDistParams.cart_fov_canter;
 	}
 	
 	event OnEnterState( prevStateName : name )
@@ -62,7 +151,12 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		
 		parent.SetBehaviorVariable('playerRider', 1.f );
 		
+		BlockActions( true );
+
 		dismountRequest = false;
+
+		hasPendingLean = false;
+		hasInFlightLean = false;
 	}
 	
 	event OnLeaveState( nextStateName : name )
@@ -81,12 +175,12 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		}
 		else
 		{
-			theGame.ActivateHorseCamera( false, 0.f );
+			theGame.ActivateHorseCamera( false, 0.2f );
 		}
 		
 		ChangeTicketPool( false );
 		
-		camera.fov = 60;
+		camera.fov = parent.GetExplorationCameraFov();
 
 		scabbardsComp.SetBehaviorVariable( 'onHorse', 0.0 );
 		
@@ -99,6 +193,8 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		
 		dismountRequest = false;
 		
+		BlockActions( false );
+
 		super.OnLeaveState(nextStateName);
 	}
 	
@@ -125,7 +221,7 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		var inGameConfigWrapper : CInGameConfigWrapper;
 		
 		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-		disableAutoSheathe = inGameConfigWrapper.GetVarValue( 'Gameplay', 'DisableAutomaticSwordSheathe' );
+		disableAutoSheathe = inGameConfigWrapper.GetVarValue( 'Accessibility', 'DisableAutomaticSwordSheathe' );
 		if( disableAutoSheathe )
 		{
 			parent.RemoveTimer('DrawWeaponIfNeeded');
@@ -240,6 +336,11 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		
 		parent.EnableCharacterCollisions( true );
 		parent.RegisterCollisionEventsListener();
+
+		thePlayer.SetIsHorseMoving( false );
+		thePlayer.SetIsOnHorse( false );
+
+		OnStopSkippingTreeCollision();
 	}
 	
 	
@@ -261,10 +362,29 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 	{	
 		var camera : CCustomCamera;
 		var angleDist : float;
+		var horseComp : W3HorseComponent;
 		
 		camera = (CCustomCamera)theCamera.GetTopmostCameraObject();
 		
+		horseComp = (W3HorseComponent)(((CR4PlayerStateHorseRiding)thePlayer.GetState( 'HorseRiding' )).vehicle);
 		
+		
+		if ( horseComp.IsFullyMounted() )
+		{
+			thePlayer.SetIsOnHorse( true );
+		}
+		else
+		{
+			thePlayer.SetIsOnHorse( false );
+		}
+		if ( horseComp.inCanter || horseComp.inGallop )
+		{
+			thePlayer.SetIsHorseMoving( true );
+		}
+		else
+		{
+			thePlayer.SetIsHorseMoving( false );
+		}
 		
 		if ( !cameraManualRotationDisabled && parent.IsCameraLockedToTarget())
 		{
@@ -319,6 +439,13 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		
 		
 		var didTrace : bool;
+
+		var camParams : SCamDistConfig;
+
+		if ( isCarriage )
+			camParams = camDistConfig_cart;
+		else
+			camParams = camDistConfig_horse;
 		
 		if ( !parent.IsAlive() )
 		{
@@ -328,7 +455,7 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 			return true;
 		}
 		
-		camera = (CCustomCamera)theCamera.GetTopmostCameraObject();
+		camera = (CCustomCamera)theCamera.GetTopmostCameraObject();		
 		
 		if ( super.OnGameCameraPostTick( moveData, dt ) )
 		{	
@@ -354,8 +481,10 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		}
 		else if ( !horseComp.inCanter && !horseComp.inGallop && !horseComp.OnCheckHorseJump() )
 		{
-			moveData.pivotDistanceController.SetDesiredDistance( 3.5 ); 
-			currDesiredDist = 3.5;										
+			moveData.pivotDistanceController.SetDesiredDistance( camParams.far_default );
+			currDesiredDist = camParams.far_default;
+			if ( !parent.IsModernExplorationCamera() )	
+				DampFloatSpring( camera.fov, fovVel, camParams.fov_default, 1.0, dt );
 			
 			
 			
@@ -369,13 +498,17 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 		}
 		else if ( horseComp.inCanter && !horseComp.OnCheckHorseJump() )
 		{
-			moveData.pivotDistanceController.SetDesiredDistance( 4.9f );
-			currDesiredDist = 4.9;
+			moveData.pivotDistanceController.SetDesiredDistance( camParams.far_canter );
+			currDesiredDist = camParams.far_canter;
+			if ( !parent.IsModernExplorationCamera() )	
+				DampFloatSpring( camera.fov, fovVel, camParams.fov_canter, 1.0, dt );
 		}
 		else if ( horseComp.inGallop && !horseComp.OnCheckHorseJump() )
 		{
-			moveData.pivotDistanceController.SetDesiredDistance( 4.1f ); 
-			currDesiredDist = 4.1;										 
+			moveData.pivotDistanceController.SetDesiredDistance( camParams.far_gallop );
+			currDesiredDist = camParams.far_gallop;
+			if ( !parent.IsModernExplorationCamera() )	
+				DampFloatSpring( camera.fov, fovVel, camParams.fov_gallop, 1.0, dt );
 		}
 		
 		if ( horseComp.OnCheckHorseJump() )
@@ -424,24 +557,24 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 				mult = SqrF(mult) * -1;	
 			
 				if(sprintLeft && theInput.LastUsedGamepad())
-					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.3f, -0.42f + mult, 0.0f ), 0.7f, dt );
+					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.3f, camParams.close_canter + mult, 0.0f ), 0.7f, dt );
 				else
-					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.8f, -0.42f + mult, 0.0f ), 0.7f, dt );
+					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.8f, camParams.close_canter + mult, 0.0f ), 0.7f, dt );
 			}
 			else if(horseComp.inGallop)
 			{
 				if(sprintLeft && theInput.LastUsedGamepad())
-					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.3f, -0.9f, 0.1f ), 1.0f, dt );		
+					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.3f, camParams.close_gallop, 0.1f ), 1.0f, dt );		
 				else
-					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.8f, -0.9f, 0.1f ), 1.0f, dt );		
+					DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.8f, camParams.close_gallop, 0.1f ), 1.0f, dt );		
 			}
 			else
 			{
 				mult = AbsF( AngleDistance(camera.GetHeading(), thePlayer.GetHeading()) );
 				mult = mult/180;
-				mult = SqrF(mult) * -1;		
+				mult = SqrF(mult) * -1;
 
-				DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.8f, -0.7f + mult, 0.1f ), 1.0f, dt );	
+				DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 0.8f, camParams.close_default + mult, 0.1f ), 1.0f, dt );
 				sprintLeft = false;	
 			}
 		}
@@ -543,6 +676,25 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 	
 	
 	
+	private function BlockActions( toggle : bool )
+	{
+		if ( isCarriage )
+		{
+			if ( toggle )
+			{
+				
+				thePlayer.weaponHolster.HolsterWeapon( true );
+				thePlayer.BlockAction( EIAB_DrawWeapon, 'HorseRiding' );
+				thePlayer.BlockAction( EIAB_CallHorse,  'HorseRiding' );
+
+			} 
+			else
+			{
+				thePlayer.BlockAllActions( 'HorseRiding', false );
+			}
+		}
+	}
+
 	private function CheckForWeapons()
 	{
 		if( parent.GetCurrentMeleeWeaponType() == PW_Steel || parent.GetCurrentMeleeWeaponType() == PW_Silver )
@@ -666,6 +818,63 @@ state HorseRiding in CR4Player extends UseGenericVehicle
 	
 	
 	event OnProcessCastingOrientation( isContinueCasting : bool ) {}
+
+	event OnSkippingTreeCollision( collisionDir : float, collisionSpeed : float )
+	{
+		if ( !parent.IsCiri() )
+		{
+			DoLean( collisionSpeed, collisionDir );
+		}
+	}
+
+	event OnStopSkippingTreeCollision()
+	{
+		AbortCurrentLean();
+		hasPendingLean = false;
+	}
+
+	event OnSkippingTreeCollisionLeanStart()
+	{
+		hasInFlightLean = true;
+	}
+
+	event OnSkippingTreeCollisionLeanEnd()
+	{
+		hasInFlightLean = false;
+		if ( hasPendingLean ) 
+		{
+			hasPendingLean = false;
+			DoLeanNow( pendingLeanSpeed, pendingLeanDir );
+		}
+	}
+
+	function DoLean( speed : float, dir : float )
+	{
+		if ( hasInFlightLean )
+		{
+			pendingLeanSpeed = MinF( speed + 1.0, 2.0 );
+			pendingLeanDir = dir;
+			hasPendingLean = true;
+			AbortCurrentLean();
+		}
+		else
+		{
+			DoLeanNow( speed, dir );
+		}
+	}
+
+	function DoLeanNow( speed : float, dir : float )
+	{
+		parent.SetBehaviorVariable( 'treeCollisionLeanSpeed', speed );
+		parent.SetBehaviorVariable( 'treeCollisionLeanDirection', dir );
+		parent.RaiseEvent( 'treeCollisionLean' );
+		
+	}
+
+	function AbortCurrentLean()
+	{
+		parent.RaiseEvent( 'treeCollisionLeanAbort' );
+	}
 }
 
 

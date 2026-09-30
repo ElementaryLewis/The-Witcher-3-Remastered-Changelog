@@ -346,7 +346,7 @@ class W3Trap extends W3MonsterClue
 		}
 	}
 	
-	private function StructFactsHack()
+	protected function StructFactsHack()
 	{
 		
 		if ( factOnArm.ID != "" )

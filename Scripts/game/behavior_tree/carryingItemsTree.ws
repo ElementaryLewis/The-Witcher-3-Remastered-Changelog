@@ -46,6 +46,9 @@ class CAICarryingItemsParams extends CAINpcWanderParams
 	editable var carryingArea 			: EntityHandle;
 	editable var dropItemOnDeactivation : bool;
 	
+	editable var specialCarry			: bool;
+	editable var specialCarryBuckets			: bool;
+	
 	function Init()
 	{
 		super.Init();

@@ -210,6 +210,7 @@ class CAINpcOlgierdParryAction extends CAINpcDefenseAction
 
 
 
+
 class CAINpcDettlaffVampireCounterAction extends CAINpcDefenseAction
 {
 	default aiTreeName = "resdef:ai\monsters/monster_dettlaff_vampire_counter";
@@ -665,6 +666,9 @@ class CAINpcOlgierdTacticTree extends CAINpcCustomTacticTree
 };
 
 
+
+
+
 class CAINpcDettlaffVampireTacticTree extends CAINpcCustomTacticTree
 {
 	default aiTreeName = "resdef:ai\monsters/monster_dettlaff_vampire_logic";
@@ -784,6 +788,8 @@ class CAIAttackBehaviorTreeParams extends CAICombatActionParameters
 		farAttackActionRange = 'rangeFar';
 	}
 };
+
+
 
 
 
@@ -1205,6 +1211,17 @@ class CAICastArcaneExplosionSpecialAction extends CAISpecialAction
 class CAIShadowDashSpecialAction extends CAISpecialAction
 {
 	default aiTreeName = "resdef:ai\combat\npc_special_shadow_dash";
+
+	function Init()
+	{
+		params = new CAISpecialActionParams in this;
+		params.OnCreated();
+	}
+};
+
+class CAISpectralRushSpecialAction extends CAISpecialAction
+{
+	default aiTreeName = "resdef:ai\combat\npc_special_spectral_rush";
 
 	function Init()
 	{

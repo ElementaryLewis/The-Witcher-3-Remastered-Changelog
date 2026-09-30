@@ -291,6 +291,8 @@ class W3LevelManager
 				hudWolfHeadModule.ShowLevelUpIndicator(show);
 			}
 		}
+
+		( ( W3PlayerAbilityManager ) GetWitcherPlayer().abilityManager ).UpdateSkillSlots();
 	}
 	
 	

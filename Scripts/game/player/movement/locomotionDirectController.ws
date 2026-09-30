@@ -88,7 +88,7 @@ class CR4LocomotionPlayerControllerScript extends CR4LocomotionDirectControllerS
 		player.SetIsWalking( false );
 		
 		movingAgentComponent.SetGameplayRelativeMoveSpeed( 0.0f );
-		movingAgentComponent.SetGameplayMoveDirection( 0.0f );
+		movingAgentComponent.UnsetGameplayMoveDirection();
 		
 		stopCheckEnabled = false;
 			
@@ -279,18 +279,28 @@ class CR4LocomotionPlayerControllerScript extends CR4LocomotionDirectControllerS
 		{
 			player.OnExitShallowWater();
 		}
+
 		
-		
-		
-		if ( _inputLocoEnabled )
+		if ( player.IsSwimming() && moveSpeed <= 0.f)
 		{
-			worldMoveDirection = _inputHeading180LastCached;
+			ResetMoveDirection();
+			worldMoveDirection = player.GetHeading();
+		}
+		else
+		{
+			
+			if ( _inputLocoEnabled )
+			{
+				worldMoveDirection = _inputHeading180LastCached;
+			}
+			
+			else if ( moveSpeed > 0.f )
+			{
+				worldMoveDirection 	= (localMoveDirection * -180.0f) + playerYaw;
+			}
 		}
 		
-		else if ( moveSpeed > 0.f )
-		{
-			worldMoveDirection 	= (localMoveDirection * -180.0f) + playerYaw;
-		}
+		
 		
 		if( player.IsOnBoat() )
 		{
@@ -304,6 +314,8 @@ class CR4LocomotionPlayerControllerScript extends CR4LocomotionDirectControllerS
 			
 			if ( !player.IsInputHeadingReady() )
 				moveSpeed = 0;
+				
+				
 			
 			if( VecLengthSquared( movingAgentComponent.GetVelocity() ) < 0.25f && player.GetCurrentStateName() != 'AimThrow' )
 			{
@@ -355,6 +367,20 @@ class CR4LocomotionPlayerControllerScript extends CR4LocomotionDirectControllerS
 		
 		player.SetIsWalking( moveSpeed > 0.1f );
 		player.SetIsRunning( moveSpeed > 0.85f ); 
+	}
+
+	function OnTeleported()
+	{
+		
+
+		if ( player.IsSwimming() )
+		{
+			ResetMoveDirection();
+			worldMoveDirection = player.GetHeading();
+			moveSpeed = 0;
+			angularInputSpeed = 0;
+			cachedMoveSpeed = 0;
+		}
 	}
 	
 	private function UpdateInputReadyness()
@@ -453,8 +479,7 @@ class CR4LocomotionPlayerControllerScript extends CR4LocomotionDirectControllerS
 		{
 			_inputMagLastCached = _inputMagCurr;
 		}
-	}
-	
+	}	
 	
 	private function MakeInputReady()
 	{
@@ -1120,6 +1145,8 @@ class CR4LocomotionPlayerControllerScript extends CR4LocomotionDirectControllerS
 		var useHeadingWS		: float;
 		var useFacingWS			: float;
 		var target				: CGameplayEntity;
+		var targetPos			: Vector;
+		var boneIndex			: int;
 		
 		var canFaceTarget		: bool;
 		var playerToTargetVec	: Vector;
@@ -1157,7 +1184,16 @@ class CR4LocomotionPlayerControllerScript extends CR4LocomotionDirectControllerS
 
 			if ( target )
 			{		
-				playerToTargetVec = target.GetWorldPosition()- player.GetWorldPosition();
+				if ( (CActor)target )
+				{
+					player.GetNearestTargetablePositionToPlayer( (CActor)target, targetPos, boneIndex );
+					playerToTargetVec = targetPos - player.GetWorldPosition();
+				}
+				else
+				{
+					playerToTargetVec = target.GetWorldPosition() - player.GetWorldPosition();
+				}
+					
 			
 				if ( !canFaceTarget )
 				{

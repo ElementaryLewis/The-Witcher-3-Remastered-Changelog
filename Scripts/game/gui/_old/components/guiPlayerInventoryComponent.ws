@@ -627,7 +627,7 @@ class W3GuiPlayerInventoryComponent extends W3GuiBaseInventoryComponent
 			targetGridSection = 1;
 		}
 		else
-		if( _inv.IsItemWeapon( itemId ) || _inv.ItemHasTag( itemId, 'WeaponUpgrade' ) || _inv.ItemHasTag( itemId, 'WeaponReapairKit' ) || _inv.IsItemBolt( itemId ) ||  _inv.IsItemUsable( itemId ) || _inv.IsQuickSlotItem( itemId ) )
+		if( _inv.IsItemWeapon( itemId ) || _inv.ItemHasTag( itemId, 'WeaponUpgrade' ) || _inv.ItemHasTag( itemId, 'WeaponReapairKit' ) || _inv.ItemHasTag( itemId, 'Sharpstone' ) || _inv.IsItemBolt( itemId ) ||  _inv.IsItemUsable( itemId ) || _inv.IsQuickSlotItem( itemId ) )
 		{
 			targetGridSection = 0;
 		}
@@ -1048,6 +1048,25 @@ function GetItemRarityDescriptionFromInt( quality : int ) : string
 			return "<font color='#934913'>"+GetLocStringByKeyExt("panel_inventory_item_rarity_type_relic")+"</font>";	
 		case 5:
 			return "<font color='#197319'>"+GetLocStringByKeyExt("panel_inventory_item_rarity_type_set")+"</font>";
+		default:
+			return "";
+	}
+}
+
+function GetItemRarityColorFromInt( quality : int ) : string
+{
+	switch(quality)
+	{
+		case 1:													  
+			return "<font color='#7b7877'>";
+		case 2:
+			return "<font color='#3661dc'>";
+		case 3:
+			return "<font color='#959500'>";
+		case 4:
+			return "<font color='#934913'>";
+		case 5:
+			return "<font color='#197319'>";
 		default:
 			return "";
 	}
