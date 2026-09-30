@@ -27,33 +27,33 @@ For instance:
 ### SCRIPTS 
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04 vs 4.04a_REDkit") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
-| [5.00]( "Scripts 4.04b vs 5.00") | [5.XX]( "Scripts 5.00 vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04 vs 4.04a_REDkit") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/e026f253c8790ebcfe545188eb0ae77978dc1178 "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/e026f253c8790ebcfe545188eb0ae77978dc1178 "Scripts 4.04b vs 5.00b") | [5.XX]( "Scripts 5.00b vs 5.XX") | 2026/XX/XX |
 
 
 ### XML
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/15e2b662b3a9145e7d24e72c4e8ab37aac0f2db3 "XML 4.02 vs 4.03") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
-| [5.00]( "XML 4.04b vs 5.00") | [5.XX]( "XML 5.00 vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/15e2b662b3a9145e7d24e72c4e8ab37aac0f2db3 "XML 4.02 vs 4.03") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00]( "XML 4.04b vs 5.00") | [5.XX]( "XML 5.00b vs 5.XX") | 2026/XX/XX |
 
 ### CSV
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/d0e37d82188654cd5e4abb2f4ff70edfcc097688 "CSV 4.04 vs 4.04a_REDkit") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
-| [5.00]( "CSV 4.04b vs 5.00") | [5.XX]( "CSV 5.00 vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/d0e37d82188654cd5e4abb2f4ff70edfcc097688 "CSV 4.04 vs 4.04a_REDkit") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00b]( "CSV 4.04b vs 5.00b") | [5.XX]( "CSV 5.00b vs 5.XX") | 2026/XX/XX |
 
 ### W3STRINGS
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/aded0c0885c208f68b068defe18c4638db187e98 "W3Strings 4.03 vs 4.04") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
-| [5.00]( "W3Strings 4.04b vs 5.00") | [5.XX]( "W3Strings 5.00 vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/aded0c0885c208f68b068defe18c4638db187e98 "W3Strings 4.03 vs 4.04") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00b]( "W3Strings 4.04b vs 5.00b") | [5.XX]( "W3Strings 5.00b vs 5.XX") | 2026/XX/XX |
 
 ### BUNDLED NON-TEXT
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://raw.githubusercontent.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/refs/heads/main/CR2W_summary/CR2W_changed-list.txt "Bundled 1.32 vs 4.00") | [5.00]( "Scripts 4.04b vs 5.00") | 2026/09/29 |
-| [5.00]( "Bundled 4.04b vs 5.00") | [5.XX]( "Bundled 5.00 vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://raw.githubusercontent.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/refs/heads/main/CR2W_summary/CR2W_changed-list.txt "Bundled 1.32 vs 4.00") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00b]( "Bundled 4.04b vs 5.00b") | [5.XX]( "Bundled 5.00b vs 5.XX") | 2026/XX/XX |
 
 
 #### Our Discord Servers:
