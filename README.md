@@ -5,7 +5,7 @@ Changelog of The Witcher 3: Wild Hunt - Remastered.
 GitHub repository to survey every The Witcher 3 game update from Next-Gen 4.04 to Remastered 5.00 and forward.
 This is meant as a resource for modders, helping them to know which files were changed and what the changes are, so they can update their mods for the Remastered version if needed.
 
-**All files are encoded in UFT-8 (with or without BOM)! They were previously UFT-16 LE BOM in Next-Gen version.**
+**All files are encoded in UFT-8! They were previously UFT-16 LE BOM in Next-Gen version.**
 
 For the purpose of creating a comparison commit, most but not all "false positive" changes were removed.
 
@@ -34,8 +34,8 @@ For instance:
 ### XML
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/15e2b662b3a9145e7d24e72c4e8ab37aac0f2db3 "XML 4.02 vs 4.03") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
-| [5.00]( "XML 4.04b vs 5.00") | [5.XX]( "XML 5.00b vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/15e2b662b3a9145e7d24e72c4e8ab37aac0f2db3 "XML 4.02 vs 4.03") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/bbdc09e016e5c0add4321a1140e19deff0e402eb "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/bbdc09e016e5c0add4321a1140e19deff0e402eb "XML 4.04b vs 5.00") | [5.XX]( "XML 5.00b vs 5.XX") | 2026/XX/XX |
 
 ### CSV
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
