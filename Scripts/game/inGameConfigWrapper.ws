@@ -25,6 +25,7 @@ import class CInGameConfigWrapper
 	import final function GetVarsNumByGroupName( groupName : name ) : int;
 	import final function IsVarVisible( groupName : name, varName : name ) : bool;
 	import final function DoVarHasTag( groupName : name, varName : name, tag : name ) : bool;
+	import final function DoOptionHasTag( groupName : name, varName : name, optionIdx : int, tag : name ) : bool;
 	
 	
 	import final function GetGroupsNum() : int;
@@ -47,6 +48,9 @@ import class CInGameConfigWrapper
 	import final function GetEntriesNumForOption( groupName : name, varName : name, optionId : int ) : int;
 	import final function GetEntryNameForOption( groupName : name, varName : name, optionId : int, entryId : int ) : name;
 	import final function GetCurrentOptionId( groupName : name, varName : name ) : int;
+
+	import final function GetRawConfigValueByStr( groupName : string, varName : string ) : string;
+	import final function SetRawConfigValueByStr( groupName : string, varName : string, varValue : string );
 }
 
 	function GetVarsNumForGroupDisplayName( displayName : string ) : int

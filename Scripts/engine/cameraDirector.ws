@@ -13,6 +13,9 @@ import class CCameraDirector
 	
 	
 	import final function WorldVectorToViewRatio( worldPos : Vector, out x : float, out y : float ) : bool;
+
+	
+	import final function TestWorldVectorToViewRatio( worldPos : Vector, out x : float, out y : float, cameraPos : Vector, cameraRot : EulerAngles ) : bool;
 	
 	import final function GetCameraPosition() : Vector;
 	import final function GetCameraRotation() : EulerAngles;

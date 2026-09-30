@@ -102,6 +102,8 @@ class CAIEchinopsIdleDecorator extends CAIMonsterIdleDecorator
 }
 
 
+
+
 class CAIMonsterIdleDecoratorParams extends CAIIdleParameters
 {
 	editable inlined var reactionTree 		: CAIMonsterReactionsTree;
@@ -676,7 +678,7 @@ class CAIMonsterIdleDecoratorGravehag extends CAIMonsterIdleDecorator
 
 class CAIFrogIdleDecorator extends CAIMonsterIdleDecorator
 {
-	default aiTreeName = "resdef:ai\idle\frog_idle_decorator";
+	default aiTreeName = "resdef:ai\idle\toad_idle_decorator";
 	
 	
 	

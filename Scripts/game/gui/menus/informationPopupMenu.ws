@@ -64,4 +64,3 @@ class CR4InformationPopupMenu extends CR4MenuBase
 		CloseMenu();		
 	}
 }
-

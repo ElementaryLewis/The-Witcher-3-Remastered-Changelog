@@ -29,7 +29,7 @@ quest function AssignNPCGroupAttitudeQuest( npcTag : name, attGroup : name )
 		LogQuest("AssignNPCGroupAttitudeQuest: cannot find any NPC with tag <<" + npcTag + ">>, unable to change attitude group to <<" + attGroup + ">>");
 }
 
-quest function AssignNPCTemporaryGroupAttitudeQuest( npcTag : name, attGroup : name, priority : EAttitudeGroupPriority, set : bool )
+quest function AssignNPCTemporaryGroupAttitudeQuest( npcTag : name, attGroup : name, priority : EAttitudeGroupPriority, value : bool )
 {
 	var npcs : array<CNewNPC>;
 	var i : int;
@@ -41,7 +41,7 @@ quest function AssignNPCTemporaryGroupAttitudeQuest( npcTag : name, attGroup : n
 	{
 		if(npcs[i])
 		{
-			if (set)
+			if (value)
 			{
 				npcs[i].SetTemporaryAttitudeGroup( attGroup, priority );
 			}

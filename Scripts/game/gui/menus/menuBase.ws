@@ -19,6 +19,7 @@ struct SKeyBinding
 	var Enabled 		 : bool;
 	var IsLocalized		 : bool;
 	var IsHold           : bool;
+	var HoldDuration     : float;
 }
 
 enum ENotificationType
@@ -51,9 +52,12 @@ class CR4MenuBase extends CR4Menu
 	protected var m_fxSetGamepadType       		: CScriptedFlashFunction;
 	protected var m_fxLockControlScheme     	: CScriptedFlashFunction;
 	protected var m_fxSetTooltipState			: CScriptedFlashFunction;
+	protected var m_fxHandleForeignInputEvent	: CScriptedFlashFunction;
 	
 	protected var m_fxEnableDebugInput			: CScriptedFlashFunction;
-	protected var m_fxSetPaperdollPreviewIcon  : CScriptedFlashFunction;
+	protected var m_fxSetPaperdollPreviewIcon	: CScriptedFlashFunction;
+
+	protected var m_fxHideAnimation				: CScriptedFlashFunction;
 	
 	protected var m_menuState			 : name;
 	protected var m_notificationData 	 : W3TutorialPopupData;
@@ -109,6 +113,8 @@ class CR4MenuBase extends CR4Menu
 		m_fxLockControlScheme			= m_flashModule.GetMemberFlashFunction( "lockControlScheme" );
 		m_fxEnableDebugInput			= m_flashModule.GetMemberFlashFunction( "enableDebugInput" );
 		m_fxSetTooltipState				= m_flashModule.GetMemberFlashFunction( "setTooltipState" );
+		m_fxHandleForeignInputEvent 	= m_flashModule.GetMemberFlashFunction( "handleForeignInputEvent" );
+		m_fxHideAnimation 				= m_flashModule.GetMemberFlashFunction( "hideAnimation" );
 		
 		m_parentMenu = (CR4MenuBase)GetParent();
 		
@@ -191,6 +197,11 @@ class CR4MenuBase extends CR4Menu
 	
 	event  OnClearSlotNewFlag(item : SItemUniqueId)
 	{
+	}
+
+	public function DispatchForeignInputEvent(type:string, keyCode:int, inputValue:string, navEquivalent:string)
+	{
+		m_fxHandleForeignInputEvent.InvokeSelfFourArgs( FlashArgString(type), FlashArgInt(keyCode), FlashArgString(inputValue), FlashArgString(navEquivalent) );
 	}
 	
 	public function UpdateRestrictDirectClosing(value:bool)
@@ -279,9 +290,19 @@ class CR4MenuBase extends CR4Menu
 	
 	public function UpdateInputDevice():void
 	{
+		
+		var childMenu : CR4MenuBase;
 		var isGamepad:bool = theInput.LastUsedGamepad();
 		
 		SetControllerType(isGamepad);
+		UpdateInputDeviceType();
+
+		childMenu = GetLastChild();
+		if (childMenu)
+		{
+			childMenu.SetControllerType(isGamepad);
+			childMenu.UpdateInputDeviceType();
+		}
 	}
 	
 	protected function SetControllerType(isGamepad:bool):void
@@ -711,7 +732,7 @@ class CR4MenuBase extends CR4Menu
 		}
 	}
 	
-	event  OnAppendGFxButton(actionId:int, gamepadNavCode:String, keyboardKeyCode:int, label:String, holdPrefix:bool)
+	event  OnAppendGFxButton(actionId:int, gamepadNavCode:String, keyboardKeyCode:int, label:String, holdPrefix:bool, optional holdDuration:float)
 	{
 		var newButtonDef:SKeyBinding;
 		
@@ -725,6 +746,7 @@ class CR4MenuBase extends CR4Menu
 			newButtonDef.LocalizationKey = GetHoldLabel() + " " + GetLocStringByKeyExt(label);
 			newButtonDef.IsLocalized = true;
 			newButtonDef.IsHold = true;			
+			newButtonDef.HoldDuration = holdDuration;
 		}
 		else
 		{
@@ -882,6 +904,23 @@ class CR4MenuBase extends CR4Menu
 			}
 			dataObject.SetMemberFlashString("level", l_craftsmanLevelName);
 		}
+	}
+
+	public function HideMenu() 
+	{
+		if(m_fxHideAnimation)
+			m_fxHideAnimation.InvokeSelf();
+		else OnCloseMenu();
+	}
+
+	event  OnKeyUpOnW3ScrollingList(scrollListName:string)
+	{
+		
+	}
+
+	event  OnFadeAnimationPercentageChanged(value:float)
+	{
+		
 	}
 	
 }

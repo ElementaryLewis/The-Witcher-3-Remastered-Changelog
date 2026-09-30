@@ -26,7 +26,7 @@ class W3LeshyRootProjectile extends CProjectileTrajectory
 	}
 	
 	event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
-	{	
+	{
 		var victim 			: CGameplayEntity;
 		
 		if(collidingComponent)
@@ -67,16 +67,16 @@ class W3LeshyRootProjectile extends CProjectileTrajectory
 		var victims 		: array<CGameplayEntity>;
 		var rootDmg 		: float;
 		var i 				: int;
-		
+
 		attributeName = GetBasicAttackDamageAttributeName(theGame.params.ATTACK_NAME_HEAVY, theGame.params.DAMAGE_NAME_PHYSICAL);
 		rootDmg = CalculateAttributeValue(((CActor)caster).GetAttributeValue(attributeName));
-		
+
 		
 		action = new W3Action_Attack in theGame.damageMgr;
 		
-		
+
 		FindGameplayEntitiesInRange( victims, fxEntity, 2, 99, , FLAG_OnlyAliveActors );
-		
+
 		if ( victims.Size() > 0 )
 		{
 			for ( i = 0 ; i < victims.Size() ; i += 1 )
@@ -87,12 +87,12 @@ class W3LeshyRootProjectile extends CProjectileTrajectory
 					action.Init( (CGameplayEntity)caster, victims[i], NULL, ((CGameplayEntity)caster).GetInventory().GetItemFromSlot( 'r_weapon' ), 'attack_heavy', ((CGameplayEntity)caster).GetName(), EHRT_Heavy, false, true, 'attack_heavy', AST_Jab, ASD_DownUp, false, false, false, true );
 					theGame.damageMgr.ProcessAction( action );
 					
-					
+
 					victims[i].OnRootHit();
 				}
 			}
 		}
-		
+
 		delete action;
 	}
 	

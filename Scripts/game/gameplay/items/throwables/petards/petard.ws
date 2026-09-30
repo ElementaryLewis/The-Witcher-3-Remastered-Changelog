@@ -36,12 +36,12 @@ class W3Petard extends CThrowable
 		hint alignToNormal = "If set entity will align it's Z axis with collision normal";
 		
 	
-	private const var FX_TRAIL 						: name;								
+	protected const var FX_TRAIL 					: name;								
 	private const var FX_CLUSTER 					: name;								
 	
 	protected var itemName							: name;								
-	private var targetPos 							: Vector;							
-	private var isProximity							: bool;								
+	protected var targetPos 						: Vector;							
+	protected var isProximity						: bool;								
 	private var isInWater							: bool;								
 	private var isInDeepWater  						: bool;								
 	private var isStuck								: bool;								
@@ -52,7 +52,7 @@ class W3Petard extends CThrowable
 	protected var stopCollisions					: bool;								
 	protected var previousTargets					: array<CGameplayEntity>;			
 	protected var targetsSinceLastCheck				: array<CGameplayEntity>;			
-	private var	wasInTutorialTrigger				: bool;								
+	protected var	wasInTutorialTrigger			: bool;								
 	private var decalRemainingTimes					: array< SPetardShownDecals > ;		
 	protected var impactNormal						: Vector;
 	protected saved var hasImpactFireDamage			: bool;
@@ -264,6 +264,8 @@ class W3Petard extends CThrowable
 	{		
 		var phantom : CPhantomComponent;
 		var inv : CInventoryComponent;
+		var freeBombValue : SAbilityAttributeValue;
+		var isFreeBomb : bool;
 			
 		
 		phantom = (CPhantomComponent)GetComponent('snappingCollisionGroupNames');
@@ -297,7 +299,15 @@ class W3Petard extends CThrowable
 		else
 		{
 			
-			if(!FactsDoesExist("debug_fact_inf_bombs"))
+			isFreeBomb = false;
+			if ( thePlayer.CanUseSkill( S_Perk_39 ) )
+			{
+				freeBombValue = thePlayer.GetSkillAttributeValue(S_Perk_39, 'free_bomb', false, true) * thePlayer.GetSkillLevel(S_Perk_39);
+				isFreeBomb = RandRange(100) < ( CalculateAttributeValue(freeBombValue) * 100 );
+			}
+
+			
+			if(!FactsDoesExist("debug_fact_inf_bombs") && !isFreeBomb)
 				thePlayer.inv.SingletonItemRemoveAmmo(itemId, 1);
 				
 			
@@ -447,7 +457,7 @@ class W3Petard extends CThrowable
 		
 		
 		
-		theGame.VibrateControllerVeryHard();	
+		
 			
 		
 		if ( hitCollisionsGroups.Contains( 'Water' ) )
@@ -564,7 +574,7 @@ class W3Petard extends CThrowable
 		var i : int;
 		var victimTags, attackerTags : array<name>;
 		var dist, camShakeStr, camShakeStrFrac : float;
-		var temp, isPerk16Active : bool;
+		var temp, isImmuneToBombDamageBySkill : bool;
 		var phantom : CPhantomComponent;
 		var meshes : array<CComponent>;
 		var mesh : CMeshComponent;
@@ -595,7 +605,9 @@ class W3Petard extends CThrowable
 		}
 		
 		
-		if(!isCluster && !ignoreBombSkills && (W3PlayerWitcher)GetOwner() && GetWitcherPlayer().CanUseSkill(S_Alchemy_s11) && !HasTag('Snowball'))
+
+		if(!isCluster && !ignoreBombSkills && (W3PlayerWitcher)GetOwner() && GetWitcherPlayer().CanUseSkill(S_Alchemy_s11) && !HasTag('Snowball') )
+
 		{
 			ProcessClusterBombs();
 			return;
@@ -636,9 +648,9 @@ class W3Petard extends CThrowable
 		if(collidedTarget && !targets.Contains(collidedTarget))
 			targets.PushBack(collidedTarget);
 			
-		if( caster == GetWitcherPlayer() && GetWitcherPlayer().CanUseSkill( S_Perk_16 ) )
+		if( caster == GetWitcherPlayer() && GetWitcherPlayer().CanUseSkill( S_Perk_39 ) )
 		{
-			isPerk16Active = true;
+			isImmuneToBombDamageBySkill = true;
 		}
 		
 		for( i=targets.Size() - 1; i >= 0; i -= 1)
@@ -677,7 +689,7 @@ class W3Petard extends CThrowable
 				
 			}
 			
-			if ( targets[i] == GetWitcherPlayer() && isPerk16Active )
+			if ( targets[i] == GetWitcherPlayer() && isImmuneToBombDamageBySkill )
 			{
 				targets.EraseFast( i );
 			}	
@@ -1281,7 +1293,7 @@ class W3Petard extends CThrowable
 	private function ProcessClusterBombs()
 	{
 		var target : CActor = thePlayer.GetTarget();
-		var i, clusterNbr : int;
+		var i, j, clusterNbr : int;
 		var cluster : W3Petard;
 		var targetPosCluster, clusterInitPos : Vector;
 		var angle, velocity, distLen : float;
@@ -1292,6 +1304,7 @@ class W3Petard extends CThrowable
 		var distanceToTarget : float;
 		var projectileFlightTime : float;
 		var collisionGroups : array<name>;
+		var clusterParams : SPetardParams;
 	
 		clusterInitPos = GetWorldPosition();
 		clusterInitPos.Z += radius + 0.15;
@@ -1318,6 +1331,14 @@ class W3Petard extends CThrowable
 			angle = (9 - distLen) * 10;					
 			velocity = 4 + distLen/2;					
 			
+			
+			clusterParams = cluster.GetImpactParams();
+			for(j=0; j<clusterParams.damages.Size(); j+=1)
+			{
+				clusterParams.damages[j].dmgVal *= 0.4;
+			}
+			cluster.SetImpactParams(clusterParams);
+
 			
 			if( target.HasTag('AddRagdollCollision'))
 			{
@@ -1419,6 +1440,8 @@ class W3Petard extends CThrowable
 		return dismemberOnKill;
 	}
 	
+	public function SetImpactParams(params: SPetardParams) {impactParams = params;}
+	public function GetImpactParams() : SPetardParams	{return impactParams;}
 	public function GetImpactRange() : float			{return impactParams.range;}
 	public function GetAoERange() : float				{return loopParams.range;}
 	public function IsStuck() : bool					{return isStuck;}

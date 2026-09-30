@@ -19,7 +19,7 @@ class W3GuiDisassembleInventoryComponent extends W3GuiPlayerInventoryComponent
 		flashObject.SetMemberFlashBool( "enableComparison", _inv.CanBeCompared(item) );
 		flashObject.SetMemberFlashInt( "gridPosition", -1 );
 		
-		if( _inv.IsItemAnyArmor( item ) || _inv.IsItemWeapon( item ) || _inv.IsItemUpgrade( item ) || _inv.IsItemArmorReapairKit( item ) || _inv.IsItemWeaponReapairKit( item )  )
+		if( _inv.IsItemAnyArmor( item ) || _inv.IsItemWeapon( item ) || _inv.IsItemUpgrade( item ) || _inv.IsItemArmorReapairKit( item ) || _inv.IsItemWeaponReapairKit( item ) || _inv.ItemHasTag( item, 'Sharpstone' ) )
 		{
 			targetGridSection = 0;
 		}

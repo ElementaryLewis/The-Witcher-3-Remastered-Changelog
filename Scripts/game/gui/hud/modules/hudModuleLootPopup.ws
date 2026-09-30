@@ -68,6 +68,7 @@ class CR4HudModuleLootPopup extends CR4HudModuleBase
 		var l_lootItemsDataFlashObject 		: CScriptedFlashObject;
 		var l_lootItemStatsFlashArray		: CScriptedFlashArray;
 		var l_lootItemStatsDataFlashObject	: CScriptedFlashObject;
+		var l_noWeightLimit					: bool;
 		
 		var l_containerInv 					: CInventoryComponent = container.GetInventory();
 		var l_item 							: SItemUniqueId;
@@ -102,6 +103,8 @@ class CR4HudModuleLootPopup extends CR4HudModuleBase
 		l_lootItemsFlashArray = m_flashValueStorage.CreateTempFlashArray();
 		l_lootItemsFlashArray.SetLength( length );
 		
+		l_noWeightLimit = theGame.GetInGameConfigWrapper().GetVarValue('Accessibility', 'WeightlessItems');
+		
 		for	( i = 0 ; i < length; i+=1 )
 		{
 			l_item			= l_allItems[i];
@@ -120,7 +123,7 @@ class CR4HudModuleLootPopup extends CR4HudModuleBase
 			
 			l_itemIconPath	= l_containerInv.GetItemIconPathByUniqueID( l_item );
 			
-			if( l_containerInv.ItemHasTag(l_item, 'Quest') || l_containerInv.IsItemIngredient(l_item) || l_containerInv.IsItemAlchemyItem(l_item) ) 
+			if( l_containerInv.ItemHasTag(l_item, 'Quest') || l_containerInv.IsItemIngredient(l_item) || l_containerInv.IsItemAlchemyItem(l_item) || l_noWeightLimit) 
 			{
 				l_weight = 0;
 			}

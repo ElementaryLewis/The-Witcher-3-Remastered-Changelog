@@ -5,6 +5,7 @@
 /***********************************************************************/
 class CR4StartScreenMenuBase extends CR4MenuBase
 {	
+	private var languageName : string;
 	private var _fadeDuration : float;
 	default _fadeDuration = 0.1;
 	protected var m_fxSetFadeDuration	: CScriptedFlashFunction;
@@ -15,7 +16,6 @@ class CR4StartScreenMenuBase extends CR4MenuBase
 	
 	event  OnConfigUI()
 	{	
-		var languageName : string;
 		var audioLanguageName : string;
 		super.OnConfigUI();
 		
@@ -32,8 +32,7 @@ class CR4StartScreenMenuBase extends CR4MenuBase
 		theGame.SetActiveUserPromiscuous();
 		
 		m_fxSetGameLogoLanguage = m_flashModule.GetMemberFlashFunction( "setGameLogoLanguage" );
-		theGame.GetGameLanguageName(audioLanguageName,languageName);
-		m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString(languageName) );
+		UpdateGameLogo();
 		
 		theSound.StopMusic( );
 		theSound.SoundEvent( "play_music_main_menu" );
@@ -60,6 +59,25 @@ class CR4StartScreenMenuBase extends CR4MenuBase
 		theGame.GetGuiManager().SetIsDuringFirstStartup( false );
 		
 		theSound.SoundEvent("stop_music"); 
+	}
+
+	private function UpdateGameLogo():void
+	{
+		var audioLanguageName 	: string;
+		var tempLanguageName 	: string;
+		theGame.GetGameLanguageName(audioLanguageName, tempLanguageName);
+		if( tempLanguageName != languageName )
+		{
+			languageName = tempLanguageName;
+			if( languageName == "ZH")
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString("ZHT") );			
+			else if( languageName == "CN")
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString("ZHS") );
+			else if( languageName == "EN" || languageName == "CZ" || languageName == "PL" || languageName == "RU" || languageName == "UA" )
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString(languageName) );
+			else 
+				m_fxSetGameLogoLanguage.InvokeSelfOneArg( FlashArgString("REST") );
+		}
 	}
 
 	private function SetFadeTime()

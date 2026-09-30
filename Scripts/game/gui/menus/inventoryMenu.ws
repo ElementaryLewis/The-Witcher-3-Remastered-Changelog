@@ -122,6 +122,10 @@ class CR4InventoryMenu extends CR4MenuBase
 	private var m_fxSetToxicity   			 : CScriptedFlashFunction;
 	private var m_fxSetPreviewMode 			 : CScriptedFlashFunction;
 	private var m_fxSetDefaultTab			 : CScriptedFlashFunction;
+
+	private var m_forcedThunderbolt : bool;
+
+	private var m_setBlockSell : bool; default m_setBlockSell = false;
 	
 	event  OnConfigUI()
 	{
@@ -148,6 +152,8 @@ class CR4InventoryMenu extends CR4MenuBase
 		m_menuInited = false;
 		
 		super.OnConfigUI();
+
+		m_forcedThunderbolt = (FactsQuerySum("tut_forced_preparation") > 0);
 		
 		l_obj = GetMenuInitData();
 		_container = (W3Container)l_obj;
@@ -200,23 +206,28 @@ class CR4InventoryMenu extends CR4MenuBase
 											 FlashArgString(GetLocStringByKeyExt("gui_panel_filter_item_rarity")));
 		
 		_inv = thePlayer.GetInventory();
-				
 		
-		GetWitcherPlayer().UnequipItemFromSlot(EES_Petard2,true);		
-		_inv.GetItemEquippedOnSlot( EES_Quickslot2, tempItem );
-		if(_inv.IsIdValid(tempItem) && _inv.GetItemCategory(tempItem) != 'mask')
-		{			
-			GetWitcherPlayer().UnequipItemFromSlot(EES_Quickslot2,true);
-		}	
-		
-		
-		_inv.GetItemEquippedOnSlot( EES_Quickslot1, tempItem );
-		_inv.GetItemEquippedOnSlot( EES_Quickslot2, tempItem2 );
-		if(!_inv.IsIdValid(tempItem2) && _inv.IsIdValid(tempItem) && _inv.GetItemCategory(tempItem) == 'mask')
+		if (!AreManualEquipmentChangesBlocked())
 		{
-			GetWitcherPlayer().EquipItemInGivenSlot(tempItem, EES_Quickslot2, true, false);
-		}
+				
+			
+			GetWitcherPlayer().UnequipItemFromSlot(EES_Petard2,true);		
+			_inv.GetItemEquippedOnSlot( EES_Quickslot2, tempItem );
+			if(_inv.IsIdValid(tempItem) && _inv.GetItemCategory(tempItem) != 'mask')
+			{			
+				GetWitcherPlayer().UnequipItemFromSlot(EES_Quickslot2,true);
+			}	
 		
+			
+			_inv.GetItemEquippedOnSlot( EES_Quickslot1, tempItem );
+			_inv.GetItemEquippedOnSlot( EES_Quickslot2, tempItem2 );
+			if(!_inv.IsIdValid(tempItem2) && _inv.IsIdValid(tempItem) && _inv.GetItemCategory(tempItem) == 'mask')
+			{
+				GetWitcherPlayer().EquipItemInGivenSlot(tempItem, EES_Quickslot2, true, false);
+			}
+			
+		
+		}
 			
 		_playerInv = new W3GuiPlayerInventoryComponent in this;
 		_playerInv.Initialize( _inv );
@@ -357,7 +368,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		m_dyePreviewSlots.Resize( EnumGetMax( 'EEquipmentSlots' ) + 1 );
 		m_previewSlots.Resize( EnumGetMax( 'EEquipmentSlots' ) + 1 );		
 	}
-	
+
 	event  OnSortingIndexChoosingStart()
 	{
 		var commonMenu 				: CR4CommonMenu;
@@ -544,13 +555,25 @@ class CR4InventoryMenu extends CR4MenuBase
 		var tutorialStateNewGeekpage : W3TutorialManagerUIHandlerStateNewGeekpage;
 		
 		gfxData = GetPlayerStatsGFxData(m_flashValueStorage);
-		
 		m_flashValueStorage.SetFlashObject("inventory.player.stats", gfxData);
 		
-		if( ShouldProcessTutorial( 'TutorialGeekpageStats' ) && theGame.GetTutorialSystem().uiHandler && theGame.GetTutorialSystem().uiHandler.GetCurrentStateName() == 'NewGeekpage' )
+		if ( ShouldProcessTutorial( 'TutorialGeekpageStats' ) && theGame.GetTutorialSystem().uiHandler )
 		{
-			tutorialStateNewGeekpage = ( W3TutorialManagerUIHandlerStateNewGeekpage )theGame.GetTutorialSystem().uiHandler.GetCurrentState();
-			tutorialStateNewGeekpage.OnGeekpageOpened();
+			
+			
+			
+			
+			if ( theGame.GetTutorialSystem().uiHandler.GetCurrentStateName() != 'NewGeekpage' )
+			{
+				theGame.GetTutorialSystem().uiHandler.GotoState('NewGeekpage');
+			}
+			
+			
+			if ( theGame.GetTutorialSystem().uiHandler.GetCurrentStateName() == 'NewGeekpage' )
+			{
+				tutorialStateNewGeekpage = ( W3TutorialManagerUIHandlerStateNewGeekpage ) theGame.GetTutorialSystem().uiHandler.GetCurrentState();
+				tutorialStateNewGeekpage.OnGeekpageOpened();
+			}	
 		}
 	}
 	
@@ -591,8 +614,8 @@ class CR4InventoryMenu extends CR4MenuBase
 	{
 		PopulateTabData(tabIndex);
 	}
-	
-	event  OnTabChanged(tabIndex:int)
+
+	event  OnKeyUpOnW3ScrollingList(scrollListName:string)
 	{
 		var tutStatePot : W3TutorialManagerUIHandlerStatePotions;
 		var tutStateOil : W3TutorialManagerUIHandlerStateOils;
@@ -601,17 +624,15 @@ class CR4InventoryMenu extends CR4MenuBase
 		var tutStateFood : W3TutorialManagerUIHandlerStateFood;
 		var tutStateSecondPotionEquip : W3TutorialManagerUIHandlerStateSecondPotionEquip;
 		var tutStateRecipeReading : W3TutorialManagerUIHandlerStateRecipeReading;
+
+		var POS_INVENTORY_X : float = 0.05f;
+		var POS_INVENTORY_Y : float = 0.63f;
 		
-		currentlySelectedTab = tabIndex;
-		
-		if(tabIndex == InventoryMenuTab_Potions && ShouldProcessTutorial('TutorialPotionCanEquip2'))
-		{
-			tutStatePot = (W3TutorialManagerUIHandlerStatePotions)theGame.GetTutorialSystem().uiHandler.GetCurrentState();
-			if(tutStatePot)
-			{
-				tutStatePot.OnPotionTabSelected();
-			}
-		}
+		var tabIndex:int = currentlySelectedTab;
+
+		if(!StrContains(scrollListName, "mcTabListItem") && scrollListName != "mcTabList")
+			return false;
+			
 		if(tabIndex == InventoryMenuTab_Default && ShouldProcessTutorial('TutorialFoodSelectTab'))
 		{
 			tutStateFood = (W3TutorialManagerUIHandlerStateFood)theGame.GetTutorialSystem().uiHandler.GetCurrentState();
@@ -658,8 +679,21 @@ class CR4InventoryMenu extends CR4MenuBase
 			if(tutStateSecondPotionEquip)
 			{
 				tutStateSecondPotionEquip.OnPotionTabSelected();
+				theGame.GetTutorialSystem().MarkMessageAsSeen('TutorialPotionCanEquip1');
+			}
+			else
+			{
+				ShowHintOutOfState('TutorialPotionCanEquip1', POS_INVENTORY_X, POS_INVENTORY_Y - 0.1f);
+				theGame.GetTutorialSystem().MarkMessageAsSeen('TutorialPotionCanEquip1');
 			}
 		}
+	}
+	
+	event  OnTabChanged(tabIndex:int)
+	{	
+		currentlySelectedTab = tabIndex;
+
+		
 	}
 	
 	public function updateCurrentTab():void
@@ -1097,6 +1131,7 @@ class CR4InventoryMenu extends CR4MenuBase
 	function PaperdollUpdateAll()
 	{
 		UpdateItemsList("inventory.grid.paperdoll", _paperdollInv, _horsePaperdollInv);
+		CheckRangedPaperslotTags();
 	}
 	
 	function UpdateHorsePaperdoll()
@@ -1720,6 +1755,9 @@ class CR4InventoryMenu extends CR4MenuBase
 		}
 		
 		theGame.GetGuiManager().RequestClearScene();
+
+		if(m_forcedThunderbolt)
+			theGame.GetTutorialSystem().ForcedAlchemyCleanup();
 	}
 
 	event  OnCloseMenu()
@@ -1992,6 +2030,35 @@ class CR4InventoryMenu extends CR4MenuBase
 		}
 	}
 	
+	event  OnUseSharpstone( item : SItemUniqueId )
+	{
+		var targetList : array<int>;
+		var itemOnSlot : SItemUniqueId;
+
+		if (_inv.ItemHasTag(item, 'Sharpstone') )
+		{
+			if ( GetWitcherPlayer().GetItemEquippedOnSlot(EES_SteelSword, itemOnSlot) )
+			{
+				targetList.PushBack(EES_SteelSword);
+			}
+			if ( GetWitcherPlayer().GetItemEquippedOnSlot(EES_SilverSword, itemOnSlot) )
+			{
+				targetList.PushBack(EES_SilverSword);
+			}
+		}
+		
+		if (targetList.Size() > 0)
+		{	
+			ShowSelectionMode(item, targetList);
+		}
+		else
+		{
+			
+			showNotification(GetLocStringByKeyExt("panel_inventory_nothing_to_repair"));
+			OnPlaySoundEvent("gui_global_denied");
+		}
+	}
+	
 	public function TryEquipToPockets(item : SItemUniqueId, slot : int ) : bool
 	{
 		var targetList : array<int>;
@@ -2086,10 +2153,41 @@ class CR4InventoryMenu extends CR4MenuBase
 	{
 		ApplyRepairKit(item, slot);
 	}
+
+
 	
 	event  OnApplyDye( item : SItemUniqueId, slot : int )
 	{
 		ApplyDye( item, slot );
+	}
+
+	private function CheckRangedPaperslotTags():void
+	{
+		var flashTempArray  : CScriptedFlashArray;
+		var flashTempObject : CScriptedFlashObject;
+		var itemCat			: name;
+		var item : SItemUniqueId;
+
+		GetWitcherPlayer().GetItemEquippedOnSlot(EES_RangedWeapon, item);
+		flashTempArray = m_flashValueStorage.CreateTempFlashArray();
+		if(_inv.IsIdValid(item))
+		{
+			itemCat = _inv.GetItemCategory(item);
+
+
+		}
+
+		flashTempObject = m_flashValueStorage.CreateTempFlashObject();
+		flashTempObject.SetMemberFlashString("currentTag", "rangeweapon");
+		flashTempObject.SetMemberFlashString("overrideTag", "");
+		flashTempArray.PushBackFlashObject(flashTempObject);
+
+		flashTempObject = m_flashValueStorage.CreateTempFlashObject();
+		flashTempObject.SetMemberFlashString("currentTag", "bolt");
+		flashTempObject.SetMemberFlashString("overrideTag", "");
+		flashTempArray.PushBackFlashObject(flashTempObject);
+
+		m_flashValueStorage.SetFlashArray("slot.paperdoll.override.tag", flashTempArray);
 	}
 	
 	event  OnEquipItem( item : SItemUniqueId, slot : int, quantity : int )
@@ -2099,14 +2197,15 @@ class CR4InventoryMenu extends CR4MenuBase
 		var itemAlreadyEuipped     : bool;
 		var keepSelection          : bool;
 		
-		var OnSlot      : bool;
-		var itemOnSlot  : SItemUniqueId;
-		var boltsItem   : SItemUniqueId;		
-		var hItem 	   	: SItemUniqueId;
-		var uiData     	: SInventoryItemUIData;				
-		var abls	    : array< name >;
-		var i		    : int;
-		var filterType  : EInventoryFilterType;
+		var OnSlot	 		: bool;
+		var itemOnSlot		: SItemUniqueId;
+		var rangedItem		: SItemUniqueId;
+		var boltsItem  		: SItemUniqueId;		
+		var hItem 	  	 	: SItemUniqueId;
+		var uiData    	 	: SInventoryItemUIData;				
+		var abls	  		: array< name >;
+		var i		  		: int;
+		var filterType 		: EInventoryFilterType;
 		
 		OnSlot = false;
 		itemAlreadyEuipped = false;
@@ -2142,6 +2241,12 @@ class CR4InventoryMenu extends CR4MenuBase
 			}
 			else
 			{
+				if (AreManualEquipmentChangesBlocked())
+				{
+					ShowEquipmentChangeBlockedFeedback();
+					return false;
+				}
+			
 				if ( !thePlayer.HasRequiredLevelToEquipItem(item) ) 
 				{
 					showNotification(GetLocStringByKeyExt("panel_inventory_cannot_equip_low_level"));
@@ -2160,6 +2265,7 @@ class CR4InventoryMenu extends CR4MenuBase
 				
 				if( slot == EES_Bolt )
 				{
+
 					if (!GetWitcherPlayer().IsAnyItemEquippedOnSlot(EES_RangedWeapon))
 					{
 						showNotification(GetLocStringByKeyExt("panel_inventory_cannot_equip_bolts"));
@@ -2260,8 +2366,13 @@ class CR4InventoryMenu extends CR4MenuBase
 		
 		
 		UpdateEncumbranceInfo();
+
+
+
 		if (slot == EES_RangedWeapon)
 		{
+
+
 			PaperdollUpdateAll();
 		}
 		else
@@ -2297,6 +2408,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		
 		OnSaveItemGridPosition(item, -1);		
 		UpdateGuiSceneEntityItems();
+		
 	}
 	
 	
@@ -2399,6 +2511,12 @@ class CR4InventoryMenu extends CR4MenuBase
 		var i, targetSlot  : int;
 		
 		forceInvAllUpdate = false;
+
+		if (AreManualEquipmentChangesBlocked())
+		{
+			ShowEquipmentChangeBlockedFeedback();
+			return false;
+		}
 		
 		if (thePlayer.IsInCombat())
 		{
@@ -2458,12 +2576,13 @@ class CR4InventoryMenu extends CR4MenuBase
 			{
 				_playerInv.UnequipItem( itemOnSlot );
 				PaperdollRemoveItem(itemOnSlot);
-				
+
 				if (!_inv.ItemHasTag(itemOnSlot,theGame.params.TAG_INFINITE_AMMO))
 				{
 					forceInvAllUpdate = true;
 				}
 			}
+
 			
 			isSetBonusActive = GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_2 );
 			
@@ -2474,6 +2593,8 @@ class CR4InventoryMenu extends CR4MenuBase
 			filterType = _playerInv.GetFilterTypeByItem(item);
 			_playerInv.SetFilterType( filterType );
 			UpdateInventoryFilter(filterType);
+
+
 			
 			if (_inv.IsItemSetItem(item) && isSetBonusActive)
 			{
@@ -2629,6 +2750,12 @@ class CR4InventoryMenu extends CR4MenuBase
 	
 	event  OnDropItem( item : SItemUniqueId, quantity : int ) 
 	{
+		if (AreManualEquipmentChangesBlocked())
+		{
+			ShowEquipmentChangeBlockedFeedback();
+			return false;
+		}
+	
 		if (( _inv.ItemHasTag(item, 'SilverOil') || _inv.ItemHasTag(item, 'SteelOil') || _inv.ItemHasTag(item, 'Petard') || ( _inv.ItemHasTag(item, 'Potion') && _inv.GetItemCategory(item)!='edibles' ) ) && _playerInv.CanDrop(item))
 		{
 			if (_destroyConfPopData)
@@ -2757,6 +2884,11 @@ class CR4InventoryMenu extends CR4MenuBase
 		
 		UpdateEncumbranceInfo();
 	}
+
+	event  OnSetBlockSell(value:bool)
+	{
+		m_setBlockSell = value;
+	}
 	
 	event  OnSellItem( itemId : SItemUniqueId, quantity : int )
 	{
@@ -2764,6 +2896,8 @@ class CR4InventoryMenu extends CR4MenuBase
 		var itemPrice : int;
         var newShopItem : SItemUniqueId;
 		
+		if(m_setBlockSell) 
+			return false;
 		if (!_playerInv.GetInventoryComponent().IsIdValid(itemId))
 		{
 			return false;
@@ -2784,6 +2918,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		{
 			
 			newShopItem = SellItem( itemId, quantity );
+			
 			if ( GetInvalidUniqueId() != newShopItem )
 			{
 				InventoryRemoveItem(itemId);
@@ -2806,6 +2941,50 @@ class CR4InventoryMenu extends CR4MenuBase
 				OpenQuantityPopup( itemId, QTF_Sell, quantity );
 			}
 		}
+	}
+
+	event  OnSellAllJunk()
+	{
+		var junkItems : array<SItemUniqueId>;
+		var itemId, newShopItem : SItemUniqueId;
+		var i : int;
+		var invItem : SInventoryItem;
+		var itemPrice : int;
+		var curQuantity, sellQuantity : int;
+
+		
+		junkItems = _playerInv.GetInventoryComponent().GetItemsByCategory('junk');
+		for (i = 0; i < junkItems.Size(); i += 1 )
+		{
+			
+			itemId = junkItems[i];
+			invItem = _playerInv.GetInventoryComponent().GetItem( itemId ); 
+			itemPrice = _shopInv.GetInventoryComponent().GetInventoryItemPriceModified( invItem, true );
+
+			if ( itemPrice <= 0 || !_playerInv.CanDrop( itemId ))
+			{
+				continue;
+			}
+
+			
+			curQuantity = _playerInv.GetItemQuantity(junkItems[i]);
+			sellQuantity = Min( curQuantity, _shopInv.GetInventoryComponent().GetMoney() / itemPrice );
+			if (sellQuantity >= 1)
+			{
+				newShopItem = SellItem( itemId, sellQuantity );
+				if (curQuantity == sellQuantity)
+					InventoryRemoveItem(itemId);
+				else
+					InventoryUpdateItem(itemId);
+				
+				ShopUpdateItem(newShopItem);
+				UpdatePlayerMoney();
+				UpdateMerchantData();
+			}
+		}
+		
+		if (_playerInv.GetFilterType() == IFT_QuestItems)
+			InventoryUpdateItems(junkItems);
 	}
 	
 	event  OnBuyItem( item : SItemUniqueId, quantity : int, moveToIdx : int )
@@ -3047,6 +3226,12 @@ class CR4InventoryMenu extends CR4MenuBase
 		var boltSlot : SItemUniqueId;
 		var updateBoltsInInv : bool;		
 		
+		if (AreManualEquipmentChangesBlocked())
+		{
+			ShowEquipmentChangeBlockedFeedback();
+			return false;
+		}
+		
 		updateBoltsInInv = false;		
 		
 		if ( thePlayer.IsInCombat() && ( _inv.IsItemMounted( item ) || _inv.IsItemHeld( item ) ) )
@@ -3087,7 +3272,10 @@ class CR4InventoryMenu extends CR4MenuBase
 					}
 				}
 				
-				FinalDropItem(item, quantity); 
+				if (!FinalDropItem(item, quantity))
+				{
+					return false;
+				}
 				
 				PaperdollRemoveItem(item);
 				InventoryRemoveItem(item);
@@ -3108,9 +3296,15 @@ class CR4InventoryMenu extends CR4MenuBase
 		return true;
 	}
 	
-	public function FinalDropItem(item : SItemUniqueId, quantity : int)
+	public function FinalDropItem(item : SItemUniqueId, quantity : int) : bool
 	{
 		var uiDataGrid : SInventoryItemUIData;
+		
+		if (AreManualEquipmentChangesBlocked())
+		{
+			ShowEquipmentChangeBlockedFeedback();
+			return true;
+		} 
 		
 		
 		uiDataGrid = _inv.GetInventoryItemUIData( item );
@@ -3128,6 +3322,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		}
 		
 		OnSaveItemGridPosition(item, -1);
+		return true;
 	}
 	
 	public function UpdatePlayerMoney()
@@ -3706,6 +3901,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		}
 	}
 	
+	
 	event  OnMouseInputHandled(NavCodeAnalog : string, itemId : SItemUniqueId, slotId:int, moduleBinding : string)
 	{
 		var curInvContext : W3InventoryItemContext;
@@ -3911,6 +4107,13 @@ class CR4InventoryMenu extends CR4MenuBase
 		else
 		if (_playerInv.isPotionItem(m_selectionModeItem) || _playerInv.isPetardItem(m_selectionModeItem) || _playerInv.isQuickslotItem(m_selectionModeItem) || _playerInv.isFoodItem(m_selectionModeItem) )
 		{
+			if (AreManualEquipmentChangesBlocked())
+			{
+				ShowEquipmentChangeBlockedFeedback();
+				HideSelectionMode();
+				return false;
+			}
+
 			
 			if(_inv.IsItemMask(m_selectionModeItem))
 			{
@@ -3961,6 +4164,7 @@ class CR4InventoryMenu extends CR4MenuBase
 		{
 			ApplyRepairKit(m_selectionModeItem, targetSlot);
 		}
+
 		
 		HideSelectionMode();
 		UpdateGuiSceneEntityItems();
@@ -4085,6 +4289,8 @@ class CR4InventoryMenu extends CR4MenuBase
 			return;
 		}
 	}
+	
+
 	
 	public function UpdateAllItemData() : void
 	{
@@ -4334,6 +4540,20 @@ class CR4InventoryMenu extends CR4MenuBase
 		return returnObject;
 	}
 	
+	private function AreManualEquipmentChangesBlocked() : bool
+	{
+		return FactsQuerySum("manual_equipment_changes_blocked") > 0;
+	}
+	
+	private function ShowEquipmentChangeBlockedFeedback() : void
+	{
+		showNotification(
+			GetLocStringByKeyExt("menu_cannot_perform_action_now")
+		);
+
+		OnPlaySoundEvent("gui_global_denied");
+	}
+	
 	function PlayOpenSoundEvent()
 	{
 		
@@ -4358,5 +4578,9 @@ class CR4InventoryMenu extends CR4MenuBase
 	
 	
 	
-	
+}
+
+exec function tutwpot():void
+{
+	theGame.GetTutorialSystem().UnmarkMessageAsSeen('TutorialPotionCanEquip1');
 }

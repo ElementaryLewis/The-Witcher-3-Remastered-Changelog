@@ -57,4 +57,3 @@ class CBTTaskNavTestToTargetDef extends IBehTreeTaskDefinition
 	
 	default useCombatTarget = true;
 }
-

@@ -96,11 +96,16 @@ import class CMovingAgentComponent extends CAnimatedComponent
 	import final function SetGameplayMoveDirection( actorDirection : float );
 	
 	
+	import final function UnsetGameplayMoveDirection();
+
+	
 	import final function SetDirectionChangeRate( directionChangeRate : float );
 		
 	
 	import final function GetMaxSpeed() : float;
 	
+	import final function GetVelocityHeading() : Vector;
+
 	
 	import final function GetVelocity() : Vector;
 	
@@ -108,7 +113,8 @@ import class CMovingAgentComponent extends CAnimatedComponent
 	import final function GetVelocityBasedOnRequestedMovement() : Vector;
 
 	import final function AdjustRequestedMovementDirectionPhysics( out directionWS : Vector, out shouldStop : bool, speed : Float, angleToDeflect : Float, freeSideDistanceRequired : Float, out cornerDetected : bool, out portal : bool) : bool;
-	import final function AdjustRequestedMovementDirectionNavMesh( out directionWS : Vector, speed : float, maxAngle : float, maxIteration : int, maxIterationStartSide : int, preferedDirection : Vector, optional checkExploration : bool ) : bool;
+	import final function AdjustRequestedMovementDirectionNavMesh( out directionWS : Vector, speed : float, maxAngle : float, maxIteration : int, maxIterationStartSide : int, preferedDirection : Vector, optional checkExploration : bool, optional filterObstacles : bool ) : bool;
+	import final function CheckLineCollisionNavmesh( pointStart : Vector, pointEnd : Vector, collisionRadius : float, optional checkExploration : bool, optional filterObstacles : bool ) : bool;
 	import final function StartRoadFollowing( speed : float, maxAngle : float, maxDistance : float, out correctedDirection : Vector ) : bool;
 	import final function ResetRoadFollowing();
 	
@@ -146,12 +152,18 @@ import class CMovingAgentComponent extends CAnimatedComponent
 	
 	
 	import final function SetEnabledHandsIK( enable : bool );
-	import final function SetHandsIKOffsets( left : float, right : float );
+	import final function SetHandsIKOffsets( left : Vector, right : Vector );
 	
+	
+	import final function SetEnabledFeetOffsetIK( enable : bool);
+	import final function SetFeetIKOffsets( left : Vector, right : Vector);
 
 	
 	import final function SetEnabledSlidingOnSlopeIK( enable : bool );
 	import final function GetEnabledSlidingOnSlopeIK() : bool;
+
+	
+	import final function SetOverrideIKLODLevel( LODLevel : int );
 
 	
 	import final function SetUseEntityForPelvisOffset( optional entity : CEntity );
@@ -168,6 +180,10 @@ import class CMovingAgentComponent extends CAnimatedComponent
 		ForceSetRelativeMoveSpeed( 0.0f );
 		SetGameplayRelativeMoveSpeed( 0.0f );
 	}
+
+	import final function Slide( dir : Vector, rot : EulerAngles, speed : float );
+
+	import final function AddCustomDelta( deltaPosition : Vector, deltaRotation : EulerAngles);
 }
 
 import struct SCollisionData
@@ -176,6 +192,13 @@ import struct SCollisionData
 	import var point : Vector;
 	import var normal : Vector;
 };
+
+import struct SVirtualControllerData
+{
+	import var centerPosition : Vector;
+	import var boneName : name;
+	import var boneIndex : int;
+}
 
 import class CMovingPhysicalAgentComponent extends CMovingAgentComponent
 {
@@ -271,8 +294,14 @@ import class CMovingPhysicalAgentComponent extends CMovingAgentComponent
 	import final function EnableCollisionPrediction( enable : bool );
 	
 	
+	import final function EnableCollisionMainController( enable : bool );
+
+	
 	import final function SetVirtualControllersPitch( pitch : Float );
+	import final function ScaleVirtualControllersRadius( multiplier : Float );
+	import final function EnableVirtualControllerCollision( virtualControllerName : CName, enable : bool );
 	import final function EnableVirtualControllerCollisionResponse( virtualControllerName : CName, enable : bool );
+	import final function GetTargetableVirtualControllers() : array< SVirtualControllerData >;
 }
 
 import class CActionAreaComponent extends CTriggerAreaComponent

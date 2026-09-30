@@ -48,5 +48,3 @@ import class AnimationTrajectoryPlayerScriptWrapper extends CObject
 	import public final latent function WaitForSyncTime() : bool;
 	import public final latent function WaitForFinish() : bool;
 }
-
-

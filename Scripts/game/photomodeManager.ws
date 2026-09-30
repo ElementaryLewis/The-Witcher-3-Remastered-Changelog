@@ -27,7 +27,7 @@ class PhotomodeManager
 		theInput.RegisterListener( this, 'OnPhotomodeEnable', 'EnablePhotoMode' );
 		theInput.RegisterListener( this, 'OnPhotomodeEnableStep', 'EnablePhotoMode_Step1' );
 		theInput.RegisterListener( this, 'OnPhotomodeEnableStep', 'EnablePhotoMode_Step2' );
-		theInput.RegisterListener( this, 'OnPhotomodeDisable', 'DisablePhotoMode' );
+		
 	}
 	
 	event OnPhotomodeEnableStep( action : SInputAction )
@@ -75,6 +75,9 @@ class PhotomodeManager
 		
 	private function EnablePhotomode()
 	{
+		var gameCameraPosition : Vector;
+		var gameCameraRotation : EulerAngles;
+
 		if( 
 		   m_photomodeEnabled 
 		|| theGame.IsDialogOrCutscenePlaying() 
@@ -92,7 +95,9 @@ class PhotomodeManager
 
 		m_lastActiveCam = theGame.GetWorld().GetCameraDirector().GetTopmostCamera();
 		m_lastActiveContext = theInput.GetContext();
-		
+		gameCameraPosition = m_lastActiveCam.GetCameraWorldPosition() + m_lastActiveCam.GetCameraWorldOffset();
+		gameCameraRotation = m_lastActiveCam.GetCameraWorldRotation();
+
 		theSound.SoundEvent( "system_pause" );
 		
 		theInput.SuppressPropagatingEventAfterAction( 'EnablePhotoMode' );
@@ -101,20 +106,30 @@ class PhotomodeManager
 		theInput.SetContext( GetPhotomodeContextName() );
 		
 		theGame.GetPhotomodeCamera().Activate();
+		theGame.GetPhotomodeCamera().SetCameraWorldPosition(gameCameraPosition);
+		theGame.GetPhotomodeCamera().SetCameraWorldRotation(gameCameraRotation);
+		theGame.GetPhotomodeCamera().UpdateWithoutInput( true );
+
 		PauseFx();
 		theGame.RequestMenu( GetPhotomodeMenuName() );
 		
 		m_photomodeEnabled = true;
 		thePlayer.ApplyCastSettings();
 		thePlayer.SetPhotoModeHorseKick(true);
+		
+		
+		theGame.SetPhotomodeCameraCanMove(false);
+
+		
+		DoFakeTick();
 	}
 	
-	private function DisablePhotomode()
+	public function DisablePhotomode()
 	{
 		if( !m_photomodeEnabled )
 			return;
-
 		theGame.SetPhotomodeEnabled( false );
+		theGame.GetPhotomodeEffects().RestoreWeather();
 
 		theSound.SoundEvent( "system_resume" );
 		theGame.CloseMenu( GetPhotomodeMenuName() );
@@ -124,6 +139,17 @@ class PhotomodeManager
 			
 		m_photomodeEnabled = false;
 		thePlayer.ApplyCastSettings();
+		
+		
+		theGame.GetCityLightManager().SetUpdateEnabled( true );
+		theGame.GetCityLightManager().ForceUpdate();
+	}
+
+	public function DoFakeTick() : void
+	{
+		
+		
+		theGame.GetPhotomodeEffects().SetPhotomodeTickTime(0.00001);
 	}
 	
 	private function PauseFx()

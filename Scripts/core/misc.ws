@@ -20,6 +20,11 @@ import function DebugBreak();
 
 import latent function Sleep( time : float );
 
+latent function SleepIgnoreTimeScale( time : float )
+{
+	Sleep( time * theGame.GetTimeScale() );
+}
+
 
 import latent function SleepOneFrame();
 
@@ -34,6 +39,15 @@ import function EnumGetMax( type : name ) : int;
 
 
 import function EnumGetMin( type : name ) : int;
+
+
+import function TabChar() : string;
+
+
+import function NewlineChar() : string;
+
+
+import function BackslashChar() : string;
 
 
 function IsNameValid( n : name ) : bool
@@ -135,6 +149,7 @@ function LogBoatFatal( str : string )
 	LogBoat( "!!!!!!!!!!!!! FATAL !!!!!!!!!!!!!" );
 	LogBoat( "" );
 }
+function LogAutomationTest( str : string )						{LogChannel('Automation Test', str );}
 
 function LogDMHits(str : string, optional action : W3DamageAction)
 {
@@ -142,4 +157,63 @@ function LogDMHits(str : string, optional action : W3DamageAction)
 		LogChannel('DamageMgrHitsDoT', str);
 	else 
 		LogChannel('DamageMgrHits', str);
+}
+
+
+function NewSkillEnumToName(skillId:ESkill) : name
+{
+	switch(skillId)
+	{
+		case S_Sword_s22 : return 'Muscle Memory';
+		case S_Sword_s23 : return 'Strength Training';
+		case S_Sword_s24 : return 'Precise Blow';
+		case S_Sword_s25 : return 'Crushing Blow';
+		case S_Sword_s26 : return 'Anatomical Knowledge';
+		case S_Sword_s27 : return 'Crippling Shots';
+		case S_Sword_s28 : return 'Sunder Armor';
+		case S_Sword_s29 : return 'Crippling Strikes';
+		case S_Sword_s30 : return 'Deadly Precision';
+		case S_Sword_s31 : return 'Counter Attack';
+		case S_Sword_s32 : return 'Lightning Reflexes';
+		case S_Sword_s33 : return 'Arrow Deflection';
+		case S_Sword_s34 : return 'Cold Blood';
+		case S_Sword_s35 : return 'Whirl';
+	}
+}
+
+function FormatNewCombatSkillMessageColor(skillId:ESkill, str : string, colorHex:string) : string
+{
+	return "<font color=\"" + colorHex + "\">" + NewSkillEnumToName(skillId) + ":</font> " + str;
+}
+
+function FormatNewCombatSkillMessage(skillId:ESkill, str : string) : string
+{
+	return NewSkillEnumToName(skillId) + ": " + str;
+}
+
+function LogNewCombatSkill(skillId:ESkill, str : string)
+{
+	if (theGame.GetPlatform() == Platform_PC)
+	{
+		LogChannel('NewCombatSkills', FormatNewCombatSkillMessage(skillId, str));
+	}
+}
+
+function LogNewCombatSkill_InGame(skillId:ESkill, str : string)
+{
+	if (theGame.GetPlatform() == Platform_PC)
+	{
+		LogNewCombatSkill_InGameColor(skillId, str, "#b1302b");
+	}
+}
+
+function LogNewCombatSkill_InGameColor(skillId:ESkill, str : string, colorHex:string)
+{
+	if (theGame.GetPlatform() == Platform_PC)
+	{
+		if(colorHex == "")
+			theGame.witcherLog.AddMessage(FormatNewCombatSkillMessage(skillId, str));
+		else 
+			theGame.witcherLog.AddMessage(FormatNewCombatSkillMessageColor(skillId, str, colorHex));
+	}
 }

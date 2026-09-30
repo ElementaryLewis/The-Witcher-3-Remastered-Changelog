@@ -21,10 +21,20 @@ class W3Effect_Burning extends W3CriticalDOTEffect
 	
 	public function CacheSettings()
 	{
+		var i : int;
 		super.CacheSettings();
 		
-		allowedHits[EHRT_Igni] = false;
-		
+		if(this.IsOnPlayer())
+		{
+			allowedHits[EHRT_Igni] = false;
+		}
+		else
+		{
+			allowedHits.Grow( EnumGetMax('EHitReactionType')+1 );
+			for(i=0; i<allowedHits.Size(); i+=1)
+				allowedHits[i] = false;
+		}
+
 		
 		blockedActions.PushBack(EIAB_CallHorse);
 		blockedActions.PushBack(EIAB_Jump);
@@ -44,7 +54,8 @@ class W3Effect_Burning extends W3CriticalDOTEffect
 		var template : CEntityTemplate;
 		var chance : SAbilityAttributeValue;
 		var surface : CGameplayFXSurfacePost;
-		
+		var i : int;
+
 		if ( this.IsOnPlayer() && thePlayer.IsUsingVehicle() )
 		{
 			if ( blockedActions.Contains( EIAB_Crossbow ) )
@@ -159,6 +170,14 @@ class W3Effect_Burning extends W3CriticalDOTEffect
 				
 				glyphword12Delay = 0.f;
 			}
+		}
+
+		if(!this.IsOnPlayer() && duration * 0.5 <= duration - timeLeft)
+		{
+			for(i=0; i<allowedHits.Size(); i+=1)
+				allowedHits[i] = true;
+
+			allowedHits[EHRT_Igni] = false;
 		}
 	
 		

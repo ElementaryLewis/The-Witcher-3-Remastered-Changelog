@@ -245,4 +245,3 @@ class CAINPCGroupTypeRedefinition extends CAIRedefinitionParameters
 {
 	editable var npcGroupType : ENPCGroupType;
 };
-

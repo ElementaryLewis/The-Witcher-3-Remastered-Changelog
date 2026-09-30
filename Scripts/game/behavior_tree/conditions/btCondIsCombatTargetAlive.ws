@@ -20,21 +20,3 @@ class CBTCondIsCombatTargetAliveDef extends IBehTreeConditionalTaskDefinition
 {
 	default instanceClass = 'CBTCondIsCombatTargetAlive';
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

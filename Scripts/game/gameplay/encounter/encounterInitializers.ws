@@ -664,4 +664,3 @@ class ISpawnAddNPCLevelInitializer extends ISpawnTreeScriptedInitializer
 		return l_Name;
 	}
 };
-

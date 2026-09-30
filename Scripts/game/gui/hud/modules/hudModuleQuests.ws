@@ -78,6 +78,25 @@ class CR4HudModuleQuests extends CR4HudModuleBase
 		objectiveDuringFocusCombat = inGameConfigWrapper.GetVarValue('Hud', 'ObjectiveDuringFocusCombat');
 		
 	}
+
+	event  OnTapQuest()
+	{
+		if ( theGame.IsBlackscreenOrFading() || theGame.IsDialogOrCutscenePlaying() )
+		{
+			return false;
+		}
+	
+		if( thePlayer.IsActionAllowed(EIAB_OpenJournal) )
+		{
+			theGame.RequestMenuWithBackground( 'JournalQuestMenu', 'CommonMenu' );
+		}
+		else
+		{
+			thePlayer.DisplayActionDisallowedHudMessage(EIAB_OpenJournal);
+		}
+		
+		return true;
+	}
 	
 	public function OnLevelUp()
 	{
@@ -551,6 +570,7 @@ class CR4HudModuleQuests extends CR4HudModuleBase
 			{
 				objectiveName = "MISSING_OBJECTIVE_NAME: " + data.objectiveEntry.baseName;
 			}
+			
 			l_flashObject.SetMemberFlashString( "name",   objectiveName + GetQuestObjectiveCounterText( data.objectiveEntry ) );
 			l_flashObject.SetMemberFlashBool(   "isHighlighted", ( data.objectiveEntry == _highlightedObjective ) );
 			l_flashObject.SetMemberFlashBool(   "isMutuallyExclusive", data.objectiveEntry.IsMutuallyExclusive() );
@@ -630,6 +650,7 @@ class CR4HudModuleQuests extends CR4HudModuleBase
 		case Side:
 		case MonsterHunt:
 		case TreasureHunt:
+
 			return 0xc0c0c0;
 		}
 		return 0xffffff;

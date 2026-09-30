@@ -36,8 +36,10 @@ import class CDLCManager extends CObject
 	public function IsEP2Enabled():bool
 	{
 		return IsDLCEnabled('abob_001_001');
-	}			
-	
+	}
+
+
+
 	public function IsAnyDLCAvailable():bool
 	{
 		var dlcList : array<name>;

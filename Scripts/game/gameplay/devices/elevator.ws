@@ -89,20 +89,20 @@ class W3ElevatorSwitch extends W3InteractionSwitch
 	
 	final function SetSwitch( elevator : W3ElevatorInteractive )
 	{
-		var set : bool;
+		var onTop : bool;
 		
 		if(elevator && interactionComponent)
 		{
-			set = elevator.IsOnTop();
+			onTop = elevator.IsOnTop();
 			if(switchType == DownSwitch)
 			{
 				if( interactionComponent )
-					interactionComponent.SetEnabled( set );
+					interactionComponent.SetEnabled( onTop );
 			}
 			else
 			{
 				if( interactionComponent )
-					interactionComponent.SetEnabled( !set );
+					interactionComponent.SetEnabled( !onTop );
 			}
 		}
 	}

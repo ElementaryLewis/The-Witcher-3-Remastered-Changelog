@@ -75,4 +75,3 @@ class CBTTaskChangeStanceDef extends IBehTreeTaskDefinition
 	editable var onDeactivate					: bool;
 	editable var changeToFlyOnlyIfAboveGround	: bool;
 }
-

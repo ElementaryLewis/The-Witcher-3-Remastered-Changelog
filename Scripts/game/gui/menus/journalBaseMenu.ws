@@ -211,32 +211,32 @@ class CR4JournalBaseMenu extends CR4Menu
 		var l_questArea						: string;
 		switch ( questEntry.GetWorld() )
 		{
-			case AN_Undefined:
-				l_questArea = GetLocStringByKeyExt("panel_journal_filters_area_any");
-				break;
-			case AN_NMLandNovigrad:
+			case 'AN_NMLandNovigrad':
 				l_questArea = GetLocStringByKeyExt("panel_journal_filters_area_no_mans_land");
 				break;
-			case AN_Skellige_ArdSkellig:
+			case 'AN_Skellige_ArdSkellig':
 				l_questArea = GetLocStringByKeyExt("panel_journal_filters_area_skellige");
 				break;
-			case AN_Kaer_Morhen:
+			case 'AN_Kaer_Morhen':
 				l_questArea = GetLocStringByKeyExt("panel_journal_filters_area_kaer_morhen");
 				break;
-			case AN_Prologue_Village:
+			case 'AN_Prologue_Village':
 				l_questArea = GetLocStringByKeyExt("panel_journal_filters_area_prolgue_village");
 				break;
 
 			
-			case AN_Wyzima:
+			case 'AN_Wyzima':
 				break;
-			case AN_Island_of_Myst:
+			case 'AN_Island_of_Myst':
 				break;
-			case AN_Spiral:
+			case 'AN_Spiral':
 				break;
-			case AN_Prologue_Village_Winter:
+			case 'AN_Prologue_Village_Winter':
 				break;
-			case AN_Velen:
+			case 'AN_Velen':
+				break;
+			default:
+				l_questArea = GetLocStringByKeyExt("panel_journal_filters_area_any");
 				break;
 		}
 		return l_questArea;

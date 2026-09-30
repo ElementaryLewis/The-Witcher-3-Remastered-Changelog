@@ -10,7 +10,7 @@ import class CWorld extends CResource
 
 	
 	import final function HideLayerGroup( layerGroupName : string );
-	
+
 	
 	import final function PointProjectionTest( point : Vector, normal : EulerAngles, range : float ) : bool; 
 	
@@ -21,7 +21,7 @@ import class CWorld extends CResource
 
 	
 	
-	import final function SweepTest( pointA, pointB : Vector, radius : float, out position, normal : Vector, optional collisionGroupsNames : array<name> ) : bool;
+	import final function SweepTest( pointA, pointB : Vector, radius : float, out position, normal : Vector, optional collisionGroupsNames : array<name>, optional treeSizeThreshold : float ) : bool;
 
 	
 	import final function SphereOverlapTest( out entities : array< CEntity > ,position : Vector, radius : float, optional collisionGroupsNames : array< name > ) : int;	
@@ -40,7 +40,7 @@ import class CWorld extends CResource
 	
 	
 	
-	import final function NavigationLineTest( pos1 : Vector, pos2 : Vector, radius : float, optional ignoreObstacles : bool , optional noEndpointZ : bool  ) : bool;
+	import final function NavigationLineTest( pos1 : Vector, pos2 : Vector, radius : float, optional ignoreObstacles : bool , optional noEndpointZ : bool , optional filterObstacles : bool  ) : bool;
 	
 	
 	
@@ -90,6 +90,13 @@ import class CWorld extends CResource
 	
 	import final function GetCameraDirector() : CCameraDirector;
 	
+	
+	import final function ResetAllCurves();
+	import final function SetSunHeightPoint(position : float, value: float);
+	import final function SetMoonHeightPoint(position : float, value: float);
+	import final function SetLightHeightPoint(position : float, value: float);
+	import final function SetLightDirPoint(position : float, value: float);
+	import final function SetLightDayAmountPoint(position : float, value: float);
 	
 	event OnWeatherChange()
 	{

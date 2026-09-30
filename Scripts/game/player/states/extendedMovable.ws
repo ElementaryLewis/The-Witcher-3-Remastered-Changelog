@@ -183,7 +183,7 @@ state ExtendedMovable in CR4Player extends Movable
 			if ( parent.GetDisplayTarget() )
 			{
 				playerToTargetVector = parent.GetDisplayTarget().GetWorldPosition() - parent.GetWorldPosition();
-				moveData.pivotRotationController.SetDesiredHeading( VecHeading( playerToTargetVector ), 0.5f );
+				moveData.pivotRotationController.SetDesiredHeading( VecHeading( playerToTargetVector ), thePlayer.lockCameraSpeed );
 			}
 			else
 				moveData.pivotRotationController.SetDesiredHeading( moveData.pivotRotationValue.Yaw, 0.5f );

@@ -20,7 +20,8 @@ state FastTravel in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		theGame.GetTutorialSystem().HideTutorialHint( INTERACTION );
 		theGame.GetTutorialSystem().MarkMessageAsSeen(INTERACTION);
 		FactsAdd("tut_FT_interaction_finish");	
-		ShowHint(FAST_TRAVEL, POS_MAP_X, POS_MAP_Y, ETHDT_Input);
+		
+		QuitState();
 	}
 		
 	event OnLeaveState( nextStateName : name )

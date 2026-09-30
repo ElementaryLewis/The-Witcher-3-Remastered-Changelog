@@ -17,6 +17,7 @@ function StatNameToEnum(n : name) : EBaseCharacterStats
 		case 'panic' : 				return BCS_Panic;
 		case 'panicStatic' :		return BCS_PanicStatic;
 		case 'swimmingStamina' :	return BCS_SwimmingStamina;
+		case 'rested' 	:			return BCS_Rested;
 		default:					return BCS_Undefined;
 	}
 }
@@ -35,6 +36,7 @@ function StatEnumToName(s : EBaseCharacterStats) : name
 		case BCS_Panic	:			return 'panic';
 		case BCS_PanicStatic :		return 'panicStatic';
 		case BCS_SwimmingStamina :	return 'swimmingStamina';
+		case BCS_Rested :			return 'rested';
 		default:					return '';
 	}
 }

@@ -33,6 +33,8 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 	default DATA_BINDING_NAME_DESCRIPTION	= "alchemy.item.description";
 	
 	var itemsQuantity 						: array< int >;
+
+	private var m_forcedThunderbolt : bool;
 	
 	event  OnConfigUI()
 	{	
@@ -44,6 +46,8 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 		var l_initData			: W3InventoryInitData;
 		
 		super.OnConfigUI();
+
+		m_forcedThunderbolt = (FactsQuerySum("tut_forced_preparation") > 0);
 		
 		m_initialSelectionsToIgnore = 2;
 		
@@ -118,6 +122,9 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 		}
 		
 		theSound.SoundEvent( 'gui_global_quit' ); 
+
+		if(m_forcedThunderbolt)
+			theGame.GetTutorialSystem().ForcedAlchemyCleanup();
 		CloseMenu();
 	}
 

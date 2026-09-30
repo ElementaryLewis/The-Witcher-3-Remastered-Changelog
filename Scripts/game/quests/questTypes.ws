@@ -22,4 +22,3 @@ struct SGlossaryImageOverride
 	var uniqueTag : name;
 	var imageFileName : string;
 }
-

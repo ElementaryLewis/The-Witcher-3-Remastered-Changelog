@@ -79,9 +79,7 @@ class W3Effect_Stagger extends W3CriticalEffect
 	}
 	
 	public function OnTimeUpdated(dt : float)
-	{
-		super.OnTimeUpdated(dt);
-		
+	{		
 		timeToEnableDodge -= dt;
 		if(timeToEnableDodge <= 0.f && isOnPlayer)
 		{
@@ -93,6 +91,8 @@ class W3Effect_Stagger extends W3CriticalEffect
 		{
 			target.RequestCriticalAnimStop(false);
 		}
+
+		super.OnTimeUpdated(dt);
 	}
 	
 	event OnEffectRemoved()

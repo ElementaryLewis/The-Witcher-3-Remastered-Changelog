@@ -253,6 +253,3 @@ abstract class W3HouseDecorationBase extends W3Container
 	
 	
 }
-	
-
-	

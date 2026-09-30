@@ -382,6 +382,7 @@ function GetSlotForItem(category : name, tags : array<name>, isPlayer : bool) : 
 			case 'mask' :				return EES_Mask;
 			case 'hair'	: 				return EES_Hair; 
 			case 'crossbow'	: 			return EES_RangedWeapon; 
+
 			default :					return EES_InvalidSlot;
 		}
 	}
@@ -401,10 +402,11 @@ function GetSlotForItemByCategory(category : name) : EEquipmentSlots
 		case 'mask' :				return EES_Mask;
 		case 'hair'	: 				return EES_Hair;
 		case 'crossbow'	: 			return EES_RangedWeapon;
+
 		case 'petard'	: 			return EES_Petard1;
 		case 'potion'	: 			return EES_Potion1;
-		
 		case 'bolt'	: 				return EES_Bolt;
+
 		case 'trophy' : 			return EES_HorseTrophy;
 		case 'horse_bag' : 			return EES_HorseBag;
 		case 'horse_blinder' :	 	return EES_HorseBlinders;
@@ -509,5 +511,5 @@ struct SAreaItemDefinition
 struct SAreaLootParams
 {
 	saved var remainingItemDrops : array<SAreaItemDefinition>;			
-	saved var areaType : EAreaName;										
+	saved var areaType : name;											
 };

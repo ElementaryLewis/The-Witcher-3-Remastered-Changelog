@@ -14,4 +14,4 @@ class BTCondWasNPCInTalkInteraction extends IBehTreeTask
 class BTCondWasNPCInTalkInteractionDef extends IBehTreeConditionalTaskDefinition
 {
 	default instanceClass = 'BTCondWasNPCInTalkInteraction';
-} 
+}

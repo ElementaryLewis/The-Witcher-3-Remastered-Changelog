@@ -43,12 +43,7 @@ statemachine class W3TutorialManagerUIHandler
 	{
 		var uitut : SUITutorial;
 		
-		uitut.menuName = 'CommonMenu';
-		uitut.tutorialStateName = 'BooksCommonMenu';
-		uitut.triggerCondition = EUITTC_OnMenuOpen;
-		uitut.priority = 1;
-		uitut.abortOnMenuClose = true;
-		RegisterUIHint(uitut);
+		
 		
 		uitut.menuName = 'GlossaryBooksMenu';
 		uitut.tutorialStateName = 'BooksNew';
@@ -57,12 +52,7 @@ statemachine class W3TutorialManagerUIHandler
 		uitut.abortOnMenuClose = true;
 		RegisterUIHint(uitut);
 		
-		uitut.menuName = 'GlossaryParent';
-		uitut.tutorialStateName = 'BooksCommonMenuSubmenu';
-		uitut.triggerCondition = EUITTC_OnMenuOpen;
-		uitut.priority = 40;
-		uitut.abortOnMenuClose = true;
-		RegisterUIHint(uitut);
+		
 	}
 	
 	

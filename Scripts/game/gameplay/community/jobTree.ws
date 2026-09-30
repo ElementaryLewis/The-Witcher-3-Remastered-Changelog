@@ -16,6 +16,3 @@ enum EJobTreeType
 	EJT_PlayingMusic,
 	EJTT_CatOnLap,
 }
-
-
-

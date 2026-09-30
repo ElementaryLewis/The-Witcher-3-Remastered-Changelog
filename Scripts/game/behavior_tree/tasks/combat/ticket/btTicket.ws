@@ -508,4 +508,3 @@ class CTicketAlgorithmMeleeDefinition extends ITicketAlgorithmScriptDefinition
 		SetValFloat(threatLevelBonus, 10.f);
 	}
 };
-

@@ -109,4 +109,4 @@ class W3Campfire extends CGameplayEntity
 		if(gameLightComp)
 			gameLightComp.SetLight( toggle );		
 	}
-}	
+}

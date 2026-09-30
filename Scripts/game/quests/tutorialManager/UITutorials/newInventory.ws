@@ -35,7 +35,7 @@ state NewInventory in W3TutorialManagerUIHandler extends TutHandlerBaseState
 
 		
 		
-		ShowHint( TAB_CRAFTING, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input, GetHighlightInvTabCrafting() );		
+		
 	}
 			
 	event OnLeaveState( nextStateName : name )
@@ -55,47 +55,10 @@ state NewInventory in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	{
 		if( closedByParentMenu || isClosing )
 			return true;
+
+		QuitState();
 			
-		if( hintName == TAB_CRAFTING )
-		{
-			ShowHint( TAB_QUEST, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input, GetHighlightInvTabQuest() );
-		}
-		else if( hintName == TAB_QUEST )
-		{
-			ShowHint( TAB_MISC, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input, GetHighlightInvTabMisc() );
-		}
-		else if( hintName == TAB_MISC )
-		{
-			ShowHint( TAB_ALCHEMY, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input, GetHighlightInvTabAlchemy() );
-		}
-		else if( hintName == TAB_ALCHEMY )
-		{
-			ShowHint( TAB_WEAPONS, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input, GetHighlightInvTabWeapons() );
-		}
-		else if( hintName == TAB_WEAPONS )
-		{
-			ShowHint( TOOLTIPS, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input );
-		}
-		else if( hintName == TOOLTIPS )
-		{
-			ShowHint( PREVIEW, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input );
-		}
-		else if( hintName == PREVIEW )
-		{
-			ShowHint( PREVIEW2, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input );
-		}
-		else if( hintName == PREVIEW2 )
-		{
-			ShowHint( SORTING, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input );
-		}
-		else if( hintName == SORTING )
-		{
-			ShowHint( GEEKPAGE, POS_INVENTORY_X, POS_INVENTORY_Y, ETHDT_Input );
-		}		
-		else if( hintName == GEEKPAGE )
-		{
-			QuitState();
-		}
+		
 	}
 }
 

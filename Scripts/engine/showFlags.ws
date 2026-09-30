@@ -4,4 +4,3 @@
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
 import function DebugSetEShowFlag(flagName : int, activate : bool);
-

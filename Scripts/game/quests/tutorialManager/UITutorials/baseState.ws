@@ -388,7 +388,7 @@ state TutHandlerBaseState in W3TutorialManagerUIHandler
 	{
 		var highlights : array< STutorialHighlight >;
 		
-		AddHighlight( highlights, 0.085f, 0.35f, 0.27f, 0.37f );
+		AddHighlight( highlights, 0.0505f, 0.174f, 0.3208f, 0.6361f );
 		
 		return highlights;
 	}
@@ -406,16 +406,36 @@ state TutHandlerBaseState in W3TutorialManagerUIHandler
 	{
 		var highlights : array< STutorialHighlight >;
 		
-		AddHighlight( highlights, .295f, .115f, .07f, .12f );
+		AddHighlight( highlights, .211f, .097f, .05f, .0888f );
 		
 		return highlights;
 	}
 	
-	protected function GetHighlightCharDevMutagenBonusString() : array< STutorialHighlight >
+	protected function GetHighlightCharDevMutagenBonusString(slot : EEquipmentSlots) : array< STutorialHighlight >
 	{
 		var highlights : array< STutorialHighlight >;
+
+		switch(slot)
+		{
+			case EES_SkillMutagen1: AddHighlight( highlights, .435f, .1916f, .1635f, .091f ); break;
+			case EES_SkillMutagen2: AddHighlight( highlights, .75625f, .1916f, .1635f, .091f ); break;
+			case EES_SkillMutagen3: AddHighlight( highlights, .435f, .53888f, .1635f, .091f ); break;
+			case EES_SkillMutagen4: AddHighlight( highlights, .75625f, .53888f, .1635f, .091f ); break;
+		}
 		
-		AddHighlight( highlights, .37f, .3f, .2f, .15f );
+		
+		
+		return highlights;
+	}
+
+	protected function GetHighlightAllSkillSlots(optional list : array< STutorialHighlight >) : array< STutorialHighlight >
+	{
+		var highlights : array< STutorialHighlight >;
+
+		if(list.Size() > 0)
+			highlights = list;
+		
+		AddHighlight( highlights, .6041f, .1694f, .1615f, .6685f );
 		
 		return highlights;
 	}
@@ -654,4 +674,48 @@ state TutHandlerBaseState in W3TutorialManagerUIHandler
 	event OnMenuOpening(menuName : name) 	{}
 	event OnMenuOpened(menuName : name) 	{}
 	event OnTutorialClosed(hintName : name, closedByParentMenu : bool) {}
+}
+
+function ShowHintOutOfState(tutorialScriptName : name, optional x : float, optional y : float, optional durationType : ETutorialHintDurationType, optional highlights : array<STutorialHighlight>, optional fullscreen : bool, optional isHudTutorial : bool, optional markSeen : bool )
+{
+	var tut : STutorialMessage;
+
+	tut.forceToQueueFront = true;
+	tut.canBeShownInMenus = true;
+	tut.canBeShownInDialogs = true;
+	tut.hintPositionType = ETHPT_DefaultUI;
+	tut.disableHorizontalResize = true;
+	tut.tutorialScriptTag = tutorialScriptName;		
+	tut.highlightAreas = highlights;
+	tut.forceToQueueFront = true;	
+	tut.canBeShownInMenus = true;
+	tut.isHUDTutorial = isHudTutorial;
+	tut.disableHorizontalResize = true;
+	tut.markAsSeenOnShow = markSeen;
+	
+	if(x != 0 || y != 0)
+	{			
+		tut.hintPositionType = ETHPT_Custom;
+	}
+	else
+	{
+		tut.hintPositionType = ETHPT_DefaultGlobal;
+	}
+	
+	tut.hintPosX = x;
+	tut.hintPosY = y;
+	
+	if(durationType == ETHDT_NotSet)
+		tut.hintDurationType = ETHDT_Input;
+	else
+		tut.hintDurationType = durationType;
+	
+	if(fullscreen)
+	{
+		tut.blockInput = true;
+		tut.pauseGame = true;
+		tut.fullscreen = true;
+	}
+			
+	theGame.GetTutorialSystem().DisplayTutorial(tut);
 }

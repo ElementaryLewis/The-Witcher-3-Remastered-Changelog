@@ -19,7 +19,7 @@ class W3Effect_HeavyKnockdown extends W3CriticalEffect
 	event OnEffectRemoved()
 	{
 		target.SetIsRecoveringFromKnockdown();
-		
+
 		super.OnEffectRemoved();
 	}
 	
@@ -113,8 +113,9 @@ class W3Effect_HeavyKnockdown extends W3CriticalEffect
 	
 	protected function CalculateDuration(optional setInitialDuration : bool)
 	{
+
+
 		super.CalculateDuration(setInitialDuration);
-		
 		duration = MaxF(1.f,duration);
 	}
 }

@@ -68,7 +68,7 @@ class W3SettlementTrigger extends CR4JournalPlaceEntity
 		var timeLapseModule : CR4HudModuleTimeLapse;
 		var manager: CCommonMapManager;
 	    var worldPath : string;
-	    var currentArea : EAreaName;
+	    var currentArea : name;
 	    var hubName : string;
 	    
 		hud = (CR4ScriptedHud)theGame.GetHud();

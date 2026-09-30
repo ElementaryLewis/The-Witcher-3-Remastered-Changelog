@@ -26,21 +26,3 @@ class CBTCondTargetHasTagDef extends IBehTreeConditionalTaskDefinition
 
 	editable var tag		: name;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

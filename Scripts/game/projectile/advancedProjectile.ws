@@ -14,13 +14,13 @@ abstract class W3AdvancedProjectile extends CThrowable
 	editable var persistFxAfterCollision		: bool;
 	editable var dealDamageEvenIfDodging		: bool; 
 	var ignore : bool;
-
 	
 	
 	protected var isActive : bool;
 	protected var collidedEntities : array<CGameplayEntity>;
 	
 	protected var lifeSpan : float; 	default lifeSpan = 20;
+	protected var deflected : bool; 	default deflected = false;
 	
 	default projSpeed = 10.f;
 	default projAngle = 5.f;
@@ -44,6 +44,11 @@ abstract class W3AdvancedProjectile extends CThrowable
 	public function ClearColidedEntities()
 	{
 		collidedEntities.Clear();
+	}
+	
+	public function ToggleActiveState( newState : bool )
+	{
+		isActive = newState;
 	}
 	
 	timer function TimeDestroy( deltaTime : float , id : int)
@@ -119,14 +124,100 @@ abstract class W3AdvancedProjectile extends CThrowable
 	}	
 }
 
+class W3DeflectableAdvancedProjectile extends W3AdvancedProjectile
+{
+	protected var casterPos : Vector;
+	protected var activeTrail : name;
+
+	function ProcessNewCombat_ArrowDeflection()
+	{
+		var damageMultiplier : float;
+
+		StopProjectile();
+		casterPos = caster.GetWorldPosition();
+		casterPos.Z += 1.5;
+		this.Init(thePlayer);
+
+		damageMultiplier = (thePlayer.GetSkillLevel(S_Sword_s33) - 1) * CalculateAttributeValue( thePlayer.GetSkillAttributeValue(S_Sword_s33, 'damage_increase', false, true) );
+		this.projDMG *= 1 + damageMultiplier;
+		this.deflected = true;
+
+		this.ShootProjectileAtPosition(8, projSpeed*1.25, casterPos);
+		ActivateTrail('arrow_trail_red');
+	}
+
+	function ProcessOldCombat_ArrowDeflection()
+	{
+		StopProjectile();
+		casterPos = caster.GetWorldPosition();
+		casterPos.Z += 1.5;
+		this.Init(thePlayer);
+		if ( thePlayer.GetSkillLevel(S_Sword_s10) == 3 )
+		{
+			this.projDMG *= 1 + CalculateAttributeValue( thePlayer.GetSkillAttributeValue(S_Sword_s10, 'damage_increase', false, true) );
+		}
+		this.ShootProjectileAtPosition(8,projSpeed*1.25,casterPos);
+		ActivateTrail('arrow_trail_red');
+	}
+	
+	function ProcessCombat_ArrowDeflection():bool
+	{
+		var counterSpamming:bool;
+		counterSpamming = thePlayer.CheckCounterSpamming( (CActor)caster );
+		if ( counterSpamming && thePlayer.GetSkillLevel(S_Sword_s10) > 1 )
+		{
+			ProcessOldCombat_ArrowDeflection();
+			return true;
+		}
+		
+		else if ( counterSpamming && thePlayer.CanUseSkill(S_Sword_s33) )
+		{
+			ProcessNewCombat_ArrowDeflection();
+
+			
+			GetWitcherPlayer().GainAdrenalineFromPerk31( 'counter' );
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	function ActivateTrail( trailName : name )
+	{
+		if ( trailName != activeTrail )
+		{
+			if ( activeTrail )
+				StopEffect( activeTrail );
+			
+			PlayEffect( trailName );
+			activeTrail = trailName;
+		}
+	}
+	
+	function StopActiveTrail()
+	{
+		if (activeTrail)
+		{
+			StopEffect( activeTrail );
+			activeTrail = '';
+		}
+	}
+}
+
 class W3BoulderProjectile extends W3AdvancedProjectile
 {
 	editable var initFxName 					: name;
 	editable var onCollisionFxName 				: name;
 	editable var spawnEntityTemplate 			: CEntityTemplate;
 	editable var onCollisionAppearanceName 		: name;
+	private editable var soundRockBreaking              : name;
+	private editable var soundRockImpact                : name;
 	
 	private var projectileHitGround : bool;
+	
+	hint soundRockBreaking					= "Sound played when the rock hits the ground and breaks.";
+    hint soundRockImpact					= "Sound played when the rock hits the creature.";
 	
 	event OnProjectileInit()
 	{
@@ -151,6 +242,7 @@ class W3BoulderProjectile extends W3AdvancedProjectile
 		
 		super.OnProjectileCollision(pos, normal, collidingComponent, hitCollisionsGroups, actorIndex, shapeIndex);
 		
+		PlayEffect('boulder_hit'); 
 		
 		
 		
@@ -178,13 +270,17 @@ class W3BoulderProjectile extends W3AdvancedProjectile
 	{
 		var action : W3DamageAction;
 		
+		this.SoundEvent( soundRockImpact );
+		
 		action = new W3DamageAction in this;
 		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Heavy,CPS_AttackPower,false,true,false,false);
 		if ( projEfect != EET_Undefined )
 		{
 			action.AddEffectInfo(projEfect);
 		}
-		
+
+
+
 		
 		action.AddDamage( theGame.params.DAMAGE_NAME_RENDING, projDMG ); 
 		
@@ -317,6 +413,251 @@ class W3BoulderProjectile extends W3AdvancedProjectile
 	}
 	
 }
+
+
+class W3ThrallBoulderProjectile extends W3DeflectableAdvancedProjectile
+{
+	editable var initFxName 					: name;
+	editable var onCollisionFxName 				: name;
+	editable var spawnEntityTemplate 			: CEntityTemplate;
+	editable var onCollisionAppearanceName 		: name;
+	private editable var soundRockBreaking              : name;
+	private editable var soundRockImpact                : name;
+	
+	private var projectileHitGround : bool;
+	private var bounce				: bool;
+	private var myTemplate 			: CEntityTemplate;
+	private	var parryInfo 			: SParryInfo;
+	private var abs 				: array<name>;
+	private var npcCaster 			: CNewNPC;
+	private var defaultTrail		: name;
+	
+	default defaultTrail = 'arrow_trail';
+	
+	hint soundRockBreaking					= "Sound played when the rock hits the ground and breaks.";
+    hint soundRockImpact					= "Sound played when the rock hits the creature.";
+	
+	
+	event OnProjectileShot( targetCurrentPosition : Vector, optional target : CNode )
+	{
+		super.OnProjectileShot(targetCurrentPosition,target);
+		
+		ActivateTrail( defaultTrail );
+		
+		npcCaster = (CNewNPC)caster;
+		npcCaster.SetCounterWindowStartTime(theGame.GetEngineTime());
+	}
+	
+	event OnProjectileInit()
+	{
+		
+		projectileHitGround = false;
+		isActive = true;
+	}
+	
+	event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
+	{
+		if ( !isActive )
+		{
+			return true;
+		}
+		
+		if(collidingComponent)
+			victim = (CGameplayEntity)collidingComponent.GetEntity();
+		else
+			victim = NULL;
+		
+		super.OnProjectileCollision(pos, normal, collidingComponent, hitCollisionsGroups, actorIndex, shapeIndex);
+		
+		PlayEffect('boulder_hit'); 
+		
+		
+		
+		if ( victim == thePlayer )
+		{
+			bounce = false;
+			
+			if(thePlayer.HasAbility( 'Glyphword 1 _Stats', true ))
+			{
+				
+				thePlayer.PlayEffect('glyphword_reflection');
+				
+				
+				myTemplate = (CEntityTemplate)LoadResource('glyphword_1');
+				theGame.CreateEntity(myTemplate, GetWorldPosition(), thePlayer.GetWorldRotation(), , , true);
+
+				if(ProcessCombat_ArrowDeflection())
+					return true;
+
+				this.SoundEvent( "cmb_arrow_bounce" );
+				bounce = true;
+			}
+			
+			else if(thePlayer.CanParryAttack() && (thePlayer.CanUseSkill(S_Sword_s10) || thePlayer.CanUseSkill(S_Sword_s33)) )
+			{			
+
+				
+				parryInfo = thePlayer.ProcessParryInfo(((CActor)caster),((CActor)victim),AST_Jab,ASD_NotSet,'attack_light',((CActor)caster).GetInventory().GetItemFromSlot('r_weapon'), true);
+
+				if ( thePlayer.PerformParryCheck(parryInfo) )
+				{
+					if(ProcessCombat_ArrowDeflection())
+						return true;
+						
+					bounce = true;
+				}
+			}
+			
+			if(!bounce)
+			{
+				thePlayer.GetCharacterStats().GetAbilities(abs, true);				
+				bounce = abs.Contains(theGame.params.BOUNCE_ARROWS_ABILITY);
+				
+				if(bounce)
+				{
+					FactsAdd("sq108_arrow_deflected");
+					thePlayer.PlayEffect( 'bolt_bump' );
+				}
+			}
+			
+			if(bounce)
+			{	
+				StopProjectile();
+				ActivateTrail('arrow_trail_orange');
+				
+				
+				casterPos = thePlayer.GetWorldPosition() + thePlayer.GetHeadingVector() * 1.5;
+				casterPos.Z += 1.5;
+				casterPos.Y += RandRangeF(0.5, -0.5);
+				this.Init(thePlayer);
+				this.ShootProjectileAtPosition(22,projSpeed*0.5,casterPos);
+				return true;
+			}
+			else
+			{
+				VictimCollision(victim);
+			}
+		}
+		else if ( victim && !hitCollisionsGroups.Contains( 'Static' ) && !projectileHitGround && !collidedEntities.Contains(victim) )
+		{
+			VictimCollision(victim);
+		}
+		else if ( hitCollisionsGroups.Contains( 'Terrain' ) || hitCollisionsGroups.Contains( 'Static' ) )
+		{
+			ProjectileHitGround();
+		}
+		else if ( hitCollisionsGroups.Contains( 'Water' ) )
+		{
+			ProjectileHitGround();
+		}
+	}
+	
+	
+	
+	protected function VictimCollision( victim : CGameplayEntity )
+	{	
+		DealDamageToVictim(victim);
+		DeactivateProjectile(victim);
+	}
+
+	protected function DealDamageToVictim( victim : CGameplayEntity )
+	{
+		var action : W3DamageAction;
+		
+		this.SoundEvent( soundRockImpact );
+		
+		action = new W3DamageAction in this;
+		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Heavy,CPS_AttackPower,false,true,false,false);
+		if ( projEfect != EET_Undefined )
+		{
+			action.AddEffectInfo(projEfect);
+		}
+
+
+
+		
+		action.AddDamage( theGame.params.DAMAGE_NAME_RENDING, projDMG ); 
+		
+		if ( ((CActor)victim).UsesEssence() )
+		{
+			
+		}
+		
+		else
+		{
+			action.SetIgnoreArmor( ignoreArmor );
+		}
+		action.SetCanPlayHitParticle(false);
+		theGame.damageMgr.ProcessAction( action );
+		delete action;
+		
+		collidedEntities.PushBack(victim);
+	}
+	
+	protected function PlayCollisionEffect( optional victim : CGameplayEntity )
+	{
+		if ( victim == thePlayer && thePlayer.GetCurrentlyCastSign() == ST_Quen && ((W3PlayerWitcher)thePlayer).IsCurrentSignChanneled() )
+		{}
+		else
+			this.PlayEffect(onCollisionFxName);
+	}
+	
+	protected function DeactivateProjectile( optional victim : CGameplayEntity )
+	{
+		StopProjectile();
+		this.StopEffect(initFxName);
+		StopActiveTrail();
+		if ( IsNameValid( onCollisionAppearanceName ))
+		{
+			this.ApplyAppearance( onCollisionAppearanceName );
+		}
+		PlayCollisionEffect ( victim );
+		isActive = false;
+		this.DestroyAfter(5.0);
+	}
+	
+	protected function ProjectileHitGround()
+	{
+		var ent : CEntity;
+		var damageAreaEntity : CDamageAreaEntity;
+		
+		if ( spawnEntityTemplate )
+		{
+			ent = theGame.CreateEntity( spawnEntityTemplate, this.GetWorldPosition(), this.GetWorldRotation() );
+			damageAreaEntity = (CDamageAreaEntity)ent;
+			if ( damageAreaEntity )
+			{
+				damageAreaEntity.owner = (CActor)caster;
+				this.StopEffect(initFxName);
+				projectileHitGround = true;
+			}
+		}
+		DeactivateProjectile();
+	}
+	
+	
+	event OnAardHit( sign : W3AardProjectile )
+	{
+		var rigidMesh		 	: CMeshComponent;
+		var randAngleOffset 	: float;
+		var level 				: int;
+		
+		super.OnAardHit(sign);
+		
+		StopProjectile();
+		ActivateTrail('arrow_trail_orange');
+				
+		
+		casterPos = thePlayer.GetWorldPosition() + thePlayer.GetHeadingVector() * 3.0;
+		casterPos.Z += 1.5;
+		casterPos.Y += RandRangeF(0.5, -0.5);
+		this.Init(thePlayer);
+		this.ShootProjectileAtPosition(22,projSpeed*0.4,casterPos);
+				
+	}
+	
+}
+
 
 class W3TraceGroundProjectile extends W3AdvancedProjectile
 {
@@ -1032,10 +1373,11 @@ class FakeProjectile extends W3AdvancedProjectile
 
 class PoisonProjectile extends W3AdvancedProjectile
 {
-	editable var initFxName				: name;
-	editable var onCollisionFxName 		: name;
-	editable var spawnEntityOnGround	: bool;
-	editable var spawnEntityTemplate 	: CEntityTemplate;
+	editable var initFxName						: name;
+	editable var onCollisionFxName 				: name;
+	editable var onCollisionScreenFxName 		: name;
+	editable var spawnEntityOnGround			: bool;
+	editable var spawnEntityTemplate 			: CEntityTemplate;
 
 	
 	var projectileHitGround : bool;
@@ -1119,7 +1461,13 @@ class PoisonProjectile extends W3AdvancedProjectile
 		if ( victim == thePlayer && thePlayer.GetCurrentlyCastSign() == ST_Quen && ((W3PlayerWitcher)thePlayer).IsCurrentSignChanneled() )
 		{}
 		else
+		{
+			if (victim == thePlayer)
+				this.PlayEffect(onCollisionScreenFxName); 
+
 			this.PlayEffect(onCollisionFxName);
+		}	
+
 	}
 	
 	protected function DeactivateProjectile()
@@ -2246,4 +2594,3 @@ class W3AirDrainProjectile extends W3AdvancedProjectile
 		
 	}
 }
-

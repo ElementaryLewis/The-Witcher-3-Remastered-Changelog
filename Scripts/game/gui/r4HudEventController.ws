@@ -59,7 +59,7 @@ class COnGasAreaEvent extends CHudEvent
 
 class COnSetCoatOfArmsEvent extends CHudEvent
 {
-	var	set : bool;
+	var	value : bool;
 }
 
 class COnManageHudTimeOutEvent extends CHudEvent
@@ -374,7 +374,7 @@ class CR4HudEventController
 		hudEvent = new COnSetCoatOfArmsEvent in this;
 		hudEvent.moduleName = "WolfHeadModule";
 		hudEvent.eventName	= "SetCoatOfArms";
-		hudEvent.set = value;
+		hudEvent.value = value;
 		delayedEvents.PushBack( hudEvent );
 		
 		LogChannel( 'HudEventsQueue', "queued event [" + hudEvent.moduleName + "] [" + hudEvent.eventName + "]" );
@@ -554,7 +554,7 @@ class CR4HudEventController
 				if ( module )
 				{
 					onSetCoatOfArmsEvent = ( COnSetCoatOfArmsEvent )delayedEvent;
-					wolfHeadModule.SetCoatOfArms( onSetCoatOfArmsEvent.set );
+					wolfHeadModule.SetCoatOfArms( onSetCoatOfArmsEvent.value );
 				}
 				break;
 

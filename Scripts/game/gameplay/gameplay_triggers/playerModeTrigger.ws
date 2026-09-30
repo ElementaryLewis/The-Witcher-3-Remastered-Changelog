@@ -118,4 +118,3 @@ quest function EnablePlayerModeTrigger( triggerTag : name, enable : bool )
 		}
 	}
 }
-

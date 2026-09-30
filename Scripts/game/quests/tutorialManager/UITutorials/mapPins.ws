@@ -39,13 +39,16 @@ state MapPins in W3TutorialManagerUIHandler extends TutHandlerBaseState
 			return true;
 		}		
 		
-		else if(hintName == PLACE_PINS)
+		QuitState();
+		return true;
+
+		if(hintName == PLACE_PINS)
 		{
-			ShowHint(CUSTOM_PINS, POS_MAP_X, POS_MAP_Y, ETHDT_Input);
+			
 		}
 		else if(hintName == CUSTOM_PINS)
 		{
-			ShowHint(PINS_MAX_COUNT, POS_MAP_X, POS_MAP_Y, ETHDT_Input);
+			
 		}
 		else if(hintName == PINS_MAX_COUNT)
 		{

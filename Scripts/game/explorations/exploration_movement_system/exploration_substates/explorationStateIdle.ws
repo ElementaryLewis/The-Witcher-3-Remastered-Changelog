@@ -43,6 +43,13 @@ class CExplorationStateIdle extends CExplorationStateAbstract
 	private editable	var m_CameraAnimWalkS				: SCameraAnimationData;
 	private editable	var m_CameraAnimRunS				: SCameraAnimationData;
 	private editable	var m_CameraAnimSprintS				: SCameraAnimationData;
+
+	
+	private editable	var	behPlayIdleBridge				: name;					default	behPlayIdleBridge				= 'PlayIdleBridge';
+	private editable	var	behIdleBridgeDeactivateNotif	: name;					default	behIdleBridgeDeactivateNotif	= 'IdleBridgeFinished';
+	private				var idleBridgeCooldown				: float;				default idleBridgeCooldown				= 30.f;
+	private				var idleBridgeCooldownCurr			: float;
+	private				var playingIdleBridge				: bool;
 	
 	
 	
@@ -83,7 +90,8 @@ class CExplorationStateIdle extends CExplorationStateAbstract
 	
 	private function StateEnterSpecific( prevStateName : name )	
 	{		
-		m_ExplorationO.m_MoverO.Reset();
+		if ( prevStateName != 'Climb' || !((bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbUseDestinationMotionBlend')) )
+			m_ExplorationO.m_MoverO.Reset();
 		
 		m_ExplorationO.m_SharedDataO.ResetHeightFallen();
 		
@@ -99,6 +107,9 @@ class CExplorationStateIdle extends CExplorationStateAbstract
 		
 		m_SubStateE					= PIS_None;
 		m_CurentCameraAnimationN	= 'None';
+
+		SetPlayIdleBridge( false );
+		idleBridgeCooldownCurr = 0.f;
 	}
 	
 	
@@ -130,6 +141,8 @@ class CExplorationStateIdle extends CExplorationStateAbstract
 		UpdateSubstate();
 		
 		UpdateCamera( _Dt );
+
+		UpdateIdleBridges( _Dt );
 	}
 	
 	
@@ -486,5 +499,68 @@ class CExplorationStateIdle extends CExplorationStateAbstract
 		{
 			camera.StopAnimation( m_CurentCameraAnimationN );
 		}
+	}
+
+	
+	private function UpdateIdleBridges( Dt : float )
+	{
+		var idleBridgeFinished : bool;
+
+		if ( thePlayer.IsCiri() )
+		{
+			SetPlayIdleBridge( false );
+			idleBridgeCooldownCurr = 0.f;
+			return;
+		}
+
+		if ( idleBridgeCooldownCurr >= idleBridgeCooldown )
+		{
+			
+			SetPlayIdleBridge( true );
+			idleBridgeCooldownCurr = 0.f;
+		}
+
+		if ( playingIdleBridge )
+		{
+			idleBridgeFinished = m_ExplorationO.m_OwnerE.BehaviorNodeDeactivationNotificationReceived( behIdleBridgeDeactivateNotif );
+			if ( idleBridgeFinished )
+			{
+				SetPlayIdleBridge( false );
+			}
+		}
+		else if ( m_SubStateE == PIS_Idle )
+		{
+			idleBridgeCooldownCurr += Dt;
+		}
+	}
+
+	
+	private function AddAnimEventCallbacks()
+	{
+		m_ExplorationO.m_OwnerE.AddAnimEventCallback( 'BlendOut', 'OnAnimEvent_SubstateManager' );
+	}
+
+	
+	private function RemoveAnimEventCallbacks()
+	{
+		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( 'BlendOut' );
+	}
+
+	
+	function OnAnimEvent( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
+	{
+		if ( animEventName == 'BlendOut' )
+		{
+			
+			SetPlayIdleBridge( false, true );
+		}
+	}
+
+	
+	private function SetPlayIdleBridge( en : bool, optional behParamOnly : bool )
+	{
+		m_ExplorationO.SetBehaviorParamBool( behPlayIdleBridge, en );
+		if ( !behParamOnly )
+			playingIdleBridge = en;
 	}
 }

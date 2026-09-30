@@ -123,10 +123,11 @@ class CR4HudModuleBossFocus extends CR4HudModuleBase
 		if ( m_bossEntity )
 		{
 			bossName = m_bossEntity.GetDisplayName();
+						
 			if ( onShow || m_bossName != bossName )
 			{
 				m_bossName = bossName;
-				m_fxSetBossName.InvokeSelfOneArg( FlashArgString( m_bossEntity.GetDisplayName() ) );
+				m_fxSetBossName.InvokeSelfOneArg( FlashArgString( m_bossName ) );
 			}
 			if ( onShow )
 			{
@@ -134,6 +135,7 @@ class CR4HudModuleBossFocus extends CR4HudModuleBase
 			}
 			
 			l_currentHealthPercentage = CeilF( 100 * m_bossEntity.GetHealthPercents() );	
+
 			if ( m_lastHealthPercentage != l_currentHealthPercentage )
 			{
 				m_fxSetBossHealth.InvokeSelfOneArg( FlashArgInt( l_currentHealthPercentage ) );
@@ -167,5 +169,4 @@ class CR4HudModuleBossFocus extends CR4HudModuleBase
 	
 	
 	
-
 }

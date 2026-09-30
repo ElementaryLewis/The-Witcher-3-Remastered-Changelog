@@ -35,6 +35,10 @@ function GetPlatformLocString( stringKey : string, optional fallbackKey : string
 		case Platform_Xbox_SCARLETT_LOCKHART:
 			foundString = GetLocStringByKey( stringKey + "_x1");
 			break;
+		
+		case Platform_Switch2_Ounce:
+			foundString = GetLocStringByKey( stringKey + "_switch");
+			break;
 	}
 	
 	if ( foundString != "" )
@@ -510,7 +514,7 @@ function ReplaceTagsToIcons(s : string) : string
 			else
 			{
 				
-				icon = GetIconForKey(keys[keyIdx]);
+				icon = GetIconForKey(keys[keyIdx], false, true);
 			}
 		}
 		
@@ -540,7 +544,7 @@ function ReplaceTagsToIcons(s : string) : string
 
 
 
-function GetIconForKey(key : EInputKey, optional isGuiKey:bool) : string
+function GetIconForKey(key : EInputKey, optional isGuiKey:bool, optional isKeybindFromInputQwertyIni:bool) : string
 {
 	var inGameConfigWrapper : CInGameConfigWrapper;
 	var configValue : bool;
@@ -564,6 +568,18 @@ function GetIconForKey(key : EInputKey, optional isGuiKey:bool) : string
 			{
 				key = IK_Pad_A_CROSS;
 			}
+		}
+	}
+
+	if(theGame.GetPlatform() == Platform_Switch2_Ounce && !isKeybindFromInputQwertyIni)
+	{
+		if (key == IK_Pad_X_SQUARE)
+		{
+			key = IK_Pad_Y_TRIANGLE;
+		}
+		else if (key == IK_Pad_Y_TRIANGLE)
+		{
+			key = IK_Pad_X_SQUARE;
 		}
 	}
 	
@@ -1229,9 +1245,9 @@ function GetIconNameForKey(key : EInputKey) : string
 function GetPadFileName(type : string) : string
 {
 	var platformPrefix:string;
+	var deviceType : EInputDeviceType = theInput.GetLastUsedGamepadType();
 	
-	if( theInput.GetLastUsedGamepadType() == IDT_PS4 
-		|| theInput.GetLastUsedGamepadType() == IDT_PS5 )
+	if( deviceType == IDT_PS4 || deviceType == IDT_PS5 )
 	{
 		
 		switch(type)
@@ -1267,9 +1283,44 @@ function GetPadFileName(type : string) : string
 			case "TouchPad" :			return "ICO_PlayS_Touchpad";
 		}
 	}
+	else if (deviceType == IDT_Switch2 || deviceType == IDT_Switch2_Mouser)
+	{
+		switch(type)
+		{
+			case "LS" :					return "ICO_Switch_L3";
+			case "RS" :					return "ICO_Switch_R3";
+			case "LS_Thumb"	:			return "ICO_Switch_L3_hold";
+			case "RS_Thumb"	:			return "ICO_Switch_R3_hold";
+			case "RS_PRESS"	:			return "ICO_Switch_R3_hold";
+			case "LS_Up_Down" : 		return "ICO_Switch_L3_scroll";			
+			case "LS_LeftRight" : 		return "ICO_Switch_L3_tabs";
+			case "RS_UpDown" : 	  		return "ICO_Switch_R3_scroll";
+			case "RS_LeftRight" : 		return "ICO_Switch_R3_tabs";
+			case "RS_Up" : 				return "ICO_Switch_R3_up";
+			case "RS_Down" : 			return "ICO_Switch_R3_down";
+			case "LS_Up" : 				return "ICO_Switch_L3_up";
+			case "Cross_Right" : 		return "ICO_Switch_dpad_right";
+			case "Cross_Left" : 		return "ICO_Switch_dpad_left";
+			case "Cross_Up" : 			return "ICO_Switch_dpad_up";
+			case "Cross_Down" : 		return "ICO_Switch_dpad_down";
+			case "Cross_LeftRight" :  	return "ICO_Switch_dpad_left_right";
+			case "Cross_UpDown" :  		return "ICO_Switch_dpad_up_down";
+			case "Back" : 				return "ICO_Switch_Touchpad";
+			case "Start" : 				return "ICO_Switch_Options";
+			case "RT" : 				return "ICO_Switch_R2";
+			case "LT" : 				return "ICO_Switch_L2";
+			case "LB" : 				return "ICO_Switch_L1";
+			case "RB" : 				return "ICO_Switch_R1";
+			case "A" : 					return "ICO_Switch_X";
+			case "B" : 					return "ICO_Switch_Circle";
+			case "X" : 					return "ICO_Switch_Square";
+			case "Y" : 					return "ICO_Switch_Triangle";
+			case "TouchPad" :			return "ICO_Switch_Touchpad";
+		}
+	}
 	else
 	{
-		if (theInput.GetLastUsedGamepadType() == IDT_Steam)
+		if (deviceType == IDT_Steam)
 		{
 			platformPrefix = "_Steam_";
 		}

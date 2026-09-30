@@ -88,6 +88,8 @@ import class CCommonGame extends CGame
 	
 	import final function LoadLastGameInit( optional isFromDeathScreen : bool  );
 	import final function LoadGameInit( info : SSavegameInfo, isFromDeathScreen : bool );
+	
+	import final function LeaveTutorialReplay() : void;
 
 	import final function CanStartStandaloneDLC( dlc : name ) : bool;
 	import final function InitStandaloneDLCLoading( dlc : name, difficulty : int ) : ELoadGameResult;
@@ -149,6 +151,9 @@ import class CCommonGame extends CGame
 
 	
 	import final function GetStorySceneSystem() : CStorySceneSystem;
+	
+	
+	import final function GetModHandlerSystem() : CModHandlerSystem;
 	
 	
 	import final function GetActorByTag( tag : name ) : CActor;
@@ -315,6 +320,9 @@ import class CCommonGame extends CGame
 	
 	import final function UpdateCrossProgressionValue( value : string ) : void;
 	import final function RefreshCrossProgressionSavesList() : void;
+	
+	import final function ReplayTutorial() : void;
+	import final function IsPatternTutorial() : bool;
 	
 	
 	protected var m_voiceLangDownloadStatusListener : CScriptedFlashValueStorage;

@@ -19,7 +19,9 @@ enum CreditsIndex
 	CreditsIndex_Wither3 = 0,
 	CreditsIndex_Ep1 = 1,
 	CreditsIndex_Ep2 = 2,
-	CreditsIndex_Witcher3_NG = 3
+	CreditsIndex_Witcher3_NG = 3,
+	CreditsIndex_Witcher3_RE = 4,
+	CreditsIndex_Ly = 5
 }
 
 class CR4MainCreditsMenu extends CR4MenuBase
@@ -101,6 +103,14 @@ class CR4MainCreditsMenu extends CR4MenuBase
 		{
 			theSound.SoundEvent( 'mus_credits_usm' );
 		}
+		else if( theGame.GetGuiManager().GetLastRequestedCreditsIndex() == CreditsIndex_Witcher3_RE )
+		{
+			theSound.SoundEvent( 'mus_credits_usm' );
+		}
+		else if( theGame.GetGuiManager().GetLastRequestedCreditsIndex() == CreditsIndex_Ly )
+		{
+			theSound.SoundEvent( 'mus_credits_usm' );
+		}
 
 		theGame.ResetFadeLock( "CR4MainCreditsMenu" );
 		theGame.FadeInAsync(0.5);
@@ -149,6 +159,11 @@ class CR4MainCreditsMenu extends CR4MenuBase
 		{
 			creditsCSV = LoadCSV("gameplay\globals\credits_ng.csv");
 		}
+		else if (theGame.GetGuiManager().GetLastRequestedCreditsIndex() == CreditsIndex_Witcher3_RE)
+		{
+			creditsCSV = LoadCSV("gameplay\globals\credits_tw3re.csv");
+		}
+
 		
 		rowsCount = creditsCSV.GetNumRows();
 
@@ -266,6 +281,14 @@ class CR4MainCreditsMenu extends CR4MenuBase
 					theSound.SoundEvent( 'mus_credits_secondary' );
 				}
 				else if ( theGame.GetGuiManager().GetLastRequestedCreditsIndex() == CreditsIndex_Witcher3_NG )
+				{
+					theSound.SoundEvent( 'mus_credits_secondary' );
+				}
+				else if ( theGame.GetGuiManager().GetLastRequestedCreditsIndex() == CreditsIndex_Witcher3_RE )
+				{
+					theSound.SoundEvent( 'mus_credits_secondary' );
+				}
+				else if ( theGame.GetGuiManager().GetLastRequestedCreditsIndex() == CreditsIndex_Ly )
 				{
 					theSound.SoundEvent( 'mus_credits_secondary' );
 				}
@@ -438,10 +461,10 @@ class CR4MainCreditsMenu extends CR4MenuBase
 		}		
 	}
 		
-	event /* C++ */ OnClosingMenu()
+	event  OnClosingMenu()
 	{
 		super.OnClosingMenu();
-		//theGame.FadeOutAsync( 0 );
+		
 		guiManager.CancelFlashbackVideo();
 		theInput.RestoreContext( 'EMPTY_CONTEXT', true );
 	}	

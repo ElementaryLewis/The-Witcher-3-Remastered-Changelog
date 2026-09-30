@@ -49,7 +49,8 @@ statemachine class W3AardEntity extends W3SignEntity
 	editable var effects		: array< SAardEffects >;
 	editable var waterTestOffsetZ : float;
 	editable var waterTestDistancePerc : float;
-	
+
+	var disableRotationHack 		: bool;
 	var projectileCollision 		: array< name >;
 	
 	default skillEnum = S_Magic_1;
@@ -281,50 +282,20 @@ statemachine class W3AardEntity extends W3SignEntity
 		
 		if ( owner.CanUseSkill( S_Magic_s20 ) )
 		{
-			dispersionLevel = owner.GetSkillLevel(S_Magic_s20);
 			
-			if(dispersionLevel == 1)
-			{			
-				
-				PlayEffect( effects[fireMode].baseCommonThrowEffectUpgrade1 );
+			PlayEffect( effects[fireMode].baseCommonThrowEffect );
+		
 			
-				
-				if(!hasMutation6)
-				{
-					if(hitsWater)
-						PlayEffect( effects[fireMode].throwEffectWaterUpgrade1 );
-					else
-						PlayEffect( effects[fireMode].throwEffectSoilUpgrade1 );
-				}
+			if(!hasMutation6)
+			{
+				if(hitsWater)
+					PlayEffect( effects[fireMode].throwEffectWater );
+				else
+					PlayEffect( effects[fireMode].throwEffectSoil );
 			}
-			else if(dispersionLevel == 2)
-			{			
-				
-				PlayEffect( effects[fireMode].baseCommonThrowEffectUpgrade2 );
+
 			
-				
-				if(!hasMutation6)
-				{
-					if(hitsWater)
-						PlayEffect( effects[fireMode].throwEffectWaterUpgrade2 );
-					else
-						PlayEffect( effects[fireMode].throwEffectSoilUpgrade2 );
-				}
-			}
-			else if(dispersionLevel == 3)
-			{			
-				
-				PlayEffect( effects[fireMode].baseCommonThrowEffectUpgrade3 );
 			
-				
-				if(!hasMutation6)
-				{
-					if(hitsWater)
-						PlayEffect( effects[fireMode].throwEffectWaterUpgrade3 );
-					else
-						PlayEffect( effects[fireMode].throwEffectSoilUpgrade3 );
-				}
-			}
 		}
 		else
 		{
@@ -363,7 +334,7 @@ statemachine class W3AardEntity extends W3SignEntity
 		}
 		
 		
-		if(owner.CanUseSkill(S_Magic_s06))
+		if(owner.CanUseSkill(S_Magic_s06) || owner.CanUseSkill(S_Magic_s33))
 		{
 			
 			switch(dispersionLevel)
@@ -405,30 +376,15 @@ statemachine class W3AardEntity extends W3SignEntity
 	{
 		var active : bool;
 		
-		if(owner.CanUseSkill(S_Magic_s20))
-		{
-			switch(owner.GetSkillLevel(S_Magic_s20))
-			{
-				case 1 :
-					active = IsEffectActive( effects[fireMode].baseCommonThrowEffectUpgrade1 );
-					break;
-				case 2 :
-					active = IsEffectActive( effects[fireMode].baseCommonThrowEffectUpgrade2 );
-					break;
-				case 3 :
-					active = IsEffectActive( effects[fireMode].baseCommonThrowEffectUpgrade3 );
-					break;
-				default :
-					LogAssert(false, "W3AardEntity.DelayedDestroyTimer: S_Magic_s20 skill level out of bounds!");
-			}
-		}
-		else
-		{
-			active = IsEffectActive( effects[fireMode].baseCommonThrowEffect );
-		}
+		active = IsEffectActive( effects[fireMode].baseCommonThrowEffect );
 		
 		if(!active)
 			Destroy();
+	}
+
+	public function DisableRotationHack( disable : bool )
+	{
+		disableRotationHack = disable;
 	}
 }
 
@@ -478,7 +434,17 @@ state AardCircleCast in W3AardEntity extends NormalCast
 					player.DrainFocus(1);
 				else
 					caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
-			}	
+			}
+			else if ( player == caster.GetActor() && player && player.CanUseSkill( S_Perk_34 ) )	
+			{
+				cost = player.GetStaminaActionCost(ESAT_Ability, SkillEnumToName( parent.skillEnum ), 0);
+				stamina = player.GetStat(BCS_Stamina, true);
+				
+				if ( player.GetStatMax(BCS_Stamina) > stamina )
+					player.DrainFocus( player.GetSignAdrenalineCostPerk34() );
+				else
+					caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
+			}
 			else
 				caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ) );
 		}

@@ -221,39 +221,14 @@ function getEnchamtmentStatName(enchantmentName:name):name
 			break;
 		case 'Runeword 10':
 			return 'Runeword 10 _Stats';
-			break;
-			
+			break;			
 		case 'Runeword 11':
 			return 'Runeword 11 _Stats';
 			break;
 		case 'Runeword 12':
 			return 'Runeword 12 _Stats';
 			break;
-		case 'Runeword 13':
-			return 'Runeword 13 _Stats';
-			break;
-		case 'Runeword 14':
-			return 'Runeword 14 _Stats';
-			break;
-		case 'Runeword 15':
-			return 'Runeword 15 _Stats';
-			break;
-		case 'Runeword 16':
-			return 'Runeword 16 _Stats';
-			break;
-		case 'Runeword 17':
-			return 'Runeword 17 _Stats';
-			break;
-		case 'Runeword 18':
-			return 'Runeword 18 _Stats';
-			break;
-		case 'Runeword 19':
-			return 'Runeword 19 _Stats';
-			break;
-		case 'Runeword 20':
-			return 'Runeword 20 _Stats';
-			break;
-			
+
 		case 'Glyphword 1':
 			return 'Glyphword 1 _Stats';
 			break;
@@ -312,7 +287,7 @@ function getEnchamtmentStatName(enchantmentName:name):name
 		case 'Glyphword 20':
 			return 'Glyphword 20 _Stats';
 			break;
-		
+
 		default:
 			break;
 	}
@@ -354,6 +329,8 @@ function GetAllRunewordSchematics():array< CName >
 	resultList.PushBack( 'Glyphword 18' );
 	resultList.PushBack( 'Glyphword 19' );
 	resultList.PushBack( 'Glyphword 20' );
+
+
 	
 	return resultList;
 }

@@ -83,6 +83,7 @@ import class CScriptSoundSystem extends CObject
 	import function SoundSequence( sequenceName : string, sequence : array< string > );
 	import function SoundEventAddToSave( eventName : string );
 	import function SoundEventClearSaved( );
+	import function SoundMusicEvent( eventName : string );
 	import function SoundEnableMusicEvents( how : bool );
 	import function SoundLoadBank( bankName : string, async : bool );
 	import function SoundUnloadBank( bankName : string );
@@ -275,47 +276,48 @@ import class CScriptSoundSystem extends CObject
 		return monsterHunt;
 	}
 	
-	function InitializeAreaMusic( worldArea : EAreaName )
+	function InitializeAreaMusic( worldArea : CName )
 	{
-		SoundEvent( "stop_music" );
+		SoundMusicEvent( "stop_music" );
 		
 		switch( worldArea )
 		{
-			case AN_NMLandNovigrad:
-				SoundEvent( "play_music_nomansgrad" );
+			case 'AN_NMLandNovigrad':
+				SoundMusicEvent( "play_music_nomansgrad" );
 				break;
 				
-			case AN_Skellige_ArdSkellig:
-				SoundEvent( "play_music_skellige" );
+			case 'AN_Skellige_ArdSkellig':
+				SoundMusicEvent( "play_music_skellige" );
 				break;
 			
-			case AN_Kaer_Morhen:
-				SoundEvent( "play_music_kaer_morhen" );
+			case 'AN_Kaer_Morhen':
+				SoundMusicEvent( "play_music_kaer_morhen" );
 				break;
 			
-			case AN_Prologue_Village:
-			case AN_Prologue_Village_Winter:
-				SoundEvent( "play_music_prologue" );
+			case 'AN_Prologue_Village':
+			case 'AN_Prologue_Village_Winter':
+				SoundMusicEvent( "play_music_prologue" );
 				break;
 				
-			case AN_Wyzima:
-				SoundEvent( "play_music_wyzima_castle" );
+			case 'AN_Wyzima':
+				SoundMusicEvent( "play_music_wyzima_castle" );
 				break;
 			
-			case AN_Island_of_Myst:
-				SoundEvent( "play_music_misty_island" );
+			case 'AN_Island_of_Myst':
+				SoundMusicEvent( "play_music_misty_island" );
 				break;
 				
-			case AN_Spiral:
-				SoundEvent( "play_music_spiral" );
+			case 'AN_Spiral':
+				SoundMusicEvent( "play_music_spiral" );
 				break;
 			
-			case AN_Undefined:
-				LogAssert( false, "theSound.InitializeAreaMusic: undefined area! No music set!" );
+			case 'AN_Dlc_Bob':
+				SoundMusicEvent( "play_music_toussaint" );
 				break;
-			case (EAreaName)AN_Dlc_Bob:
-				SoundEvent( "play_music_toussaint" );
+			case 'AN_Bob':
+				SoundMusicEvent( "play_music_toussaint" );
 				break;
+
 			default:
 				LogAssert( false, "theSound.InitializeAreaMusic: unsupported area type <<" + worldArea + ">> passed! Music not set!" );
 				break;

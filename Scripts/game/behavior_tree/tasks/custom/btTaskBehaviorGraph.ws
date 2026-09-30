@@ -185,4 +185,3 @@ class CBehTreeBehaviorGraphDef extends IBehTreeTaskDefinition
 	editable inlined var graph : CBTEnumBehaviorGraph;
 	editable var forceHighPriority : CBehTreeValBool;
 	}
-

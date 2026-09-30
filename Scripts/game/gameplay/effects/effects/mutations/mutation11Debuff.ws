@@ -26,4 +26,4 @@ class W3Effect_Mutation11Debuff extends CBaseGameplayEffect
 		
 		super.OnEffectRemoved();
 	}
-}	
+}
