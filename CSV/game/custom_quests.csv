@@ -16,7 +16,5 @@ game\hub_definitions\skellige_part2.redgame;skellige_part2
 game\combat.redgame;combat
 game\game_parts_definitions\part3_plus_konsylium_review.redgame;part3_plus_konsylium_review
 quests\part_2\quest_files\q403_battle\q403_battle.redgame;q403_battle
-test_cases\quests\localtravelmemdump.redgame;localtravelmemdump
-test_cases\quests\worldtravelmemdump.redgame;worldtravelmemdump
-test_cases\quests\nothing.redgame;nothing
+engine\reference_level\quest\reference_level_w3re_def.redgame;reference_level_w3re_def
 engine\reference_level\quest\reference_level_def.redgame;reference_level_def

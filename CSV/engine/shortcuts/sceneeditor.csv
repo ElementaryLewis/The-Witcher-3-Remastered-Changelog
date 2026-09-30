@@ -1,6 +1,6 @@
 KeyCode;BlockClass;Template
 I;CStorySceneInputBlock;
-O;CStorySceneOutputBlock;
+E;CStorySceneOutputBlock;
 S;CStorySceneSectionBlock;
 U;CStorySceneCutsceneSectionBlock;
 C;CStorySceneFlowConditionBlock;

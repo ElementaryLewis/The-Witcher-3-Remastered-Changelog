@@ -1,0 +1,13 @@
+Set;Pose;Name
+Woman;;Neutral
+Woman;geralt_reaction_smile_face;Smile
+Woman;geralt_reaction_sad_face;Sad
+Woman;geralt_reaction_mad_face;Mad
+Man;;Neutral
+Man;geralt_reaction_smile_face;Smile
+Man;geralt_reaction_sad_face;Sad
+Man;geralt_neutral_gesture_brows_down_face_lcl;Mad
+Godling;;Neutral
+Godling;happy_pose_face;Smile
+Godling;sad_pose_face;Sad
+Godling;aggressive_pose_face;Mad

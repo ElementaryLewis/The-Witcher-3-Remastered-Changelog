@@ -1,0 +1,37 @@
+Set;Pose;StartOffset;Name
+Sorceress;woman_sorceress_idle_lp_01;;Sorceress Idle Left
+Sorceress;woman_sorceress_idle_rp_01;;Sorceress Idle Right
+Sorceress;ciri_targeting_for_triss_meteorite_rp_loop;;Meteorite
+Woman;locomotion_idle;;Idle
+Woman;menu_idle_v3;;Meditation
+Woman;c_mage_cast_loop;;Mage Cast
+Henrietta;locomotion_idle;;Idle
+Man;geralt_photomode_idle;;Idle
+Man;geralt_photomode_attack;;Threatening
+Man;geralt_photomode_idle2;;Reversed
+Man;man_work_sit_squat_01;;Sitting
+Man;reinard_hanging_trapped;;Hanging
+Eredin;geralt_photomode_idle;;Idle
+Eredin;geralt_photomode_idle2;;Reversed
+Eredin;man_work_sit_squat_01;;Sitting
+Eredin;reinard_hanging_trapped;;Hanging
+Dwarf;dwarf_stand_slightly_drunk_loop_01;;Idle
+Dwarf;high_standing_determined_idle;;Arms Crossed
+Dwarf;dwarf_guarding_the_entrance_loop_01;;Guarding
+Dwarf;low_sitting_ground_leaning_back_sleeping_idle;;Sitting
+Child;locomotion_idle_01;;Idle
+Child;child_hide_and_seek_loop;;Hiding
+Child;child_sit_on_ground_loop;;Sitting
+Uma;high_standing_determined_idle;;Idle
+Uma;uma_sitting_on_ground_loop_3;;Sitting
+Bart;monster_cave_troll_threat_posture;;Idle
+Bart;monster_cave_troll_sitting;;Sitting
+Bart;monster_cave_troll_idle_1;;Threatening
+Horse;horse_breathing_slow;;Idle
+Horse;horse_eating_idle02;;Eating
+Horse;horse_walk;;Walk
+Horse;horse_trot;;Trot
+Horse;horse_canter_to_gallop_turn_left;;Gallop Left
+Horse;horse_canter_to_gallop_turn_right;;Gallop Right
+Horse;horse_gallop_jump_loop;;Gallop Jump
+Horse;horse_back_kick01;1.07;Back Kick

@@ -631,6 +631,18 @@ sectionID;Name;Title;x;y;time;delay
 11;;credits_HUNGARIAN_LOCALIZATION;;;;
 11;QLOC S.A.;;;;;
 11;;;;;;
+11;;CRE_LOCALISATION_PROJECT_MANAGER;;;;
+11;KOVÁCS ADRIÁN;;;;;
+11;;;;;;
+11;;CRE_TRANSLATORS;;;;
+11;GÁSPÁR ANDRÁS;;;;;
+11;HORVÁTH NORBERT;;;;;
+11;JAKAB ZSOLT;;;;;
+11;NOVÁK GÁBOR;;;;;
+11;;;;;;
+11;;credits_LOCO_REVIEWER;;;;
+11;PÉTERFI ANDRÁS;;;;;
+11;;;;;;
 11;***;;;;;
 11;;;;;;
 11;;credits_RUSSIAN_LOCALIZATION;;;;

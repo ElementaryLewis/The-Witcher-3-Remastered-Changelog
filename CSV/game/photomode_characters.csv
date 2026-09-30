@@ -1,0 +1,32 @@
+Name;LocKey;Entity;Icon;Categories;PoseSet;MimicSet
+Triss;Triss;triss;icons/characters/journal_triss.png;Main;Woman|Sorceress;Woman
+Yenn;Yennefer;yennefer;icons/characters/journal_yenn.png;Main;Woman;Woman
+Ciri;Ciri;cirilla;icons/characters/journal_ciri.png;Main;Woman|Sorceress;Woman
+Dandelion;Dandelion;dandelion;icons/characters/journal_dandelion.png;Main;Man;Man
+Priscilla;Priscilla;priscilla;icons/characters/journal_priscilla.png;Main;Woman;Woman
+Zoltan;Zoltan_Chivay;zoltan;icons/characters/journal_zoltan.png;Main;Dwarf;Man
+Shani;Shani;shani;icons/characters/journal_shani.png;Main;Woman;Woman
+Olgierd;olgierd;olgierdvoneverec;icons/characters/journal_olgierd.png;Main;Man;Man
+Gaunter;displayname_gaunterodim;gaunter;icons/characters/journal_mirrorman.png;Main;Man;Man
+Vesemir;Vesemir;vesemir;icons/characters/journal_vesemir.png;Witcher;Man;Man
+Lambert;Lambert;lambert;icons/characters/journal_lambert.png;Witcher;Man;Man
+Letho;Letho;letho;icons/characters/journal_letho.png;Witcher;Man;Man
+Eskel;Eskel;eskel;icons/characters/journal_eskel.png;Witcher;Man;Man
+Philippa;Filippa_Eilhart;philippa;icons/characters/journal_philipa.png;Lodge;Woman|Sorceress;Woman
+Keira;Keira_Metz;keira;icons/characters/journal_keira.png;Lodge;Woman|Sorceress;Woman
+Red Baron;Baron;red_baron;icons/characters/journal_baron.png;Side;Man;Man
+Roche;Vernon_Roche;roche;icons/characters/journal_roche.png;Side;Man;Man
+Ves;Ves;ves;icons/characters/journal_ves.png;Side;Woman;Woman
+Emhyr;Emhyr_var_Emreis;emhyr;icons/characters/journal_emhyr.png;Side;Man;Man
+Radovid;Radovid;radovid;icons/characters/journal_radovid.png;Side;Man;Man
+Dijkstra;Djikstra;djikstra;icons/characters/journal_dijkstra.png;Side;Man;Man
+Crach;Crach_an_Craite;crach;icons/characters/journal_crach.png;Side;Man;Man
+Anna Henrietta;anna_henrietta;anna_henrietta;icons/characters/journal_henrietta.png;Side;Henrietta;Woman
+Syanna;syanna;syanna;icons/characters/journal_syanna.png;Side;Woman;Woman
+Avallac'h;Avallach;avallac_h;icons/characters/journal_avallachunlocked.png;Side;Man;Man
+Uma;Ugliest_Man_Alive;uma;icons/characters/journal_uma.png;Side;Uma;
+Bart the Troll;bart_the_troll;bart;icons/characters/journal_bart.png;Side;Bart;Man
+Johnny;Godling_Johnny;johnny;icons/characters/journal_yanek.png;Side;Child;Godling
+Imlerith;Imlerith;imlerith;icons/characters/journal_imlerith.png;WildHunt;Man;Man
+Eredin;Eredin;eredin;icons/characters/journal_eredin.png;WildHunt;Eredin;
+Roach;Płotka;playerHorse;icons/photomode/roach_64x64.png;Mounts;Horse

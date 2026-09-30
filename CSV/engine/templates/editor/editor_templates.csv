@@ -109,6 +109,7 @@ Swarms.Birds.Pigeons;;engine\templates\editor\swarms\pigeons_swarm_lair.w2ent;CS
 Swarms.Birds.Crows;;engine\templates\editor\swarms\crows_swarm_lair.w2ent;CSwarmTemplateInsertion
 Swarms.PeacefulFishes;;engine\templates\editor\swarms\fishes_swarm_lair.w2ent;CSwarmTemplateInsertion
 Swarms.Toads;;engine\templates\editor\swarms\toads_swarm_lair.w2ent;CSwarmTemplateInsertion
+Swarms.Sheep;;engine\templates\editor\swarms\sheep_swarm_lair.w2ent;CSwarmTemplateInsertion
 Swarms.PeacefulCrabs;;engine\templates\editor\swarms\crabs_swarm_lair.w2ent;CSwarmTemplateInsertion
 Gameplay.Trigger.Player Mode Trigger;;engine\templates\editor\player_mode_trigger.w2ent;
 Gameplay.Area.Block Gameplay Actions Area;;engine\templates\editor\blockgameplaytrigger.w2ent;
