@@ -52,8 +52,8 @@ For instance:
 ### BUNDLED NON-TEXT
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
-| [4.04b](https://raw.githubusercontent.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/refs/heads/main/CR2W_summary/CR2W_changed-list.txt "Bundled 1.32 vs 4.00") | [5.00b]( "Scripts 4.04b vs 5.00b") | 2026/09/29 |
-| [5.00b]( "Bundled 4.04b vs 5.00b") | [5.XX]( "Bundled 5.00b vs 5.XX") | 2026/XX/XX |
+| [4.04b](https://raw.githubusercontent.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/refs/heads/main/CR2W_summary/CR2W_changed-list.txt "Bundled 1.32 vs 4.00") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/List%20of%20changed%20Bundled%20Non%20Text.txt "Scripts 4.04b vs 5.00b") | 2026/09/29 |
+| [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/List%20of%20changed%20Bundled%20Non%20Text.txt "Bundled 4.04b vs 5.00b") | [5.XX]( "Bundled 5.00b vs 5.XX") | 2026/XX/XX |
 
 
 #### Our Discord Servers:
