@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Attitudes>
     <Attitude GroupName1="q601_ofir_soldiers" GroupName2="q601_ofir_mage" AttitudeValue="Neutral" />
     <Attitude GroupName1="q603_boar" GroupName2="player" AttitudeValue="Hostile" />

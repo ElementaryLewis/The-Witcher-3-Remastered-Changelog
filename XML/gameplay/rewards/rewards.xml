@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <redxml>
     <reward name="q001_1_after_dream" 								level="1"	experience="250" 	gold="0" 	achievement="0" 	script="" comment="" />
     <reward name="q001_2_after_bandits" 							level="1"	experience="350" 	gold="0" 	achievement="0" 	script="" comment="" />

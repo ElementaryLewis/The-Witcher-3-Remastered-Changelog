@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <redxml>
     <reward name="mh201_investigation"                              experience="25"     gold="0"    achievement="0"     script="" comment="" />
     <reward name="mh201_troll_killed"                               experience="200"    gold="271"  achievement="0"     script="" comment="" />

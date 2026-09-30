@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Attitudes>
     <Attitude GroupName1="mq7002_cyclop" GroupName2="mq7002_knight" AttitudeValue="Hostile" />
     <Attitude GroupName1="mq7002_cyclop" GroupName2="player" AttitudeValue="Hostile" />
