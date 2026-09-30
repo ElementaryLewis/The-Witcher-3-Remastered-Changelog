@@ -57,9 +57,20 @@ statemachine import class CNewNPC extends CActor
 	default grantNoExperienceAfterKill = false;
 	
 	editable var abilityBuffStackedOnEnemyHitName : name;
-	
+
+	editable var cartPredictionRepeatDelay : float;
+	default cartPredictionRepeatDelay = 0.5f;
+
+	editable var cartPredictionReactionMinSpeed : float;
+	default cartPredictionReactionMinSpeed = 1.5f;
+
+
 	
 	private var levelBonusesComputedAtPlayerLevel : int; 		default levelBonusesComputedAtPlayerLevel = -1;
+
+	private var predictionOverlapInProgress : array<CNewNPC>;
+	private var predictionOverlapTimer : float;
+	default predictionOverlapTimer = 0.f;
 	
 	hint abilityBuffStackedOnEnemyHitName = "Stackable ability added on hitting enemies. Mainly for damage scaling of followers.";
 	hint disableConstrainLookat = "It will disable lookats form reactions and from QuestLookat block";
@@ -96,6 +107,15 @@ statemachine import class CNewNPC extends CActor
 	private var		bIsCountering				: bool;
 	private var		allowBehGraphChange			: bool;				default			allowBehGraphChange = true;
 	private var		aardedFlight				: bool;				
+	
+	private var signDRAardCount : int;
+	private var signDRAardLastHit : float;
+	private var signDRAardTier : int;
+
+	private var signDRIgniCount : int;
+	private var signDRIgniLastHit : float;
+	private var signDRIgniLastStep : float;
+	
 	public var		lastMeleeHitTime			: EngineTime;		
 	
 	private saved var preferedCombatStyle : EBehaviorGraph;
@@ -151,7 +171,7 @@ statemachine import class CNewNPC extends CActor
 	public 	var lastMealTime						: float;	default lastMealTime = -1;
 	public 	var packName							: name;		
 	public 	var isPackLeader						: bool;		
-	private var mac 								: CMovingPhysicalAgentComponent;
+	protected var mac 								: CMovingPhysicalAgentComponent;
 	private var parentEncounter						: CEncounter; 
 	private var npcLevelToUpscaledLevelDifference	: int; 		
 	
@@ -163,6 +183,20 @@ statemachine import class CNewNPC extends CActor
 	private var wasNGPlusLevelAdded					: bool; default wasNGPlusLevelAdded = false;
 	
 	private var deathTimestamp : float;
+
+	
+	
+	private var armorSunderedPercent 				:float; 
+	private var armorSunderedCooldown 				:float; 
+	
+	private var cripplingStrikeMultiplier 			:float; 
+	private var cripplingStrikeMultiplierCooldown 	:float; 
+	
+	
+	
+	private var slidePosDebug 			: Vector;
+	private var targetPosDebug 			: Vector;
+	private var npcPosDebug 			: Vector;
 	
 	event OnGameDifficultyChanged( previousDifficulty : int, currentDifficulty : int )
 	{
@@ -400,6 +434,8 @@ statemachine import class CNewNPC extends CActor
 		}
 		
 		
+		
+		
 		if(!spawnData.restored )
 		{
 			if( !isXmlLevelSet )
@@ -478,6 +514,7 @@ statemachine import class CNewNPC extends CActor
 		AddAnimEventCallback('extensionWalkStartStopNormalSpeed' ,	'OnAnimEvent_extensionWalkStartStopNormalSpeed');
 		AddAnimEventCallback('weaponSoundType' ,					'OnAnimEvent_weaponSoundType');
 		AddAnimEventCallback('disableCrowdOverride' ,				'OnAnimEvent_disableCrowdOverride');
+
 		
 		if ( IsAnimal() )
 		{
@@ -508,6 +545,7 @@ statemachine import class CNewNPC extends CActor
 			AddAnimEventCallback('BC_Sign' ,						'OnAnimEvent_PlayBattlecry');
 			AddAnimEventCallback('BC_Taunt' ,						'OnAnimEvent_PlayBattlecry');
 		}
+
 		else if( HasTag( 'scolopendromorph' ) || HasTag( 'archespor' ) )
 		{
 			AddAnimEventCallback('SetIsUnderground' ,			'OnAnimEvent_ToggleIsOverground');
@@ -612,6 +650,25 @@ statemachine import class CNewNPC extends CActor
 			AddTimer('NGE_HorseEquipWeaponHack',0.5f,false);			
 		}
 		
+
+	}
+	
+	event OnVisualDebug( frame : CScriptedRenderFrame, flag : EShowFlags )
+	{
+
+		
+			
+		frame.DrawSphere(slidePosDebug, 0.15f, Color(255, 250, 0));
+		frame.DrawText("Slide Pos", slidePosDebug, Color(255, 0, 0));
+
+		frame.DrawSphere(targetPosDebug, 0.2f, Color(255, 0, 0));
+		frame.DrawText("Target Pos", targetPosDebug, Color(255, 0, 0));
+		frame.DrawSphere(npcPosDebug, 0.2f, Color(255, 0, 0));
+		frame.DrawText("Npc Pos", npcPosDebug, Color(255, 0, 0));
+		
+		
+		
+		return true;
 	}
 	
 	
@@ -989,7 +1046,9 @@ statemachine import class CNewNPC extends CActor
 		
 		npcTarget = (CNewNPC)parryInfo.target;
 		
-		if( npcTarget.IsShielded(parryInfo.attacker) || ( !npcTarget.HasShieldedAbility() && parryInfo.targetToAttackerAngleAbs < 90 ) || (  npcTarget.HasTag( 'olgierd_gpl' ) && parryInfo.targetToAttackerAngleAbs < 120 ) )
+		if( npcTarget.IsShielded(parryInfo.attacker) || ( !npcTarget.HasShieldedAbility() && parryInfo.targetToAttackerAngleAbs < 90 ) || ( ( npcTarget.HasTag( 'olgierd_gpl' ) 
+
+ ) && parryInfo.targetToAttackerAngleAbs < 120 ) )
 		{	
 			isHeavy = IsHeavyAttack(parryInfo.attackActionName);
 						
@@ -1829,15 +1888,7 @@ statemachine import class CNewNPC extends CActor
 		if ( damageAction.attacker )
 		{
 			super.PlayHitAnimation( damageAction, animType );
-			node = (CNode)damageAction.causer;
-			if (node)
-			{
-				SetHitReactionDirection(node);
-			}
-			else
-			{
-				SetHitReactionDirection(damageAction.attacker);
-			}
+			SetHitReaction( damageAction );
 			SetDetailedHitReaction(damageAction.GetSwingType(), damageAction.GetSwingDirection());
 		}
 		
@@ -1867,6 +1918,7 @@ statemachine import class CNewNPC extends CActor
 		var node							: CNode;
 		var boltCauser						: W3ArrowProjectile;
 		var yrdenCauser 					: W3YrdenEntityStateYrdenShock;
+		var bombCauser						: W3Petard;
 		var attackAction					: W3Action_Attack;
 		
 		damaveValue 				 = damageAction.GetDamageDealt();
@@ -1921,17 +1973,15 @@ statemachine import class CNewNPC extends CActor
 				SignalGameplayDamageEvent('BeingHit', damageAction );
 		}
 		
+		bombCauser = (W3Petard)( damageAction.causer );
+		if ( bombCauser )
+		{
+			SignalGameplayDamageEvent('BombHit', damageAction );
+		}
+		
 		if( damageAction.additiveHitReactionAnimRequested == true )
 		{
-			node = (CNode)damageAction.causer;
-			if (node)
-			{
-				SetHitReactionDirection(node);
-			}
-			else
-			{
-				SetHitReactionDirection(damageAction.attacker);
-			}
+			SetHitReaction( damageAction );
 		}
 		
 		if(((CPlayer)damageAction.attacker || !((CNewNPC)damageAction.attacker)) && damageAction.DealsAnyDamage())
@@ -1944,6 +1994,10 @@ statemachine import class CNewNPC extends CActor
 			
 			if(!witcher.CanUseSkill(S_Magic_s05) || witcher.GetSkillLevel(S_Magic_s05) < 3)
 				RemoveBuff(EET_AxiiGuardMe, true);
+
+			
+			if( !witcher.CanUseSkill( S_Magic_s31 ) || witcher.GetSkillLevel( S_Magic_s31 ) < 3 )
+				RemoveBuff(EET_AxiiGuardMe, true);
 		}
 		
 		if(damageAction.attacker == thePlayer && damageAction.DealsAnyDamage() && !damageAction.IsDoTDamage())
@@ -1953,7 +2007,7 @@ statemachine import class CNewNPC extends CActor
 			
 			
 			if(SkillNameToEnum(attackAction.GetAttackTypeName()) == S_Sword_s02)
-				theGame.VibrateControllerLight();
+				
 			
 			
 			if(attackAction && attackAction.UsedZeroStaminaPerk())
@@ -1965,7 +2019,35 @@ statemachine import class CNewNPC extends CActor
 		return ret;
 	}
 	
-	
+	private function SetHitReaction( damageAction : W3DamageAction )
+	{
+		var node : CNode;
+		var attackerPlayer : CR4Player;
+		var targetableVCC : SVirtualControllerData;
+
+		node = (CNode)damageAction.causer;
+		attackerPlayer = (CR4Player)damageAction.attacker;
+
+		if ( attackerPlayer && attackerPlayer.HasVirtualControllerTarget() )
+		{
+			targetableVCC = attackerPlayer.GetTargetableVirtualController();
+			if ( -1 < targetableVCC.boneIndex )
+			{
+				SetHitReactionBone( targetableVCC.boneIndex );
+				
+			}
+		}
+
+		if (node)
+		{
+			SetHitReactionDirection(node);
+		}
+		else
+		{
+			SetHitReactionDirection(damageAction.attacker);
+		}
+	}
+
 	
 	
 	
@@ -2125,6 +2207,7 @@ statemachine import class CNewNPC extends CActor
 		
 		manager = theGame.GetJournalManager();
 		
+
 		if ( AddBestiaryKnowledgeEP2() ) return;
 		
 		if ( HasAbility( 'NoJournalEntry' )) return; else
@@ -2281,8 +2364,8 @@ statemachine import class CNewNPC extends CActor
 		return false;
 		
 	}
-	
-	
+
+
 	public function CalculateExperiencePoints(optional skipLog : bool) : int
 	{
 		var finalExp : int;
@@ -2542,7 +2625,10 @@ statemachine import class CNewNPC extends CActor
 		
 		super.OnDeath( damageAction );
 		
-		if (!IsHuman() && (damageAction.attacker == thePlayer || GetAttitudeBetween( thePlayer, damageAction.attacker ) == AIA_Friendly) && !ciriEntity && !HasTag('NoBestiaryEntry') ) AddBestiaryKnowledge();	
+		if ( (!IsHuman() && (damageAction.attacker == thePlayer || GetAttitudeBetween( thePlayer, damageAction.attacker ) == AIA_Friendly) && !ciriEntity && !HasTag('NoBestiaryEntry')) 
+
+		) 
+			AddBestiaryKnowledge();	
 		
 		if ( !WillBeUnconscious() && !HasTag( 'NoHitFx' ) )
 		{
@@ -2967,7 +3053,9 @@ statemachine import class CNewNPC extends CActor
 					}
 				}
 			}
-		}		
+		}
+
+
 	}
 	
 	
@@ -3058,6 +3146,7 @@ statemachine import class CNewNPC extends CActor
 		{
 			return true;
 		}
+
 		if( HasAbility( 'DisableFinishers' ) )
 		{
 			return true;
@@ -3105,13 +3194,98 @@ statemachine import class CNewNPC extends CActor
 		}
 	}
 	
+	public function SignDRGetResetTime() : float
+	{
+
+		return 1.0f;
+	}
+	
+	public function SignDRRegisterAard() : int
+	{
+		var now : float;
+
+		now = theGame.GetEngineTimeAsSeconds();
+
+		if( signDRAardCount == 0 || now - signDRAardLastHit > SignDRGetResetTime() )
+		{
+			signDRAardCount = 0;
+		}
+
+		signDRAardLastHit = now;
+
+		signDRAardCount += 1;
+	
+		if( signDRAardCount > 4 )
+		{
+			signDRAardCount = 4;
+		}
+
+		signDRAardTier = signDRAardCount;
+
+		return signDRAardTier;
+	}
+
+	public function SignDRGetAardTier() : int
+	{
+		if( signDRAardTier == 0 )
+		{
+			return 1;
+		}
+
+		if( theGame.GetEngineTimeAsSeconds() - signDRAardLastHit > SignDRGetResetTime() )
+		{
+			return 1;
+		}
+
+		return signDRAardTier;
+	}
+
+	public function SignDRRegisterIgni( isChannel : bool ) : int
+	{
+		var now : float;
+
+		now = theGame.GetEngineTimeAsSeconds();
+	
+		if( signDRIgniCount == 0 || now - signDRIgniLastHit > SignDRGetResetTime() )
+		{
+			signDRIgniCount = 0;
+			signDRIgniLastStep = -1000.0f;
+		}
+
+		if( isChannel )
+		{
+			if( signDRIgniCount == 0 || now - signDRIgniLastStep >= 0.5f )
+			{
+				signDRIgniCount += 1;
+				signDRIgniLastStep = now;
+			}
+		}
+		else
+		{
+			signDRIgniCount += 1;
+			signDRIgniLastStep = now;
+		}
+
+		if( signDRIgniCount > 4 )
+		{
+			signDRIgniCount = 4;
+		}
+
+		signDRIgniLastHit = now;
+
+		return signDRIgniCount;
+	}
+	
+	
 	event OnAardHit( sign : W3AardProjectile )
 	{
 		var staminaDrainPerc : float;		
 		
-		SignalGameplayEvent( 'AardHitReceived' );
-		
-		aardedFlight = true;
+		if( !sign.GetOwner().GetPlayer() || SignDRGetAardTier() == 1 )
+		{
+			SignalGameplayEvent( 'AardHitReceived' );
+			aardedFlight = true; 
+		}
 		
 		
 		if( !sign.GetOwner().GetPlayer() || !GetWitcherPlayer().IsMutationActive( EPMT_Mutation6 ) )
@@ -3509,6 +3683,7 @@ statemachine import class CNewNPC extends CActor
 					AddAbility( 'EtherealMashingFixBeforeSkill4' );
 				}
 			}
+
 			else if( HasTag( 'dettlaff_vampire' ) )
 			{
 				AddAbility( 'DettlaffWeakenedState', false );
@@ -3532,11 +3707,13 @@ statemachine import class CNewNPC extends CActor
 					RemoveAbility( 'EtherealMashingFixBeforeSkill4' );
 				}
 			}
+
 			else if( HasTag( 'dettlaff_vampire' ) )
 			{
 				RemoveAbility( 'DettlaffWeakenedState' );
 				StopEffect( 'weakened' );
 			}
+			
 		}
 	}
 	
@@ -3686,6 +3863,7 @@ statemachine import class CNewNPC extends CActor
 		var slidePos 			: Vector;
 		var slideDuration		: float;
 		
+		
 		movementAdjustor = GetMovingAgentComponent().GetMovementAdjustor();
 		movementAdjustor.CancelByName( 'SlideForward' );
 		
@@ -3702,14 +3880,84 @@ statemachine import class CNewNPC extends CActor
 			movementAdjustor.BlendIn( ticket, 0.25 );
 			movementAdjustor.SlideTo( ticket, slidePos );
 		}
-
 		return true;	
 	}
+	
+	event OnAnimEvent_SlideAttack( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
+	{
+		var ticket 				: SMovementAdjustmentRequestTicket;
+		var movementAdjustor	: CMovementAdjustor;
+		var slidePos 			: Vector;
+		var targetPos 			: Vector;
+		var npcPos 			: Vector;
+		var slideDirection 			: Vector;
+		var slideDuration		: float;
+		var slideDistance		: float;
+		var slideDistanceClamped		: float;
+		
+		var minDistance : float;
+		var maxDistance : float;
+		
+		minDistance = 0.0f;
+		maxDistance = 5.0f;
+		
+		if(animEventType != AET_DurationStart)
+		{
+			return false;
+		}
+		
+		movementAdjustor = GetMovingAgentComponent().GetMovementAdjustor();
+		movementAdjustor.CancelByName( 'SlideAttack' );
+		
+		ticket = movementAdjustor.CreateNewRequest( 'SlideAttack' );
+		npcPos = GetWorldPosition();
+		targetPos = thePlayer.GetWorldPosition();
+		slideDirection = VecNormalize2D( thePlayer.GetWorldPosition() - GetWorldPosition());
+		slideDistance = VecDistance2D(GetWorldPosition(), thePlayer.GetWorldPosition());
+		slideDistanceClamped = ClampF(slideDistance,minDistance,maxDistance);
+		slidePos = GetWorldPosition() + ( slideDirection  * (slideDistanceClamped * 0.75));
+		
+		
+		npcPosDebug = npcPos; 
+		targetPosDebug = targetPos;
+		slidePosDebug = slidePos;
+		
+		if( theGame.GetWorld().NavigationLineTest( GetWorldPosition(), slidePos, GetRadius(), false, true ) ) 
+		{
+			movementAdjustor.BindToEventAnimInfo( ticket, animInfo );
+			
+			movementAdjustor.MaxLocationAdjustmentSpeed( ticket, 4 );
+			
+			movementAdjustor.BlendIn( ticket, 0.25 );
+			movementAdjustor.SlideTo( ticket, slidePos );
+			movementAdjustor.RotateTowards( ticket, GetTarget() );
+		}
+		return true;	
+	}
+
 	
 	event OnAnimEvent_SlideTowards( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
 	{
 		var ticket 				: SMovementAdjustmentRequestTicket;
 		var movementAdjustor	: CMovementAdjustor;
+		
+		var maxDistance		: float;
+		
+		switch (animEventName)
+		{
+			case 'SlideTowards1m':
+				maxDistance = 1.25;
+				break;
+			case 'SlideTowards5m':
+				maxDistance = 5.25;
+				break;
+			case 'SlideTowards10m':
+				maxDistance = 10.25;
+				break;
+			default:
+				maxDistance = 1.25;
+				break;
+		}
 		
 		movementAdjustor = GetMovingAgentComponent().GetMovementAdjustor();
 		movementAdjustor.CancelByName( 'SlideTowards' );
@@ -3720,7 +3968,7 @@ statemachine import class CNewNPC extends CActor
 		movementAdjustor.BindToEventAnimInfo( ticket, animInfo );
 		movementAdjustor.MaxLocationAdjustmentSpeed( ticket, 4 );
 		movementAdjustor.ScaleAnimation( ticket );
-		movementAdjustor.SlideTowards( ticket, thePlayer, 1.0, 1.25 );
+		movementAdjustor.SlideTowards( ticket, thePlayer, 1.0, maxDistance );
 		movementAdjustor.RotateTowards( ticket, GetTarget() );
 
 		return true;	
@@ -4060,7 +4308,9 @@ statemachine import class CNewNPC extends CActor
 	{
 		var stateName : name;
 		var horseComp : W3HorseComponent;
-		
+		var activatorPosWS : Vector;
+		var thisPosWS : Vector;
+
 		if( interactionComponentName == "talk" )
 		{
 			if( activator == thePlayer && thePlayer.CanStartTalk() && CanStartTalk() )
@@ -4083,12 +4333,46 @@ statemachine import class CNewNPC extends CActor
 			if ( GetAttitudeBetween(this,thePlayer) == AIA_Hostile && !( HasBuff(EET_Confusion) || HasBuff(EET_AxiiGuardMe) ) )
 				return false;
 			
+			activatorPosWS = activator.GetWorldPosition();
+			thisPosWS = this.GetWorldPosition();
+
+			
+			if ( VecDistanceSquared( activatorPosWS, thisPosWS ) > 10.6f ) 
+			{
+				
+				if ( !IsMountsRemasterEnabled() || thePlayer.IsCiri() )
+				{
+					return false;
+				}
+				if ( VecLength2D( thePlayer.GetMovingAgentComponent().GetVelocity() ) < 3.0f ) 
+				{
+					return false;
+				}
+
+				
+
+				
+				if ( VecGetAngleBetween( VecFromHeading( thePlayer.GetBehaviorVariable( 'requestedMovementDirection' ) ), thisPosWS - activatorPosWS ) > 70 )
+				{
+					return false;
+				}
+				if ( VecGetAngleBetween( thePlayer.GetHeadingVector(), thisPosWS - activatorPosWS ) > 70 )
+				{
+					return false;
+				}
+
+				if ( thePlayer.IsSwimming() )
+				{
+					return false;
+				}
+			}
+
 			if( mac.IsOnNavigableSpace() )
 			{
-				if( theGame.GetWorld().NavigationLineTest( activator.GetWorldPosition(), this.GetWorldPosition(), 0.05, false, true ) ) 
+				if( theGame.GetWorld().NavigationLineTest( activatorPosWS, thisPosWS, 0.05, false, true ) ) 
 				{
 					
-					if( theGame.TestNoCreaturesOnLine( activator.GetWorldPosition(), this.GetWorldPosition(), 0.4, (CActor)activator, this, true ) ) 
+					if( theGame.TestNoCreaturesOnLine( activatorPosWS, thisPosWS, 0.4, (CActor)activator, this, true ) ) 
 					{
 						return true;
 					}
@@ -4102,9 +4386,9 @@ statemachine import class CNewNPC extends CActor
 				
 				if( horseComp )
 				{
-					horseComp.mountTestPlayerPos = activator.GetWorldPosition();
+					horseComp.mountTestPlayerPos = activatorPosWS;
 					horseComp.mountTestPlayerPos.Z += 0.5;
-					horseComp.mountTestHorsePos = this.GetWorldPosition();
+					horseComp.mountTestHorsePos = thisPosWS;
 					horseComp.mountTestHorsePos.Z += 0.5;
 					
 					if( !theGame.GetWorld().StaticTrace( horseComp.mountTestPlayerPos, horseComp.mountTestHorsePos, horseComp.mountTestEndPos, horseComp.mountTestNormal, horseComp.mountTestCollisionGroups ) )
@@ -4250,6 +4534,32 @@ statemachine import class CNewNPC extends CActor
 		DropItemFromSlot( 'l_weapon', true );
 	}
 
+	
+	private var shieldToDrop : CEntity;
+	timer function ShieldImpulse(dt : float, id : int)
+	{
+		var headingVector : Vector;
+
+		if (shieldToDrop)
+		{
+			headingVector = VecNormalize2D(thePlayer.GetWorldPosition() - GetWorldPosition());
+			headingVector.Z = 1.f;
+			shieldToDrop.GetComponentByClassName('CRigidMeshComponent').ApplyLocalImpulseToPhysicalObject( headingVector * Vector(1000.f, 1000.f, 500.f) );	
+			shieldToDrop = NULL;
+		}
+	}
+
+	public function SetShieldToDrop()
+	{
+		shieldToDrop = GetInventory().GetItemEntityUnsafe(GetInventory().GetItemFromSlot('l_weapon'));
+	}
+
+
+
+	private var isInSpawnTask : bool;
+	public function SetIsInSpawnTask(isSpawning : bool) { isInSpawnTask = isSpawning; }
+	public function GetIsInSpawnTask() : bool {return isInSpawnTask; }
+
 	event OnIncomingProjectile( isBomb : bool ) 
 	{
 		if( IsShielded( thePlayer ) )
@@ -4321,7 +4631,14 @@ statemachine import class CNewNPC extends CActor
 	private var spear : CEntity;
 	timer function SpearImpulse(dt : float, id : int)
 	{
-		spear.GetComponent("CMeshComponent0").ApplyLocalImpulseToPhysicalObject(Vector(50,0,50));	
+		if ( HasAbility('mon_thrall_pitchfork') )
+		{
+			spear.GetComponent("CMeshComponent0").ApplyLocalImpulseToPhysicalObject(Vector(100,0,100));
+		}
+		else
+		{
+			spear.GetComponent("CMeshComponent0").ApplyLocalImpulseToPhysicalObject(Vector(50,0,50));	
+		}
 	}
 	
 	
@@ -4338,14 +4655,30 @@ statemachine import class CNewNPC extends CActor
 		spear.ApplyAppearance( appearanceName );
 		DropItemFromSlot('r_weapon', true);
 		
-		
-		spear.PlayEffect('wood_break');
-		ids = GetInventory().GetItemsByName('Q1_brokenSpear');
-		if(ids.Size() <= 0)
-			ids = GetInventory().AddAnItem( 'Q1_brokenSpear', 1, true, true, false );
-		GetInventory().MountItem(ids[0], true);
-		AddTimer('SpearImpulse', 0.05, false);
-		
+		if ( HasAbility('mon_thrall_pitchfork') )
+		{
+			
+			spear.PlayEffect('wood_break');
+			AddAbility('mon_thrall_pitchfork_broken');
+			RemoveAbility('ablComboAttacks');
+			ids = GetInventory().GetItemsByName('Thrall_Pitchfork_Broken');
+			if(ids.Size() <= 0)
+				ids = GetInventory().AddAnItem( 'Thrall_Pitchfork_Broken', 1, true, true, false );
+			GetInventory().MountItem(ids[0], true);
+			AddTimer('SpearImpulse', 0.1, false);
+			
+		}
+		else
+		{
+			
+			spear.PlayEffect('wood_break');
+			ids = GetInventory().GetItemsByName('Q1_brokenSpear');
+			if(ids.Size() <= 0)
+				ids = GetInventory().AddAnItem( 'Q1_brokenSpear', 1, true, true, false );
+			GetInventory().MountItem(ids[0], true);
+			AddTimer('SpearImpulse', 0.05, false);
+			
+		}
 		
 		return true;
 		
@@ -4531,7 +4864,7 @@ statemachine import class CNewNPC extends CActor
 	
 	event OnActorSideCollision( object : CObject, physicalActorindex : int, shapeIndex : int  )
 	{
-		var  ent : CEntity;
+		var ent : CEntity;
 		var horseComp : W3HorseComponent;
 		var component : CComponent;
 		component = (CComponent) object;
@@ -4552,7 +4885,126 @@ statemachine import class CNewNPC extends CActor
 			}
 		}
 	}
-	
+
+	var collisionPredictionOtherNPC : CNewNPC;
+
+	public function SetupCollisionPredictionRepeat( otherNPC : CNewNPC )
+	{
+		collisionPredictionOtherNPC = otherNPC;
+		AddTimer('HandleCollisionPredictionLast', cartPredictionRepeatDelay, true);
+	}
+
+	public function CleanupCollisionPredictionRepeat()
+	{
+		RemoveTimer('HandleCollisionPredictionLast');
+		collisionPredictionOtherNPC = NULL;
+	}
+
+	event OnActorCollisionPrediction( object : CObject, physicalActorindex : int, shapeIndex : int  )
+	{
+		var ent : CEntity;
+		var component : CComponent;
+		var npc : CNewNPC;
+
+		component = (CComponent) object;
+		if( !component )
+		{
+			return false;
+		}
+
+		ent = component.GetEntity();
+		npc = (CNewNPC)ent;
+
+		if (!npc || !horseComponent)
+		{
+			return false;
+		}
+
+		if (predictionOverlapInProgress.Contains(npc))
+		{
+			return false;
+		}
+
+		predictionOverlapInProgress.PushBack(npc);
+		npc.SetupCollisionPredictionRepeat(this);
+
+		HandleCollisionPrediction(npc);
+	}
+
+	timer function HandleCollisionPredictionLast( dt : float , id : int )
+	{
+		Log("Attempting to HandleCollisionPredictionLast... | " + this);
+		if (collisionPredictionOtherNPC && collisionPredictionOtherNPC != this)
+		{
+			Log("Repeating collision prediction event: " + collisionPredictionOtherNPC);
+			collisionPredictionOtherNPC.HandleCollisionPrediction(this);
+		}
+	}
+
+	public function HandleCollisionPrediction( npc : CNewNPC )
+	{
+		var angle : float;
+		var fromOther : Vector;
+		var forwardPoint : Vector;
+		var backPoint : Vector;
+		var npcProjection : Vector;
+		var backToNPC : Vector;
+		var backToForward : Vector;
+
+		if (AbsF(horseComponent.InternalGetSpeed()) <= cartPredictionReactionMinSpeed)
+			return;
+
+		forwardPoint = horseComponent.GetWorldPosition() + horseComponent.GetWorldForward() * 10;
+		backPoint = horseComponent.GetWorldPosition() - horseComponent.GetWorldForward() * 10;
+
+		backToNPC = npc.GetWorldPosition() - backPoint;
+		backToForward = forwardPoint - backPoint;
+		npcProjection = backPoint + VecDot(backToNPC, backToForward) / VecDot(backToForward, backToForward) * backToForward;
+
+		fromOther = npc.GetWorldPosition() - npcProjection;
+		if (VecDot(horseComponent.GetWorldRight(), fromOther) >= 0.f)
+		{
+			angle	= VecHeading( -fromOther - horseComponent.GetWorldRight() * 0.75f );
+		}
+		else
+		{
+			angle	= VecHeading( -fromOther + horseComponent.GetWorldRight() * 0.75f );
+		}
+
+		Log( "HandleCollisionPrediction: " + npc + "; angle: " + angle);
+		horseComponent.MakeNPCReactAtAngle(npc, angle);
+	}
+
+	event OnActorCollisionPredictionEnd( object : CObject, physicalActorindex : int, shapeIndex : int  )
+	{
+		var ent : CEntity;
+		var component : CComponent;
+		var npc : CNewNPC;
+
+		component = (CComponent) object;
+		if( !component )
+		{
+			return false;
+		}
+
+		ent = component.GetEntity();
+		npc = (CNewNPC)ent;
+
+		if (!npc || !horseComponent)
+		{
+			return false;
+		}
+
+		if (!predictionOverlapInProgress.Contains(npc))
+		{
+			return false;
+		}
+
+		predictionOverlapInProgress.Remove(npc);
+		npc.CleanupCollisionPredictionRepeat();
+		Log( "OnActorCollisionPredictionEnd: " + ent );
+	}
+
 	event OnStaticCollision( component : CComponent )
 	{
 		SignalGameplayEventParamObject('CollisionWithStatic',component);
@@ -4920,7 +5372,124 @@ statemachine import class CNewNPC extends CActor
 	{
 		PlayEffectSingle( 'appear' );
 	}
+
+	function CripplingStrike(mul:float, duration:float)
+	{
+		cripplingStrikeMultiplier = mul;
+		cripplingStrikeMultiplierCooldown = duration;
+		AddTimer('CripplingStrikeCooldown', duration);
+	}
+
+	timer function CripplingStrikeCooldown(dt:float, id:int)
+	{
+		cripplingStrikeMultiplierCooldown -= dt;
+		if(cripplingStrikeMultiplierCooldown <= 0.0)
+		{
+			LogNewCombatSkill(S_Sword_s29, "Reset for " + this);
+			cripplingStrikeMultiplierCooldown = 0.0;
+			cripplingStrikeMultiplier = 0.0;
+		}
+	}
+
+	function GetCripplingStrikeDamageMultiplier() : float
+	{
+		return cripplingStrikeMultiplier;
+	}
+
+	function SunderArmor(incMul:float, maxMul:float, duration:float) : float
+	{
+		armorSunderedPercent += incMul;
+		if(armorSunderedPercent >= maxMul)
+			armorSunderedPercent = maxMul;
+		armorSunderedCooldown = duration;
+		AddTimer('SunderArmorCooldown', duration);
+		return armorSunderedPercent;
+	}
+
+	timer function SunderArmorCooldown(dt:float, id:int)
+	{
+		armorSunderedCooldown -= dt;
+		if(armorSunderedCooldown <= 0.0)
+		{
+			LogNewCombatSkill(S_Sword_s28, "Reset for " + this);
+			armorSunderedCooldown = 0.0;
+			armorSunderedPercent = 0.0;
+		}
+	}
+
+	function GetSunderArmorPercent() : float
+	{
+		return armorSunderedPercent;
+	}
+	
+	public function QuestRiderStop()
+	{
+		var horseComp : W3HorseComponent;
+
+		horseComp = GetUsedHorseComponent();
+
+		if( !horseComp )
+			return;
+
+		horseComp.QuestSetRiderMoveType( MT_Walk );
+		horseComp.QuestSetRiderSpeed( 0.0f );
+	}
+	
+	public function QuestRiderWalk()
+	{
+		var horseComp : W3HorseComponent;
+
+		horseComp = GetUsedHorseComponent();
+
+		if( !horseComp )
+			return;
+
+		horseComp.QuestSetRiderMoveType( MT_Walk );
+		horseComp.QuestSetRiderSpeed( 1.0f );
+	}
+
+	public function QuestRiderRun()
+	{
+		var horseComp : W3HorseComponent;
+
+		horseComp = GetUsedHorseComponent();
+
+		if( !horseComp )
+			return;
+
+		horseComp.QuestSetRiderMoveType( MT_Run );
+		horseComp.QuestSetRiderSpeed( 2.0f );
+	}
+
+	public function QuestRiderFastRun()
+	{
+		var horseComp : W3HorseComponent;
+
+		horseComp = GetUsedHorseComponent();
+
+		if( !horseComp )
+			return;
+
+		horseComp.QuestSetRiderMoveType( MT_FastRun );
+		horseComp.QuestSetRiderSpeed( 3.0f );
+	}
+
+	public function QuestRiderSprint()
+	{
+		var horseComp : W3HorseComponent;
+
+		horseComp = GetUsedHorseComponent();
+
+		if( !horseComp )
+			return;
+
+		horseComp.QuestSetRiderMoveType( MT_Sprint );
+		horseComp.QuestSetRiderSpeed( 4.0f );
+	}
+
+
 }
+
 
 exec function IsFireSource( tag : name )
 {
@@ -4929,4 +5498,4 @@ exec function IsFireSource( tag : name )
 	npc = ( CNewNPC )theGame.GetEntityByTag( tag );	
 	
 	LogChannel('SD', "" + npc.IsAtWorkDependentOnFireSource() );
-}	
+}

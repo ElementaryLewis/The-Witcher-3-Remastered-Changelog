@@ -10,6 +10,10 @@ class CR4MenuPopup extends CR4OverlayMenu
 	private var m_initialized		: bool;
 	private var m_HideTutorial 		: bool;
 	private var m_fxSetBarValueSFF	: CScriptedFlashFunction;
+	
+	private var m_modVerificationStateMachine : CR4ModVerificationStates;
+	private var m_textInputStateMachine		 : CR4VirtualTextInputStates;
+	private var m_fxHandleImageLoaded			: CScriptedFlashFunction;
 
 	event  OnConfigUI()
 	{
@@ -24,6 +28,7 @@ class CR4MenuPopup extends CR4OverlayMenu
 		super.OnConfigUI();
 		
 		m_fxSetBarValueSFF = m_flashModule.GetMemberFlashFunction( "setBarValue" );
+		m_fxHandleImageLoaded = m_flashModule.GetMemberFlashFunction( "handleImageLoaded" );
 		m_DataObject = (W3PopupData)GetMenuInitData();
 		
 		if (!m_DataObject)
@@ -188,6 +193,21 @@ class CR4MenuPopup extends CR4OverlayMenu
 		CreatePopupInstance( PopupDataObject );
 	}
 	
+	public function UpdateModTempAuthWindow(PopupDataObject : W3PopupData):void
+	{
+		var GFxDataObject  : CScriptedFlashObject;
+		var GFxButtonsListData : CScriptedFlashArray;
+		
+		m_DataObject = PopupDataObject;
+		GFxDataObject = m_DataObject.GetGFxData(m_flashValueStorage);
+		GFxButtonsListData = m_DataObject.GetGFxButtons(m_flashValueStorage);
+		GFxDataObject.SetMemberFlashArray("ButtonsList", GFxButtonsListData);
+		GFxDataObject.SetMemberFlashNumber("ScreenPosX", m_DataObject.ScreenPosX);
+		GFxDataObject.SetMemberFlashNumber("ScreenPosY", m_DataObject.ScreenPosY);
+		
+		m_flashValueStorage.SetFlashObject("panel.mod.temp.update", GFxDataObject);
+	}
+	
 	protected function BlurBackground(firstLayer : CR4MenuBase, value : bool) : void
 	{
 		if (firstLayer.m_parentMenu)
@@ -246,6 +266,7 @@ class CR4MenuPopup extends CR4OverlayMenu
 		switch (itemCat)
 		{
 			case 'bolt':
+
 			case 'secondary':
 			case 'steelsword':
 				itemScaleKoeff = 2;
@@ -308,5 +329,111 @@ class CR4MenuPopup extends CR4OverlayMenu
 				guiSceneController.SetEntityTransform(itemPosition, itemRotation, itemScale);
 			}
 		}
+	}
+	
+	event  OnSetText(NewText : string)
+	{
+		
+	}
+	
+	event  OnSetCheckboxesClicked(index:int, value : bool)
+	{
+		var tempInputData : W3CheckboxListPopupData;
+		
+		tempInputData = (W3CheckboxListPopupData) m_DataObject;
+		if (tempInputData)
+		{
+			tempInputData.OnCheckboxValueChanged(index, value);
+		}
+	}
+	
+	event  OnVerificationCheckboxClicked( modid:string, value:bool)
+	{
+		var tempInputData : W3ModVerificationPopupData;
+		
+		tempInputData = (W3ModVerificationPopupData) m_DataObject;
+		if (tempInputData)
+		{
+			tempInputData.HandleModEnabledChange(modid, value);
+		}
+	}
+	
+	event  OnRequestMediaLogo( modid:string, resolution:string )
+	{
+		var data : SModImageLoadData;
+		var tempData : W3ModVerificationPopupData;	
+		
+		tempData = (W3ModVerificationPopupData) m_DataObject;
+		
+		if(!tempData.FindModIdFromString(modid, data.m_modid))
+			return false;
+		data.m_resolution = resolution;
+		data.m_type = "logo";
+		
+		if(!m_modVerificationStateMachine)
+		{
+			m_modVerificationStateMachine = new CR4ModVerificationStates in this;
+			m_modVerificationStateMachine.SetRef(this);
+		}
+		
+		m_modVerificationStateMachine.AddImageToList(data);
+	}
+	
+	public function HandleImageLoad( data: SModImageLoadData, path:string)
+	{
+		var modidStr : string;
+		modidStr = theGame.GetModHandlerSystem().ConvertModIDToString(data.m_modid);
+	
+		if(data.m_type != "gallery")
+			m_fxHandleImageLoaded.InvokeSelfFourArgs( FlashArgString(modidStr),FlashArgString(data.m_resolution), FlashArgString(data.m_type), FlashArgString(path));
+		else	
+			m_fxHandleImageLoaded.InvokeSelfFiveArgs( FlashArgString(modidStr),FlashArgString(data.m_resolution), FlashArgString(data.m_type), FlashArgString(path), FlashArgString(data.m_galleryIndex));
+	}
+	
+	event  OnUseTextInput(title : string, placeholder : string, current : string, inputScope : EVirtualKeyboardInputScope)
+	{
+		
+		
+		
+		
+		
+		var config : SVirtualKeyboardConfig;
+	
+		if(!m_textInputStateMachine)
+		{
+			m_textInputStateMachine = new CR4VirtualTextInputStates in this;
+		}
+		
+		config.inputScope = inputScope;
+		if(StrLen(title) == 0)
+			config.titleStr = "";
+		else if (StrLen(title) > 0 && !StrBeginsWith(title, "["))
+			config.titleStr = title;
+		else
+			config.titleStr = GetLocStringByKeyExt(title);
+			
+		if(StrLen(current) > 0)
+			config.defaultStr = current;
+		else if(StrLen(placeholder) == 0)
+			config.defaultStr = "";
+		else if (StrLen(placeholder)  > 0 && !StrBeginsWith(placeholder, "["))
+			config.defaultStr = placeholder;
+		else
+			config.defaultStr = GetLocStringByKeyExt(placeholder);
+		
+		m_textInputStateMachine.OnTextInputOpened(config, this, m_flashValueStorage);
+	} 
+	
+	event  OnSignalOpenUrl(urlIndex : int)
+	{
+		var tempData : W3ModTermsPopupData;
+		var igMenu : CR4IngameMenu;
+		tempData = (W3ModTermsPopupData) m_DataObject;
+		
+	
+		igMenu = tempData.GetMenuRef();
+		igMenu.RequestLinkLoad( (ETermsLinkType)urlIndex );
+		
+		LogChannel('JIFIX',"Signaling URL: " + urlIndex);
 	}
 }

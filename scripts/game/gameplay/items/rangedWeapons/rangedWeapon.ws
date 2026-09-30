@@ -12,6 +12,7 @@ import statemachine class RangedWeapon extends CItemEntity
 	protected	var inv							: CInventoryComponent;
 	protected	var previousAmmoItemName		: name;
 	protected	var deployedEnt					: W3BoltProjectile;
+
 	protected	var isSettingOwnerOrientation	: bool;
 	protected	var isDeployedEntAiming			: bool;
 	protected	var isAimingWeapon				: bool;
@@ -41,7 +42,7 @@ import statemachine class RangedWeapon extends CItemEntity
 	}
 			
 	event OnRangedWeaponPress()
-	{		
+	{	
 		SetBehaviorGraphVariables( 'isAimingWeapon', true );
 		SetBehaviorGraphVariables( 'isShootingWeapon', false );
 	}
@@ -112,6 +113,8 @@ import statemachine class RangedWeapon extends CItemEntity
 		SetBehaviorGraphVariables( 'isAimingWeapon', false );
 		SetBehaviorGraphVariables( 'isShootingWeapon', false );
 		SetBehaviorGraphVariables( 'recoilLevel', false, (int)RL_1 );
+
+		thePlayer.AddTimer('ResetCripplingShotDelayed', 1.0f);
 		
 		OnChangeTo( 'State_WeaponShoot' );
 	}
@@ -210,7 +213,7 @@ import statemachine class RangedWeapon extends CItemEntity
 			itemId = ownerPlayer.inv.GetItemFromSlot( 'l_weapon' );
 			
 			
-			if( ownerPlayer.inv.IsIdValid( itemId ) && ( ownerPlayer.inv.IsItemCrossbow( itemId ) || ownerPlayer.inv.IsItemBomb( itemId ) ) )
+			if( ownerPlayer.inv.IsIdValid( itemId ) && ( ownerPlayer.inv.IsItemRangedWeapon( itemId ) || ownerPlayer.inv.IsItemBomb( itemId ) ) )
 			{
 				ownerPlayer.HolsterItems( true, itemId );
 			}
@@ -405,6 +408,7 @@ import statemachine class RangedWeapon extends CItemEntity
 		actionBlockingExceptions.PushBack(EIAB_Fists);
 		actionBlockingExceptions.PushBack(EIAB_QuickSlots);
 		actionBlockingExceptions.PushBack(EIAB_Crossbow);
+
 		actionBlockingExceptions.PushBack(EIAB_OpenGlossary);
 		actionBlockingExceptions.PushBack(EIAB_MeditationWaiting);
 		actionBlockingExceptions.PushBack(EIAB_Signs);
@@ -450,8 +454,8 @@ import statemachine class RangedWeapon extends CItemEntity
 			{
 				item = this.ownerPlayer.inv.GetItemFromSlot( 'l_weapon' );
 				
-				if ( !( this.ownerPlayer.inv.IsIdValid( item ) && this.ownerPlayer.inv.IsItemCrossbow( item ) ) )  
-					this.OnForceHolster( false, true );
+				if ( !( this.ownerPlayer.inv.IsIdValid( item ) &&  this.ownerPlayer.inv.IsItemRangedWeapon( item ) ) )  
+						this.OnForceHolster( false, true );
 			}
 			
 			if ( this.GetCurrentStateName() != 'State_WeaponWait' )
@@ -459,10 +463,10 @@ import statemachine class RangedWeapon extends CItemEntity
 				if ( !ownerPlayer.GetBIsCombatActionAllowed() 
 					&& ownerPlayer.GetBehaviorVariable( 'combatActionType' ) == (int)CAT_Attack
 					&& ownerPlayer.GetBehaviorVariable( 'fullBodyAnimWeight' ) == 1.f )
-					OnForceHolster( true, true );
-				
+						OnForceHolster( true, true );
+					
 				if ( ownerPlayer.IsInShallowWater() && !ownerPlayer.IsSwimming() )
-					OnForceHolster( true, false );
+						OnForceHolster( true, false );
 					
 				if ( ownerPlayer.GetPlayerCombatStance() == PCS_Normal || ownerPlayer.GetPlayerCombatStance() == PCS_AlertFar )
 				{
@@ -525,7 +529,7 @@ import statemachine class RangedWeapon extends CItemEntity
 	protected function ProcessCharacterRotationInCombat(){}
 	
 	
-	public final function ClearDeployedEntity(destroyBolt : bool)
+	public function ClearDeployedEntity(destroyBolt : bool)
 	{	
 		
 		if(destroyBolt && deployedEnt && deployedEnt.IsStopped())
@@ -539,9 +543,16 @@ import statemachine class RangedWeapon extends CItemEntity
 		return isDeployedEntAiming;
 	}
 	
+	protected function SetIsDeployedEntAiming( isAiming : bool)
+	{
+		isDeployedEntAiming = isAiming;
+	}
+
 	public function GetDeployedEntity() : W3AdvancedProjectile
 	{
+
 		return deployedEnt;
+
 	}
 	
 	protected function SetDeployedEntVisibility( flag : bool )
@@ -576,11 +587,14 @@ import statemachine class RangedWeapon extends CItemEntity
 		weaponToThrowPosDist = VecDistance( ownerPlayer.playerAiming.GetThrowPosition(), ownerPlayer.playerAiming.GetThrowStartPosition() );
 		
 		if ( ownerPlayer.GetDisplayTarget() && ownerPlayer.IsDisplayTargetTargetable() )
+		{
 			shootTarget = (CActor)( ownerPlayer.GetDisplayTarget() );
+		}
 		else
+		{
 			shootTarget = (CActor)( ownerPlayer.slideTarget );
-			
-		if ( this.isDeployedEntAiming ) 
+		}		
+		if ( IsDeployedEntAiming() ) 
 		{
 			if ( ownerPlayer.playerAiming.GetSweptFriendly() || weaponToThrowPosDist < 1.f )	
 				return false;
@@ -588,6 +602,8 @@ import statemachine class RangedWeapon extends CItemEntity
 				return true;
 		}
 		else if ( shootTarget && shootTarget.IsHuman() && !ownerPlayer.IsThreat( shootTarget ) ) 
+			return false;
+		else if ( shootTarget && shootTarget.HasTag('PLAYER_horse'))
 			return false;
 		else
 			return true;
@@ -607,13 +623,13 @@ import statemachine class RangedWeapon extends CItemEntity
 		ExitCombatAction();
 		
 		ownerPlayer.RemoveCustomOrientationTarget( 'RangedWeapon' );
-		ownerPlayer.SetBehaviorVariable( 'hasCrossbowHeld', 0.f );
+		PlayerSetBehaviorWeaponHeld(0.f);
 
 		ownerPlayer.GetMovingAgentComponent().EnableVirtualController( 'Crossbow', false );
 		
-		if ( isDeployedEntAiming )
+		if ( IsDeployedEntAiming() )
 		{
-			isDeployedEntAiming = false;
+			SetIsDeployedEntAiming(false);
 			deployedEnt.StopAiming( true );
 		}
 		
@@ -662,6 +678,11 @@ import statemachine class RangedWeapon extends CItemEntity
 	public function IsShootingComplete() : bool
 	{
 		return shootingIsComplete;
+	}
+
+	protected function PlayerSetBehaviorWeaponHeld(value : float)
+	{
+		
 	}
 }
 
@@ -916,12 +937,12 @@ class Crossbow extends RangedWeapon
 				setFullWeight = true;
 		}
 			
-		if ( !isAxisReleased && ownerPlayer.GetPlayerCombatStance() == PCS_Normal && !isDeployedEntAiming && !ownerPlayer.IsSwimming()  )
+		if ( !isAxisReleased && ownerPlayer.GetPlayerCombatStance() == PCS_Normal && !IsDeployedEntAiming() && !ownerPlayer.IsSwimming()  )
 		{
 			
 				setFullWeight = false;
 		}
-		else if ( ownerPlayer.GetIsSprinting() && !isDeployedEntAiming )
+		else if ( ownerPlayer.GetIsSprinting() && !IsDeployedEntAiming() )
 			setFullWeight = false;
 		else if ( !isAxisReleased && !ownerPlayer.IsSwimming() && this.GetCurrentStateName() == 'State_WeaponHolster' && ( ownerPlayer.GetPlayerCombatStance() == PCS_Normal || ownerPlayer.GetPlayerCombatStance() == PCS_AlertFar ) ) 
 			setFullWeight = false;
@@ -979,6 +1000,11 @@ class Crossbow extends RangedWeapon
 		}
 		
 		return false;
+	}
+
+	protected function PlayerSetBehaviorWeaponHeld(value : float)
+	{
+		ownerPlayer.SetBehaviorVariable( 'hasCrossbowHeld', value );
 	}	
 }
 
@@ -1141,7 +1167,7 @@ state State_WeaponDraw in RangedWeapon
 		var id : SItemUniqueId;
 	
 		id = parent.inv.GetItemFromSlot('l_weapon');
-		if ( parent.inv.IsIdValid( id  ) && !parent.inv.IsItemCrossbow( id ) )
+		if ( parent.inv.IsIdValid( id  ) && !parent.inv.IsItemRangedWeapon( id ) )
 			virtual_parent.OnForceHolster();
 	}
 	
@@ -1262,9 +1288,9 @@ state State_WeaponAim in RangedWeapon
 		parent.ownerPlayer.SetBehaviorVariable( 'canHolsterAfterDelay', 0.f );
 		parent.ownerPlayer.SetBehaviorVariable( 'canHolsterAfterDelayHorse', 0.f );		
 
-		parent.ProcessEnableRadialSlot();
-		
-		parent.ownerPlayer.SetBehaviorVariable( 'hasCrossbowHeld', 1.f );
+		parent.ProcessEnableRadialSlot();		
+
+		virtual_parent.PlayerSetBehaviorWeaponHeld(1.f);
 		parent.ownerPlayer.RaiseEvent( 'DivingForceStop' ); 
 		parent.ProcessCanAttackWhenNotInCombat();
 		parent.ownerPlayer.GetMovingAgentComponent().EnableVirtualController( 'Crossbow', true );
@@ -1320,18 +1346,19 @@ state State_WeaponAim in RangedWeapon
 	{
 		var targetToPlayerHeading 	: float;
 		var startTime				: float; 
-		
+
 		startTime = theGame.GetEngineTimeAsSeconds();
+
 		while( theGame.GetEngineTimeAsSeconds() < startTime + 0.2 )
 		{
-			if ( !( parent.ownerPlayer.GetCurrentStateName() == 'AimThrow' && parent.deployedEnt ) )
+			if ( !( parent.ownerPlayer.GetCurrentStateName() == 'AimThrow' && parent.GetDeployedEntity() ) )
 			{
 				virtual_parent.SetOwnerOrientation();	
 			}
 		
 			Sleep( 0.0001f );
 		}		
-		
+
 		if ( theInput.GetActionValue( 'ThrowItem' ) == 1.f 
 			|| theInput.GetActionValue( 'VehicleItemAction' ) == 1.f )
 		{		
@@ -1361,7 +1388,7 @@ state State_WeaponAim in RangedWeapon
 				Lock();
 			}	
 
-			if ( parent.deployedEnt )
+			if ( parent.GetDeployedEntity() )
 			{
 				if ( parent.ownerPlayer.playerAiming.GetCurrentStateName() != 'Aiming' )
 				{
@@ -1373,8 +1400,8 @@ state State_WeaponAim in RangedWeapon
 						parent.ownerPlayer.OnEnableAimingMode( true );			
 					}
 					
-					parent.isDeployedEntAiming = true;
-					parent.deployedEnt.StartAiming();
+					parent.SetIsDeployedEntAiming(true);
+					parent.GetDeployedEntity().StartAiming();
 					virtual_parent.SetOwnerOrientation();
 				}
 				else
@@ -1423,7 +1450,7 @@ state State_WeaponAim in RangedWeapon
 		parent.ownerPlayer.UpdateCustomRotationHeading( 'Crossbow', targetToPlayerHeading );
 	}
 	
-	private function Lock()
+	protected function Lock()
 	{
 		var actionBlockingExceptions : array<EInputActionBlock>;
 
@@ -1431,7 +1458,7 @@ state State_WeaponAim in RangedWeapon
 		thePlayer.BlockAction( EIAB_DrawWeapon, 'RangedWeaponAiming' );
 	}
 	
-	private function Unlock()
+	protected function Unlock()
 	{
 		
 		thePlayer.BlockAllActions( 'RangedWeaponAiming', false);
@@ -1445,7 +1472,7 @@ state State_WeaponShoot in RangedWeapon
 	event OnEnterState( prevStateName : name )
 	{
 		var target : CActor;
-		
+
 		target = parent.ownerPlayer.GetTarget();
 		parent.ownerPlayer.RaiseEvent( 'DivingForceStop' ); 
 		
@@ -1518,7 +1545,7 @@ state State_WeaponShoot in RangedWeapon
 					GCameraShake(0.125);
 			}			
 				
-			if ( parent.isDeployedEntAiming )
+			if ( parent.IsDeployedEntAiming() )
 			{
 				
 					parent.AddTimer( 'HolsterAfterDelay', 0.5f );
@@ -1630,10 +1657,10 @@ state State_WeaponHolster in RangedWeapon
 		{	
 			parent.SetCleanupFunction( 'CancelledEquiping' );
 			
-			Sleep( 0.2 );
+			Sleep( 0.2f / MaxF( 0.01f, parent.owner.GetAnimationTimeMultiplier() ) );
 			isSettingItems = true;
 			
-			Sleep( 0.3f );
+			Sleep( 0.3f / MaxF( 0.01f, parent.owner.GetAnimationTimeMultiplier() ) );
 			
 			
 			

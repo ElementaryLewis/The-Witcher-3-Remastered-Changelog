@@ -43,6 +43,12 @@ class W3HorseManager extends CPeristentEntity
 	{
 		var worldName : String;
 		var isOnBobLevel : bool;
+
+		var isFireSaddleEquipped : bool;
+		var areFireBlindersEquipped : bool;
+
+		isFireSaddleEquipped = inv.HasItem( 'Fire Horse Saddle' );
+		areFireBlindersEquipped = inv.HasItem( 'Fire Horse Blinders' );
 		
 		worldName =  theGame.GetWorld().GetDepotPath();
 		if( StrFindFirst( worldName, "bob" ) < 0 )
@@ -56,13 +62,27 @@ class W3HorseManager extends CPeristentEntity
 		}
 		else if( horseMode == EHM_Devil )
 		{
+			if( areFireBlindersEquipped )
+				return 'player_horse_with_devil_saddle_no_harness';
+			
+			
+
 			if( isOnBobLevel )
 				return 'player_horse_with_devil_saddle_mimics';
 			else
 				return 'player_horse_with_devil_saddle';
-		}		
+		}
 		else if( FactsQuerySum( "q110_geralt_refused_pay" ) > 0 ) 
 		{
+			if( isFireSaddleEquipped && areFireBlindersEquipped )
+				return 'player_horse_after_q110_fire_armor_saddle_and_blinders';
+			
+			if( isFireSaddleEquipped )
+				return 'player_horse_after_q110_fire_armor_saddle';
+
+			if( areFireBlindersEquipped )
+				return 'player_horse_after_q110_fire_armor';
+
 			if( isOnBobLevel )
 				return 'player_horse_after_q110_mimics';
 			else
@@ -70,6 +90,15 @@ class W3HorseManager extends CPeristentEntity
 		}	
 		else
 		{
+			if( isFireSaddleEquipped && areFireBlindersEquipped )
+				return 'player_horse_fire_armor_saddle_and_blinders';
+			
+			if( isFireSaddleEquipped )
+				return 'player_horse_fire_armor_saddle';
+
+			if( areFireBlindersEquipped )
+				return 'player_horse_fire_armor';
+
 			if( isOnBobLevel )
 				return 'player_horse_mimics';
 			else
@@ -118,13 +147,15 @@ class W3HorseManager extends CPeristentEntity
 	
 	public function ApplyHorseUpdateOnSpawn() : bool
 	{
-		var ids, items 		: array<SItemUniqueId>;
+		var ids, items		: array<SItemUniqueId>;
 		var eqId  			: SItemUniqueId;
 		var i 				: int;
 		var horseInv 		: CInventoryComponent;
 		var horse			: CNewNPC;
 		var itemName		: name;
 		var devilSaddle		: bool; 
+		var hasHair			: bool;
+		var hairItems		: array<SItemUniqueId>;
 		var tempItems		: array<SItemUniqueId>; 
 		
 		horse = thePlayer.GetHorseWithInventory();
@@ -190,6 +221,32 @@ class W3HorseManager extends CPeristentEntity
 		{
 			tempItems = horseInv.AddAnItem( 'Horse Hair 0' );
 			horseInv.MountItem( tempItems[0] );
+		}
+		
+		if( !devilSaddle )
+		{
+			hairItems = horseInv.GetItemsByCategory('horse_hair');
+			for(i=0; i<hairItems.Size(); i+=1)
+			{
+				if ( horseInv.IsItemMounted(hairItems[i]) )
+				{
+					hasHair = true;
+					break;
+				}
+			}
+			
+			if( !hasHair )
+			{
+				if( hairItems.Size() == 0 )
+				{
+					tempItems = horseInv.AddAnItem( 'Horse Hair 0' );
+					horseInv.MountItem( tempItems[0] );
+				}
+				else
+				{
+					horseInv.MountItem( hairItems[0] );
+				}
+			}
 		}
 		
 		if( !horseInv.HasItem( 'Horse Universal Reins' ) )
@@ -376,6 +433,7 @@ class W3HorseManager extends CPeristentEntity
 		
 		var horseHairs : array<SItemUniqueId>;
 		var horseInv : CInventoryComponent;
+		var horseTails : array<SItemUniqueId>;
 	
 		
 		if(!inv.IsIdValid(id))
@@ -416,17 +474,30 @@ class W3HorseManager extends CPeristentEntity
 				SetHorseMode( EHM_Normal );				
 			}
 			
-			if ( itemName == 'Devil Saddle' ) 
+			
+			
+			if ( itemName == 'Devil Saddle' || itemName == 'Fire Horse Saddle' ) 
 			{
-				SetHorseMode( EHM_Devil );		
 				
 				horseHairs = horseInv.GetItemsByName('Horse Hair 0');
 				for(i=0;i<horseHairs.Size();i+=1)
 				{
-					horseInv.UnmountItem(horseHairs[i]);
+					horseInv.UnmountItem(horseHairs[i], true, true);
 				}
 				
 			}
+
+			
+			if ( itemName == 'Devil Saddle' ) 
+			{
+				SetHorseMode( EHM_Devil );
+			}
+			else if ( itemName == 'Fire Horse Blinders' || itemName == 'Fire Horse Saddle' )
+			{
+				horse.ApplyAppearance( GetAppearanceName() );
+			}
+
+
 		}
 		else
 		{
@@ -494,6 +565,8 @@ class W3HorseManager extends CPeristentEntity
 		
 		var horseInv : CInventoryComponent; 
 		var horseHairs : array<SItemUniqueId>; 
+
+		
 	
 		
 		if(slot == EES_InvalidSlot)
@@ -528,10 +601,12 @@ class W3HorseManager extends CPeristentEntity
 		horseInv = horse.GetInventory(); 
 		
 		Debug_TraceInventories( "UnequipItem ] " + itemName + " - BEFORE" );
+
 		
-		if ( itemName == 'Devil Saddle' && horseMode == EHM_Devil) 
+		if ( itemName == 'Devil Saddle' && horseMode == EHM_Devil )
 		{
 			SetHorseMode( EHM_Normal );	
+
 			
 			horseHairs = horseInv.GetItemsByName('Horse Hair 0');
 			for(i=0;i<horseHairs.Size();i+=1)
@@ -540,7 +615,16 @@ class W3HorseManager extends CPeristentEntity
 			}
 			
 		}
-		
+		else if ( itemName == 'Fire Horse Saddle' )
+		{
+			horseHairs = horseInv.GetItemsByName('Horse Hair 0');
+			for(i=0;i<horseHairs.Size();i+=1)
+			{
+				horseInv.MountItem(horseHairs[i]);
+			}
+		}
+
+
 		
 		if( horse )
 		{
@@ -560,6 +644,11 @@ class W3HorseManager extends CPeristentEntity
 		
 		
 		newId = inv.GiveItemTo(thePlayer.inv, oldItem, 1, false, true, false);
+
+		if ( itemName == 'Fire Horse Blinders' || itemName == 'Fire Horse Saddle' )
+		{
+			horse.ApplyAppearance( GetAppearanceName() );
+		}
 
 		
 		theGame.GetGlobalEventsManager().OnScriptedEvent( SEC_OnItemEquipped );

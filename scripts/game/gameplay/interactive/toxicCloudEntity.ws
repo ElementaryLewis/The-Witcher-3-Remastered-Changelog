@@ -527,6 +527,7 @@ state Armed in W3ToxicCloud
 				damage = new W3DamageAction in parent;
 				damage.Initialize( parent, entitiesInRange[i], parent, parent, EHRT_None, CPS_Undefined, false, false, false, true );
 				dmgVal = parent.explosionDamage.valueAdditive + parent.explosionDamage.valueMultiplicative * actor.GetMaxHealth();
+
 				damage.AddDamage( theGame.params.DAMAGE_NAME_FIRE, dmgVal);
 				damage.AddEffectInfo(EET_KnockdownTypeApplicator);
 				damage.SetSuppressHitSounds(true);

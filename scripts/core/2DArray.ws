@@ -33,4 +33,10 @@ import class CIndexed2dArray extends C2dArray
 	import final function GetRowIndexByKey( key : name ) : int;
 }
 
+
+
+
 import function LoadCSV( filePath : string ) : C2dArray;
+
+
+import function LoadCSVDirect( filePath : string, separator: string ) : C2dArray;

@@ -40,8 +40,9 @@ import class CR4TutorialSystem extends IGameSystem
 		default needsTickEvent = true;
 		default HINT_DURATION_SHORT = 7;
 		default HINT_DURATION_LONG = 10;
-		
 
+	public var switchTutorialManager : SwitchTutorialManager;
+	
 	
 	
 	public function AreMessagesEnabled() : bool
@@ -93,6 +94,10 @@ import class CR4TutorialSystem extends IGameSystem
 			uiHandler.OnLoad();
 		}
 		
+		switchTutorialManager = new SwitchTutorialManager in this;
+		switchTutorialManager.tutorialSystem = this;
+		switchTutorialManager.UpdateDualGripStyleFact();
+
 		attackProcessed = false;
 		
 		
@@ -103,6 +108,34 @@ import class CR4TutorialSystem extends IGameSystem
 		ActivateJournalEntry('TutorialJournalLightAttacks');
 		ActivateJournalEntry('TutorialJournalSpecialAttacks');		
 		ActivateJournalEntry('TutorialAdrenaline');
+		
+		
+		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
+		{
+			ActivateJournalEntry('TutorialJournalGyro');
+			ActivateJournalEntry('TutorialJournalMouser');
+			ActivateJournalEntry('TutorialJournalTouch');
+			ActivateJournalEntry('TutorialJournalMotionPatternDetails');
+			ActivateJournalEntry('TutorialJournalMotionPatternBombs');
+			ActivateJournalEntry('TutorialJournalMotionPatternSignCast');
+			ActivateJournalEntry('TutorialJournalMotionPatternHorseAcceleration');
+			ActivateJournalEntry('TutorialJournalMotionPatternHorseStop');
+			ActivateJournalEntry('TutorialJournalMotionPatternHorseSummon');
+			ActivateJournalEntry('TutorialJournalMotionPatternPotion1');
+			ActivateJournalEntry('TutorialJournalMotionPatternPotion2');
+			ActivateJournalEntry('TutorialJournalMotionPatternCrossbow');
+		}
+
+		
+		if ( theGame.IsNewGameInStandaloneDLCMode() && theGame.GetTutorialSystem().AreMessagesEnabled() )
+		{
+			TutorialScript('start', '');
+			TutorialScript('alchemy', '');
+			TutorialScript('inventory', '');
+			TutorialScript('journal', '');
+			TutorialScript('fast_travel', '');
+			TutorialScript('meditationWait', '');
+		}
 	}
 	
 	public final function ClearSavedVars()
@@ -255,7 +288,12 @@ import class CR4TutorialSystem extends IGameSystem
 				
 			return;
 		}
-		
+
+		if(tut.tutorialScriptTag == 'PlaystyleDualGrip')
+		{
+			FactsAdd("switch_dual_grip_style", 0);
+		}
+
 		
 		if(tut.forceToQueueFront && queuedTutorials.Size() > 0)
 		{
@@ -324,7 +362,7 @@ import class CR4TutorialSystem extends IGameSystem
 				HideTutorialHint('', true, true);
 			}
 		}
-		
+	
 		
 		if(wereMessagesEnabled && !AreMessagesEnabled())
 		{
@@ -372,7 +410,7 @@ import class CR4TutorialSystem extends IGameSystem
 						delayedQueuedTutorialShowTime = HINT_SHOW_DELAY;
 						
 					hasDelayedTutorial = true;
-					
+
 					
 					if(i != 0)
 					{
@@ -380,12 +418,39 @@ import class CR4TutorialSystem extends IGameSystem
 						queuedTutorials.Insert(0, temp);
 						queuedTutorials.Erase(i+1);
 					}
-					
 					break;
 				}
 			}
-		}		
+		}
+
+		if(queuedTutorials.Size() > 0 && wereMessagesEnabled && queuedTutorials[0].hintCloseOnFactExist != "")
+		{
+			if(FactsQueryLatestValue( queuedTutorials[0].hintCloseOnFactExist ) > 0)
+			{	
+				HideTutorialHint(queuedTutorials[0].tutorialScriptTag);
+			}
+		}
+
 		
+		if(theGame.GetPlatform() == Platform_Switch2_Ounce
+		 	&& queuedTutorials.Size() > 0 
+		 	&& wereMessagesEnabled )
+		{
+			if( queuedTutorials[0].tutorialScriptTag == 'TutorialCrossbowMotionControls' 
+				||queuedTutorials[0].tutorialScriptTag == 'TutorialPotionEquippedPrimaryMotionControls'
+				||queuedTutorials[0].tutorialScriptTag == 'TutorialPotionEquippedSecondaryMotionControls'
+				||queuedTutorials[0].tutorialScriptTag == 'TutorialHorseSummonMotionControls'
+				||queuedTutorials[0].tutorialScriptTag == 'TutorialHorseSpeed2MotionControls'
+				||queuedTutorials[0].tutorialScriptTag == 'TutorialHorseStopMotionControls')
+			{
+				if(FactsQueryLatestValue( "switch_dual_grip_style" ) == 0)
+				{
+					HideTutorialHint(queuedTutorials[0].tutorialScriptTag);
+					switchTutorialManager.inMotionPatternTutorial = false;
+				}
+			}
+		}
+
 		
 		if(thePlayer.IsThreatened() && ShouldProcessTutorial('TutorialDodge'))
 		{
@@ -428,7 +493,7 @@ import class CR4TutorialSystem extends IGameSystem
 			}
 			
 			attackProcessed = false;
-		}		
+		}
 	}
 	
 	private final function ProcessRolls()
@@ -452,7 +517,7 @@ import class CR4TutorialSystem extends IGameSystem
 			}
 			
 			attackProcessed = false;
-		}		
+		}
 	}
 	
 	
@@ -511,16 +576,16 @@ import class CR4TutorialSystem extends IGameSystem
 							break;
 						}
 					}
-				
+
 					if(!inQueue)
 						FactsAdd(factOnSeen);
 				}
-	
+
 				break;
 			}
 		}
 	}
-	
+
 	
 	event OnTutorialClosed(scriptName : name, closedByUIPanel : bool, informUIHandler : bool)
 	{
@@ -581,6 +646,7 @@ import class CR4TutorialSystem extends IGameSystem
 		m_tutorialHintDataObj.messageTitle = GetLocStringById(tutorialEntry.GetNameStringId());
 		m_tutorialHintDataObj.messageText = GetTutorialLocalizedText(tutorialEntry.GetDescriptionStringId());
 		m_tutorialHintDataObj.imagePath = tutorialEntry.GetImagePath();
+		m_tutorialHintDataObj.extraInfo = tut.extraInfo;
 		m_tutorialHintDataObj.enableGlossoryLink = false;		
 		m_tutorialHintDataObj.autosize = !tut.disableHorizontalResize;
 		m_tutorialHintDataObj.blockInput = tut.blockInput;
@@ -591,12 +657,16 @@ import class CR4TutorialSystem extends IGameSystem
 		
 		if(tut.hintDurationType == ETHDT_Input && tut.type != ETMT_Message)
 		{
+			Log("DebugTutorial force enable button" );
 			m_tutorialHintDataObj.enableAcceptButton = true;
 			m_tutorialHintDataObj.blockInput = true;
 		}
 				
 		if(tut.type == ETMT_Message)
+		{	
 			m_tutorialHintDataObj.fullscreen = true;
+			m_tutorialHintDataObj.enableAcceptButton = true;
+		}
 		
 		if(tut.isHUDTutorial)
 		{
@@ -635,9 +705,9 @@ import class CR4TutorialSystem extends IGameSystem
 			case ETHPT_DefaultRadialMenu :
 				m_tutorialHintDataObj.posX = 0;
 				m_tutorialHintDataObj.posY = 0.43;
-				
+
 		}
-			
+
 		if(tut.hintDurationType == ETHDT_Short)
 		{
 			m_tutorialHintDataObj.duration = HINT_DURATION_SHORT * 1000;
@@ -784,6 +854,11 @@ import class CR4TutorialSystem extends IGameSystem
 			
 		return tutorialEntry;
 	}
+
+	public function HideFirstTutorial()
+	{
+		HideTutorialHint(queuedTutorials[0].tutorialScriptTag);
+	}
 	
 	
 	public function HideTutorialHint(scriptTag : name, optional forceCloseAny : bool, optional dontRemoveFromQueue : bool)
@@ -925,13 +1000,13 @@ import class CR4TutorialSystem extends IGameSystem
 				
 				if( ent.GetComponentByClassName('W3CraftsmanComponent') )
 					craftsman = true;
-			}		
+			}
 			else if(actionName == 'Examine')
 			{
 				examine = true;
-			}			
+			}
 		}
-			
+
 		
 		if(container)
 			FactsAdd("tutorial_interaction_container");
@@ -942,7 +1017,7 @@ import class CR4TutorialSystem extends IGameSystem
 			FactsAdd("tutorial_interaction_talk");
 		else
 			FactsRemove("tutorial_interaction_talk");
-						
+
 		if(examine)
 			FactsAdd("tutorial_interaction_examine");
 		else
@@ -1001,7 +1076,7 @@ import class CR4TutorialSystem extends IGameSystem
 		var entryBase : CJournalBase;
 		var resource : CJournalResource;
 		var manager : CWitcherJournalManager;
-		
+
 		if(!IsNameValid(entryName))
 			return;
 		
@@ -1150,18 +1225,18 @@ import class CR4TutorialSystem extends IGameSystem
 				manager.ActivateEntry( resCommon.GetEntry(), JS_Inactive);
 				tutorialEntry = (CJournalTutorial)manager.GetEntryByString(queuedTutorials[0].tutorialScriptTag);
 			}
-			
+
 			
 			if(!tutorialEntry || HasLolcalizationTags( GetLocStringById(tutorialEntry.GetDescriptionStringId()) ) )
 				performReload = true;
 		}
-				
+
 		if(performReload)
 		{
 			
 			showNextHintInstantly = true;			
 			HideTutorialHint('', true, true);
-			
+
 			
 			if(forceShowImmediately)
 			{
@@ -1177,11 +1252,11 @@ import class CR4TutorialSystem extends IGameSystem
 		var s: string;
 		var inGameConfigWrapper : CInGameConfigWrapper;
 		var configValue: string;
-		
+
 		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();		
 		configValue = inGameConfigWrapper.GetVarValue( 'Controls', 'AlternativeRadialMenuInputMode' );
 		s = GetLocStringById(locId);
-		
+
 		if(configValue && m_tutorialHintDataObj.scriptTag=='TutorialSelectQuen')
 		{	
 			s = StrReplace(s, "GI_AxisLeft", "GI_AxisRight");
@@ -1189,41 +1264,41 @@ import class CR4TutorialSystem extends IGameSystem
 
 		return ReplaceTagsToIcons(s);
 	}
-	
+
 	
 	private function SetMenuRestrictions(enabledMenuList:array<name>):void
 	{
 		var commonMenuRef  : CR4CommonMenu;
-		
+
 		enableMenuRestrictions = true;
 		allowedMenusList = enabledMenuList;
-		
+
    		commonMenuRef = theGame.GetGuiManager().GetCommonMenu();
    		if (commonMenuRef)
    		{
 			commonMenuRef.UpdateTutorialRestruction();
    		}
 	}
-	
+
 	
 	private function RemoveMenuRestrictions():void
 	{
 		enableMenuRestrictions = false;
 		allowedMenusList.Clear();
 	}
-	
+
 	
 	public function IsMenuRestrictionsEnable() : bool
 	{
 		return enableMenuRestrictions;
 	}
-	
+
 	
 	public function GetAllowedMenuList() : array <name>
 	{
 		return allowedMenusList;
 	}
-	
+
 	public final function Failsafe()
 	{
 		queuedTutorials.Clear();
@@ -1236,16 +1311,16 @@ import class CR4TutorialSystem extends IGameSystem
 		invisibleTutorialHint = '';
 		allowedMenusList.Clear();
 	}
+
 	
 	
 	
-	
-	
+
 	public final function SetHudMessage(tutorialMessageName : name, on : bool)
 	{
 		var hud : CR4ScriptedHud;
 		var messageModule : CR4HudModuleMessage;
-		
+
 		if(on)
 		{
 			hudMessage = tutorialMessageName;
@@ -1253,7 +1328,7 @@ import class CR4TutorialSystem extends IGameSystem
 		else
 		{
 			hudMessage = '';
-			
+
 			hud = (CR4ScriptedHud)theGame.GetHud();
 			if( hud )
 			{
@@ -1265,12 +1340,12 @@ import class CR4TutorialSystem extends IGameSystem
 			}
 		}
 	}
-	
+
 	private final function ProcessHUDMessage()
 	{
 		var tutorialEntry : CJournalTutorial;
 		var msgText : string;
-	
+
 		if(IsNameValid(hudMessage) && AreMessagesEnabled())
 		{
 			tutorialEntry = GetMessageText(hudMessage, JS_Inactive);
@@ -1278,36 +1353,36 @@ import class CR4TutorialSystem extends IGameSystem
 			thePlayer.DisplayHudMessage(msgText);
 		}
 	}	
+
 	
 	
 	
-	
-	
+
 	private timer function TutorialInvisibleHint(dt : float, id : int)
 	{
 		HideTutorialHint(invisibleTutorialHint);
 	}
-	
+
 	public final function ForcedAlchemyCleanup()
 	{
 		
 		uiHandler.LockCloseUIPanels(false);
-		
+
 		
 		FactsRemove("tut_forced_preparation");
-		
+
 		
 		uiHandler.LockLeaveMenu(false);
-		
+
 		
 		thePlayer.BlockAllActions('tut_forced_preparation', false);
-		
+
 		
 		uiHandler.UnregisterUIState('ForcedAlchemy');
-		
+
 		
 		uiHandler.UnregisterUIState('Alchemy', "forced");
-			
+
 		
 		uiHandler.UnregisterUIState('Potions', "forced");
 	}
@@ -1346,9 +1421,315 @@ import class CR4TutorialSystem extends IGameSystem
 			LogTutorial(i + ") " + queuedTutorials[i].tutorialScriptTag);
 		}
 	}
+
+	public function IsQueuedTutorials() :bool
+	{
+		return queuedTutorials.Size() > 0;
+	}
 }
 
 exec function logtutorialqueue()
 {
 	theGame.GetTutorialSystem().DEBUG_LogQueuedTutorials();
+}
+
+
+class SwitchTutorialManager
+{
+	var tutorialSystem : CR4TutorialSystem;
+	public var inMotionPatternTutorial : bool;
+	public var forceEnableMultipleTutorial : bool;
+	private var _currentPatternType : EMotionPatternTutorialType;
+
+	
+	public function UpdateMotionPatternTutorialState(patterntype : EMotionPatternTutorialType, patternstate : EMotionPatternTutorialState) : void
+	{
+		var tut : STutorialMessage;	
+		var ounceStyle:  OunceGamepadStyle ;
+		var enabledMP:  int ;
+
+		ounceStyle = theInput.GetOunceGamepadStyle();
+		enabledMP = theGame.GetMotionPatternsMode_DualGrip();
+
+		if(theGame.GetPlatform() != Platform_Switch2_Ounce 	
+			|| thePlayer.IsInCombat() 
+			|| ounceStyle != OunceGamepadStyle_JoyDual
+			|| !FactsDoesExist("q001_nightmare_ended")
+			|| FactsQuerySum("q001_nightmare_ended") == 0 )
+		{
+			
+			
+			
+			
+			
+
+			return;
+		}
+		
+		
+
+		switch(patterntype)
+		{
+			case MPTT_Crossbow:
+			if(enabledMP == 0 || enabledMP == 2)
+			{
+				return;
+			}
+			break;
+
+			case MPTT_PotionUsePrimary:
+			if(enabledMP == 0 || enabledMP == 2)
+			{
+				return;
+			}
+			break;
+
+			case MPTT_PotionUseSecondary:
+			if(enabledMP == 0 || enabledMP == 2)
+			{
+				return;
+			}
+			break;
+
+			case MPTT_HorseCall:
+			if(enabledMP == 0)
+			{
+				return;
+			}
+			break;
+
+			case MPTT_HorseAcceleration:
+			if(enabledMP == 0)
+			{
+				return;
+			}
+			break;
+
+			case MPTT_HorseStop:
+			if(enabledMP == 0)
+			{
+				return;
+			}
+			break;
+		}
+
+		switch(patternstate)
+		{
+			case MPTS_Trigger:
+
+			if(inMotionPatternTutorial)
+			{				
+				return;
+			}
+			if(!forceEnableMultipleTutorial && tutorialSystem.IsQueuedTutorials())
+			{
+				return;
+			}
+
+			if(NeedMotionPatternTutorial(patterntype,patternstate))
+			{
+				inMotionPatternTutorial = true;
+				_currentPatternType = patterntype;
+
+				tut.hintDurationType = ETHDT_Infinite;
+				tut.hintCloseOnFactExist = MotionPatternFactToString(patterntype , MPTS_Done);
+				tut.type = ETMT_Hint;
+				tut.force = true;
+
+				switch(patterntype)
+				{
+					case MPTT_Crossbow:
+					tut.tutorialScriptTag ='TutorialCrossbowMotionControls';
+					tutorialSystem.DisplayTutorial(tut);
+					break;
+
+					case MPTT_PotionUsePrimary:
+					tut.tutorialScriptTag = 'TutorialPotionEquippedPrimaryMotionControls';
+					tutorialSystem.DisplayTutorial(tut);
+
+					thePlayer.GetInventory().SingletonItemsRefillAmmo();
+					break;
+
+					case MPTT_PotionUseSecondary:
+					tut.tutorialScriptTag = 'TutorialPotionEquippedSecondaryMotionControls';
+					tutorialSystem.DisplayTutorial(tut);
+
+					thePlayer.GetInventory().SingletonItemsRefillAmmo();
+					break;
+
+					case MPTT_HorseCall:
+					tut.tutorialScriptTag = 'TutorialHorseSummonMotionControls';
+					tutorialSystem.DisplayTutorial(tut);
+					break;
+
+					case MPTT_HorseAcceleration:
+					tut.tutorialScriptTag = 'TutorialHorseSpeed2MotionControls';
+					tutorialSystem.DisplayTutorial(tut);
+					break;
+
+					case MPTT_HorseStop:
+					tut.tutorialScriptTag =	'TutorialHorseStopMotionControls';
+					tutorialSystem.DisplayTutorial(tut);
+					break;
+				}
+			}
+
+			AddMotionPatternTutorialFact(patterntype,patternstate);
+
+			break;
+
+			case MPTS_Done:
+			if(inMotionPatternTutorial && _currentPatternType == patterntype)
+			{
+				inMotionPatternTutorial = false;
+				AddMotionPatternTutorialFact(patterntype,patternstate);
+
+				if(_currentPatternType == MPTT_PotionUsePrimary)
+				{
+					forceEnableMultipleTutorial = true;				
+					UpdateMotionPatternTutorialState(MPTT_PotionUseSecondary,MPTS_Trigger);
+					forceEnableMultipleTutorial=false;
+				}
+				else if (_currentPatternType == MPTT_HorseAcceleration)
+				{
+					forceEnableMultipleTutorial = true;
+					UpdateMotionPatternTutorialState(MPTT_HorseStop,MPTS_Trigger);
+					forceEnableMultipleTutorial = false;
+				}
+			}			
+			break;
+		}
+	}
+
+	public function UpdateDualGripStyleFact()
+	{	
+		var ounceStyle:  OunceGamepadStyle ;
+
+		ounceStyle = theInput.GetOunceGamepadStyle();
+
+		if( ounceStyle == OunceGamepadStyle_JoyDual)
+		{
+			FactsAdd("switch_dual_grip_style", 1);
+		}
+		else
+		{
+			FactsAdd("switch_dual_grip_style", 0);
+		}
+	}
+
+	public function NeedMotionPatternTutorial(patterntype : EMotionPatternTutorialType, patternstate : EMotionPatternTutorialState) : bool
+	{		
+		if(FactsQuerySum(MotionPatternFactToString(patterntype , MPTS_Trigger)) > 0 || FactsQuerySum(MotionPatternFactToString(patterntype , MPTS_Done)) > 0 )
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	private function AddMotionPatternTutorialFact(patterntype : EMotionPatternTutorialType, patternstate : EMotionPatternTutorialState)
+	{	
+		var factName : string;
+		FactsAdd(MotionPatternFactToString(patterntype , patternstate), 1);
+	}
+
+	private function MotionPatternFactToString(patterntype : EMotionPatternTutorialType , patternstate : EMotionPatternTutorialState) : String
+	{
+		var factName : string;
+		factName = "motionpattern_";
+
+		switch(patterntype)
+		{
+			case MPTT_Crossbow:
+				factName += "crossbow";
+				break;
+
+			case MPTT_PotionUsePrimary:
+				factName += "potionuseprimary";
+				break;
+
+			case MPTT_PotionUseSecondary:
+				factName += "potionusesecondary";
+				break;
+
+			case MPTT_HorseCall:
+				factName += "horsecall";
+				break;
+
+			case MPTT_HorseAcceleration:
+				factName += "horseacceleration";
+				break;
+
+			case MPTT_HorseStop:
+				factName += "horsestop";
+				break;
+		}
+
+		switch(patternstate)
+		{
+			case MPTS_Trigger:
+				factName += "_trigger";
+				break;
+
+			case MPTS_Done:
+				factName += "_done";
+				break;
+		}
+
+		return factName;
+	}
+}
+
+enum EMotionPatternTutorialType
+{
+	MPTT_Crossbow,
+	MPTT_PotionUsePrimary,
+	MPTT_PotionUseSecondary,
+	MPTT_HorseCall,
+	MPTT_HorseAcceleration,
+	MPTT_HorseStop
+}
+
+enum EMotionPatternTutorialState
+{
+	MPTS_Trigger,
+	MPTS_Done
+}
+
+exec function showPatternTutorial()
+{
+	var tut : STutorialMessage;
+
+	TutorialMessagesEnable(true);
+	tut.hintDurationType = ETHDT_Infinite;
+	tut.enableAcceptButton = true;
+	tut.type = ETMT_Hint;
+	tut.tutorialScriptTag ='TutorialCrossbowMotionControls';
+	tut.force = true ;
+	theGame.GetTutorialSystem().DisplayTutorial(tut);
+}
+
+exec function showPatternTutorialTag(tag : name)
+{
+	var tut : STutorialMessage;
+
+	TutorialMessagesEnable(true);
+	tut.hintDurationType = ETHDT_Infinite;
+	tut.tutorialScriptTag = tag;
+	tut.enableAcceptButton = true;
+	tut.type = ETMT_Hint;
+	tut.force = true;
+	tut.forceToQueueFront = true;
+	tut.blockInput = true;
+	theGame.GetTutorialSystem().DisplayTutorial(tut);
+}
+
+exec function closeTutorialPopup()
+{
+	theGame.GetTutorialSystem().HideFirstTutorial();
+}
+
+exec function AddFactDualGripStyle()
+{
+	FactsAdd("switch_dual_grip_style", 1);
 }

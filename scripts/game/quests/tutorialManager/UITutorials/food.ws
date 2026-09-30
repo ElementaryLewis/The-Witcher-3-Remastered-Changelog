@@ -53,7 +53,7 @@ state Food in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 		if(hasFood)
 		{
-			ShowHint(USAGE, POS_INVENTORY_X, POS_INVENTORY_Y);
+			ShowHint(USAGE, POS_INVENTORY_X, POS_INVENTORY_Y - 0.1f);
 		}
 		else
 		{
@@ -128,6 +128,6 @@ state Food in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	event OnFoodEquipped()
 	{
 		CloseStateHint(EQUIP_FOOD);
-		ShowHint(USAGE, POS_INVENTORY_X, POS_INVENTORY_Y);
+		ShowHint(USAGE, POS_INVENTORY_X, POS_INVENTORY_Y - 0.1f);
 	}
 }

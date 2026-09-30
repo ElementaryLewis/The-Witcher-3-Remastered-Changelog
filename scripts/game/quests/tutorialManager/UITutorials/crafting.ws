@@ -21,7 +21,7 @@ state Crafting in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 		isClosing = false;
 			
-		ShowHint( SCHEMATICS, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Input, GetHighlightCraftingList(), , , true );
+		ShowHint( SCHEMATICS, POS_ALCHEMY_X, POS_ALCHEMY_Y - 0.1f, ETHDT_Input, GetHighlightCraftingList(), , , true );
 	}
 			
 	event OnLeaveState( nextStateName : name )
@@ -44,30 +44,32 @@ state Crafting in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	{
 		if(closedByParentMenu || isClosing)
 			return true;
+
+		QuitState();
 			
 		if(hintName == SCHEMATICS)
 		{
-			ShowHint( ITEM_DESCRIPTION, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Input, GetHighlightCraftingItemDescription() );
+			
 		}
 		else if(hintName == ITEM_DESCRIPTION)
 		{
-			ShowHint( COMPONENTS, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Input, GetHighlightCraftingIngredients() );
+			
 		}
 		else if(hintName == COMPONENTS)
 		{
-			ShowHint( PRICE, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Input, GetHighlightCraftingPrice() );
+			
 		}
 		else if(hintName == PRICE)
 		{
-			ShowHint(CRAFTSMEN, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Input);
+			
 		}
 		else if(hintName == CRAFTSMEN)
 		{
-			ShowHint(DISMANTLING, POS_ALCHEMY_X, POS_ALCHEMY_Y, ETHDT_Input);
+			
 		}
 		else if(hintName == DISMANTLING)
 		{
-			QuitState();
+			
 		}
 	}
 }

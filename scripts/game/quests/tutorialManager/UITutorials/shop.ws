@@ -21,7 +21,7 @@ state Shop in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 		isClosing = false;
 		
-		ShowHint(DESCRIPTION, SHOP_POS_X, SHOP_POS_Y);
+		
 	}
 			
 	event OnLeaveState( nextStateName : name )
@@ -39,16 +39,7 @@ state Shop in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	
 	event OnTutorialClosed(hintName : name, closedByParentMenu : bool)
 	{
-		if(hintName == DESCRIPTION && !closedByParentMenu && !isClosing)
-		{
-			CloseStateHint(DESCRIPTION);
-			ShowHint(BUY, SHOP_POS_X, SHOP_POS_Y);
-		}
-		else if(hintName == BUY && !closedByParentMenu && !isClosing)
-		{
-			CloseStateHint(BUY);
-			ShowHint(CLOSE, SHOP_POS_X, SHOP_POS_Y);
-		}
+		
 	}
 	
 	event OnBoughtItem()

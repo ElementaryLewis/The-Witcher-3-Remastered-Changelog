@@ -79,11 +79,16 @@ import class CEntity extends CNode
 	
 	
 	import final function BehaviorNodeDeactivationNotificationReceived( deactivationName : name ) : bool;
+
+	
+	import final function BehaviorNodeActivationNotificationReceived( activationName : name ) : bool;
 	
 	
 	import function I_GetDisplayName() : string;
 	
 	import function CalcBoundingBox( out box : Box );
+
+	import final function SetRawPlacement( position : Vector, rotation : EulerAngles );
 	
 	
 	event OnBehaviorGraphNotification( notificationName : name, stateName : name ){}
@@ -233,7 +238,7 @@ import class CEntity extends CNode
 	import final function Fade( fadeIn : bool );
 	
 	
-	import final function SetHideInGame( hide : bool );
+	import final function SetHideInGame( hide : bool, optional immediate : bool  );
 	
 	
 	

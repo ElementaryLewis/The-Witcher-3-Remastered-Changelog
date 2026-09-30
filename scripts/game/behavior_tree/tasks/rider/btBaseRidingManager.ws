@@ -17,7 +17,10 @@ abstract class CBTTaskRidingManagerVehicleMount extends IBehTreeTask
 		if ( !vehicleComponent || vehicleComponent.IsMountingPossible() == false )
         {
 			return BTNS_Failed;
-        }		
+        }	
+
+		mountType = '';
+
         return BTNS_Active;
 	}
 	
@@ -30,7 +33,7 @@ abstract class CBTTaskRidingManagerVehicleMount extends IBehTreeTask
 	{
 		var riderActor			: CActor = GetActor();
 		var behaviorsToActivate : array< name >;
-		var preloadResult		: bool = true;	
+		var preloadResult		: bool = true;
 
 		
 		vehicleComponent.OnMountStarted( riderActor, riderData.sharedParams.vehicleSlot );
@@ -53,7 +56,7 @@ abstract class CBTTaskRidingManagerVehicleMount extends IBehTreeTask
 		var behaviorsToActivate : array< name >;
 		var graphResult 		: bool;
 		var movementAdjustor	: CMovementAdjustor;
-		
+
 		
 		riderData.sharedParams.mountStatus = VMS_mounted;
 		
@@ -90,7 +93,7 @@ abstract class CBTTaskRidingManagerVehicleMount extends IBehTreeTask
 		
 		
 		riderActor.EnableCollisions( false );
-		
+
 		
 		riderActor.CreateAttachment( vehicleComponent.GetEntity(), attachSlot );		
 		
@@ -114,7 +117,7 @@ abstract class CBTTaskRidingManagerVehicleMount extends IBehTreeTask
 		riderData.sharedParams.mountStatus 	= VMS_dismounted;
 		
 		riderActor.SetUsedVehicle( NULL );
-	}	
+	}
 	
 	latent function MountActor( riderData : CAIStorageRiderData, behGraphName: name, vehicleComponent : CVehicleComponent )
 	{
@@ -123,6 +126,7 @@ abstract class CBTTaskRidingManagerVehicleMount extends IBehTreeTask
 		var vehicleEntity		: CEntity = vehicleComponent.GetEntity();
 		var queryContext		: SExplorationQueryContext;
 		var success 			: bool = true;		
+		var horseComponent		: W3HorseComponent;
 		
 		
 		if ( riderData.ridingManagerInstantMount == false )
@@ -137,6 +141,12 @@ abstract class CBTTaskRidingManagerVehicleMount extends IBehTreeTask
 		{
 			
 			OnMountStarted( riderData, behGraphName, vehicleComponent );
+
+			horseComponent = (W3HorseComponent)vehicleComponent;
+			if( horseComponent )
+			{
+				exploration.isCart = horseComponent.isCart;
+			}
 
 			
 			if ( riderData.ridingManagerInstantMount == false )
@@ -239,6 +249,11 @@ class CBTTaskRidingManagerVehicleDismount extends IBehTreeTask
     }
 
     
+	
+	
+	
+	
+	
     function FindDismountDirection( riderData : CAIStorageRiderData, vehicleComponent : CVehicleComponent, out dismountDirection : float )
 	{
 		var riderActor						: CActor 	= GetActor();
@@ -256,10 +271,12 @@ class CBTTaskRidingManagerVehicleDismount extends IBehTreeTask
 		var vehicleRight					: Vector 	= vehicleEntity.GetWorldRight();
 		var dismountCheckLength				: float		= 1.0;
 		var possibleDirections				: array<float>;
-		
+		var forceLeft						: bool;
+		var forceRight						: bool;
+
 		
 		var lookatAngle : float;
-		
+
 		dismountDirection = 1.0;	
 		actorMovingAgentComponent =( CMovingPhysicalAgentComponent ) riderActor.GetMovingAgentComponent();
 		
@@ -366,30 +383,33 @@ class CBTTaskRidingManagerVehicleDismount extends IBehTreeTask
 		}
 		else	
 		{
+			forceLeft = vehicleEntity.HasTag( 'force_left_side_dismount' );
+			forceRight = vehicleEntity.HasTag( 'force_right_side_dismount' );
+
 			
-			if( IsPositionValid( vehicleComponent, LeftForwardDismountPosition ) )
+			if ( !forceRight && IsPositionValid( vehicleComponent, LeftForwardDismountPosition ) )
 			{
 				possibleDirections.PushBack( 0.0 );
 			}
-			if( IsPositionValid( vehicleComponent, RightForwardDismountPosition ) )
+			if ( !forceLeft && IsPositionValid( vehicleComponent, RightForwardDismountPosition ) )
 			{
 				possibleDirections.PushBack( 1.0 );
 			}
-			if( possibleDirections.Size() <= 0 )
+			if ( possibleDirections.Size() <= 0 )
 			{
 				
-				if( IsPositionValid( vehicleComponent, LeftBackwardDismountPosition ) )
+				if ( !forceRight && IsPositionValid( vehicleComponent, LeftBackwardDismountPosition ) )
 				{
 					possibleDirections.PushBack( 2.0 );
 				}
-				if( IsPositionValid( vehicleComponent, RightBackwardDismountPosition ) )
+				if ( !forceLeft && IsPositionValid( vehicleComponent, RightBackwardDismountPosition ) )
 				{
 					possibleDirections.PushBack( 3.0 );
 				}
 				
-				if( !possibleDirections.Size() )
+				if ( !possibleDirections.Size() )
 				{
-					if( IsPositionValid( vehicleComponent, BackDismountPosition ) )
+					if ( IsPositionValid( vehicleComponent, BackDismountPosition ) )
 					{
 						dismountDirection = 4.0;
 						return;
@@ -419,6 +439,7 @@ class CBTTaskRidingManagerVehicleDismount extends IBehTreeTask
 		var vehiclePosition					: Vector 	= vehicleEntity.GetWorldPosition();
 		var pointA, pointB, outPosition, outNormal : Vector;
 		var collisionGroupsNames 			: array<name>;
+
 		
 		
 		actorMovingAgentComponent = ( CMovingPhysicalAgentComponent ) riderActor.GetMovingAgentComponent();
@@ -427,16 +448,28 @@ class CBTTaskRidingManagerVehicleDismount extends IBehTreeTask
 		collisionGroupsNames.PushBack('Terrain');
 		collisionGroupsNames.PushBack('Destructible');
 		collisionGroupsNames.PushBack('Foliage');
+		collisionGroupsNames.PushBack('Door');
 		
 		pointA = vehiclePosition;
 		pointB = _position;
 		pointA.Z += 1.0;
 		pointB.Z += 1.0;
 
-		if ( theGame.GetWorld().SweepTest( pointA, pointB, 0.4, outPosition, outNormal, collisionGroupsNames ) )
+		if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls')  == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'TreeFiltering') == "true")
 		{
-			
-			return false;
+			if ( theGame.GetWorld().SweepTest( pointA, pointB, 0.4, outPosition, outNormal, collisionGroupsNames, StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'TreeSizeThreshold')) ) )
+			{
+				
+				return false;
+			}
+		}
+		else
+		{
+			if ( theGame.GetWorld().SweepTest( pointA, pointB, 0.4, outPosition, outNormal, collisionGroupsNames ) )
+			{
+				
+				return false;
+			}
 		}
 
 		
@@ -456,8 +489,22 @@ class CBTTaskRidingManagerVehicleDismount extends IBehTreeTask
 		if( (W3HorseComponent)vehicleComponent )
 		{
 			numSecWait = 2.0f;
+
+			if ( ((W3HorseComponent)vehicleComponent).isCart )
+			{
+				numSecWait = 6.5f;
+				riderActor.SetBehaviorVariable('isDismountingFromCart', 1.0f );
+			}
+			else
+			{
+				riderActor.SetBehaviorVariable('isDismountingFromCart', 0.0f );
+			}
 		}
-		else
+		else if((CBoatComponent)vehicleComponent)
+		{
+			numSecWait = 2.0f;
+		}
+		else 
 		{
 			
 			numSecWait = 0.5f;

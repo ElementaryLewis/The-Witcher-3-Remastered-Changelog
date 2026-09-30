@@ -27,6 +27,8 @@ class W3AardProjectile extends W3SignProjectile
 		var sp : SAbilityAttributeValue;
 		var isMutation6 : bool;
 		var victimNPC : CNewNPC;
+		var aardDRTier : int;
+	
 	
 		
 		if ( hitEntities.FindFirst( collider ) != -1 )
@@ -41,6 +43,14 @@ class W3AardProjectile extends W3SignProjectile
 		
 		victimNPC = (CNewNPC) collider;
 		
+		aardDRTier = 1;
+
+		if( owner.IsPlayer() && victimNPC )
+		{
+			aardDRTier = victimNPC.SignDRRegisterAard();
+		}
+			
+		
 		
 		if( IsRequiredAttitudeBetween(victimNPC, caster, true ) )
 		{
@@ -48,16 +58,10 @@ class W3AardProjectile extends W3SignProjectile
 			if( isMutation6 )
 			{
 				action.SetBuffSourceName( "Mutation6" );
-			}		
-			else if ( owner.CanUseSkill(S_Magic_s06) )		
-			{			
-				
-				
-				sp = action.GetPowerStatValue();
-				dmgVal += GetWitcherPlayer().GetSkillLevel(S_Magic_s06) * victimNPC.GetHealth() * ( 0.01 + 0.03 * LogF( sp.valueMultiplicative ) );
-				
-				action.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, dmgVal );
-				
+			}
+			else if ( owner.CanUseSkill( S_Magic_s33 ) )	
+			{
+				action.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, GetWitcherPlayer().CalcMagic33Damage() );
 			}
 		}
 		else
@@ -79,15 +83,67 @@ class W3AardProjectile extends W3SignProjectile
 		
 		
 		
+		if( owner.IsPlayer() && victimNPC )
+		{
+			if( aardDRTier == 2 )
+			{
+				action.RemoveBuffsByType( EET_KnockdownTypeApplicator );
+				action.RemoveBuffsByType( EET_Knockdown );
+				action.RemoveBuffsByType( EET_HeavyKnockdown );
+				action.RemoveBuffsByType( EET_LongStagger );
+				action.RemoveBuffsByType( EET_Stagger );
+				action.RemoveBuffsByType( EET_Ragdoll );
+
+				action.AddEffectInfo( EET_LongStagger );
+			}
+			else if( aardDRTier == 3 )
+			{
+				action.RemoveBuffsByType( EET_KnockdownTypeApplicator );
+				action.RemoveBuffsByType( EET_Knockdown );
+				action.RemoveBuffsByType( EET_HeavyKnockdown );
+				action.RemoveBuffsByType( EET_LongStagger );
+				action.RemoveBuffsByType( EET_Stagger );
+				action.RemoveBuffsByType( EET_Ragdoll );
+
+				action.AddEffectInfo( EET_Stagger );
+			}
+			else if( aardDRTier >= 4 )
+			{
+				action.RemoveBuffsByType( EET_KnockdownTypeApplicator );
+				action.RemoveBuffsByType( EET_Knockdown );
+				action.RemoveBuffsByType( EET_HeavyKnockdown );
+				action.RemoveBuffsByType( EET_LongStagger );
+				action.RemoveBuffsByType( EET_Stagger );
+				action.RemoveBuffsByType( EET_Ragdoll );
+
+				action.SetHitReactionType( EHRT_None, false );
+				action.SetHitAnimationPlayType( EAHA_ForceNo );
+			}
+		}
+		
+		
 		theGame.damageMgr.ProcessAction( action );
 		
+		CheckFrostEffect ( collider );
+
 		collider.OnAardHit( this );
+		
 		
 		
 		if( isMutation6 && victimNPC && victimNPC.IsAlive() )
 		{
 			ProcessMutation6( victimNPC );
 		}
+	}
+	
+	private function CheckFrostEffect ( collider : CGameplayEntity )
+	{
+		var isMutation6 : bool;
+		
+		isMutation6 = ( ( W3PlayerWitcher )owner.GetPlayer() && GetWitcherPlayer().IsMutationActive( EPMT_Mutation6 ) );
+		
+		if ( collider && isMutation6 )
+			collider.OnFrostHit(this);
 	}
 	
 	private final function ProcessMutation6( victimNPC : CNewNPC )
@@ -157,6 +213,14 @@ class W3AardProjectile extends W3SignProjectile
 				dmgVal += GetWitcherPlayer().GetSkillLevel(S_Magic_s06) * victimNPC.GetHealth() * ( 0.01 + 0.03 * LogF( sp.valueMultiplicative ) );
 				
 				action.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, dmgVal );
+				
+				
+				if(victimNPC.HasTag('eredin') || victimNPC.HasTag('imlerith') || victimNPC.HasTag('Caranthir'))
+					theGame.damageMgr.ProcessAction( action );
+			}
+			else if ( owner.CanUseSkill( S_Magic_s33 ) ) 
+			{
+				action.AddDamage( theGame.params.DAMAGE_NAME_DIRECT, GetWitcherPlayer().CalcMagic33Damage() );
 				
 				
 				if(victimNPC.HasTag('eredin') || victimNPC.HasTag('imlerith') || victimNPC.HasTag('Caranthir'))
@@ -319,6 +383,7 @@ class W3IgniProjectile extends W3SignProjectile
 		var performBurningTest : bool;
 		var igniEntity : W3IgniEntity;
 		var postEffect : CGameplayFXSurfacePost = theGame.GetSurfacePostFX();
+		var igniDRTier : int;
 		
 		postEffect.AddSurfacePostFXGroup( pos, 0.5f, 8.0f, 10.0f, 2.5f, 1 );
 		
@@ -380,6 +445,14 @@ class W3IgniProjectile extends W3SignProjectile
 			return;
 		}
 		
+		igniDRTier = 1;
+
+		if( owner.IsPlayer() && npc )
+		{
+			igniDRTier = npc.SignDRRegisterIgni( IsProjectileFromChannelMode() );
+		}
+		
+		
 		
 		signPower = signEntity.GetOwner().GetTotalSignSpellPower(signEntity.GetSkill());
 
@@ -420,6 +493,29 @@ class W3IgniProjectile extends W3SignProjectile
 			}			
 			action.SetHitReactionType(EHRT_Igni, false);
 		}
+		
+		if( owner.IsPlayer() && npc )
+		{
+			if( igniDRTier == 2 )
+			{
+				if( RandF() >= 0.60f )
+				{
+					action.RemoveBuffsByType( EET_Burning );
+				}
+			}
+			else if( igniDRTier == 3 )
+			{
+				if( RandF() >= 0.25f )
+				{
+					action.RemoveBuffsByType( EET_Burning );
+				}
+			}
+			else if( igniDRTier >= 4 )
+			{
+				action.RemoveBuffsByType( EET_Burning );
+			}
+		}
+		
 		
 		theGame.damageMgr.ProcessAction( action );	
 		
@@ -467,6 +563,6 @@ class W3IgniProjectile extends W3SignProjectile
 	
 	public function IsProjectileFromChannelMode() : bool
 	{
-		return signSkill == S_Magic_s02;
+		return signSkill == S_Magic_s02 || signSkill == S_Magic_s28;
 	}
 }

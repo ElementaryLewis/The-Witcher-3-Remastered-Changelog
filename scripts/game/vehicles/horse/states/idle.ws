@@ -19,13 +19,23 @@ state Idle in W3HorseComponent
 	event OnMountStarted( entity : CEntity, vehicleSlot : EVehicleSlot )
 	{
 		parent.OnMountStarted( entity, vehicleSlot );
+		
+		
+		if ( entity == thePlayer && parent.useEarlyExploration )
+		{
+			parent.PushState( 'Exploration' );
+		}
 	}
 	
 	event OnMountFinished( entity : CEntity )
 	{
 		parent.OnMountFinished( entity );
-		if ( entity == thePlayer ) 
+		
+		
+		if ( entity == thePlayer )
+		{
 			parent.PushState( 'Exploration' );
+		}
 	}
 	
 	event OnTick( dt : float )

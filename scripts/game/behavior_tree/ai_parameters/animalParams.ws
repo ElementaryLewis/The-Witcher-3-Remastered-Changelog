@@ -792,6 +792,8 @@ class CAIAnimalCombatDeer extends CAIAnimalCombat
 	default maxFleeWalkDistance				= 30.0;
 	default stopFleeingDistance 			= 50;
 };
+
+
    
 
 class CAIAnimalCombatHorse extends CAIAnimalCombat
@@ -814,6 +816,8 @@ class CAIAnimalCombatHorse extends CAIAnimalCombat
 		shakeRiderTree.OnCreated();
 	}
 };
+
+
 
 
 class CAIAnimalCharmed extends CAIIdleTree

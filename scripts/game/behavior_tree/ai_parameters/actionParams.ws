@@ -649,6 +649,37 @@ class CAISailorMoveAlongPathActionParams extends ISailorActionParameters
 };
 
 
+class CAISailorFollowPathAction extends ISailorActionTree
+{
+	default aiTreeName = "resdef:ai\scripted_actions/sailor_follow_path";
+
+	editable inlined var params : CAISailorFollowPathActionParams;
+	
+	function Init()
+	{
+		params = new CAISailorFollowPathActionParams in this;
+		params.OnCreated();
+	}
+};
+
+
+
+class CAISailorFollowPathActionParams extends ISailorActionParameters
+{
+	editable var boatTag 			: CName;
+	editable var pathTag 			: CName;
+	editable var upThePath 			: bool;
+	editable var startFromBeginning : bool;
+	
+	default upThePath 			=  true;
+	default startFromBeginning 	= true;
+	function Init()
+	{
+		super.Init();
+	}
+};
+
+
 class CAISailorRaceAlongPathAction extends ISailorActionTree
 {	
 	default aiTreeName = "resdef:ai\scripted_actions/sailor_race_along_path";
@@ -739,12 +770,14 @@ class CAIMoveToParams extends IAIActionParameters
 	editable var targetTag 			: CName;
 	editable var rotateAfterwards 	: bool;
 	editable var tolerance			: float;
+	editable var forceNoPathfinding	: bool;
 	
 	default maxDistance 		= 1.0;
 	default moveSpeed 			= 1.0;
 	default moveType 			= MT_Walk;
 	default rotateAfterwards 	= true;
 	default tolerance			= 0.0;
+	default forceNoPathfinding = false;
 };
 
 class CAIMoveToActionAwareOfTail extends IAIBaseAction
@@ -843,6 +876,21 @@ class CAIPlayAnimationSlotAction extends IAIActionTree
 };
 
 
+class CAIPlayAnimationSlotTeleportAction extends IAIActionTree
+{
+	default aiTreeName = "resdef:ai\scripted_actions/play_animation_slot_teleport";
+
+	editable var animName: CName;
+	editable var TeleportTag: CName;
+	editable var slotName: CName;
+	editable var blendInTime: float;
+	editable var blendOutTime: float;
+	
+	
+	default blendInTime = 1.0f;
+	default blendOutTime = 1.0f;	
+	default slotName = 'NPC_ANIM_SLOT';
+};
 
 
 
@@ -1140,7 +1188,6 @@ class CAIHideTorchAction extends IAIActionTree
 
 
 
-
 class CAIAttachToCurve extends IAIActionTree
 {
 	default aiTreeName = "resdef:ai\scripted_actions/attach_to_curve";
@@ -1283,6 +1330,7 @@ class CAICustomSpawnActionDecorator extends IActionDecorator
 {
 	default aiTreeName = "dlc\bob\data\gameplay\trees\npc_banshee_summon_spawn.w2behtree";
 }
+
 
 
 

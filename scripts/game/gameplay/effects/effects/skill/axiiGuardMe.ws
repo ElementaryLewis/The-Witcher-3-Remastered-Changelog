@@ -49,6 +49,11 @@ class W3Effect_AxiiGuardMe extends CBaseGameplayEffect
 		bonusAbilityName = thePlayer.GetSkillAbilityName(S_Magic_s05);
 		for(i=0; i<skillLevel; i+=1)
 			target.AddAbility(bonusAbilityName, true);
+
+		
+		skillLevel = thePlayer.GetSkillLevel( S_Magic_s31 );
+		bonusAbilityName = thePlayer.GetSkillAbilityName( S_Magic_s31 );
+		target.AddAbilityMultiple( bonusAbilityName, skillLevel );
 			
 		if (npc.IsHorse())
 			npc.GetHorseComponent().ResetPanic();
@@ -78,6 +83,9 @@ class W3Effect_AxiiGuardMe extends CBaseGameplayEffect
 		bonusAbilityName = thePlayer.GetSkillAbilityName(S_Magic_s05);		
 		while(target.HasAbility(bonusAbilityName))
 			target.RemoveAbility(bonusAbilityName);
+
+		bonusAbilityName = thePlayer.GetSkillAbilityName( S_Magic_s31 );
+		target.RemoveAbilityAll( bonusAbilityName );
 	}
 	
 	public function SetDrainStaminaOnExit()
@@ -91,10 +99,19 @@ class W3Effect_AxiiGuardMe extends CBaseGameplayEffect
 		
 		if ( duration > 0 )
 		{	
-			duration = 9.f;
-		
-			
-			if(thePlayer.IsSkillEquipped(S_Magic_s18))
+			if (FactsQuerySum("used_red_haze") > 0) 
+			{
+				duration = 8.f;
+			}
+			else if (FactsQuerySum("used_red_haze_2") > 0) 
+			{
+				duration = 10.f;
+			}
+			else if (FactsQuerySum("used_red_haze_3") > 0) 
+			{
+				duration = 12.f;
+			}
+			else if(thePlayer.IsSkillEquipped(S_Magic_s18)) 
 			{
 				switch(GetWitcherPlayer().GetSkillLevel(S_Magic_s18))
 				{

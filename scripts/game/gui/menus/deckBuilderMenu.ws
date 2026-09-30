@@ -50,7 +50,11 @@ class CR4DeckBuilderMenu extends CR4GwintBaseMenu
 		theSound.EnterGameState( ESGS_Gwent );
 		
 		theGame.GetGuiManager().RequestMouseCursor(true);
-		theGame.CenterMouse();
+
+		if (theInput.IsMousePresent())
+		{
+			theGame.CenterMouse();
+		}
 		
 		if (!gwintManager.GetHasDoneDeckTutorial())
 		{
@@ -65,6 +69,8 @@ class CR4DeckBuilderMenu extends CR4GwintBaseMenu
 				m_fxShowTutorial.InvokeSelf();
 			}
 		}
+
+		CloseNewCardPopup();
 	}
 	
 	event  OnClosingMenu()
@@ -195,12 +201,25 @@ class CR4DeckBuilderMenu extends CR4GwintBaseMenu
 	event  OnLeaderChanged(factionID:int, leaderID:int)
 	{
 		var deckDefinition : SDeckDefinition;
+		var oldCardDefinition : SCardDefinition;
+		var newCardDefinition : SCardDefinition;
 		
-		if (gwintManager.GetFactionDeck(factionID, deckDefinition) && deckDefinition.leaderIndex != leaderID)
+		if (gwintManager.GetFactionDeck(factionID, deckDefinition))
 		{
-			OnPlaySoundEvent("gui_gwint_leader_change");
-			deckDefinition.leaderIndex = leaderID;
-			gwintManager.SetFactionDeck(factionID, deckDefinition);
+			if ( gwintManager.GetGwentCard( deckDefinition.leaderCard, oldCardDefinition ) )
+			{
+				if(gwintManager.GetIndex(oldCardDefinition) != leaderID)
+				{
+					OnPlaySoundEvent("gui_gwint_leader_change");
+					
+					
+					if ( gwintManager.GetGwentCardByIndex(leaderID, newCardDefinition) )
+					{
+						deckDefinition.leaderCard = newCardDefinition.cardName;
+						gwintManager.SetFactionDeck(factionID, deckDefinition);
+					}
+				}
+			}
 		}
 	}
 	
@@ -239,8 +258,13 @@ class CR4DeckBuilderMenu extends CR4GwintBaseMenu
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_deck_tut_composition_desc")));
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_deck_tut_full_deck_desc")));
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_deck_tut_full_deck_2_desc")));
-		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_deck_tut_exit_builder_desc")));
+		
 		
 		m_flashValueStorage.SetFlashArray( "gwint.tutorial.strings", l_flashArray );
+	}
+
+	private function CloseNewCardPopup():void
+	{
+		theGame.GetTutorialSystem().HideTutorialHint('TutorialGwentDeckBuilder2');
 	}
 }

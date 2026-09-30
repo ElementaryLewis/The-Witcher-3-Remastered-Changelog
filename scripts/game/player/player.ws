@@ -185,6 +185,8 @@ statemachine import abstract class CPlayer extends CActor
 	
 	protected var photomodeManager : PhotomodeManager;
 
+
+
 	
 	
 	public var isAdaptiveBalance : bool;
@@ -314,6 +316,9 @@ statemachine import abstract class CPlayer extends CActor
 		if ( inputHandler )
 		{
 			inputHandler.BlockAction(action, sourceName, true, keepOnSpawn, this, isFromQuest, isFromPlace);
+
+
+
 			return true;
 		}		
 		return false;
@@ -324,6 +329,9 @@ statemachine import abstract class CPlayer extends CActor
 		if ( inputHandler )
 		{
 			inputHandler.BlockAction(action, sourceName, false);
+
+
+
 			return true;
 		}		
 		return false;
@@ -438,9 +446,9 @@ statemachine import abstract class CPlayer extends CActor
 	public function CheatGod2(on : bool)
 	{
 		if(on)
-			SetImmortalityMode( AIM_Immortal, AIC_Default, true );
+			SetImmortalityMode( AIM_Immortal, AIC_Cheat, true );
 		else
-			SetImmortalityMode( AIM_None, AIC_Default, true );	
+			SetImmortalityMode( AIM_None, AIC_Cheat, true );	
 		
 		StaminaBoyInternal(on);
 	}
@@ -760,11 +768,11 @@ statemachine import abstract class CPlayer extends CActor
 	private var invertedControllerCameraX, invertedControllerCameraY : bool;
 	private var invertedMouseCameraX, invertedMouseCameraY : bool;
 	
-	public function SetInvertedLockOption(set : bool) {invertedLockOption = set;}
-	public function SetInvertedCameraX(set : bool) {invertedControllerCameraX = set;}
-	public function SetInvertedCameraY(set : bool) {invertedControllerCameraY = set;}
-	public function SetInvertedMouseCameraX(set : bool) {invertedMouseCameraX = set;}
-	public function SetInvertedMouseCameraY(set : bool) {invertedMouseCameraY = set;}
+	public function SetInvertedLockOption(value : bool) {invertedLockOption = value;}
+	public function SetInvertedCameraX(value : bool) {invertedControllerCameraX = value;}
+	public function SetInvertedCameraY(value : bool) {invertedControllerCameraY = value;}
+	public function SetInvertedMouseCameraX(value : bool) {invertedMouseCameraX = value;}
+	public function SetInvertedMouseCameraY(value : bool) {invertedMouseCameraY = value;}
 	
 
 	private var bRAxisReleasedLastFrame 	: bool;
@@ -779,6 +787,9 @@ statemachine import abstract class CPlayer extends CActor
 		var currTime	: float;
 		var rightStickVectorNormalized : Vector;
 		var dot	: float;
+		
+		
+		var minMouseSwipeDist: float = 350.f;
 		
 		if ( this.IsCameraLockedToTarget() )
 		{
@@ -802,6 +813,8 @@ statemachine import abstract class CPlayer extends CActor
 			
 			if ( thePlayer.IsPCModeEnabled() )
 			{
+				minMouseSwipeDist = thePlayer.targetLockSwitchMinSwipeDist;
+			
 				if ( rawLengthR > 0.f )
 				{
 					rightStickVectorNormalized = VecNormalize( rightStickVector );
@@ -844,12 +857,18 @@ statemachine import abstract class CPlayer extends CActor
 					enableSwipeCheck = true;
 				}
 				
-				if ( swipeMouseDist <= 350.f )
+				if ( swipeMouseDist <= minMouseSwipeDist )
 					return true;
 				else
 				{
 					rightStickVector = rightStickVectorNormalized;
 					rawLengthR = VecLength( rightStickVector );
+					
+					if ( thePlayer.isModernTargetLockEnabled )
+					{
+						swipeMouseDist = 0.f;
+						enableSwipeCheck = true;
+					}
 				}
 			}
 			
@@ -861,7 +880,7 @@ statemachine import abstract class CPlayer extends CActor
 					selectTargetTime = currTime;
 				}
 			}
-			else if ( rawLengthR >= 0.3 && currTime > ( selectTargetTime + 0.5f ) )
+			else if ( rawLengthR >= 0.3 && currTime > ( selectTargetTime + thePlayer.targetLockSwitchCooldown ) )
 			{
 				inputHandler.OnCbtSelectLockTarget( rightStickVector );
 				selectTargetTime = currTime;	
@@ -1142,6 +1161,9 @@ statemachine import abstract class CPlayer extends CActor
 				}
 			}
 			theTelemetry.LogWithLabel(TE_FIGHT_PLAYER_DIES, damageAction.attacker.ToString());
+			
+			if(attacker)
+				theGame.IncrementDeathCount();
 		}
 	}
 	
@@ -1189,10 +1211,10 @@ statemachine import abstract class CPlayer extends CActor
 	
 	private var sprintButtonPressedTimestamp : float;
 	
-	function SetSprintActionPressed( enable : bool, optional dontClearTimeStamp : bool )
+	function SetSprintActionPressed( enable : bool, optional keepPreviousTimeStamp : bool )
 	{
 		sprintActionPressed = enable;
-		if ( !dontClearTimeStamp )
+		if ( !keepPreviousTimeStamp )
 			sprintButtonPressedTimestamp = theGame.GetEngineTimeAsSeconds();
 	}
 	
@@ -1535,7 +1557,7 @@ statemachine import abstract class CPlayer extends CActor
 		else
 		{
 			itemId = thePlayer.GetSelectedItemId();
-			if ( !( playerWitcher.IsHoldingItemInLHand() && inv.IsIdValid(itemId) && !inv.IsItemCrossbow(itemId) && !inv.IsItemBomb(itemId) ) )
+			if ( !( playerWitcher.IsHoldingItemInLHand() && inv.IsIdValid(itemId) && !inv.IsItemRangedWeapon(itemId) && !inv.IsItemBomb(itemId) ) )
  				return true;
 		}
 			
@@ -2277,7 +2299,7 @@ statemachine import abstract class CPlayer extends CActor
 		var currWorld		: CWorld = theGame.GetWorld();
 		var destWorldPath	: string;
 		var id				: int;
-		var area			: int;
+		var area			: name;
 		var type			: int;
 		var position		: Vector;
 		var rotation 		: EulerAngles;
@@ -2500,5 +2522,65 @@ statemachine import abstract class CPlayer extends CActor
 	{
 		spawnBoatAndMount();
 		RemoveTimer( 'DelayedSpawnAndMountBoat' );
+	}
+	
+	public function GetPhotomodeManager() : PhotomodeManager
+	{
+		return photomodeManager;
+	}
+
+	
+	
+	
+	saved var m_lastOpenedMenu : name; 
+	saved var m_lastOpenedGlossaryPage : name;
+
+	public function SetLastOpenedMenu(menu : name)
+	{
+		m_lastOpenedMenu = menu;
+	}
+
+	public function SetLastOpenedGlossaryPage(menu : name)
+	{
+		m_lastOpenedGlossaryPage = menu;
+	}
+
+	public function GetDefaultCommonMenuSelection():name
+	{
+		
+
+		if(m_lastOpenedMenu != '')
+			return m_lastOpenedMenu;
+
+		return 'MapMenu';
+	}
+
+	public function GetDefaultGlossaryPage():name
+	{
+		
+
+		if(m_lastOpenedGlossaryPage != '')
+			return m_lastOpenedGlossaryPage;
+
+		return 'GlossaryBestiaryMenu';
+	}
+	
+
+
+	private var lastPositionBeforeDismount : Vector;
+	private var lastHorsePositionBeforeDismount : Vector;
+	public function SetLastPositionsBeforeDismount(playerPosition : Vector, horsePosition : Vector)
+	{
+		lastPositionBeforeDismount = playerPosition;
+		lastHorsePositionBeforeDismount = horsePosition;
+	}
+
+	public function GetLastPositionsBeforeDismount(out playerPosition : Vector, out horsePosition : Vector)
+	{
+		playerPosition = lastPositionBeforeDismount;
+		horsePosition = lastHorsePositionBeforeDismount;
+
+		lastPositionBeforeDismount = Vector(0.0, 0.0, 0.0);
+		lastHorsePositionBeforeDismount = Vector(0.0, 0.0, 0.0);
 	}
 }

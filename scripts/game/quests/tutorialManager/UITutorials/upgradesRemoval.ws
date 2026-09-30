@@ -45,6 +45,9 @@ state UpgradesRemoval in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	{
 		if(closedByParentMenu || isClosing)
 			return true;
+
+		QuitState();
+		return true;
 			
 		if(hintName == DESCRIPTION)
 		{

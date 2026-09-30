@@ -45,11 +45,7 @@ class CR4GlossaryPlacesMenu extends CR4ListBaseMenu
 		
 		l_entry = (CJournalPlace)m_journalManager.GetEntryByTag( tag );
 		str = l_entry.GetImage();
-		if( str == "" )
-		{
-			m_flashValueStorage.SetFlashString("glossary.places.sublist.image","empty_texture.PNG");
-		}
-		else
+		if( str != "" )
 		{
 			m_flashValueStorage.SetFlashString("glossary.places.sublist.image",str);
 		}

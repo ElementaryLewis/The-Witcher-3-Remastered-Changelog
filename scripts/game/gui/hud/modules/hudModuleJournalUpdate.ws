@@ -17,6 +17,8 @@ struct SJournalUpdate
 	var displayTime   : float;
 	var itemId 	      : SItemUniqueId; 
 	var isItemUpdate  : bool;
+	var tag			  : name;
+	var existTime	  : float; default existTime = 0;
 	
 	default title = "";
 };
@@ -48,6 +50,9 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 	private var defaultDisplayTime : float;
 	private var defaultBookInfoDisplayTime : float;
 	private var defaultTrackableDisplayTime : float;
+
+	private var minExistTime : float; default minExistTime = 0.5;
+	private var maxQuestTimeRange : float; default maxQuestTimeRange = 0.5;
 	
 	default defaultDisplayTime = 3000; 
 	default defaultBookInfoDisplayTime = 6000;
@@ -83,12 +88,23 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		
 	}
 
+	private function TickUpdateTimes(timeDelta : float):void
+	{
+		var i : int;
+
+		for(i = 0; i < journalUpdates.Size(); i+=1)
+		{
+			journalUpdates[i].existTime += timeDelta;
+		}
+	}
+
 	event OnTick( timeDelta : float )
 	{
 		var currentContext : name;		
 		
 		if( !theGame.IsPausedForReason( "Popup" ) )
 		{
+			TickUpdateTimes(timeDelta);
 			if( !_bDuringDisplay )
 			{
 				if( CheckPending() )
@@ -151,9 +167,256 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		
 	}
 
+	private function IsQuestEndingLogicDoable():bool
+	{
+		return journalUpdates[0].existTime > maxQuestTimeRange;
+	}
+
+	private function IsJournalUpdateQuestSubType(currentUpdate : SJournalUpdate):bool
+	{
+		return currentUpdate.tag == 'item' || currentUpdate.tag == 'alchemy' || currentUpdate.tag == 'crafting' || currentUpdate.tag == 'mappin' ||currentUpdate.tag == 'bestiary' || currentUpdate.tag == 'glossary' || currentUpdate.tag == 'character';
+	}
+
+	private function GetCategoryItemPath( itemName : name ) : string
+	{
+		var itemId : SItemUniqueId;
+		var itemTags : array<name>;
+		var category : name;
+
+		itemId = thePlayer.inv.GetItemId(itemName);
+		category = thePlayer.inv.GetItemCategory(itemId);
+		thePlayer.inv.GetItemTags( itemId, itemTags );
+
+		if(itemName == 'Crowns')
+		{
+			return "icons\hud\quest\icon_coins.png";
+		}
+		else if(itemTags.Contains('Quest'))
+		{
+			return "icons\hud\quest\icon_quest_item.png";
+		}
+		else if(itemTags.Contains('Upgrade') || itemTags.Contains('WeaponUpgrade') || itemTags.Contains('ArmorUpgrade'))
+		{
+			return "icons\hud\quest\icon_weapon_armor.png";
+		}
+		else if(category == 'steelsword' || category == 'silversword' || category == 'armor' || category == 'gloves' || category == 'pants' || category == 'boots' || category == 'crossbow')
+		{
+			return "icons\hud\quest\icon_weapon_armor.png";
+		}
+		else if(itemTags.Contains('mod_alchemy') || itemTags.Contains('Potion') || category == 'oil')
+		{
+			return "icons\hud\quest\icon_potions.png";
+		}
+		else if(itemTags.Contains('ReadableItem'))
+		{
+			return "icons\hud\quest\icon_books.png";
+		}
+
+		
+		
+		
+		
+		return "icons\hud\quest\icon_default_sack.png";
+	}
+
+	private function DoQuestEndingLogic(doable : bool):void
+	{
+		var items : array<SJournalUpdate>;
+		var currentUpdate : SJournalUpdate;
+		var i : int;
+		var gfxDataObj : CScriptedFlashObject;
+		var gfxDataSubArray : CScriptedFlashArray;
+		var gfxDataSubObj : CScriptedFlashObject;
+		var questUpdate : SJournalUpdate;
+
+
+		if(!doable)
+		{
+			
+			return;
+		}
+
+		gfxDataObj = m_flashValueStorage.CreateTempFlashObject();
+
+		gfxDataSubArray = m_flashValueStorage.CreateTempFlashArray();
+
+		m_fxSetJournalUpdateStatusSFF.InvokeSelfOneArg(FlashArgInt(8));
+		ShowElement(true);
+
+		
+		gfxDataObj.SetMemberFlashNumber("minOnlineTime", 3.5);
+		gfxDataObj.SetMemberFlashNumber("itemRendererLifeTime", 3);
+		gfxDataObj.SetMemberFlashNumber("itemRendererFadeInTime", 0.6);
+		gfxDataObj.SetMemberFlashNumber("itemRendererFadeOutTime", 0.5);
+		gfxDataObj.SetMemberFlashNumber("itemRendererSpawnDelay", 0.5);
+		gfxDataObj.SetMemberFlashNumber("itemRendererMoveTime", 0.4);
+
+		for(i = 0; i < journalUpdates.Size(); i+=1)
+		{
+			currentUpdate = journalUpdates[i];
+
+			if(currentUpdate.journalEntry && currentUpdate.tag == 'quest' && questUpdate.journalEntry && currentUpdate.journalEntry != questUpdate.journalEntry) 
+			{
+				continue;
+			}
+			if(currentUpdate.journalEntry && currentUpdate.tag == 'quest')
+			{
+				journalUpdates[i].tag = 'questShown';
+				gfxDataObj.SetMemberFlashString("title", currentUpdate.title);
+				gfxDataObj.SetMemberFlashString("text", currentUpdate.text);
+				gfxDataObj.SetMemberFlashString("crest", GetAreaName((CJournalQuest)(currentUpdate.journalEntry))); 
+				gfxDataObj.SetMemberFlashInt("colorId", currentUpdate.status);
+				questUpdate = currentUpdate;
+				OnPlaySoundEvent( currentUpdate.soundEvent );
+
+				
+				continue;
+			}
+			else if (currentUpdate.tag == 'exp')
+			{
+				if(items.Size() > 0)
+					items.Insert(0, currentUpdate);
+				else
+					items.PushBack(currentUpdate);
+			}
+			else if (IsJournalUpdateQuestSubType(currentUpdate))
+			{
+				if(currentUpdate.iconPath == "")
+					currentUpdate.iconPath = GetEntryIconPath(currentUpdate.journalEntry);
+				items.PushBack(currentUpdate);
+			}
+			else if(currentUpdate.existTime - questUpdate.existTime > maxQuestTimeRange)
+			{
+				break; 
+			}
+			else 
+			{
+				continue;
+			}
+
+			journalUpdates.Erase(i);
+			i-=1;
+		}
+
+		for(i = 0; i < items.Size(); i+=1)
+		{
+			gfxDataSubObj = m_flashValueStorage.CreateTempFlashObject();
+			if(items[i].tag == 'mappin')
+				gfxDataSubObj.SetMemberFlashString("mappinType", items[i].entryTag);
+			else if (items[i].tag == 'item')
+			{
+				items[i].iconPath = GetCategoryItemPath(items[i].entryTag);
+			}
+			gfxDataSubObj.SetMemberFlashString("text", items[i].text);
+			gfxDataSubObj.SetMemberFlashString("iconPath", items[i].iconPath);
+			gfxDataSubArray.PushBackFlashObject(gfxDataSubObj);
+		}
+		gfxDataObj.SetMemberFlashArray("items",gfxDataSubArray);
+		m_flashValueStorage.SetFlashObject("hud.journal.update.quest.finished", gfxDataObj);
+		_bDuringDisplay = true;
+
+		m_defaultInputBindings.Clear();
+		if( ( theInput.GetContext() != 'Scene' ) && ( questUpdate.journalEntry || IsNameValid( questUpdate.entryTag ) && !thePlayer.IsCiri() ) )
+		{			
+			if( IsTrackableQuest() )
+			{			
+				RegisterKeyBindings("panel_button_journal_track");
+				
+				if( ShouldProcessTutorial( 'TutorialNotTrackedQuestUpdate' ) )
+				{
+					FactsAdd( 'tut_not_tracked_quest_updates' );
+				}
+			}
+		}
+
+		UpdateInputFeedback();
+	}
+
+	function EliminateNonprioUpdates():void
+	{
+		var i : int;
+		var bFound : bool;
+		var currentEntry : CJournalBase;
+		var currentUpdate : SJournalUpdate;
+		var lastPosition : int;
+		var lastStatus : int;
+
+		lastPosition = journalUpdates.Size();
+
+		while(true)
+		{
+			bFound = false;
+
+			for(i = lastPosition - 1; i >= 0; i-= 1)
+			{
+				currentUpdate = journalUpdates[i];
+
+				if(!bFound && currentUpdate.journalEntry)
+				{
+					currentEntry = currentUpdate.journalEntry;
+					bFound = true;
+					lastPosition = i;
+					lastStatus = currentUpdate.status;
+					continue;
+				}
+
+				if(bFound && currentUpdate.journalEntry == currentEntry && currentUpdate.status <= lastStatus) 
+				{
+ 					journalUpdates.Erase(i);
+					lastPosition -=1;
+				}
+			}
+
+			if(!bFound)
+				break;
+		}
+	}
+
+	
+	function RepositionQuestUpdates():void
+	{
+		var i : int;
+		var currentUpdate : SJournalUpdate;
+		var inactiveCount : int = 0;
+		var activeCount : int = 0;
+		var successCount : int = 0;
+		var failedCount : int = 0;
+		var localCount : int = 0;
+
+		for(i = 0; i < journalUpdates.Size(); i+=1)
+		{
+			currentUpdate = journalUpdates[i];
+			if(currentUpdate.tag == 'quest')
+			{
+				journalUpdates.Erase(i);
+
+				switch(currentUpdate.status)
+				{
+					case JS_Inactive:
+						localCount = inactiveCount + activeCount + successCount + failedCount;
+						inactiveCount+=1;
+						break;
+					case JS_Active:
+						localCount = activeCount + successCount + failedCount;
+						activeCount+=1;
+						break;
+					case JS_Success:
+						localCount = successCount + failedCount;
+						successCount+=1;
+						break;
+					case JS_Failed:
+						localCount = failedCount;
+						failedCount+=1;
+						break;
+				}
+				journalUpdates.Insert(localCount, currentUpdate);
+			}
+		}
+	}
+
 	function CheckPending() : bool
 	{	
-		if( GetPendingSize() > 0 && theInput.GetContext() != 'RadialMenu' && theInput.GetContext() != 'Death' )
+		if( GetPendingSize() > 0 && journalUpdates[0].existTime > minExistTime && theInput.GetContext() != 'RadialMenu' && theInput.GetContext() != 'Death' )
 		{
 			return true;
 		}
@@ -173,6 +436,18 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		{
 			return;
 		}
+		if(journalUpdates.Size() > 1)
+		{
+			EliminateNonprioUpdates();
+			RepositionQuestUpdates();
+		}
+
+		
+ 		if(journalUpdates[0].tag == 'quest')
+		{
+			DoQuestEndingLogic(IsQuestEndingLogicDoable());
+			return;
+		}
 
 		_bDuringDisplay = true;
 		isCutscene = theInput.GetContext() == 'Scene';
@@ -190,6 +465,7 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 				return;
 			}
 			
+			m_fxSetJournalUpdateStatusSFF.InvokeSelfOneArg(FlashArgInt(1));
 			ShowElement(true);
 			ShowItemInfo(itemId);
 			journalUpdates.Erase(0);
@@ -263,7 +539,6 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 					FactsAdd( 'tut_not_tracked_quest_updates' );
 				}
 			}
-			SetButtons( ( (CJournalQuest)journalUpdates[0].journalEntry ) );
 		}
 		UpdateInputFeedback();
 		bWasRemoved = false;
@@ -448,6 +723,11 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		return journalUpdates.Size();
 	}	
 
+	function AddNewJournalUpdate(newJournalUpdate : SJournalUpdate):void
+	{
+		journalUpdates.PushBack(newJournalUpdate);
+	}
+
 	function AddQuestUpdate(journalQuest : CJournalQuest, isQuestUpdate : bool ) : void 
 	{
 		var newJournalUpdate : SJournalUpdate;
@@ -456,6 +736,7 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		newJournalUpdate.journalEntry = journalQuest;
 		newJournalUpdate.text = GetLocStringById( journalQuest.GetTitleStringId() );
 		newJournalUpdate.isQuestUpdate = isQuestUpdate;
+		newJournalUpdate.tag = 'quest';
 		status = manager.GetEntryStatus(journalQuest);
 		
 		if( thePlayer.IsNewQuest( newJournalUpdate.journalEntry.guid ) && status == JS_Active )
@@ -483,7 +764,7 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		
 		if( !HasQuestPendingUpdate( journalQuest, newJournalUpdate.status ) )
 		{
-			journalUpdates.PushBack(newJournalUpdate);
+ 			AddNewJournalUpdate(newJournalUpdate);
 		}
 	}
 	
@@ -525,9 +806,10 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 			newJournalUpdate.panelName = 'CraftingMenu';
 			newJournalUpdate.entryTag = schematicName;
 			newJournalUpdate.soundEvent = "gui_ingame_new_journal"; 
+			newJournalUpdate.tag = 'crafting';
 			
 			newJournalUpdate.title = GetLocStringByKeyExt("panel_hud_craftingschematic_update_new_entry");
-			journalUpdates.PushBack(newJournalUpdate);
+			AddNewJournalUpdate(newJournalUpdate);
 		
 	}		
 
@@ -546,9 +828,10 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 			newJournalUpdate.panelName = 'AlchemyMenu';
 			newJournalUpdate.entryTag = schematicName;
 			newJournalUpdate.soundEvent = "gui_ingame_new_journal"; 
+			newJournalUpdate.tag = 'alchemy';
 			
 			newJournalUpdate.title = GetLocStringByKeyExt("panel_hud_alchemyschematic_update_new_entry");
-			journalUpdates.PushBack(newJournalUpdate);
+			AddNewJournalUpdate(newJournalUpdate);
 		
 	}
 	
@@ -569,7 +852,10 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		{
 			newJournalUpdate.itemId = itemId;
 			newJournalUpdate.isItemUpdate = true;
-			journalUpdates.PushBack(newJournalUpdate);
+			AddNewJournalUpdate(newJournalUpdate);
+
+			
+			theGame.GetTutorialSystem().uiHandler.AddNewBooksTutorial();
 		}
 	}
 
@@ -584,8 +870,10 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 			newJournalUpdate.status = JS_Active;
 			newJournalUpdate.soundEvent = "gui_ingame_new_journal"; 
 			
+			newJournalUpdate.tag = GetEntryTag(journalEntry);
+			
 			newJournalUpdate.title = GetEntryTitle(journalEntry, isDescription);
-			journalUpdates.PushBack(newJournalUpdate);
+			AddNewJournalUpdate(newJournalUpdate);
 		}
 	}
 	
@@ -614,7 +902,60 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		}
 		
 		return str;
-	}	
+	}
+
+	function GetEntryIconPath( journalEntry : CJournalBase ) : string
+	{
+		var str : string;
+		var creatureEntry : CJournalCreature;
+		var glossaryEntry : CJournalGlossary;
+		var characterEntry : CJournalCharacter;
+		
+		creatureEntry = (CJournalCreature)journalEntry;
+		glossaryEntry = (CJournalGlossary)journalEntry;
+		characterEntry = (CJournalCharacter)journalEntry;
+		
+		if( creatureEntry )
+		{
+			str = "icons\hud\quest\icon_bestiary_hud.png";
+		}
+		else if( glossaryEntry )
+		{
+			str = "icons\hud\quest\icon_glossary_hud.png";
+		}	
+		else if( characterEntry )
+		{
+			str = "icons\hud\quest\icon_character_hud.png";
+		}
+		
+		return str;
+	}
+
+	function GetEntryTag( journalEntry : CJournalBase ) : name
+	{
+		var creatureEntry : CJournalCreature;
+		var glossaryEntry : CJournalGlossary;
+		var characterEntry : CJournalCharacter;
+		
+		creatureEntry = (CJournalCreature)journalEntry;
+		glossaryEntry = (CJournalGlossary)journalEntry;
+		characterEntry = (CJournalCharacter)journalEntry;
+		
+		if( creatureEntry )
+		{
+			return 'bestiary';
+		}
+		else if( glossaryEntry )
+		{
+			return 'glossary';
+		}	
+		else if( characterEntry )
+		{
+			return 'character';
+		}
+		
+		return '';
+	}
 
 	function GetEntryTitle( journalEntry : CJournalBase, isDescription : bool ) : string
 	{
@@ -667,7 +1008,7 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		arrInt.PushBack(level);			
 		newJournalUpdate.title = GetLocStringByKeyExtWithParams("panel_hud_level_update_level_reached",arrInt);
 		
-		journalUpdates.PushBack(newJournalUpdate);
+		AddNewJournalUpdate(newJournalUpdate);
 	}	
 
 	function AddExperienceUpdate( exp : int ) : void 
@@ -684,19 +1025,23 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		arrInt.PushBack(exp);
 		newJournalUpdate.text = GetLocStringByKeyExtWithParams("hud_combat_log_gained_experience", arrInt);
 		newJournalUpdate.status = JS_Active + 1; 
-		newJournalUpdate.iconPath = "icons\skills\exp_gained.png";
+		newJournalUpdate.iconPath = "icons\hud\quest\icon_exp.png";
 		newJournalUpdate.title = GetLocStringByKey("panel_hud_item_update_recived_experience");
-		journalUpdates.PushBack(newJournalUpdate);
+		newJournalUpdate.tag = 'exp';
+		AddNewJournalUpdate(newJournalUpdate);
 	}	
 
-	function AddMapPinUpdate( mapPinName : name ) : void 
+	function AddMapPinUpdate( mapPinName : name, mapPinType : name ) : void 
 	{
 		var newJournalUpdate : SJournalUpdate;
 		newJournalUpdate.text = GetLocStringByKeyExt( StrLower("map_location_"+mapPinName) );
-		newJournalUpdate.status = JS_Active;
+		newJournalUpdate.status = JS_Inactive;
 		newJournalUpdate.soundEvent = "gui_ingame_new_mappin"; 
 		newJournalUpdate.title = GetLocStringByKeyExt("panel_hud_map_update_new_entry");
-		journalUpdates.PushBack(newJournalUpdate);
+		
+		newJournalUpdate.tag = 'mappin';
+		newJournalUpdate.entryTag = mapPinType; 
+		AddNewJournalUpdate(newJournalUpdate);
 	}
 
 	function AddItemRecivedDuringSceneUpdate( itemName : name, optional quantity : int ) : void 
@@ -722,7 +1067,9 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		{
 			newJournalUpdate.text += " x "+quantity;
 		}
-		journalUpdates.PushBack(newJournalUpdate);
+		newJournalUpdate.tag = 'item';
+		newJournalUpdate.entryTag = itemName;
+		AddNewJournalUpdate(newJournalUpdate);
 	}
 	
 	function HasQuestPendingUpdate( journalQuest : CJournalQuest, status : EJournalStatus ) : bool
@@ -811,7 +1158,7 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		{
 			newJournalUpdate.title = GetLocStringByKeyExt( locKeyTitle );
 		}
-		journalUpdates.PushBack(newJournalUpdate);
+		AddNewJournalUpdate(newJournalUpdate);
 	}
 	
 	function GetTrackedQuestName() : string
@@ -838,6 +1185,8 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		if(journalUpdates.Size() > 0 && (CJournalQuest)journalUpdates[0].journalEntry )
 		{
 			theInput.UnregisterListener( this, 'OnTrackQuest' );
+			if(journalUpdates[0].tag == 'questShown')
+				journalUpdates.Erase(0);
 			
 		}
 		
@@ -1007,14 +1356,6 @@ class CR4HudModuleJournalUpdate extends CR4HudModuleBase
 		GatherBindersArray(gfxDataList, m_defaultInputBindings);
 		m_flashValueStorage.SetFlashArray("hud.journalupdate.buttons.setup", gfxDataList);
 	}
-		
-	function SetButtons( isJournalEntry : bool )
-	{	
-		var outKeys 				: array< EInputKey >;
-		var outKeysPC 				: array< EInputKey >;
-		
-		
-	}	
 	
 	protected function AddInputBinding(label:string, padNavCode:string, optional keyboardKeyCode:int)
 	{

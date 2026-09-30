@@ -37,6 +37,9 @@ class CBTTaskSpawnMultipleEntitiesAttack extends CBTTaskSpawnEntityAttack
 	var		spawnInRandomOrder			: bool;
 	var		delayBetweenSpawn			: float;
 	var		spawnOnGround				: bool;
+	var		headingOffset				: bool;
+	var		headingDist					: float;
+	
 	
 	
 	var m_dodgeDistance			: float;
@@ -139,6 +142,8 @@ class CBTTaskSpawnMultipleEntitiesAttack extends CBTTaskSpawnEntityAttack
 			break;
 			case ESPP_AroundSpawner:
 			l_spawnCenter = GetNPC().GetWorldPosition();
+			if (headingOffset)			
+				l_spawnCenter += GetNPC().GetHeadingVector() * headingDist;
 			break;
 			case ESPP_AroundBoth:
 			l_spawnCenter = GetNPC().GetWorldPosition();
@@ -328,6 +333,8 @@ class CBTTaskSpawnMultipleEntitiesAttackDef extends CBTTaskSpawnEntityAttackDef
 	editable var		delayBetweenSpawn				: float;
 	editable var		spawnInRandomOrder				: bool;
 	editable var		spawnOnGround					: bool;
+	editable var		headingOffset					: bool;
+	editable var		headingDist						: float;
 	
 	
 	default numberToSpawn		= 2;
@@ -339,6 +346,8 @@ class CBTTaskSpawnMultipleEntitiesAttackDef extends CBTTaskSpawnEntityAttackDef
 	default delayBetweenSpawn  	= 0;
 	default spawnOnGround		= true;
 	default useCombatTarget 	= true;
+	default headingOffset 		= false;
+	
 	
 	hint randomnessInCircles	= "if using more than one circle, what is the position randomness max in each circle";
 	hint numberOfCircles = "How many concentric circles should the entities form when spawn";

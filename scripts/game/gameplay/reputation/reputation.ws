@@ -29,7 +29,6 @@ enum EFactionName
 	FN_NoMansLandPoor = 0,
 	FN_NovigradNobles = 1,
 	FN_SkelligeUndvik = 2,
-	FN_MaxEnum = 3,
 }
 
 class W3Reputation
@@ -39,10 +38,11 @@ class W3Reputation
 			
 	function Initialize()
 	{
-		if ( factionReputations.Size() == 0 )
+		var i, n: int;
+
+		n = EnumGetMax('EFactionName') + 1;
+		for ( i = factionReputations.Size(); i < n; i += 1 )
 		{
-			factionReputations.PushBack( new W3FactionReputationPoints in this );
-			factionReputations.PushBack( new W3FactionReputationPoints in this );
 			factionReputations.PushBack( new W3FactionReputationPoints in this );
 		}
 	}
@@ -199,7 +199,7 @@ class W3Reputation
 	{
 		var facName : EFactionName = GetPlayerReputationManager().GetFaction( i );
 
-		if ( i >= FN_MaxEnum )
+		if ( i > EnumGetMax('EFactionName') )
 		{
 			LogChannel('Reputation', "There's no such faction.");
 		}
@@ -278,4 +278,4 @@ class W3Reputation
 		GetPlayerReputationManager().GetReputationBonuses( repLevel, buyPriceMultiplier, sellPriceMultiplier );
 		
 		LogChannel( 'Reputation', "Buy price multiplier: " + buyPriceMultiplier + ", sell price multiplier: " + sellPriceMultiplier + "." );
-	} 
+	}

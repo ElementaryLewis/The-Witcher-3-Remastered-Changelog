@@ -47,6 +47,8 @@ abstract class W3CriticalEffect extends CBaseGameplayEffect
 		blockedActions.PushBack(EIAB_FastTravel);
 	}
 	
+	
+	
 	public function OnTimeUpdated(deltaTime : float)
 	{
 		if ( isActive )
@@ -71,7 +73,8 @@ abstract class W3CriticalEffect extends CBaseGameplayEffect
 		
 			
 			if(isActive && this == target.GetCurrentlyAnimatedCS())
-			{				
+			{		
+				
 				target.RequestCriticalAnimStop();
 			}
 			else
@@ -177,7 +180,7 @@ abstract class W3CriticalEffect extends CBaseGameplayEffect
 		
 		
 		if(isOnPlayer)
-			theGame.VibrateControllerVeryHard();	
+			theGame.HapticStart( "classic_vibro_large_oneshot" );
 	}
 	
 	event OnEffectAddedPost()

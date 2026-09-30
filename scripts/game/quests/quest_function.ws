@@ -28,6 +28,13 @@ quest function LaunchCreditsEP2()
 	theGame.GetGuiManager().RequestCreditsMenu(CreditsIndex_Ep2);
 }
 
+quest function QuitGame()
+{
+	theGame.RequestEndGame();
+}
+
+
+
 quest function MessageDialogPopup( locMessage : string )
 {
 	theGame.GetGuiManager().ShowUserDialog(UMID_QuestBlockMessage, "", locMessage, UDB_Ok);
@@ -41,6 +48,45 @@ enum EFactValueChangeMethod
 	FVCM_Divide,
 }
 
+
+
+quest function BlockManualEquipmentChanges(block : bool)
+{
+    if (block)
+    {
+        FactsSet("manual_equipment_changes_blocked", 1, -1);
+    }
+    else
+    {
+        FactsRemove("manual_equipment_changes_blocked");
+    }
+}
+
+quest function SetBoatSceneDismountBlocked(blocked : bool)
+{
+    var hud : CR4ScriptedHud;
+    var module : CR4HudModuleControlsFeedback;
+
+    hud = (CR4ScriptedHud)theGame.GetHud();
+
+    if (!hud)
+        return;
+
+    module = (CR4HudModuleControlsFeedback)
+        hud.GetHudModule("ControlsFeedbackModule");
+
+    if (!module)
+        return;
+
+    if (blocked)
+    {
+        module.SetEnabled(false);
+    }
+    else
+    {
+        hud.UpdateHudConfig('ControlsFeedbackModule', true);
+    }
+}
 
 
 latent function OpenContainerQuest( npcTag : CName, optional tagsFilter : array<name> )
@@ -286,7 +332,7 @@ enum EMapPinStatus
 
 
 
-quest function SetMapPinStatus( type : EMapPinStatus, tag : name, set : bool, dontChangeIfKnown : bool, dontChangeIfDiscovered : bool )
+quest function SetMapPinStatus( type : EMapPinStatus, tag : name, value : bool, dontChangeIfKnown : bool, dontChangeIfDiscovered : bool )
 {
 	var i 			: int;
 	var mapManager 	: CCommonMapManager = theGame.GetCommonMapManager();
@@ -317,13 +363,13 @@ quest function SetMapPinStatus( type : EMapPinStatus, tag : name, set : bool, do
 		case EMPS_Undefined:
 			break;
 		case EMPS_Known:
-			mapManager.SetEntityMapPinKnown( tag, set );
+			mapManager.SetEntityMapPinKnown( tag, value );
 			break;
 		case EMPS_Discovered:
-			mapManager.SetEntityMapPinDiscovered( tag, set );
+			mapManager.SetEntityMapPinDiscovered( tag, value );
 			break;
 		case EMPS_Disabled:
-			mapManager.SetEntityMapPinDisabled( tag, set );
+			mapManager.SetEntityMapPinDisabled( tag, value );
 			break;
 	}
 }
@@ -334,7 +380,7 @@ quest function SetMapPinStatus( type : EMapPinStatus, tag : name, set : bool, do
 
 
 
-quest function SetMapPinStatusEx( type : EMapPinStatus, tag : name, set : bool, dontChangeIfKnown : bool, dontChangeIfDiscovered : bool )
+quest function SetMapPinStatusEx( type : EMapPinStatus, tag : name, value : bool, dontChangeIfKnown : bool, dontChangeIfDiscovered : bool )
 {
 	var i 			: int;
 	var mapManager 	: CCommonMapManager = theGame.GetCommonMapManager();
@@ -365,13 +411,13 @@ quest function SetMapPinStatusEx( type : EMapPinStatus, tag : name, set : bool, 
 		case EMPS_Undefined:
 			break;
 		case EMPS_Known:
-			mapManager.SetEntityMapPinKnown( tag, set );
+			mapManager.SetEntityMapPinKnown( tag, value );
 			break;
 		case EMPS_Discovered:
-			mapManager.SetEntityMapPinDiscoveredScript( false, tag, set );
+			mapManager.SetEntityMapPinDiscoveredScript( false, tag, value );
 			break;
 		case EMPS_Disabled:
-			mapManager.SetEntityMapPinDisabled( tag, set );
+			mapManager.SetEntityMapPinDisabled( tag, value );
 			break;
 	}
 }
@@ -547,6 +593,22 @@ quest function AlwaysDisplayItemInfo( display : bool )
 			itemInfoModule.SetAlwaysDisplayed( display );
 		}
 	}
+} 
+
+quest function AddingBulkJournalEntries ( addingBulkJournalEntries : bool )
+
+
+
+{
+	var hud : CR4ScriptedHud;	
+
+	hud = (CR4ScriptedHud)theGame.GetHud();	
+	
+	if(hud)
+	{
+		hud.AddingBulkJournalEntries ( addingBulkJournalEntries );
+		LogQuest("Quest function <<AddingBulkJournalEntries>>: Are we adding Journal Entries in Bulk? " + addingBulkJournalEntries);
+	}
 }
 
 latent quest function DisplayPortalConfirmationPopup( pauseGame : bool ) : bool
@@ -679,7 +741,7 @@ quest function SetGeraltHairQuest( hairstyleName : name )
 		}
 		
 	}
-	ids = inv.AddAnItem( hairstyleName );
+	ids = inv.AddAnItem( hairstyleName , , true );
 	inv.MountItem(ids[0]);
 }
 
@@ -1522,6 +1584,90 @@ quest function ChangeWeatherQuest( weatherName: name, blendTime: float, randomGe
 
 
 
+
+
+
+
+quest function enablePolarSun()
+{
+
+
+		var l_world 			: CWorld;
+		l_world 		= theGame.GetWorld();
+		l_world.ResetAllCurves();
+		
+		
+		l_world.SetSunHeightPoint(0.15,0.08);
+		l_world.SetSunHeightPoint(0.5,0.08);
+		l_world.SetSunHeightPoint(0.85,0.08);
+		
+		
+		l_world.SetMoonHeightPoint(0.2,-0.8);
+		l_world.SetMoonHeightPoint(0.5,-0.8);
+		l_world.SetMoonHeightPoint(0.8,-0.8);
+		
+		
+		l_world.SetLightHeightPoint(0.2,0.4);
+		l_world.SetLightHeightPoint(0.5,0.4);
+		l_world.SetLightHeightPoint(0.8,0.4);
+		
+		
+		l_world.SetLightDirPoint(0.5,1.0);
+		
+		
+		l_world.SetLightDayAmountPoint(0.15,0);
+		l_world.SetLightDayAmountPoint(0.25,1);
+		l_world.SetLightDayAmountPoint(0.75,1);
+		l_world.SetLightDayAmountPoint(0.85,0);
+}
+
+quest function disablePolarSun()
+{
+		var l_world 			: CWorld;
+		l_world 		= theGame.GetWorld();
+		l_world.ResetAllCurves();	
+		
+		
+		
+		l_world.SetSunHeightPoint(0.15,-0.08);
+		l_world.SetSunHeightPoint(0.19,0.08);
+		l_world.SetSunHeightPoint(0.25,0.0115);
+		l_world.SetSunHeightPoint(0.48,0.346);
+		l_world.SetSunHeightPoint(0.67,0.27);
+		l_world.SetSunHeightPoint(0.92,-0.06);
+		
+		
+		l_world.SetMoonHeightPoint(0.24,-0.17);
+		l_world.SetMoonHeightPoint(0.52,-0.35);
+		l_world.SetMoonHeightPoint(0.74,-0.2);
+		l_world.SetMoonHeightPoint(0.99,0.4);
+		
+		
+		l_world.SetLightHeightPoint(0.133,0.19);
+		l_world.SetLightHeightPoint(0.175,0.07);
+		l_world.SetLightHeightPoint(0.294,0.25);
+		l_world.SetLightHeightPoint(0.497,0.5);
+		l_world.SetLightHeightPoint(0.75,0.25);
+		l_world.SetLightHeightPoint(0.874,0.05);
+		l_world.SetLightHeightPoint(0.887,0.22);
+		l_world.SetLightHeightPoint(0.99,0.4);
+		
+		
+		l_world.SetLightDirPoint(0.16,-0.05);
+		l_world.SetLightDirPoint(0.162,1.0);
+		l_world.SetLightDirPoint(0.88,1.0);
+		l_world.SetLightDirPoint(0.89,-0.05);
+		
+		
+		l_world.SetLightDayAmountPoint(0.15,0);
+		l_world.SetLightDayAmountPoint(0.167,0.98);
+		l_world.SetLightDayAmountPoint(0.25,1);
+		l_world.SetLightDayAmountPoint(0.75,1);
+		l_world.SetLightDayAmountPoint(0.85,0);
+}
+
+
+
 quest function EffectOnCamera( effectName: name, play: bool )
 {
 
@@ -1660,6 +1806,18 @@ quest function EnableOrDisableContainers( containersTag : name, containerEnabled
 		}
 	}
 }
+
+quest function StoreNextFastTravelToSavedSpot( isStored: bool )
+{
+	var commonMapManager: CCommonMapManager = theGame.GetCommonMapManager();
+	if ( commonMapManager )
+	{
+		commonMapManager.SetNextFastTravelStored( isStored );
+	}
+}
+
+
+
 
 
 quest function CombatStageChange( npcsTag : name, stage : ENPCFightStage )
@@ -2386,6 +2544,71 @@ quest function RemoveItemQuestExt( entityTag : name, item_name : SItemExt, item_
 	RemoveItemQuest(entityTag, item_name.itemName.itemName, item_category, item_tag, item_name.quantity);
 }
 
+quest function AddItemsToRewardChest()
+{
+	var rewardChestTag : name;
+	var chestEntity : CGameplayEntity;
+	var chestInventory : CInventoryComponent;
+	var preplacedItems : array<name>;
+	var eligibleRewards : array<SEligibleRewardDesc>;
+	var addedIds : array<SItemUniqueId>;	
+
+	var i : int;
+
+	rewardChestTag = 'mq1060_reward_chest';
+	
+	
+	chestEntity = (CGameplayEntity)theGame.GetEntityByTag(rewardChestTag);
+	if (!chestEntity)	
+	{
+		LogQuest( "Quest function <<AddItemsToRewardChest>>: entity tag <<" + rewardChestTag + ">> is not a valid entity name, aborting!");
+		return; 
+	}
+
+	
+	chestInventory = chestEntity.GetInventory();
+	if (!chestInventory)
+	{
+		LogQuest( "Quest function <<AddItemsToRewardChest>>: entity with tag <<" + rewardChestTag + ">> has no inventory component, cannot add item!");
+		return;
+	}
+
+	
+	theGame.GetGuiManager().GetGalaxyPendingRewards(eligibleRewards);
+
+	for (i = 0; i < eligibleRewards.Size(); i = i + 1)
+	{
+		if(!IsNameValid(eligibleRewards[i].itemName))
+		{
+			LogQuest( "Quest function <<AddItemsToRewardChest>>: item name <<" + eligibleRewards[i].itemName + ">> is not a valid item name, skipping!");
+			continue;
+		}
+		if(FactsQuerySum(eligibleRewards[i].grantedFactId) > 0)
+		{
+			LogQuest( "Quest function <<AddItemQuest>>: <<" + eligibleRewards[i].itemName + ">> is granted directly only, skipping!");
+			continue;
+		}
+
+		addedIds.Clear();
+		addedIds = chestInventory.AddAnItem(eligibleRewards[i].itemName, 1, true);
+		
+		
+		if (addedIds.Size() != 0)
+		{
+			
+			FactsSet(eligibleRewards[i].grantedFactId, 1);
+		}
+	}
+
+	
+	if (!FactsDoesExist("reward_chest_letter_received"))
+	{
+		chestInventory.AddAnItem((eligibleRewards.Size() > 0) ? 'ngu_gear_letter_db' : 'ngu_gear_letter_ck', 1, true);
+		FactsAdd("reward_chest_letter_received");
+	}
+}
+
+
 quest function PlayEffectQuest ( entityTag : name, effectName : name, activate : bool, persistentEffect : bool, deactivateAll : bool, preventEffectStacking : bool )
 {
 	var entities : array <CNode>;
@@ -2898,6 +3121,12 @@ quest function FadeInQuest( fadeTime : float )
 {
 	theGame.ResetFadeLock( "Quest_FadeInQuest" );
 	theGame.FadeInAsync(fadeTime);
+}
+
+quest function FadeInQuestColor( fadeTime : float, color : Color )
+{
+	theGame.ResetFadeLock( "Quest_FadeInQuest" );
+	theGame.FadeInAsync(fadeTime, color);
 }
 
 
@@ -3555,6 +3784,72 @@ quest function DrawWeaponQuest(weapon : EDrawWeaponQuestType, dontIgnoreDrawActi
 	}
 }
 
+quest function DrawWeaponWithCombatQuest( weapon : EDrawWeaponQuestType, dontIgnoreDrawActionLock : bool )
+{
+    var witcher : W3PlayerWitcher;
+
+    witcher = GetWitcherPlayer();
+
+    if( !witcher )
+        return;
+
+    if( weapon == EDWQT_Silver )
+    {
+        if( !witcher.IsAnyItemEquippedOnSlot(EES_SilverSword) )
+        {
+            LogQuest("DrawWeaponWithCombatQuest: no silver sword equipped");
+            return;
+        }
+
+        thePlayer.OnEquipMeleeWeapon(
+            PW_Silver,
+            !dontIgnoreDrawActionLock
+        );
+
+        witcher.StartQuestCombatHold(
+            PW_Silver,
+            3.f
+        );
+    }
+    else if( weapon == EDWQT_Steel )
+    {
+        if( !witcher.IsAnyItemEquippedOnSlot(EES_SteelSword) )
+        {
+            LogQuest("DrawWeaponWithCombatQuest: no steel sword equipped");
+            return;
+        }
+
+        thePlayer.OnEquipMeleeWeapon(
+            PW_Steel,
+            !dontIgnoreDrawActionLock
+        );
+
+        witcher.StartQuestCombatHold(
+            PW_Steel,
+            3.f
+        );
+    }
+    else if( weapon == EDWQT_Fists )
+    {
+        thePlayer.OnEquipMeleeWeapon(
+            PW_Fists,
+            !dontIgnoreDrawActionLock
+        );
+
+        witcher.StartQuestCombatHold(
+            PW_Fists,
+            3.f
+        );
+    }
+    else if( weapon == EDWQT_NoWeapon )
+    {
+        thePlayer.OnMeleeForceHolster(
+            !dontIgnoreDrawActionLock
+        );
+    }
+}
+
+
 quest function DespawnNPCsWithTag( tag : name )
 {
 	var actors : array< CActor >;
@@ -4057,6 +4352,105 @@ quest function InstantMountPlayer ( vehicleTag : name, vehicleType : EVehicleTyp
 	}
 }
 
+quest function InstantMountPlayerAsPassenger ( vehicleTag : name, vehicleType : EVehicleType, dismount : bool, useAnim : bool )
+{
+	var vehicleEntity 		: CEntity;
+	var createEntityHelper 	: CR4CreateEntityHelper;
+	var vehicle 			: CVehicleComponent; 
+	
+	if ( dismount == false )
+	{
+		if ( vehicleTag != 'None' )
+		{
+			vehicleEntity = theGame.GetEntityByTag( vehicleTag );
+		}
+
+		if ( vehicleEntity )
+		{
+			if ( vehicleType == EVT_Horse )
+			{
+				vehicle = (CVehicleComponent)( vehicleEntity.GetComponentByClassName('W3HorseComponent') );
+				
+				if ( !vehicle )
+				{
+					LogAssert( vehicle, "InstantMountPlayer: Entity with tag <<" + vehicleTag + ">> is not a horse !!" );
+					return;
+				}
+			}
+			else
+			{
+				vehicle = (CVehicleComponent)( vehicleEntity.GetComponentByClassName('CBoatComponent') );
+				if ( !vehicle )
+				{
+					LogAssert( vehicle, "InstantMountPlayer: Entity with tag <<" + vehicleTag + ">> is not a boat !!" );
+					return;
+				}
+			}
+		}
+		else
+		{
+			if ( vehicleType == EVT_Horse )
+			{
+				
+				vehicleEntity = thePlayer.GetHorseWithInventory();
+				
+				if ( !vehicleEntity )
+				{
+					createEntityHelper = new CR4CreateEntityHelper in thePlayer;
+					createEntityHelper.SetPostAttachedCallback( thePlayer, 'OnInstantMountVehicle' );
+					theGame.SummonPlayerHorse( false, createEntityHelper );
+					return;
+				}
+			}
+			else
+			{
+				LogQuest( "InstantMountPlayer: Boat with tag <<" + vehicleTag + ">> doesn't exist !!" );
+				return;
+			}
+		}
+		
+		if ( useAnim )
+			thePlayer.MountVehicle( vehicleEntity, VMT_ApproachAndMount, EVS_passenger_slot);
+		else
+			thePlayer.MountVehicle( vehicleEntity, VMT_ImmediateUse, EVS_passenger_slot);
+		
+	}
+	else
+	{
+		if ( vehicleType == EVT_Horse )
+		{
+			vehicleEntity = thePlayer.GetHorseCurrentlyMounted();
+			if ( !vehicleEntity )
+			{
+				LogQuest( "InstantMountPlayer: Geralt is not on horse!!" );
+				return;
+			}
+		}
+		else 
+		{
+			if ( vehicleTag != 'None' )
+			{
+				vehicleEntity = theGame.GetEntityByTag( vehicleTag );
+			}
+			else
+			{
+				vehicleEntity = thePlayer.GetUsedVehicle();
+			}
+			
+			if ( !vehicleEntity )
+				return;
+		}
+		
+		if ( useAnim )
+		{
+			
+			thePlayer.GetUsedHorseComponent().OnSmartDismount();
+		}
+		else
+			thePlayer.DismountVehicle( vehicleEntity, DT_instant );
+	}
+}
+
 
 quest function InstantDismountPlayer ( )
 {	
@@ -4328,7 +4722,16 @@ latent function QuestHelper_BlockGameplayFunctionality(act : EInputActionBlock, 
 }
 
 
-latent quest function BlockGameplayFunctionality(lock : bool, sourceName : name, signs, drawWeapon, openInventory, openPreparation, radialMenu, callHorse, fastTravel, movement, jump, meditation, bombThrow, runAndSprint, sprint, openMap, openCharacterPanel, openJournal, highlightObjective, openAlchemy, explorationFocus, dive, interactions, explorations, climb, slide, mount, dismount, fistFight, swordAttacks, lightAttacks, heavyAttacks, dodgee, roll, parry, counter, quickslots, custom0, crossbow, usableItem, openGlossary, hardLockTarget, meditationWaiting, interactionContainers, XXXXXXX, allGUI, all, sheatheWeaponIfDrawn, specialLightAttack, specialHeavyAttack, openGwint, openFastMenu, openMeditation, noticeboards : bool)
+latent quest function BlockGameplayFunctionality(
+	lock : bool, 
+	sourceName : name, 
+	signs, drawWeapon, openInventory, openPreparation, radialMenu, callHorse, fastTravel, movement, jump, meditation, bombThrow, 
+	runAndSprint, sprint, openMap, openCharacterPanel, openJournal, highlightObjective, openAlchemy, explorationFocus, dive, interactions, 
+	explorations, climb, slide, mount, dismount, fistFight, swordAttacks, lightAttacks, heavyAttacks, dodgee, roll, parry, counter, quickslots,
+	custom0, crossbow, usableItem, openGlossary, hardLockTarget, meditationWaiting, interactionContainers, XXXXXXX, allGUI, all, sheatheWeaponIfDrawn, 
+	specialLightAttack, specialHeavyAttack, openGwint, openFastMenu, openMeditation, noticeboards, nonPatternAlternatives
+
+	: bool)
 {
 	var ret : bool;
 	var locking : string;
@@ -4453,6 +4856,9 @@ latent quest function BlockGameplayFunctionality(lock : bool, sourceName : name,
 			QuestHelper_BlockGameplayFunctionality(EIAB_OpenMeditation, sourceName, lock);
 		if(noticeboards)		
 			QuestHelper_BlockGameplayFunctionality(EIAB_Noticeboards, sourceName, lock);
+		if(nonPatternAlternatives)
+			QuestHelper_BlockGameplayFunctionality(EIAB_NonPatternAlternatives, sourceName, lock);
+
 	}
 	
 	if(FactsQuerySum("debug_BGF_single_channels") > 0)
@@ -5008,6 +5414,8 @@ quest function ManageTeleport( teleportTag : name, enabling_activating : bool, v
 	}
 }
 
+
+
 quest function ManageToxicCloud ( toxicCloudsTag : name, executeAction : array < EToxicCloudOperation >)
 {
 	var nodesWithTag    : array <CNode>; 
@@ -5238,6 +5646,7 @@ quest function ForceDismount( horseTag : name )
 	
 	if (horseComp.GetCurrentUser() == thePlayer)
 	{
+		horseComp.OnStopTheVehicleInstant();
 		horseComp.IssueCommandToDismount( DT_normal );
 	}
 	else
@@ -5639,6 +6048,9 @@ enum EDM_MappinType
 	EDM_Torch,
 	EDM_HorseRaceTarget,
 	EDM_HorseRaceDummy,
+	EDM_EP3QuestAvailable,
+	EDM_EP3QuestAvailableFromNonActor,
+	EDM_Blacksmith
 }
 
 
@@ -5667,7 +6079,7 @@ quest function AddQuestMappinToNoticeboard( noticeboardTag : name, entityTag : n
 }
 
 
-quest function EnableDynamicMappin( tag : name, optional enable : bool, optional type : EDM_MappinType, optional informUI : bool )
+quest function EnableDynamicMappin( tag : name, optional enable : bool, optional type : EDM_MappinType, optional showAlways : bool )
 {
 	var commonMapManager: CCommonMapManager = theGame.GetCommonMapManager();
 	
@@ -5676,50 +6088,56 @@ quest function EnableDynamicMappin( tag : name, optional enable : bool, optional
 		switch ( type )
 		{
 		case EDM_QuestAvailable:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailable', true );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailable', true, showAlways );
 			break;
 		case EDM_MonsterNest:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'MonsterNest' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'MonsterNest', false, showAlways );
 			break;
 		case EDM_Prostitute:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'Prostitute' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'Prostitute', false, showAlways );
 			break;
 		case EDM_HorseRacingNPC:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'HorseRacingNPC' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'HorseRacingNPC', false, showAlways );
 			break;
 		case EDM_NonQuestHorseRace:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'NonQuestHorseRace' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'NonQuestHorseRace', false, showAlways );
 			break;
 		case EDM_QuestAvailableFromNonActor:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailable' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailable', false, showAlways );
 			break;
 		case EDM_EP1QuestAvailable:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableHoS', true );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableHoS', true, showAlways );
 			break;
 		case EDM_EP1QuestAvailableFromNonActor:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableHoS' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableHoS', false, showAlways );
 			break;
 		case EDM_EP2QuestAvailable:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableBaW', true );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableBaW', true, showAlways );
 			break;
 		case EDM_EP2QuestAvailableFromNonActor:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableBaW' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableBaW', false, showAlways );
 			break;
 		case EDM_Torch:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'Torch' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'Torch', false, showAlways );
 			break;
 		case EDM_HorseRaceTarget:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'HorseRaceTarget' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'HorseRaceTarget', false, showAlways );
 			break;
 		case EDM_HorseRaceDummy:
-			commonMapManager.EnableDynamicMappin( tag, enable, 'HorseRaceDummy' );
+			commonMapManager.EnableDynamicMappin( tag, enable, 'HorseRaceDummy', false, showAlways );
 			break;
-			
+		case EDM_EP3QuestAvailable:
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableLy', true, showAlways );
+			break;
+		case EDM_EP3QuestAvailableFromNonActor:
+			commonMapManager.EnableDynamicMappin( tag, enable, 'QuestAvailableLy', false, showAlways );
+			break;
+		case EDM_Blacksmith:
+			commonMapManager.EnableDynamicMappin( tag, enable, 'Blacksmith', true, showAlways );
+			break;
 		default:
 			break;
 		}
-		
-		
 	}
 }
 
@@ -5770,6 +6188,40 @@ quest function ManageRootsEntrance( tag : name, shouldOpen : bool )
 	if( entity )
 	{
 		roots = (W3RootsEntrance)entity;
+		
+		if( roots )
+		{
+			if( shouldOpen )
+			{
+				roots.Open();
+			}
+			else
+			{
+				roots.Close();
+			}
+		}
+	}
+}
+
+quest function ManageRootsEntranceMult( tags : array<name>, shouldOpen : bool )
+{
+	var entitesList, allEntities 	: array<CEntity>;
+	var i,j 						: int;
+	var roots 						: W3RootsEntrance;
+	
+	for ( i=0; i<tags.Size(); i+=1 )
+	{
+		theGame.GetEntitiesByTag( tags[i], entitesList );
+		
+		for ( j=0; j<entitesList.Size(); j+=1 )
+		{
+			allEntities.PushBack( entitesList[j] );
+		}
+	}
+	
+	for( i=0; i<allEntities.Size(); i+=1 )
+	{
+		roots = (W3RootsEntrance)allEntities[i];
 		
 		if( roots )
 		{
@@ -6140,40 +6592,33 @@ enum EGwentCardFaction
 quest function IsGwentFactionPlayable( faction : EGwentCardFaction ) : bool
 {
 	var neutralCreatures : int;
-	var playerCollection : array<CollectionCard>;
-	var cardDefinitions : array<SCardDefinition>;
+	var playerCollection : array<CName>;
 	var currentDefinition : SCardDefinition;
-	var currentCollectionCard : CollectionCard;
+	var cardName : CName;
 	var i : int;
 	var x : int;
 	var unitCardCount : int;
 	var maskResult : int;
 	
 	playerCollection = theGame.GetGwintManager().GetPlayerCollection();
-	cardDefinitions = theGame.GetGwintManager().GetCardDefs();
 	unitCardCount = 0;
 	
 	if (faction != EGCF_Neutral)
 	{
 		for (i = 0; i < playerCollection.Size(); i += 1)
 		{
-			currentCollectionCard = playerCollection[i];
-			
-			for (x = 0; x < cardDefinitions.Size(); x += 1)
+			cardName = playerCollection[i];
+			if ( theGame.GetGwintManager().GetGwentCard( cardName, currentDefinition ) )
 			{
-				currentDefinition = cardDefinitions[x];
-				if (currentDefinition.index == currentCollectionCard.cardID)
+				if ((int)currentDefinition.faction == (int)EGCF_Neutral || (int)currentDefinition.faction == (int)faction)
 				{
-					if ((int)currentDefinition.faction == (int)EGCF_Neutral || (int)currentDefinition.faction == (int)faction)
+					maskResult = currentDefinition.typeFlags & GwintType_Creature;
+
+					if (maskResult == GwintType_Creature)
 					{
-						maskResult = currentDefinition.typeFlags & GwintType_Creature;
-						
-						if (maskResult == GwintType_Creature)
-						{
-							unitCardCount += currentCollectionCard.numCopies; 
-						}
-						break;
+						unitCardCount += theGame.GetGwintManager().GetPlayerCardCount(cardName);
 					}
+					break;
 				}
 			}
 		}
@@ -6192,29 +6637,29 @@ quest function UnlockSkelligeGwentDeck()
 		
 		FactsAdd("skel_gwint_base_deck_given");
 		
-		gwintManager.AddCardToCollection(22);
-		gwintManager.AddCardToCollection(501);
-		gwintManager.AddCardToCollection(505);
-		gwintManager.AddCardToCollection(506);
-		gwintManager.AddCardToCollection(507);
-		gwintManager.AddCardToCollection(508);
-		gwintManager.AddCardToCollection(509);
-		gwintManager.AddCardToCollection(510);
-		gwintManager.AddCardToCollection(511);
-		gwintManager.AddCardToCollection(513);
-		gwintManager.AddCardToCollection(515);
-		gwintManager.AddCardToCollection(517);
-		gwintManager.AddCardToCollection(517);
-		gwintManager.AddCardToCollection(517);
-		gwintManager.AddCardToCollection(518);
-		gwintManager.AddCardToCollection(519);
-		gwintManager.AddCardToCollection(520);
-		gwintManager.AddCardToCollection(520);
-		gwintManager.AddCardToCollection(521);
-		gwintManager.AddCardToCollection(521);
-		gwintManager.AddCardToCollection(522);
-		gwintManager.AddCardToCollection(522);
-		gwintManager.AddCardToCollection(523);
+		gwintManager.AddCardToCollection('mushroom');
+		gwintManager.AddCardToCollection('hjalmar');
+		gwintManager.AddCardToCollection('holger_blackhand');
+		gwintManager.AddCardToCollection('madman_lugos');
+		gwintManager.AddCardToCollection('donar_an_hindar');
+		gwintManager.AddCardToCollection('udalryk');
+		gwintManager.AddCardToCollection('birna_bran');
+		gwintManager.AddCardToCollection('blueboy_lugos');
+		gwintManager.AddCardToCollection('svanrige');
+		gwintManager.AddCardToCollection('berserker');
+		gwintManager.AddCardToCollection('young_berserker');
+		gwintManager.AddCardToCollection('clan_an_craite_warrior');
+		gwintManager.AddCardToCollection('clan_an_craite_warrior');
+		gwintManager.AddCardToCollection('clan_an_craite_warrior');
+		gwintManager.AddCardToCollection('clan_tordarroch_armorsmith');
+		gwintManager.AddCardToCollection('clan_heymaey_skald');
+		gwintManager.AddCardToCollection('light_drakkar');
+		gwintManager.AddCardToCollection('light_drakkar');
+		gwintManager.AddCardToCollection('war_drakkar');
+		gwintManager.AddCardToCollection('war_drakkar');
+		gwintManager.AddCardToCollection('clan_brokvar_archer');
+		gwintManager.AddCardToCollection('clan_brokvar_archer');
+		gwintManager.AddCardToCollection('clan_drummond_shieldmaiden');
 		
 		
 		if( !gwintManager.IsDeckUnlocked( GwintFaction_Skellige ) &&
@@ -6225,121 +6670,60 @@ quest function UnlockSkelligeGwentDeck()
 	}
 }
 
-quest function AddGwentCards( val : EGwentCardFaction )
+quest function ForceGwentFaction(val : EGwentCardFaction)
 {
+	theGame.GetGwintManager().SetForcedFaction((int)val);
+}
 
-	var arr : array<int>;
-	switch ( val )
+quest function AddAllGwentCards ( optional faction : EGwentCardFaction, optional ignoreLy : bool )
+
+{
+	var dm : CDefinitionsManagerAccessor;
+	var cardDefs : array<SCardDefinition>;
+	var lyCards : array<name>;
+	var cardDef : SCardDefinition;
+	var min, max : SAbilityAttributeValue;
+	var i : int;
+	var j : int;
+	var maxCard : int;
+	var cardItemName : name;
+
+	dm = theGame.GetDefinitionsManager();
+ 	cardDefs = theGame.GetGwintManager().GetCardDefs();
+
+
+
+	for(i = 0; i < cardDefs.Size(); i+=1)
 	{
-		case EGCF_Neutral :
-		{			
-			arr.PushBack(7);
-			arr.PushBack(8);
-			arr.PushBack(9);
-			arr.PushBack(10);
-			arr.PushBack(11);
-			arr.PushBack(12);
-			arr.PushBack(13);
-			arr.PushBack(14);
-			arr.PushBack(15);
-			arr.PushBack(16);			
+		cardDef = cardDefs[i];
+
+
+
+		cardItemName = dm.GetItemNameFromLocalisationKeyName(cardDef.title);
+		dm.GetItemAttributeValueNoRandom(cardItemName, false, 'max_count', min, max);
 			
-			thePlayer.InitGwintCardNumbersArray( arr );
-			break;
-		}
-		case EGCF_Kingdoms :
-		{		
-			arr.PushBack(20);
-			arr.PushBack(37);
-			arr.PushBack(37);
-			arr.PushBack(37);
-			arr.PushBack(30);
-			arr.PushBack(29);
-			arr.PushBack(38);
-			arr.PushBack(39);
-			arr.PushBack(40);
-			arr.PushBack(40);
-			arr.PushBack(31);
-			arr.PushBack(31);
-			arr.PushBack(35);
-			arr.PushBack(35);
-			arr.PushBack(41);
-			arr.PushBack(42);
-			arr.PushBack(34);
-			arr.PushBack(43);		
-			
-			thePlayer.InitGwintCardNumbersArray( arr );
-			break;
-		}
-			
-		case EGCF_Monsters :
-		{		
-			arr.PushBack (125);
-			arr.PushBack (126);
-			arr.PushBack (127);
-			arr.PushBack (117);
-			arr.PushBack (108);
-			arr.PushBack (108);
-			arr.PushBack (109);
-			arr.PushBack (118);
-			arr.PushBack (119);
-			arr.PushBack (120);
-			arr.PushBack (121);
-			arr.PushBack (122);
-			arr.PushBack (123);
-			arr.PushBack (107);
-			arr.PushBack (107);
-			arr.PushBack (124);
-			arr.PushBack (124);
-			arr.PushBack (124);	
-			
-			thePlayer.InitGwintCardNumbersArray( arr );
-			break;
-			
-		}
-		
-		case EGCF_Nilfgaard :
+		maxCard =  (int)min.valueBase;
+
+		Log(cardDef.title + " : " + cardDef.faction + ") max:" + maxCard) ;
+
+		if((faction == EGCF_Neutral || (int)faction == (int)cardDef.faction) && maxCard > 0)
 		{
-			arr.PushBack (52);
-			arr.PushBack (52);
-			arr.PushBack (52);
-			arr.PushBack (48);
-			arr.PushBack (53);
-			arr.PushBack (45);
-			arr.PushBack (45);
-			arr.PushBack (63);
-			arr.PushBack (46);
-			arr.PushBack (50);
-			arr.PushBack (57);
-			arr.PushBack (64);
-			arr.PushBack (47);
-			arr.PushBack (54);
 			
-			thePlayer.InitGwintCardNumbersArray( arr );
-			break;
+			
+			
+			
+
+			
+			
+			thePlayer.inv.AddAnItem( cardItemName, maxCard, true, true, false);
+
+			
+			FactsAdd( "merchant_card_" + cardItemName + "_already_given", 1, -1 );
 		}
-		case EGCF_Scoiatael :
-		{
-			arr.PushBack (76);
-			arr.PushBack (76);
-			arr.PushBack (88);
-			arr.PushBack (88);
-			arr.PushBack (88);
-			arr.PushBack (88);
-			arr.PushBack (94);
-			arr.PushBack (94);
-			arr.PushBack (95);
-			arr.PushBack (78);
-			arr.PushBack (89);
-			arr.PushBack (79);
-			arr.PushBack (77);
-			arr.PushBack (75);
-			
-			thePlayer.InitGwintCardNumbersArray( arr );
-			break;
-			
-		}
-	}		
+	}
+	
+	FactsAdd("Gwint_Card_Looted"); 
+	
 }
 
 quest function ManageBuffImmunities( npcTag : name, effects : array< EEffectType >, remove : bool )
@@ -6502,6 +6886,18 @@ quest function SpawnAndAttachEntity( entTemplate : CEntityTemplate, attachToEnti
 	parentEnt = theGame.GetEntityByTag( attachToEntityTag );
 	
 	ent.CreateAttachment( parentEnt, attachSlot );
+}
+
+quest function SpawnEntityAndDestroyAfter( entTemplate : CEntityTemplate, destroyTime : float )
+{
+	var ent : CEntity;
+	
+	ent = theGame.CreateEntity(entTemplate, thePlayer.GetWorldPosition(), thePlayer.GetWorldRotation(), true, false, false );
+	
+	if ( ent )
+	{
+		ent.DestroyAfter(destroyTime);
+	}
 }
 
 quest function DisableHorseSlowdownTriggers( HorseCanAlwaysGallop : bool )
@@ -8816,6 +9212,116 @@ latent quest function AddAndReadBook(bookName : name, optional addToInventoryFir
 	}
 }
 
+quest function QuestRiderStopByTag( npcTag : name )
+{
+    var npc : CNewNPC;
+    npc = theGame.GetNPCByTag( npcTag );
+
+    if( npc )
+        npc.QuestRiderStop();
+}
+
+
+    quest function QuestRiderWalkByTag( npcTag : name )
+{
+    var npc : CNewNPC;
+    npc = theGame.GetNPCByTag( npcTag );
+
+    if( npc )
+        npc.QuestRiderWalk();
+}
+
+quest function QuestRiderRunByTag( npcTag : name )
+{
+    var npc : CNewNPC;
+    npc = theGame.GetNPCByTag( npcTag );
+
+    if( npc )
+        npc.QuestRiderRun();
+}
+
+quest function QuestRiderFastRunByTag( npcTag : name )
+{
+    var npc : CNewNPC;
+    npc = theGame.GetNPCByTag( npcTag );
+
+    if( npc )
+        npc.QuestRiderFastRun();
+}
+
+quest function QuestRiderSprintByTag( npcTag : name )
+{
+    var npc : CNewNPC;
+    npc = theGame.GetNPCByTag( npcTag );
+
+    if( npc )
+        npc.QuestRiderSprint();
+}
+
+quest function QuestGeraltRiderWalk()
+{
+    var horseComp : W3HorseComponent;
+
+    horseComp = thePlayer.GetUsedHorseComponent();
+
+    if( !horseComp )
+        return;
+
+    horseComp.QuestSetRiderMoveType( MT_Walk );
+    horseComp.QuestSetRiderSpeed( 1.0f );
+}
+
+quest function QuestGeraltRiderRun()
+{
+    var horseComp : W3HorseComponent;
+
+    horseComp = thePlayer.GetUsedHorseComponent();
+
+    if( !horseComp )
+        return;
+
+    horseComp.QuestSetRiderMoveType( MT_Run );
+    horseComp.QuestSetRiderSpeed( 2.0f );
+}
+
+quest function QuestGeraltRiderFastRun()
+{
+    var horseComp : W3HorseComponent;
+
+    horseComp = thePlayer.GetUsedHorseComponent();
+
+    if( !horseComp )
+        return;
+
+    horseComp.QuestSetRiderMoveType( MT_FastRun );
+    horseComp.QuestSetRiderSpeed( 3.0f );
+}
+
+quest function QuestGeraltRiderSprint()
+{
+    var horseComp : W3HorseComponent;
+
+    horseComp = thePlayer.GetUsedHorseComponent();
+
+    if( !horseComp )
+        return;
+
+    horseComp.QuestSetRiderMoveType( MT_Sprint );
+    horseComp.QuestSetRiderSpeed( 4.0f );
+}
+
+quest function QuestGeraltRiderManualControl( manualControl : bool )
+{
+    var horseComp : W3HorseComponent;
+
+    horseComp = thePlayer.GetUsedHorseComponent();
+
+    if( !horseComp )
+        return;
+
+    horseComp.SetQuestRiderOverride( manualControl );
+}
+
 
 quest function IsCiriDLCAppearance() : bool
 {
@@ -8853,7 +9359,7 @@ quest function PlayerDrinkPotionQuest( itemName : name )
 
 quest function IsPlatformPC() : bool
 {
-	if(theGame.GetPlatform() == Platform_PC)
+	if(theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK)
 		return true;
 	else
 		return false;
@@ -9107,4 +9613,1384 @@ quest function NGE_NPCAnimationMultiplier(npcTag : name, multiplier : float)
 			npcs[i].SetAnimationTimeMultiplier(multiplier);		
 		}
 	}
+}
+
+quest function TakeScreenshot()
+{
+	theGame.TakeScreenshot();
+}
+
+
+
+quest function AddPlayerHorsePanic( percents : int )
+{
+	var horseActor : CActor;
+	var horseComp : W3HorseComponent;
+	var perc : float;
+
+	horseActor = thePlayer.GetHorseCurrentlyMounted();
+
+	if (horseActor)
+	{
+		perc = percents * 0.01 * horseActor.GetStatMax(BCS_Panic);
+		horseActor.AddPanic(perc);
+
+		horseComp = (W3HorseComponent)horseActor.GetComponentByClassName('W3HorseComponent');
+
+		if (horseComp && horseComp.GetPanicPercent() >= 1.0f)
+			horseComp.ShakeOffRider(DT_shakeOff);
+	}
+}
+
+
+
+
+quest function ToggleHoofprints(horseTag : name)
+{
+	var entities : array<CEntity>;
+	var gmplEntity : CGameplayEntity;
+	var comp	: W3HoofprintsComponent;
+	var i : int;
+
+	theGame.GetEntitiesByTag( horseTag, entities );
+
+	for (i = 0; i < entities.Size(); i += 1)
+	{
+		gmplEntity = (CGameplayEntity)entities[i];
+
+		if (gmplEntity)
+		{
+			comp = (W3HoofprintsComponent)(gmplEntity.GetComponentByClassName('W3HoofprintsComponent'));
+			if (comp)
+				comp.ToggleComponent(true);	
+			else
+				LogQuest("No valid HoofprintsComponent found for " + horseTag);
+		} 	
+	}
+}
+
+
+quest function RequestQuestCameraExt(camera : SQuestCameraRequest, zOffset : float, transitionTime : float, lookAtOffset : Vector, cameraDistance : float , requestDistance : bool, lockCamera : bool)
+{
+	if (lockCamera)
+		thePlayer.EnableManualCameraControl(false, 'QuestCameraZOffset');
+
+	thePlayer.RequestQuestCameraExtended(camera , zOffset, transitionTime, lookAtOffset, cameraDistance, requestDistance);
+}
+
+quest function ResetQuestCameraExt(forceUnlockCamera : bool)
+{
+	if (forceUnlockCamera)
+		thePlayer.EnableManualCameraControl(true, 'QuestCameraZOffset');
+
+	thePlayer.ResetQuestCameraRequest();
+}
+
+
+quest function RestoreExplorationCameraMinMaxPitch()
+{
+	var rotationController : ICustomCameraPivotRotationController;
+
+	rotationController = theGame.GetGameCamera().GetActivePivotRotationController();
+	rotationController.minPitch = -38;
+	rotationController.maxPitch = 38;
+}
+
+quest function ForceQuestCameraUnlock()
+{
+	thePlayer.EnableManualCameraControl(true, 'QuestCameraZOffset');
+}
+
+
+
+quest function QuestDebugLog(logString : name)
+{
+	
+	if(logString == '')
+	{
+		return;
+	}
+	
+	LogQuest("[QuestDebugLog] " + logString);
+}
+
+quest function ChangeTimeFlowInHours(MinutesPerSecond : float, HoursToPass : int) 
+	{
+		thePlayer.changeClockSpeed(MinutesPerSecond, HoursToPass);
+	}
+
+quest function RaiseEventOnTaggedEntity(tag : name, eventName : name)
+{
+	var entities : array<CEntity>;
+	var i : int;
+
+	theGame.GetEntitiesByTag( tag, entities );
+
+	for (i = 0; i < entities.Size(); i += 1)
+		entities[i].RaiseEvent(eventName);
+}
+
+
+
+quest function PlayerToggleHorseRidingVoiceset(enable : bool)
+{
+	thePlayer.ToggleHorseRidingVoiceset(enable);
+}
+
+quest function RemoveTagsFromDeadNPCsQuest( npcTag : name, maxDistance : float )
+{
+	var npc : CNewNPC;		
+	var npcs : array <CNewNPC>;
+	var distanceToPlayer : float;
+	var tags : array<name>;
+	var i      : int;
+	
+	theGame.GetNPCsByTag(npcTag,npcs);
+	if ( npcs.Size() <= 0 ) 
+	{
+		LogQuest("RemoveTagsFromDeadNPCsQuest_questFunction: no NPC with tag " + npcTag + " found!!!");
+		return;
+	}
+	
+	for ( i=0 ; i < npcs.Size() ; i+=1 )
+	{
+		npc = npcs[i];
+		tags =  npc.GetTags();
+		
+		distanceToPlayer = VecDistance2D( thePlayer.GetWorldPosition(), npc.GetWorldPosition() );
+		
+		if ( npc.isDead && (distanceToPlayer < maxDistance))
+		{
+			tags.Clear();
+			npc.SetTags(tags);
+		}
+	}
+}
+
+quest function PlayerForceDefaultCombatCamera(forceCamera : bool)
+{
+	
+	if (forceCamera)
+	{
+		thePlayer.ForceCmbtCamera(false);
+	}
+	else
+	{
+		thePlayer.ResetForcedCmbtCamera();
+		thePlayer.SetPlayerCameraPreset();
+	}
+}
+
+
+
+quest function ForceSetOptionSwitchMotionPatterns(enable : bool)
+{	
+	var inGameConfigWrapper	: CInGameConfigWrapper;
+	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+
+	if(enable)
+	{
+		inGameConfigWrapper.SetVarValue('Controls_DualGrip', 'MotionPatternsMode', "1");
+	}
+	else
+	{
+		inGameConfigWrapper.SetVarValue('Controls_DualGrip', 'MotionPatternsMode', "0");
+	}
+
+	
+}
+
+quest function ForceSetOptionMouserActivationMode(index : int)
+{	
+	var inGameConfigWrapper	: CInGameConfigWrapper;
+	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+
+
+	switch (index)
+	{
+		case 0:	inGameConfigWrapper.SetVarValue('Controls_Mouser', 'MouserActivationMode', "0");
+			break;
+		case 1:	inGameConfigWrapper.SetVarValue('Controls_Mouser', 'MouserActivationMode', "1");
+			break;
+		case 2:	inGameConfigWrapper.SetVarValue('Controls_Mouser', 'MouserActivationMode', "2");
+			break;
+	}
+
+	
+}
+
+quest function ForceSetOptionSwitchGyro(enable : bool)
+{	
+	var inGameConfigWrapper	: CInGameConfigWrapper;
+	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+
+	if(enable)
+	{
+		inGameConfigWrapper.SetVarValue('Controls_DualGrip', 'DualGrip_GyroAimingMode',"1");
+	}
+	else
+	{
+		inGameConfigWrapper.SetVarValue('Controls_DualGrip', 'DualGrip_GyroAimingMode', "0");
+	}
+	
+}
+
+quest function ForceSetOptionQuickCast(enable : bool)
+{
+	var inGameConfigWrapper	: CInGameConfigWrapper;
+	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+
+	if(enable)
+	{
+		inGameConfigWrapper.SetVarValue('Gameplay', 'EnableAlternateSignCasting',"1");
+		thePlayer.GetInputHandler().SetIsAltSignCasting(true);
+		FactsSet( "nge_alt_sign_casting_chosen", 1 );
+	}
+	else
+	{
+		inGameConfigWrapper.SetVarValue('Gameplay', 'EnableAlternateSignCasting', "0");
+		thePlayer.GetInputHandler().SetIsAltSignCasting(false);
+		FactsSet( "nge_alt_sign_casting_chosen", 0 );
+	}
+	
+}
+
+quest function CheckDualGripStyle()
+{
+	if(theInput.GetOunceGamepadStyle() == OunceGamepadStyle_JoyDual)
+	{	
+		FactsAdd("switch_dual_grip_style", 1);
+	}
+	else
+	{
+		FactsAdd("switch_dual_grip_style", 0);
+	}	
+}
+
+quest function SaveAltCastingBeforeTutorial()
+{
+	var inGameConfigWrapper	: CInGameConfigWrapper;
+	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+
+	
+	FactsAdd("check_revert_on_quit", 1);
+	
+	if(inGameConfigWrapper.GetVarValue('Gameplay', 'EnableAlternateSignCasting') == "1")
+	{	
+		FactsAdd("altcast_before_switchtutorial", 2);
+		
+	}
+	else
+	{
+		FactsAdd("altcast_before_switchtutorial", 1);
+		
+	}
+}
+
+quest function RevertAltCastingAfterTutorial()
+{
+	var inGameConfigWrapper	: CInGameConfigWrapper;
+	inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+	
+
+	if(FactsDoesExist("altcast_before_switchtutorial"))
+	{
+		if(FactsQueryLatestValue( "altcast_before_switchtutorial" ) == 2)
+		{
+			inGameConfigWrapper.SetVarValue('Gameplay', 'EnableAlternateSignCasting',"1");
+			thePlayer.GetInputHandler().SetIsAltSignCasting(true);
+			FactsSet( "nge_alt_sign_casting_chosen", 1 );
+			
+		}
+		else if(FactsQueryLatestValue( "altcast_before_switchtutorial" ) == 1)
+		{
+			inGameConfigWrapper.SetVarValue('Gameplay', 'EnableAlternateSignCasting', "0");
+			thePlayer.GetInputHandler().SetIsAltSignCasting(false);
+			FactsSet( "nge_alt_sign_casting_chosen", 0 );
+			
+		}
+	}		
+}
+
+
+
+
+
+quest function AT_AddAndEquipReSkill(skill : ESkill, lvl: int)
+{
+	var totalDmg : float;
+	var curStats : SPlayerOffenseStats;
+	var currentLvl : int = 1;
+	var skillIsValid : bool = false;
+	var curSpellPower : SAbilityAttributeValue;
+	var curSpellPowerMulti : int;
+	var damageType : name;
+    var player : W3PlayerWitcher = GetWitcherPlayer();
+
+
+	
+	
+	
+	((W3PlayerAbilityManager)thePlayer.abilityManager).OnLevelGained(36);
+
+	
+	player.GetSignStats( S_Magic_2, damageType, totalDmg, curSpellPower);
+
+	
+	curSpellPowerMulti = CeilF(curSpellPower.valueMultiplicative * 10);
+
+	
+	FactsAdd("AT_spellPower", curSpellPowerMulti);
+
+	while(currentLvl <= lvl)
+	{
+		skillIsValid = AddAndEquipSkill(skill);
+
+		if(!skillIsValid)
+		{
+			break;
+		}
+		
+		if(currentLvl == 3)
+		{
+			break;
+		}
+		
+		currentLvl += 1;
+	}
+	if ( skillIsValid )
+	{
+		GetWitcherPlayer().DisplayHudMessage("Equipped " + SkillEnumToName(skill) + " (lvl " + currentLvl + ")");
+	} else {
+		GetWitcherPlayer().DisplayHudMessage("Skill " + SkillEnumToName(skill) + " is not valid!");
+	}
+}
+
+
+
+
+
+enum ESkillPresetBuild {
+	BUILD_FastAttack,
+	BUILD_StrongAttack,
+	BUILD_FastStrongAttack,
+	BUILD_Defense,
+	BUILD_Crossbow,
+	BUILD_Yrden,
+	BUILD_Aard,
+	BUILD_Axii,
+	BUILD_AlternativeCast,
+	BUILD_IgniQuen,
+	BUILD_Catalyst,
+	BUILD_Potion,
+	BUILD_Posion,
+	BUILD_Bomb,
+	BUILD_Vitality,
+	BUILD_Schools,
+	BUILD_Utility,
+	BUILD_UtilityDefensive,
+	BUILD_Griffin,
+	BUILD_Viper,
+	BUILD_Manticore
+}
+
+
+
+quest function SetPlayerBuildQuest( build : ESkillPresetBuild, attributePoints : int )
+{
+	
+	var attributeLvl : int = 0;
+	if (attributePoints)
+	{
+		
+		attributeLvl = attributePoints / 10;
+	}
+	
+	
+	GetWitcherPlayer().ResetCharacterDev();
+
+	
+	
+	AT_Setlevel(100);
+
+	switch( build )
+	{
+		case BUILD_FastAttack:
+			GetWitcherPlayer().DisplayHudMessage("Fast Attack Build");
+			EquipFastAttackSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_StrongAttack:
+			GetWitcherPlayer().DisplayHudMessage("Strong Attack Build");
+			EquipStrongAttackSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_FastStrongAttack:
+			GetWitcherPlayer().DisplayHudMessage("Fast and Strong Attack Build");
+			EquipFastStrongAttackSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Defense:
+			GetWitcherPlayer().DisplayHudMessage("Defense Build");
+			EquipDefenseSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Crossbow:
+			GetWitcherPlayer().DisplayHudMessage("Crossbow Build");
+			EquipCrossbowSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Yrden:
+			GetWitcherPlayer().DisplayHudMessage("Yrden Sign Build");
+			EquipYrdenSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Aard:
+			GetWitcherPlayer().DisplayHudMessage("Aard Sign Build");
+			EquipAardSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Axii:
+			GetWitcherPlayer().DisplayHudMessage("Axii Sign Build");
+			EquipAxiiSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_AlternativeCast:
+			GetWitcherPlayer().DisplayHudMessage("Alternative Cast Build");
+			EquipAlternativeSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_IgniQuen:
+			GetWitcherPlayer().DisplayHudMessage("Igni and Quen Build");
+			EquipIgniAndQuenSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Catalyst:
+			GetWitcherPlayer().DisplayHudMessage("Catalyst Build");
+			EquipCatalystSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Potion:
+			GetWitcherPlayer().DisplayHudMessage("Potion Build");
+			EquipPotionSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Posion:
+			GetWitcherPlayer().DisplayHudMessage("Potion Build");
+			EquipPosionSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Bomb:
+			GetWitcherPlayer().DisplayHudMessage("Bomb Build");
+			EquipBombSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Vitality:
+			GetWitcherPlayer().DisplayHudMessage("Vitality Build");
+			EquipVitalitySkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Schools:
+			GetWitcherPlayer().DisplayHudMessage("Schools Build");
+			EquipSchoolsSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Utility:
+			GetWitcherPlayer().DisplayHudMessage("Utility Build");
+			EquipUtilitySkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_UtilityDefensive:
+			GetWitcherPlayer().DisplayHudMessage("Utility and Defensive Build");
+			EquipUtilityDefensiveSkillsBasedOnAttributeLvl(attributeLvl);
+			break;
+		case BUILD_Griffin:
+			GetWitcherPlayer().DisplayHudMessage("Griffin Build");
+			AT_AddAndEquipReSkill(S_Magic_s22 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s27 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s28 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s37 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s38 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s35 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s36 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s39 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s40 ,3); 
+			AT_AddAndEquipReSkill(S_Magic_s41 ,3); 
+			AT_AddAndEquipReSkill(S_Perk_01, 3); 
+			AT_AddAndEquipReSkill(S_Perk_24, 3); 
+			break;
+		case BUILD_Manticore:
+			GetWitcherPlayer().DisplayHudMessage("Manticore Build");
+			AT_AddAndEquipReSkill(S_Alchemy_s24, 3); 
+			AT_AddAndEquipReSkill(S_Perk_39, 3); 
+			AT_AddAndEquipReSkill(S_Alchemy_s08, 3); 
+			AT_AddAndEquipReSkill(S_Alchemy_s25, 3); 
+			AT_AddAndEquipReSkill(S_Alchemy_s11, 3); 
+			break;
+		case BUILD_Viper:
+			GetWitcherPlayer().DisplayHudMessage("Viper Build");
+			AT_AddAndEquipReSkill(S_Alchemy_s20, 3); 
+			AT_AddAndEquipReSkill(S_Alchemy_s23, 3); 
+			AT_AddAndEquipReSkill(S_Alchemy_s22, 3); 
+			AT_AddAndEquipReSkill(S_Alchemy_s26, 3); 
+			AT_AddAndEquipReSkill(S_Perk_01, 3); 
+			AT_AddAndEquipReSkill(S_Perk_28, 3); 
+			break;
+	}
+}
+
+function EquipFastAttackSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+				break;
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Sword_s22, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s23, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s24, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s38, 3); 
+				break;
+			
+			case 2:
+				AT_AddAndEquipReSkill(S_Sword_s22, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s23, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s24, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s38, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s18, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s36, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s35, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s29, 3); 
+				break;
+			
+			case 3:
+				AT_AddAndEquipReSkill(S_Sword_s22, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s23, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s24, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s38, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s18, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s36, 2); 
+				AT_AddAndEquipReSkill(S_Sword_s35, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s29, 3); 
+				
+				GetWitcherPlayer().AddSkill(S_Perk_01);
+				AT_AddAndEquipReSkill(S_Perk_23, 3); 
+				AT_AddAndEquipReSkill(S_Perk_33, 3); 
+				AT_AddAndEquipReSkill(S_Perk_43, 1); 
+				AT_AddAndEquipReSkill(S_Perk_40, 3); 
+				break;
+			
+			case 4:
+				AT_AddAndEquipReSkill(S_Sword_s22, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s23, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s24, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s18, 2); 
+				AT_AddAndEquipReSkill(S_Sword_s25, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s36, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s02, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s30, 3); 
+				
+				
+				GetWitcherPlayer().AddSkill(S_Perk_01); 
+				GetWitcherPlayer().AddSkill(S_Perk_30); 
+				
+				GetWitcherPlayer().AddSkill(S_Perk_23); 
+				GetWitcherPlayer().AddSkill(S_Perk_23); 
+				GetWitcherPlayer().AddSkill(S_Perk_23); 
+
+				GetWitcherPlayer().AddSkill(S_Perk_25); 
+				GetWitcherPlayer().AddSkill(S_Perk_25); 
+				GetWitcherPlayer().AddSkill(S_Perk_25); 
+
+				AT_AddAndEquipReSkill(S_Sword_s35, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s29, 3); 
+				break;
+	}
+}
+
+function EquipStrongAttackSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+				break;
+			
+			case 1:	
+				AT_AddAndEquipReSkill(S_Sword_s22, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s23, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s24, 2); 
+				AT_AddAndEquipReSkill(S_Sword_s25, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s28, 1); 
+				break;
+			
+			case 2:
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Sword_s22, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s23, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s24, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s18, 2); 
+				AT_AddAndEquipReSkill(S_Sword_s25, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s38, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s02, 1); 
+				AT_AddAndEquipReSkill(S_Sword_s28, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s30, 3); 
+				break;
+			
+	}
+}
+
+function EquipFastStrongAttackSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+	{
+		
+		case 0:
+			break;
+		case 1:	
+			GetWitcherPlayer().DisplayHudMessage("Fast and Strong Attack Build is only applicable with 30, 40 attributes");
+			break;
+		case 2:
+			GetWitcherPlayer().DisplayHudMessage("Fast and Strong Attack Build is only applicable with 30, 40 attributes");
+			break;
+		
+		case 3:
+			AT_AddAndEquipReSkill(S_Sword_s22, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s23, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s24, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s18, 1); 
+			AT_AddAndEquipReSkill(S_Sword_s25, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s36, 1); 
+			AT_AddAndEquipReSkill(S_Sword_s35, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s29, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s30, 2); 
+			AT_AddAndEquipReSkill(S_Perk_25, 3); 
+			break;
+		
+		case 4:
+			AT_AddAndEquipReSkill(S_Sword_s22, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s23, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s24, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s18, 2); 
+			AT_AddAndEquipReSkill(S_Sword_s25, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s36, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s02, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s30, 3); 
+			
+			GetWitcherPlayer().AddSkill(S_Perk_01); 
+			GetWitcherPlayer().AddSkill(S_Perk_30); 
+
+			AT_AddAndEquipReSkill(S_Perk_23, 3); 
+			AT_AddAndEquipReSkill(S_Perk_25, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s35, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s29, 3); 
+			break;
+	}
+}
+
+function EquipDefenseSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+	{
+		
+		case 0:
+			break;
+		
+		case 1:	
+			AT_AddAndEquipReSkill(S_Sword_s33, 1); 
+ 			AT_AddAndEquipReSkill(S_Sword_s16, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s18, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s36, 3); 
+			break;
+		
+		case 2:
+			AT_AddAndEquipReSkill(S_Sword_s33, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s34, 1); 
+ 			AT_AddAndEquipReSkill(S_Sword_s16, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s18, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s36, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s26, 1); 
+			AT_AddAndEquipReSkill(S_Sword_s11, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s27, 2); 
+			AT_AddAndEquipReSkill(S_Sword_s19, 1); 
+			break;
+		
+		case 3:
+			AT_AddAndEquipReSkill(S_Sword_s33, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s34, 1); 
+ 			AT_AddAndEquipReSkill(S_Sword_s16, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s18, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s36, 3); 
+
+			GetWitcherPlayer().AddSkill(S_Sword_s26); 
+
+			AT_AddAndEquipReSkill(S_Sword_s11, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s27, 2); 
+			AT_AddAndEquipReSkill(S_Sword_s19, 1); 
+
+			GetWitcherPlayer().AddSkill(S_Alchemy_s24); 
+
+			AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+			AT_AddAndEquipReSkill(S_Perk_30, 3); 
+			AT_AddAndEquipReSkill(S_Perk_25, 3); 
+			AT_AddAndEquipReSkill(S_Perk_32, 1); 
+			break;
+		
+		case 4:
+			AT_AddAndEquipReSkill(S_Sword_s33, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s34, 1); 
+ 			AT_AddAndEquipReSkill(S_Sword_s16, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s18, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s36, 3); 
+
+			GetWitcherPlayer().AddSkill(S_Sword_s26); 
+
+			AT_AddAndEquipReSkill(S_Sword_s11, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s27, 2); 
+			AT_AddAndEquipReSkill(S_Sword_s19, 1); 
+			AT_AddAndEquipReSkill(S_Perk_30, 3); 
+			AT_AddAndEquipReSkill(S_Perk_25, 3); 
+			AT_AddAndEquipReSkill(S_Perk_32, 1); 
+			AT_AddAndEquipReSkill(S_Magic_s13, 1); 
+			AT_AddAndEquipReSkill(S_Magic_s14, 1); 
+
+			GetWitcherPlayer().AddSkill(S_Alchemy_s24); 
+
+			AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+
+			GetWitcherPlayer().AddSkill(S_Perk_32); 
+			break;
+	}
+}
+
+function EquipCrossbowSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+	{
+		
+		case 0:
+			break;
+		
+		case 1:	
+			AT_AddAndEquipReSkill(S_Sword_s33, 1); 
+			AT_AddAndEquipReSkill(S_Sword_s34, 1); 
+ 			AT_AddAndEquipReSkill(S_Sword_s16, 1); 
+			AT_AddAndEquipReSkill(S_Sword_s08, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s26, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s27, 1); 
+			break;
+		
+		case 2:
+		case 3:
+		case 4:
+			AT_AddAndEquipReSkill(S_Sword_s33, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s34, 3); 
+ 			AT_AddAndEquipReSkill(S_Sword_s16, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s08, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s26, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s27, 3); 
+			AT_AddAndEquipReSkill(S_Sword_s19, 1); 
+			break;
+	}
+}
+
+
+function EquipYrdenSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+				break;
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Magic_s24, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s42, 1); 
+
+				AT_AddAndEquipReSkill(S_Magic_s29, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s32, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s35, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s36, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s37, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s39, 2); 
+				break;
+			
+			case 2:
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Magic_s24, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s42, 3); 
+
+				AT_AddAndEquipReSkill(S_Magic_s29, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s32, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s35, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s36, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s37, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s39, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s38, 1); 
+				break;
+	}
+}
+
+function EquipAardSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+				break;
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Magic_s20, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s27, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s33, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s35, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s37, 2); 
+				break;
+			
+			case 2:
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Magic_s20, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s27, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s33, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s35, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s37, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s38, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s40, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s41, 3); 
+				break;
+	}
+}
+
+function EquipAxiiSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+				break;
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Magic_s26, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s31, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s34, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s36, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s39, 1); 
+				break;
+			
+			case 2:
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Magic_s26, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s31, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s34, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s36, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s39, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s40, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s41, 3); 
+				break;
+	}
+}
+
+function EquipAlternativeSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+				break;
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Magic_s20, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s27, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s08, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s28, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s42, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s29, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s13, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s14, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s17, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s31, 1); 
+				break;
+			
+			case 2:
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Magic_s20, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s27, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s08, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s28, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s42, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s29, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s13, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s14, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s17, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s31, 3); 
+				break;
+	}
+}
+
+function EquipIgniAndQuenSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+				break;
+			
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Magic_s08, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s28, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s13, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s14, 3); 
+				break;
+	}
+
+	
+}
+
+function EquipCatalystSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			
+			case 0:
+			case 1:
+				GetWitcherPlayer().DisplayHudMessage("Yrden Sign Build is only applicable with 20, 30, 40 attributes");
+				break;
+			case 2:
+				AT_AddAndEquipReSkill(S_Magic_s20, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s08, 2); 
+				AT_AddAndEquipReSkill(S_Magic_s42, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s27, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s28, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s32, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s33, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s35, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s37, 2); 
+				break;
+			
+			case 3:
+				AT_AddAndEquipReSkill(S_Magic_s20, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s08, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s42, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s27, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s28, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s32, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s33, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s35, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s37, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s39 ,3); 
+				AT_AddAndEquipReSkill(S_Magic_s40 ,1); 
+				break;
+			case 4:
+				AT_AddAndEquipReSkill(S_Magic_s20, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s08, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s42, 3); 
+				GetWitcherPlayer().AddSkill(S_Magic_s27); 
+				AT_AddAndEquipReSkill(S_Magic_s28, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s32, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s33, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s35, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s37, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s39, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s40, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s41, 3); 
+				break;
+	}
+
+	
+}
+
+
+
+function EquipPotionSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Alchemy_s24, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s18, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s27, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s13, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s03, 1); 
+				break;
+			
+			case 2:
+				AT_AddAndEquipReSkill(S_Alchemy_s24, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s18, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s27, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s13, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s03, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s14, 2); 
+				AT_AddAndEquipReSkill(S_Alchemy_s15, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s04, 3); 
+				break;
+			
+			case 3:
+				AT_AddAndEquipReSkill(S_Alchemy_s24, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s16, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s18, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s27, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s13, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s03, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s14, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s15, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s04, 3); 
+				break;
+			
+			case 4:
+				AT_AddAndEquipReSkill(S_Alchemy_s24, 3); 
+
+				GetWitcherPlayer().AddSkill(S_Alchemy_s05); 
+
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s16, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s18, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s27, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s13, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s03, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s14, 3); 
+
+				GetWitcherPlayer().AddSkill(S_Alchemy_s15); 
+
+				AT_AddAndEquipReSkill(S_Alchemy_s04, 3); 
+
+				GetWitcherPlayer().AddSkill(S_Perk_01); 
+				GetWitcherPlayer().AddSkill(S_Perk_23); 
+
+				AT_AddAndEquipReSkill(S_Perk_33, 3); 
+				AT_AddAndEquipReSkill(S_Perk_43, 3); 
+				break;
+	}
+
+	
+}
+
+function EquipPosionSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s12, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s23, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s22, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s26, 2); 
+				break;
+			
+			case 2:
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 2); 
+				AT_AddAndEquipReSkill(S_Alchemy_s16, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s12, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s23, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s22, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s26, 3); 
+				break;
+			
+			case 3:
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 3); 
+				AT_AddAndEquipReSkill(S_Perk_01, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 3); 
+				AT_AddAndEquipReSkill(S_Perk_28, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s16, 3); 
+				AT_AddAndEquipReSkill(S_Perk_33, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s18, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s12, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s27, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s23, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s22, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s26, 3); 
+				break;
+			
+			case 4:
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 3); 
+				
+				GetWitcherPlayer().AddSkill(S_Perk_01); 
+				
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 3); 
+				AT_AddAndEquipReSkill(S_Perk_28, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s16, 3); 
+				AT_AddAndEquipReSkill(S_Perk_33, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s10, 3); 
+				AT_AddAndEquipReSkill(S_Perk_43, 1); 
+				
+				GetWitcherPlayer().AddSkill(S_Alchemy_s18); 
+				GetWitcherPlayer().AddSkill(S_Perk_40); 
+				
+				AT_AddAndEquipReSkill(S_Alchemy_s12, 3); 
+				AT_AddAndEquipReSkill(S_Perk_37, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s27, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s23, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s22, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s26, 3); 
+				break;
+	}	
+}
+
+function EquipBombSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s10, 2); 
+				AT_AddAndEquipReSkill(S_Alchemy_s08, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s25, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s11, 3); 
+				break;
+			
+			case 2:
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 1); 
+				AT_AddAndEquipReSkill(S_Perk_30, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s10, 3); 
+				AT_AddAndEquipReSkill(S_Perk_27, 2); 
+				AT_AddAndEquipReSkill(S_Alchemy_s08, 3); 
+				AT_AddAndEquipReSkill(S_Perk_41, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s25, 3); 
+				AT_AddAndEquipReSkill(S_Perk_39, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s11, 3); 
+				break;
+			
+			case 3:
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 1); 
+				AT_AddAndEquipReSkill(S_Perk_30, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s10, 3); 
+				AT_AddAndEquipReSkill(S_Perk_27, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s08, 3); 
+				AT_AddAndEquipReSkill(S_Perk_41, 1); 
+
+				GetWitcherPlayer().AddSkill(S_Alchemy_s13); 
+				GetWitcherPlayer().AddSkill(S_Alchemy_s14); 
+
+				AT_AddAndEquipReSkill(S_Alchemy_s25, 3); 
+				AT_AddAndEquipReSkill(S_Perk_39, 3); 
+				AT_AddAndEquipReSkill(S_Perk_37, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s22, 1); 
+				AT_AddAndEquipReSkill(S_Perk_44, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s11, 3); 
+				break;
+			
+			case 4:
+				AT_AddAndEquipReSkill(S_Alchemy_s24, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s10, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s18, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s08, 3); 
+
+				GetWitcherPlayer().AddSkill(S_Alchemy_s13); 
+				GetWitcherPlayer().AddSkill(S_Alchemy_s14); 
+
+				AT_AddAndEquipReSkill(S_Alchemy_s25, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s22, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s11, 3); 
+
+				GetWitcherPlayer().AddSkill(S_Perk_30); 
+				
+				AT_AddAndEquipReSkill(S_Perk_27, 3); 
+				AT_AddAndEquipReSkill(S_Perk_33, 3); 
+
+				GetWitcherPlayer().AddSkill(S_Perk_41); 
+
+				AT_AddAndEquipReSkill(S_Perk_39, 3); 
+				AT_AddAndEquipReSkill(S_Perk_37, 3); 
+				AT_AddAndEquipReSkill(S_Perk_44, 3); 
+				break;
+	}	
+}
+
+
+
+function EquipVitalitySkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Perk_01, 2); 
+				AT_AddAndEquipReSkill(S_Perk_30, 3); 
+				AT_AddAndEquipReSkill(S_Perk_25, 3); 
+				AT_AddAndEquipReSkill(S_Perk_32, 1); 
+				AT_AddAndEquipReSkill(S_Perk_41, 1); 
+				break;
+			
+			case 2:
+				AT_AddAndEquipReSkill(S_Perk_01, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s24, 1); 
+				AT_AddAndEquipReSkill(S_Perk_30, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 3); 
+				AT_AddAndEquipReSkill(S_Perk_25, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+				AT_AddAndEquipReSkill(S_Perk_32, 1); 
+				AT_AddAndEquipReSkill(S_Perk_41, 3); 
+				break;
+			
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Perk_01, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s24, 1); 
+				AT_AddAndEquipReSkill(S_Perk_30, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s05, 2); 
+				AT_AddAndEquipReSkill(S_Perk_25, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s20, 3); 
+
+				GetWitcherPlayer().AddSkill(S_Perk_32); 
+				
+				AT_AddAndEquipReSkill(S_Alchemy_s02, 3); 
+				AT_AddAndEquipReSkill(S_Perk_41, 3); 
+				AT_AddAndEquipReSkill(S_Alchemy_s16, 3); 
+				AT_AddAndEquipReSkill(S_Perk_39, 1); 
+				AT_AddAndEquipReSkill(S_Perk_37, 1); 
+				AT_AddAndEquipReSkill(S_Perk_31, 3); 
+				break;
+	}	
+}
+
+function EquipSchoolsSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Perk_01, 1); 
+				AT_AddAndEquipReSkill(S_Perk_30, 1); 
+				AT_AddAndEquipReSkill(S_Perk_24, 1); 
+				AT_AddAndEquipReSkill(S_Perk_23, 2); 
+				AT_AddAndEquipReSkill(S_Perk_26, 1); 
+				AT_AddAndEquipReSkill(S_Perk_25, 2); 
+				break;
+			
+			case 2:
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Perk_01, 1); 
+				AT_AddAndEquipReSkill(S_Perk_30, 1); 
+				AT_AddAndEquipReSkill(S_Perk_24, 1); 
+				AT_AddAndEquipReSkill(S_Perk_23, 3); 
+				AT_AddAndEquipReSkill(S_Perk_26, 3); 
+				AT_AddAndEquipReSkill(S_Perk_25, 3); 
+				AT_AddAndEquipReSkill(S_Perk_28, 3); 
+				AT_AddAndEquipReSkill(S_Perk_27, 3); 
+				break;
+	}	
+}
+
+function EquipUtilitySkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+			
+			case 1:
+				AT_AddAndEquipReSkill(S_Perk_01, 1); 
+				AT_AddAndEquipReSkill(S_Perk_30, 1); 
+				AT_AddAndEquipReSkill(S_Perk_24, 1); 
+				AT_AddAndEquipReSkill(S_Perk_28, 1); 
+				AT_AddAndEquipReSkill(S_Perk_42, 1); 
+				AT_AddAndEquipReSkill(S_Perk_33, 3); 
+				AT_AddAndEquipReSkill(S_Perk_43, 1); 
+				AT_AddAndEquipReSkill(S_Perk_40, 1); 
+				break;
+			
+			case 2:
+				AT_AddAndEquipReSkill(S_Perk_01, 3); 
+				AT_AddAndEquipReSkill(S_Perk_30, 1); 
+				AT_AddAndEquipReSkill(S_Perk_24, 3); 
+				AT_AddAndEquipReSkill(S_Perk_28, 1); 
+				AT_AddAndEquipReSkill(S_Perk_42, 3); 
+				AT_AddAndEquipReSkill(S_Perk_33, 3); 
+				AT_AddAndEquipReSkill(S_Perk_43, 3); 
+				AT_AddAndEquipReSkill(S_Perk_40, 1); 
+				AT_AddAndEquipReSkill(S_Perk_37, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s19, 1); 
+				break;
+			
+			case 3:
+			case 4:
+				AT_AddAndEquipReSkill(S_Perk_01, 3); 
+				AT_AddAndEquipReSkill(S_Perk_30, 1); 
+				AT_AddAndEquipReSkill(S_Perk_24, 3); 
+				AT_AddAndEquipReSkill(S_Perk_28, 3); 
+				AT_AddAndEquipReSkill(S_Perk_42, 3); 
+				AT_AddAndEquipReSkill(S_Perk_33, 3); 
+				AT_AddAndEquipReSkill(S_Perk_43, 3); 
+				AT_AddAndEquipReSkill(S_Perk_40, 3); 
+				AT_AddAndEquipReSkill(S_Perk_39, 3); 
+				AT_AddAndEquipReSkill(S_Perk_37, 1); 
+				AT_AddAndEquipReSkill(S_Alchemy_s19, 3); 
+				AT_AddAndEquipReSkill(S_Perk_31, 3); 
+				break;
+	}	
+}
+
+function EquipUtilityDefensiveSkillsBasedOnAttributeLvl(attributeLvl : int)
+{
+	switch( attributeLvl )
+		{
+			
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				GetWitcherPlayer().DisplayHudMessage("Utility and Defensive build can only be acquired with 40 attributes.");
+				break;
+			
+			case 4:
+				AT_AddAndEquipReSkill(S_Perk_01, 3); 
+				AT_AddAndEquipReSkill(S_Perk_24, 3); 
+				AT_AddAndEquipReSkill(S_Perk_42, 3); 
+				
+				GetWitcherPlayer().AddSkill(S_Perk_43); 
+				GetWitcherPlayer().AddSkill(S_Perk_40); 
+				GetWitcherPlayer().AddSkill(S_Perk_37); 
+				
+				AT_AddAndEquipReSkill(S_Perk_34, 3); 
+				AT_AddAndEquipReSkill(S_Perk_31, 3); 
+				
+				GetWitcherPlayer().AddSkill(S_Sword_s22); 
+				GetWitcherPlayer().AddSkill(S_Sword_s33); 
+				GetWitcherPlayer().AddSkill(S_Sword_s18); 
+
+				AT_AddAndEquipReSkill(S_Sword_s16, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s18, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s38, 3); 
+				AT_AddAndEquipReSkill(S_Sword_s36, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s13, 3); 
+				AT_AddAndEquipReSkill(S_Magic_s17, 1); 
+				AT_AddAndEquipReSkill(S_Magic_s14, 3); 
+				break;
+	}	
+}
+
+function AT_Setlevel( targetLvl : int )
+{
+	var lm : W3PlayerWitcher;
+	var exp, prevLvl, currLvl : int;
+	
+	lm = GetWitcherPlayer();
+	prevLvl = lm.GetLevel();
+	currLvl = lm.GetLevel();
+		
+	while(currLvl < targetLvl)
+	{
+		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
+		lm.AddPoints(EExperiencePoint, exp, false);
+		currLvl = lm.GetLevel();
+		
+		if(prevLvl == currLvl)
+			break;				
+		
+		prevLvl = currLvl;
+	}	
 }

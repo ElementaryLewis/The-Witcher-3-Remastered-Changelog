@@ -538,7 +538,8 @@ import class CFocusModeController extends IGameSystem
 		
 		if ( UseControllerVibration( focusModeIntensity ) )
 		{
-			theGame.VibrateController( 0, intensity * ( 1.0f - focusModeIntensity ) * controllerVibrationFactor, controllerVibrationDuration );	
+			theGame.HapticStart( "classic_vibro_small_oneshot" );
+			
 			
 			focusAreaIntensity = 0.0f;
 		}

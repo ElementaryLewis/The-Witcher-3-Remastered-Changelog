@@ -196,6 +196,7 @@ statemachine class CMonsterNestEntity extends CInteractiveEntity
 		{
 			if( interactionComponent && interactionComponent.IsEnabled() )
 			{
+				thePlayer.SetBehaviorVariable( 'NestAnimType', 0 );
 				theGame.CreateNoSaveLock( 'nestSettingExplosives', saveLockIdx );
 				wasExploded = true;
 				GetEncounter();
@@ -266,7 +267,8 @@ statemachine class CMonsterNestEntity extends CInteractiveEntity
 		}
 		
 	}
-	private function SetMappinOnLoad ()
+
+	function SetMappinOnLoad ()
 	{
 		var commonMapManager : CCommonMapManager = theGame.GetCommonMapManager();
 		
@@ -279,6 +281,7 @@ statemachine class CMonsterNestEntity extends CInteractiveEntity
 			commonMapManager.SetEntityMapPinDiscoveredScript( false, entityName, true );
 		}
 	}
+	
 	function PlayerHasBombActivator() : bool
 	{
 		var i,j : int;

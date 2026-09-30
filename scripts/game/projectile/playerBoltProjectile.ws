@@ -50,6 +50,9 @@ class W3BoltProjectile extends W3ArrowProjectile
 	{
 		var action : W3Action_Attack;
 		var victimTags, attackerTags : array<name>;
+		var boneNameString : string;
+
+		boneNameString = NameToString(boneName);
 
 		
 		
@@ -74,7 +77,7 @@ class W3BoltProjectile extends W3ArrowProjectile
 		
 		if ( (CNewNPC)victim )
 		{
-			if ( boneName == 'head' || boneName == 'neck' || boneName == 'hroll' || ( boneName == 'pelvis' && ((CNewNPC)victim).IsHuman() ) )
+			if ( StrFindFirst(boneNameString, "head") >= 0 || StrFindFirst(boneNameString, "neck") >= 0 || StrFindFirst(boneNameString, "hroll") >= 0 || ( StrFindFirst(boneNameString, "pelvis") >= 0 && ((CNewNPC)victim).IsHuman() ) )
 				action.SetHeadShot();
 		}
 			
@@ -246,11 +249,7 @@ class W3BoltProjectile extends W3ArrowProjectile
 		var splitCount : int;
 		var additionalProjectile : W3BoltProjectile;
 		
-		if(GetOwner() == thePlayer)
-		{
-			if( theGame.GetPlatform() != Platform_PS5 ) 
-				theGame.VibrateControllerHard();	
-		}
+		 
 		
 		inv = GetOwner().GetInventory();
 		projectiles.Clear();
@@ -331,8 +330,10 @@ class W3BoltProjectile extends W3ArrowProjectile
 		var target 					: CActor = thePlayer.GetTarget();
 		var inv 					: CInventoryComponent;
 		
-		var boneIndex				: int;
 		var npc						: CNewNPC;
+		var vcc						: SVirtualControllerData;
+		var boneIndex				: int;
+		var boneName				: name;
 
 		
 		
@@ -349,18 +350,29 @@ class W3BoltProjectile extends W3ArrowProjectile
 		
 		
 		boneIndex = -1;
-		if ( thePlayer.IsCombatMusicEnabled() && thePlayer.GetDisplayTarget()  && thePlayer.playerAiming.GetCurrentStateName() == 'Waiting' )
+		npc = (CNewNPC)(thePlayer.GetDisplayTarget());
+		if ( npc && thePlayer.IsCombatMusicEnabled()  && thePlayer.playerAiming.GetCurrentStateName() == 'Waiting' )
 		{
-			npc = (CNewNPC)(thePlayer.GetDisplayTarget());
-			if ( npc )
-				boneIndex = npc.GetBoneIndex( 'torso2' );					
+			if ( thePlayer.HasVirtualControllerTarget() )
+			{
+				
+				
+				vcc = thePlayer.GetTargetableVirtualController();
+				boneName = vcc.boneName;
+				boneIndex = vcc.boneIndex;
+			}
+			else
+			{
+				boneName = 'torso2';
+				boneIndex = npc.GetBoneIndex( boneName );
+			}
 		}
 		if ( target.HasTag('AddRagdollCollision'))
 		{
 			collisionGroups.Remove('Character');
 		}
 		if ( boneIndex >= 0 )
-			projectiles[0].ShootProjectileAtBone( projAngle, projSpeed, npc, 'torso2', attackRange, collisionGroups );
+			projectiles[0].ShootProjectileAtBone( projAngle, projSpeed, npc, boneName, attackRange, collisionGroups );
 		else
 			projectiles[0].ShootProjectileAtPosition( projAngle, projSpeed, targetPos, attackRange, collisionGroups );
 			

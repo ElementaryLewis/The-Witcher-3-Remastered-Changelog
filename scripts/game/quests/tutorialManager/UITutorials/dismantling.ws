@@ -20,7 +20,7 @@ state Dismantling in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 		isClosing = false;
 		
-		ShowHint(DESCRIPTION, POS_DISMANTLE_X, POS_DISMANTLE_Y, ETHDT_Input);
+		ShowHint(DESCRIPTION, POS_DISMANTLE_X, POS_DISMANTLE_Y - 0.065f, ETHDT_Input);
 	}
 			
 	event OnLeaveState( nextStateName : name )
@@ -46,20 +46,10 @@ state Dismantling in W3TutorialManagerUIHandler extends TutHandlerBaseState
 			
 		if(hintName == DESCRIPTION)
 		{
-			ShowHint( ITEMS, POS_DISMANTLE_X, POS_DISMANTLE_Y, ETHDT_Input, GetHighlightDismantleItems() );
+			ShowHint(DISMANTLING, POS_DISMANTLE_X, POS_DISMANTLE_Y - 0.065f, ETHDT_Input);
+			
 		}		
-		else if(hintName == ITEMS)
-		{
-			ShowHint(COMPONENTS, POS_DISMANTLE_X, POS_DISMANTLE_Y, ETHDT_Input, GetHighlightDismantleComponents() );
-		}
-		else if(hintName == COMPONENTS)
-		{
-			ShowHint( COST, POS_DISMANTLE_X, POS_DISMANTLE_Y, ETHDT_Input, GetHighlightDismantleCost() );
-		}
-		else if(hintName == COST)
-		{
-			ShowHint(DISMANTLING, POS_DISMANTLE_X, POS_DISMANTLE_Y, ETHDT_Input);
-		}
+		
 		else if(hintName == DISMANTLING)
 		{
 			QuitState();

@@ -64,6 +64,7 @@ class CR4TutorialPopup extends CR4PopupBase
 		var isGamepad:bool = theInput.LastUsedGamepad();
 		
 		SetControllerType(isGamepad);
+		UpdateInputDeviceType();
 	}
 	
 	public function UpdateData(TutData : W3TutorialPopupData, optional showAnimation : bool) : void
@@ -109,7 +110,7 @@ class CR4TutorialPopup extends CR4PopupBase
 					commonMenuRef.SetInputFeedbackVisibility(false);
 				}
 			}
-			if (m_DataObject.pauseGame || m_DataObject.fullscreen)
+			if (m_DataObject.pauseGame || m_DataObject.fullscreen && m_DataObject.scriptTag != 'PlaystyleDualGrip')
 			{
 				theGame.Pause("tutorial");
 			}
@@ -371,8 +372,10 @@ class CR4TutorialPopup extends CR4PopupBase
 		GFxHintObject.SetMemberFlashNumber("posY", m_DataObject.posY);
 		GFxHintObject.SetMemberFlashNumber("duration", m_DataObject.duration);
 		GFxHintObject.SetMemberFlashString("messageText", m_DataObject.messageText);
+		GFxHintObject.SetMemberFlashString("scriptTag", NameToString(m_DataObject.scriptTag));
 		GFxHintObject.SetMemberFlashString("messageTitle", m_DataObject.messageTitle);
 		GFxHintObject.SetMemberFlashString("imagePath", m_DataObject.imagePath);
+		GFxHintObject.SetMemberFlashString("extraInfo", m_DataObject.extraInfo);
 		GFxHintObject.SetMemberFlashBool("enableGlossaryLink", enableGlossaryLink);
 		GFxHintObject.SetMemberFlashBool("enableAcceptButton", m_DataObject.enableAcceptButton);
 		GFxHintObject.SetMemberFlashBool("autosize", m_DataObject.autosize);
@@ -411,6 +414,7 @@ class W3TutorialPopupData extends CObject
 	public var messageTitle:string;
 	public var messageText:string;
 	public var imagePath:string;
+	public var extraInfo:string;
 	public var fadeBackground:bool; 
 	public var autosize:bool;
 	public var enableGlossoryLink:bool;

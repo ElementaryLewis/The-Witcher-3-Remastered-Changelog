@@ -11,21 +11,34 @@ class BTTaskSetAdditiveHitFlag extends IBehTreeTask
 	public var additiveHits				: bool;
 	public var additiveCriticalStates	: bool;
 	public var overrideOnly				: bool;
+	public var checkStunAdditive		: bool;
 	public var playNormalHitOnCritical	: bool;
 	
 	private var m_valueOnActivate		: bool;
 	private var m_csValueOnActivate		: bool;
+	private var m_stunValueOnActivate	: bool;
 	
 	private var m_waitingForEventEnd	: bool;
 	
 	
 	
 	function OnActivate() : EBTNodeStatus
-	{
+	{	
 		var npc : CNewNPC = GetNPC();
 		
-		m_valueOnActivate = npc.UseAdditiveHit();
-		m_csValueOnActivate = npc.UseAdditiveCriticalState();
+		if(npc.UseAdditiveStunHit())
+		{
+			m_valueOnActivate = false;
+		}
+		else
+		{
+			m_valueOnActivate = npc.UseAdditiveHit();
+		}
+		
+		
+		m_csValueOnActivate = npc.UseAdditiveCriticalState();	
+		m_stunValueOnActivate = npc.UseAdditiveStunHit();
+		
 		
 		if( !onDeactivate )
 			Execute( flag, flag );
@@ -51,7 +64,7 @@ class BTTaskSetAdditiveHitFlag extends IBehTreeTask
 	
 	
 	function OnAnimEvent( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo ) : bool
-	{	
+	{
 		if( animEventName == onAnimEvent && animEventType != AET_DurationEnd && animEventType != AET_Duration )
 		{
 			Execute( flag, flag );
@@ -69,13 +82,34 @@ class BTTaskSetAdditiveHitFlag extends IBehTreeTask
 	
 	private function Execute( _Flag : bool, _criticalStateFlag : bool )
 	{
+
 		var npc : CNewNPC = GetNPC();
+		
+		
 		if ( additiveHits )
+		{
+			npc.SetUseAdditionalAdditiveStunHit(_Flag);
+			
+			if(npc.UseAdditiveStunHit())
+			{
+				return;	
+			}
+			else if(m_stunValueOnActivate)
+			{
+				npc.SetUseAdditiveHit( false, false );
+				return;	
+			}
+			
 			npc.SetUseAdditiveHit( _Flag, playNormalHitOnCritical );
+		}
+		
+		
 		if ( additiveCriticalStates )
-			npc.SetUseAdditiveCriticalStateAnim( _criticalStateFlag );
+			npc.SetUseAdditiveCriticalStateAnim( _criticalStateFlag );		
 	}
 }
+
+
 
 class BTTaskSetAdditiveHitFlagDef extends IBehTreeTaskDefinition
 {
@@ -87,6 +121,7 @@ class BTTaskSetAdditiveHitFlagDef extends IBehTreeTaskDefinition
 	editable var additiveHits				: bool;
 	editable var additiveCriticalStates		: bool;
 	editable var overrideOnly				: bool;
+	editable var checkStunAdditive			: bool;
 	editable var playNormalHitOnCritical	: bool;
 	
 	default flag			= true;

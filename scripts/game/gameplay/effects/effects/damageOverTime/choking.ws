@@ -16,10 +16,16 @@ class W3Effect_Choking extends W3DamageOverTimeEffect
 	
 	event OnUpdate(dt : float)
 	{
+		var inGameConfigWrapper : CInGameConfigWrapper;
+		var isAccessibilityAirDrainDisabled : bool;
+
+		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+		isAccessibilityAirDrainDisabled = inGameConfigWrapper.GetVarValue('Accessibility', 'NoAirDrain') == "true";
+
 		super.OnUpdate(dt);
 		
 		
-		if(target.GetStat(BCS_Air) > 0)
+		if(target.GetStat(BCS_Air) > 0 || isAccessibilityAirDrainDisabled )
 		{
 			isActive = false;
 		}

@@ -465,3 +465,18 @@ function SignOrZeroF( value : float )	: float
 	
 	return 0.0f;
 }
+
+
+
+function ProjectPointToLine(point : Vector, lineA : Vector , lineB : Vector) : Vector
+{
+	var u : Vector;
+	var v : Vector;
+	var u_normed : Vector;
+
+	u = lineA - lineB;
+	v = point - lineA;
+
+	u_normed = VecNormalize(u);
+	return lineA + u_normed * VecDot(v,u_normed);
+}

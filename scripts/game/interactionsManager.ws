@@ -39,7 +39,8 @@ import class CInteractionsManager extends IGameSystem
 		{
 			return IsPressed( action );
 		}
-		else if ( thePlayer.GetHowLongSprintButtonWasPressed() > 0.12f )
+		
+		else if ( thePlayer.GetHowLongSprintButtonWasPressed() > 0.2f )
 		{
 			theInput.GetPadKeysForAction('Sprint', outSprintKeys );
 			theInput.GetPadKeysForAction(action.aName, outInteractionKeys );

@@ -204,6 +204,9 @@ class CTeleportEntity extends CInteractiveEntity
 	timer function TeleportMe( td : float , id : int )
 	{	
 		thePlayer.TeleportWithRotation( destinationNode.GetWorldPosition() + destinationNode.GetHeadingVector() * 1.5, destinationNode.GetWorldRotation() );
+
+
+
 		if( thePlayer.GetCurrentStateName() == 'AimThrow' )
 				thePlayer.OnRangedForceHolster( true );
 		AddTimer( 'FadeInAfter', 0.5 );	
@@ -214,6 +217,9 @@ class CTeleportEntity extends CInteractiveEntity
 	timer function TeleportMeWithBlackscreen( td : float , id : int )
 	{	
 		thePlayer.TeleportWithRotation( destinationNode.GetWorldPosition() + destinationNode.GetHeadingVector() * 1.5, destinationNode.GetWorldRotation() );
+
+
+
 		theInput.RestoreContext( 'EMPTY_CONTEXT', false );
 		currentlyTeleporting = false;
 	}

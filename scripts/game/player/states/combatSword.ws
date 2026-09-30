@@ -146,7 +146,18 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_7_rp_40ms', AD_Front, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_rp_40ms', AD_Back, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_rp_40ms', AD_Left, ADIST_Medium );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms', AD_Right, ADIST_Medium );			
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms', AD_Right, ADIST_Medium );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_1_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_2_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_3_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_4_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_5_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_6_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_7_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_rp_40ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_rp_40ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
 
 			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_rp_50ms', AD_Front, ADIST_Large );
@@ -156,7 +167,16 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_rp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_rp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_rp_50ms', AD_Right, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms', AD_Right, ADIST_Large );			
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_rp_50ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_3_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_rp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_rp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_rp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 
 			
 			
@@ -168,7 +188,7 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddAttack( 'man_geralt_sword_attack_fast_4_rp_40ms', ADIST_Medium );
 			str.AddAttack( 'man_geralt_sword_attack_fast_5_rp_40ms', ADIST_Medium );
 			str.AddAttack( 'man_geralt_sword_attack_fast_6_rp_40ms', ADIST_Medium );
-			str.AddAttack( 'man_geralt_sword_attack_fast_7_rp_40ms', ADIST_Medium );			
+			str.AddAttack( 'man_geralt_sword_attack_fast_7_rp_40ms', ADIST_Medium );
 
 			
 			aspect.AddLink( 'man_geralt_sword_attack_close_combo_l_1', 'man_geralt_sword_attack_close_combo_r_2' );
@@ -200,14 +220,33 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_lp_40ms', AD_Left, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_lp_40ms', AD_Right, ADIST_Medium );
 
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_1_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_2_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_3_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_4_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_5_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_6_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_7_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_lp_40ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_lp_40ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_lp_40ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
+
 			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_lp_50ms', AD_Front, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_lp_50ms', AD_Back, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_lp_50ms', AD_Back, ADIST_Large );			
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_lp_50ms', AD_Back, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_lp_50ms', AD_Left, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_lp_50ms', AD_Left, ADIST_Large );			
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_lp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_lp_50ms', AD_Right, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms', AD_Right, ADIST_Large );				
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_lp_50ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_lp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_lp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_lp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_lp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_lp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 
 			
 			
@@ -219,7 +258,7 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddAttack( 'man_geralt_sword_attack_fast_4_lp_40ms', ADIST_Medium );
 			str.AddAttack( 'man_geralt_sword_attack_fast_5_lp_40ms', ADIST_Medium );
 			str.AddAttack( 'man_geralt_sword_attack_fast_6_lp_40ms', ADIST_Medium );
-			str.AddAttack( 'man_geralt_sword_attack_fast_7_lp_40ms', ADIST_Medium );			
+			str.AddAttack( 'man_geralt_sword_attack_fast_7_lp_40ms', ADIST_Medium );
 
 			
 			aspect.AddLink( 'man_geralt_attack_close_30ms_r_1', 'man_geralt_sword_attack_close_combo_l_1' );
@@ -254,10 +293,29 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_left_1_rp_70ms', AD_Left, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_right_1_rp_70ms', AD_Right, ADIST_Medium );
 
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_1_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_2_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_3_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_4_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_5_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_6_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_7_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_8_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_9_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_10_rp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_back_1_rp_70ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_left_1_rp_70ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_right_1_rp_70ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
+
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_forward_1_rp_80ms', AD_Front, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_back_1_rp_80ms', AD_Back, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_left_1_rp_80ms', AD_Left, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_right_1_rp_80ms', AD_Right, ADIST_Large );			
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_right_1_rp_80ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_forward_1_rp_80ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_back_1_rp_80ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_left_1_rp_80ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_right_1_rp_80ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 					
 			str.AddAttack( 'man_geralt_sword_attack_strong_1_rp_70ms', ADIST_Medium );
 			str.AddAttack( 'man_geralt_sword_attack_strong_2_rp_70ms', ADIST_Medium );
@@ -289,10 +347,29 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_left_1_lp_70ms', AD_Left, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_right_1_lp_70ms', AD_Right, ADIST_Medium );
 
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_1_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_2_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_3_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_4_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_5_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_6_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_7_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_8_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_9_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_10_lp_70ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_back_1_lp_70ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_left_1_lp_70ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_right_1_lp_70ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
+
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_forward_1_lp_80ms', AD_Front, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_back_1_lp_80ms', AD_Back, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_left_1_lp_80ms', AD_Left, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_right_1_lp_80ms', AD_Right, ADIST_Large );			
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_right_1_lp_80ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_forward_1_lp_80ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_back_1_lp_80ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_left_1_lp_80ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_strong_far_right_1_lp_80ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 					
 			str.AddAttack( 'man_geralt_sword_attack_strong_1_lp_70ms', ADIST_Medium );
 			str.AddAttack( 'man_geralt_sword_attack_strong_2_lp_70ms', ADIST_Medium );
@@ -693,7 +770,14 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_8_rp_40ms', AD_Front, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_rp_40ms', AD_Back, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_rp_40ms', AD_Left, ADIST_Medium );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms', AD_Right, ADIST_Medium );			
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms', AD_Right, ADIST_Medium );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_1_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_5_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_7_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_rp_40ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_rp_40ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
 			
 			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_rp_50ms', AD_Front, ADIST_Large );
@@ -703,7 +787,16 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_rp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_rp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_rp_50ms', AD_Right, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms', AD_Right, ADIST_Large );			
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_rp_50ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_3_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_rp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_rp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_rp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 			
 			
 			str.AddAttack( 'man_geralt_sword_attack_fast_1_rp_40ms', ADIST_Small );
@@ -740,6 +833,14 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_lp_40ms', AD_Left, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_lp_40ms', AD_Right, ADIST_Medium );
 
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_1_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_5_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_6_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_7_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_lp_40ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_lp_40ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_lp_40ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
+
 			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_lp_50ms', AD_Front, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_lp_50ms', AD_Back, ADIST_Large );
@@ -747,7 +848,15 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_lp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_lp_50ms', AD_Left, ADIST_Large );			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_lp_50ms', AD_Right, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms', AD_Right, ADIST_Large );	
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_lp_50ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_lp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_lp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_lp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_lp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_lp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 
 			
 			str.AddAttack( 'man_geralt_sword_attack_fast_1_lp_40ms', ADIST_Small );
@@ -793,7 +902,14 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_8_rp_40ms', AD_Front, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_rp_40ms', AD_Back, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_rp_40ms', AD_Left, ADIST_Medium );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms', AD_Right, ADIST_Medium );			
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms', AD_Right, ADIST_Medium );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_1_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_5_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_7_rp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_rp_40ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_rp_40ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_rp_40ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
 			
 			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_rp_50ms', AD_Front, ADIST_Large );
@@ -803,7 +919,16 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_rp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_rp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_rp_50ms', AD_Right, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms', AD_Right, ADIST_Large );	
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_rp_50ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_3_rp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_rp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_rp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_rp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_rp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 				
 			
 			str.AddAttack( 'man_geralt_sword_attack_fast_1_rp_40ms', ADIST_Small );
@@ -840,6 +965,14 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_lp_40ms', AD_Left, ADIST_Medium );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_lp_40ms', AD_Right, ADIST_Medium );
 
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_1_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_5_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_6_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_7_lp_40ms_extra_dist_remaster', AD_Front, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_back_1_lp_40ms_extra_dist_remaster', AD_Back, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_left_1_lp_40ms_extra_dist_remaster', AD_Left, ADIST_MediumLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_right_1_lp_40ms_extra_dist_remaster', AD_Right, ADIST_MediumLarge );
+
 			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_lp_50ms', AD_Front, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_lp_50ms', AD_Back, ADIST_Large );
@@ -847,7 +980,15 @@ state CombatSword in W3PlayerWitcher extends Combat
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_lp_50ms', AD_Left, ADIST_Large );
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_lp_50ms', AD_Left, ADIST_Large );			
 			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_lp_50ms', AD_Right, ADIST_Large );
-			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms', AD_Right, ADIST_Large );		
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms', AD_Right, ADIST_Large );
+
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_forward_1_lp_50ms_extra_dist_remaster', AD_Front, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_1_lp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_back_2_lp_50ms_extra_dist_remaster', AD_Back, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_1_lp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_left_2_lp_50ms_extra_dist_remaster', AD_Left, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_1_lp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
+			str.AddDirAttack( 'man_geralt_sword_attack_fast_far_right_2_lp_50ms_extra_dist_remaster', AD_Right, ADIST_ExtraLarge );
 
 			
 			str.AddAttack( 'man_geralt_sword_attack_fast_1_lp_40ms', ADIST_Small );

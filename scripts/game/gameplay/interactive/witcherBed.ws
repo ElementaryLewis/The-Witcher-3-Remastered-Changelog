@@ -132,6 +132,7 @@ state Sleep in W3WitcherBed
 		var l_component				: CComponent;
 		var l_HACKmovementCorrector	: CExplorationMovementCorrector;
 		var l_buffsHud				: CR4HudModuleBuffs;
+		var blockExceptions : array<EInputActionBlock>;
 		
 		
 		l_HACKmovementCorrector = thePlayer.substateManager.m_MovementCorrectorO;
@@ -157,7 +158,9 @@ state Sleep in W3WitcherBed
 		thePlayer.AddBuffImmunity_AllNegative( 'Bed', true );
 		
 		
-		thePlayer.BlockAllActions( 'WitcherBed', true,,,,,false );
+		blockExceptions.PushBack(EIAB_OpenMeditation);
+		blockExceptions.PushBack(EIAB_MeditationWaiting);
+		thePlayer.BlockAllActions( 'WitcherBed', true,blockExceptions,,,,false );
 		thePlayer.ActionMoveToNodeWithHeading( l_node, MT_Walk, 1.f, 0.4f );
 		
 		

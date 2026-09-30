@@ -13,7 +13,7 @@ state JournalQuest in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	{
 		super.OnEnterState(prevStateName);
 		
-		ShowHint(TUTORIAL, POS_QUESTS_X, POS_QUESTS_Y, ETHDT_Infinite);
+		ShowHint(TUTORIAL, POS_QUESTS_X, POS_QUESTS_Y);
 	}
 		
 	event OnLeaveState( nextStateName : name )

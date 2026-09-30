@@ -73,6 +73,7 @@ class W3DamageAction extends CDamageData
 	protected var wasFrozen	: bool;									
 	protected var mutation4Triggered : bool;						
 	protected var didReturnDamageToAttacker : bool;					
+	protected var simulateOnly : bool;								
 	
 	
 	private var DOTdt : float;										
@@ -82,6 +83,7 @@ class W3DamageAction extends CDamageData
 	private var isActionRanged : bool;
 	private var isActionWitcherSign : bool;
 	private var isActionEnvironment : bool;
+
 	
 	default hitAnimationPlayType 			= EAHA_Default;
 	default cannotReturnDamage 				= false;
@@ -102,6 +104,7 @@ class W3DamageAction extends CDamageData
 	default underwaterDisplayDamageHack 	= false;
 	default parryStagger					= false;
 	default bouncedArrow					= false;
+	default simulateOnly					= false;
 		
 	public function Initialize( att : CGameplayEntity, vict : CGameplayEntity, caus : IScriptable, src : string, hrt : EHitReactionType, pwrStatType : ECharacterPowerStats, isM : bool, isR : bool, isW : bool, isE : bool, optional hitFX_ : name, optional hitBackFX_ : name, optional hitParriedFX_ : name, optional hitBackParriedFX_ : name)
 	{
@@ -622,7 +625,7 @@ class W3DamageAction extends CDamageData
 	public final function IsActionRanged() : bool			{return isActionRanged;}
 	public final function IsActionWitcherSign() : bool		{return isActionWitcherSign;}	
 	public final function IsActionEnvironment() : bool		{return isActionEnvironment;}
-	
+
 	public final function IsParryStagger() : bool				{return parryStagger;}
 	public final function SetParryStagger()						{parryStagger = true;}
 	public final function ProcessBuffsIfNoDamage() : bool		{return shouldProcessBuffsIfNoDamage;}
@@ -661,6 +664,8 @@ class W3DamageAction extends CDamageData
 	public final function GetMutation4Triggered() : bool		{return mutation4Triggered;}
 	public final function WasDamageReturnedToAttacker() : bool  {return didReturnDamageToAttacker;}
 	public final function SetWasDamageReturnedToAttacker( b : bool ) {didReturnDamageToAttacker = b;}
+	public final function SetSimulateOnly( toggle : bool ) 		{simulateOnly = toggle;}
+	public final function GetSimulateOnly() : bool				{return simulateOnly;}
 
 	public final function SetCriticalHit()
 	{
