@@ -1076,7 +1076,7 @@ class CR4BlacksmithMenu extends CR4MenuBase
 		
 	}
 	
-	event  OnAppendGFxButton(actionId:int, gamepadNavCode:String, keyboardKeyCode:int, label:String, holdPrefix:bool, optional holdDuration:float)
+	event  OnAppendGFxButton(actionId:int, gamepadNavCode:String, keyboardKeyCode:int, label:String, holdPrefix:bool)
 	{
 		var newButtonDef:SKeyBinding;
 		
@@ -1089,8 +1089,6 @@ class CR4BlacksmithMenu extends CR4MenuBase
 		{
 			newButtonDef.LocalizationKey = GetHoldLabel() + " " + GetLocStringByKeyExt(label);
 			newButtonDef.IsLocalized = true;
-			newButtonDef.IsHold = true;
-			newButtonDef.HoldDuration = holdDuration;
 		}
 		else
 		{

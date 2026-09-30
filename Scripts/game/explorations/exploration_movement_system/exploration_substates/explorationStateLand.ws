@@ -51,7 +51,6 @@ class CExplorationStateLand extends CExplorationStateAbstract
 	protected editable			var	m_BehLandSkipToWalkN	: name;			default	m_BehLandSkipToWalkN		= 'LandSkipToWalk';
 	protected editable			var	m_BehLandSkipToIdleN	: name;			default	m_BehLandSkipToIdleN		= 'LandSkipToIdle';
 	protected editable			var	m_BehLandFallForwardN	: name;			default	m_BehLandFallForwardN		= 'LandFallIsForward';
-	protected editable			var m_BehCheckFootForward	: name;			default m_BehCheckFootForward		= 'CheckFootForward';
 	
 	
 	protected editable			var	m_HeightToLandCrouch	: float;		default	m_HeightToLandCrouch		= 2.75f;
@@ -70,7 +69,6 @@ class CExplorationStateLand extends CExplorationStateAbstract
 	protected editable inlined	var	m_LandDataDamage		: SLandData;	
 	protected editable inlined	var	m_LandDataDeath			: SLandData;
 	protected editable inlined	var	m_LandDataKnockBack		: SLandData;
-	protected editable inlined	var	m_LandDataVault			: SLandData;
 	
 	protected 					var	m_LandData				: SLandData;
 	
@@ -314,11 +312,6 @@ class CExplorationStateLand extends CExplorationStateAbstract
 		{
 			m_ExplorationO.m_SharedDataO.ForceFotForward( !m_ExplorationO.m_SharedDataO.m_IsRightFootForwardB );
 		}
-
-		if ( m_ExplorationO.m_SharedDataO.m_JumpTypeE == EJT_Vault )
-		{
-			m_ExplorationO.m_SharedDataO.SetRunStartingFoot();
-		}
 	}
 	
 	
@@ -326,7 +319,6 @@ class CExplorationStateLand extends CExplorationStateAbstract
 	{
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( m_BehLandCanEndN, 'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( m_BehLandCancelN, 'OnAnimEvent_SubstateManager' );
-		m_ExplorationO.m_OwnerE.AddAnimEventCallback( m_BehCheckFootForward, 'OnAnimEvent_SubstateManager' );
 	}
 	
 	
@@ -455,7 +447,6 @@ class CExplorationStateLand extends CExplorationStateAbstract
 	{
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( m_BehLandCanEndN );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( m_BehLandCancelN );
-		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( m_BehCheckFootForward );
 	}
 	
 	
@@ -750,10 +741,6 @@ class CExplorationStateLand extends CExplorationStateAbstract
 						SetThisParameters( m_LandDataFall );
 						LogExploration( " Params set: m_LandDataFall" );
 						break;
-					case EJT_Vault :
-						SetThisParameters( m_LandDataVault );
-						LogExploration( " Params set: m_LandDataVault" );
-						break;
 				}
 				break;
 			case LT_Higher	:
@@ -963,11 +950,6 @@ class CExplorationStateLand extends CExplorationStateAbstract
 		{		
 			LogExplorationLandExit( GetStateName() + " SetReadyToChangeTo: Beh land cancel event received" );
 			SetReadyToChangeTo( 'Idle' );
-		}
-		else if ( animEventName == m_BehCheckFootForward && m_ExplorationO.m_SharedDataO.m_JumpTypeE == EJT_Vault )
-		{
-			
-			m_ExplorationO.m_SharedDataO.SetRunStartingFoot();
 		}
 	}
 	

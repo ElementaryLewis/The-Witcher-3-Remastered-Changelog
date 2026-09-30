@@ -33,13 +33,7 @@ class W3Effect_Drowning extends W3DamageOverTimeEffect
 	}
 	
 	event OnUpdate(dt : float)
-	{	
-		var inGameConfigWrapper : CInGameConfigWrapper;
-		var isAccessibilityAirDrainDisabled : bool;
-
-		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
-		isAccessibilityAirDrainDisabled = inGameConfigWrapper.GetVarValue('Accessibility', 'NoAirDrain') == "true";
-
+	{
 		super.OnUpdate(dt);
 
 		submergeDepth = mac.GetSubmergeDepth();
@@ -61,7 +55,7 @@ class W3Effect_Drowning extends W3DamageOverTimeEffect
 		}
 		
 		
-		if( target.GetStat(BCS_Air) > 0 || ( isOnPlayer && !thePlayer.OnCheckDiving() ) || isAccessibilityAirDrainDisabled )
+		if( target.GetStat(BCS_Air) > 0 || ( isOnPlayer && !thePlayer.OnCheckDiving() ) )
 		{
 			isActive = false;
 			return false;

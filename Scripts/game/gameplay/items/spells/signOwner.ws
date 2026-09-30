@@ -194,80 +194,28 @@ class W3SignOwnerPlayer extends W3SignOwner
 		
 		
 		var shouldAltCast : bool;
-		var shouldAltCastSelect : bool = false;
-		var altInputPressed : bool;
-		var mouserControllerScheme : MouserControllerScheme = theInput.GetMouserControllerScheme();
-
+		var altInputHeld : bool;
 		if(!theInput.LastUsedPCInput() && thePlayer.GetInputHandler().GetIsAltSignCasting())
 		{
-			if (mouserControllerScheme == MouserControllerScheme_None) 
+			if( ((W3AardEntity)signEntity) && (theInput.IsActionPressed('Sprint') || theInput.IsActionPressed('CbtRoll')) )
 			{
-				if( ((W3AardEntity)signEntity) && (theInput.IsActionPressed('Sprint') || theInput.IsActionPressed('CbtRoll')))
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3AxiiEntity)signEntity) && theInput.IsActionPressed('AttackLight') )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3QuenEntity)signEntity) && (theInput.IsActionPressed('AltQuenCasting') || theInput.IsActionPressed('Dodge')))
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3YrdenEntity)signEntity) && theInput.IsActionPressed('AttackHeavy') )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3IgniEntity)signEntity) && (theInput.IsActionPressed('LockAndGuard') || theInput.IsActionPressed('Focus')) )
-				{
-					shouldAltCast = true;
-				}
+				shouldAltCast = true;
+			} 
+			else if( ((W3IgniEntity)signEntity) && (theInput.IsActionPressed('LockAndGuard') || theInput.IsActionPressed('Focus')) )
+			{
+				shouldAltCast = true;
 			}
-			else if (mouserControllerScheme == MouserControllerScheme_Comfort)
+			else if( ((W3YrdenEntity)signEntity) && theInput.IsActionPressed('AttackHeavy') )
 			{
-				if( ((W3AardEntity)signEntity) && (theInput.IsActionPressed('Sprint') || theInput.IsActionPressed('CbtRoll')))
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3AxiiEntity)signEntity) && theInput.IsActionPressed('ThrowItem') )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3QuenEntity)signEntity) && (theInput.IsActionPressed('AltQuenCasting') || theInput.IsActionPressed('Dodge')))
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3YrdenEntity)signEntity) && (theInput.IsActionPressed('LockAndGuard') || theInput.IsActionPressed('Focus')) )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3IgniEntity)signEntity) && theInput.IsActionPressed('AttackHeavy') )
-				{
-					shouldAltCast = true;
-				}
+				shouldAltCast = true;
 			}
-			else if(mouserControllerScheme == MouserControllerScheme_Dynamic)
+			else if( ((W3QuenEntity)signEntity) && (theInput.IsActionPressed('AltQuenCasting') || theInput.IsActionPressed('Dodge')) )
 			{
-				if( ((W3AardEntity)signEntity) && (theInput.IsActionPressed('SilverSword')) )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3AxiiEntity)signEntity) && theInput.IsActionPressed('DrinkPotion1') )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3QuenEntity)signEntity) && theInput.IsActionPressed('DrinkPotion2') )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3YrdenEntity)signEntity) && theInput.IsActionPressed('SteelSword') )
-				{
-					shouldAltCast = true;
-				}
-				else if( ((W3IgniEntity)signEntity) && (theInput.IsActionPressed('LockAndGuard') || theInput.IsActionPressed('Focus')) )
-				{
-					shouldAltCast = true;
-				}
+				shouldAltCast = true;
+			}
+			else if( ((W3AxiiEntity)signEntity) && theInput.IsActionPressed('AttackLight') )
+			{
+				shouldAltCast = true;
 			}
 		}
 		else if(theInput.LastUsedPCInput() && thePlayer.GetInputHandler().GetIsAltSignCasting())
@@ -275,32 +223,27 @@ class W3SignOwnerPlayer extends W3SignOwner
 			if( ((W3AardEntity)signEntity) && (theInput.IsActionPressed('SelectAard') || theInput.IsActionPressed( 'CastSign' )) )
 			{
 				shouldAltCast = true;
-				shouldAltCastSelect = !theInput.IsActionReleased('SelectAard');
-				altInputPressed = theInput.IsActionPressed('SelectAard');
+				altInputHeld = true;
 			} 
 			else if( ((W3IgniEntity)signEntity) && (theInput.IsActionPressed('SelectIgni') || theInput.IsActionPressed( 'CastSign' )) )
 			{
 				shouldAltCast = true;
-				shouldAltCastSelect = !theInput.IsActionReleased('SelectIgni');
-				altInputPressed = theInput.IsActionPressed('SelectIgni');
+				altInputHeld = true;
 			}
 			else if( ((W3YrdenEntity)signEntity) && (theInput.IsActionPressed('SelectYrden') || theInput.IsActionPressed( 'CastSign' )) )
 			{
 				shouldAltCast = true;
-				shouldAltCastSelect = !theInput.IsActionReleased('SelectYrden');
-				altInputPressed = theInput.IsActionPressed('SelectYrden');
+				altInputHeld = true;
 			}
 			else if( ((W3QuenEntity)signEntity) && (theInput.IsActionPressed('SelectQuen') || theInput.IsActionPressed( 'CastSign' )) )
 			{
 				shouldAltCast = true;
-				shouldAltCastSelect = !theInput.IsActionReleased('SelectQuen');
-				altInputPressed = theInput.IsActionPressed('SelectQuen');
+				altInputHeld = true;
 			}
 			else if( ((W3AxiiEntity)signEntity) && (theInput.IsActionPressed('SelectAxii') || theInput.IsActionPressed( 'CastSign' )) )
 			{
 				shouldAltCast = true;
-				shouldAltCastSelect = !theInput.IsActionReleased('SelectAxii');
-				altInputPressed = theInput.IsActionPressed('SelectAxii');
+				altInputHeld = true;
 			}
 		}
 		else
@@ -308,11 +251,12 @@ class W3SignOwnerPlayer extends W3SignOwner
 			shouldAltCast = true;
 		}
 		
+
 		if ( !player.CanUseSkill( newSkill ) )
 		{
 			ret = false;
 		}	
-		else if ( (theInput.IsActionPressed( 'CastSign' ) || theInput.GetActionValue( 'CastSignHold' ) > 0.f || altInputPressed) && shouldAltCast ) 
+		else if ( (theInput.IsActionPressed( 'CastSign' ) || theInput.GetActionValue( 'CastSignHold' ) > 0.f || altInputHeld) && shouldAltCast ) 
 		{
 			if ( !player.IsCombatMusicEnabled() && !player.CanAttackWhenNotInCombat( EBAT_CastSign, true, newTarget ) )
 			{
@@ -321,23 +265,6 @@ class W3SignOwnerPlayer extends W3SignOwner
 			else if( player.HasBuff( EET_GryphonSetBonus ) && player.GetStatPercents( BCS_Stamina ) < 1.f )
 			{
 				ret = false;
-			}
-			else if( theInput.IsActionPressed( 'CastSign' ) && !altInputPressed && theInput.GetActionValue( 'CastSignHold' ) == 0.f )
-			{
-				ret = false;
-			}
-			else if( altInputPressed )
-			{
-				if (shouldAltCastSelect)
-				{
-					signEntity.SetAlternateCast( newSkill );
-					player.SetBehaviorVariable( 'alternateSignCast', 1 );
-					ret = true;
-				}
-				else
-				{
-					ret = false;
-				}
 			}
 			else
 			{
@@ -365,11 +292,6 @@ class W3SignOwnerPlayer extends W3SignOwner
 	public function SetCurrentlyCastSign( type : ESignType, entity : W3SignEntity )
 	{
 		player.SetCurrentlyCastSign( type, entity );
-		
-		if (type != ST_None)
-		{
-			theTelemetry.LogWithValueStr(TE_FIGHT_PLAYER_USE_SIGN, SignEnumToString(type));
-		}
 	}
 
 	public function GetSkillAbilityName( skill : ESkill ) : name

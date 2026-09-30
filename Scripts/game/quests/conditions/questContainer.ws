@@ -48,12 +48,6 @@ class W3QuestCond_Container extends CQuestScriptedCondition
 	
 	function RegisterGlobalListener( flag : bool )
 	{
-		if (globalListener && flag)
-			return;
-	
-		if (!globalListener && !flag)
-			return;
-		
 		if ( flag )
 		{
 			globalListener = new W3QuestCond_Container_GlobalListener in this;
@@ -71,12 +65,6 @@ class W3QuestCond_Container extends CQuestScriptedCondition
 	
 	function RegisterInventoryListener( flag : bool )
 	{
-		if (inventoryListener && flag)
-			return;
-	
-		if (!inventoryListener && !flag)
-			return;
-		
 		if ( flag )
 		{
 			inventoryListener = new W3QuestCond_Container_InventoryListener in this;

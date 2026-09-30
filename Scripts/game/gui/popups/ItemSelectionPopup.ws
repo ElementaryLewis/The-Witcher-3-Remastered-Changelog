@@ -64,7 +64,7 @@ class CR4ItemSelectionPopup extends CR4PopupBase
 			ClosePopup();
 		}
 		
-		if (theInput.IsMousePresent())
+		if (theInput.LastUsedPCInput())
 		{
 			theGame.MoveMouseTo(0.5, 0.5);
 		}

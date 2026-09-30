@@ -35,7 +35,7 @@ import class CJournalContainer extends CJournalContainerEntry
 import class CJournalQuestObjective extends CJournalContainer
 {
 	import final function GetTitleStringId() : int;
-	import final function GetWorld() : name;
+	import final function GetWorld() : int;
 	import final function GetCount() : int;
 	import final function GetCounterType() : eQuestObjectiveType;
 	import final function IsMutuallyExclusive() : bool;
@@ -61,7 +61,7 @@ import class CJournalQuest extends CJournalContainer
 	import final function GetTitleStringId() : int;
 	import final function GetType() : eQuestType;
 	import final function GetContentType() : EJournalContentType;
-	import final function GetWorld() : name;
+	import final function GetWorld() : int;
 	import final function GetHuntingQuestCreatureTag() : name;
 }
 
@@ -418,24 +418,12 @@ import class CWitcherJournalManager extends CJournalManager
 	import final function GetTreasureHuntQuestCount() : int;
 	import final function GetQuestProgress() : int;
 	
-	import final function GetJournalAreasWithQuests() : array< name >;
+	import final function GetJournalAreasWithQuests() : array< int >;
 	
-	import final function ForceSettingLoadingScreenVideoForWorld( area : name );
+	import final function ForceSettingLoadingScreenVideoForWorld( area : int );
 	import final function ForceSettingLoadingScreenContextNameForWorld( contextName : name );
 	
 	import final function ForceUntrackingQuestForEP1Savegame();
-	
-	 public function GetInitialEntriesPathAndFilename( epIndex: int ) : string
-	{
-		switch (epIndex)
-		{
-			case 0: return "gameplay\journal\start.w2je";
-			case 1: return "dlc\ep1\data\gameplay\journal\startep1.w2je";
-			case 2: return "dlc\bob\data\gameplay\journal\startep2.w2je";
-
-			default: return "";
-		}
-	}
 }
 
 import class CJournalResource extends CResource
@@ -504,69 +492,6 @@ exec function testMonsterAdvanced()
 	}
 }
 
-
-
-
-function activateJournalQuestEntry(entryResourceName:string, journalManager:CWitcherJournalManager):void
-{
-	var i, j : int;
-	var resource : CJournalResource;
-	var entryBase : CJournalBase;
-	var childGroups : array<CJournalBase>;
-	var childEntries : array<CJournalBase>;
-	var descriptionGroup : CJournalQuestDescriptionGroup;
-	var descriptionEntry : CJournalQuestDescriptionEntry;
-	var questPhase : CJournalQuestPhase;
-	var questObjective : CJournalQuestObjective;
-	var childJournal : CJournalBase;
-	
-	resource = (CJournalResource)LoadResource( entryResourceName, true );
-	
-	if ( resource )
-	{
-		entryBase = resource.GetEntry();
-		if ( entryBase )
-		{
-			journalManager.ActivateEntry( entryBase, JS_Active );
-			
-			journalManager.SetEntryHasAdvancedInfo( entryBase, true );
-			
-			
-			journalManager.GetAllChildren( entryBase, childGroups );
-			for ( i = 0; i < childGroups.Size(); i += 1 )
-			{
-				descriptionGroup = ( CJournalQuestDescriptionGroup )childGroups[ i ];
-				if ( descriptionGroup )
-				{
-					journalManager.GetAllChildren( descriptionGroup, childEntries );
-					for ( j = 0; j < childEntries.Size(); j += 1 )
-					{
-						descriptionEntry = ( CJournalQuestDescriptionEntry )childEntries[ j ];
-						if ( descriptionEntry )
-						{
-							journalManager.ActivateEntry( descriptionEntry, JS_Active );
-						}
-					}
-				}
-				
-				questPhase = ( CJournalQuestPhase )childGroups[ i ];
-				if ( questPhase )
-				{
-					
-					journalManager.GetAllChildren( questPhase, childEntries );
-					for ( i = 0; i < childEntries.Size(); i += 1 )
-					{
-						questObjective = ( CJournalQuestObjective )childEntries[ i ];
-						if ( questObjective )
-						{
-							journalManager.ActivateEntry( questObjective, JS_Active );
-						}
-					}
-				}
-			}
-		}
-	}
-}
 
 
 

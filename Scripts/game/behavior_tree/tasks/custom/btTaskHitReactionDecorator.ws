@@ -19,8 +19,6 @@ class CBTTaskHitReactionDecorator extends CBTTaskPlayAnimationEventDecorator
 	private var damageIsMelee 			: bool;
 	private var rotateNode 				: CNode;
 	private var lastAttacker 			: CGameplayEntity;
-	
-	private var timeStamp 						: float;
 
 	protected var reactionDataStorage 	: CAIStorageReactionData;
 	
@@ -49,7 +47,6 @@ class CBTTaskHitReactionDecorator extends CBTTaskPlayAnimationEventDecorator
 			npc.SetIsInHitAnim(false);
 			return BTNS_Completed;
 		}
-		
 		
 		return BTNS_Active;
 	}
@@ -99,7 +96,6 @@ class CBTTaskHitReactionDecorator extends CBTTaskPlayAnimationEventDecorator
 				return false;
 			}
 		}
-
 		
 		GetStats();
 		hitCounter = npc.GetHitCounter();
@@ -138,7 +134,7 @@ class CBTTaskHitReactionDecorator extends CBTTaskPlayAnimationEventDecorator
 	{
 		var npc : CNewNPC = GetNPC();
 		
-		if ( eventName == 'BeingHit')
+		if ( eventName == 'BeingHit' )
 		{			
 			damageData 		= (CDamageData) GetEventParamBaseDamage();
 			damageIsMelee 	= damageData.isActionMelee;
@@ -153,26 +149,13 @@ class CBTTaskHitReactionDecorator extends CBTTaskPlayAnimationEventDecorator
 			if ( !increaseHitCounterOnlyOnMeleeDmg || (increaseHitCounterOnlyOnMeleeDmg && damageIsMelee) )
 				npc.IncHitCounter();			
 			
+			
 			if ( isActive && CheckGuardOrCounter() )
 			{
 				npc.DisableHitAnimFor(0.1);
 				Complete(true);
 				return false;
 			}
-			
-			
-			if(npc.HasAbility( 'EnableAdditiveHitsFor' ))
-			{		
-				if(!npc.UseAdditiveHit())
-				{
-					npc.EnableAdditiveHitsFor(2.0);
-				}
-				else if(!npc.UseAdditionalAdditiveStunHit() && !npc.UseAdditiveStunHit())
-				{
-					npc.SetUseAdditiveHit( false, false );
-				}
-			}
-			
 			
 			
 			

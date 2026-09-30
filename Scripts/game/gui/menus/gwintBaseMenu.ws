@@ -84,23 +84,13 @@ class CR4GwintBaseMenu extends CR4MenuBase
 				imageLoc = currentCard.dlcPicture;
 			}
 			
-			l_flashObject.SetMemberFlashInt("index", theGame.GetGwintManager().GetIndex(currentCard));
+			l_flashObject.SetMemberFlashInt("index", currentCard.index);
 			l_flashObject.SetMemberFlashString("title", GetLocStringByKeyExt(currentCard.title));
 			l_flashObject.SetMemberFlashString("description", GetLocStringByKeyExt(currentCard.description));
 			l_flashObject.SetMemberFlashInt("power", currentCard.power);
 			l_flashObject.SetMemberFlashString("imageLoc", imageLoc);
 			l_flashObject.SetMemberFlashInt("factionIdx", currentCard.faction);
-
-			if (theGame.GetGwintManager().IsKingCard(currentCard))
-			{
-				
-				l_flashObject.SetMemberFlashInt("typeArray", 0);
-			}
-			else
-			{
-				l_flashObject.SetMemberFlashInt("typeArray", currentCard.typeFlags);
-			}
-			
+			l_flashObject.SetMemberFlashInt("typeArray", currentCard.typeFlags);
 			AddCardEffectsToFlashObject(l_flashObject, currentCard);
 			AddSummonFlagsToObject(l_flashObject, currentCard);
 			
@@ -127,120 +117,68 @@ class CR4GwintBaseMenu extends CR4MenuBase
 	{
 		var flashSummonArray : CScriptedFlashArray;
 		var i : int;
-		var summon : SCardDefinition;
 		
 		flashSummonArray = m_flashValueStorage.CreateTempFlashArray();
 		
 		for (i = 0; i < card.summonFlags.Size(); i += 1)
 		{
-			if ( theGame.GetGwintManager().GetGwentCard( card.summonFlags[i], summon ) )
-			{
-				flashSummonArray.PushBackFlashInt( theGame.GetGwintManager().GetIndex(summon) );
-			}
-			else
-			{
-				LogChannel( 'Gwint', "Summon for card not found: " + NameToString(card.cardName) );
-			}
+			flashSummonArray.PushBackFlashInt(card.summonFlags[i]);
 		}
 		
 		flashObject.SetMemberFlashArray("summonFlags", flashSummonArray);
 	}
 	
-	public function CreateDeckDefinitionFlash(deckInfo : SDeckDefinition, optional additionalCards: array<name>) : CScriptedFlashObject
+	public function CreateDeckDefinitionFlash(deckInfo : SDeckDefinition) : CScriptedFlashObject
 	{
 		var deckFlashObject : CScriptedFlashObject;
 		var indicesFlashArray : CScriptedFlashArray;
 		var dynCardRequirements : CScriptedFlashArray;
 		var dynCards : CScriptedFlashArray;
-		var i, diff : int;
-		var card : SCardDefinition;
-		var dynamicCards: array<SDynamicCard>;
-		var allCards : array<name> = deckInfo.cards;
-
-		
-		for (i = 0; i < additionalCards.Size(); i += 1)
-		{
-			allCards.PushBack(additionalCards[i]);
-		}
+		var i : int;
 		
 		deckFlashObject = flashConstructor.CreateFlashObject("red.game.witcher3.menus.gwint.GwintDeck");
 		indicesFlashArray = m_flashValueStorage.CreateTempFlashArray();
 		
 		deckFlashObject.SetMemberFlashString("deckName", "");
 		
-		for (i = 0; i < allCards.Size(); i += 1)
+		for (i = 0; i < deckInfo.cardIndices.Size(); i += 1)
 		{
-			if ( theGame.GetGwintManager().GetGwentCard( allCards[i], card ) )
-			{
-				indicesFlashArray.PushBackFlashInt( theGame.GetGwintManager().GetIndex(card) );
-			}
-			else
-			{
-				LogChannel( 'Gwint', NameToString(deckInfo.deckName) + ": card not found: " + NameToString(card.cardName) );
-			}
+			indicesFlashArray.PushBackFlashInt(deckInfo.cardIndices[i]);
 		}
 		deckFlashObject.SetMemberFlashArray("cardIndices", indicesFlashArray);
 		deckFlashObject.SetMemberFlashBool("isUnlocked", deckInfo.unlocked);
 		
-		if ( theGame.GetGwintManager().GetGwentCard( deckInfo.leaderCard, card ) )
-		{
-			deckFlashObject.SetMemberFlashInt("selectedKingIndex", theGame.GetGwintManager().GetIndex(card));
-		}
-		else
-		{
-			LogChannel( 'Gwint', NameToString(deckInfo.deckName) + ": leaderCard not found: "+ NameToString(deckInfo.leaderCard) );
-			deckFlashObject.SetMemberFlashInt("selectedKingIndex", -1);
-		}
-		
-		if ( theGame.GetGwintManager().GetGwentCard( deckInfo.specialCard, card ) )
-		{
-			deckFlashObject.SetMemberFlashInt("specialCard", theGame.GetGwintManager().GetIndex(card));
-		}
-		else
-		{
-			LogChannel( 'Gwint', NameToString(deckInfo.deckName) + ": specialCard not found: "+ NameToString(deckInfo.specialCard) );
-			deckFlashObject.SetMemberFlashInt("specialCard", -1);
-		}
-		
+		deckFlashObject.SetMemberFlashInt("selectedKingIndex", deckInfo.leaderIndex);
+		deckFlashObject.SetMemberFlashInt("specialCard", deckInfo.specialCard);
 		
 		dynCardRequirements = m_flashValueStorage.CreateTempFlashArray();
-		dynCards = m_flashValueStorage.CreateTempFlashArray();
-
-		dynamicCards = theGame.GetGwintManager().GetDynamicCards(deckInfo.deckName);
-		for (i = 0; i < dynamicCards.Size(); i += 1)
+		for (i = 0; i < deckInfo.dynamicCardRequirements.Size(); i += 1)
 		{
-			if ( theGame.GetGwintManager().GetGwentCard( dynamicCards[i].cardName, card ) )
-			{
-				diff = theGame.GetGwintManager().GetDifficulty(dynamicCards[i].difficulty);
-				
-				dynCardRequirements.PushBackFlashInt(diff);
-				dynCards.PushBackFlashInt(theGame.GetGwintManager().GetIndex(card));
-			}
+			dynCardRequirements.PushBackFlashInt(deckInfo.dynamicCardRequirements[i]);
 		}
 		deckFlashObject.SetMemberFlashArray("dynamicCardRequirements", dynCardRequirements);
-		deckFlashObject.SetMemberFlashArray("dynamicCards", dynCards);		
+		
+		dynCards = m_flashValueStorage.CreateTempFlashArray();
+		for (i = 0; i < deckInfo.dynamicCards.Size(); i += 1)
+		{
+			dynCards.PushBackFlashInt(deckInfo.dynamicCards[i]);
+		}
+		deckFlashObject.SetMemberFlashArray("dynamicCards", dynCards);
 		
 		return deckFlashObject;
 	}
-
 	
-	
-	public function FillArrayWithCardList(cardList:array< name >, targetArray:CScriptedFlashArray):void
+	public function FillArrayWithCardList(cardList:array< CollectionCard >, targetArray:CScriptedFlashArray):void
 	{
 		var cardInfo : CScriptedFlashObject;
-		var card: SCardDefinition;
 		var i : int;
 		
 		for (i = 0; i < cardList.Size(); i += 1)
 		{
 			cardInfo = m_flashValueStorage.CreateTempFlashObject();
-
-			if ( theGame.GetGwintManager().GetGwentCard( cardList[i], card ) )
-			{
-				cardInfo.SetMemberFlashInt("cardID", theGame.GetGwintManager().GetIndex(card));
-				cardInfo.SetMemberFlashInt("numCopies", theGame.GetGwintManager().GetPlayerCardCount(cardList[i]));
-				targetArray.PushBackFlashObject(cardInfo);
-			}
+			cardInfo.SetMemberFlashInt("cardID", cardList[i].cardID);
+			cardInfo.SetMemberFlashInt("numCopies", cardList[i].numCopies);
+			targetArray.PushBackFlashObject(cardInfo);
 		}
 	}
 	

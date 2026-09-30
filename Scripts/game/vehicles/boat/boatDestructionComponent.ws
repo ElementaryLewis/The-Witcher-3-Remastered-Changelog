@@ -193,7 +193,7 @@ import class CBoatDestructionComponent extends CComponent
 		
 		
 		if(boatComponent.user == thePlayer || boatComponent.GetPassenger() == thePlayer)
-			theGame.HapticStart( "classic_vibro_large_oneshot" );
+			theGame.VibrateControllerHard();	
 		
 		boat = (W3Boat)GetEntity();
 		if( !boat.GetCanBeDestroyed() ) 

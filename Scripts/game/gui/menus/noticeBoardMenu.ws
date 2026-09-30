@@ -30,7 +30,7 @@ class CR4NoticeBoardMenu extends CR4MenuBase
 		
 		theGame.GetGuiManager().RequestMouseCursor(true);
 		
-		if (theInput.IsMousePresent())
+		if (theInput.LastUsedPCInput())
 		{
 			theGame.MoveMouseTo(0.3, 0.5);
 		}

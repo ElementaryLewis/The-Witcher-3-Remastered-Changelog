@@ -267,7 +267,7 @@ class CExplorationStateSlide extends CExplorationStateAbstract
 		AddActionToBlock( EIAB_Parry );
 		AddActionToBlock( EIAB_Counter );
 	}
-
+	
 	
 	private function AddDefaultStateChangesSpecific()
 	{
@@ -392,7 +392,6 @@ class CExplorationStateSlide extends CExplorationStateAbstract
 		
 		
 		BlockActions();
-
 		
 		
 		m_ExplorationO.m_OwnerMAC.SetEnabledFeetIK( false ); 

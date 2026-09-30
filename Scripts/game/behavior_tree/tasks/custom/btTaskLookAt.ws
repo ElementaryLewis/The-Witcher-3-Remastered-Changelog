@@ -240,8 +240,6 @@ class BTTaskUpdateLookatTarget extends IBehTreeTask
 	public var disableLookAtOnDeath 		: bool;
 	public var disableLookAtOnDeactivate 	: bool;
 	
-	public var useAnimEvents				: bool;
-	
 	protected var lookatTarget				: CNode;
 	protected var lookatActor				: CActor;
 	protected var targetBoneIndex 			: int;
@@ -369,20 +367,6 @@ class BTTaskUpdateLookatTarget extends IBehTreeTask
 		return finalPos;
 	}
 	
-	function OnGameplayEvent( eventName : name ) : bool
-	{
-		
-		if ( eventName == 'LookatOff' )
-		{
-			GetNPC().SetBehaviorVariable( 'lookatOn', 0, true );
-		}
-		else if ( eventName == 'LookatOn' )
-		{
-			GetNPC().SetBehaviorVariable( 'lookatOn', 1, true );
-		}
-		return false;
-	}
-	
 	function Initialize()
 	{
 		if ( usePrediction )
@@ -404,16 +388,12 @@ class BTTaskUpdateLookatTargetDef extends IBehTreeTaskDefinition
 	editable var disableLookAtOnDeath 		: bool;
 	editable var disableLookAtOnDeactivate 	: bool;
 	
-	editable var useAnimEvents				: bool;
-	
 	default useCombatTarget 				= true;
 	default headBoneName 					= 'head';
 	default usePrediction 					= false;
 	default addZOffsetValue 				= true;
 	default disableLookAtOnDeath 			= true;
 	
-	default useAnimEvents 					= false;
-	hint useAnimEvents = "Enabled allows anim events to turn on and off LookAts";
 	hint addZOffsetValue = "works only if headBone was not found. +1.f for custom target; +1.5f otherwise.";
 	hint usePrediction = "works only if target is CActor.";
 	

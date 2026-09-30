@@ -18,8 +18,6 @@ state CharDevMutagens in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		default WRONG_COLOR			= 'TutorialMutagenWrongColor';
 		default POTIONS				= 'TutorialMutagenPotions';
 		default MUTAGENS_JOURNAL	= 'TutorialJournalCharDevMutagens';
-
-	private var cachedSlot : EEquipmentSlots;
 		
 	event OnEnterState( prevStateName : name )
 	{
@@ -64,15 +62,14 @@ state CharDevMutagens in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		}
 		else if(hintName == EQUIP)
 		{
+			savedEquippedSkills = GetWitcherPlayer().TutorialMutagensUnequipPlayerSkills();
 			
-			
-			
-			
+			ShowHint(BONUSES, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, ETHDT_Input, GetHighlightCharDevMutagenBonusString() );
 		}
 		else if(hintName == BONUSES)
 		{
-			highlights = GetHighlightCharDevMutagenBonusString(cachedSlot);
-			highlights = GetHighlightAllSkillSlots(highlights);
+			highlights = GetHighlightCharDevMutagenBonusString();
+			AddHighlight( highlights, .568f, .14f, .08f, .15f );
 			
 			GetWitcherPlayer().TutorialMutagensEquipOneGoodSkill();
 			
@@ -80,8 +77,8 @@ state CharDevMutagens in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		}
 		else if(hintName == MATCH_SKILL_COLOR)
 		{
-			highlights = GetHighlightCharDevMutagenBonusString(cachedSlot);
-			highlights = GetHighlightAllSkillSlots(highlights);
+			highlights = GetHighlightCharDevMutagenBonusString();
+			AddHighlight( highlights, .568f, .24f, .08f, .15f );
 			
 			GetWitcherPlayer().TutorialMutagensEquipOneGoodOneBadSkill();
 			
@@ -91,7 +88,7 @@ state CharDevMutagens in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		{
 			GetWitcherPlayer().TutorialMutagensEquipThreeGoodSkills();
 			
-			ShowHint(MULTIPLE_SKILLS, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, ETHDT_Input, GetHighlightCharDevMutagenBonusString(cachedSlot) );
+			ShowHint(MULTIPLE_SKILLS, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, ETHDT_Input, GetHighlightCharDevMutagenBonusString() );
 		}		
 		else if(hintName == MULTIPLE_SKILLS)
 		{
@@ -118,11 +115,10 @@ state CharDevMutagens in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		}
 	}
 	
-	public final function EquippedMutagen(slot : EEquipmentSlots)
+	public final function EquippedMutagen()
 	{
 		CloseStateHint(EQUIP);
-		ShowHint(BONUSES, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, ETHDT_Input, GetHighlightCharDevMutagenBonusString(slot) );
-		cachedSlot = slot;
+		ShowHint(BONUSES, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, ETHDT_Input, GetHighlightCharDevMutagenBonusString() );
 	}
 }
 

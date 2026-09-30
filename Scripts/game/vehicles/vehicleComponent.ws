@@ -41,15 +41,6 @@ import abstract class CVehicleComponent extends CComponent
 			OnDriverMount();
 		}
 	}
-
-	event OnEarlyExplorationMountStart( entity : CEntity )
-	{
-	}
-
-	event OnEarlyExplorationMountJump( entity : CEntity )
-	{
-	}
-
 	event OnMountFinished( entity : CEntity )
 	{
 		if( entity == thePlayer )
@@ -60,7 +51,6 @@ import abstract class CVehicleComponent extends CComponent
 			}
 			
 			thePlayer.BlockAction(EIAB_MeditationWaiting, 'vehicle', true);
-			GetWitcherPlayer().TestStopClothSimulation(false);
 		}
 	}
 	
@@ -76,8 +66,6 @@ import abstract class CVehicleComponent extends CComponent
 			ToggleVehicleCamera( false );
 			thePlayer.UnblockAction(EIAB_MeditationWaiting, 'vehicle');
 			thePlayer.AddTimer('ReapplyCSTimer', 2.f);
-			thePlayer.SetInteractionPriority(IP_Prio_0);
-			GetWitcherPlayer().TestStopClothSimulation(true);
 		}
 	}
 	

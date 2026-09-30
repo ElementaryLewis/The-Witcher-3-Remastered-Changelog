@@ -55,18 +55,14 @@ class CR4StartupMoviesMenu extends CR4MenuBase
 		m_MovieData.Clear();
 		
 		
-		if( theGame.GetPlatform() == Platform_PC || theGame.GetPlatform() == Platform_PC_GDK ) 
+		if( theGame.GetPlatform() == Platform_PC ) 
 		{
+			movieData.movieName = "gamestart/epilepsy/epilepsy.usm";
 			movieData.isSkipable = true;
 			movieData.showLogo = false;
-			
-			movieData.movieName = "gamestart/bumpers/disclaimers.usm";
 			m_MovieData.PushBack(movieData);
 
-			movieData.movieName = "gamestart/bumpers/legal.usm";
-			m_MovieData.PushBack(movieData);
-
-			movieData.movieName = "gamestart/bumpers/logo.usm";
+			movieData.movieName = "gamestart/bumpers/bumpers.usm";
 			m_MovieData.PushBack(movieData);
 		}
 	}
@@ -164,17 +160,10 @@ class CR4StartupMoviesMenu extends CR4MenuBase
 	function SetButtons()
 	{	
 		var ButtonsDef	: array<SMenuButtonDef>;
-		var padNavCode : string = "gamepad_X";
-
-		if (theGame.GetPlatform() == Platform_Switch2_Ounce)
-		{
-			padNavCode = "escape-gamepad_B";
-		}
-
 		m_defaultInputBindings.Clear();
 		if( m_MovieData[m_CurrentMovieID].isSkipable )
 		{
-			AddInputBinding("panel_button_dialogue_skip", padNavCode, 32 );
+			AddInputBinding("panel_button_dialogue_skip", "gamepad_X", 32 );
 		}
 		UpdateInputFeedback();
 	}	

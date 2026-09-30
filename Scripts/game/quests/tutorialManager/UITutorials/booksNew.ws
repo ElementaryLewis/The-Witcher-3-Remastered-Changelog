@@ -43,8 +43,7 @@ state BooksNew in W3TutorialManagerUIHandler extends TutHandlerBaseState
 			
 		if(hintName == BOOKS_PANEL)
 		{
-			
-			QuitState();
+			ShowHint(NAVIGATION, 0.4, 0.7, ETHDT_Input);
 		}
 		else
 		{

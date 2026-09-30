@@ -50,27 +50,27 @@ statemachine class CHeartMiniboss extends CNewNPC
 			return false;
 		}
 		
-		if( !canHit && action.GetSignSkill() != S_Magic_s02 && action.GetSignSkill() != S_Magic_s28 )
+		if( !canHit && action.GetSignSkill() != S_Magic_s02 )
 			PlayEffect( 'wood_hit' );
 		
 		if( GetCurrentStateName() == 'FullyCovered' && canHit )
 		{
 			canHit = false;
-			if(action.GetSignSkill() != S_Magic_s02 && action.GetSignSkill() != S_Magic_s28)
+			if(action.GetSignSkill() != S_Magic_s02)
 				PlayEffect( 'wood_hit' );
 			GotoState( 'FourRoots' );
 		}
 		else if( GetCurrentStateName() == 'FourRoots' && canHit )
 		{
 			canHit = false;
-			if(action.GetSignSkill() != S_Magic_s02 && action.GetSignSkill() != S_Magic_s28)
+			if(action.GetSignSkill() != S_Magic_s02)
 				PlayEffect( 'wood_hit' );
 			GotoState( 'TwoRoots' );
 		}
 		else if( GetCurrentStateName() == 'TwoRoots' && canHit )
 		{
 			canHit = false;
-			if(action.GetSignSkill() != S_Magic_s02 && action.GetSignSkill() != S_Magic_s28)
+			if(action.GetSignSkill() != S_Magic_s02)
 				PlayEffect( 'wood_hit' );
 			GotoState( 'NoRoots' );
 			FactsAdd( factSetInOpenedPhase, 1 );

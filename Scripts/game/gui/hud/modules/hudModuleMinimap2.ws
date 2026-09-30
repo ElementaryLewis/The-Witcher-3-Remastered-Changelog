@@ -377,66 +377,6 @@ class CR4HudModuleMinimap2 extends CR4HudModuleBase
 	
 	
 	
-	event  OnTapMinimap()
-	{
-		if ( theGame.IsBlackscreenOrFading() || theGame.IsDialogOrCutscenePlaying() )
-		{
-			return false;
-		}
-	
-		if( thePlayer.IsActionAllowed(EIAB_OpenMap) )
-		{
-			theGame.RequestMenuWithBackground( 'MapMenu', 'CommonMenu' );
-		}
-		else
-		{
-			thePlayer.DisplayActionDisallowedHudMessage(EIAB_OpenMap);
-		}
-		
-		return true;
-	}
-
-	event  OnTapTime()
-	{
-		var witcher : W3PlayerWitcher;
-		var guiManager : CR4GuiManager;
-		
-		if ( theGame.IsBlackscreenOrFading() || theGame.IsDialogOrCutscenePlaying() )
-		{
-			return false;
-		}
-		
-		if( !thePlayer.IsCiri() )
-		{
-			witcher = GetWitcherPlayer();
-			
-			if(witcher.IsActionAllowed(EIAB_OpenMeditation))
-			{
-				guiManager = theGame.GetGuiManager();
-				guiManager.RemoveUISavedData('MeditationClockMenu');
-				
-				thePlayer.OnRadialMenuItemChoose("Meditation"); 
-				
-				
-				
-				if(thePlayer.GetCurrentStateName() != 'Meditation')
-				{
-					thePlayer.DisplayActionDisallowedHudMessage(EIAB_OpenMeditation, , witcher.IsThreatened(), !witcher.CanMeditateHere(), witcher.IsThreatened());
-				}
-				else
-				{
-					return true;
-				}
-			}
-			else
-			{
-				thePlayer.DisplayActionDisallowedHudMessage(EIAB_OpenMeditation, , witcher.IsThreatened(), !witcher.CanMeditateHere(), witcher.IsThreatened());
-			}
-		}
-		
-		return false;
-	}
-
 	private function UpdateZoom()
 	{
 		var hud : CR4ScriptedHud;
@@ -790,19 +730,17 @@ class CR4HudModuleMinimap2 extends CR4HudModuleBase
 		var interiorTextureSize  : int;
 		var exteriorTextureExtension : string;
 		var interiorTextureExtension : string;
+		var areaName  : int;
 		var levelName : string;
-		var areaName : name;
-		var manager : CCommonMapManager = theGame.GetCommonMapManager();
 		
 		world = theGame.GetWorld();
 		world.GetTerrainParameters( levelSize, tileCount );
 
-		
 		levelName = StrAfterLast(theGame.GetWorld().GetPath(),StrChar(92)); 
 		levelName = StrReplace( levelName, ".w2w", "" );
-
-		areaName = manager.GetAreaFromWorldPath( world.GetDepotPath() );
-				
+		
+		areaName = (int) AreaNameToType(levelName);
+		
 		exteriorTextureSize			= theGame.GetMiniMapExteriorTextureSize( areaName );
 		interiorTextureSize			= theGame.GetMiniMapInteriorTextureSize( areaName );
 		exteriorTextureExtension	= theGame.GetMiniMapExteriorTextureExtension( areaName );

@@ -84,14 +84,11 @@ class W3DamageManagerProcessor extends CObject
  		if(actorAttacker && playerVictim && ((W3PlayerWitcher)playerVictim) && GetWitcherPlayer().IsAnyQuenActive())
 			FactsAdd("player_had_quen");
 		
-		if (!action.GetSimulateOnly())
-		{
-			
-			ProcessPreHitModifications();
+		
+		ProcessPreHitModifications();
 
-			
-			ProcessActionQuest(act);
-		}
+		
+		ProcessActionQuest(act);
 		
 		
 		isFrozen = (actorVictim && actorVictim.HasBuff(EET_Frozen));
@@ -183,7 +180,6 @@ class W3DamageManagerProcessor extends CObject
 					GetWitcherPlayer().Runeword10Triggerred();
 				if(thePlayer.HasAbility('Runeword 12 _Stats', true))
 					GetWitcherPlayer().Runeword12Triggerred();
-
 			}
 		}
 		
@@ -332,12 +328,11 @@ class W3DamageManagerProcessor extends CObject
 		var immortalityMode : EActorImmortalityMode;
 		var dmgValue : float;
 		var anyDamageProcessed, fallingRaffard : bool;
-		var victimHealthPercBeforeHit, frozenAdditionalDamage : float;
-		var debilitatingPoisonMin, debilitatingPoisonMax: SAbilityAttributeValue;		
+		var victimHealthPercBeforeHit, frozenAdditionalDamage : float;		
 		var powerMod : SAbilityAttributeValue;
 		var witcher : W3PlayerWitcher;
 		var canLog : bool;
-		var immortalityChannels : array<EActorImmortalityChannel>;
+		var immortalityChannels : array<EActorImmortalityChanel>;
 		
 		canLog = theGame.CanLog();
 		
@@ -372,7 +367,7 @@ class W3DamageManagerProcessor extends CObject
 			victimHealthPercBeforeHit = actorVictim.GetStatPercents(BCS_Essence);
 			
 		
-		if ( actorVictim && playerAttacker && victimMonsterCategory == MC_Specter && playerAttacker.HasBuff(EET_Mutagen28) && !actorVictim.HasAbility( 'ShadowFormActive' ) && !action.GetSimulateOnly())
+		if ( actorVictim && playerAttacker && victimMonsterCategory == MC_Specter && playerAttacker.HasBuff(EET_Mutagen28) && !actorVictim.HasAbility( 'ShadowFormActive' ) )
 		{
 			actorVictim.BlockAbility('ShadowForm', true);			
 			actorVictim.BlockAbility('Flashstep', true);			
@@ -382,12 +377,10 @@ class W3DamageManagerProcessor extends CObject
 			actorVictim.BlockAbility('Specter', true);			
 		}
 		
+
 	
 		
 		ProcessDamageIncrease( dmgInfos );
-
-		
-		ProcessNewSkills_Combat( dmgInfos );
 					
 		
 		if ( canLog )
@@ -467,7 +460,7 @@ class W3DamageManagerProcessor extends CObject
 			LogDMHits("*** There is no incoming damage set (probably only buffs).", action);
 		}
 		
-		if(canLog)
+		if ( canLog )
 		{
 			LogDMHits("", action);
 			LogDMHits("Processing block, parry, immortality, signs and other GLOBAL damage reductions...", action);		
@@ -475,43 +468,7 @@ class W3DamageManagerProcessor extends CObject
 		
 		
 		if(actorVictim)
-		{
 			actorVictim.ReduceDamage(action);
-			
-			
-			if(!action.GetIgnoreImmortalityMode())
-			{
-				
-				if( actorVictim.IsInvulnerable() )
-				{
-					if(theGame.CanLog())
-					{
-						LogDMHits("W3DamageManagerProcessor.ProcessActionDamage: victim Invulnerable - no damage will be dealt", action );
-					}
-					action.SetAllProcessedDamageAs(0);
-				}
-				
-				else if(actorAttacker && action.DealsAnyDamage())
-					actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', action );
-				
-				
-				if(actorVictim.IsImmortal())
-				{
-					if(theGame.CanLog())
-					{
-						LogDMHits("W3DamageManagerProcessor.ProcessActionDamage: victim is Immortal, clamping damage", action );
-					}
-					action.processedDmg.vitalityDamage = ClampF(action.processedDmg.vitalityDamage, 0, actorVictim.GetStat(BCS_Vitality)-1 );
-					action.processedDmg.essenceDamage  = ClampF(action.processedDmg.essenceDamage, 0, actorVictim.GetStat(BCS_Essence)-1 );
-				}
-			}
-			else
-			{
-				
-				if(actorAttacker && action.DealsAnyDamage())
-					actorAttacker.SignalGameplayEventParamObject( 'DamageInstigated', action );
-			}
-		}
 				
 		
 		if(directDmgIndex != -1)
@@ -521,16 +478,11 @@ class W3DamageManagerProcessor extends CObject
 			
 			immortalityChannels = actorVictim.GetImmortalityModeChannels(AIM_Invulnerable);
 			fallingRaffard = immortalityChannels.Size() == 1 && immortalityChannels.Contains(AIC_WhiteRaffardsPotion) && action.GetBuffSourceName() == "FallingDamage";
-
-			dmgValue = dmgInfos[directDmgIndex].dmgVal;
-
-			if ( action.GetSignSkill() == S_Magic_1 )	
-				dmgValue = MaxF(0, CalculateDamage(dmgInfos[directDmgIndex], powerMod));
 			
 			if(action.GetIgnoreImmortalityMode() || (!actorVictim.IsImmortal() && !actorVictim.IsInvulnerable() && !actorVictim.IsKnockedUnconscious()) || fallingRaffard)
 			{
-				action.processedDmg.vitalityDamage += dmgValue;
-				action.processedDmg.essenceDamage  += dmgValue;
+				action.processedDmg.vitalityDamage += dmgInfos[directDmgIndex].dmgVal;
+				action.processedDmg.essenceDamage  += dmgInfos[directDmgIndex].dmgVal;
 			}
 			else if( actorVictim.IsInvulnerable() )
 			{
@@ -539,8 +491,8 @@ class W3DamageManagerProcessor extends CObject
 			else if( actorVictim.IsImmortal() )
 			{
 				
-				action.processedDmg.vitalityDamage += MinF(dmgValue, actorVictim.GetStat(BCS_Vitality)-1 );
-				action.processedDmg.essenceDamage  += MinF(dmgValue, actorVictim.GetStat(BCS_Essence)-1 );
+				action.processedDmg.vitalityDamage += MinF(dmgInfos[directDmgIndex].dmgVal, actorVictim.GetStat(BCS_Vitality)-1 );
+				action.processedDmg.essenceDamage  += MinF(dmgInfos[directDmgIndex].dmgVal, actorVictim.GetStat(BCS_Essence)-1 );
 			}
 		}
 		
@@ -558,7 +510,6 @@ class W3DamageManagerProcessor extends CObject
 		}
 		
 		
-
 		if(action.HasDealtFireDamage())
 			action.victim.OnFireHit( (CGameplayEntity)action.causer );
 			
@@ -569,11 +520,8 @@ class W3DamageManagerProcessor extends CObject
 		ProcessActionDamage_DealDamage();
 		
 		
-		if(playerAttacker && witcher && attackAction.GetAttackName() != 'counter_attack_light')
-		{
+		if(playerAttacker && witcher)
 			witcher.SetRecentlyCountered(false);
-			witcher.SetRecentlyDodged(false);
-		}
 		
 		
 		if( attackAction && !attackAction.IsCountered() && playerVictim && attackAction.IsActionMelee())
@@ -615,7 +563,7 @@ class W3DamageManagerProcessor extends CObject
 		}
 		
 		
-		if(actorVictim && actorAttacker && !action.GetCannotReturnDamage() && !action.GetSimulateOnly())
+		if(actorVictim && actorAttacker && !action.GetCannotReturnDamage() )
 			ProcessActionReturnedDamage();	
 		
 		return anyDamageProcessed;
@@ -625,33 +573,15 @@ class W3DamageManagerProcessor extends CObject
 	private function ProcessInstantKill()
 	{
 		var instantKill, focus : float;
-		var victimIsImmune:bool;
-		var witcherAttacker:W3PlayerWitcher;
-		
-		witcherAttacker = GetWitcherPlayer();
 
-		
-		if( action.WasDodged() || ( attackAction && ( attackAction.IsParried() || attackAction.IsCountered() ) ) )
+		if( !actorVictim || !actorAttacker || actorVictim.IsImmuneToInstantKill() )
 		{
 			return;
 		}
-
-		victimIsImmune = actorVictim.IsImmuneToInstantKill();
-
-
-		if( !actorVictim || !actorAttacker || victimIsImmune || action.GetSimulateOnly() )
+		
+		
+		if( action.WasDodged() || ( attackAction && ( attackAction.IsParried() || attackAction.IsCountered() ) ) )
 		{
-			
-			if(victimIsImmune 
-			&& actorAttacker == witcherAttacker 
-			&& witcherAttacker.CanUseSkill(S_Sword_s30) 
-			&& witcherAttacker.IsDeadlyPrecisionEnabled()
-			&& attackAction
-			&& attackAction.GetAttackTypeName() == 'attack_heavy') 
-			{
-				
-				witcherAttacker.GainStat(BCS_Focus, GetTriggerChance(S_Sword_s30));
-			}
 			return;
 		}
 		
@@ -684,28 +614,6 @@ class W3DamageManagerProcessor extends CObject
 				{
 					instantKill += focus * CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Sword_s03, 'instant_kill_chance', false, true ) ) * thePlayer.GetSkillLevel( S_Sword_s03 );
 				}
-			}
-			
-			if( action.IsBouncedArrow() && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s33))
-			{
-				instantKill += CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Sword_s33, 'instant_kill_chance', false, true ) ) * thePlayer.GetSkillLevel( S_Sword_s33 );
-			}
-
-			if(attackAction.GetAttackName() == 'bolt' && action.GetIsHeadShot() && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s32))
-			{
-				instantKill += CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Sword_s32, 'instant_kill_chance', false, true ) ) * thePlayer.GetSkillLevel( S_Sword_s32 );
-			}
-
-			
-			if(!victimIsImmune 
-			&& actorAttacker == witcherAttacker 
-			&& witcherAttacker.CanUseSkill(S_Sword_s30) 
-			&& witcherAttacker.IsDeadlyPrecisionEnabled() 
-			&& attackAction
-			&& attackAction.GetAttackTypeName() == 'attack_heavy') 
-			{
-				instantKill += GetTriggerChance(S_Sword_s30);
-				witcherAttacker.ResetDeadlyPrecision();
 			}
 		}
 		
@@ -776,15 +684,6 @@ class W3DamageManagerProcessor extends CObject
 				}
 			}
 		}
-
-		
-		if( playerAttacker && actorVictim && attackAction 
-			&& !playerAttacker.GetInventory().IsItemFists(weaponId) 
-			&& playerAttacker.IsLightAttack(attackAction.GetAttackName()) 
-			&& playerAttacker.CanUseSkill(S_Sword_s29) && action.IsCriticalHit() )
-		{
-					ProcessNewSkill_CripplingStrikes();
-		}
 	}
 	
 	
@@ -796,10 +695,7 @@ class W3DamageManagerProcessor extends CObject
 		var samum : CBaseGameplayEffect;
 		var signPower, min, max : SAbilityAttributeValue;
 		var aerondight : W3Effect_Aerondight;
-		var witcherAttacker : W3PlayerWitcher;
 		
-		
-		witcherAttacker = GetWitcherPlayer();
 		meleeOrRanged = playerAttacker && attackAction && ( attackAction.IsActionMelee() || attackAction.IsActionRanged() );
 		redWolfSet = ( W3Petard )action.causer && ( W3PlayerWitcher )actorAttacker && GetWitcherPlayer().IsSetBonusActive( EISB_RedWolf_1 );
 		mutation2 = ( W3PlayerWitcher )actorAttacker && GetWitcherPlayer().IsMutationActive(EPMT_Mutation2) && action.IsActionWitcherSign();
@@ -825,19 +721,19 @@ class W3DamageManagerProcessor extends CObject
 			else
 			{
 				if( attackAction )
-				{				
+				{
+					
+					if( SkillEnumToName(S_Sword_s02) == attackAction.GetAttackTypeName() )
+					{				
+						critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s02, theGame.params.CRITICAL_HIT_CHANCE, false, true)) * playerAttacker.GetSkillLevel(S_Sword_s02);
+					}
+					
 					
 					if(GetWitcherPlayer() && GetWitcherPlayer().HasRecentlyCountered() && playerAttacker.CanUseSkill(S_Sword_s11) && playerAttacker.GetSkillLevel(S_Sword_s11) > 2)
 					{
 						critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s11, theGame.params.CRITICAL_HIT_CHANCE, false, true));
 					}
 					
-					if(GetWitcherPlayer() && (GetWitcherPlayer().HasRecentlyCountered() || GetWitcherPlayer().HasRecentlyDodged()) && attackAction.GetAttackName() != 'counter_attack_light' 
-						&& playerAttacker.CanUseSkill(S_Sword_s31) && playerAttacker.GetSkillLevel(S_Sword_s31) > 3)
-					{
-						critChance += CalculateAttributeValue(playerAttacker.GetSkillAttributeValue(S_Sword_s31, theGame.params.CRITICAL_HIT_CHANCE, false, true));
-					}
-
 					
 					isLightAttack = playerAttacker.IsLightAttack( attackAction.GetAttackName() );
 					isHeavyAttack = playerAttacker.IsHeavyAttack( attackAction.GetAttackName() );
@@ -868,8 +764,6 @@ class W3DamageManagerProcessor extends CObject
 							critChance += min.valueAdditive;
 						}
 					}
-
-
 				}
 				else
 				{
@@ -899,7 +793,7 @@ class W3DamageManagerProcessor extends CObject
 			}
 			
 			
-			if(RandF() < critChance) 
+			if(RandF() < critChance)
 			{
 				
 				action.SetCriticalHit();
@@ -958,551 +852,36 @@ class W3DamageManagerProcessor extends CObject
 		}
 	}
 	
-	private function GetDamageIncreaseBaseMultiplier(skillId:ESkill, optional isPerLevel:bool) : float
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var attribValue:SAbilityAttributeValue;
-
-		witcherAttacker = GetWitcherPlayer();
-		attribValue = witcherAttacker.GetSkillAttributeValue(skillId, 'damage_increase', false, true);
-		if (isPerLevel)
-		{
-			return (float)attribValue.valueMultiplicative * witcherAttacker.GetSkillLevel(skillId);
-		}
-		else
-		{
-			return (float)attribValue.valueMultiplicative;
-		}
-	}
-
-	private function GetTriggerChance(skillId:ESkill) : float
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var attribValue:SAbilityAttributeValue;
-
-		witcherAttacker = GetWitcherPlayer();
-		attribValue = witcherAttacker.GetSkillAttributeValue(skillId, 'trigger_chance', false, true);
-		return attribValue.valueBase * witcherAttacker.GetSkillLevel(skillId);
-	}
-
-	private function GetTriggerAtAttackCount(skillId:ESkill, optional isPerLevel:bool) : int
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var attribValue:SAbilityAttributeValue;
-
-		witcherAttacker = GetWitcherPlayer();
-		attribValue = witcherAttacker.GetSkillAttributeValue(skillId, 'trigger_at_attack_count', false, true);
-		if (isPerLevel)
-		{
-			return (int)attribValue.valueBase * witcherAttacker.GetSkillLevel(skillId);
-		}
-		else
-		{
-			return (int)attribValue.valueBase;
-		}
-	}
-
-	private function GetSkillDuration(skillId:ESkill) : float
-	{
-		var attribValue:SAbilityAttributeValue;
-		attribValue = GetWitcherPlayer().GetSkillAttributeValue(skillId, 'duration', false, true);
-		return (float)attribValue.valueAdditive; 
-	}
-
-	private function ProcessNewSkill_MuscleMemory(out dmgInfos : array< SRawDamage >)
-	{
-		var witcherAttacker : W3PlayerWitcher;
-
-		var skillId:ESkill;
-		var damageIncreaseMultiplier:float;
-		var i:int;
-		var comboCounter:int;
-		
-		skillId = S_Sword_s22;
-		witcherAttacker = GetWitcherPlayer();
-		comboCounter = witcherAttacker.GetSkillComboCounter(skillId);
-
-		
-		if(comboCounter > 0)
-		{
-			damageIncreaseMultiplier = 1.0 + GetDamageIncreaseBaseMultiplier(skillId, false);
-
-			for (i = 0; i < dmgInfos.Size(); i += 1)
-			{
-				dmgInfos[i].dmgVal *= damageIncreaseMultiplier;
-			}
-
-			LogNewCombatSkill(skillId, "Damage Multiplier : " + damageIncreaseMultiplier);
-		}
-	}
-
-	private function ProcessNewSkill_StrengthTraining_Counter()
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
-		var skillId:ESkill;
-		var triggerAtAttackCount:int;
-		var currentAttackCount:int;
-
-		LogNewCombatSkill(skillId, "Enabled");
-
-		skillId = S_Sword_s23;
-
-		triggerAtAttackCount = GetTriggerAtAttackCount(skillId, false);
-
-		
-		witcherAttacker = GetWitcherPlayer();
-		witcherAttacker.IncrementSkillComboCounter(skillId, GetSkillDuration(skillId));
-
-		currentAttackCount = witcherAttacker.GetSkillComboCounter(skillId);
-
-		if(currentAttackCount >= triggerAtAttackCount)
-		{
-			swordEntity = witcherAttacker.GetHeldSwordEntity();	
-			if(swordEntity)
-			{
-				if(currentAttackCount == triggerAtAttackCount)
-				{
-					
-					witcherAttacker.PlaySkillComboEffect(skillId, swordEntity, 'strong_attack_buff');
-				}
-
-				
-				
-			}
-		}
-	}
-
-	private function ProcessNewSkill_StrengthTraining_Damage(out dmgInfos : array< SRawDamage >)
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
-
-		var skillId:ESkill;
-		var damageIncreaseMultiplier:float;
-		var i:int;
-
-		skillId = S_Sword_s23;
-
-		witcherAttacker = GetWitcherPlayer();
-		swordEntity = witcherAttacker.GetHeldSwordEntity();	
-
-		LogNewCombatSkill(skillId, "Attack Num : " + witcherAttacker.GetSkillComboCounter(skillId));
-
-		if (witcherAttacker.GetSkillComboCounter(skillId) >= GetTriggerAtAttackCount(skillId, false))
-		{
-			damageIncreaseMultiplier = 1.0 + GetDamageIncreaseBaseMultiplier(skillId, true);
-
-			for (i = 0; i < dmgInfos.Size(); i += 1)
-			{
-				dmgInfos[i].dmgVal *= damageIncreaseMultiplier;
-			}
-
-			LogNewCombatSkill(skillId, "Damage Multiplier : " + damageIncreaseMultiplier);
-
-			witcherAttacker.ResetSkillCombo(skillId);
-		}
-	}
-
-	private function ProcessNewSkill_PreciseBlows(out dmgInfos : array< SRawDamage >, variation:EPreciseBlowsCounterId)
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
-		var skillId:ESkill;
-		var damageMultiplierValue:SAbilityAttributeValue;
-		var i:int;
-		var randVal:float;
-		var triggerChance:float;
-		var triggerAtAttackCount:int;
-		var currentHitCount:int;
-		var logMessage:string;
-		var logMessageInGame:string;
-
-		skillId = S_Sword_s24;
-
-		witcherAttacker = GetWitcherPlayer();
-		swordEntity = witcherAttacker.GetHeldSwordEntity();	
-
-		witcherAttacker.IncrementSkillComboCounterEx(skillId, GetSkillDuration(skillId), variation);
-
-		if(variation == PreciseBlowsCounterId_Fast)
-			LogNewCombatSkill(skillId, "(Fast) : Attack Num : " + witcherAttacker.GetSkillComboCounterEx(skillId, variation));
-		else
-			LogNewCombatSkill(skillId, "(Strong) : Attack Num : " + witcherAttacker.GetSkillComboCounterEx(skillId, variation));
-
-		
-		triggerAtAttackCount = GetTriggerAtAttackCount(skillId, false);
-		currentHitCount = witcherAttacker.GetSkillComboCounterEx(skillId, variation);
-		
-		if (currentHitCount == triggerAtAttackCount - 1)
-		{
-			logMessageInGame = currentHitCount + " ... Ready";
-		}
-		else if (currentHitCount == triggerAtAttackCount)
-		{
-			randVal = RandF();
-			triggerChance = GetTriggerChance(skillId);
-			if (randVal < triggerChance) 
-			{
-				logMessageInGame = "Power Strike !";
-				if(swordEntity)
-				{
-					if(variation == PreciseBlowsCounterId_Fast)
-						witcherAttacker.PlaySkillComboEffect(skillId, swordEntity, 'fast_attack_buff');
-					else 
-						witcherAttacker.PlaySkillComboEffect(skillId, swordEntity, 'strong_attack_buff');
-
-					thePlayer.AddTimer('SkillPreciseBlowsActiveBuffDurationReset', GetSkillDuration(skillId), false, false, TICK_Main, false, false);
-				}
-
-				damageMultiplierValue = witcherAttacker.GetSkillAttributeValue(skillId, 'damage_increase', false, true);
-				for (i = 0; i < dmgInfos.Size(); i += 1)
-				{
-					dmgInfos[i].dmgVal *= 1.0 + damageMultiplierValue.valueMultiplicative;
-				}
-				if(variation == PreciseBlowsCounterId_Fast)
-					LogNewCombatSkill(skillId, "(Fast): Damage Multiplier : " + (1.0 + damageMultiplierValue.valueMultiplicative));
-				else
-					LogNewCombatSkill(skillId, "(Strong): Damage Multiplier : " + (1.0 + damageMultiplierValue.valueMultiplicative));
-			}
-			else 
-			{
-				logMessageInGame = "Missed ..."; 
-				if(variation == PreciseBlowsCounterId_Fast)
-					LogNewCombatSkill(skillId, "(Fast) : Chance failed : " + randVal + " > chance:" + triggerChance);
-				else
-					LogNewCombatSkill(skillId, "(Strong) : Chance failed : " + randVal + " > chance:" + triggerChance);
-			}
-
-			witcherAttacker.ResetSkillComboEx(skillId, PreciseBlowsCounterId_Fast);
-			witcherAttacker.ResetSkillComboEx(skillId, PreciseBlowsCounterId_Strong);
-		}
-		else
-		{
-			logMessageInGame = currentHitCount + " ...";
-
-			if(swordEntity)
-			{
-				witcherAttacker.StopAllSkillComboEffectsEx(skillId, PreciseBlowsCounterId_Fast);
-				witcherAttacker.StopAllSkillComboEffectsEx(skillId, PreciseBlowsCounterId_Strong);
-			}
-		} 
-	}
-
-	private function ProcessNewSkill_CrushingBlows(out dmgInfos : array< SRawDamage >)
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
-		var skillId:ESkill;
-		var damageMultiplierValue:SAbilityAttributeValue;
-		var triggerAtAttackCount:int;
-		var firstPowerfulAttackCount:int;
-		var attackCount:int;
-		var i:int;
-		var randVal:float;
-		var triggerChance:float;
-		var buffedAttackCount:int;
-		var logMessage:string;
-		var logMessageInGame:string;
-		var resetCooldown:float;
-		
-		skillId = S_Sword_s25;
-
-		resetCooldown = GetSkillDuration(skillId);
-
-		witcherAttacker = GetWitcherPlayer();
-		swordEntity = witcherAttacker.GetHeldSwordEntity();	
-
-		triggerAtAttackCount = GetTriggerAtAttackCount(skillId, false);
-		firstPowerfulAttackCount = triggerAtAttackCount + 1;
-
-		attackCount = witcherAttacker.GetSkillComboCounter(skillId);
-
-		if(attackCount == 0)
-			witcherAttacker.IncrementSkillComboCounter(skillId, resetCooldown);
-		else 
-			witcherAttacker.IncrementSkillComboCounter(skillId, -1.0);
-
-		attackCount += 1;
-
-		if (attackCount >= triggerAtAttackCount)
-		{
-			buffedAttackCount = attackCount - triggerAtAttackCount;
-			
-			if(buffedAttackCount > 0)
-			{
-				
-					
-
-				
-				damageMultiplierValue = witcherAttacker.GetSkillAttributeValue(skillId, 'damage_increase', false, true);
-				for (i = 0; i < dmgInfos.Size(); i += 1)
-				{
-					dmgInfos[i].dmgVal *= 1.0 + damageMultiplierValue.valueMultiplicative;
-				}
-				logMessage += "Attack Num : " + attackCount + " POWER STRIKE: Damage Multiplier : " + (1.0 + damageMultiplierValue.valueMultiplicative);
-				logMessageInGame += "Power Strike !";
-			} 
-			else 
-			{
-				logMessage += "Attack Num : " + attackCount;
-			}
-
-			randVal = RandF();
-			triggerChance = GetTriggerChance(skillId);
-
-			if (randVal < triggerChance) 
-			{
-				logMessage += " | SUCCESS";
-				if(buffedAttackCount == 0)
-					logMessageInGame += "Charging !";
-				else	
-					logMessageInGame += " (Recharged)";
-				
-				if(swordEntity && buffedAttackCount == 0)
-					witcherAttacker.PlaySkillComboEffect(skillId, swordEntity, 'strong_attack_buff');
-				
-				
-				witcherAttacker.ResetSkillComboCounter(skillId);
-				witcherAttacker.IncrementSkillComboCounter(skillId, resetCooldown);
-			}
-			else 
-			{
-				logMessage += " | UNLUCKY : " + randVal + " > chance:" + triggerChance;
-
-				
-				if(buffedAttackCount == 0)
-				{
-					logMessageInGame = "Missed ...";
-					witcherAttacker.ResetSkillComboCounter(skillId);
-				}
-				
-				else if(buffedAttackCount == 2) 
-				{
-					
-					
-						
-				}
-			}
-		}
-	}
-
-
-	private function ProcessNewSkill_AnatomicalKnowledge() : float
-	{
-		var witcherAttacker : W3PlayerWitcher;
-
-		var i : int;
-		var skillId : ESkill;
-		var silverDamageValue, powerMod : SAbilityAttributeValue;
-		var damageMultiplierValue : float;
-		var equipedItem 		: SItemUniqueId;
-		var silverSwordId : SItemUniqueId;
-		
-		skillId = S_Sword_s26;
-		witcherAttacker = GetWitcherPlayer();
-		
-		if (witcherAttacker.GetItemEquippedOnSlot(EES_SilverSword, silverSwordId))
-		{
-			silverDamageValue = witcherAttacker.inv.GetItemAttributeValue(silverSwordId, 'SilverDamage');
-			damageMultiplierValue = GetDamageIncreaseBaseMultiplier(skillId, true);
-
-			
-			powerMod = action.GetPowerStatValue();
-			
-			return silverDamageValue.valueBase * damageMultiplierValue;
-		}
-
-		return 0;
-	}
-
-	private function ProcessNewSkill_CripplingShot()
-	{
-		
-	}
-
-	private function ProcessNewSkill_SunderArmor()
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
-		var skillId:ESkill;
-		var armorReducAddValue:SAbilityAttributeValue;
-		var attackCount:int;
-		var i:int;
-		var duration:float;
-		var stackedCount:int;
-		var skillLevel:int;
-		var armorReduc:float;
-		var currMultiplier:float;
-		var npcVictim:CNewNPC;
-		
-		skillId = S_Sword_s28;
-
-		npcVictim = (CNewNPC)attackAction.victim;
-
-		if(!npcVictim) 
-			return;
-
-		duration = GetSkillDuration(skillId);
-
-		witcherAttacker = GetWitcherPlayer();
-		swordEntity = witcherAttacker.GetHeldSwordEntity();	
-
-		skillLevel = witcherAttacker.GetSkillLevel(skillId);
-
-		armorReducAddValue = witcherAttacker.GetSkillAttributeValue(skillId, 'armor_reduction_perc', false, true);
-
-		armorReduc = CalculateAttributeValue(armorReducAddValue);
-
-		
-		currMultiplier = npcVictim.SunderArmor(armorReduc, armorReduc*skillLevel, duration);
-
-		if(swordEntity )
-			witcherAttacker.PlaySkillComboEffect(skillId, swordEntity, ''); 
-	}
-
-	private function ProcessNewSkill_CripplingStrikes()
-	{
-		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
-		var skillId:ESkill;
-		var damageMultiplier:float;
-		var attackCount:int;
-		var i:int;
-		var duration:float;
-		var skillLevel:int;
-		var npcVictim:CNewNPC;
-		
-		skillId = S_Sword_s29;
-
-		npcVictim = (CNewNPC)attackAction.victim;
-
-		if(!npcVictim) 
-			return;
-
-		duration = GetSkillDuration(skillId);
-
-		witcherAttacker = GetWitcherPlayer();
-
-		swordEntity = witcherAttacker.GetHeldSwordEntity();	
-
-		damageMultiplier = GetDamageIncreaseBaseMultiplier(skillId, true);
-
-		npcVictim.CripplingStrike(damageMultiplier, duration);
-
-		if(swordEntity)
-			witcherAttacker.PlaySkillComboEffect(skillId, swordEntity, ''); 
-	}
-
-	private function ProcessNewSkills_Combat(out dmgInfos : array< SRawDamage >)
-	{
-		var witcherAttacker : W3PlayerWitcher;
-
-		
-		var perLevelDamageMultiplier:float;
-		var damageIncreaseValue:SAbilityAttributeValue;
-		var triggerChanceValue:SAbilityAttributeValue;
-		var i:int;
-		var triggerAtAttackCount:int;
-		var cooldownSeconds:float;
-
-		witcherAttacker = GetWitcherPlayer();
-
-		
-
-		if(witcherAttacker == playerAttacker 
-			&& attackAction)
-		{
-			if(!playerAttacker.GetInventory().IsItemFists(weaponId) && playerAttacker.IsLightAttack(attackAction.GetAttackName())) 
-			{
-				if(witcherAttacker.CanUseSkill(S_Sword_s22))  
-				{
-					ProcessNewSkill_MuscleMemory(dmgInfos);
-				}
-				if(witcherAttacker.CanUseSkill(S_Sword_s23)) 
-				{
-					ProcessNewSkill_StrengthTraining_Counter();
-				}
-				if(witcherAttacker.CanUseSkill(S_Sword_s24)) 
-				{
-					witcherAttacker.ResetSkillComboEx(S_Sword_s24, PreciseBlowsCounterId_Strong); 
-
-					
-					witcherAttacker.StopAllSkillComboEffectsEx(S_Sword_s24, PreciseBlowsCounterId_Strong); 
-					ProcessNewSkill_PreciseBlows(dmgInfos, PreciseBlowsCounterId_Fast); 
-				}
-			}
-			else if( playerAttacker.IsHeavyAttack(attackAction.GetAttackName())) 
-			{
-				if(witcherAttacker.CanUseSkill(S_Sword_s23)) 
-				{
-					ProcessNewSkill_StrengthTraining_Damage(dmgInfos);
-				}
-				if(witcherAttacker.CanUseSkill(S_Sword_s24)) 
-				{
-					witcherAttacker.ResetSkillComboEx(S_Sword_s24, PreciseBlowsCounterId_Fast); 
-
-					
-					witcherAttacker.StopAllSkillComboEffectsEx(S_Sword_s24, PreciseBlowsCounterId_Fast); 
-					ProcessNewSkill_PreciseBlows(dmgInfos, PreciseBlowsCounterId_Strong); 
-				}
-				if(witcherAttacker.CanUseSkill(S_Sword_s25))
-				{
-					ProcessNewSkill_CrushingBlows(dmgInfos); 
-				}
-				if(witcherAttacker.CanUseSkill(S_Sword_s28)) 
-				{
-					ProcessNewSkill_SunderArmor();
-				}
-			}
-		}
-	}
-	
 	
 	private function ProcessDamageIncrease(out dmgInfos : array< SRawDamage >)
 	{
-		var difficultyDamageMultiplier, rendLoad, rendBonus, overheal, rendRatio, focusCost, extraSignDamageMult, extraPoisonDamageMult, tempBonus : float;
-		var i, j, dmgIdx, bonusCount, signSkillCatalystLevel, alchemySkillToxicShockLevel, meleeAttackCounterForResonanceSkill : int;
+		var difficultyDamageMultiplier, rendLoad, rendBonus, overheal, rendRatio, focusCost : float;
+		var i, bonusCount : int;
 		var frozenBuff : W3Effect_Frozen;
 		var frozenDmgInfo : SRawDamage;
-		var hadFrostDamage, signSkillCatalystActive : bool;
+		var hadFrostDamage : bool;
 		var mpac : CMovingPhysicalAgentComponent;
-		var rendBonusPerPoint, staminaRendBonus, perk20Bonus, minCatalyst, maxCatalyst, minEnhanced, maxEnhanced : SAbilityAttributeValue;
+		var rendBonusPerPoint, staminaRendBonus, perk20Bonus : SAbilityAttributeValue;
 		var witcherAttacker : W3PlayerWitcher;
 		var damageVal, damageBonus, min, max			: SAbilityAttributeValue;		
 		var npcVictim : CNewNPC;
 		var sword : SItemUniqueId;
 		var actionFreeze : W3DamageAction;
 		var aerondight	: W3Effect_Aerondight;
-		var conjunctionDamageMult, spellPowerIgni : float;
-		var toxicShockDamage : SRawDamage;
-		var swordEntity: CWitcherSword;
-		var inv			: CInventoryComponent;
-
+		
 		
 		var aardDamage : SRawDamage;
 		var yrdens : array<W3YrdenEntity>;
-		var levelDiff : int;
+		var j, levelDiff : int;
 		var aardDamageF : float;
 		var spellPower, spellPowerAard, spellPowerYrden : float;
 		var spNetflix : SAbilityAttributeValue;
-		var poisonDamageValue : SAbilityAttributeValue;
-		var attackPowerValue : SAbilityAttributeValue;
 		
 		
 		
 		var entities : array<CGameplayEntity>;
 		var skillPassiveMod : float;
 		
-
-		
-		var monsterBonusType : name;
-		var null, tempAttribute : SAbilityAttributeValue;
-		var resonanceDamage : SRawDamage;
-
-		var elementOfSurpriseMult : float;
-		var survivalSkillElementOfSurpriseLevel : int;
-		var minElementOfSurprise, maxElementOfSurprise : SAbilityAttributeValue;
 
 		
 		
@@ -1591,98 +970,6 @@ class W3DamageManagerProcessor extends CObject
 				}
 			}
 		}
-
-		
-		if ( actorVictim && playerAttacker && GetWitcherPlayer().CanUseSkill( S_Magic_s35 ) )
-		{
-			yrdens = GetWitcherPlayer().yrdenEntities;
-			signSkillCatalystLevel = playerAttacker.GetSkillLevel( S_Magic_s35 );
-			signSkillCatalystActive = yrdens.Size() > 0 && ( action.GetSignType() == ST_Aard || action.GetSignType() == ST_Igni );
-
-			if ( signSkillCatalystActive )
-			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue('magic_s35', 'spell_power_aard_igni', minCatalyst, maxCatalyst);
-				extraSignDamageMult = minCatalyst.valueMultiplicative * signSkillCatalystLevel;
-
-				spellPower = action.GetDamageValueTotal();
-
-				for(i=0; i<yrdens.Size(); i+=1)
-				{
-					for(j=0; j<yrdens[i].validTargetsInArea.Size(); j+=1)
-					{			
-						if(yrdens[i].validTargetsInArea[j] == actorVictim )
-						{
-							
-							for ( dmgIdx = 0; dmgIdx < dmgInfos.Size(); dmgIdx += 1 )
-							{
-								dmgInfos[dmgIdx].dmgVal *= ( 1 + extraSignDamageMult );
-							}
-						}
-					}
-				}
-			}
-		}
-
-		
-
-		
-		if( playerAttacker && action.IsActionMelee() && playerAttacker.IsHeavyAttack( attackAction.GetAttackName() ) &&
-			playerAttacker.CanUseSkill( S_Alchemy_s23 ) && GetWitcherPlayer().CanUseToxicShock() )
-		{
-			if ( actorVictim && actorVictim.HasBuff( EET_Poison ) )
-			{
-				alchemySkillToxicShockLevel = playerAttacker.GetSkillLevel(S_Alchemy_s23);
-				switch (alchemySkillToxicShockLevel)
-				{
-					case 1:
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_1', minEnhanced, maxEnhanced);
-						extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-						break;
-					case 2:
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_2', minEnhanced, maxEnhanced);
-						extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-						break;
-					case 3:
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_3', minEnhanced, maxEnhanced);
-						extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-						break;
-					default:
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue('alchemy_s23', 'poison_dmg_level_3', minEnhanced, maxEnhanced);
-						extraPoisonDamageMult = minEnhanced.valueMultiplicative;
-						break;
-				}
-
-				toxicShockDamage.dmgType = theGame.params.DAMAGE_NAME_POISON;
-				toxicShockDamage.dmgVal = action.GetDamageValueTotal() * extraPoisonDamageMult;
-				dmgInfos.PushBack( toxicShockDamage );
-				actorVictim.RemoveBuff( EET_Poison );
-				GetWitcherPlayer().ConsumeToxicShock();
-				thePlayer.AddTimer( 'ResetToxicShock', 5.0,,,, true );
-
-				swordEntity = GetWitcherPlayer().GetHeldSwordEntity();
-				if (swordEntity)
-				{
-					swordEntity.PlayEffect('toxic_shock_sword');
-				}
-			}
-		}
-
-		
-		if ( actorVictim && playerAttacker && playerAttacker.CanUseSkill( S_Perk_37 ) )
-		{
-			conjunctionDamageMult = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue( S_Perk_37, 'damage_multiplier', false, false ) );
-			conjunctionDamageMult = 1 + playerAttacker.GetSkillLevel( S_Perk_37 ) * conjunctionDamageMult;
-
-			for ( i = 0; i < dmgInfos.Size(); i += 1 )
-			{
-				if ( IsDamageTypeAnyPhysicalType( dmgInfos[i].dmgType ) )
-				{
-					continue;
-				}
-
-				dmgInfos[i].dmgVal *= conjunctionDamageMult;
-			}
-		}
 			
 		
 		if(actorVictim)
@@ -1729,8 +1016,8 @@ class W3DamageManagerProcessor extends CObject
 			
 			if(rendLoad >= 1)
 			{
-				rendBonusPerPoint = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'adrenaline_damage_bonus', false, true);
-				rendBonus = FloorF(rendLoad) * rendBonusPerPoint.valueMultiplicative * witcherAttacker.GetSkillLevel(S_Sword_s02);
+				rendBonusPerPoint = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'adrenaline_final_damage_bonus', false, true);
+				rendBonus = FloorF(rendLoad) * rendBonusPerPoint.valueMultiplicative;
 				
 				for(i=0; i<dmgInfos.Size(); i+=1)
 				{
@@ -1806,19 +1093,6 @@ class W3DamageManagerProcessor extends CObject
 			}
 		}
 		
-
-		
-		if ( playerAttacker && attackAction.IsActionMelee() && thePlayer.HasBuff( EET_ElementOfSurprise ) )
-		{
-			survivalSkillElementOfSurpriseLevel = thePlayer.GetSkillLevel( S_Perk_44 );
-			theGame.GetDefinitionsManager().GetAbilityAttributeValue('perk_44', 'melee_damage_increase', minElementOfSurprise, maxElementOfSurprise);
-			elementOfSurpriseMult = minElementOfSurprise.valueMultiplicative * survivalSkillElementOfSurpriseLevel;
-
-			for( i=0 ; i<dmgInfos.Size() ; i += 1 )
-			{
-				dmgInfos[i].dmgVal *= 1 + elementOfSurpriseMult;
-			}
-		}
 		
 		
 		if( playerAttacker && playerAttacker.IsLightAttack( attackAction.GetAttackName() ) && playerAttacker.HasBuff( EET_LynxSetBonus ) && !attackAction.WasDodged() ) 
@@ -1884,32 +1158,6 @@ class W3DamageManagerProcessor extends CObject
 				}
 			}
 			
-
-			
-			if ( GetWitcherPlayer().CanUseSkill(S_Perk_27) && !action.IsDoTDamage() )
-			{
-				perk20Bonus = GetWitcherPlayer().GetAttributeValue('bomb_dmg_multiplier');
-				for( i = 0 ; i < dmgInfos.Size() ; i+=1)
-				{
-					dmgInfos[i].dmgVal *= ( 1 + perk20Bonus.valueMultiplicative );
-				}
-			}
-
-			
-			if ( !playerVictim && playerAttacker.CanUseSkill(S_Alchemy_s25) && !action.IsDoTDamage() )
-			{
-				tempBonus = playerAttacker.GetStat(BCS_Toxicity) * CalculateAttributeValue(playerAttacker.GetSkillAttributeValue( S_Alchemy_s25, 'bomb_damage_bonus', false, false) * playerAttacker.GetSkillLevel(S_Alchemy_s25));
-				for( i = 0 ; i < dmgInfos.Size() ; i+=1)
-				{
-					dmgInfos[i].dmgVal *= ( 1 + tempBonus );
-				}
-			}
-
-			
-			if ( GetWitcherPlayer().CanUseSkill(S_Perk_44) && !action.IsDoTDamage() )
-			{
-				thePlayer.AddEffectDefault( EET_ElementOfSurprise, NULL, "ElementOfSurpriseEffect" );
-			}	
 		}
 		
 		
@@ -1976,126 +1224,7 @@ class W3DamageManagerProcessor extends CObject
 					}
 				}				
 			}
-		}
-
-		
-		
-		if(npcVictim) 
-		{
-			for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-			{
-				dmgInfos[i].dmgVal *= 1 + npcVictim.GetCripplingStrikeDamageMultiplier();
-			}
-		}
-
-		
-		if(playerAttacker && playerAttacker.CanUseSkill(S_Perk_28))
-		{
-			for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-			{
-				if(dmgInfos[i].dmgType == theGame.params.DAMAGE_NAME_POISON)
-				{
-					poisonDamageValue = playerAttacker.GetAttributeValue('poison_dmg_multiplier');
-					dmgInfos[i].dmgVal *= 1 + poisonDamageValue.valueMultiplicative;
-				}
-			}
-		}
-
-		
-		if( !playerAttacker && actorAttacker && playerVictim && playerVictim.CanUseSkill( S_Alchemy_s24 ) )
-		{
-			
-			if ( playerVictim.GetStat( BCS_Toxicity, false ) / playerVictim.GetStatMax( BCS_Toxicity ) >= CalculateAttributeValue( playerVictim.GetSkillAttributeValue(S_Alchemy_s24, 'toxicity_threshold', false, true ) ) )
-			{
-				tempBonus = CalculateAttributeValue( playerVictim.GetSkillAttributeValue( S_Alchemy_s24, 'received_damage_multiplier', false, true ) );
-				for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-				{
-					dmgInfos[i].dmgVal *= tempBonus;
-				}
-			}
-		}
-	
-		
-		if( actorVictim && playerAttacker && attackAction && attackAction.IsActionMelee() && playerAttacker.CanUseSkill(S_Alchemy_s26) 
-			&& playerAttacker.inv.ItemHasActiveOilApplied( weaponId, victimMonsterCategory ) )
-		{
-			
-			monsterBonusType = MonsterCategoryToAttackPowerBonus(victimMonsterCategory);
-			tempAttribute = playerAttacker.inv.GetItemAttributeValue(weaponId, monsterBonusType);
-		
-			if(tempAttribute != null && actorVictim.IsImmuneToBuff( EET_Poison ) )
-			{
-				tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Alchemy_s26, 'damage_bonus_immune', false, true ) * playerAttacker.GetSkillLevel(S_Alchemy_s26) );
-				for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-				{
-					dmgInfos[i].dmgVal *= 1 + tempBonus;
-				}
-			}
-			else if(tempAttribute != null)
-			{
-				tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Alchemy_s26, 'damage_bonus', false, true ) * playerAttacker.GetSkillLevel(S_Alchemy_s26) );
-				for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-				{
-					dmgInfos[i].dmgVal *= 1 + tempBonus;
-				}
-			}
-		}
-
-		
-		meleeAttackCounterForResonanceSkill = thePlayer.GetMeleeAttackCounterForResonanceSkill();
-		if( playerAttacker && attackAction && attackAction.IsActionMelee() && !playerAttacker.GetInventory().IsItemFists(weaponId) && playerAttacker.HasBuff(EET_Resonance) &&
-			meleeAttackCounterForResonanceSkill <= 3)
-		{
-			tempAttribute = playerAttacker.GetPowerStatValue(CPS_SpellPower);
-			tempBonus = tempAttribute.valueMultiplicative;
-			tempBonus *= CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Magic_s41, 'sign_intensity_ratio', false, true ) * playerAttacker.GetSkillLevel(S_Magic_s41) );
-
-			for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-			{
-				dmgInfos[i].dmgVal *= 1 + tempBonus;
-			}
-
-			if (meleeAttackCounterForResonanceSkill == 3)
-			{
-				playerAttacker.RemoveBuff(EET_Resonance);
-				thePlayer.SetMeleeAttackCounterForResonanceSkill(1);
-
-				if(GetWitcherPlayer())
-				{
-					GetWitcherPlayer().StopEffect('resonance_sword');
-				}
-			}
-			else
-			{
-				thePlayer.SetMeleeAttackCounterForResonanceSkill(meleeAttackCounterForResonanceSkill+1);
-			}
-		}
-
-		
-		if(attackAction.GetAttackName() == 'bolt')
-		{
-			if(thePlayer.CanUseSkill(S_Sword_s26)) 
-			{
-				tempBonus = ProcessNewSkill_AnatomicalKnowledge();
-				for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-				{
-					dmgInfos[i].dmgVal += tempBonus;
-				}
-			}
-
-			if(attackAction.GetIsHeadShot() && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s32))
-			{
-				tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Sword_s32, 'damage_increase', false, true ));
-				for( i = 0 ; i < dmgInfos.Size() ; i += 1 )
-				{
-					dmgInfos[i].dmgVal *= 1 + tempBonus;
-				}
-			}
-
-
-		}
-
-
+		}	
 	}
 	
 	
@@ -2114,15 +1243,11 @@ class W3DamageManagerProcessor extends CObject
 			returned = ProcessActionBlackBloodReturnedDamage();		
 		}
 		
-
-		
 		
 		if(action.IsActionMelee() && actorVictim.HasAbility( 'Thorns' ) )
 		{
 			returned = ProcessActionThornDamage() || returned;
 		}
-		
-
 		
 		if(actorVictim.HasAbility( 'Glyphword 5 _Stats', true))
 		{			
@@ -2241,7 +1366,7 @@ class W3DamageManagerProcessor extends CObject
 		
 		return true;
 	}
-
+	
 	
 	private function ProcessSilverStudsReturnedDamage() : bool
 	{
@@ -2305,8 +1430,6 @@ class W3DamageManagerProcessor extends CObject
 		delete returnedAction;
 		return true;
 	}
-	
-
 	
 	
 	private function ProcessActionReflectDamage() : bool
@@ -2403,15 +1526,13 @@ class W3DamageManagerProcessor extends CObject
 		
 		return true;
 	}
-
-
 		
 	
 	private function GetAttackersPowerMod() : SAbilityAttributeValue
 	{		
 		var powerMod, criticalDamageBonus, min, max, critReduction, sp : SAbilityAttributeValue;
 		var mutagen : CBaseGameplayEffect;
-		var totalBonus, tempBonus : float;
+		var totalBonus : float;
 		
 		
 		var inv	: CInventoryComponent; 
@@ -2433,18 +1554,8 @@ class W3DamageManagerProcessor extends CObject
 		
 		
 		if ( playerAttacker && (W3AardProjectile)action.causer )
-			powerMod.valueMultiplicative = 1 + (powerMod.valueMultiplicative - 1) * theGame.params.AARD_SPELL_POWER_MULT;
-
+			powerMod.valueMultiplicative = 1;
 		
-		if(attackAction.GetAttackName() == 'bolt')
-		{
-			if(attackAction.GetIsHeadShot() && playerAttacker && playerAttacker.CanUseSkill(S_Sword_s32))
-			{
-				tempBonus = CalculateAttributeValue( playerAttacker.GetSkillAttributeValue(S_Sword_s32, 'damage_increase', false, true ));
-				powerMod.valueAdditive *= 1 + tempBonus;
-			}
-		}
-
 		
 		
 		inv = actorAttacker.GetInventory();	
@@ -2499,12 +1610,6 @@ class W3DamageManagerProcessor extends CObject
 						criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Sword_s17, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Sword_s17);
 				}
 			}
-
-			
-			if ( thePlayer.CanUseSkill( S_Alchemy_s27 ) && thePlayer.GetStatMax(BCS_Focus) == thePlayer.GetStat(BCS_Focus) && IsMonsterOilTarget() )
-			{
-				criticalDamageBonus += playerAttacker.GetSkillAttributeValue(S_Alchemy_s27, theGame.params.CRITICAL_HIT_DAMAGE_BONUS, false, true) * playerAttacker.GetSkillLevel(S_Alchemy_s27);				
-			}
 			
 			
 			totalBonus = CalculateAttributeValue(criticalDamageBonus);
@@ -2556,12 +1661,6 @@ class W3DamageManagerProcessor extends CObject
 				
 				resistPerc += bonusResist * playerVictim.GetSkillLevel(S_Alchemy_s05);
 			}
-
-			
-			if (playerVictim && playerVictim.CanUseSkill(S_Alchemy_s22) && actorAttacker && actorAttacker.HasBuff(EET_Poison))
-			{
-				resistPerc += CalculateAttributeValue( playerVictim.GetSkillAttributeValue(S_Alchemy_s22, 'defence_bonus', false, true ) ) * playerVictim.GetSkillLevel(S_Alchemy_s22);
-			}		
 			
 			
 			if(playerVictim && actorAttacker && playerVictim.HasBuff(EET_Mutagen28))
@@ -2597,7 +1696,7 @@ class W3DamageManagerProcessor extends CObject
 								armorReductionPerc.valueMultiplicative += oils[ i ].GetAmmoPercentage();
 							}
 						}
-					}	
+					}
 				}
 				
 				
@@ -2613,19 +1712,13 @@ class W3DamageManagerProcessor extends CObject
 					   dmgType == theGame.params.DAMAGE_NAME_BLUDGEONING || 
 					   dmgType == theGame.params.DAMAGE_NAME_RENDING || 
 					   dmgType == theGame.params.DAMAGE_NAME_SILVER
-					 )
+					 ) && 
+					 playerAttacker.CanUseSkill(S_Sword_s06)
 				   ) 
 				{
-					if(playerAttacker.CanUseSkill(S_Sword_s06))
-					{
-						
-						skillArmorReduction = playerAttacker.GetSkillAttributeValue(S_Sword_s06, 'armor_reduction_perc', false, true);
-						armorReductionPerc += skillArmorReduction * playerAttacker.GetSkillLevel(S_Sword_s06);				
-					}
-					if(playerAttacker.CanUseSkill(S_Sword_s28) && (CNewNPC)actorVictim)
-					{
-						armorReductionPerc.valueAdditive += ((CNewNPC)actorVictim).GetSunderArmorPercent();
-					}
+					
+					skillArmorReduction = playerAttacker.GetSkillAttributeValue(S_Sword_s06, 'armor_reduction_perc', false, true);
+					armorReductionPerc += skillArmorReduction * playerAttacker.GetSkillLevel(S_Sword_s06);				
 				}
 			}
 		}
@@ -2635,10 +1728,9 @@ class W3DamageManagerProcessor extends CObject
 			resistPts += CalculateAttributeValue( actorVictim.GetTotalArmor() );
 		
 		
-		resistPerc -= CalculateAttributeValue(armorReductionPerc);
-
+		resistPts = MaxF(0, resistPts - CalculateAttributeValue(armorReduction) );		
+		resistPerc -= CalculateAttributeValue(armorReductionPerc);		
 		
-		resistPts = MaxF(0, (resistPts - CalculateAttributeValue(armorReduction)) * (1 + MinF(resistPerc, 0.f) ) );
 		
 		
 		resistPerc = MaxF(0, resistPerc);
@@ -2647,7 +1739,7 @@ class W3DamageManagerProcessor extends CObject
 	
 	private function CalculateDamage(dmgInfo : SRawDamage, powerMod : SAbilityAttributeValue) : float
 	{
-		var finalDamage : float;
+		var finalDamage, finalIncomingDamage : float;
 		var resistPoints, resistPercents : float;
 		var ptsString, percString : string;
 		var mutagen : CBaseGameplayEffect;
@@ -2714,6 +1806,8 @@ class W3DamageManagerProcessor extends CObject
 			}
 			
 		}
+			
+		finalIncomingDamage = finalDamage;
 			
 		if(finalDamage > 0.f)
 		{
@@ -2863,11 +1957,6 @@ class W3DamageManagerProcessor extends CObject
 					finalDamage *= 1.2;	
 					break;
 			}
-
-			if ( thePlayer.CanUseSkill( S_Magic_s31 ) )
-			{
-				finalDamage *= 1 + thePlayer.GetSkillLevel( S_Magic_s31 ) * CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Magic_s31, 'attack_power', false, true ) );
-			}
 		}
 		
 	
@@ -2941,7 +2030,7 @@ class W3DamageManagerProcessor extends CObject
 		}
 				
 		
-		if(actorVictim && !action.GetSimulateOnly())
+		if(actorVictim)
 		{
 			hpPerc = actorVictim.GetHealthPercents();
 			
@@ -2993,9 +2082,6 @@ class W3DamageManagerProcessor extends CObject
 		var canLog, playerHasSword : bool;
 		var i : int;
 		
-		if (action.GetSimulateOnly())
-			return;
-
 		canLog = theGame.CanLog();
 
 		witcherPlayer = GetWitcherPlayer();
@@ -3148,6 +2234,10 @@ class W3DamageManagerProcessor extends CObject
 				{
 					npcVictim.NoticeActorInGuardArea( actorAttacker );
 				}
+
+				
+				if ( !playerVictim )
+					actorVictim.RemoveAllBuffsOfType(EET_Confusion);
 				
 				
 				if(playerAttacker && action.IsActionMelee() && !playerAttacker.GetInventory().IsItemFists(weaponId) && playerAttacker.IsLightAttack(attackAction.GetAttackName()) && playerAttacker.CanUseSkill(S_Sword_s05))
@@ -3229,7 +2319,7 @@ class W3DamageManagerProcessor extends CObject
 				
 				if 	( 	theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'AutomaticFinishersEnabled' ) == "true" 
 					|| ( (W3PlayerWitcher)playerAttacker && GetWitcherPlayer().IsMutationActive( EPMT_Mutation3 ) ) 
-					
+					||	actorVictim.WillBeUnconscious()
 					)
 				{
 					actorVictim.AddAbility( 'ForceFinisher', false );
@@ -3310,15 +2400,13 @@ class W3DamageManagerProcessor extends CObject
 			GetWitcherPlayer().SetRecentlyCountered(true);
 		}
 		
-		if(attackAction && attackAction.IsActionMelee() && actorAttacker && playerVictim && attackAction.WasDodged() && playerVictim == GetWitcherPlayer())
+		
+		
+		
+		if(attackAction && !action.IsDoTDamage() && (playerAttacker || playerVictim) && (attackAction.IsParried() || attackAction.IsCountered()) )
 		{
-			GetWitcherPlayer().SetRecentlyDodged(true);
+			theGame.VibrateControllerLight();
 		}
-		
-		
-		
-		
-		
 	}
 	
 	private function CanDismember( wasFrozen : bool, out dismemberExplosion : bool, out weaponName : name ) : bool
@@ -3390,11 +2478,6 @@ class W3DamageManagerProcessor extends CObject
 		{
 			dismember = true;
 			dismemberExplosion = true;
-		}
-		else if ( actorVictim.HasTag( 'q803_ScoloForceFinisher' ) && playerAttacker && attackAction && attackAction.IsActionMelee() ) 
-		{			
-			dismember = true;
-			dismemberExplosion = false;
 		}
 		else
 		{
@@ -3545,14 +2628,14 @@ class W3DamageManagerProcessor extends CObject
 			
 		item = thePlayer.inv.GetItemFromSlot( 'l_weapon' );	
 		
-		if ( thePlayer.forceFinisher && !thePlayer.forceFinisherKeepConditions )
+		if ( thePlayer.forceFinisher )
 		{
 			b = playerAttacker && attackAction && attackAction.IsActionMelee();
 			b = b && ( actorVictim.IsHuman() && !actorVictim.IsWoman() );
 			b =	b && !thePlayer.IsInAir();
 			b =	b && ( thePlayer.IsWeaponHeld( 'steelsword') || thePlayer.IsWeaponHeld( 'silversword') );
 			b = b && !thePlayer.IsSecondaryWeaponHeld();
-			b =	b && (!thePlayer.inv.IsIdValid( item ));
+			b =	b && !thePlayer.inv.IsIdValid( item );
 			b =	b && !actorVictim.IsKnockedUnconscious();
 			b =	b && !actorVictim.HasBuff( EET_Knockdown );
 			b =	b && !actorVictim.HasBuff( EET_Ragdoll );
@@ -3566,7 +2649,7 @@ class W3DamageManagerProcessor extends CObject
 		{
 			b = playerAttacker && attackAction && attackAction.IsActionMelee();
 			b = b && ( actorVictim.IsHuman() && !actorVictim.IsWoman() );
-			b =	b && ((RandRange(100) < finisherChance) || thePlayer.forceFinisher);
+			b =	b && RandRange(100) < finisherChance;
 			b =	b && !areEnemiesAttacking;
 			b =	b && AbsF( victimToPlayerVector.Z ) < 0.4f;
 			b =	b && !thePlayer.IsInAir();
@@ -3600,9 +2683,7 @@ class W3DamageManagerProcessor extends CObject
 	private function CanPerformFinisherOnAliveTarget( actorVictim : CActor ) : bool
 	{
 		return actorVictim.IsHuman() 
-
 		&& ( actorVictim.HasBuff(EET_Confusion) || actorVictim.HasBuff(EET_AxiiGuardMe) )
-
 		&& actorVictim.IsVulnerable()
 		&& !actorVictim.HasAbility('DisableFinisher')
 		&& !actorVictim.HasAbility('InstantKillImmune');
@@ -3874,7 +2955,7 @@ class W3DamageManagerProcessor extends CObject
 				GCameraShake( 0.5, true, actorAttacker.GetWorldPosition(), 10);
 				
 			if(playerAttacker)
-				theGame.HapticStart( "classic_vibro_large_oneshot" );
+				theGame.VibrateControllerHard();	
 				
 			
 			if( dismemberExplosion && (W3AardProjectile)action.causer )
@@ -3979,7 +3060,7 @@ class W3DamageManagerProcessor extends CObject
 			GCameraShake( 0.5, true, actorAttacker.GetWorldPosition(), 10);
 			
 		if(playerAttacker)
-			theGame.HapticStart( "classic_vibro_large_oneshot" );
+			theGame.VibrateControllerHard();	
 	}
 	
 	
@@ -4134,7 +3215,7 @@ class W3DamageManagerProcessor extends CObject
 			return;
 		}
 		
-		resist = CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Alchemy_s05, 'defence_bonus', false, true ) );
+		resist = CalculateAttributeValue( thePlayer.GetSkillAttributeValue( S_Alchemy_s05, 'defence_bonus', false, true ) );		
 	}
 	
 	
@@ -4314,41 +3395,7 @@ class W3DamageManagerProcessor extends CObject
 			action.AddEffectInfo( EET_KnockdownTypeApplicator, 0.1f, , , , 1.f );
 		}
 	}
-
-	private function IsMonsterOilTarget() : bool
-	{
-		var appliedOilName : name;
-		var monsterOil: array<name>;
-		var oils : array< W3Effect_Oil >;
-		var i : int;
-
-		if(!playerAttacker)
-		{
-			return false;
-		}
-
-		monsterOil = MonsterCategoryToOilNames(victimMonsterCategory);
-		oils = playerAttacker.inv.GetOilsAppliedOnItem( weaponId );
-			
-		if( oils.Size() > 0 )
-		{
-			for( i=0; i<oils.Size(); i+=1 )
-			{
-				appliedOilName = oils[ i ].GetOilItemName();
-				
-				
-				if( oils[ i ].GetAmmoCurrentCount() > 0 && monsterOil.Contains( appliedOilName ) )
-				{
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
 }
-
-
 
 exec function ForceDismember( b: bool, optional chance : int, optional n : name, optional e : bool )
 {
@@ -4361,7 +3408,7 @@ exec function ForceDismember( b: bool, optional chance : int, optional n : name,
 	temp.forceDismemberExplosion = e;
 } 
 
-exec function ForceFinisher( b: bool, optional n : name, optional rightStance : bool, optional keepConditions : bool )
+exec function ForceFinisher( b: bool, optional n : name, optional rightStance : bool )
 {
 	var temp : CR4Player;
 	
@@ -4369,5 +3416,4 @@ exec function ForceFinisher( b: bool, optional n : name, optional rightStance : 
 	temp.forcedStance = rightStance;
 	temp.forceFinisher = b;
 	temp.forceFinisherAnimName = n;
-	temp.forceFinisherKeepConditions = keepConditions;
-}
+} 

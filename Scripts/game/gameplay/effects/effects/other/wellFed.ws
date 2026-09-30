@@ -10,20 +10,7 @@ class W3Effect_WellFed extends W3RegenEffect
 	default isNeutral = false;
 	default isNegative = false;
 	
-	public function Init(params : SEffectInitInfo)
-	{
-		var ability : SAbilityAttributeValue;
-
-		super.Init(params);
-
-		if( GetWitcherPlayer().CanUseSkill( S_Perk_41 ) )
-		{
-			ability = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_41, 'duration', false, false );
-			duration = ability.valueAdditive * thePlayer.GetSkillLevel( S_Perk_41 );
-			timeLeft = duration;
-		}
-	}
-
+	
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
 		super.OnEffectAdded(customParams);
@@ -33,45 +20,11 @@ class W3Effect_WellFed extends W3RegenEffect
 			iconPath = theGame.effectMgr.GetPathForEffectIconTypeName('icon_effect_Dumplings');
 		}
 	}
-
-	event OnEffectRemoved()
-	{
-		var player : CR4Player;
-
-		super.OnEffectRemoved();
-
-		
-		player = (CR4Player)target;
-		if(player)
-		{
-			player.RemoveAbilityAll('GourmetEffect');
-		}
-	}
 	
 	event OnPerk15Unequipped()
 	{
 		SetTimeLeft( initialDuration );
 		duration = initialDuration;
-	}
-
-	event OnPerk41Updated()
-	{
-		var player : CR4Player;
-		var ability : SAbilityAttributeValue;
-
-		player = (CR4Player)target;
-		if(player && player.CanUseSkill(S_Perk_41))
-		{
-			ability = GetWitcherPlayer().GetSkillAttributeValue( S_Perk_41, 'duration', false, false );
-			duration += ability.valueAdditive;
-			timeLeft += ability.valueAdditive;
-		}
-	}
-
-	
-	event OnPerk41Unequipped()
-	{
-		timeLeft = 0;
 	}
 	
 	protected function CalculateDuration(optional setInitialDuration : bool)

@@ -200,18 +200,12 @@ class CR4GlossaryBooksMenu extends CR4MenuBase
 	event  OnCloseMenu()
 	{
 		var commonMenu : CR4CommonMenu;
-		var glossaryMainMenu : CR4GlossaryMainMenu;
 		
 		commonMenu = (CR4CommonMenu)m_parentMenu;
-		glossaryMainMenu = (CR4GlossaryMainMenu)m_parentMenu;
 		
 		if( commonMenu )
 		{
 			commonMenu.ChildRequestCloseMenu();
-		}
-		if(glossaryMainMenu)
-		{
-			glossaryMainMenu.ChildRequestCloseMenu();
 		}
 		
 		theSound.SoundEvent( 'gui_global_quit' );

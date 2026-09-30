@@ -37,8 +37,8 @@ state Bestiary in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		if(closedByParentMenu || isClosing)
 			return true;
 			
-		
-		
+		if(hintName == BESTIARY_DESCRIPTION)
+			ShowHint(BESTIARY_CLOSE, 0.02f, 0.65f, ETHDT_Infinite);
 	}
 	
 	event OnMenuClosing(menuName : name)

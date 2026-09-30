@@ -17,7 +17,7 @@ state OpenWorldMap in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 		theGame.GetTutorialSystem().HideTutorialHint( OPEN_FAST_MENU );
 		
-		
+		ShowHint(OPEN_MAP, 0.35f, 0.6f, ETHDT_Infinite, GetHighlightHubMenuMap() );	
 	}
 	
 	event OnLeaveState( nextStateName : name )

@@ -23,10 +23,10 @@ state Inventory in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 		isClosing = false;
 		
-		
+		BlockPanels(true);
 		
 		highlights.PushBack( GetHighlightForPaperdoll() );			
-		ShowHint(PAPERDOLL, POS_INVENTORY_X, POS_INVENTORY_Y - 0.05f);
+		ShowHint(PAPERDOLL, POS_INVENTORY_X, POS_INVENTORY_Y, , highlights);
 		
 		theGame.GameplayFactsAdd( 'panel_on_since_inv_tut' );
 	}
@@ -35,7 +35,7 @@ state Inventory in W3TutorialManagerUIHandler extends TutHandlerBaseState
 	{
 		isClosing = true;
 		
-		
+		BlockPanels(false);
 		
 		CloseStateHint(PAPERDOLL);
 		CloseStateHint(BAG);
@@ -84,12 +84,33 @@ state Inventory in W3TutorialManagerUIHandler extends TutHandlerBaseState
 				
 		else if(hintName == PAPERDOLL)
 		{
-			
-			BlockPanels(false);
-			QuitState();
-			
+			highlights.PushBack( GetHighlightForItemsGrid() );
+			ShowHint(BAG, POS_INVENTORY_X, POS_INVENTORY_Y, , highlights);
 		}
+		else if(hintName == BAG)
+		{
+			highlights.PushBack( GetHighlightForInventoryTabs() );
+			ShowHint(TABS, POS_INVENTORY_X, POS_INVENTORY_Y, , highlights);
+		}
+		else if(hintName == TABS)
+		{
+			highlights.Resize(1);
+			highlights[0].x = 0.805;
+			highlights[0].y = 0.67;
+			highlights[0].width = 0.13;
+			highlights[0].height = 0.18;
+			
+			ShowHint(STATS, POS_INVENTORY_X, POS_INVENTORY_Y, , highlights);
+		}
+		else if(hintName == STATS)
+		{
 		
+			ShowHint(EQUIPPING, POS_INVENTORY_X, POS_INVENTORY_Y);
+		}
+		else if(hintName == EQUIPPING)
+		{
+			QuitState();
+		}
 	}
 }
 

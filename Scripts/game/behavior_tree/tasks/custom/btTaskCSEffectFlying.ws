@@ -105,7 +105,6 @@ class CBehTreeTaskCSEffectFlying extends CBehTreeTaskCSEffect
 		mac.SetAnimatedMovement( false );
 		owner.EnablePhysicalMovement( false );
 		mac.SnapToNavigableSpace( true );
-
 	}
 	
 	function OnAnimEvent( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo ) : bool

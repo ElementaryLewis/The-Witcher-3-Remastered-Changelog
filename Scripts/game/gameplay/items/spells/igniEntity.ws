@@ -101,7 +101,7 @@ statemachine class W3IgniEntity extends W3SignEntity
 		projectileCollision.PushBack( 'Corpse' );
 		projectileCollision.PushBack( 'ParticleCollider' ); 
 	
-		if ( owner.ChangeAspect( this, S_Magic_s02 ) || owner.ChangeAspect( this, S_Magic_s28 ) )
+		if ( owner.ChangeAspect( this, S_Magic_s02 ) )
 		{
 			CacheActionBuffsFromSkill();
 			GotoState( 'IgniChanneled' );

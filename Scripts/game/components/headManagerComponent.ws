@@ -6,11 +6,9 @@
 import class CHeadManagerComponent extends CSelfUpdatingComponent
 {
 	import final function SetTattoo( hasTattoo : bool );
-	import final function SetDemonMark( hasDemonMark : bool );
-	import final function SetScar( hasScar : bool );
+	import final function SetDemonMark( hasDemonMark : bool );	
 	import final function SetBeardStage( maxStage : bool, optional stage : int );
 	import final function SetCustomHead( head : name );
-	import final function SetCustomHeadNum( num : int ) : name;
 	import final function RemoveCustomHead();
 	import final function BlockGrowing( block : bool );
 	import final function Shave();

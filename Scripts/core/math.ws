@@ -226,22 +226,6 @@ function RoundTo(f : float, decimal : int) : float
 	return ret;
 }
 
-function SmoothstepF( alpha, a, b : float ) : float
-{
-	alpha = ClampF( alpha, 0.f, 1.f );
-	alpha = alpha * alpha * ( 3.f - 2.f * alpha );
-
-	return a + ( b - a ) * alpha;
-}
-
-function SmootherstepF( alpha, a, b : float ) : float
-{
-	alpha = ClampF( alpha, 0.f, 1.f );
-	alpha = alpha * alpha * alpha * ( alpha * ( alpha * 6.f - 15.f ) + 10.f );
-
-	return a + ( b - a ) * alpha;
-}
-
 
 import function ReinterpretIntAsFloat( a : int ) : float;
 
@@ -404,7 +388,7 @@ import function VecGetAngleDegAroundAxis( dirA : Vector, dirB : Vector, axis : V
 import function VecProjectPointToPlane( p1 : Vector, p2 : Vector, p3 : Vector, toProject : Vector ) : Vector;
 
 
-import function VecRotateAxis( vector : Vector, axis : Vector, angleRadians : float ) : Vector;
+import function VecRotateAxis( vector : Vector, axis : Vector, angle : float ) : Vector;
 
 function VecRotByAngleXY(vec : Vector, angleDeg : float) : Vector
 {

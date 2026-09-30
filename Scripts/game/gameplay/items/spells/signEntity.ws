@@ -14,11 +14,8 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	public    	var signType 			: ESignType;
 	public    	var actionBuffs   		: array<SEffectInfo>;	
 	editable  	var friendlyCastEffect	: name;
-	protected	var cachedCost			: float;
+	protected		var cachedCost			: float;
 	protected 	var usedFocus			: bool;
-	protected	var disableCost			: bool;
-	protected 	var skipChannelCost		: bool;
-	protected 	var onlyDrainFocus		: bool;
 	
 	
 	private var specialIgniCast : bool; default specialIgniCast = false;
@@ -42,30 +39,16 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			{
 				thePlayer.SetPadBacklightColorFromSign(GetSignType());				
 			}
-
-			if(thePlayer.CanUseSkill(S_Sword_s19) && GetWitcherPlayer().GetTempLearnedSignSkillsSize() > 0)
-			{
-				GetWitcherPlayer().SetFloodOfAngerSucceeded(true);
-			}
+	
 			OnStarted();
 		}
 		else if( eventName == 'cast_throw' )
 		{
 			OnThrowing();
-
-			if( thePlayer.HasBuff( EET_Avoidance ) )
-			{
-				thePlayer.RemoveBuff( EET_Avoidance, false, "AvoidanceEffect" );
-			}
 		}
 		else if( eventName == 'cast_end' )
 		{
 			OnEnded();
-
-			if( thePlayer.HasBuff( EET_Avoidance ) )
-			{
-				thePlayer.RemoveBuff( EET_Avoidance, false, "AvoidanceEffect" );
-			}
 		}
 		else if( eventName == 'cast_friendly_begin' )
 		{
@@ -109,17 +92,15 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			
 			
 			player = (CR4Player)owner.GetPlayer();
-			if(player && !notPlayerCast && (player.CanUseSkill(S_Perk_10) || player.CanUseSkill(S_Perk_42)))
+			if(player && !notPlayerCast && player.CanUseSkill(S_Perk_10))
 			{
 				focus = player.GetAttributeValue('focus_gain');
-
 				
 				if ( player.CanUseSkill(S_Sword_s20) )
 				{
 					focus += player.GetSkillAttributeValue(S_Sword_s20, 'focus_gain', false, true) * player.GetSkillLevel(S_Sword_s20);
 				}
 				player.GainStat(BCS_Focus, 0.1f * (1 + CalculateAttributeValue(focus)) );	
-				thePlayer.AddTimer('DelayedAdrenalineDrain', theGame.params.ADRENALINE_DRAIN_AFTER_COMBAT_DELAY, , , , true);
 			}
 			
 			
@@ -247,9 +228,8 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			 {
 				mutagen17.ClearBoost();
 			 }
-		}
-
-
+		}		
+		
 		CleanUp();
 	}
 
@@ -282,8 +262,8 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 	
 	public function OnNormalCast()
 	{
-		
-			
+		if(owner.GetActor() == thePlayer && GetWitcherPlayer().IsInitialized())
+			theGame.VibrateControllerLight();	
 	}
 
 	public function SetAlternateCast( newSkill : ESkill )
@@ -358,7 +338,7 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 				loc = MatrixGetTranslation( attachedTo.GetBoneWorldMatrixByIndex( boneIndex ) );
 				
 				
-				if ( ownerActor == thePlayer && (W3AardEntity)this && !((W3AardEntity)this).disableRotationHack )
+				if ( ownerActor == thePlayer && (W3AardEntity)this )
 				{
 					rot = VecToRotation( thePlayer.GetLookAtPosition() - MatrixGetTranslation( thePlayer.GetBoneWorldMatrixByIndex( thePlayer.GetHeadBoneIndex() ) ) );
 					rot.Pitch = -rot.Pitch;
@@ -517,11 +497,6 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 			Destroy();
 		}
 	}
-
-	public function DisableStaminaCost( disable : bool )
-	{
-		disableCost = disable;
-	}
 	
 	public function ManagePlayerStamina()
 	{
@@ -529,17 +504,12 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 		var l_cost, l_stamina	: float;
 		var l_gryphonBuff		: W3Effect_GryphonSetBonus;
 
-		if ( disableCost )
-		{
-			return;
-		}
-
 		l_player = owner.GetPlayer();
 		
 		l_gryphonBuff = (W3Effect_GryphonSetBonus)l_player.GetBuff( EET_GryphonSetBonus );
 		l_gryphonBuff.SetWhichSignForFree( this );
 		
-		if( (!l_gryphonBuff || l_gryphonBuff.GetWhichSignForFree() != this) && !l_player.HasAbility('Glyphword 22 Bonus', true))
+		if( !l_gryphonBuff || l_gryphonBuff.GetWhichSignForFree() != this )
 		{
 			if( l_player.CanUseSkill( S_Perk_09 ) )
 			{
@@ -556,29 +526,11 @@ statemachine abstract class W3SignEntity extends CGameplayEntity
 					l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ) );
 				}
 			}
-			else if ( l_player.CanUseSkill( S_Perk_34 ) )	
-			{
-				l_cost = l_player.GetStaminaActionCost( ESAT_Ability, SkillEnumToName( skillEnum ), 0 );
-				l_stamina = l_player.GetStat( BCS_Stamina, true );
-				
-				if ( l_cost > l_stamina )
-				{
-					l_player.DrainFocus( l_player.GetSignAdrenalineCostPerk34() );
-					SetUsedFocus( true );
-				}
-				else
-				{
-					l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ) );
-				}
-			}
 			else
 			{
 				l_player.DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( skillEnum ) );
 			}
-		}
-
-		l_player.RemoveAbility('Glyphword 22 Bonus');
-
+		}		
 	}
 	
 	public function ManageGryphonSetBonusBuff()
@@ -674,7 +626,7 @@ state BaseCast in W3SignEntity
 			parent.SetIsSpecialIgniCast();
 			parent.fireMode = 0;
 			ProcessIgniThrow();
-			
+			theGame.VibrateControllerLight();			
 			thePlayer.AddTimer('NGE_DrainIgniStamina',0.1f,false);
 		}
 		
@@ -756,31 +708,12 @@ state BaseCast in W3SignEntity
 		var abilityCount, maxStack : float;
 		var min, max : SAbilityAttributeValue;
 		var addAbility : bool;
-
+		
 		l_player = caster.GetPlayer();
-
+		
 		if( l_player )
 		{
-			
-			if(l_player.CanUseSkill(S_Magic_s40) && (!l_player.HasBuff(EET_OverloadCooldown) || !parent.IsAlternateCast()))
-			{
-				l_player.OverloadImpulse(parent, "Overload Impulse");
-
-				if(parent.IsAlternateCast())
-				{
-					l_player.AddEffectDefault( EET_OverloadCooldown, NULL, "OverloadCooldownEffect" );
-				}
-			}
-
-			
-			if(l_player.CanUseSkill(S_Magic_s41) && !l_player.HasBuff(EET_Resonance))
-			{
-				l_player.AddEffectDefault( EET_Resonance, NULL, "ResonanceEffect" );
-				l_player.PlayEffect('resonance_sword');
-			}
-
-			FactsAdd("ach_sign", 1, 4 );
-
+			FactsAdd("ach_sign", 1, 4 );		
 			theGame.GetGamerProfile().CheckLearningTheRopes();
 			
 			l_gryphonBuff = (W3Effect_GryphonSetBonus)l_player.GetBuff( EET_GryphonSetBonus );
@@ -855,35 +788,11 @@ state NormalCast in W3SignEntity extends BaseCast
 	{
 		var player : CR4Player;
 		var cost, stamina : float;
-		var currentSign : ESignType;
-		var hasConvergenceTheoryBuff : bool;
 		
 		super.OnEnterState(prevStateName);
-
 		
 		
-
-		player = GetWitcherPlayer();
-		if(player)
-		{
-			
-			currentSign = virtual_parent.GetSignType();
-			hasConvergenceTheoryBuff = player.HasBuff( EET_ConvergenceTheory );
-			
-			if ( currentSign != GetWitcherPlayer().GetLastUsedSign() && player.CanUseSkill(S_Magic_s37) )
-			{
-				player.AddEffectDefault( EET_ConvergenceTheory, NULL, "ConvergenceTheoryEffect" );
-			}
-			else
-			{
-				if (hasConvergenceTheoryBuff)
-				{
-					GetWitcherPlayer().RemoveBuff( EET_ConvergenceTheory, false, "ConvergenceTheoryEffect" );
-				}
-			}
-			GetWitcherPlayer().SetLastUsedSign(currentSign);
-		}
-
+		
 		return true;
 	}
 	
@@ -902,46 +811,12 @@ state Channeling in W3SignEntity extends BaseCast
 {
 	event OnEnterState( prevStateName : name )
 	{
-		var player : CR4Player;
-		var actor : CActor;
-		var currentSign : ESignType;
-		var hasConvergenceTheoryBuff : bool;
-
 		
 		super.OnEnterState( prevStateName );
 		parent.cachedCost = -1.0f;
-
-		actor = caster.GetActor();
-		player = (CR4Player)actor;
-
-		if(player && player.GetStatMax(BCS_Stamina) > player.GetStat(BCS_Stamina, true) && player.CanUseSkill( S_Perk_34 ) && virtual_parent.GetSignType() == ST_Yrden)
-		{
-			parent.skipChannelCost = true;
-			player.DrainFocus(player.GetSignAdrenalineCostPerk34());
-		}
 		
 		theGame.GetBehTreeReactionManager().CreateReactionEventIfPossible( parent.owner.GetActor(), 'CastSignAction', -1, 8.0f, 0.2f, -1, true );
 		theGame.GetBehTreeReactionManager().CreateReactionEventIfPossible( parent, 'CastSignActionFar', -1, 30.0f, -1.f, -1, true );
-	
-		if(player)
-		{
-			
-			currentSign = virtual_parent.GetSignType();
-			hasConvergenceTheoryBuff = player.HasBuff( EET_ConvergenceTheory );
-			
-			if ( currentSign != GetWitcherPlayer().GetLastUsedSign() && player.CanUseSkill(S_Magic_s37) )
-			{
-				player.AddEffectDefault( EET_ConvergenceTheory, NULL, "ConvergenceTheoryEffect" );
-			}
-			else
-			{
-				if (hasConvergenceTheoryBuff)
-				{
-					GetWitcherPlayer().RemoveBuff( EET_ConvergenceTheory, false, "ConvergenceTheoryEffect" );
-				}
-			}
-			GetWitcherPlayer().SetLastUsedSign(currentSign);
-		}
 	}
 
 	event OnLeaveState( nextStateName : name )
@@ -982,24 +857,9 @@ state Channeling in W3SignEntity extends BaseCast
 			actor.StartStaminaRegen();
 			actor.PauseStaminaRegen( 'SignCast' );
 			
-			if(player && ( parent.cachedCost > stamina ) && ( player.CanUseSkill( S_Perk_10 ) || player.CanUseSkill( S_Perk_42 ) ) )
-			{
+			if(player && ( parent.cachedCost > stamina ) && ( player.CanUseSkill( S_Perk_10 ) ) )
 				player.DrainFocus( 1 );
-			}
-
-			if(player && player.GetStatMax(BCS_Stamina) > stamina && player.CanUseSkill( S_Perk_34 ) )
-			{
-				if(virtual_parent.GetSignType() == ST_Igni || virtual_parent.GetSignType() == ST_Quen)
-				{
-					parent.onlyDrainFocus = true;
-				}
-				if(virtual_parent.GetSignType() == ST_Axii)
-				{
-					parent.skipChannelCost = true;
-					player.DrainFocus(player.GetSignAdrenalineCostPerk34());
-				}
-			}
-
+				
 			return true;
 		}
 		
@@ -1014,11 +874,11 @@ state Channeling in W3SignEntity extends BaseCast
 	
 	function Update() : bool
 	{
-		var multiplier, avoidanceMult, stamina, leftStaminaCostPerc, leftStaminaCost : float;
+		var multiplier, stamina, leftStaminaCostPerc, leftStaminaCost : float;
 		var player : CR4Player;
-		var reductionCounter, signSkillAvoidanceLevel : int;
-		var stop, abortAxii, signSkillAvoidanceActive : bool;
-		var costReduction, minAvoidance, maxAvoidance : SAbilityAttributeValue;
+		var reductionCounter : int;
+		var stop, abortAxii : bool;
+		var costReduction : SAbilityAttributeValue;
 		
 		player = caster.GetPlayer();
 		abortAxii = false;
@@ -1031,42 +891,30 @@ state Channeling in W3SignEntity extends BaseCast
 			}
 			
 			stop = false;
-			stamina = player.GetStat(BCS_Stamina);
 			if( ShouldStopChanneling() )
 			{
 				stop = true;
 				abortAxii = true;
 			}
 			else
-			{	
-				if(parent.skipChannelCost)
+			{
+				if(player.CanUseSkill(S_Perk_09))
 				{
-					stop = false;
-				}
-				else if(player.CanUseSkill(S_Perk_34))
-				{
-					if(player.GetStat(BCS_Focus) <= 0 && (stamina <= 0 || parent.onlyDrainFocus ))
+					if(player.GetStat( BCS_Stamina ) <= 0 && player.GetStat(BCS_Focus) <= 0)
 						stop = true;
 					else
 						stop = false;
 				}
 				else
 				{
-					if(stamina <= 0)
-					{
-						stop = true;
-					}
-					else
-					{
-						stop = false;
-					}
+					stop = (player.GetStat( BCS_Stamina ) <= 0);
 				}
 			}
 		}		
 		
 		if(stop)
 		{
-			if( ( parent.skillEnum == S_Magic_s05 || parent.skillEnum == S_Magic_s31 ) && abortAxii )		
+			if( parent.skillEnum == S_Magic_s05 && abortAxii )		
 			{
 				OnSignAborted( true );
 			}
@@ -1081,7 +929,7 @@ state Channeling in W3SignEntity extends BaseCast
 		{
 			if(player && !((W3QuenEntity)parent) )	
 			{
-				
+				theGame.VibrateControllerLight();	
 			}
 			
 			
@@ -1094,7 +942,7 @@ state Channeling in W3SignEntity extends BaseCast
 			}
 			
 			
-			if (!(virtual_parent.GetSignType() == ST_Quen && caster.CanUseSkill(S_Magic_s04) && multiplier == 0) && !parent.skipChannelCost )
+			if (!(virtual_parent.GetSignType() == ST_Quen && caster.CanUseSkill(S_Magic_s04) && multiplier == 0))
 			{
 				if(player)
 				{
@@ -1102,30 +950,20 @@ state Channeling in W3SignEntity extends BaseCast
 					{	
 						parent.cachedCost = multiplier * player.GetStaminaActionCost( ESAT_Ability, SkillEnumToName( parent.skillEnum ), theTimer.timeDelta );
 					}
+				
+					stamina = player.GetStat(BCS_Stamina);
 				}
 				
-				if(player && (parent.cachedCost > stamina && player.CanUseSkill(S_Perk_34)) || parent.onlyDrainFocus)
-				{
-					if(parent.onlyDrainFocus)
-					{
-						leftStaminaCost = parent.cachedCost;
-					}
-					else
-					{
-						leftStaminaCost = parent.cachedCost - stamina;
-					}
-					
-					leftStaminaCostPerc = leftStaminaCost / player.GetStatMax(BCS_Stamina);
-
-					player.DrainFocus(leftStaminaCostPerc * player.GetSignAdrenalineCostPerk34());
-					if(player.GetStat(BCS_Focus) <= 0)
-					{
-						OnEnded();
-					}
-				}
-				else if(multiplier > 0.f)
-				{
+				if(multiplier > 0.f)
 					caster.GetActor().DrainStamina( ESAT_Ability, 0, 0, SkillEnumToName( parent.skillEnum ), theTimer.timeDelta, multiplier );
+				
+				if(player && parent.cachedCost > stamina)
+				{
+					leftStaminaCost = parent.cachedCost - stamina;
+					leftStaminaCostPerc = leftStaminaCost / player.GetStatMax(BCS_Stamina);
+										
+					
+					player.DrainFocus(leftStaminaCostPerc);
 				}
 			}
 			caster.OnProcessCastingOrientation( true );
@@ -1148,7 +986,7 @@ state Channeling in W3SignEntity extends BaseCast
 		}
 		
 		
-		if ( theInput.GetActionValue( 'CastSignHold' ) > 0.f || pcInputHeld || ((W3YrdenEntity)parent) )  
+		if ( theInput.GetActionValue( 'CastSignHold' ) > 0.f || pcInputHeld )  
 		{
 			return false;
 		}

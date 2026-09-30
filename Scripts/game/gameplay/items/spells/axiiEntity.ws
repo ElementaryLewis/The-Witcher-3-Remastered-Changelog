@@ -87,10 +87,10 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			GetWitcherPlayer().FailFundamentalsFirstAchievementCondition();
 			player.AddTimer('ResetPadBacklightColorTimer', 2);
 		}
-
+			
 		PlayEffect( effects[fireMode].castEffect );
 		
-		if ( owner.ChangeAspect( this, S_Magic_s05 ) || owner.ChangeAspect( this, S_Magic_s31 ) )
+		if ( owner.ChangeAspect( this, S_Magic_s05 ) )
 		{
 			CacheActionBuffsFromSkill();
 			GotoState( 'AxiiChanneled' );
@@ -181,7 +181,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		ownerPos = ownerActor.GetWorldPosition();
 		
 		
-		actors = ownerActor.GetNPCsAndPlayersInCone(15, VecHeading(ownerActor.GetHeadingVector()), 270, 20, , FLAG_OnlyAliveActors ); 
+		actors = ownerActor.GetNPCsAndPlayersInCone(15, VecHeading(ownerActor.GetHeadingVector()), 270, 20, , FLAG_OnlyAliveActors + FLAG_TestLineOfSight); 
 					
 		
 		for(i=actors.Size()-1; i>=0; i-=1)
@@ -258,7 +258,7 @@ statemachine class W3AxiiEntity extends W3SignEntity
 		var buff : EEffectInteract;
 		var conf : W3ConfuseEffect;
 		var i : int;
-		var duration, durationAnimal, fortifiedSignsAtt : SAbilityAttributeValue;
+		var duration, durationAnimal : SAbilityAttributeValue;
 		var casterActor : CActor;
 		var dur, durAnimals : float;
 		var params, staggerParams : SCustomEffectParams;
@@ -293,14 +293,6 @@ statemachine class W3AxiiEntity extends W3SignEntity
 			duration.valueMultiplicative = 1.0f;
 			durationAnimal.valueMultiplicative = 1.0f;
 			
-			
-			if(owner.CanUseSkill(S_Magic_s36))
-			{
-				fortifiedSignsAtt = owner.GetSkillAttributeValue(S_Magic_s36, 'duration', false, true) * owner.GetSkillLevel(S_Magic_s36);
-				duration += fortifiedSignsAtt;
-				durationAnimal += fortifiedSignsAtt;
-			}
-
 			
 			
 			

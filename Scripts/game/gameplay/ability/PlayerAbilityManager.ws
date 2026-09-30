@@ -19,7 +19,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	private   saved var ep1SkillsInitialized : bool;
 	private   saved var ep2SkillsInitialized : bool;
 	private   saved var baseGamePerksGUIPosUpdated : bool;
-	private	  saved var remasterSkillsNeedInit : bool;
 	private   saved var mutagenBonuses : array< SMutagenBonusAlchemy19 >;		
 	private   saved var alchemy19OptimizationDone : bool;						
 	
@@ -42,7 +41,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		default ep1SkillsInitialized = false;
 		default ep2SkillsInitialized = false;
 		default baseGamePerksGUIPosUpdated = false;
-		default remasterSkillsNeedInit = false;
 		
 		
 	
@@ -91,24 +89,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			LoadMutagenSlotsDataFromXML();
 			
 			
-			
-			mutagenBonuses.Resize( GetSkillGroupsCount() + 5 );
+			mutagenBonuses.Resize( GetSkillGroupsCount() + 1 );
 			
 			
 			InitSkills();
 			
-			PrecacheModifierSkills();
-
-			FactsAdd("RemasterSkillResetAndRefund");
+			PrecacheModifierSkills();			
 		}
 		else
 		{
-			if (skills.Size() != S_Perk_MAX)
-			{
-				
-				skills.Clear();
-				remasterSkillsNeedInit = true;
-			}
 			tempSkills.Clear();
 			temporaryTutorialSkills.Clear();
 			
@@ -119,11 +108,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			if ( !ep2SkillsInitialized && theGame.GetDLCManager().IsEP2Available() )
 			{
 				ep2SkillsInitialized = FixMissingSkills();
-			}
-			if (remasterSkillsNeedInit)
-			{
-				FixMissingSkills();
-				remasterSkillsNeedInit = false;
 			}
 			if ( !baseGamePerksGUIPosUpdated )
 			{
@@ -138,54 +122,10 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		
 		LoadMutationData();		
-
+		
 		isInitialized = true;
 		
 		return true;	
-	}
-
-	public function AddSkillPassiveBonusesForEquipped()
-	{
-		var i : int;
-		var skill : ESkill;
-
-		
-		owner.RemoveAbilityAll('sword_adrenalinegain');
-		owner.RemoveAbilityAll('magic_staminaregen');
-		owner.RemoveAbilityAll('alchemy_potionduration');
-		owner.RemoveAbilityAll('survival_vitality');
-
-		for( i = 0; i < skills.Size(); i += 1 )
-		{
-			skill = skills[i].skillType;
-
-			if (IsSkillEquipped(skill) && !IsCoreSkill(skill) && ( skills[i].isReworked || skills[i].isUnchangedLegacy ) )
-			{
-				
-				if(GetSkillPathType(skill) == ESP_Sword)
-				{
-					owner.AddAbilityMultiple('sword_adrenalinegain', GetSkillLevel(skill) );
-				}
-		
-				
-				if(GetSkillPathType(skill) == ESP_Signs)
-				{
-					owner.AddAbilityMultiple('magic_staminaregen', GetSkillLevel(skill) );
-				}
-		
-				
-				if(GetSkillPathType(skill) == ESP_Alchemy)
-				{
-					owner.AddAbilityMultiple('alchemy_potionduration', GetSkillLevel(skill) );
-				}
-
-				
-				if(GetSkillPathType(skill) == ESP_Perks)
-				{
-					owner.AddAbilityMultiple('survival_vitality', GetSkillLevel(skill) );
-				}
-			}
-		}
 	}
 	
 	private function FixMissingSkills() : bool
@@ -324,7 +264,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	public final function PostInit()
 	{		
-		var i, used, free, mutationPoints, skillPoints : int;
+		var i, playerLevel : int;
 	
 		if(CanUseSkill(S_Sword_5))
 			AddPassiveSkillBuff(S_Sword_5);
@@ -332,20 +272,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		if( (W3PlayerWitcher)owner )
 		{
-			
-			
-			
-			used = GetWitcherPlayer().levelManager.GetPointsUsed(ESkillPoint);
-			free = GetWitcherPlayer().levelManager.GetPointsFree(ESkillPoint);	
-			mutationPoints = GetMutationsUsedSkillPoints();
-
-			skillPoints = free + used + mutationPoints;
-			
+			playerLevel = ((W3PlayerWitcher)owner).GetLevel();
 			for(i=0; i<skillSlots.Size(); i+=1)
 			{
 				if( skillSlots[ i ].groupID != MUTATION_SKILL_GROUP_ID )
 				{
-					skillSlots[i].unlocked = ( skillPoints >= skillSlots[i].unlockedOnLevel);
+					skillSlots[i].unlocked = ( playerLevel >= skillSlots[i].unlockedOnLevel);
 				}
 			}
 		}
@@ -398,35 +330,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		for(i=0; i<skills.Size(); i+=1)
 		{
 			if(skills[i].skillPath == ESP_Signs && skills[i].level < skills[i].maxLevel)
-			{
-				temp.skillType = skills[i].skillType;
-				temp.level = skills[i].level;
-				ret.PushBack(temp);
-				
-				tempSkills.PushBack(skills[i].skillType);
-				
-				cnt = skills[i].maxLevel - skills[i].level;
-				for(j=0; j<cnt; j+=1)
-					AddSkill(skills[i].skillType, true);
-			}
-		}
-		
-		return ret;
-	}
-
-	public final function AddIndividualSignSkillsTemporary() : array<SSimpleSkill>
-	{
-		var i, cnt, j : int;
-		var ret : array<SSimpleSkill>;
-		var temp : SSimpleSkill;
-	
-		tempSkills.Clear();
-
-		for(i=0; i<skills.Size(); i+=1)
-		{
-			if(skills[i].skillType == S_Magic_s20 || skills[i].skillType == S_Magic_s08 || skills[i].skillType == S_Magic_s42 || skills[i].skillType == S_Magic_s13 || skills[i].skillType == S_Magic_s17 ||
-			   skills[i].skillType == S_Magic_s01 || skills[i].skillType == S_Magic_s28 || skills[i].skillType == S_Magic_s03 || skills[i].skillType == S_Magic_s04 || skills[i].skillType == S_Magic_s31 ||
-			   skills[i].skillType == S_Magic_s11 || skills[i].skillType == S_Magic_s33 || skills[i].skillType == S_Magic_s19)
 			{
 				temp.skillType = skills[i].skillType;
 				temp.level = skills[i].level;
@@ -516,9 +419,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		{
 			owner.RemoveBuff( EET_Mutation5 );
 		}
-
-		
-		thePlayer.OnFocusChanged();
 	}
 	
 	
@@ -614,13 +514,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	public final function IsSkillMutagenSlotUnlocked( eqSlot : EEquipmentSlots ) : bool
 	{
-		var i, used, free, mutationPoints, skillPoints : int;
-
-		used = GetWitcherPlayer().levelManager.GetPointsUsed(ESkillPoint);
-		free = GetWitcherPlayer().levelManager.GetPointsFree(ESkillPoint);	
-		mutationPoints = GetMutationsUsedSkillPoints();
-
-		skillPoints = free + used + mutationPoints;
+		var i : int;
 		
 		i = GetMutagenSlotIndex( eqSlot );
 		if( i<0 )
@@ -630,7 +524,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		
 		
-		return skillPoints >= mutagenSlots[ i ].unlockedAtLevel;
+		return ( ( W3PlayerWitcher ) owner ).GetLevel() >= mutagenSlots[ i ].unlockedAtLevel;
 	}
 	
 	private final function GetMutagenSlotForGroupId(groupID : int) : EEquipmentSlots
@@ -687,7 +581,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	public final function OnSkillMutagenEquipped(item : SItemUniqueId, slot : EEquipmentSlots, prevColor : ESkillColor)
 	{
-		var i, skillLevelSynergyFromAlchemy, skillLevelSynergyFromPerks : int;
+		var i : int;
+		var newColor : ESkillColor;
 		var tutState : W3TutorialManagerUIHandlerStateCharDevMutagens;
 		
 		i = GetMutagenSlotIndex(slot);
@@ -697,18 +592,13 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		mutagenSlots[i].item = item;
 		
 		
-		if(CanUseSkill(S_Alchemy_s19) || CanUseSkill(S_Perk_43))
+		newColor = GetSkillGroupColor(mutagenSlots[i].skillGroupID);
+		LinkUpdate(newColor, prevColor );
+		
+		
+		if(CanUseSkill(S_Alchemy_s19))
 		{
-			skillLevelSynergyFromAlchemy = GetSkillLevel( S_Alchemy_s19);
-			skillLevelSynergyFromPerks = GetSkillLevel( S_Perk_43);
-			if (skillLevelSynergyFromAlchemy > skillLevelSynergyFromPerks)
-			{
-				MutagensSyngergyBonusUpdate( mutagenSlots[i].skillGroupID, skillLevelSynergyFromAlchemy );
-			}
-			else
-			{
-				MutagensSyngergyBonusUpdate( mutagenSlots[i].skillGroupID, skillLevelSynergyFromPerks );
-			}
+			MutagensSyngergyBonusUpdate( mutagenSlots[i].skillGroupID, GetSkillLevel( S_Alchemy_s19) );
 		}
 		
 		
@@ -717,7 +607,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			tutState = (W3TutorialManagerUIHandlerStateCharDevMutagens)theGame.GetTutorialSystem().uiHandler.GetCurrentState();
 			if(tutState)
 			{
-				tutState.EquippedMutagen(slot);
+				tutState.EquippedMutagen();
 			}
 		}
 		
@@ -731,7 +621,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	public final function OnSkillMutagenUnequipped( out item : SItemUniqueId, slot : EEquipmentSlots, prevColor : ESkillColor, optional dontMerge : bool )
 	{
-		var i, skillLevelSynergyFromAlchemy, skillLevelSynergyFromPerks : int;
+		var i : int;
+		var newColor : ESkillColor;
 		var ids : array< SItemUniqueId >;
 		var itemName : name;
 		
@@ -740,21 +631,15 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			return;
 		
 		
-		if(CanUseSkill(S_Alchemy_s19) || CanUseSkill(S_Perk_43))
+		if(CanUseSkill(S_Alchemy_s19))
 		{
-			skillLevelSynergyFromAlchemy = GetSkillLevel( S_Alchemy_s19);
-			skillLevelSynergyFromPerks = GetSkillLevel( S_Perk_43);
-			if (skillLevelSynergyFromAlchemy > skillLevelSynergyFromPerks)
-			{
-				MutagensSyngergyBonusUpdate( mutagenSlots[i].skillGroupID, skillLevelSynergyFromAlchemy );
-			}
-			else
-			{
-				MutagensSyngergyBonusUpdate( mutagenSlots[i].skillGroupID, skillLevelSynergyFromPerks );
-			}
+			MutagensSyngergyBonusUpdate( mutagenSlots[i].skillGroupID, GetSkillLevel( S_Alchemy_s19) );
 		}
 		
 		mutagenSlots[i].item = GetInvalidUniqueId();
+		
+		newColor = GetSkillGroupColor(mutagenSlots[i].skillGroupID);
+		LinkUpdate(newColor, prevColor);
 
 		theGame.GetGuiManager().IgnoreNewItemNotifications( true );
 		
@@ -775,17 +660,27 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	public final function OnSwappedMutagensPost(a : SItemUniqueId, b : SItemUniqueId)
 	{
 		var oldSlotIndexA, oldSlotIndexB : int;
+		var oldColorA, oldColorB, newColorA, newColorB : ESkillColor;
 	
 		oldSlotIndexA = GetMutagenSlotIndexFromItemId(a);
 		oldSlotIndexB = GetMutagenSlotIndexFromItemId(b);
 		
+		oldColorA = GetSkillGroupColor(mutagenSlots[oldSlotIndexA].skillGroupID);
+		oldColorB = GetSkillGroupColor(mutagenSlots[oldSlotIndexB].skillGroupID);
+		
 		mutagenSlots[oldSlotIndexA].item = b;
 		mutagenSlots[oldSlotIndexB].item = a;
+		
+		newColorA = GetSkillGroupColor(mutagenSlots[oldSlotIndexA].skillGroupID);
+		newColorB = GetSkillGroupColor(mutagenSlots[oldSlotIndexB].skillGroupID);
+		
+		LinkUpdate(newColorA, oldColorA);
+		LinkUpdate(newColorB, oldColorB);
 	}
 	
 	private final function Alchemy19OptimizationRetro()
 	{
-		var i, skillLevelSynergyFromAlchemy, skillLevelSynergyFromPerks : int;
+		var i : int;
 		var mutagenItemID : SItemUniqueId;
 		
 		
@@ -799,22 +694,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 			
 		
+		mutagenBonuses.Resize( GetSkillGroupsCount() + 1 );
 		
-		mutagenBonuses.Resize( GetSkillGroupsCount() + 5 );
 		
-		
-		if( CanUseSkill( S_Alchemy_s19 ) || CanUseSkill(S_Perk_43) )
+		if( CanUseSkill( S_Alchemy_s19 ) )
 		{
-			skillLevelSynergyFromAlchemy = GetSkillLevel( S_Alchemy_s19);
-			skillLevelSynergyFromPerks = GetSkillLevel( S_Perk_43);
-			if ( skillLevelSynergyFromAlchemy > skillLevelSynergyFromPerks )
-			{
-				MutagensSyngergyBonusUpdate( -1, skillLevelSynergyFromAlchemy );
-			}
-			else
-			{
-				MutagensSyngergyBonusUpdate( -1, skillLevelSynergyFromPerks );
-			}
+			MutagensSyngergyBonusUpdate( -1, GetSkillLevel( S_Alchemy_s19 ) );
 		}
 	}
 	
@@ -826,23 +711,13 @@ class W3PlayerAbilityManager extends W3AbilityManager
 
 		if( skillGroupID != -1 )
 		{
-			if (IsMutagenRare(GetMutagenItemIDFromGroupID( skillGroupID )))
-			{
-				MutagensSyngergyBonusUpdateMultiple( skillGroupID, skillLevel );
-			}
-			else
-				MutagensSyngergyBonusUpdateSingle( skillGroupID, skillLevel );
+			MutagensSyngergyBonusUpdateSingle( skillGroupID, skillLevel );
 		}
 		else
 		{
 			for( i=0; i<mutagenSlots.Size(); i+=1 )
 			{
-				if (IsMutagenRare(GetMutagenItemIDFromGroupID( mutagenSlots[i].skillGroupID )))
-				{
-					MutagensSyngergyBonusUpdateMultiple( mutagenSlots[i].skillGroupID, skillLevel );
-				}
-				else
-					MutagensSyngergyBonusUpdateSingle( mutagenSlots[i].skillGroupID, skillLevel );
+				MutagensSyngergyBonusUpdateSingle( mutagenSlots[i].skillGroupID, skillLevel );
 			}
 		}
 	}
@@ -864,7 +739,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		mutagenItemID = GetMutagenItemIDFromGroupID( skillGroupID );
 		
 		if( owner.GetInventory().IsIdValid( mutagenItemID ) )
-		{	
+		{			
 			current.abilityName = GetMutagenBonusAbilityName( mutagenItemID );
 			
 			if( skillLevel > 0 )
@@ -909,119 +784,9 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		mutagenBonuses[skillGroupID] = current;
 	}
-
-	
-	private final function MutagensSyngergyBonusUpdateMultiple( skillGroupID : int, skillLevel : int )
-	{
-		var bonusA : SMutagenBonusAlchemy19;
-		var bonusB : SMutagenBonusAlchemy19;
-		var skillGroupIDB : int;
-		var mutagenBonusesNames : array<name>;
-		var color : ESkillColor;
-		var mutagenItemID : SItemUniqueId;
-		var delta : int;
-		
-		
-		skillGroupIDB = skillGroupID + 4;
-
-		if( skillGroupID < 0 )
-		{
-			return;
-		}
-		
-		
-		mutagenItemID = GetMutagenItemIDFromGroupID( skillGroupID );
-		
-		if( owner.GetInventory().IsIdValid( mutagenItemID ) )
-		{	
-			
-			mutagenBonusesNames = GetMutagenBonusAbilityNames( mutagenItemID );
-			bonusA.abilityName = mutagenBonusesNames[0];
-			bonusB.abilityName = mutagenBonusesNames[1];
-			
-			if( skillLevel > 0 )
-			{
-				color = owner.GetInventory().GetSkillMutagenColor( mutagenItemID );
-				bonusA.count = skillLevel * ( GetSkillGroupColorCount(color, skillGroupID) + 1 );
-				bonusB.count = skillLevel * ( GetSkillGroupColorCount(color, skillGroupIDB) + 1 );
-			}
-		}
-		
-
-		
-		
-		if( bonusA.abilityName != mutagenBonuses[skillGroupID].abilityName )
-		{
-			
-			if( IsNameValid( mutagenBonuses[skillGroupID].abilityName ) && mutagenBonuses[skillGroupID].count > 0 )
-			{
-				owner.RemoveAbilityMultiple( mutagenBonuses[skillGroupID].abilityName, mutagenBonuses[skillGroupID].count );
-			}
-			
-			
-			if( IsNameValid( bonusA.abilityName ) && bonusA.count > 0 )
-			{
-				owner.AddAbilityMultiple( bonusA.abilityName, bonusA.count );
-			}
-		}
-		
-		else if( IsNameValid( bonusA.abilityName ) )
-		{
-			
-			delta = bonusA.count - mutagenBonuses[skillGroupID].count;
-			
-			if( delta > 0 )
-			{
-				owner.AddAbilityMultiple( bonusA.abilityName, delta );
-			}
-			else if( delta < 0 )
-			{
-				owner.RemoveAbilityMultiple( bonusA.abilityName, -delta );
-			}
-		}
-		
-		
-		mutagenBonuses[skillGroupID] = bonusA;
-
-
-		
-		
-		if( bonusB.abilityName != mutagenBonuses[skillGroupIDB].abilityName )
-		{
-			
-			if( IsNameValid( mutagenBonuses[skillGroupIDB].abilityName ) && mutagenBonuses[skillGroupIDB].count > 0 )
-			{
-				owner.RemoveAbilityMultiple( mutagenBonuses[skillGroupIDB].abilityName, mutagenBonuses[skillGroupIDB].count );
-			}
-			
-			
-			if( IsNameValid( bonusB.abilityName ) && bonusB.count > 0 )
-			{
-				owner.AddAbilityMultiple( bonusB.abilityName, bonusB.count );
-			}
-		}
-		
-		else if( IsNameValid( bonusB.abilityName ) )
-		{
-			
-			delta = bonusB.count - mutagenBonuses[skillGroupIDB].count;
-			
-			if( delta > 0 )
-			{
-				owner.AddAbilityMultiple( bonusB.abilityName, delta );
-			}
-			else if( delta < 0 )
-			{
-				owner.RemoveAbilityMultiple( bonusB.abilityName, -delta );
-			}
-		}
-		
-		
-		mutagenBonuses[skillGroupIDB] = bonusB;
-	}
 		
 	
-	public final function GetMutagenBonusAbilityName( mutagenItemId : SItemUniqueId ) : name
+	public final function GetMutagenBonusAbilityName(mutagenItemId : SItemUniqueId) : name
 	{
 		var i : int;
 		var abs : array<name>;
@@ -1029,82 +794,10 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		for(i=0; i<abs.Size(); i+=1)
 		{
-			if(theGame.GetDefinitionsManager().AbilityHasTag(abs[i], 'alchemy_s19') || theGame.GetDefinitionsManager().AbilityHasTag(abs[i], 'perk_43'))
+			if(theGame.GetDefinitionsManager().AbilityHasTag(abs[i], 'alchemy_s19'))
 				return abs[i];
 		}
 		return '';
-	}
-
-	
-	public final function GetMutagenBonusAbilityNames( mutagenItemId : SItemUniqueId ) : array<name>
-	{
-		var i : int;
-		var abs : array<name>;
-		var bonusAbilities : array<name>;
-
-		owner.GetInventory().GetItemContainedAbilities(mutagenItemId, abs);
-		
-		for(i=0; i<abs.Size(); i+=1)
-		{
-			if(theGame.GetDefinitionsManager().AbilityHasTag(abs[i], 'alchemy_s19') || theGame.GetDefinitionsManager().AbilityHasTag(abs[i], 'perk_43'))
-				bonusAbilities.PushBack(abs[i]);
-		}
-
-		return bonusAbilities;
-	}
-
-	
-	public final function GetRareMutagenConnectionsCount(mutagenItemId : SItemUniqueId, optional out leftCount : int, optional out rightCount : int)
-	{
-		var leftColorCount : int;
-		var rightColorcount : int;
-		var color : ESkillColor;
-		var mutagenSlotID 	: int;
-		var groupID : int;
-		
-		color = owner.GetInventory().GetSkillMutagenColor(mutagenItemId);
-		mutagenSlotID = GetMutagenSlotIndexFromItemId(mutagenItemId);
-		groupID = mutagenSlots[mutagenSlotID].skillGroupID;
-		if (color == SC_RedGreen)
-		{
-			leftColorCount = GetSkillGroupColorCount(SC_Red, groupID);
-			rightColorcount = GetSkillGroupColorCount(SC_Green, groupID);
-		}
-		else if (color == SC_RedBlue)
-		{
-			leftColorCount = GetSkillGroupColorCount(SC_Red, groupID);
-			rightColorcount = GetSkillGroupColorCount(SC_Blue, groupID);
-		}
-		else if (color == SC_BlueGreen)
-		{
-			leftColorCount = GetSkillGroupColorCount(SC_Blue, groupID);
-			rightColorcount = GetSkillGroupColorCount(SC_Green, groupID);
-		}
-		else if (color == SC_RedWhite)
-		{
-			leftColorCount = GetSkillGroupColorCount(SC_Red, groupID);
-			rightColorcount = GetSkillGroupColorCount(SC_Yellow, groupID);
-		}
-		else if (color == SC_BlueWhite)
-		{
-			leftColorCount = GetSkillGroupColorCount(SC_Blue, groupID);
-			rightColorcount = GetSkillGroupColorCount(SC_Yellow, groupID);
-		}
-		else if (color == SC_GreenWhite)
-		{
-			leftColorCount = GetSkillGroupColorCount(SC_Green, groupID);
-			rightColorcount = GetSkillGroupColorCount(SC_Yellow, groupID);
-		}
-		
-		leftCount = leftColorCount;
-		rightCount = rightColorcount;
-	}
-	public final function IsMutagenRare(mutagenItemId : SItemUniqueId) : bool
-	{
-		var color : ESkillColor;
-		color = owner.GetInventory().GetSkillMutagenColor(mutagenItemId);
-		
-		return (color == SC_RedGreen || color == SC_RedBlue || color == SC_BlueGreen || color == SC_BlueWhite || color == SC_RedWhite || color == SC_GreenWhite);
 	}
 	
 	
@@ -1160,7 +853,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	{
 		return GetMutagenSlotForGroupId(groupID);
 	}
-	
+		
 	public final function GetGroupBonus(groupID : int) : name
 	{
 		var groupColor : ESkillColor;
@@ -1178,7 +871,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			case SC_Red: return LINK_BONUS_RED;
 		}
 	}
-
+	
 	
 	public final function GetSkillGroupColor(groupID : int) : ESkillColor
 	{
@@ -1259,8 +952,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		
 		return count;
-	}
-	
+	}	
+		
 	
 	private final function LinkUpdate(newColor : ESkillColor, prevColor : ESkillColor)
 	{
@@ -1451,7 +1144,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		if ( CanUseSkill( S_Alchemy_s03 ) )
 		{
-			toxicityThreshold = thePlayer.GetStatMax(BCS_Toxicity) * GetWitcherPlayer().GetAlchemyS03Threshold();
+			toxicityThreshold = thePlayer.GetStatMax(BCS_Toxicity) * (1 - CalculateAttributeValue( thePlayer.GetSkillAttributeValue(S_Alchemy_s03, 'toxicity_threshold', false, true) ) * thePlayer.GetSkillLevel(S_Alchemy_s03));
 			if ( thePlayer.GetStat(BCS_Toxicity, true) > toxicityThreshold && GetWitcherPlayer().IsMutationActive( EPMT_Mutation7 ) )
 			{
 				deny = true;
@@ -1656,26 +1349,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	{
 		return skills[skill].isCoreSkill;
 	}
-
-	protected final function IsReworked(skill : ESkill) : bool
-	{
-		return skills[skill].isReworked;
-	}
-
-	protected final function IsUnchangedLegacy(skill : ESkill) : bool
-	{
-		return skills[skill].isUnchangedLegacy;
-	}
-
-	protected final function GetGridRow(skill : ESkill) : float
-	{
-		return skills[skill].gridRow;
-	}
-
-	protected final function GetGridColumn(skill : ESkill) : float
-	{
-		return skills[skill].gridColumn;
-	}
 	
 	
 	protected final function CacheSkills(skillDefinitionName : name, out cache : array<SSkill>)
@@ -1790,7 +1463,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		
 		
-		if(dm.GetCustomNodeAttributeValueBool(definitionNode, 'isAlternative', tmpBool))
+		if(dm.GetCustomNodeAttributeValueBool(reqSkills, 'isAlternative', tmpBool))
 			skill.requiredSkillsIsAlternative = tmpBool;
 		
 		
@@ -1824,20 +1497,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		if(dm.GetCustomNodeAttributeValueBool(definitionNode, 'isCoreSkill', tmpBool))
 			skill.isCoreSkill = tmpBool;
-
-		
-		if(dm.GetCustomNodeAttributeValueBool(definitionNode, 'isReworked', tmpBool))
-			skill.isReworked = tmpBool;
-
-		
-		if(dm.GetCustomNodeAttributeValueBool(definitionNode, 'isUnchangedLegacy', tmpBool))
-			skill.isUnchangedLegacy = tmpBool;
-
-		if(dm.GetCustomNodeAttributeValueInt(definitionNode, 'gridRow', tmpInt))
-			skill.gridRow = tmpInt;
-
-		if(dm.GetCustomNodeAttributeValueInt(definitionNode, 'gridColumn', tmpInt))
-			skill.gridColumn = tmpInt;
 			
 		
 		if(dm.GetCustomNodeAttributeValueInt(definitionNode, 'guiPositionID', tmpInt))
@@ -1860,9 +1519,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		if(dm.GetCustomNodeAttributeValueString(definitionNode, 'iconPath', tmpString))
 			skill.iconPath = tmpString;
-
-		if(dm.GetCustomNodeAttributeValueString(definitionNode, 'iconPathTest', tmpString))
-			skill.iconPathTest = tmpString;
 			
 		
 		
@@ -1922,7 +1578,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			tree = GetSkillPathType(skill);
 			for(i=0; i<skills.Size(); i+=1)
 			{
-				if( skills[i].skillPath == tree && (skills[i].isUnchangedLegacy || skills[i].isReworked))
+				if( skills[i].skillPath == tree)
 				{
 					countInTree+=1;
 					if (skills[i].level == 0 || skills[i].isTemporary )
@@ -2019,7 +1675,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		}
 		
 		tempSkills.Remove(skill.skillType);
-		GetWitcherPlayer().SetFloodOfAngerSucceeded(false);
 		return true;
 	}
 		
@@ -2047,97 +1702,23 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		if(skill == S_SUndefined)
 			return false;
-
-		
-		if(skills[skill].isCoreSkill)
-			return false;
 		
 		
 		if(skills[skill].level >= skills[skill].maxLevel)
 			return false;
 			
 		
-		if(skills[skill].isReworked || skills[skill].isUnchangedLegacy)
-		{
-			if(skills[skill].requiredSkills.Size() > 0)
-			{
-				if(skills[skill].requiredSkillsIsAlternative)
-					hasSomeRequiredSkill = false;
-				else
-					hasSomeRequiredSkill = true;
-
-				for(j=0; j<skills[skill].requiredSkills.Size(); j+=1)
-				{
-					if(skills[skill].requiredSkillsIsAlternative)
-					{
-						if(HasLearnedSkill(skills[skill].requiredSkills[j]))
-						{
-							hasSomeRequiredSkill = true;
-							break;
-						}
-					}
-					else if(!HasLearnedSkill(skills[skill].requiredSkills[j]))
-					{
-						return false;	
-					}
-				}
-
-				if(!hasSomeRequiredSkill)
-					return false;		
-			}
-		}
 		
 		
-		if (!skills[skill].isReworked && !skills[skill].isUnchangedLegacy)
-		{
-			if(skills[skill].requiredPointsSpent > 0 && pathPointsSpent[skills[skill].skillPath] < skills[skill].requiredPointsSpent)
-				return false;
-		}
+		
+		
+		if(skills[skill].requiredPointsSpent > 0 && pathPointsSpent[skills[skill].skillPath] < skills[skill].requiredPointsSpent)
+			return false;
 			
 		
 		if(((W3PlayerWitcher)owner).levelManager.GetPointsFree(ESkillPoint) < skills[skill].cost)
 			return false;
 			
-		
-		return true;
-	}
-
-	public final function IsSkillUnlockedByDependency(skill : ESkill) : bool
-	{
-		var j : int;
-		var hasSomeRequiredSkill : bool;
-
-		
-		if(skills[skill].isReworked || skills[skill].isUnchangedLegacy)
-		{
-			if(skills[skill].requiredSkills.Size() > 0)
-			{
-				if(skills[skill].requiredSkillsIsAlternative)
-					hasSomeRequiredSkill = false;
-				else
-					hasSomeRequiredSkill = true;
-
-				for(j=0; j<skills[skill].requiredSkills.Size(); j+=1)
-				{
-					if(skills[skill].requiredSkillsIsAlternative)
-					{
-						if(HasLearnedSkill(skills[skill].requiredSkills[j]))
-						{
-							hasSomeRequiredSkill = true;
-							break;
-						}
-					}
-					else if(!HasLearnedSkill(skills[skill].requiredSkills[j]))
-					{
-						return false;	
-					}
-				}
-
-				if(!hasSomeRequiredSkill)
-					return false;		
-			}
-		}
-
 		
 		return true;
 	}
@@ -2584,60 +2165,13 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	event OnLevelGained(currentLevel : int)
 	{
-		UpdateSkillSlots();
-	}
-
+		var i : int;
 	
-	public function UpdateSkillSlots()
-	{
-		var i, used, free, mutationPoints, skillPoints : int;
-
-		used = GetWitcherPlayer().levelManager.GetPointsUsed(ESkillPoint);
-		free = GetWitcherPlayer().levelManager.GetPointsFree(ESkillPoint);	
-		mutationPoints = GetMutationsUsedSkillPoints();
-
-		skillPoints = free + used + mutationPoints;
-
 		for(i=0; i<skillSlots.Size(); i+=1)
 		{
-			if(skillPoints >= skillSlots[i].unlockedOnLevel)
+			if(currentLevel >= skillSlots[i].unlockedOnLevel)
 				skillSlots[i].unlocked = true;
 		}
-	}
-
-	public function RemasterSkillSlotReset()
-	{
-		var i, used, free, mutationPoints, skillPoints : int;
-		var skill : ESkill;
-
-		used = GetWitcherPlayer().levelManager.GetPointsUsed(ESkillPoint);
-		free = GetWitcherPlayer().levelManager.GetPointsFree(ESkillPoint);	
-		mutationPoints = GetMutationsUsedSkillPoints();
-
-		skillPoints = free + used + mutationPoints;
-
-		for(i=0; i<skillSlots.Size(); i+=1)
-		{
-			if (skillSlots[i].socketedSkill != S_SUndefined)
-			{
-				skill = skillSlots[i].socketedSkill;
-				skillSlots[i].socketedSkill = S_SUndefined;
-				OnSkillUnequip(skill);
-			}
-			if( skillSlots[ i ].groupID != MUTATION_SKILL_GROUP_ID )
-			{
-				skillSlots[i].unlocked = skillSlots[i].unlockedOnLevel <= skillPoints;
-			}
-		}
-		for(i=0; i<mutagenSlots.Size(); i+=1)
-		{
-			if (mutagenSlots[i].item != GetInvalidUniqueId())
-			{
-				GetWitcherPlayer().UnequipItemFromSlot(mutagenSlots[i].equipmentSlot);
-			}
-		}
-
-		UpdateMutationSkillSlotsLocks();
 	}
 	
 	
@@ -2794,6 +2328,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 		skillSlots[idx].socketedSkill = skill;
 		
+		LinkUpdate(GetSkillGroupColor(skillSlots[idx].groupID), prevColor);
 		OnSkillEquip(skill);
 		
 		return true;
@@ -2820,6 +2355,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		skillSlots[idx].socketedSkill = S_SUndefined;
 		prevColor = GetSkillGroupColor(skillSlots[idx].groupID);
+		LinkUpdate(GetSkillGroupColor(skillSlots[idx].groupID), prevColor);
 		OnSkillUnequip(skill);
 		
 		return true;
@@ -2832,7 +2368,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var names, abs : array<name>;
 		var buff : W3Effect_Toxicity;
 		var witcher : W3PlayerWitcher;
-		var i, skillLevel, skillLevelSynergyFromAlchemy, skillLevelSynergyFromPerks : int;
+		var i, skillLevel : int;
 		var isPassive, isNight : bool;
 		var m_alchemyManager : W3AlchemyManager;
 		var recipe : SAlchemyRecipe;
@@ -2843,6 +2379,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var horseManager : W3HorseManager;
 		var weapon, armor : W3RepairObjectEnhancement;
 		var foodBuff : W3Effect_WellFed;
+		var commonMenu : CR4CommonMenu;
+		var guiMan : CR4GuiManager;
 		var shrineBuffs : array<CBaseGameplayEffect>;
 		var shrineTimeLeft, highestShrineTime : float;
 		var shrineEffectIndex : int;
@@ -2885,26 +2423,11 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		{
 			owner.AddAbilityMultiple('alchemy_potionduration', GetSkillLevel(skill) );
 		}
-
 		
-		if(GetSkillPathType(skill) == ESP_Perks)
+		
+		if ( CanUseSkill(S_Alchemy_s19) )
 		{
-			owner.AddAbilityMultiple('survival_vitality', GetSkillLevel(skill) );
-		}
-		
-		
-		if ( CanUseSkill(S_Alchemy_s19) || CanUseSkill(S_Perk_43) )
-		{
-			skillLevelSynergyFromAlchemy = GetSkillLevel( S_Alchemy_s19);
-			skillLevelSynergyFromPerks = GetSkillLevel( S_Perk_43);
-			if ( skillLevelSynergyFromAlchemy > skillLevelSynergyFromPerks )
-			{
-				MutagensSyngergyBonusUpdate( GetSkillGroupIdFromSkill( skill ), skillLevelSynergyFromAlchemy );
-			}
-			else
-			{
-				MutagensSyngergyBonusUpdate( GetSkillGroupIdFromSkill( skill ), skillLevelSynergyFromPerks );
-			}
+			MutagensSyngergyBonusUpdate( GetSkillGroupIdFromSkill( skill ), GetSkillLevel(S_Alchemy_s19) );
 		}
 		else if(skill == S_Alchemy_s20)
 		{
@@ -2960,18 +2483,9 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			
 			thePlayer.ChangeAlchemyItemsAbilities(true);
 		}
-		else if(skill == S_Alchemy_s19 || skill == S_Perk_43)
+		else if(skill == S_Alchemy_s19)
 		{
-			skillLevelSynergyFromAlchemy = GetSkillLevel( S_Alchemy_s19);
-			skillLevelSynergyFromPerks = GetSkillLevel( S_Perk_43);
-			if ( skillLevelSynergyFromAlchemy > skillLevelSynergyFromPerks )
-			{
-				MutagensSyngergyBonusUpdate( -1, skillLevelSynergyFromAlchemy );
-			}
-			else
-			{
-				MutagensSyngergyBonusUpdate( -1, skillLevelSynergyFromPerks );
-			}
+			MutagensSyngergyBonusUpdate( -1, GetSkillLevel(S_Alchemy_s19) );
 		}
 		else if(skill == S_Perk_01)
 		{
@@ -2990,41 +2504,11 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		{
 			SetPerkArmorBonus(S_Perk_07);
 		}
-		else if(skill == S_Perk_23)
-		{
-			SetPerkArmorBonus(S_Perk_23);
-		}
-		else if(skill == S_Perk_24)
-		{
-			SetPerkArmorBonus(S_Perk_24);
-		}
-		else if(skill == S_Perk_25)
-		{
-			SetPerkArmorBonus(S_Perk_25);
-		}
-		else if(skill == S_Perk_26)
-		{
-			SetPerkArmorBonus(S_Perk_26);
-		}
-		else if(skill == S_Perk_27)
-		{
-			SetPerkArmorBonus(S_Perk_27);
-		}
-		else if(skill == S_Perk_28)
-		{
-			SetPerkArmorBonus(S_Perk_28);
-		}
 		else if(skill == S_Perk_11)
 		{
 			battleTrance = (W3Effect_BattleTrance)owner.GetBuff(EET_BattleTrance);
 			if(battleTrance)
 				battleTrance.OnPerk11Equipped();
-		}
-		else if(skill == S_Magic_s38)
-		{
-			battleTrance = (W3Effect_BattleTrance)owner.GetBuff(EET_BattleTrance);
-			if(battleTrance)
-				battleTrance.OnMagic38Equipped();
 		}
 		else if( skill == S_Perk_14 )
 		{
@@ -3047,24 +2531,28 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				}
 			}
 		}
-		else if((skill == S_Perk_19 || skill == S_Perk_40) && witcher.HasBuff(EET_BattleTrance))
+		else if(skill == S_Perk_19 && witcher.HasBuff(EET_BattleTrance))
 		{
 			skillLevel = FloorF(witcher.GetStat(BCS_Focus));
 			witcher.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), skillLevel);
-			witcher.AddAbilityMultiple(thePlayer.GetSkillAbilityName(skill), skillLevel);
+			witcher.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Perk_19), skillLevel);
 		}		
 		else if(skill == S_Perk_20)
 		{
 			thePlayer.SkillReduceBombAmmoBonus();
 		}
-		else if(skill == S_Perk_22 || skill == S_Perk_35)
+		else if(skill == S_Perk_22)
 		{
-			RefreshEncumbrance();
-		}
-		else if(skill == S_Perk_38)
-		{
-			isNight = theGame.envMgr.IsNight();
-			SetPerk38Abilities( !isNight, isNight );
+			GetWitcherPlayer().UpdateEncumbrance();
+			guiMan = theGame.GetGuiManager();
+			if(guiMan)
+			{
+				commonMenu = theGame.GetGuiManager().GetCommonMenu();
+				if(commonMenu)
+				{
+					commonMenu.UpdateItemsCounter();
+				}
+			}
 		}
 		
 		if(GetSkillPathType(skill) == ESP_Alchemy)
@@ -3084,7 +2572,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 	
 	private final function OnSkillUnequip(skill : ESkill)
 	{
-		var i, skillLevel, skillLevelSynergyFromAlchemy, skillLevelSynergyFromPerks : int;
+		var i, skillLevel : int;
 		var isPassive : bool;
 		var petard : W3Petard;
 		var ents : array<CGameplayEntity>;
@@ -3098,11 +2586,9 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var witcher : W3PlayerWitcher;
 		var weapon, armor : W3RepairObjectEnhancement;
 		var foodBuff : W3Effect_WellFed;
-		var catsFeastBuff : W3Effect_CatsFeast;
+		var commonMenu : CR4CommonMenu;
+		var guiMan : CR4GuiManager;
 		var hud : CR4ScriptedHud;
-		var shrineBuffs : array<CBaseGameplayEffect>;
-		var shrineBuffTimeLeft : float;
-		var min, max : SAbilityAttributeValue;
 		
 		var id : SItemUniqueId; 
 		
@@ -3141,12 +2627,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		if(GetSkillPathType(skill) == ESP_Alchemy)
 		{
 			owner.RemoveAbilityMultiple('alchemy_potionduration', GetSkillLevel(skill) );
-		}
-
-		
-		if(GetSkillPathType(skill) == ESP_Perks)
-		{
-			owner.RemoveAbilityMultiple('survival_vitality', GetSkillLevel(skill) );
 		}
 		
 		
@@ -3220,8 +2700,8 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			
 			thePlayer.ChangeAlchemyItemsAbilities(false);
 		}
-		else if(skill == S_Alchemy_s19 || skill == S_Perk_43)
-		{
+		else if(skill == S_Alchemy_s19)
+		{			
 			MutagensSyngergyBonusUpdate( -1, 0 );
 		}
 		else if(skill == S_Perk_01)
@@ -3240,42 +2720,12 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		{
 			UpdatePerkArmorBonus(S_Perk_07, 0);	
 		}
-		else if(skill == S_Perk_23)
-		{
-			UpdatePerkArmorBonus(S_Perk_23, 0);	
-		}
-		else if(skill == S_Perk_24)
-		{
-			UpdatePerkArmorBonus(S_Perk_24, 0);	
-		}
-		else if(skill == S_Perk_25)
-		{
-			UpdatePerkArmorBonus(S_Perk_25, 0);	
-		}
-		else if(skill == S_Perk_26)
-		{
-			UpdatePerkArmorBonus(S_Perk_26, 0);	
-		}
-		else if(skill == S_Perk_27)
-		{
-			UpdatePerkArmorBonus(S_Perk_27, 0);	
-		}
-		else if(skill == S_Perk_28)
-		{
-			UpdatePerkArmorBonus(S_Perk_28, 0);	
-		}
 		else if(skill == S_Perk_11)
 		{
 			battleTrance = (W3Effect_BattleTrance)owner.GetBuff(EET_BattleTrance);
 			if(battleTrance)
 				battleTrance.OnPerk11Unequipped();
 		}		
-		else if(skill == S_Magic_s38)
-		{
-			battleTrance = (W3Effect_BattleTrance)owner.GetBuff(EET_BattleTrance);
-			if(battleTrance)
-				battleTrance.OnMagic38Unequipped();
-		}	
 		else if( skill == S_Perk_15 )
 		{
 			foodBuff = (W3Effect_WellFed)owner.GetBuff( EET_WellFed );
@@ -3284,87 +2734,33 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				foodBuff.OnPerk15Unequipped();
 			}
 		}
-		else if( skill == S_Perk_40 )
-		{
-			owner.RemoveAbilityAll( thePlayer.GetSkillAbilityName(S_Perk_40) );
-		}
-		else if( skill == S_Perk_41 )
-		{
-			foodBuff = (W3Effect_WellFed)owner.GetBuff( EET_WellFed );
-			if( foodBuff )
-			{
-				foodBuff.OnPerk41Unequipped();
-			}
-		}
-		else if((skill == S_Perk_19 || skill == S_Perk_40) && owner.HasBuff(EET_BattleTrance))
+		else if(skill == S_Perk_19 && owner.HasBuff(EET_BattleTrance))
 		{
 			skillLevel = FloorF(owner.GetStat(BCS_Focus));
-			owner.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(skill), skillLevel);
+			owner.RemoveAbilityMultiple(thePlayer.GetSkillAbilityName(S_Perk_19), skillLevel);
 			owner.AddAbilityMultiple(thePlayer.GetSkillAbilityName(S_Sword_5), skillLevel);
 		}
-		else if(skill == S_Perk_22 || skill == S_Perk_35)
+		else if(skill == S_Perk_22)
 		{
-			RefreshEncumbrance();
-		}
-		else if(skill == S_Perk_29)
-		{
-			catsFeastBuff = (W3Effect_CatsFeast) owner.GetBuff( EET_CatPerk29 );
-			if ( catsFeastBuff )
+			GetWitcherPlayer().UpdateEncumbrance();
+			guiMan = theGame.GetGuiManager();
+			if(guiMan)
 			{
-				catsFeastBuff.OnPerk29Unequipped();
+				commonMenu = theGame.GetGuiManager().GetCommonMenu();
+				if(commonMenu)
+				{
+					commonMenu.UpdateItemsCounter();
+				}
 			}
-		}
-		else if(skill == S_Perk_36)
-		{
-			shrineBuffs = GetWitcherPlayer().GetShrineBuffs();
-			for ( i = 0; i < shrineBuffs.Size(); i += 1 )
-			{
-				theGame.GetDefinitionsManager().GetAbilityAttributeValue( shrineBuffs[i].GetAbilityName(), 'duration', min, max );
-				shrineBuffTimeLeft = CalculateAttributeValue( GetAttributeRandomizedValue( min, max ) ) - shrineBuffs[i].GetTimeActive();
-				if ( shrineBuffTimeLeft <= 0 )
-					owner.RemoveBuff( shrineBuffs[i].GetEffectType() );
-				else
-					shrineBuffs[i].SetTimeLeft( shrineBuffTimeLeft );
-			}
-		}
-		else if(skill == S_Perk_38)
-		{
-			SetPerk38Abilities( false, false );
 		}
 		
 		if(GetSkillPathType(skill) == ESP_Alchemy)
 			GetWitcherPlayer().RecalcPotionsDurations();
 		
 		
-		if ( CanUseSkill(S_Alchemy_s19) || CanUseSkill(S_Perk_43) )
+		if ( CanUseSkill(S_Alchemy_s19) )
 		{
-			skillLevelSynergyFromAlchemy = GetSkillLevel( S_Alchemy_s19);
-			skillLevelSynergyFromPerks = GetSkillLevel( S_Perk_43);
-			if ( skillLevelSynergyFromAlchemy > skillLevelSynergyFromPerks )
-			{
-				MutagensSyngergyBonusUpdate( GetSkillGroupIdFromSkill( skill ), skillLevelSynergyFromAlchemy );
-			}
-			else
-			{
-				MutagensSyngergyBonusUpdate( GetSkillGroupIdFromSkill( skill ), skillLevelSynergyFromPerks );
-			}
-		}
-	}
-
-	public final function RefreshEncumbrance()
-	{
-		var commonMenu : CR4CommonMenu;
-		var guiMan : CR4GuiManager;
-
-		GetWitcherPlayer().UpdateEncumbrance();
-		guiMan = theGame.GetGuiManager();
-		if(guiMan)
-		{
-			commonMenu = theGame.GetGuiManager().GetCommonMenu();
-			if(commonMenu)
-			{
-				commonMenu.UpdateItemsCounter();
-			}
+			MutagensSyngergyBonusUpdate( GetSkillGroupIdFromSkill( skill ), GetSkillLevel(S_Alchemy_s19) );
 		}
 	}
 	
@@ -3378,9 +2774,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var witcher : W3PlayerWitcher;
 		var inventory : CInventoryComponent;
 		
-		if(skill != S_Perk_05 && skill != S_Perk_06 && skill != S_Perk_07
-		&& skill != S_Perk_23 && skill != S_Perk_24 && skill != S_Perk_25
-		&& skill != S_Perk_26 && skill != S_Perk_27 && skill != S_Perk_28)
+		if(skill != S_Perk_05 && skill != S_Perk_06 && skill != S_Perk_07)
 		{
 			return;
 		}
@@ -3431,16 +2825,10 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			
 			if(skill == S_Perk_05)
 				cnt = light;
-			else if(skill == S_Perk_23)
-				cnt = light * GetSkillLevel(skill);
 			else if(skill == S_Perk_06)
 				cnt = medium;
-			else if(skill == S_Perk_24 || skill == S_Perk_26 || skill == S_Perk_27 || skill == S_Perk_28)
-				cnt = medium * GetSkillLevel(skill);
-			else if(skill == S_Perk_07)
+			else
 				cnt = heavy;
-			else if(skill == S_Perk_25)
-				cnt = heavy * GetSkillLevel(skill);
 		}
 		
 		UpdatePerkArmorBonus(skill, cnt);		
@@ -3499,46 +2887,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				charStats.RemoveAbility(abs[i]);
 		}
 	}
-
-	
-	public final function SetPerk38Abilities( enableDay : bool, enableNight : bool )
-	{
-		var abilityName : name;
-		var i : int;
-		var dm : CDefinitionsManagerAccessor;
-		var abs : array<name>;
-		var enable : bool;
-
-		var abilityCount : int;
-		var abilitiesToAdd : int;
-		
-		abilityName = GetSkillAbilityName( S_Perk_38 );
-		dm = theGame.GetDefinitionsManager();
-		dm.GetContainedAbilities( abilityName, abs );
-		
-		for( i = 0; i < abs.Size(); i += 1 )
-		{
-			if( dm.AbilityHasTag( abs[i], 'Day' ) )
-				enable = enableDay;
-			else
-				enable = enableNight;
-				
-			if( enable )
-			{
-				abilityCount = charStats.GetAbilityCount( abs[i] );
-				abilitiesToAdd = GetSkillLevel( S_Perk_38 ) - abilityCount;
-
-				if ( abilitiesToAdd > 0 )
-					charStats.AddAbilityMultiple( abs[i], abilitiesToAdd );
-				else if ( abilitiesToAdd < 0 )
-					charStats.RemoveAbilityMultiple( abs[i], Abs( abilitiesToAdd ) );
-			}
-			else
-			{
-				charStats.RemoveAbilityAll( abs[i] );
-			}
-		}
-	}
 	
 	
 	private final function OnSkillEquippedLevelChange(skill : ESkill, prevLevel : int, currLevel : int)
@@ -3549,12 +2897,9 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		var mutagens : array<CBaseGameplayEffect>;
 		var recipe : SAlchemyRecipe;
 		var m_alchemyManager : W3AlchemyManager;
-		var tox : W3Effect_Toxicity;
 		var ignorePain : W3Effect_IgnorePain;
-		var foodBuff : W3Effect_WellFed;
 		
 		var hud : CR4ScriptedHud;
-		var isNight : bool;
 		
 		
 		if(IsCoreSkill(skill))
@@ -3573,11 +2918,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			{
 				hud.OnRelevantSkillChanged( skill, true );
 			}
-		}
-		else if(skill == S_Alchemy_s15 && owner.HasBuff(EET_Toxicity))
-		{
-			tox = (W3Effect_Toxicity)owner.GetBuff(EET_Toxicity);
-			tox.RecalcEffectValue();
 		}
 		else if(skill == S_Alchemy_s18)
 		{
@@ -3608,30 +2948,14 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			skillAbilityName = GetSkillAbilityName(S_Alchemy_s13);			
 			
 			if(mutagens.Size() > 0)
-				charStats.AddAbilityMultiple(skillAbilityName, mutagens.Size());
+				charStats.AddAbilityMultiple(skillAbilityName, GetSkillLevel(skill));
 			else
-				charStats.RemoveAbilityMultiple(skillAbilityName, mutagens.Size());						
+				charStats.RemoveAbilityMultiple(skillAbilityName, GetSkillLevel(skill));						
 		}
 		else if(skill == S_Alchemy_s19)
 		{
 			
 			if ( CanUseSkill(S_Alchemy_s19) )
-			{
-				MutagensSyngergyBonusUpdate( -1, currLevel );
-			}
-		}
-		else if( skill == S_Perk_41 )
-		{
-			foodBuff = (W3Effect_WellFed)owner.GetBuff( EET_WellFed );
-			if( foodBuff )
-			{
-				foodBuff.OnPerk41Updated();
-			}
-		}
-		else if(skill == S_Perk_43)
-		{
-			
-			if ( CanUseSkill(S_Perk_43) )
 			{
 				MutagensSyngergyBonusUpdate( -1, currLevel );
 			}
@@ -3650,45 +2974,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 				thePlayer.ChangeAlchemyItemsAbilities(true);
 			else if(currLevel == 2 && prevLevel == 3)
 				thePlayer.ChangeAlchemyItemsAbilities(false);
-		}
-		else if(skill == S_Perk_30 || skill == S_Perk_33)
-		{
-			AdjustAbilitiesOnLevelChange( skill, prevLevel, currLevel );
-		}
-		else if(skill == S_Perk_35)
-		{
-			AdjustAbilitiesOnLevelChange( skill, prevLevel, currLevel );
-			
-			RefreshEncumbrance();
-		}
-		else if(skill == S_Perk_23)
-		{
-			SetPerkArmorBonus(S_Perk_23);
-		}
-		else if(skill == S_Perk_24)
-		{
-			SetPerkArmorBonus(S_Perk_24);
-		}
-		else if(skill == S_Perk_25)
-		{
-			SetPerkArmorBonus(S_Perk_25);
-		}
-		else if(skill == S_Perk_26)
-		{
-			SetPerkArmorBonus(S_Perk_26);
-		}
-		else if(skill == S_Perk_27)
-		{
-			SetPerkArmorBonus(S_Perk_27);
-		}
-		else if(skill == S_Perk_28)
-		{
-			SetPerkArmorBonus(S_Perk_28);
-		}
-		else if(skill == S_Perk_38)
-		{
-			isNight = theGame.envMgr.IsNight();
-			SetPerk38Abilities( !isNight, isNight );
 		}
 		
 		
@@ -3717,26 +3002,9 @@ class W3PlayerAbilityManager extends W3AbilityManager
 			else if ( (currLevel - prevLevel) < 0)
 				owner.RemoveAbilityMultiple('alchemy_potionduration', currLevel - prevLevel );
 		}
-
-		
-		if(GetSkillPathType(skill) == ESP_Perks)
-		{
-			if ( (currLevel - prevLevel) > 0)
-				owner.AddAbilityMultiple('survival_vitality', currLevel - prevLevel );
-			else if ( (currLevel - prevLevel) < 0)
-				owner.RemoveAbilityMultiple('survival_vitality', currLevel - prevLevel );
-		}
 		
 		if(GetSkillPathType(skill) == ESP_Alchemy)
 			GetWitcherPlayer().RecalcPotionsDurations();
-	}
-
-	public final function AdjustAbilitiesOnLevelChange( skill : ESkill, prevLevel : int, currLevel : int )
-	{
-		if ( currLevel > prevLevel )
-			owner.AddAbilityMultiple( SkillEnumToName( skill ), currLevel - prevLevel );
-		else if ( currLevel < prevLevel )
-			owner.RemoveAbilityMultiple( SkillEnumToName( skill ), prevLevel - currLevel );
 	}
 	
 	public final function CanUseSkill(skill : ESkill) : bool
@@ -3746,7 +3014,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		if(!IsSkillEquipped(skill))
 			return false;
 			
-		if(skills[skill].level < 1 && !skills[skill].isCoreSkill)
+		if(skills[skill].level < 1)
 			return false;
 			
 		if(skills[skill].remainingBlockedTime != 0)
@@ -3842,7 +3110,6 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		owner.RemoveAbilityAll('sword_adrenalinegain');
 		owner.RemoveAbilityAll('magic_staminaregen');
 		owner.RemoveAbilityAll('alchemy_potionduration');
-		owner.RemoveAbilityAll('survival_vitality');
 	}
 	
 	
@@ -4023,7 +3290,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		owner.RemoveAbilityAll('sword_adrenalinegain');
 		owner.RemoveAbilityAll('magic_staminaregen');
 		owner.RemoveAbilityAll('alchemy_potionduration');
-		owner.RemoveAbilityAll('survival_vitality');
+		
 		
 		
 		charStats.GetAbilitiesWithTag('SkillDefinitionName', skillDefs);
@@ -4057,86 +3324,7 @@ class W3PlayerAbilityManager extends W3AbilityManager
 		
 		SetToxicityOffset(0.f);
 	}	
-
 	
-	public function RemasterCheckAndFixSkillStatsOnLoadedSave()
-	{
-		var i, j : int;
-		var newSkills : array<SSkill>;
-		var skillDefs : array<name>;
-		var fixedSomething : bool;
-		
-		charStats.GetAbilitiesWithTag('SkillDefinitionName', skillDefs);
-		LogAssert(skillDefs.Size()>0, "W3PlayerAbilityManager.Init: actor <<" + owner + ">> has no skills!!");
-		fixedSomething = false;
-		
-		for( i = 0; i < skillDefs.Size(); i+=1 )
-			CacheSkills(skillDefs[i], newSkills);	
-
-		for( i = 0; i < newSkills.Size(); i+=1 )
-		{
-			if ( newSkills[ i ].isUnchangedLegacy || newSkills[ i ].isReworked )
-			{
-				for( j = 0; j < skills.Size(); j+=1 )
-				{
-					if( newSkills[ i ].skillType == skills[ j ].skillType )
-					{
-						
-						skills[ j ].gridRow = newSkills[ i ].gridRow;
-						skills[ j ].gridColumn = newSkills[ i ].gridColumn;
-						skills[ j ].requiredSkills = newSkills[ i ].requiredSkills;
-						skills[ j ].requiredSkillsIsAlternative = newSkills[ i ].requiredSkillsIsAlternative;
-						skills[ j ].localisationNameKey = newSkills[ i ].localisationNameKey;
-						skills[ j ].localisationDescriptionKey = newSkills[ i ].localisationDescriptionKey;
-						skills[ j ].localisationDescriptionLevel2Key = newSkills[ i ].localisationDescriptionLevel2Key;
-						skills[ j ].localisationDescriptionLevel3Key = newSkills[ i ].localisationDescriptionLevel3Key;
-					}
-				}
-			}
-		}
-	}
-	
-	
-	public function RemasterSkillResetAndRefund()
-	{
-		var i, j : int;
-		var skillType : ESkill;
-		var equippedSkills : array<STempSkill>;
-		var tempSkill : STempSkill;
-		var skillPointsToAdd : int;
-		var skillDefs : array<name>;
-		var canContinue : bool;
-		
-		var used, free, mutationPoints : int;
-		
-		used = GetWitcherPlayer().levelManager.GetPointsUsed(ESkillPoint);
-		free = GetWitcherPlayer().levelManager.GetPointsFree(ESkillPoint);	
-		mutationPoints = GetMutationsUsedSkillPoints();
-
-		skillPointsToAdd += free + used - mutationPoints;
-		ResetCharacterDev();
-		
-		
-		charStats.GetAbilitiesWithTag('SkillDefinitionName', skillDefs);
-		for(i=0; i<skillDefs.Size(); i+=1)
-			CacheSkills(skillDefs[i], skills);
-		InitSkills();	
-		PrecacheModifierSkills();	
-
-		
-		GetWitcherPlayer().AddPoints(ESkillPoint, skillPointsToAdd, true);
-		
-		
-		GetWitcherPlayer().levelManager.NGE_SetUsedPoints( used - Abs(skillPointsToAdd - free) );
-		GetWitcherPlayer().levelManager.NGE_SetFreePoints( skillPointsToAdd );
-		
-		
-		SetToxicityOffset(0.f);
-
-		
-		RemasterSkillSlotReset();
-	}
-
 	public function GetToxicityOffset() : float
 	{
 		return toxicityOffset;

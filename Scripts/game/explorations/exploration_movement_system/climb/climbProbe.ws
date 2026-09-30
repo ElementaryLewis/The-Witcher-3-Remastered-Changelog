@@ -11,7 +11,6 @@ class CClimbProbe
 	private				var	exploratorPosition		: Vector;
 	private				var	directionChecking		: Vector;
 	private				var directionRequiresInput	: bool;
-	private				var startExploratorPosition	: Vector;
 	
 	
 	
@@ -199,7 +198,6 @@ class CClimbProbe
 	private				var	debugVertFree			: bool;						default	debugVertFree		= true;
 	private				var	debugHorSlope			: bool;						default	debugHorSlope		= true;
 	private				var	debugPlatform			: bool;						default	debugPlatform		= true;
-	private				var	debugStartPos			: bool;						default debugStartPos		= true;
 	
 	
 	
@@ -267,13 +265,10 @@ class CClimbProbe
 	
 	public function PreUpdate( position : Vector, direction : Vector, requireInputDir : bool, distanceType : EClimbDistanceType,  logFails : bool )
 	{
-		var distOverride : float;
-
 		PrepareDebugPositions();
 		
 		debugLogFails			= logFails;
 		exploratorPosition		= position;
-		startExploratorPosition	= position;
 		directionChecking		= direction;
 		directionRequiresInput	= requireInputDir;
 		distanceCheckType		= distanceType;
@@ -282,16 +277,7 @@ class CClimbProbe
 		{
 			distForwardToCheck	= distForwardToCheckClose;
 		}
-		else if ( distanceCheckType == ECDT_FarRemaster )
-		{
-			distForwardToCheck	= distForwardToCheckMedium;
-			distOverride = ((float)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbDistance'));
-			if(distOverride > 0.f)
-			{
-				distForwardToCheck = distOverride;
-			}
-		}
-		else	
+		else
 		{
 			distForwardToCheck	= distForwardToCheckMedium;
 		}
@@ -592,38 +578,15 @@ class CClimbProbe
 		var	dot			: float;
 		var rayOrig		: Vector;
 		var rayEnd		: Vector;
-
-		var tempDistForwardToCheck : float;
-
+		
+		
+		
 		position			= exploratorPosition;
-
-		if ( theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewProbe') )
-		{
-			
-			for ( tempDistForwardToCheck = distForwardToCheckClose; tempDistForwardToCheck <= distForwardToCheck; tempDistForwardToCheck += distForwardToCheckClose )
-			{
-				
-				groundCheckFrom		= position + directionChecking * tempDistForwardToCheck;
-				groundCheckTo		= groundCheckFrom + vectorUp * (heightTotalMin + groundRadiusToCheck);
-				groundCheckFrom		= groundCheckFrom + vectorUp * ( ceilingHeightFree - ceilingHeightNeeded + groundRadiusToCheck );
-				
-				groundFound			= theGame.GetWorld().SweepTest( groundCheckFrom, groundCheckTo, groundRadiusToCheck, point, normal, collisionClimbableNames );
-
-				if ( groundFound )
-					break;
-			}
-		}
+		groundCheckFrom		= position + directionChecking * distForwardToCheck;
+		groundCheckTo		= groundCheckFrom + vectorUp * heightTotalMin;
+		groundCheckFrom		= groundCheckFrom + vectorUp * ( ceilingHeightFree - ceilingHeightNeeded + groundRadiusToCheck );
 		
-		if ( !groundFound )
-		{
-			
-			groundCheckFrom		= position + directionChecking * distForwardToCheck;
-			groundCheckTo		= groundCheckFrom + vectorUp * heightTotalMin;
-			groundCheckFrom		= groundCheckFrom + vectorUp * ( ceilingHeightFree - ceilingHeightNeeded + groundRadiusToCheck );
-			
-			groundFound			= theGame.GetWorld().SweepTest( groundCheckFrom, groundCheckTo, groundRadiusToCheck, point, normal, collisionClimbableNames );
-		}
-		
+		groundFound			= theGame.GetWorld().SweepTest( groundCheckFrom, groundCheckTo, groundRadiusToCheck, point, normal, collisionClimbableNames );
 		
 		
 		if( groundFound && directionRequiresInput )
@@ -738,8 +701,6 @@ class CClimbProbe
 		var end		: Vector;
 		var point	: Vector;
 		var normal	: Vector;
-
-		var entities: array< CEntity >;
 		
 		
 		origin			= groundEndPoint;
@@ -760,14 +721,6 @@ class CClimbProbe
 		{
 			climbableFound			= false;
 			climbableObjForceAllow	= false;
-
-			if ( debugDrawGraphics )
-			{
-				theGame.GetWorld().SphereOverlapTest( entities, point, climbableRadius, collisionLockNames );
-
-				if ( entities.Size() > 0 )
-					climbableObjName = entities[0].GetName();
-			}
 		}
 		
 		else
@@ -829,8 +782,6 @@ class CClimbProbe
 		var normalR		: Vector;
 		var foundL		: bool;
 		var foundR		: bool;
-
-		var deltaPos	: Vector;
 		
 		
 		
@@ -878,17 +829,6 @@ class CClimbProbe
 		{
 			wallNormalOrigin		= wallCollR;
 			wallNormalDirection		= normalR;
-		}
-
-		if ( theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewProbe') )
-		{
-			deltaPos = startExploratorPosition - wallNormalOrigin;
-			if ( VecDot2D( deltaPos, directionChecking ) > -0.1f )	
-			{
-				wallFound = false;
-
-				return;
-			}
 		}
 		
 		
@@ -1092,7 +1032,6 @@ class CClimbProbe
 		if( !collided )
 		{
 			vaultingFound	= ECRV_Vault;
-			vaultEndsFalling	= true;
 		}
 		else
 		{
@@ -1289,7 +1228,7 @@ class CClimbProbe
 			
 			return false;
 		}
-		else if( groundEndNormal.Z <= groundNormalMinZ && !theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewProbe') )
+		else if( groundEndNormal.Z <= groundNormalMinZ )
 		{
 			FailedClimbCheckBecause( "Ground normal Z: " + groundEndNormal.Z  + " <= groundNormalMinZ: " + groundNormalMinZ );
 			
@@ -1320,7 +1259,7 @@ class CClimbProbe
 			
 			return false;
 		}
-		else if( groundEndNormal.Z <= groundNormalMinZ && !theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewProbe') )
+		else if( groundEndNormal.Z <= groundNormalMinZ )
 		{
 			FailedClimbCheckBecause( "Ground normal Z: " + groundEndNormal.Z  + " <= groundNormalMinZ: " + groundNormalMinZ );
 			
@@ -1455,10 +1394,6 @@ class CClimbProbe
 			FailedClimbCheckBecause( "Vertical LOW slope is too much: " + vertSlopeLowAngleCur + " > " + vertSlopeLowAngleMax );
 			
 			return false;
-		}
-		else
-		{
-			LogExplorationClimb( "Vertical LOW slope is OK: " + vertSlopeLowAngleCur );
 		}
 		
 		return true;
@@ -1629,12 +1564,6 @@ class CClimbProbe
 			platformFrom		= vectorZero;
 			platformTo			= vectorZero;
 		}
-
-		
-		if( debugStartPos )
-		{
-			startExploratorPosition = vectorZero;
-		}
 	}
 	
 	
@@ -1670,8 +1599,6 @@ class CClimbProbe
 		{
 			colorAux	= Color( 0, 255 / debugColorDiv, 0 );
 			frame.DrawLine( groundEndPoint, groundEndPoint + groundEndNormal, colorAux );
-			frame.DrawSphere( groundEndPoint + groundEndNormal, verySmallRadius, colorAux );
-			frame.DrawText( "Normal", groundEndPoint + groundEndNormal, colorAux );
 			frame.DrawLine( groundCheckFrom, groundCheckTo, colorAux );
 			frame.DrawSphere( groundEndPoint, smallRadius, colorAux );
 			if( groundRefined )
@@ -1692,15 +1619,9 @@ class CClimbProbe
 			frame.DrawLine( wallNormalOrigin, wallNormalOrigin + wallNormalDirection, colorAux );
 			frame.DrawLine( wallCheckFromL, wallCheckToL, colorAux );
 			frame.DrawLine( wallCheckFromR, wallCheckToR, colorAux );
-			frame.DrawSphere( wallCollL, verySmallRadius, colorAux );
-			frame.DrawSphere( wallCollR, verySmallRadius, colorAux );
+			frame.DrawSphere( wallCollL, wallRadiusToCheck, colorAux );
+			frame.DrawSphere( wallCollR, wallRadiusToCheck, colorAux );
 			frame.DrawSphere( wallNormalOrigin, verySmallRadius, colorAux );
-
-			
-			
-			
-			
-	
 			frame.DrawText( "W", wallNormalOrigin, colorAux );
 			frame.DrawText( "WL", wallCollL, colorAux );
 			frame.DrawText( "WR", wallCollR, colorAux );
@@ -1776,14 +1697,6 @@ class CClimbProbe
 			frame.DrawLine( platformFrom, platformTo, colorAux );
 			frame.DrawText( "" + platformFound, platformFrom, colorAux );
 			frame.DrawText( "P", platformTo, colorAux );
-		}
-
-		
-		if( debugStartPos )
-		{
-			colorAux	= Color( 255 / debugColorDiv, 255 / debugColorDiv, 0 );	
-			frame.DrawSphere( startExploratorPosition, verySmallRadius, colorAux );
-			frame.DrawText( "S", startExploratorPosition, colorAux );
 		}
 		
 		

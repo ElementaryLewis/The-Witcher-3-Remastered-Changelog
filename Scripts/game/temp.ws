@@ -3,270 +3,13 @@
 /** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
-exec function setAIDeck(deckName : name)
-{
-	theGame.GetGwintManager().SetEnemyDeck( deckName );
-}
-
-
-
-exec function resetDecks()
-{
-	theGame.GetGwintManager().OnGwintSetupNewgame();
-}
-
-exec function winGwent( result : bool )
-{
-	theGame.GetGuiManager().GetRootMenu().CloseMenu();
-	if (result)
-	{
-	thePlayer.SetGwintMinigameState( EMS_End_PlayerWon );
-	}
-	else
-	{
-	thePlayer.SetGwintMinigameState( EMS_End_PlayerLost );
-	}
-}
-
-exec function winGwentPanel( result : int )
-{
-	var manager : CR4GuiManager;
-	var gwintMenu : CR4GwintGameMenu;
-
-	manager = (CR4GuiManager)theGame.GetGuiManager();
-	if ( manager )
-	{
-		gwintMenu = (CR4GwintGameMenu)manager.GetRootMenu();
-		if ( gwintMenu )
-		{
-			gwintMenu.EndGwintMatch( result );
-		}
-	}
-}
-
-exec function unlockDeck( val : int)
-{
-	theGame.GetGwintManager().UnlockDeck(val);
-	theGame.GetGwintManager().SetSelectedPlayerDeck(val);
-}
-
-exec function addCardByName( cardName : name )
-{
-	GetWitcherPlayer().AddGwentCard( cardName, 1 );
-}
-
-function DrawCardById(cardTemplateId : int, optional playerIndex:int)
-{
-	var manager : CR4GuiManager;
-	var gwintMenu : CR4GwintGameMenu;
-
-	manager = (CR4GuiManager)theGame.GetGuiManager();
-
-	if ( manager )
-	{
-		gwintMenu = (CR4GwintGameMenu)manager.GetRootMenu();
-		if ( gwintMenu )
-		{
-			gwintMenu.spawnCardInstance(cardTemplateId, playerIndex, 1);
-		}
-	}
-}
-
-function DrawCardsById(cardTemplateIds : array<int>, optional playerIndex:int)
-{
-	var manager : CR4GuiManager;
-	var gwintMenu : CR4GwintGameMenu;
-
-	manager = (CR4GuiManager)theGame.GetGuiManager();
-
-	if ( manager )
-	{
-		gwintMenu = (CR4GwintGameMenu)manager.GetRootMenu();
-		if ( gwintMenu )
-		{
-			gwintMenu.spawnCardInstances(cardTemplateIds, playerIndex, 1);
-		}
-	}
-}
-
-function DrawCard(cardName : name, optional playerIndex:int)
-{
-	DrawCardById(theGame.GetGwintManager().GetGwentCardIndex(cardName), playerIndex);
-}
-
-function AddCardToDeckById(cardTemplateId : int, optional playerIndex:int)
-{
-	var manager : CR4GuiManager;
-	var gwintMenu : CR4GwintGameMenu;
-
-	manager = (CR4GuiManager)theGame.GetGuiManager();
-	if ( manager )
-	{
-		gwintMenu = (CR4GwintGameMenu)manager.GetRootMenu();
-		if ( gwintMenu )
-		{
-			gwintMenu.addCardToDeck(cardTemplateId, playerIndex);
-		}
-	}
-}
-
-function AddCardsToDeckById(cardTemplateIds : array<int>, optional playerIndex:int)
-{
-	var manager : CR4GuiManager;
-	var gwintMenu : CR4GwintGameMenu;
-
-	manager = (CR4GuiManager)theGame.GetGuiManager();
-	if ( manager )
-	{
-		gwintMenu = (CR4GwintGameMenu)manager.GetRootMenu();
-		if ( gwintMenu )
-		{
-			gwintMenu.addCardsToDeck(cardTemplateIds, playerIndex);
-		}
-	}
-}
-
-function AddCardToDeck(cardName : name, optional playerIndex:int)
-{
-	AddCardToDeckById(theGame.GetGwintManager().GetGwentCardIndex(cardName), playerIndex);
-}
-
-exec function drawCard(cardName : name, optional playerIndex:int)
-{
-	var cardIds:array<int>;
-	var deckCardIds:array<int>;
-
-	DrawCard(cardName, playerIndex);
-}
-
-exec function addCardToDeck(cardName : name, optional playerIndex:int)
-{
-	AddCardToDeck(cardName, playerIndex);
-}
-
-exec function killCard()
-{
-	var manager : CR4GuiManager;
-	var gwintMenu : CR4GwintGameMenu;
-
-	manager = (CR4GuiManager)theGame.GetGuiManager();
-	if ( manager )
-	{
-		gwintMenu = (CR4GwintGameMenu)manager.GetRootMenu();
-		if ( gwintMenu )
-		{
-			gwintMenu.killCard();
-		}
-	}
-}
-
-exec function gwentTournamentCards( optional val : int )
-{
-	if( val )
-	{
-		thePlayer.inv.RemoveItemByName('gwint_card_kayran',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_ciri',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_geralt',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_imlerith',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_philippa',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_leshen',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_draug',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_saskia',1);
-		thePlayer.inv.RemoveItemByName('gwint_card_eithne',1);
-	}
-	else
-	{
-		thePlayer.inv.AddAnItem('gwint_card_kayran',1);
-		thePlayer.inv.AddAnItem('gwint_card_ciri',1);
-		thePlayer.inv.AddAnItem('gwint_card_geralt',1);
-		thePlayer.inv.AddAnItem('gwint_card_imlerith',1);
-		thePlayer.inv.AddAnItem('gwint_card_philippa',1);
-		thePlayer.inv.AddAnItem('gwint_card_leshen',1);
-		thePlayer.inv.AddAnItem('gwint_card_draug',1);
-		thePlayer.inv.AddAnItem('gwint_card_saskia',1);
-		thePlayer.inv.AddAnItem('gwint_card_eithne',1);
-		thePlayer.inv.AddAnItem('gwint_card_tibor',1);
-		thePlayer.inv.AddAnItem('gwint_card_moorvran',1);
-		thePlayer.inv.AddAnItem('gwint_card_menno',1);
-		thePlayer.inv.AddAnItem('gwint_card_letho',1);
-		thePlayer.inv.AddAnItem('gwint_card_esterad',1);
-	}
-}
-
-exec function secretGwent(optional deckName : name)
-{
-	var gwintManager:CR4GwintManager;
-	gwintManager = theGame.GetGwintManager();
-	gwintManager.setDoubleAIEnabled(false);
-
-	if (deckName)
-	{
-		gwintManager.SetEnemyDeck(deckName);
-	}
-
-	gwintManager.testMatch = true;
-
-	if (gwintManager.GetHasDoneTutorial())
-	{
-		gwintManager.gameRequested = true;
-		theGame.RequestMenu( 'DeckBuilder' );
-	}
-	else
-	{
-		gwintManager.SetForcedFaction(GwintFaction_Neutral);
-		theGame.RequestMenu( 'GwintGame' );
-	}
-}
-
-exec function secretGwentNoTutoAgainstDeckName(optional deckName : name)
-{
-	var gwintManager:CR4GwintManager;
-	gwintManager = theGame.GetGwintManager();
-
-	gwintManager.SetHasDoneTutorial(true); 
-	gwintManager.SetHasDoneDeckTutorial(true); 
-	gwintManager.setDoubleAIEnabled(false);
-	gwintManager.SetEnemyDeck(deckName);
-
-	gwintManager.testMatch = true;
-
-	theGame.RequestMenu( 'DeckBuilder' );
-}
-
-exec function forceFaction(factionIndex : int)
-{
-	if( factionIndex >= 0 && factionIndex <= GwintFaction_Skellige)
-		theGame.GetGwintManager().SetForcedFaction(factionIndex);
-}
-
-exec function secretGwentAI()
-{
-	var gwintManager:CR4GwintManager;
-	gwintManager = theGame.GetGwintManager();
-
-	gwintManager.testMatch = true;
-	gwintManager.setDoubleAIEnabled(true);
-
-	theGame.RequestMenu( 'GwintGame' );
-}
-
-exec function addAllGwentCards(optional faction:int)
-{
-	if(faction >=0 && faction <= GwintFaction_Skellige)
-		AddAllGwentCards((EGwentCardFaction)faction);
-}
-
-
-
-
-
 exec function PlayMovieScene()
 {
 	var storyScene : CStoryScene;
-
+	
 	storyScene = (CStoryScene)LoadResource("movies\cutscenes\movie_player.w2scene", true);
 	theGame.GetStorySceneSystem().PlayScene( storyScene, "Input" );
-
+	
 	
 	
 }
@@ -294,13 +37,13 @@ exec function radialslotsstatus ()
 	var i 				 : int;
 	var j				 : int;
 	var radialSlots		 : array < SRadialSlotDef >;
-
+	
 	radialSlots = thePlayer.GetBlockedSlots();
-
+	
 	for ( i = 0; i < radialSlots.Size(); i+=1 )
 	{
 		LogChannel('RadialSlotsBLocked', radialSlots[i].slotName + " is blocked by: "  );
-
+		
 		for ( j = 0; j < radialSlots[i].disabledBySources.Size(); j+=1 )
 		{
 			LogChannel('RadialSlotsBLocked', radialSlots[i].disabledBySources[j] );
@@ -317,7 +60,7 @@ exec function reduceitems()
 {
 		var allItems : array<SItemUniqueId>;
 		var i : int;
-
+		
 		thePlayer.GetInventory().GetAllItems(allItems);
 		for(i=allItems.Size()-1; i >= 0; i-=1)
 		{
@@ -337,7 +80,7 @@ exec function enablemusicevents( enable : bool)
 exec function fillChest( optional tag : name )
 {
 	var container : W3Container;
-
+	
 	if ( tag == '' )
 	{
 		container = (W3Container)theGame.GetEntityByTag( 'chest1' );
@@ -361,7 +104,7 @@ exec function fillChest( optional tag : name )
 exec function fillShop( optional tag : name )
 {
 	var npc : CNewNPC;
-
+	
 	if ( tag == '' )
 	{
 		npc = (CNewNPC)theGame.GetEntityByTag('ShopkeeperEntity');
@@ -370,8 +113,8 @@ exec function fillShop( optional tag : name )
 	{
 		npc = (CNewNPC)theGame.GetEntityByTag( tag );
 	}
-
-
+		
+	
 	if ( npc )
 	{
 		npc.GetInventory().AddAnItem('Recipe for Rubedo');
@@ -394,10 +137,10 @@ exec function ListHair()
 
 	ids = inv.GetItemsByCategory( 'hair' );
 	size = ids.Size();
-
+	
 	if( size > 0 )
 	{
-
+		
 		for( i = 0; i < size; i+=1 )
 		{
 			if(inv.IsItemMounted( ids[i] ) )
@@ -405,7 +148,7 @@ exec function ListHair()
 			else
 				GetWitcherPlayer().DisplayHudMessage( i+": "+inv.GetItemName(ids[i]) );
 		}
-
+		
 	}
 
 }
@@ -418,7 +161,7 @@ exec function OpenDoor ( doorTag : name )
 	var doorComponent : CDoorComponent;
 	var lockableEntity : W3LockableEntity;
 	var i : int;
-
+	
 	for(i=0; i<nodes.Size(); i+=1)
 	{
 		
@@ -430,7 +173,7 @@ exec function OpenDoor ( doorTag : name )
 			door.Enable(true);
 			door.Unlock();
 			door.Open();
-
+			
 		}
 		else
 		{
@@ -440,11 +183,11 @@ exec function OpenDoor ( doorTag : name )
 			{
 				continue;
 			}
-
-			doorComponent = (CDoorComponent)entity.GetComponentByClassName( 'CDoorComponent' );
-			lockableEntity = (W3LockableEntity)entity;
-
-
+			
+			doorComponent = (CDoorComponent)entity.GetComponentByClassName( 'CDoorComponent' );			
+			lockableEntity = (W3LockableEntity)entity; 
+			
+	
 			if( lockableEntity )
 			{
 				lockableEntity.Enable( true );
@@ -455,25 +198,25 @@ exec function OpenDoor ( doorTag : name )
 			}
 			if( lockableEntity )
 			{
-				lockableEntity.Unlock();
-
+				lockableEntity.Unlock();							
+				
 			}
 			if( doorComponent )
-			{
-				doorComponent.Open( true, false );
+			{					
+				doorComponent.Open( true, false );					
 			}
-
+				
 		}
 	}
-
+	
 }
 exec function FixNoticeboard( boardTag : name ) 
 {
 	var board : W3NoticeBoard;
 	var i : int;
-
+	
 	board = ( W3NoticeBoard )theGame.GetEntityByTag( boardTag );
-
+	
 	if(board)
 	{
 		board.FixErrands();
@@ -493,19 +236,19 @@ exec function IsInInterior( tag : name )
 		LogChannel('SD', "" + npc.IsInInterior() );
 	else
 	{
-		player = (CR4Player)actor;
-
+		player = (CR4Player)actor;	
+		
 		if ( player )
-			LogChannel('SD', "" + player.IsInInterior() );
+			LogChannel('SD', "" + player.IsInInterior() );		
 	}
 }
 
 exec function SetHostile( ownerName : name )
 {
 	var owner : CActor;
-	owner = theGame.GetActorByTag( ownerName );
+	owner = theGame.GetActorByTag( ownerName ); 
 
-	owner.SetAttitude( thePlayer, AIA_Hostile );
+	owner.SetAttitude( thePlayer, AIA_Hostile );	
 }
 
 exec function GetAtt( actor1Name : name )
@@ -513,9 +256,9 @@ exec function GetAtt( actor1Name : name )
 	var actor1 : CActor;
 	var attitude : EAIAttitude;
 
-	actor1 = theGame.GetActorByTag( actor1Name );
+	actor1 = theGame.GetActorByTag( actor1Name ); 
 	attitude = thePlayer.GetAttitude( actor1 );
-
+		
 	LogChannel( 'SD', "Att: " + attitude );
 }
 
@@ -525,11 +268,11 @@ exec function GetActorAtt( actor1Name : name, actor2Name : name )
 	var actor2 : CActor;
 	var attitude : EAIAttitude;
 
-	actor1 = theGame.GetActorByTag( actor1Name );
-	actor2 = theGame.GetActorByTag( actor1Name );
+	actor1 = theGame.GetActorByTag( actor1Name ); 
+	actor2 = theGame.GetActorByTag( actor1Name ); 
 
 	attitude = actor1.GetAttitude( actor2 );
-
+		
 	LogChannel( 'SD', "Att: " + attitude );
 }
 
@@ -538,10 +281,10 @@ exec function GetActorAttGroup( actor1Name : name )
 	var actor1 : CActor;
 	var attitude : name;
 
-	actor1 = theGame.GetActorByTag( actor1Name );
+	actor1 = theGame.GetActorByTag( actor1Name ); 
 
 	attitude = actor1.GetAttitudeGroup();
-
+		
 	LogChannel( 'SD', "Att group: " + attitude );
 }
 
@@ -601,50 +344,50 @@ exec function tuten(optional e : bool)
 exec function testtut( optional scriptTag : name, optional x : float, optional y : float, optional dur : float, optional dontEnableMessages : bool, optional fullscreen : bool, optional noHorResize : bool, optional addToJournal : bool )
 {
 	var tut : STutorialMessage;
-
+	
 	
 	if(!dontEnableMessages)
 		TutorialMessagesEnable(true);
-
+		
 	
 	theGame.GetTutorialSystem().TutorialStart(false);
-
+	
 	
 	theGame.GetTutorialSystem().HideTutorialHint('', true);
-
+		
 	
 	if(fullscreen)
 		tut.type = ETMT_Message;
 	else
 		tut.type = ETMT_Hint;
-
+	
 	if(scriptTag == '')
 		tut.tutorialScriptTag = 'TutorialLadderMove';
 	else
 		tut.tutorialScriptTag = scriptTag;
-
+		
 	tut.disableHorizontalResize = noHorResize;
 	tut.hintPosX = x;
 	tut.hintPosY = y;
-
+	
 	if(x != 0 || y != 0)
 		tut.hintPositionType = ETHPT_Custom;
-
+	
 	if(dur == 0)
 		tut.hintDuration = -1;
 	else
-		tut.hintDuration = dur;
-
+		tut.hintDuration = dur;		
+		
 	tut.hintDurationType = ETHDT_Custom;
 	tut.canBeShownInMenus = true;
 	tut.canBeShownInDialogs = true;
 	tut.glossaryLink = true;
 	tut.forceToQueueFront = true;
 	tut.force = true;
-
+	
 	if( addToJournal )
 		tut.journalEntryName = scriptTag;
-
+	
 	
 	theGame.GetTutorialSystem().DisplayTutorial(tut);
 }
@@ -653,7 +396,7 @@ exec function testtutanim()
 {
 	if (theGame.GetTutorialSystem())
 	{
-		theGame.GetTutorialSystem().DEBUG_TestTutFeedback(true);
+		theGame.GetTutorialSystem().DEBUG_TestTutFeedback(true);	
 	}
 }
 
@@ -716,7 +459,7 @@ exec function mutagentest()
 	thePlayer.inv.AddAnItem('Berbercane fruit',20);
 	thePlayer.inv.AddAnItem('Bloodmoss',20);
 	thePlayer.inv.AddAnItem('Green mold',20);
-
+	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Mutagen 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Mutagen 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Mutagen 3');
@@ -728,7 +471,7 @@ exec function readabook(bookName : name)
 {
 	var item : SItemUniqueId;
 	var items : array<SItemUniqueId>;
-
+	
 	items = thePlayer.inv.AddAnItem(bookName,1);
 	item = items[0];
 	thePlayer.inv.ReadBook(item);
@@ -766,7 +509,7 @@ exec function testreward()
 		LogChannel( 'QuestReward', i + " " + rewards[ i ] );
 		if ( theGame.GetReward( rewards[ i ], rewrd ) )
 		{
-			LogChannel( 'QuestReward', "    " + rewrd.gold + " " + rewrd.experience + " " + rewrd.items.Size() );
+			LogChannel( 'QuestReward', "    " + rewrd.gold + " " + rewrd.experience + " " + rewrd.items.Size() );	
 		}
 	}
 }
@@ -780,45 +523,45 @@ exec function eqbomb(itemName : name, optional slotID : int )
 {
 	var items 	: array<SItemUniqueId>;
 	var inv : CInventoryComponent;
-
-
+	
+	
 	inv = GetWitcherPlayer().GetInventory();
-
+	
 	inv.AddAnItem(itemName,5);
 	items = inv.GetItemsIds(itemName);
-
+	
 	if( slotID > 0 )
 	{
 		slotID += EES_Quickslot1 - 1;
 	}
-
-	GetWitcherPlayer().EquipItem( items[0], slotID);
+	
+	GetWitcherPlayer().EquipItem( items[0], slotID);	
 }
 
 exec function FD( n : float, f : float, dt : float, ds : float)
 {
-
+	
 	
 	theGame.GetFocusModeController().SetFadeParameters( n, f, dt, ds );
 }
 
 exec function dismember()
 {
-	var actor 				: CActor;
+	var actor 				: CActor;	
 	var dismembermentComp 	: CDismembermentComponent;
 	var wounds				: array< name >;
 	var usedWound			: name;
-
+	
 	actor = thePlayer.GetTarget();
 	if(!actor) return;
 	dismembermentComp = (CDismembermentComponent)(actor.GetComponentByClassName( 'CDismembermentComponent' ));
 	if(!dismembermentComp) return;
-
+	
 	dismembermentComp.GetWoundsNames( wounds, WTF_Explosion );
-
+	
 	if ( wounds.Size() > 0 )
 					usedWound = wounds[ RandRange( wounds.Size() ) ];
-
+					
 	actor.SetDismembermentInfo( usedWound, actor.GetWorldPosition() - actor.GetWorldPosition(), true );
 	actor.AddTimer( 'DelayedDismemberTimer', 0.05f );
 }
@@ -849,14 +592,14 @@ exec function boat_destr( idxParts : int, index : int )
 		drop = (CDropPhysicsComponent)entity.GetComponentByClassName( 'CDropPhysicsComponent' );
 		if ( boatDestruction && drop )
 		{
-			dropCompName = boatDestruction.partsConfig[ idxParts ].parts[ index ].componentName;
+			dropCompName = boatDestruction.partsConfig[ idxParts ].parts[ index ].componentName;	
 			rigidMeshComp = (CRigidMeshComponent)entity.GetComponent( dropCompName );
 			if ( rigidMeshComp )
 			{
-				rigidMeshComp.EnableBuoyancy( false );
+				rigidMeshComp.EnableBuoyancy( false );			
 				drop.DropMeshByName( dropCompName, VecFromHeading( entity.GetHeading() ), boatDestruction.PartNameToCurveName( dropCompName ) );
 			}
-
+			
 		}
 	}
 }
@@ -865,7 +608,7 @@ exec function test_wound( wound : name )
 {
 	var actor : CActor;
 	var direction : Vector;
-	actor = thePlayer.GetTarget();
+	actor = thePlayer.GetTarget();	
 	if ( actor )
 	{
 		direction = VecNormalize( actor.GetWorldPosition() - thePlayer.GetWorldPosition() );
@@ -977,10 +720,10 @@ class CTestTrigger extends CGameplayEntity
 {
 	private				var entryTime	: float;
 	private				var timerInterval	: float;
-
+	
 	default timerInterval = 0.0100f;
 	default entryTime = 0.0f;
-
+	
 	timer function entryTimer( time : float, id : int)
 	{
 		
@@ -989,17 +732,17 @@ class CTestTrigger extends CGameplayEntity
 		
 		
 		
-
+			
 		
 		
 	}
-
+	
 	event OnAreaEnter( area : CTriggerAreaComponent, activator : CComponent )
-	{
+	{	
 		var actor : CActor;
 		var params : SCustomEffectParams;
-
-		entryTime = 0;
+		
+		entryTime = 0;		
 		if ( activator.GetEntity() )
 		{
 			actor = (CActor)activator.GetEntity();
@@ -1011,23 +754,23 @@ class CTestTrigger extends CGameplayEntity
 				actor.AddEffectCustom(params);
 			}
 		}
-
 		
 		
 		
-	}
-
+		
+	}	
+	
 	event OnAreaExit( area : CTriggerAreaComponent, activator : CComponent )
 	{
 		
 		
 	}
-};
+};	
 
 exec function TM( hoursPerMinute : float )
 {
 	theGame.SetHoursPerMinute( hoursPerMinute );
-
+	
 	Log("Time : " + GameTimeToString( theGame.GetGameTime() ) );
 }
 
@@ -1052,9 +795,9 @@ class W3KillTestTrigger extends CGameplayEntity
 {
 	private				var entered : Bool;
 	private				var actors : array< CActor >;
-
+	
 	editable var entityTemplate : CEntityTemplate;
-
+	
 	timer function acttimer( dt : float , id : int)
 	{
 		var i : int;
@@ -1066,34 +809,34 @@ class W3KillTestTrigger extends CGameplayEntity
 		}
 		actors.Clear();
 	}
-
+	
 	function DoStuff()
 	{
 		var act : CActor;
 		var position : Vector;
-		var rotation : EulerAngles;
+		var rotation : EulerAngles; 
 		position = thePlayer.GetWorldPosition();
 		rotation = thePlayer.GetWorldRotation();
-
+		
 		position += ( VecFromHeading( rotation.Yaw ) * 5.f );
 		rotation.Yaw = -rotation.Yaw;
-
+		
 		act = (CActor)theGame.CreateEntity( entityTemplate, position, rotation );
-
+		
 		actors.PushBack( act );
-
+		
 		AddTimer( 'acttimer', 3.f, false );
 	}
-
+	
 	event OnAreaEnter( area : CTriggerAreaComponent, activator : CComponent )
-	{
+	{		
 		if ( false == entered )
 		{
 			entered = true;
 			DoStuff();
 		}
-	}
-
+	}	
+	
 	event OnAreaExit( area : CTriggerAreaComponent, activator : CComponent )
 	{
 		entered = false;
@@ -1111,12 +854,12 @@ exec function SM()
 {
 	var player : CR4Player;
 	player = (CR4Player)thePlayer;
-
+	
 	if( player )
 	{
 		player.SetBehaviorVariable( 'simpleRot', 1.0);
 	}
-
+	
 }
 
 exec function GT()
@@ -1124,9 +867,9 @@ exec function GT()
 	var dayTime : GameTime;
 	var hours : int;
 	dayTime = theGame.GetGameTime();
-
+	
 	hours = GameTimeHours( dayTime );
-
+	
 	LogChannel('hour', "Hours: " + GameTimeToString( dayTime ));
 }
 exec function FM()
@@ -1135,13 +878,13 @@ exec function FM()
 	var i, size : int;
 	var monsterClue : W3MonsterClue;
 	theGame.GetNodesByTag( 'fm_object', nodes );
-
+	
 	size = nodes.Size();
-
+	
 	for( i = 0; i < size; i += 1 )
 	{
 		monsterClue = (W3MonsterClue)nodes[i];
-
+		
 		if( monsterClue )
 		{
 			monsterClue.SetAvailable( !monsterClue.GetIsAvailable() );
@@ -1152,12 +895,12 @@ exec function FM()
 exec function testtutorial(msgName : name, optional isNotHint : bool, optional duration : float)
 {
 	var tut : STutorialMessage;
-
+	
 	if(isNotHint)
 		tut.type = ETMT_Message;
 	else
 		tut.type = ETMT_Hint;
-
+	
 	tut.tutorialScriptTag = msgName;
 	if(duration != 0)
 	{
@@ -1176,12 +919,12 @@ exec function printability(tag : name)
 	var i, size, j : int;
 	var actor : CActor;
 	var counts : array<int>;
-
+	
 	if(tag == 'PLAYER')
 		actor = thePlayer;
 	else
 		actor = theGame.GetActorByTag(tag);
-
+		
 	if(actor)
 	{
 		actor.GetCharacterStats().GetAbilities(abilities,true);
@@ -1203,7 +946,7 @@ exec function printability(tag : name)
 				counts.PushBack(1);
 			}
 		}
-
+		
 		for(i = 0; i < tmp.Size(); i += 1)
 		{
 			LogChannel('Ability', tmp[i] + " x " + counts[i]);
@@ -1222,24 +965,24 @@ exec function DebugActivateJournal()
 	var entryJour : CJournalBase;
 	var tags : array <name>;
 	var i,j,k,l,m : int;
-
+	
 	manager = theGame.GetJournalManager();
-
+	
 	
 
 	tags.PushBack('DebugCharacter');
 	tags.PushBack('DebugGlossary');
 	tags.PushBack('DebugTuturialEntry');
-	tags.PushBack('MonsterType1');
-	tags.PushBack('MonsterType2');
-	tags.PushBack('MonsterType5');
-	tags.PushBack('MonsterType6');
-	tags.PushBack('MonsterType7');
-	tags.PushBack('MonsterType8');
-	tags.PushBack('MonsterType9');
-	tags.PushBack('MonsterType11');
-	tags.PushBack('MonsterType12');
-	tags.PushBack('MonsterType10');
+	tags.PushBack('MonsterType1');	
+	tags.PushBack('MonsterType2');	
+	tags.PushBack('MonsterType5');	
+	tags.PushBack('MonsterType6');	
+	tags.PushBack('MonsterType7');	
+	tags.PushBack('MonsterType8');	
+	tags.PushBack('MonsterType9');	
+	tags.PushBack('MonsterType11');	
+	tags.PushBack('MonsterType12');	
+	tags.PushBack('MonsterType10');	
 	tags.PushBack('MonsterTypeHumans');
 	tags.PushBack('bestiary_elemental');
 	tags.PushBack('bestiary_golem');
@@ -1269,29 +1012,29 @@ exec function DebugActivateJournal()
 	tags.PushBack('bestiary_katakan');
 	tags.PushBack('Human');
 	
-
+	
 	for( i = 0; i < tags.Size(); i += 1 )
 	{
 		entryJour = manager.GetEntryByTag(tags[i]);
-
+		
 		tempContainer = (CJournalContainer)entryJour;
 		manager.ActivateEntry(entryJour,JS_Active);
-
+		
 		LogChannel('DJOUR',"");
 		LogChannel('DJOUR'," entries "+i+" tag: "+tags[i]+" size "+tempContainer.GetNumChildren()+" tempContainer "+tempContainer.baseName+" bzium " + (bool)((CJournalContainer)entryJour) );
-
+		
 		for( j = 0; j < tempContainer.GetNumChildren(); j += 1 )
 		{
 			manager.ActivateEntry(tempContainer.GetChild(j),JS_Active);
 			tempContainer2 = (CJournalContainer)tempContainer.GetChild(j);
-
+			
 			if( tempContainer2 )
 			{
 				LogChannel('DJOUR',"");
 				LogChannel('DJOUR'," 	 entries2 "+j+" name: "+tempContainer2.baseName+" size "+tempContainer2.GetNumChildren());
-
+			
 				for( k = 0; k < tempContainer2.GetNumChildren(); k += 1 )
-				{
+				{	
 					tempContainer3 = (CJournalContainer)tempContainer2.GetChild(k);
 					manager.ActivateEntry(tempContainer2.GetChild(k),JS_Active);
 					if( tempContainer3 )
@@ -1370,7 +1113,7 @@ class W2BalanceCalc
 		statPoisonRes,
 		statBleedingRes,
 		statIncinerationRes : float;
-
+	
 	var costVitality,
 		costEssence,
 		costStamina,
@@ -1442,14 +1185,14 @@ class W2BalanceCalc
 		var npc : CNewNPC;
 		npc = (CNewNPC)actor;
 		actor.GetCharacterStats().GetAbilities(abilities, true);
-
+		
 		statVitality = npc.GetStatMax(BCS_Vitality);
 		statEssence = npc.GetStatMax(BCS_Essence);
 		statStamina = npc.GetStatMax(BCS_Stamina);
 		statFocus = npc.GetStatMax(BCS_Focus);
 		statToxicity = npc.GetStatMax(BCS_Toxicity);
 		statMorale = npc.GetStatMax(BCS_Morale);
-
+		
 		statCurrentVitality = npc.GetStat( BCS_Vitality );
 		statCurrentEssence = npc.GetStat( BCS_Essence );
 		statCurrentStamina = npc.GetStat( BCS_Stamina, true );
@@ -1457,7 +1200,7 @@ class W2BalanceCalc
 		statToxicity = npc.GetStat(BCS_Toxicity);
 		statMorale = npc.GetStat(BCS_Morale);
 		
-
+		
 	}
 	function PrintActorStats(actor : CActor)
 	{
@@ -1522,7 +1265,7 @@ class W2BalanceCalc
 		statToxicity = thePlayer.GetStatMax(BCS_Toxicity);
 		statMorale = thePlayer.GetStatMax(BCS_Morale);
 		
-
+		
 
 	}
 	function SetCosts()
@@ -1570,11 +1313,11 @@ class W2BalanceCalc
 		Log("Poison Resistance " + statPoisonRes);
 		Log("Bleeding Resistance " + statBleedingRes);
 		Log("Incineration Resistance " + statIncinerationRes);
-
-		Log("Used Items:");
-
 		
-
+		Log("Used Items:");
+		
+		
+		
 		Log("---------- Geralt stats END --------------");
 	}
 }
@@ -1627,7 +1370,7 @@ exec function TestAb()
 	var actor : CActor;
 	var i, size, sizeAb : int;
 	var actorName : string;
-
+	
 	actors = GetActorsInRange(thePlayer, 20.0);
 	size = actors.Size();
 	if(size > 0)
@@ -1661,11 +1404,11 @@ exec function addabl(ablName : name)
 
 exec function targetaddabl(ablName : name, tag : name)
 {
-	var ent : CEntity;
-	var gplEnt : CGameplayEntity;
-
+	var ent : CEntity; 
+	var gplEnt : CGameplayEntity; 
+	
 	ent = theGame.GetEntityByTag( tag );
-
+	
 	gplEnt = (CGameplayEntity)ent;
 	if( gplEnt )
 		gplEnt.AddAbility(ablName);
@@ -1678,16 +1421,16 @@ exec function rmvabl(ablName : name)
 
 exec function DispSkeleton( entTag : name )
 {
-	var ent : CEntity;
+	var ent : CEntity; 
 	var acs : array< CComponent >;
 	var i, size : int;
-
+	
 	ent = theGame.GetEntityByTag( entTag );
 	if ( ent )
 	{
 		acs = ent.GetComponentsByClassName( 'CAnimatedComponent' );
 		size = acs.Size();
-
+		
 		for ( i=0; i<size; i+= 1 )
 		{
 			((CAnimatedComponent)acs[ i ]).DisplaySkeleton( true );
@@ -1697,16 +1440,16 @@ exec function DispSkeleton( entTag : name )
 
 exec function DispSkeletonAll( entTag : name )
 {
-	var ent : CEntity;
+	var ent : CEntity; 
 	var acs : array< CComponent >;
 	var i, size : int;
-
+	
 	ent = theGame.GetEntityByTag( entTag );
 	if ( ent )
 	{
 		acs = ent.GetComponentsByClassName( 'CAnimatedComponent' );
 		size = acs.Size();
-
+		
 		for ( i=0; i<size; i+= 1 )
 		{
 			((CAnimatedComponent)acs[ i ]).DisplaySkeleton( true, true );
@@ -1716,16 +1459,16 @@ exec function DispSkeletonAll( entTag : name )
 
 exec function DispSkeletonAxis( entTag : name )
 {
-	var ent : CEntity;
+	var ent : CEntity; 
 	var acs : array< CComponent >;
 	var i, size : int;
-
+	
 	ent = theGame.GetEntityByTag( entTag );
 	if ( ent )
 	{
 		acs = ent.GetComponentsByClassName( 'CAnimatedComponent' );
 		size = acs.Size();
-
+		
 		for ( i=0; i<size; i+= 1 )
 		{
 			((CAnimatedComponent)acs[ i ]).DisplaySkeleton( false, true );
@@ -1747,25 +1490,25 @@ class W3ProjectileShooterTest extends CActor
 	default frequency = 1.f;
 
 	event OnSpawned( spawnData : SEntitySpawnData )
-	{
+	{	
 		if ( projectileTemplate && IsNameValid( targetTag ) && frequency > 0.f )
 		{
 			AddTimer( 'Shoot', 1.f / frequency, true );
-		}
+		}	
 	}
-
+	
 	timer function Shoot( t : float , id : int)
 	{
 		var projectile : CProjectileTrajectory;
 		var node : CNode;
-
+		
 		projectile = (CProjectileTrajectory) theGame.CreateEntity( projectileTemplate, GetWorldPosition() );
 		node = theGame.GetNodeByTag( targetTag );
 
 		projectile.Init( this );
 		projectile.ShootProjectileAtNode( 45.f, 20.f,  node, 1000.f );
 	}
-
+	
 };
 
 exec function Hour()
@@ -1792,7 +1535,7 @@ exec function ParryStart( flag : bool )
 	else
 	{
 		thePlayer.SetBehaviorVariable( 'parryType', 7.0 );
-		thePlayer.RaiseForceEvent( 'ParryStart' );
+		thePlayer.RaiseForceEvent( 'ParryStart' );	
 	}
 }
 
@@ -1836,24 +1579,24 @@ exec function FixMovement()
 exec function trad()
 {
 	var arr : array<SItemUniqueId>;
-
+	
 	arr = thePlayer.inv.AddAnItem('White Frost 3');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
 	thePlayer.EquipItem(arr[0], EES_Petard1);
-
+	
 	arr = thePlayer.inv.AddAnItem('Silver Dust Bomb 3');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
-
+	
 	arr = thePlayer.inv.AddAnItem('Devils Puffball 3');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
-
+	
 	arr = thePlayer.inv.AddAnItem('Samum 3');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
-
+	
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
 	arr = thePlayer.inv.AddAnItem('Dancing Star 3');
 	thePlayer.EquipItem(arr[0], EES_Petard2);
-
+	
 	thePlayer.inv.AddAnItem('Tracking Bolt',9);
 	thePlayer.inv.AddAnItem('Bait Bolt',9);
 	thePlayer.inv.AddAnItem('Blunt Bolt',9);
@@ -1861,26 +1604,26 @@ exec function trad()
 	thePlayer.inv.AddAnItem('Target Point Bolt',9);
 	thePlayer.inv.AddAnItem('Split Bolt',9);
 	thePlayer.inv.AddAnItem('Explosive Bolt',9);
-
+	
 	thePlayer.inv.AddAnItem('Blunt Bolt Legendary',9);
 	thePlayer.inv.AddAnItem('Broadhead Bolt Legendary',9);
 	thePlayer.inv.AddAnItem('Target Point Bolt Legendary',9);
 	thePlayer.inv.AddAnItem('Split Bolt Legendary',9);
 	thePlayer.inv.AddAnItem('Explosive Bolt Legendary',9);
-
+	
 	thePlayer.inv.AddAnItem('Torch');
 	thePlayer.inv.AddAnItem('q103_bell');
 }
 
 exec function addbombs(optional notInfinite : bool)
-{
+{	
 	var arr : array<SItemUniqueId>;
 
 	if(!notInfinite)
 	{
 		FactsAdd("debug_fact_inf_bombs");
 	}
-
+	
 	arr = thePlayer.inv.AddAnItem('Samum 1');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
 	arr = thePlayer.inv.AddAnItem('Samum 2');
@@ -1923,14 +1666,14 @@ exec function addbombs(optional notInfinite : bool)
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
 	arr = thePlayer.inv.AddAnItem('White Frost 3');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
-
+		
 	arr = thePlayer.inv.AddAnItem('Grapeshot 2');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
 	arr = thePlayer.inv.AddAnItem('Grapeshot 3');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
 	arr = thePlayer.inv.AddAnItem('Grapeshot 1');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
-
+	
 	thePlayer.EquipItem(arr[0], EES_Petard1);
 	GetWitcherPlayer().SelectQuickslotItem( EES_Petard1 );
 }
@@ -1939,13 +1682,13 @@ exec function freezetodeath()
 {
 	var arr : array<SItemUniqueId>;
 	
-	arr = thePlayer.inv.AddAnItem('Freeze to death', 20);
+	arr = thePlayer.inv.AddAnItem('Freeze to death', 20);	
 	thePlayer.EquipItem(arr[0], EES_Quickslot1);
 	GetWitcherPlayer().SelectQuickslotItem( EES_Quickslot1 );
 }
 
 exec function addbolts(optional infinite : bool)
-{
+{	
 	var arr : array<SItemUniqueId>;
 
 	if(infinite)
@@ -1955,7 +1698,7 @@ exec function addbolts(optional infinite : bool)
 
 
 
-
+	
 	thePlayer.inv.AddAnItem('Tracking Bolt',9);
 	thePlayer.inv.AddAnItem('Bait Bolt',9);
 	thePlayer.inv.AddAnItem('Blunt Bolt',9);
@@ -1963,7 +1706,7 @@ exec function addbolts(optional infinite : bool)
 	thePlayer.inv.AddAnItem('Target Point Bolt',9);
 	thePlayer.inv.AddAnItem('Split Bolt',9);
 	thePlayer.inv.AddAnItem('Explosive Bolt',9);
-
+	
 	thePlayer.inv.AddAnItem('Blunt Bolt Legendary',9);
 	thePlayer.inv.AddAnItem('Broadhead Bolt Legendary',9);
 	thePlayer.inv.AddAnItem('Target Point Bolt Legendary',9);
@@ -1982,12 +1725,12 @@ exec function addcraft()
 	thePlayer.inv.AddAnItem('Cotton', 10);
 	thePlayer.inv.AddAnItem('Oil', 10);
 	thePlayer.inv.AddAnItem('Infused shard', 10);
-
+	
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Boots 2 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Boots 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Pants 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Pants 2 schematic');
-
+	
 	thePlayer.AddMoney(50000);
 }
 
@@ -2033,7 +1776,7 @@ exec function addsteelswords()
 	thePlayer.inv.AddAnItem('Wild Hunt sword 2',1);
 	thePlayer.inv.AddAnItem('Wild Hunt sword 3',1);
 	thePlayer.inv.AddAnItem('Wild Hunt sword 4',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2052,7 +1795,7 @@ exec function addsteelswords2()
 	thePlayer.inv.AddAnItem('Lynx School steel sword 1',1);
 	thePlayer.inv.AddAnItem('Lynx School steel sword 2',1);
 	thePlayer.inv.AddAnItem('Lynx School steel sword 3',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2082,7 +1825,7 @@ exec function addwolfdlc(optional dontOpenInv : bool)
 	thePlayer.inv.AddAnItem('Wolf School silver sword 1', 1);
 	thePlayer.inv.AddAnItem('Wolf School silver sword 2', 1);
 	thePlayer.inv.AddAnItem('Wolf School silver sword 3', 1);
-
+	
 	if(!dontOpenInv)
 	{
 		theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
@@ -2124,7 +1867,7 @@ exec function addsilverswords(optional dontOpenInv : bool)
 	thePlayer.inv.AddAnItem('Wolf School silver sword 1',1);
 	thePlayer.inv.AddAnItem('Wolf School silver sword 2',1);
 	thePlayer.inv.AddAnItem('Wolf School silver sword 3',1);
-
+	
 	if(!dontOpenInv)
 		theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
@@ -2148,7 +1891,7 @@ exec function addsilverswords2()
 	thePlayer.inv.AddAnItem('Wolf School silver sword 1',1);
 	thePlayer.inv.AddAnItem('Wolf School silver sword 2',1);
 	thePlayer.inv.AddAnItem('Wolf School silver sword 3',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2166,7 +1909,7 @@ exec function addcrossbows()
 	thePlayer.inv.AddAnItem('Lynx School Crossbow',1);
 	thePlayer.inv.AddAnItem('Bear School Crossbow',1);
 	thePlayer.inv.AddAnItem('Nilfgaardian crossbow',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2204,7 +1947,7 @@ exec function addarmor()
 	thePlayer.inv.AddAnItem('Nilfgaardian Casual Suit 03',1);
 	thePlayer.inv.AddAnItem('Skellige Casual Suit 01',1);
 	thePlayer.inv.AddAnItem('Skellige Casual Suit 02',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2237,7 +1980,7 @@ exec function addarmor2()
 	thePlayer.inv.AddAnItem('Skellige Casual Suit 02',1);
 	thePlayer.inv.AddAnItem('sq108_heavy_armor',1);
 	
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2268,7 +2011,7 @@ exec function addpants()
 	thePlayer.inv.AddAnItem('Bath Towel Pants 01',1);
 	thePlayer.inv.AddAnItem('Ciri pants 01',1);
 	thePlayer.inv.AddAnItem('Wild Hunt pants 01',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2297,7 +2040,7 @@ exec function addboots()
 	thePlayer.inv.AddAnItem('Nilfgaardian casual shoes',1);
 	thePlayer.inv.AddAnItem('Skellige casual shoes',1);
 	thePlayer.inv.AddAnItem('Radovid boots 01',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2324,7 +2067,7 @@ exec function addgloves()
 	thePlayer.inv.AddAnItem('Heavy gloves 03',1);
 	thePlayer.inv.AddAnItem('Heavy gloves 04',1);
 	thePlayer.inv.AddAnItem('Wild Hunt gloves 01',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2335,27 +2078,27 @@ exec function addsets()
 	thePlayer.inv.AddAnItem('Lynx Boots 1',1);
 	thePlayer.inv.AddAnItem('Gryphon Boots 1',1);
 	thePlayer.inv.AddAnItem('Bear Boots 1',1);
-
+	
 	thePlayer.inv.AddAnItem('Wolf Pants 1',1);
 	thePlayer.inv.AddAnItem('Lynx Pants 1',1);
 	thePlayer.inv.AddAnItem('Gryphon Pants 1',1);
 	thePlayer.inv.AddAnItem('Bear Pants 1',1);
-
+	
 	thePlayer.inv.AddAnItem('Bear Armor',1);
 	thePlayer.inv.AddAnItem('Gryphon Armor',1);
 	thePlayer.inv.AddAnItem('Lynx Armor',1);
 	thePlayer.inv.AddAnItem('Wolf Armor',1);
-
+	
 	thePlayer.inv.AddAnItem('Wolf Gloves 1',1);
 	thePlayer.inv.AddAnItem('Lynx Gloves 1',1);
 	thePlayer.inv.AddAnItem('Gryphon Gloves 1',1);
 	thePlayer.inv.AddAnItem('Bear Gloves 1',1);
-
+	
 	thePlayer.inv.AddAnItem('Bear School steel sword',1);
 	thePlayer.inv.AddAnItem('Gryphon School steel sword',1);
 	thePlayer.inv.AddAnItem('Lynx School steel sword',1);
 	thePlayer.inv.AddAnItem('Wolf School steel sword',1);
-
+	
 	thePlayer.inv.AddAnItem('Bear School silver sword',1);
 	thePlayer.inv.AddAnItem('Gryphon School silver sword',1);
 	thePlayer.inv.AddAnItem('Lynx School silver sword',1);
@@ -2412,7 +2155,7 @@ function addbooks_()
 	thePlayer.inv.AddAnItem('Orders from Shilard',1);
 	thePlayer.inv.AddAnItem('Journey into the mind',1);
 	thePlayer.inv.AddAnItem('Necronomicon',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2459,7 +2202,7 @@ exec function addlore()
 	thePlayer.inv.AddAnItem('lore_prophecy_of_ithlinne',1);
 	thePlayer.inv.AddAnItem('lore_conjunction_of_spheres',1);
 	thePlayer.inv.AddAnItem('lore_theory_of_spheres',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2502,7 +2245,7 @@ exec function addlore2()
 	thePlayer.inv.AddAnItem('lore_popiels_journal',1);
 	thePlayer.inv.AddAnItem('lore_about_the_fourth_witch',1);
 	thePlayer.inv.AddAnItem('lore_brother_adalbert_bestiary',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2588,7 +2331,7 @@ exec function adddrinks(optional cnt : int, optional noMenu : bool)
 {
 	if(cnt == 0)
 		cnt = 1;
-
+		
 	thePlayer.inv.AddAnItem('Apple juice',cnt);
 	thePlayer.inv.AddAnItem('Bottled water',cnt);
 	thePlayer.inv.AddAnItem('Cows milk',cnt);
@@ -2611,7 +2354,7 @@ exec function adddrinks(optional cnt : int, optional noMenu : bool)
 	thePlayer.inv.AddAnItem('Rivian Kriek',cnt);
 	thePlayer.inv.AddAnItem('Kaedwenian Stout',cnt);
 	thePlayer.inv.AddAnItem('Dwarven spirit',cnt);
-
+	
 	if(!noMenu)
 		theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
@@ -2655,7 +2398,7 @@ exec function addtrophies()
 	thePlayer.inv.AddAnItem('mh308_noonwraith_trophy',1);
 	thePlayer.inv.AddAnItem('sq108_griffin_trophy',1);
 	thePlayer.inv.AddAnItem('mq0003_noonwraith_trophy',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2707,7 +2450,7 @@ exec function addmisc()
 	thePlayer.inv.AddAnItem('q403_ciri_meteor',1);
 	thePlayer.inv.AddAnItem('mh107_czart_lure',1);
 	
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2733,7 +2476,7 @@ exec function addhorseitems()
 	thePlayer.inv.AddAnItem('Horse Saddle 3v3',1);
 	thePlayer.inv.AddAnItem('Horse Saddle 3v4',1);
 	thePlayer.inv.AddAnItem('Horse Saddle 4',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -2751,19 +2494,19 @@ exec function WitcherHairstyle( number : int )
 
 	ids = inv.GetItemsByCategory( 'hair' );
 	size = ids.Size();
-
+	
 	if( size > 0 )
 	{
-
+		
 		for( i = 0; i < size; i+=1 )
 		{
-			inv.RemoveItem(ids[i], 1);
+			inv.RemoveItem(ids[i], 1);	
 		}
-
+		
 	}
-
+	
 	ids.Clear();
-
+	
 	if(number == 0)
 	{
 		ids = inv.AddAnItem('Half With Tail Hairstyle');
@@ -2780,10 +2523,6 @@ exec function WitcherHairstyle( number : int )
 	{
 		ids = inv.AddAnItem('Preview Hair');
 	}
-	else if( number == 4 )
-	{
-		ids = inv.AddAnItem('Rabble rouser Hair');
-	}
 	
 	inv.MountItem(ids[0]);
 }
@@ -2793,7 +2532,7 @@ exec function addupgrades(optional count : int, optional dontOpenUI : bool)
 {
 	if(count == 0)
 		count = 1;
-
+	
 	thePlayer.inv.AddAnItem('Rune stribog lesser', count);
 	thePlayer.inv.AddAnItem('Rune stribog', count);
 	thePlayer.inv.AddAnItem('Rune stribog greater', count);
@@ -2826,7 +2565,7 @@ exec function addupgrades(optional count : int, optional dontOpenUI : bool)
 	thePlayer.inv.AddAnItem('Rune elemental greater', count);
 	thePlayer.inv.AddAnItem('Rune tvarog', count);
 	thePlayer.inv.AddAnItem('Rune pierog', count);
-
+	
 	thePlayer.inv.AddAnItem('Glyph aard lesser', count);
 	thePlayer.inv.AddAnItem('Glyph aard', count);
 	thePlayer.inv.AddAnItem('Glyph aard greater', count);
@@ -2866,7 +2605,7 @@ exec function addcraftingingre(optional quantity : int)
 {
 	if(quantity == 0)
 		quantity = 20;
-
+	
 	thePlayer.inv.AddAnItem('Alghoul bone marrow',quantity);
 	thePlayer.inv.AddAnItem('Amethyst dust',quantity);
 	thePlayer.inv.AddAnItem('Arachas eyes',quantity);
@@ -2970,35 +2709,35 @@ exec function addCraftingItem( item : int)
 		case 2:
 			thePlayer.inv.AddAnItem('Alghoul bone marrow',quantity);
 			break;
-
+		
 		case 3:
 			thePlayer.inv.AddAnItem('Amethyst dust',quantity);
 			break;
-
+		
 		case 4:
 			thePlayer.inv.AddAnItem('Arachas eyes',quantity);
 			break;
-
+		
 		case 5:
 			thePlayer.inv.AddAnItem('Arachas venom',quantity);
 			break;
-
+		
 		case 6:
 			thePlayer.inv.AddAnItem('Basilisk hide',quantity);
 			break;
-
+		
 		case 7:
 			thePlayer.inv.AddAnItem('Basilisk venom',quantity);
 			break;
-
+		
 		case 8:
 			thePlayer.inv.AddAnItem('Bear pelt',quantity);
 			break;
-
+		
 		case 9:
 			thePlayer.inv.AddAnItem('Berserker pelt',quantity);
 			break;
-
+		
 		case 10:
 			thePlayer.inv.AddAnItem('Coal',quantity);
 
@@ -3280,7 +3019,7 @@ exec function learnallschematics()
 	GetWitcherPlayer().AddCraftingSchematic('Silver sword 2 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Viper Silver sword schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Lynx School silver sword schematic');
-
+	
 	GetWitcherPlayer().AddCraftingSchematic('Boots 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Dwarven sword 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Boots 2 schematic');
@@ -3290,7 +3029,7 @@ exec function learnallschematics()
 	GetWitcherPlayer().AddCraftingSchematic('Boots 4 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Gnomish sword 2 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Boots 1 schematic');
-
+	
 	GetWitcherPlayer().AddCraftingSchematic('Pants 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Silver sword 3 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Pants 2 schematic');
@@ -3308,7 +3047,7 @@ exec function learnallschematics()
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Pants 4 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Elven silver sword 2 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Wolf School silver sword schematic');
-
+	
 	GetWitcherPlayer().AddCraftingSchematic('Gloves 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Dwarven silver sword 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Gloves 2 schematic');
@@ -3321,7 +3060,7 @@ exec function learnallschematics()
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Gloves 2 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Gloves 3 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Heavy Gloves 4 schematic');
-
+	
 	GetWitcherPlayer().AddCraftingSchematic('Lynx Armor schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Lynx Boots 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Lynx Gloves 1 schematic');
@@ -3338,7 +3077,7 @@ exec function learnallschematics()
 	GetWitcherPlayer().AddCraftingSchematic('Wolf Boots 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Wolf Gloves 1 schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Wolf Pants 1 schematic');
-
+	
 	GetWitcherPlayer().AddCraftingSchematic('Witcher Bear Jacket Upgrade schematic 1');
 	GetWitcherPlayer().AddCraftingSchematic('Witcher Bear Jacket Upgrade schematic 2');
 	GetWitcherPlayer().AddCraftingSchematic('Witcher Bear Jacket Upgrade schematic 3');
@@ -3386,8 +3125,8 @@ exec function learnallschematics()
 	GetWitcherPlayer().AddCraftingSchematic('Lynx School steel sword Upgrade schematic 3');
 	GetWitcherPlayer().AddCraftingSchematic('Lynx School silver sword Upgrade schematic ');
 	GetWitcherPlayer().AddCraftingSchematic('Lynx School silver sword Upgrade schematic 2');
-	GetWitcherPlayer().AddCraftingSchematic('Lynx School silver sword Upgrade schematic 3');
-
+	GetWitcherPlayer().AddCraftingSchematic('Lynx School silver sword Upgrade schematic 3'); 
+	
 	GetWitcherPlayer().AddCraftingSchematic('Steel ingot schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Dark iron ingot schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Meteorite ingot schematic');
@@ -3414,7 +3153,7 @@ exec function learnallschematics()
 	GetWitcherPlayer().AddCraftingSchematic('Leather schematic 8');
 	GetWitcherPlayer().AddCraftingSchematic('Leather straps schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Steel plate schematic');
-
+	
 	GetWitcherPlayer().AddCraftingSchematic('Rune stribog lesser schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Rune stribog schematic');
 	GetWitcherPlayer().AddCraftingSchematic('Rune stribog greater schematic');
@@ -3578,7 +3317,7 @@ exec function addschematicspants()
 
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
-
+	
 
 exec function addschematicsgloves()
 {
@@ -3591,7 +3330,7 @@ exec function addschematicsgloves()
 	thePlayer.inv.AddAnItem('Heavy Gloves 2 schematic',1);
 	thePlayer.inv.AddAnItem('Heavy Gloves 3 schematic',1);
 	thePlayer.inv.AddAnItem('Heavy Gloves 4 schematic',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3637,7 +3376,7 @@ exec function addschematicsarmor()
 	thePlayer.inv.AddAnItem('Heavy Armor 2 schematic',1);
 	thePlayer.inv.AddAnItem('Heavy Armor 3 schematic',1);
 	thePlayer.inv.AddAnItem('Heavy Armor 4 schematic',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3670,7 +3409,7 @@ exec function addschematicscomponents()
 	thePlayer.inv.AddAnItem('Leather schematic 8',1);
 	thePlayer.inv.AddAnItem('Leather straps schematic',1);
 	thePlayer.inv.AddAnItem('Steel plate schematic',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3741,8 +3480,8 @@ exec function addschematicsupgrades()
 	thePlayer.inv.AddAnItem('Lynx School steel sword Upgrade schematic 3',1);
 	thePlayer.inv.AddAnItem('Lynx School silver sword Upgrade schematic ',1);
 	thePlayer.inv.AddAnItem('Lynx School silver sword Upgrade schematic 2',1);
-	thePlayer.inv.AddAnItem('Lynx School silver sword Upgrade schematic 3',1);
-
+	thePlayer.inv.AddAnItem('Lynx School silver sword Upgrade schematic 3',1); 
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3757,7 +3496,7 @@ exec function addschematicsbolts()
 	thePlayer.inv.AddAnItem('Target Point Bolt schematic',1);
 	thePlayer.inv.AddAnItem('Split Bolt schematic',1);
 	thePlayer.inv.AddAnItem('Explosive Bolt schematic',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3796,7 +3535,7 @@ exec function addmutagens()
 	thePlayer.inv.AddAnItem('Mutagen 26',1);
 	thePlayer.inv.AddAnItem('Mutagen 27',1);
 	thePlayer.inv.AddAnItem('Mutagen 28',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3864,7 +3603,7 @@ exec function addmutagenrecipes()
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Mutagen 26');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Mutagen 27');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Mutagen 28');
-
+	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe Lesser Mutagen Red to Blue');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe Lesser Mutagen Red to Green');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe Lesser Mutagen Blue to Red');
@@ -3921,7 +3660,7 @@ exec function addrecipesoils()
 	thePlayer.inv.AddAnItem('Recipe for Relic Oil 1',1);
 	thePlayer.inv.AddAnItem('Recipe for Relic Oil 2',1);
 	thePlayer.inv.AddAnItem('Recipe for Relic Oil 3',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3950,7 +3689,7 @@ exec function addrecipesbombs()
 	thePlayer.inv.AddAnItem('Recipe for Silver Dust Bomb 2',1);
 	thePlayer.inv.AddAnItem('Recipe for Silver Dust Bomb 3',1);
 	thePlayer.inv.AddAnItem('Recipe for White Frost 1',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -3993,7 +3732,7 @@ exec function addrecipespotions()
 	thePlayer.inv.AddAnItem('Recipe for Thunderbolt 1',1);
 	thePlayer.inv.AddAnItem('Recipe for Thunderbolt 2',1);
 	thePlayer.inv.AddAnItem('Recipe for Thunderbolt 3',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -4013,7 +3752,7 @@ exec function addrecipespotions2()
 	thePlayer.inv.AddAnItem('Recipe for Dwarven spirit 1',1);
 	thePlayer.inv.AddAnItem('Recipe for Alcohest 1',1);
 	thePlayer.inv.AddAnItem('Recipe for White gull 1',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -4022,7 +3761,7 @@ exec function addherbs(optional cnt : int, optional noMenu : bool)
 {
 	if(cnt == 0)
 		cnt = 1;
-
+		
 	thePlayer.inv.AddAnItem('Allspice root',cnt);
 	thePlayer.inv.AddAnItem('Arenaria',cnt);
 	thePlayer.inv.AddAnItem('Balisse fruit',cnt);
@@ -4112,7 +3851,7 @@ exec function addkeys()
 	thePlayer.inv.AddAnItem('lw_tm12_refugee_camp_key',1);
 	thePlayer.inv.AddAnItem('lw_gr13_slavers_key',1);
 	thePlayer.inv.AddAnItem('lw_de6_scavenger_key',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -4401,7 +4140,7 @@ function additemrunesupgrades()
 	thePlayer.inv.AddAnItem('Rune elemental lesser',1);
 	thePlayer.inv.AddAnItem('Rune elemental',1);
 	thePlayer.inv.AddAnItem('Rune elemental greater',1);
-
+	
 }
 
 function additemmonstrous()
@@ -4573,7 +4312,7 @@ exec function addjunk()
 	thePlayer.inv.AddAnItem('Ornate silver shield replica',1);
 	thePlayer.inv.AddAnItem('Ornate silver sword replica',1);
 	thePlayer.inv.AddAnItem('Parchment',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -4610,7 +4349,7 @@ exec function addjunk2()
 	thePlayer.inv.AddAnItem('q305_painting_of_hemmelfart',1);
 	thePlayer.inv.AddAnItem('mq3016_bards_belongings',1);
 	thePlayer.inv.AddAnItem('sq202_tableware',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -4636,7 +4375,7 @@ exec function addquestitems1()
 	thePlayer.inv.AddAnItem('q105_witch_bones',1);
 	thePlayer.inv.AddAnItem('q106_magic_communicator',1);
 	thePlayer.inv.AddAnItem('q106_anabelle_remains',1);
-	thePlayer.inv.AddAnItem('q106_anabelle_vial',1);
+	thePlayer.inv.AddAnItem('q106_anabelle_vial',1);	
 	thePlayer.inv.AddAnItem('q107_doll1',1);
 	thePlayer.inv.AddAnItem('q107_doll2',1);
 	thePlayer.inv.AddAnItem('q107_doll3',1);
@@ -4789,7 +4528,7 @@ exec function addquestitems1()
 	thePlayer.inv.AddAnItem('mq2006_key_2',1);
 	thePlayer.inv.AddAnItem('mq2030_shawl',1);
 	thePlayer.inv.AddAnItem('mq2033_tp_stone',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -4993,10 +4732,10 @@ exec function addquestitems2()
 	thePlayer.inv.AddAnItem('mq2039_Honeycomb',1);
 	thePlayer.inv.AddAnItem('mq2048_guide_notes',1);
 	thePlayer.inv.AddAnItem('mq2048_waxed_letters',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
-
+	
 
 
 exec function addquestitems3()
@@ -5044,7 +4783,7 @@ exec function addquestitems3()
 	thePlayer.inv.AddAnItem('sq402_hydragenum',1);
 	thePlayer.inv.AddAnItem('sq402_aether',1);
 	thePlayer.inv.AddAnItem('sq402_quebrith',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -5121,7 +4860,7 @@ exec function addtreasurehuntitems()
 	thePlayer.inv.AddAnItem('th059_map_bear_steel_sword_upgrade1',1);
 	thePlayer.inv.AddAnItem('th060_map_bear_steel_sword_upgrade2',1);
 	thePlayer.inv.AddAnItem('th061_map_bear_steel_sword_upgrade3',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -5173,7 +4912,7 @@ exec function addcharacterdecorations()
 	thePlayer.inv.AddAnItem('Guest mask woman 15',1);
 	thePlayer.inv.AddAnItem('Guest mask woman 16',1);
 	thePlayer.inv.AddAnItem('Guest mask woman 17',1);
-
+	
 	theGame.RequestMenuWithBackground( 'InventoryMenu', 'CommonMenu' );
 }
 
@@ -5181,7 +4920,7 @@ exec function addcharacterdecorations()
 exec function recycle()
 {
 	var id : array<SItemUniqueId>;
-
+	
 	id = thePlayer.inv.AddAnItem('Witcher Silver Sword');
 	thePlayer.inv.RecycleItem( id[0], ECL_Journeyman );
 }
@@ -5205,11 +4944,11 @@ exec function dressmeup( i : int)
 {
 	var inv : CInventoryComponent = thePlayer.inv;
 	var ids : array<SItemUniqueId>;
-
+	
 	switch(i)
 	{
 		case 0:
-			ids = inv.AddAnItem('Plain Shirt');
+			ids = inv.AddAnItem('Plain Shirt');		
 			break;
 		case 1:
 			ids = inv.AddAnItem('Worn Leather Boots');
@@ -5221,14 +4960,14 @@ exec function dressmeup( i : int)
 			ids = inv.AddAnItem('Worn Leather Gloves');
 			break;
 	}
-
+	
 	thePlayer.EquipItem(ids[0]);
 }
 
 exec function undressme( i : int )
 {
 	var inv : CInventoryComponent = thePlayer.inv;
-
+	
 	if( i == 0 )
 	{
 		inv.RemoveItemByName('Plain Shirt', 1 );
@@ -5253,7 +4992,7 @@ exec function healme(optional perc : int)
 
 	if(perc <= 0)
 		perc = 100;
-
+		
 	max = thePlayer.GetStatMax(BCS_Vitality);
 	current = thePlayer.GetStat(BCS_Vitality);
 	thePlayer.ForceSetStat(BCS_Vitality, MinF(max, current + max * perc / 100));
@@ -5279,9 +5018,9 @@ exec function hitme(d : int, optional playHitAnim : bool)
 	action = new W3DamageAction in theGame.damageMgr;
 	action.Initialize(NULL, thePlayer, NULL, 'console', EHRT_Light, CPS_Undefined, false, false, false, false);
 	action.AddDamage(theGame.params.DAMAGE_NAME_DIRECT, (thePlayer.GetStatMax( BCS_Vitality )*d)/100);
-
+	
 	action.SetSuppressHitSounds(true);
-
+	
 	if ( playHitAnim )
 	{
 		action.SetHitAnimationPlayType(EAHA_ForceYes);
@@ -5290,7 +5029,7 @@ exec function hitme(d : int, optional playHitAnim : bool)
 	{
 		action.SetHitAnimationPlayType(EAHA_ForceNo);
 	}
-
+	
 	theGame.damageMgr.ProcessAction(action);
 	delete action;
 }
@@ -5302,9 +5041,9 @@ exec function hittarget(d : int, optional playHitAnim : bool)
 	action = new W3DamageAction in theGame.damageMgr;
 	action.Initialize(NULL, thePlayer.GetTarget(), NULL, 'console', EHRT_Light, CPS_Undefined, false, false, false, false);
 	action.AddDamage(theGame.params.DAMAGE_NAME_DIRECT, (thePlayer.GetTarget().GetMaxHealth() * d /100) );
-
+	
 	action.SetSuppressHitSounds(true);
-
+	
 	if ( playHitAnim )
 	{
 		action.SetHitAnimationPlayType(EAHA_ForceYes);
@@ -5313,7 +5052,7 @@ exec function hittarget(d : int, optional playHitAnim : bool)
 	{
 		action.SetHitAnimationPlayType(EAHA_ForceNo);
 	}
-
+	
 	theGame.damageMgr.ProcessAction(action);
 	delete action;
 }
@@ -5327,34 +5066,34 @@ exec function hitstamina(d : int)
 
 
 exec function drinkpots( index : int)
-{
+{	
 	var witcher : W3PlayerWitcher;
-
+	
 	witcher = GetWitcherPlayer();
 	switch( index )
 	{
-		case 1 :
+		case 1 : 
 		{
-			witcher.inv.AddAnItem('White Honey 1',10);
+			witcher.inv.AddAnItem('White Honey 1',10);	
+			break;
+		}	
+		case 2 : 
+		{
+			witcher.inv.AddAnItem('Full Moon 1',10);	
 			break;
 		}
-		case 2 :
-		{
-			witcher.inv.AddAnItem('Full Moon 1',10);
-			break;
-		}
-		case 3 :
+		case 3 : 
 		
-		case 4 :
+		case 4 : 
 		
 		case 5 :
 		{
-			witcher.inv.AddAnItem('White Honey 1',10);
-			witcher.inv.AddAnItem('Cat 1',10);
+			witcher.inv.AddAnItem('White Honey 1',10);	
+			witcher.inv.AddAnItem('Cat 1',10);	
 			
 			break;
 		}
-	}
+	}	
 }
 
 exec function drinkpot(potionName : name, slot : int)
@@ -5365,8 +5104,8 @@ exec function drinkpot(potionName : name, slot : int)
 
 	theGame.GetDefinitionsManager().GetItemAttributeValueNoRandom(potionName, true, 'ammo', min, max);
 	ammo = (int)CalculateAttributeValue(GetAttributeRandomizedValue(min, max));
-	ids = thePlayer.inv.AddAnItem(potionName, ammo);
-
+	ids = thePlayer.inv.AddAnItem(potionName, ammo);	
+	
 	switch(slot)
 	{
 		case 1 : slot = EES_Potion1; break;
@@ -5374,7 +5113,7 @@ exec function drinkpot(potionName : name, slot : int)
 		case 3 : slot = EES_Potion3; break;
 		case 4 : slot = EES_Potion4; break;
 	}
-
+	
 	GetWitcherPlayer().EquipItemInGivenSlot(ids[0], slot, false);
 }
 
@@ -5382,26 +5121,26 @@ exec function expots(optional isDoubleTap : bool)
 {
 	var witcher : W3PlayerWitcher;
 	var ids : array<SItemUniqueId>;
-
+	
 	witcher = GetWitcherPlayer();
-
+	
 	ids = witcher.inv.AddAnItem('Apple',100);
 	witcher.EquipItemInGivenSlot(ids[0], EES_Potion1, false);
-
+	
 	ids.Clear();
 	ids = witcher.inv.AddAnItem('Tawny Owl 3');
 	witcher.EquipItemInGivenSlot(ids[0], EES_Potion3, false);
-
+	
 	ids.Clear();
 	ids = witcher.inv.AddAnItem('Swallow 3');
 	witcher.EquipItemInGivenSlot(ids[0], EES_Potion2, false);
-
+	
 	ids.Clear();
 	ids = witcher.inv.AddAnItem('Thunderbolt 3');
 	witcher.EquipItemInGivenSlot(ids[0], EES_Potion4, false);
-
+	
 	witcher.inv.AddAnItem('Dwarven spirit',100);
-
+	
 	thePlayer.GetInputHandler().SetPotionSelectionMode(!isDoubleTap);
 }
 
@@ -5430,8 +5169,8 @@ exec function addalch2()
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Tawny Owl 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Thunderbolt 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Honey 2');
-	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Raffards Decoction 2');
-
+	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Raffards Decoction 2');	
+	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Anthropomorph Oil 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Cursed Oil 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Hanged Man Venom 2');
@@ -5441,20 +5180,20 @@ exec function addalch2()
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Necrophage Oil 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Specter Oil 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Vampire Oil 2');
-
+	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Dancing Star 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Devils Puffball 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Dwimeritum Bomb 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Dragons Dream 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Grapeshot 2');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Samum 2');
-
+	
 	LogChannel('AlchemyTimers', "addalch2 <<<<<<<<");
 }
 exec function addalch3()
 {
 	LogChannel('AlchemyTimers', "addalch3 >>>>>>>>");
-
+	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Black Blood 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Blizzard 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Cat 3');
@@ -5466,8 +5205,8 @@ exec function addalch3()
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Tawny Owl 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Thunderbolt 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Honey 3');
-	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Raffards Decoction 3');
-
+	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Raffards Decoction 3');	
+	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Anthropomorph Oil 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Cursed Oil 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Hanged Man Venom 3');
@@ -5477,14 +5216,14 @@ exec function addalch3()
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Necrophage Oil 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Specter Oil 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Vampire Oil 3');
-
+	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Dancing Star 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Devils Puffball 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Dwimeritum Bomb 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Dragons Dream 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Grapeshot 3');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Samum 3');
-
+	
 	LogChannel('AlchemyTimers', "addalch3 <<<<<<<<");
 }
 
@@ -5516,8 +5255,8 @@ exec function addalch(optional quantity : int )
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Thunderbolt 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Gull 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Honey 1');
-	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Raffards Decoction 1');
-
+	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Raffards Decoction 1');	
+	
 	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Beast Oil 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Cursed Oil 1');
@@ -5531,7 +5270,7 @@ exec function addalch(optional quantity : int )
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Draconide Oil 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Ogre Oil 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Relic Oil 1');
-
+	
 	
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Dancing Star 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Devils Puffball 1');
@@ -5541,9 +5280,9 @@ exec function addalch(optional quantity : int )
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Samum 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for Silver Dust Bomb 1');
 	GetWitcherPlayer().AddAlchemyRecipe('Recipe for White Frost 1');
-
+	
 	GetWitcherPlayer().AddAlchemyRecipe('q305_antidote_for_venom_formula');
-
+	
 	LogChannel('AlchemyTimers', "addalch ||||||||1");
 
 	
@@ -5551,13 +5290,13 @@ exec function addalch(optional quantity : int )
 	main = dm.GetCustomDefinition('alchemy_recipes');
 
 	LogChannel('AlchemyTimers', "addalch ||||||||2");
-
-
+	
+	
 	for(i=0; i<main.subNodes.Size(); i+=1)
 	{
-		ingredients = dm.GetCustomDefinitionSubNode(main.subNodes[i],'ingredients');
+		ingredients = dm.GetCustomDefinitionSubNode(main.subNodes[i],'ingredients');					
 		for(k=0; k<ingredients.subNodes.Size(); k+=1)
-		{
+		{		
 			if(dm.GetCustomNodeAttributeValueName(ingredients.subNodes[k], 'item_name', tmpName))
 			{
 				if(!ing.Contains(tmpName))
@@ -5565,9 +5304,9 @@ exec function addalch(optional quantity : int )
 			}
 		}
 	}
-
+	
 	LogChannel('AlchemyTimers', "addalch ||||||||3");
-
+	
 	for(i=0; i<ing.Size(); i+=1)
 	{
 		if (dm.ItemHasTag(ing[i], 'MutagenIngredient'))
@@ -5579,7 +5318,7 @@ exec function addalch(optional quantity : int )
 			thePlayer.inv.AddAnItem(ing[i],quantity);
 		}
 	}
-
+		
 	LogChannel('AlchemyTimers', "addalch <<<<<<<<");
 }
 
@@ -5592,19 +5331,19 @@ function PrintInventory(optional onlyEquipped : bool)
 	var itemName : name;
 	var dm : CDefinitionsManagerAccessor;
 	var witcher : W3PlayerWitcher;
-
-	Log("==== Showing inventory ====");
+	
+	Log("==== Showing inventory ====");	
 	dm = theGame.GetDefinitionsManager();
 	thePlayer.inv.GetAllItems(items);
 	witcher = GetWitcherPlayer();
-
+	
 	for(i=0; i<items.Size(); i+=1)
-	{
+	{	
 		if(onlyEquipped && !witcher.IsItemEquipped(items[i]))
 			continue;
-
+			
 		itemName = thePlayer.inv.GetItemName(items[i]);
-
+			
 		if(onlyEquipped)
 		{
 			Log(witcher.inv.GetItemQuantity(items[i]) + " x " + itemName + ", " + witcher.GetItemSlot(items[i]));
@@ -5614,7 +5353,7 @@ function PrintInventory(optional onlyEquipped : bool)
 			printables.PushBack(itemName);
 		}
 	}
-
+	
 	if(!onlyEquipped)
 	{
 		for(i=0; i<printables.Size(); i+=1)
@@ -5623,7 +5362,7 @@ function PrintInventory(optional onlyEquipped : bool)
 			Log(quantity + " x " + printables[i]);
 		}
 	}
-
+	
 	Log("");
 }
 
@@ -5637,7 +5376,7 @@ function PrintInventory2()
 	var itemCategory	: name;
 	var itemTagsArr		: array< name >;
 	var itemTags		: string;
-
+	
 	var listName		: array< string >;
 	var listQuantity	: array< string >;
 	var listCategory	: array< string >;
@@ -5647,15 +5386,15 @@ function PrintInventory2()
 	var listQuantityLen	: int;
 	var listCategoryLen	: int;
 	var listTagsLen		: int;
-
+	
 	var line			: string;
 
 	LogItems("==== Showing inventory ==========================================================");
-
+	
 	inv = thePlayer.inv;
 	inv.GetAllItems( items );
 	for( i = 0; i < items.Size(); i += 1 )
-	{
+	{	
 		itemName     = inv.GetItemName( items[ i ] );
 		itemQuantity = inv.GetItemQuantity( items[ i ] );
 		itemCategory = inv.GetItemCategory( items[ i ] );
@@ -5674,7 +5413,7 @@ function PrintInventory2()
 		listCategory.PushBack( "[" + itemCategory + "] " );
 		listTags.PushBack(     "[" + itemTags + "] " );
 	}
-
+	
 	for ( i = 0; i < listName.Size(); i += 1 )
 	{
 		if ( listNameLen < StrLen( listName[ i ] ) )
@@ -5740,9 +5479,9 @@ function PrintInventory2Item( index : int )
 	var itemQuantity	: int;
 	var itemCategory	: name;
 	var itemDurability  : float;
-
+	
 	LogItems("==== Showing inventory item =====================================================");
-
+	
 	inv = thePlayer.inv;
 	inv.GetAllItems( items );
 	if ( index >= 0 && index < items.Size() )
@@ -5770,24 +5509,24 @@ exec function craft(schemName : name, level : int, type : int)
 	var craftedItemId : SItemUniqueId;
 	var craftsmanDef : SCraftsman;
 	var error : ECraftingException;
-
+	
 	LogCrafting("--==  Starting craft test  ==--");
-
+	
 	GetWitcherPlayer().AddCraftingSchematic(schemName);
-
+	
 	
 	master = new W3CraftsmanComponent in theGame;
 	craftsmanDef.level = level;
 	craftsmanDef.type = type;
 	master.craftsmanData.PushBack(craftsmanDef);
-
+	
 	cftman = new W3CraftingManager in theGame;
 	cftman.Init(master);
 	error = cftman.Craft(schemName, craftedItemId);
-
+	
 	LogCrafting("Craft test: result is <<" + error + ">>");
 	LogCrafting("");
-
+		
 	delete master;
 	delete cftman;
 }
@@ -5796,7 +5535,7 @@ exec function testuroboros()
 {
 	var maskIds : array<SItemUniqueId>;
 	var maskId : SItemUniqueId;
-
+	
 	maskIds = thePlayer.inv.AddAnItem('q203_eyeofloki');
 	maskId = maskIds[0];
 	FactsAdd("q203_eyeofloki_active");
@@ -5807,7 +5546,7 @@ exec function unequipitem(n : name)
 {
 	var ids : array<SItemUniqueId>;
 	var id : SItemUniqueId;
-
+	
 	ids = thePlayer.inv.GetItemsIds(n);
 	id = ids[0];
 	thePlayer.UnequipItem(id);
@@ -5827,7 +5566,7 @@ exec function equipitem(n : name)
 {
 	var ids : array<SItemUniqueId>;
 	var id : SItemUniqueId;
-
+	
 	ids = thePlayer.inv.GetItemsIds(n);
 	id = ids[0];
 	thePlayer.EquipItem(id);
@@ -5838,14 +5577,14 @@ exec function useoil(n : name, optional type : int)
 	var ids : array<SItemUniqueId>;
 	var swordId : SItemUniqueId;
 	var slot : EEquipmentSlots;
-
+	
 	if(type == 0)
 		slot = EES_SteelSword;
 	if(type == 1)
 		slot = EES_SilverSword;
 
 	ids = thePlayer.inv.AddAnItem(n);
-
+	
 	if(GetWitcherPlayer())
 	{
 		GetWitcherPlayer().GetItemEquippedOnSlot(slot, swordId);
@@ -5854,7 +5593,7 @@ exec function useoil(n : name, optional type : int)
 	{
 		swordId = ((W3ReplacerCiri)thePlayer).GetEquippedSword(!type);
 	}
-
+	
 	if(swordId != GetInvalidUniqueId())
 		thePlayer.ApplyOil(ids[0], swordId);
 }
@@ -5872,7 +5611,7 @@ function oilstats_internal( steel : bool )
 	var oils : array< W3Effect_Oil >;
 	var str : string;
 	var i : int;
-
+	
 	if( steel )
 	{
 		slot = EES_SteelSword;
@@ -5883,7 +5622,7 @@ function oilstats_internal( steel : bool )
 		slot = EES_SilverSword;
 		str = "Silver";
 	}
-
+	
 	if(GetWitcherPlayer().GetItemEquippedOnSlot(slot, id))
 	{
 		oils = GetWitcherPlayer().inv.GetOilsAppliedOnItem( id );
@@ -5892,7 +5631,7 @@ function oilstats_internal( steel : bool )
 			LogStats( "=============== oil stats ==============================" );
 			LogStats( str + " sword has <<" + oils[ i ].GetOilItemName() + ">> oil, with " + oils[ i ].GetAmmoCurrentCount() + "/" + oils[ i ].GetAmmoMaxCount() + " charges left");
 		}
-	}
+	}	
 }
 
 exec function addSlot()
@@ -5958,7 +5697,7 @@ exec function itemattributes(itemName : name)
 	inv = thePlayer.inv;
 	ids = inv.GetItemsIds(itemName);
 	inv.GetItemAttributes(ids[0], atts);
-
+	
 	LogItems("Logging attributes of item <<" + itemName + ">>");
 	for(i=0; i<atts.Size(); i+=1)
 		LogItems(atts[i]);
@@ -5978,13 +5717,13 @@ exec function additem(itemName : name, optional count : int, optional equip : bo
 			for(i=0; i<ids.Size(); i+=1)
 				thePlayer.inv.SingletonItemSetAmmo(ids[i], thePlayer.inv.SingletonItemGetMaxAmmo(ids[i]));
 		}
-
+		
 		if(ids.Size() == 0)
 		{
 			LogItems("exec function additem: failed to add item <<" + itemName + ">>, most likely wrong item name");
 			return;
 		}
-
+		
 		if(equip)
 			thePlayer.EquipItem(ids[0]);
 	}
@@ -6006,7 +5745,7 @@ exec function addfact(factID : string, optional value : int, optional expires : 
 {
 	var val : int;
 	var exp : int;
-
+	
 	if(value == 0)
 		val = 1;
 	else
@@ -6016,7 +5755,7 @@ exec function addfact(factID : string, optional value : int, optional expires : 
 	    exp = -1;
 	else
 		exp = expires;
-
+	
 	FactsAdd(factID, val, exp);
 }
 
@@ -6060,7 +5799,7 @@ function god_internal()
 {
 	if( !thePlayer.IsInvulnerable() )
 	{
-		thePlayer.SetImmortalityMode( AIM_Invulnerable, AIC_Cheat, true );
+		thePlayer.SetImmortalityMode( AIM_Invulnerable, AIC_Default, true );
 		thePlayer.SetCanPlayHitAnim(false);
 		thePlayer.AddBuffImmunity_AllNegative('god', true);
 		StaminaBoyInternal(true);
@@ -6068,7 +5807,7 @@ function god_internal()
 	}
 	else
 	{
-		thePlayer.SetImmortalityMode( AIM_None, AIC_Cheat, true );
+		thePlayer.SetImmortalityMode( AIM_None, AIC_Default, true );	
 		thePlayer.SetCanPlayHitAnim(true);
 		thePlayer.RemoveBuffImmunity_AllNegative('god');
 		StaminaBoyInternal(false);
@@ -6085,10 +5824,10 @@ exec function god2()
 function god2_internal()
 {
 	var isImmortal : bool;
-
+	
 	isImmortal = thePlayer.IsImmortal();
 	thePlayer.CheatGod2( !isImmortal );
-
+	
 	if( isImmortal )
 	{
 		LogCheats( "God is now OFF" );
@@ -6101,21 +5840,21 @@ function god2_internal()
 
 
 exec function god3()
-{
+{	
 	thePlayer.SetImmortalityMode(AIM_Unconscious,AIC_Default);
 }
 
 
 exec function eatapple()
-{
+{		
 	var ids : array<SItemUniqueId>;
-
+	
 	ids = thePlayer.inv.AddAnItem( 'Apple' );
 	thePlayer.ConsumeItem(ids[0]);
 }
 
 exec function gametestdummy() : bool
-{
+{		
 	return false;
 }
 
@@ -6146,11 +5885,6 @@ exec function learnskill(skillName : name)
 	}
 }
 
-exec function learnskillId(skill:ESkill)
-{
-	thePlayer.AddSkill(skill);
-}
-
 exec function stats(tag : name)
 {
 	var actor : CActor;
@@ -6161,19 +5895,19 @@ exec function stats(tag : name)
 		LogStats("Cannot find actor with tag <<" + tag + ">>");
 		return;
 	}
-
+	
 	Debug_stats(actor);
 }
 
 exec function statstarget()
 {
 	var target : CNewNPC;
-	target = (CNewNPC)thePlayer.GetTarget();
-
+	target = (CNewNPC)thePlayer.GetTarget();	
+	
 	if( target )
 		Debug_stats( target );
 	else
-		LogStats("statstarget: No target!");
+		LogStats("statstarget: No target!");		
 }
 
 exec function statsplayer()
@@ -6194,7 +5928,7 @@ exec function logstats()
 	var itemCategory	: name;
 	var itemTagsArr		: array< name >;
 	var itemTags		: string;
-
+	
 	var listName		: array< string >;
 	var listQuantity	: array< string >;
 	var listCategory	: array< string >;
@@ -6205,19 +5939,19 @@ exec function logstats()
 	var listCategoryLen	: int;
 	var listTagsLen		: int;
 	var temp			: bool;
-
-	var line			: string;
-
+	
+	var line			: string;	
+	
 	LogStats("======================================================================================================");
 	LogStats("================================= BALANCE STATS LOG - STARTS HERE ====================================");
 	LogStats("======================================================================================================");
 	LogStats("");
-	LogStats("CURRENT DIFFICULTY LEVEL :");
-	LogStats(theGame.GetDifficultyMode() );
+	LogStats("CURRENT DIFFICULTY LEVEL :");	
+	LogStats(theGame.GetDifficultyMode() );	
 	LogStats("");
-	LogStats("EXPERIENCE POINTS MULTIPLIERS :");
-	LogStats("KILLS = BASE_EPERIENCE *" + theGame.expGlobalMod_kills );
-	LogStats("QUESTS = BASE_EXPERIENCE *" + theGame.expGlobalMod_quests );
+	LogStats("EXPERIENCE POINTS MULTIPLIERS :");	
+	LogStats("KILLS = BASE_EPERIENCE *" + theGame.expGlobalMod_kills );	
+	LogStats("QUESTS = BASE_EXPERIENCE *" + theGame.expGlobalMod_quests );	
 	LogStats("");
 	LogStats("------------------------------------------------------------------------------------------------------");
 	LogStats(" STATISTICS");
@@ -6237,7 +5971,7 @@ exec function logstats()
 		if(thePlayer.HasLearnedSkill(i))
 		{
 			bullshit = i;
-			if ( thePlayer.IsSkillEquipped(i) )
+			if ( thePlayer.IsSkillEquipped(i) ) 
 			LogStats(GetLocStringByKeyExt(thePlayer.GetSkillLocalisationKeyName( bullshit ) ) + " ("+bullshit+")");
 		}
 	}
@@ -6250,7 +5984,7 @@ exec function logstats()
 		if(thePlayer.HasLearnedSkill(i))
 		{
 			bullshit = i;
-			if ( thePlayer.IsSkillEquipped(i) )
+			if ( thePlayer.IsSkillEquipped(i) ) 
 			LogStats(GetLocStringByKeyExt(thePlayer.GetSkillLocalisationKeyName( bullshit ) ) + " ("+bullshit+")");
 		}
 	}
@@ -6263,7 +5997,7 @@ exec function logstats()
 		if(thePlayer.HasLearnedSkill(i))
 		{
 			bullshit = i;
-			if ( !thePlayer.IsSkillEquipped(i) )
+			if ( !thePlayer.IsSkillEquipped(i) ) 
 			LogStats(GetLocStringByKeyExt(thePlayer.GetSkillLocalisationKeyName( bullshit ) ) + " ("+bullshit+") | isEquipped=" + thePlayer.IsSkillEquipped(i) + " | canUse=" + thePlayer.CanUseSkill(i));
 		}
 	}
@@ -6276,7 +6010,7 @@ exec function logstats()
 
 	inv = thePlayer.inv;
 	LogStats("GENERAL STATS:");
-	LogStats("CAPACITY - " + RoundF(GetWitcherPlayer().GetEncumbrance()) + "/" + RoundF(GetWitcherPlayer().GetMaxRunEncumbrance(temp)) );
+	LogStats("CAPACITY - " + RoundF(GetWitcherPlayer().GetEncumbrance()) + "/" + RoundF(GetWitcherPlayer().GetMaxRunEncumbrance(temp)) );	
 	LogStats("CROWNS (money) - " + inv.GetMoney() );
 	LogStats("");
 	LogStats("CUREENTLY EQUIPPED ITEMS:");
@@ -6287,12 +6021,12 @@ exec function logstats()
 			{
 					LogStats( StrUpper(inv.GetItemCategory(items[i]))  + ": " + inv.GetItemName( items[i] ));
 			}
-		}
-
+		}	
+	
 	LogStats("");
 	LogStats("ALL ITEMS:");
 	for( i = 0; i < items.Size(); i += 1 )
-	{
+	{	
 		itemName     = inv.GetItemName( items[ i ] );
 		itemQuantity = inv.GetItemQuantity( items[ i ] );
 		itemCategory = inv.GetItemCategory( items[ i ] );
@@ -6311,7 +6045,7 @@ exec function logstats()
 		listCategory.PushBack( "[" + itemCategory + "] " );
 		listTags.PushBack(     "[" + itemTags + "] " );
 	}
-
+	
 	for ( i = 0; i < listName.Size(); i += 1 )
 	{
 		if ( listNameLen < StrLen( listName[ i ] ) )
@@ -6366,7 +6100,7 @@ exec function logstats()
 
 		LogStats(line );
 	}
-	LogStats("");
+	LogStats("");	
 	LogStats("------------------------------------------------------------------------------------------------------");
 	LogStats(" ABILITIES LIST");
 	LogStats("------------------------------------------------------------------------------------------------------");
@@ -6387,13 +6121,13 @@ function Debug_stats(actor : CActor)
 	var buffs : array<CBaseGameplayEffect>;
 	var npc : CNewNPC;
 	var tempString : string;
-	var invChannels : array<EActorImmortalityChannel>;
-
+	var invChannels : array<EActorImmortalityChanel>;
+	
 	npc = (CNewNPC)actor;
-
+	
 	LogStats("");
 	LogStats("  ----------------------------== Printing stats for <<" + actor + ">> ==----------------------------");
-
+	
 	
 	tags = npc.GetTags();
 	size = tags.Size();
@@ -6403,7 +6137,7 @@ function Debug_stats(actor : CActor)
 		tempString += NameToString(tags[i]) + ", ";
 	}
 	LogStats(tempString);
-
+	
 	
 	LogStats("isAlive = " + actor.IsAlive());
 	LogStats(" ");
@@ -6416,7 +6150,7 @@ function Debug_stats(actor : CActor)
 		LogStats(theGame.params.DIFFICULTY_DMG_MULTIPLIER + " = " + NoTrailZeros(CalculateAttributeValue(actor.GetAttributeValue(theGame.params.DIFFICULTY_DMG_MULTIPLIER))) );
 		LogStats(" ");
 	}
-
+	
 	
 	if(actor == GetWitcherPlayer())
 	{
@@ -6433,40 +6167,40 @@ function Debug_stats(actor : CActor)
 		LogStats("Level: " + (int)CalculateAttributeValue(actor.GetAttributeValue('level',,true)));
 		LogStats("True Level: " + ((CNewNPC)actor).GetLevelFromLocalVar());
 	}
-
+	
 	
 	if(npc)
 	{
 		LogStats("XP for killing: " + npc.CalculateExperiencePoints(true));
 		LogStats("");
 	}
-
+	
 	
 	LogStats( SpaceFill(BCS_Vitality,12) + " = " +  SpaceFill( NoTrailZeros(actor.GetStat(BCS_Vitality)), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Vitality)), 7, ESFM_JustifyRight) );
 	LogStats( SpaceFill(BCS_Essence,12) + " = " + SpaceFill( NoTrailZeros(actor.GetStat(BCS_Essence)), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Essence)), 7, ESFM_JustifyRight) );
-
+	
 	stamina = actor.GetStat(BCS_Stamina);
 	LogStats( SpaceFill(BCS_Stamina,12) + " = " + SpaceFill( NoTrailZeros(stamina), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Stamina)), 7, ESFM_JustifyRight) );
-
+	
 	if(actor == GetWitcherPlayer())
 	{
 		toxicityNoLock = actor.GetStat(BCS_Toxicity, true);
 		lockedToxicity = actor.GetStat(BCS_Toxicity) - toxicityNoLock;
 		LogStats( SpaceFill(BCS_Toxicity,12) + " = " + SpaceFill( NoTrailZeros(toxicityNoLock), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Toxicity)), 7, ESFM_JustifyRight) + ", lockedToxicity = " + NoTrailZeros(lockedToxicity) );
-	}
-
+	}	
+	
 	LogStats( SpaceFill(BCS_Focus,12) + " = " + SpaceFill( NoTrailZeros(actor.GetStat(BCS_Focus)), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Focus)), 7, ESFM_JustifyRight) );
 	LogStats( SpaceFill(BCS_Morale,12) + " = " + SpaceFill( NoTrailZeros(actor.GetStat(BCS_Morale)), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Morale)), 7, ESFM_JustifyRight) );
-	LogStats( SpaceFill(BCS_Air,12) + " = " + SpaceFill( NoTrailZeros(actor.GetStat(BCS_Air)), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Air)), 7, ESFM_JustifyRight) );
+	LogStats( SpaceFill(BCS_Air,12) + " = " + SpaceFill( NoTrailZeros(actor.GetStat(BCS_Air)), 7, ESFM_JustifyRight) + " / " + SpaceFill( NoTrailZeros(actor.GetStatMax(BCS_Air)), 7, ESFM_JustifyRight) );	
 	LogStats(" ");
-
+	
 	
 	val = actor.GetPowerStatValue(CPS_AttackPower);
 	LogStats("attack power: Base = " + SpaceFill(NoTrailZeros(val.valueBase), 4, ESFM_JustifyRight) + ", Mult = " + SpaceFill(NoTrailZeros(val.valueMultiplicative), 4, ESFM_JustifyRight) + ", Add = " + SpaceFill(NoTrailZeros(val.valueAdditive), 4, ESFM_JustifyRight) );
 	val = actor.GetPowerStatValue(CPS_SpellPower);
 	LogStats("spell power : Base = " + SpaceFill(NoTrailZeros(val.valueBase), 4, ESFM_JustifyRight) + ", Mult = " + SpaceFill(NoTrailZeros(val.valueMultiplicative), 4, ESFM_JustifyRight) + ", Add = " + SpaceFill(NoTrailZeros(val.valueAdditive), 4, ESFM_JustifyRight) );
 	LogStats(" ");
-
+	
 	
 	if(actor != thePlayer)
 	{
@@ -6477,11 +6211,11 @@ function Debug_stats(actor : CActor)
 	{
 		temp = thePlayer.GetCriticalHitChance( true, false, NULL, MC_NotSet, false );
 		LogStats( "Fast Attack critical hit chance: " + NoTrailZeros( temp*100 ) + "%" );
-
+		
 		temp = thePlayer.GetCriticalHitChance( false, true, NULL, MC_NotSet, false );
 		LogStats( "Heavy Attack critical hit chance: " + NoTrailZeros( temp*100 ) + "%" );
-	}
-
+	}	
+	
 	if(actor != thePlayer)
 	{
 		val = actor.GetAttributeValue(theGame.params.CRITICAL_HIT_DAMAGE_BONUS);
@@ -6492,17 +6226,17 @@ function Debug_stats(actor : CActor)
 	}
 	LogStats("critical hit damage bonus: +" + NoTrailZeros(CalculateAttributeValue(val) * 100) + "%");
 	LogStats(" ");
-
+	
 	
 	val = actor.GetAttributeValue(RegenStatEnumToName(CRS_Vitality));
 	LogStats("Vitality Regen        :   Base = " + SpaceFill(NoTrailZeros(val.valueBase), 4, ESFM_JustifyRight)  + ",   Mult = " + SpaceFill(NoTrailZeros(val.valueMultiplicative), 4, ESFM_JustifyRight)  + ",   Add = " + SpaceFill(NoTrailZeros(val.valueAdditive), 4, ESFM_JustifyRight) );
-
+	
 	if(actor == thePlayer)
 	{
 		val = actor.GetAttributeValue('vitalityCombatRegen');
 		LogStats("Combat Vitality Regen :   Base = " + SpaceFill(NoTrailZeros(val.valueBase), 4, ESFM_JustifyRight)  + ",   Mult = " + SpaceFill(NoTrailZeros(val.valueMultiplicative), 4, ESFM_JustifyRight)  + ",   Add = " + SpaceFill(NoTrailZeros(val.valueAdditive), 4, ESFM_JustifyRight) );
 	}
-
+	
 	val = actor.GetAttributeValue(RegenStatEnumToName(CRS_Essence));
 	LogStats("Essence Regen         :   Base = " + SpaceFill(NoTrailZeros(val.valueBase), 4, ESFM_JustifyRight)  + ",   Mult = " + SpaceFill(NoTrailZeros(val.valueMultiplicative), 4, ESFM_JustifyRight)  + ",   Add = " + SpaceFill(NoTrailZeros(val.valueAdditive), 4, ESFM_JustifyRight) );
 	val = actor.GetAttributeValue(RegenStatEnumToName(CRS_Morale));
@@ -6510,12 +6244,12 @@ function Debug_stats(actor : CActor)
 	val = actor.GetAttributeValue(RegenStatEnumToName(CRS_Stamina));
 	LogStats("Stamina Regen         :   Base = " + SpaceFill(NoTrailZeros(val.valueBase), 4, ESFM_JustifyRight)  + ",   Mult = " + SpaceFill(NoTrailZeros(val.valueMultiplicative), 4, ESFM_JustifyRight)  + ",   Add = " + SpaceFill(NoTrailZeros(val.valueAdditive), 4, ESFM_JustifyRight) );
 	LogStats(" ");
-
+	
 	
 	val = actor.GetTotalArmor();
 	LogStats("Armor:   Base = " + NoTrailZeros(val.valueBase) + ",   Mult = " + NoTrailZeros(val.valueMultiplicative) + ",   Add = " + NoTrailZeros(val.valueAdditive));
 	LogStats(" ");
-
+	
 	
 	actor.GetResistValue(CDS_SlashingRes, fVal1, fVal2);
 	LogStats( SpaceFill(CDS_SlashingRes, 31) + "Points = " + SpaceFill(NoTrailZeros(fVal1), 7, ESFM_JustifyRight) + ", Percents = " + NoTrailZeros(fVal2*100));
@@ -6553,15 +6287,15 @@ function Debug_stats(actor : CActor)
 	LogStats( SpaceFill(CDS_DoTPoisonDamageRes, 31) + "Points = " + SpaceFill(NoTrailZeros(fVal1), 7, ESFM_JustifyRight) + ", Percents = " + NoTrailZeros(fVal2*100));
 	actor.GetResistValue(CDS_DoTBleedingDamageRes, fVal1, fVal2);
 	LogStats( SpaceFill(CDS_DoTBleedingDamageRes, 31) + "Points = " + SpaceFill(NoTrailZeros(fVal1), 7, ESFM_JustifyRight) + ", Percents = " + NoTrailZeros(fVal2*100));
-
+	
 	
 	LogStats("");
 	val = actor.GetAttributeValue('critical_hit_damage_reduction');
 	fVal2 = val.valueMultiplicative;
 	LogStats( SpaceFill("critical_hit_damage_reduction", 31) + "Points = " + SpaceFill(NoTrailZeros(0.f), 7, ESFM_JustifyRight) + ", Percents = " + NoTrailZeros(fVal2*100));
-
+	
 	LogStats("Hit severity reduction = " + NoTrailZeros(CalculateAttributeValue(actor.GetAttributeValue('hit_severity'))) );
-
+		
 	
 	LogStats("");
 	LogStats("Buff immunitites:");
@@ -6574,7 +6308,7 @@ function Debug_stats(actor : CActor)
 		}
 	}
 	LogStats("");
-
+	
 	
 	LogStats("Is invulnerable = " + actor.IsInvulnerable() );
 	if(actor.IsInvulnerable())
@@ -6597,12 +6331,12 @@ function Debug_stats(actor : CActor)
 			tempString += invChannels[i] + ", ";
 		}
 		LogStats(tempString);
-	}
-
+	}	
+	
 	
 	LogStats("Hit severity reduction = " + NoTrailZeros(CalculateAttributeValue(actor.GetAttributeValue('hit_severity'))) );
-
-
+	
+	
 	
 	LogStats("");
 	LogStats("Current buffs:");
@@ -6611,7 +6345,7 @@ function Debug_stats(actor : CActor)
 	{
 		LogStats( SpaceFill( buffs[i].GetEffectType(), 25 ) + " isPaused= " + SpaceFill( buffs[i].IsPaused(),5,ESFM_JustifyRight ) + ", duration= " + SpaceFill( NoTrailZeros( buffs[i].GetDurationLeft() ), 9, ESFM_JustifyRight ) + " / " + SpaceFill( NoTrailZeros( buffs[i].GetInitialDurationAfterResists() ), 9, ESFM_JustifyRight ) );
 	}
-
+	
 	LogStats(" ");
 	LogStats("                    --== End of stats for <<" + actor + ">> ==--");
 	LogStats(" ");
@@ -6627,11 +6361,11 @@ function Debug_Attributes(n : CActor)
 
 	if(!n)
 		return;
-
+		
 	n.GetCharacterStats().GetAbilities(abs, true);
 	dm = theGame.GetDefinitionsManager();
 	atts = dm.GetAbilitiesAttributes(abs);
-
+	
 	LogStats("Printing non-forbidden attributes of <<" + n + ">>");
 	LogStats("");
 	for(i=0; i<atts.Size(); i+=1)
@@ -6648,8 +6382,8 @@ function Debug_Attributes(n : CActor)
 exec function BlockRageOnTarget(lock : bool, optional time : float)
 {
 	var target : CActor;
-	target = thePlayer.GetTarget();
-
+	target = thePlayer.GetTarget();	
+	
 	if ( target )
 	{
 		target.BlockAbility('Rage',lock,time);
@@ -6659,8 +6393,8 @@ exec function BlockRageOnTarget(lock : bool, optional time : float)
 exec function blockabilityontarget( abilityName : name )
 {
 	var target : CActor;
-	target = thePlayer.GetTarget();
-
+	target = thePlayer.GetTarget();	
+	
 	if ( target )
 	{
 		target.BlockAbility(abilityName,true);
@@ -6692,14 +6426,14 @@ exec function testdlcinstalled()
 {
 	theGame.GetGuiManager().DisplayNewDlcInstalled( "Hoho! New DLC installed" );
 }
-
+	
 exec function dodge()
 {
 	var target : CActor;
-	target = thePlayer.GetTarget();
+	target = thePlayer.GetTarget();	
 	if ( target )
 	{
-		target.SignalGameplayEventParamInt('Time2Dodge', (int)EDT_Projectile );
+		target.SignalGameplayEventParamInt('Time2Dodge', (int)EDT_Projectile );	
 	}
 }
 
@@ -6709,7 +6443,7 @@ exec function dcc()
 }
 
 
-exec function spawnRaw( nam : name, optional quantity : int, optional distance : float, optional isHostile : bool )
+exec function spawnRaw( nam : name, optional quantity : int, optional distance : float, optional isHostile : bool ) 
 {
 	var ent : CEntity;
 	var horse : CEntity;
@@ -6720,39 +6454,39 @@ exec function spawnRaw( nam : name, optional quantity : int, optional distance :
 	var horseTemplate : CEntityTemplate;
 	var horseTag : array<name>;
 	var l_aiTree		: CAIHorseDoNothingAction;
-
+	
 	quantity = Max(quantity, 1);
-
-	rot = thePlayer.GetWorldRotation();
+	
+	rot = thePlayer.GetWorldRotation();	
 	if(nam != 'boat')
 	{
 		rot.Yaw += 180;		
 	}
-
+	
 	
 	cameraDir = theCamera.GetCameraDirection();
-
+	
 	if( distance == 0 ) distance = 3; 
-	cameraDir.X *= distance;
+	cameraDir.X *= distance;	
 	cameraDir.Y *= distance;
-
+	
 	
 	player = thePlayer.GetWorldPosition();
-
 	
-	pos 	= cameraDir + player;
+	
+	pos 	= cameraDir + player;	
 	pos.Z = player.Z;
-
+	
 	
 	template = (CEntityTemplate)LoadResource(nam);
-
-	if ( nam == 'rider' )
+	
+	if ( nam == 'rider' ) 
 		horseTemplate = (CEntityTemplate)LoadResource('horse');
-
+		
 	for(i=0; i<quantity; i+=1)
-	{
+	{		
 		ent = theGame.CreateEntity(template, pos, rot);
-
+		
 		if ( horseTemplate )
 		{
 			horseTag.PushBack('enemy_horse');
@@ -6761,9 +6495,9 @@ exec function spawnRaw( nam : name, optional quantity : int, optional distance :
 			l_aiTree.OnCreated();
 			((CActor)ent).ForceAIBehavior( l_aiTree, BTAP_AboveEmergency2, 'AI_Rider_Load_Forced' );
 			((CActor)ent).SignalGameplayEventParamInt( 'RidingManagerMountHorse', MT_instant | MT_fromScript );
-
+			
 		}
-
+			
 		if( isHostile )
 		{
 			((CActor)ent).SetTemporaryAttitudeGroup( 'hostile_to_player', AGP_Default );
@@ -6778,11 +6512,11 @@ exec function spawnBoat000()
 	var pos : Vector;
 	var rot : EulerAngles;
 	var template : CEntityTemplate;
-
+	
 	nam = 'boat';
 	rot = EulerAngles( 0.0f, 0.0f, 0.0f );
 	pos = Vector( 0.0f, 0.0f, 0.0f, 1.0f );
-
+	
 	template = (CEntityTemplate)LoadResource(nam);
 	ent = theGame.CreateEntity(template, pos, rot, true, false, false, PM_Persist );
 }
@@ -6793,15 +6527,15 @@ exec function spawnPath(path : name, optional isHostile : bool)
 	var pos : Vector;
 	var rot : EulerAngles;
 	var template : CEntityTemplate;
-
-	rot = thePlayer.GetWorldRotation();
+	
+	rot = thePlayer.GetWorldRotation();	
 	rot.Yaw += 180;
 	pos = thePlayer.GetWorldPosition();
 	pos += VecConeRand(thePlayer.GetHeading(), 0, 3, 3);
-
+	
 	template = (CEntityTemplate)LoadResource(path,true);
 	ent = theGame.CreateEntity(template, pos, rot);
-
+	
 	if( isHostile )
 	{
 		((CActor)ent).SetTemporaryAttitudeGroup( 'hostile_to_player', AGP_Default );
@@ -6827,38 +6561,38 @@ exec function spawn(nam : name, optional quantity : int, optional distance : flo
 	var l_aiTree		: CAIHorseDoNothingAction;
 	var templateCSV : C2dArray;
 	quantity = Max(quantity, 1);
-
-	rot = thePlayer.GetWorldRotation();
+	
+	rot = thePlayer.GetWorldRotation();	
 	if(nam != 'boat')
 	{
 		rot.Yaw += 180;		
 	}
-
+	
 	
 	cameraDir = theCamera.GetCameraDirection();
-
+	
 	if( distance == 0 ) distance = 3; 
-	cameraDir.X *= distance;
+	cameraDir.X *= distance;	
 	cameraDir.Y *= distance;
-
+	
 	
 	player = thePlayer.GetWorldPosition();
-
 	
-	pos = cameraDir + player;
+	
+	pos = cameraDir + player;	
 	pos.Z = player.Z;
-
+	
 	
 	posFin.Z = pos.Z;			
 	s = quantity / 0.2;			
 	r = SqrtF(s/Pi());
-
+	
 	
 	template = (CEntityTemplate)LoadResource(nam);
-
-	if ( nam == 'rider' )
+	
+	if ( nam == 'rider' ) 
 		horseTemplate = (CEntityTemplate)LoadResource('horse');
-
+		
 	if(!template)
 	{
 		resourcePath = "characters\npc_entities\monsters";
@@ -6866,34 +6600,34 @@ exec function spawn(nam : name, optional quantity : int, optional distance : flo
 		resourcePath = resourcePath + ".w2ent";
 		template = (CEntityTemplate)LoadResource( resourcePath, true );
 	}
-
+	
 	if( nam == 'def' )
 	{
 		templateCSV = LoadCSV("gameplay\globals\temp_spawner.csv");
-
+		
 		resourcePath = templateCSV.GetValueAt(0,0);
 		template = (CEntityTemplate)LoadResource( resourcePath, true );
 	}
 
 	for(i=0; i<quantity; i+=1)
-	{
+	{		
 		x = RandF() * r;			
 		y = RandF() * (r - x);		
-
+		
 		if(RandRange(2))					
 			sign = 1;
 		else
 			sign = -1;
-
+			
 		posFin.X = pos.X + sign * x;	
-
+		
 		if(RandRange(2))					
 			sign = 1;
 		else
 			sign = -1;
-
+			
 		posFin.Y = pos.Y + sign * y;	
-
+		
 		if(nam == 'boat')
 		{
 			posFin.Z = 0.0f;
@@ -6905,7 +6639,7 @@ exec function spawn(nam : name, optional quantity : int, optional distance : flo
 				posFin = posTemp;
 			}
 		}
-
+		
 		if( nam == 'boat' )
 		{
 			ent = theGame.CreateEntity(template, posFin, rot, true, false, false, PM_Persist );
@@ -6914,7 +6648,7 @@ exec function spawn(nam : name, optional quantity : int, optional distance : flo
 		{
 			ent = theGame.CreateEntity(template, posFin, rot);
 		}
-
+		
 		if ( horseTemplate )
 		{
 			horseTag.PushBack('enemy_horse');
@@ -6922,19 +6656,19 @@ exec function spawn(nam : name, optional quantity : int, optional distance : flo
 			
 			
 			
-
+			
 			l_aiTree = new CAIHorseDoNothingAction in ent;
 			l_aiTree.OnCreated();
 			((CActor)ent).ForceAIBehavior( l_aiTree, BTAP_AboveEmergency2, 'AI_Rider_Load_Forced' );
-
+			
 			((CActor)ent).SignalGameplayEventParamInt( 'RidingManagerMountHorse', MT_instant | MT_fromScript );
 		}
-
+			
 		if( isHostile )
 		{
 			((CActor)ent).SetTemporaryAttitudeGroup( 'hostile_to_player', AGP_Default );
 		}
-
+			
 		if ( level != 0 )
 		{
 			((CNewNPC)ent).SetLevel( level );
@@ -6958,8 +6692,8 @@ exec function likeaboss()
 exec function dismounttest()
 {
 	var target : CActor;
-	target = thePlayer.GetTarget();
-
+	target = thePlayer.GetTarget();	
+	
 	if( target )
 	{
 		target.SignalGameplayEvent('DismountTheHorse');
@@ -6972,10 +6706,10 @@ exec function sfmh()
 	var results : array< CGameplayEntity >;
 	var size : int;
 	var i : int;
-
+	
 	FindGameplayEntitiesInRange( results, thePlayer, 20, 100 );
 	size = results.Size();
-
+	
 	for( i = 0; i <= size; i += 1 )
 	{
 		
@@ -6994,10 +6728,10 @@ exec function panic()
 	var results : array< CGameplayEntity >;
 	var size : int;
 	var i : int;
-
+	
 	FindGameplayEntitiesInRange( results, thePlayer, 30, 100 );
 	size = results.Size();
-
+	
 	for( i = 0; i <= size; i += 1 )
 	{
 		((CNewNPC)results[i]).DrainMorale(100);
@@ -7015,28 +6749,28 @@ exec function freeze(optional off : int, optional range : float, optional tag : 
 	for(i=0; i<npcs.Size(); i+=1)
 	{
 		if((CPlayer)npcs[i])
-			continue;
+			continue;		
 		if(off)
 			npcs[i].AddEffectDefault(EET_Stagger, NULL, 'console');
 		else
-			npcs[i].SignalGameplayEvent('CombatFocusMode');
+			npcs[i].SignalGameplayEvent('CombatFocusMode');			
 	}
 }
 
 
 exec function twt()
 {
-	var target : CNewNPC;
+	var target : CNewNPC; 
 
 	target = theGame.GetNPCByTag( 'tgt' );
-	thePlayer.SetUnpushableTarget( target );
+	thePlayer.SetUnpushableTarget( target ); 
 }
 
 exec function twr()
 {
-	var target : CNewNPC;
+	var target : CNewNPC; 
 
-	thePlayer.SetUnpushableTarget( target );
+	thePlayer.SetUnpushableTarget( target ); 
 }
 
 
@@ -7047,13 +6781,13 @@ exec function ut()
 
 	if( target )
 	{
-		thePlayer.SetUnpushableTarget( target );
+		thePlayer.SetUnpushableTarget( target ); 
 	}
 }
 
 exec function setpri( tag : name, value : int )
 {
-	var target : CNewNPC;
+	var target : CNewNPC; 
 
 	target = theGame.GetNPCByTag( tag );
 	target.SetInteractionPriority( value );
@@ -7068,7 +6802,7 @@ exec function addpotions()
 {
 	var inv : CInventoryComponent;
 	var arr : array<SItemUniqueId>;
-
+	
 	inv = thePlayer.inv;
 	arr = inv.AddAnItem('Black Blood 1');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
@@ -7150,9 +6884,9 @@ exec function addoils()
 {
 	var inv : CInventoryComponent;
 	var arr : array<SItemUniqueId>;
-
+	
 	inv = thePlayer.inv;
-
+	
 	arr = inv.AddAnItem('Beast Oil 1');
 	thePlayer.inv.SingletonItemSetAmmo(arr[0], thePlayer.inv.SingletonItemGetMaxAmmo(arr[0]));
 	arr = inv.AddAnItem('Beast Oil 2');
@@ -7276,16 +7010,16 @@ exec function drainstat(stat : EBaseCharacterStats, val : float)
 		case BCS_Stamina :
 			thePlayer.DrainStamina(ESAT_FixedValue, val, 1);
 			break;
-		case BCS_Toxicity :
+		case BCS_Toxicity : 
 			thePlayer.DrainToxicity(val);
 			break;
-		case BCS_Focus :
+		case BCS_Focus : 
 			thePlayer.DrainFocus(val);
 			break;
-		case BCS_Morale :
+		case BCS_Morale : 
 			thePlayer.DrainMorale(val);
 			break;
-		case BCS_Air :
+		case BCS_Air : 
 			thePlayer.DrainAir(val);
 			break;
 	}
@@ -7295,38 +7029,33 @@ exec function printbuffs()
 {
 	var buffs : array<CBaseGameplayEffect>;
 	var i : int;
-
+	
 	buffs = thePlayer.GetBuffs();
 	LogEffects("--------- Printing player buffs:");
-
+	
 	for(i=0; i<buffs.Size(); i+=1)
 		LogEffects(buffs[i] + "         time left = " + NoTrailZeros(buffs[i].GetDurationLeft()) );
-
+	
 	LogEffects("--------- Done");
-}
-
-function spawnentity(idname:string)
-{
-	var template : CEntityTemplate;
-	var pos : Vector;
-	var rot : EulerAngles;
-
-	pos = thePlayer.GetWorldPosition() + VecRingRand(1.f,2.f);
-	rot = VecToRotation(thePlayer.GetWorldPosition() - pos);
-
-	template = (CEntityTemplate)LoadResource(idname);
-	theGame.CreateEntity(template, pos, rot );
 }
 
 exec function spawnenemy()
 {
-	spawnentity("1hand");
+	var template : CEntityTemplate;
+	var pos : Vector;
+	var rot : EulerAngles;
+	
+	pos = thePlayer.GetWorldPosition() + VecRingRand(1.f,2.f);
+	rot = VecToRotation(thePlayer.GetWorldPosition() - pos);
+	
+	template = (CEntityTemplate)LoadResource("1hand");
+	theGame.CreateEntity(template, pos, rot );
 }
 
 exec function ApproachAttack( i : int)
 {
 	var player : CR4Player;
-
+	
 	player = thePlayer;
 	player.approachAttack = i;
 }
@@ -7334,14 +7063,14 @@ exec function ApproachAttack( i : int)
 exec function TReset()
 {
 	var gameTime : GameTime;
-
+	
 	gameTime = GameTimeCreate( 1, 14, 2 );
-
+	
 	theGame.SetGameTime(gameTime, false);
-
+	
 	theGame.SetHoursPerMinute( 1 );
-
-
+	
+	
 }
 
 exec function HPM(hpm : int)
@@ -7358,7 +7087,7 @@ exec function weak()
 	}
 	else
 	{
-		FactsAdd("debug_fact_weak");
+		FactsAdd("debug_fact_weak");	
 		LogCheats( "Weak is now ON" );
 	}
 }
@@ -7368,10 +7097,10 @@ exec function instantMount( vehicleTag : name )
 	var entities : array<CGameplayEntity>;
 	var entity : CGameplayEntity;
 	var vehicle : CVehicleComponent;
-
+	
 	FindGameplayEntitiesInRange(entities,thePlayer,1000,1,vehicleTag);
 	entity = entities[0];
-
+	
 	if ( entity )
 	{
 		vehicle = (CVehicleComponent)(entity.GetComponentByClassName('CVehicleComponent'));
@@ -7417,7 +7146,7 @@ class ARDebugCameraDist extends ICustomCameraScriptedPivotDistanceController
 
 
 exec function arcam()
-{
+{ 
 	
 	theGame.GetGameCamera().ChangePivotRotationController('Debug_AR_Test_Cam_Rot');
 	theGame.GetGameCamera().ChangePivotDistanceController('Debug_AR_Test_Cam_Dist');
@@ -7451,7 +7180,7 @@ exec function appearance( app : name )
 {
 	var npc : CActor;
 	npc = thePlayer.GetTarget();
-
+	
 	if( npc )
 	{
 		npc.SetAppearance( app );
@@ -7475,7 +7204,7 @@ exec function testdur()
 
 	items1 = inv.GetItemsByCategory( 'steelsword' );
 	items2 = inv.GetItemsByCategory( 'silversword' );
-
+	
 	ArrayOfIdsAppend( allItems, items1 );
 	ArrayOfIdsAppend( allItems, items2 );
 
@@ -7507,11 +7236,11 @@ exec function incdur( item : name, val : int )
 {
 	var inv				: CInventoryComponent;
 	var items			: array< SItemUniqueId >;
-
+	
 	inv = thePlayer.inv;
 
 	items = inv.AddAnItem( item );
-
+	
 	inv.SetItemDurabilityScript(items[0], val);
 }
 
@@ -7577,10 +7306,10 @@ exec function spawnpukespot()
 	var ent : CEntity;
 	var tags : array< name >;
 	var template : CEntityTemplate;
-
+	
 	tags = ent.GetTags();
 	tags.PushBack( 'dudes' );
-
+	
 	template = (CEntityTemplate)LoadResource("stand_puke");
 	ent = theGame.CreateEntity(template, thePlayer.GetWorldPosition(), thePlayer.GetWorldRotation(), true, false, false, PM_DontPersist,  tags );
 }
@@ -7589,21 +7318,21 @@ exec function durr()
 {
 	var ids : array<SItemUniqueId>;
 	var sword : SItemUniqueId;
-
+		
 	GetWitcherPlayer().GetItemEquippedOnSlot(EES_SteelSword, sword);
-
+	
 	damageitem_g(EES_SteelSword, 0.5);
 	LogItems("durr: before = " + thePlayer.inv.GetItemDurability(sword));
 	ids = thePlayer.inv.AddAnItem('Weapon repair kit 1');
 	thePlayer.RepairItemUsingConsumable(sword, ids[0]);
 	LogItems("durr: after = " + thePlayer.inv.GetItemDurability(sword));
-}
+}	
 
 exec function spawnbarrel()
 {
 	var ent : CEntity;
 	var template : CEntityTemplate;
-
+	
 	template = (CEntityTemplate)LoadResource("barrel");
 	ent = theGame.CreateEntity(template, thePlayer.GetWorldPosition(), thePlayer.GetWorldRotation() );
 }
@@ -7613,23 +7342,23 @@ exec function spawnbarrels()
 	var ent : CEntity;
 	var pos : Vector;
 	var template : CEntityTemplate;
-
+	
 	pos = thePlayer.GetWorldPosition();
 	pos.Z += 3;
 	template = (CEntityTemplate)LoadResource( "barrel");
-
+	
 	pos.X += 4;
 	pos.Y += 4;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X -= 4;
 	pos.Y += 4;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X += 4;
 	pos.Y -= 4;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X -= 4;
 	pos.Y -= 4;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
@@ -7637,15 +7366,15 @@ exec function spawnbarrels()
 	pos.X += 6;
 	pos.Y += 6;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X -= 6;
 	pos.Y += 6;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X += 6;
 	pos.Y -= 6;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X -= 6;
 	pos.Y -= 6;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
@@ -7656,19 +7385,19 @@ exec function spawnbees()
 	var ent : CEntity;
 	var pos : Vector;
 	var template : CEntityTemplate;
-
+	
 	pos = thePlayer.GetWorldPosition();
 	pos.Z += 4;
 	template = (CEntityTemplate)LoadResource( "beehive");
-
+	
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X += 8;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.Y += 8;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
-
+	
 	pos.X -= 8;
 	ent = theGame.CreateEntity(template, pos, thePlayer.GetWorldRotation() );
 }
@@ -7682,16 +7411,16 @@ exec function iu()
 {
 	var um : W3ItemUpgradeManager;
 	var ids : array<SItemUniqueId>;
-
+	
 	um = new W3ItemUpgradeManager in theGame;
 	um.Init();
-
+	
 	thePlayer.AddMoney(10000);
 	thePlayer.inv.AddAnItem('Iron ore', 100);
 	thePlayer.inv.AddAnItem('Silver mineral', 100);
-
+	
 	ids = thePlayer.inv.GetItemsIds('Witcher Silver Sword');
-
+	
 	um.PurchaseUpgrade(ids[0], 'Damage 2');
 }
 
@@ -7704,41 +7433,41 @@ exec function RainStrength()
 
 
 exec function MegaBomb()
-{
+{	
 	var angle : float;
 	var velocity : float;
 	var range : float;
 	var i : int;
-
+	
 	var projectile : CProjectileTrajectory;
 	var collisionGroups : array<name>;
 	var target: Vector;
 	var rot : EulerAngles;
 	var step : float;
 	var template : CEntityTemplate;
-
+	
 	angle = 90.0f;
 	velocity = 20.0f;
 	range = 100.0f;
 	step = 5.0f;
-
+	
 	collisionGroups.PushBack('Terrain');
 	collisionGroups.PushBack('Static');
-
+	
 	rot = thePlayer.GetWorldRotation();
-
+	
 	for( i=0; i<180; i+=(int)step )
-	{
+	{	
 		target = VecNormalize( Vector( CosF(rot.Yaw), SinF(rot.Yaw), 0.0f ) );
 		target *= range*0.25f;
 		target += thePlayer.GetWorldPosition();
-
+		
 		template = (CEntityTemplate)LoadResource("grapeshot");
 		projectile = (CProjectileTrajectory) theGame.CreateEntity(template, thePlayer.GetWorldPosition() + Vector(0,0,30), thePlayer.GetWorldRotation() );
 
 		projectile.Init( thePlayer );
 		projectile.ShootProjectileAtPosition( angle, velocity, target, range, collisionGroups );
-
+		
 		angle -= step;
 		if( angle < -90.0f )
 			angle = 90.0f;
@@ -7747,7 +7476,7 @@ exec function MegaBomb()
 }
 
 exec function LogInputContext()
-{
+{	
 	LogInput(theInput.GetContext() );
 }
 
@@ -7773,33 +7502,19 @@ function AddAndEquipSkill(skill : ESkill) : bool
 {
 	var slot : int;
 
-	GetWitcherPlayer().AddSkill(skill);
+	GetWitcherPlayer().AddSkill(skill);  
 	slot = GetWitcherPlayer().GetFreeSkillSlot();
-
-	if(GetWitcherPlayer().IsSkillEquipped(skill))
-	{
-		return true;
-	}
-
 	if(slot > -1)
 	{
 		GetWitcherPlayer().EquipSkill(skill, slot);
 		return true;
 	}
-
+	
 	return false;
 }
 
-exec function UnlockSkillSlot( id : int )
-{
-	var witcher : W3PlayerWitcher;
-
-	witcher = GetWitcherPlayer();
-	witcher.Debug_HAX_UnlockSkillSlot( id );
-}
-
 exec function FB( level : int )
-{
+{	
 	if ( level <= 1 )
 	{
 		thePlayer.AddAbility('Lvl10');
@@ -7834,7 +7549,7 @@ exec function ActivateTeleport( teleportTag : name )
 {
 	var teleportEntity : CTeleportEntity;
 	teleportEntity = ( CTeleportEntity )( theGame.GetEntityByTag( teleportTag ) );
-
+	
 	if( !teleportEntity )
 			LogChannel( 'Error', "Teleport not set properly in ManageTeleport quest function." );
 
@@ -7843,21 +7558,18 @@ exec function ActivateTeleport( teleportTag : name )
 
 exec function RunGossip()
 {
-	theGame.GetBehTreeReactionManager().InitReactionScene( thePlayer, 'Gossip', 5.0, 30.0f, 1000.0f, 2 );
+	theGame.GetBehTreeReactionManager().InitReactionScene( thePlayer, 'Gossip', 5.0, 30.0f, 1000.0f, 2 );			
 }
 
 exec function debugtp()
 {
 	thePlayer.TeleportWithRotation( thePlayer.GetWorldPosition(), thePlayer.GetWorldRotation() );
-
-
-
 }
 
 exec function OpenRift( tag : name )
 {
 	var rift : CRiftEntity;
-
+	
 	rift = (CRiftEntity)( theGame.GetNodeByTag( tag ) );
 	rift.ActivateRift();
 }
@@ -7865,7 +7577,7 @@ exec function OpenRift( tag : name )
 exec function CloseRift( tag : name )
 {
 	var rift : CRiftEntity;
-
+	
 	rift = (CRiftEntity)( theGame.GetNodeByTag( tag ) );
 	rift.DeactivateRift();
 }
@@ -7874,9 +7586,9 @@ exec function Ragdoll( tag : name )
 {
 	var dude : CActor;
 	var target : CActor;
-
-	target = thePlayer.GetTarget();
-
+	
+	target = thePlayer.GetTarget();	
+	
 	dude = (CActor)( theGame.GetNodeByTag( tag ) );
 	if( dude )
 	{
@@ -7896,16 +7608,16 @@ exec function omnom(optional level : int)
 		ids = thePlayer.inv.AddAnItem('Raw meat');
 	else if(level == 2)
 		ids = thePlayer.inv.AddAnItem('Very good honey');
-	else
+	else 
 		ids = thePlayer.inv.AddAnItem('Toffee');
-
+		
 	thePlayer.ConsumeItem(ids[0]);
 }
 
 exec function stagger( tag : name )
 {
 	var dude : CActor;
-
+	
 	dude = (CActor)( theGame.GetNodeByTag( tag ) );
 	if( dude )
 		dude.AddEffectDefault(EET_Stagger, NULL);
@@ -7953,11 +7665,11 @@ exec function printdiff()
 exec function BlockAb( actorTag : name, abilityName : name )
 {
 	var actor : CActor;
-
+	
 	actor = ( CActor )( theGame.GetEntityByTag( actorTag ) );
 	if( !actor )
 		LogChannel( 'Error', "Actor not found in BlockAb exec function." );
-
+	
 	actor.BlockAbility( abilityName, true);
 }
 
@@ -7978,87 +7690,87 @@ exec function criticalboy()
 
 exec function ProfilerInit( bufforSize : int )
 {
-	PROFILER_Init(bufforSize);
+	PROFILER_Init(bufforSize);	
 }
 
 exec function ProfilerInitEx( bufforSize : int, bufforSignalsSize : int )
 {
-	PROFILER_InitEx(bufforSize,bufforSignalsSize);
+	PROFILER_InitEx(bufforSize,bufforSignalsSize);	
 }
 
 exec function ProfilerInitMB( bufforSize : int )
 {
-	PROFILER_Init(bufforSize*1024*1024);
+	PROFILER_Init(bufforSize*1024*1024);	
 }
 
 exec function ProfilerInitExMB( bufforSize : int, bufforSignalsSize : int )
 {
-	PROFILER_InitEx(bufforSize*1024*1024,bufforSignalsSize*1024*1024);
+	PROFILER_InitEx(bufforSize*1024*1024,bufforSignalsSize*1024*1024);	
 }
 
 exec function ProfilerScriptEnable()
 {
-	PROFILER_ScriptEnable();
+	PROFILER_ScriptEnable();	
 }
 
 exec function ProfilerScriptDisable()
 {
-	PROFILER_ScriptDisable();
+	PROFILER_ScriptDisable();	
 }
 
 exec function ProfilerStart()
 {
-	PROFILER_Start();
+	PROFILER_Start();	
 }
 
 exec function ProfilerStop()
 {
-	PROFILER_Stop();
+	PROFILER_Stop();	
 }
 
 exec function ProfilerStore( profileName : string )
 {
-	PROFILER_Store( profileName );
+	PROFILER_Store( profileName );	
 }
 
 exec function ProfilerStoreDef()
 {
-	PROFILER_StoreDef();
+	PROFILER_StoreDef();	
 }
 
 exec function ProfilerStoreInstrFuncList()
 {
-	PROFILER_StoreInstrFuncList();
+	PROFILER_StoreInstrFuncList();	
 }
 
 exec function ProfilerStartCatchBr()
 {
-	PROFILER_StartCatchBreakpoint();
+	PROFILER_StartCatchBreakpoint();	
 }
 
 exec function ProfilerStopCatchBr()
 {
-	PROFILER_StopCatchBreakpoint();
+	PROFILER_StopCatchBreakpoint();	
 }
 
 exec function ProfilerSetTimeBr( instrFuncName : string, time : float, stopOnce : bool )
 {
-	PROFILER_SetTimeBreakpoint( instrFuncName, time, stopOnce );
+	PROFILER_SetTimeBreakpoint( instrFuncName, time, stopOnce );	
 }
 
 exec function ProfilerSetHitCountBr( instrFuncName : string, counter : int )
 {
-	PROFILER_SetHitCountBreakpoint( instrFuncName, counter );
+	PROFILER_SetHitCountBreakpoint( instrFuncName, counter );	
 }
 
 exec function ProfilerDisableTimeBr( instrFuncName : string )
 {
-	PROFILER_DisableTimeBreakpoint( instrFuncName );
+	PROFILER_DisableTimeBreakpoint( instrFuncName );	
 }
 
 exec function ProfilerDisableHitCountBr( instrFuncName : string )
 {
-	PROFILER_DisableHitCountBreakpoint( instrFuncName );
+	PROFILER_DisableHitCountBreakpoint( instrFuncName );	
 }
 
 exec function MoveToPlayer( speed:float, optional actorTag:name )
@@ -8067,21 +7779,21 @@ exec function MoveToPlayer( speed:float, optional actorTag:name )
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
 	var l_aiTree		: CAIMoveToAction;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	l_aiTree = new CAIMoveToAction in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	l_aiTree.params.targetTag = 'PLAYER';
 	l_aiTree.params.moveSpeed = speed;
 	l_aiTree.params.rotateAfterwards = false;
-
+	
 	if( speed > 1 )
 	{
 		l_aiTree.params.moveType = MT_Run;
 	}
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -8095,21 +7807,21 @@ exec function MoveToPoint( speed:float, waypointTag:name, optional actorTag:name
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
 	var l_aiTree		: CAIMoveToAction;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	l_aiTree = new CAIMoveToAction in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	l_aiTree.params.targetTag = waypointTag;
 	l_aiTree.params.moveSpeed = speed;
 	l_aiTree.params.rotateAfterwards = false;
-
+	
 	if( speed > 1 )
 	{
 		l_aiTree.params.moveType = MT_Run;
 	}
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -8123,14 +7835,14 @@ exec function MoveAlongPath( speed : float, pathTag : name, optional actorTag : 
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
 	var l_aiTree		: CAIMoveAlongPathAction;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	l_aiTree = new CAIMoveAlongPathAction in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	l_aiTree.params.pathTag = pathTag;
-
+	
 	if( speed > 1 )
 	{
 		l_aiTree.params.moveType = MT_Run;
@@ -8139,7 +7851,7 @@ exec function MoveAlongPath( speed : float, pathTag : name, optional actorTag : 
 	{
 		l_aiTree.params.moveType = MT_Walk;
 	}
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -8158,7 +7870,7 @@ exec function testdrownerswimming( optional actorTag : name )
 	var i :int;
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 50, 99, actorTag );
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
@@ -8176,12 +7888,12 @@ exec function dismantle()
 }
 
 exec function Skate()
-{
+{	
 	thePlayer.GotoState('Skating');
 }
 
 exec function AltCombatCamera( b : bool )
-{
+{	
 	var  player : CR4Player = thePlayer;
 	player.scriptedCombatCamera = b;
 }
@@ -8216,27 +7928,27 @@ exec function slow(factor : float)
 exec function shakeoffgeralt()
 {
 	var vehicleComp : W3HorseComponent;
-
+	
 	vehicleComp = (W3HorseComponent)thePlayer.GetUsedVehicle().GetComponentByClassName('CVehicleComponent');
 	vehicleComp.ShakeOffRider( DT_ragdoll );
 }
 
 exec function immunity( effectName : name, optional actorTag:name  )
-{
+{	
 	var i 			: int;
 	var l_actor 	: CActor;
 	var l_actors	: array<CActor>;
 	var effect 		: EEffectType;
 	var abilityName : name;
-
-	EffectNameToType ( effectName, effect, abilityName );
-
-	if (actorTag == 'PLAYER')
+	
+	EffectNameToType ( effectName, effect, abilityName ); 
+	
+	if (actorTag == 'PLAYER') 
 	{
 		thePlayer.AddBuffImmunity( effect, 'console', true );
 		return;
 	}
-
+	
 	l_actors = GetActorsInRange( thePlayer, 10000, 99, actorTag );
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
@@ -8256,7 +7968,7 @@ exec function CryStart()
 {
 	var baron		: CEntity;
 	var baronActor	: CActor;
-
+	
 	baron		= theGame.GetEntityByTag('Baron');
 	if( baron )
 	{
@@ -8272,17 +7984,17 @@ exec function ultrafix()
 {
 	
 	thePlayer.Debug_ReleaseCriticalStateSaveLocks();
-
+	
 	
 	thePlayer.Debug_ResetInput();
-
+	
 	
 	thePlayer.GetBuff(EET_AutoStaminaRegen).Debug_HAX_FIX(thePlayer);
 	thePlayer.GetBuff(EET_AutoStaminaRegen).Debug_HAX_FIX(thePlayer);
-
+	
 	
 	thePlayer.CheatResurrect();
-
+	
 	
 	theGame.ResetFadeLock( "exe_func_ultrafix" );
 	theGame.FadeInAsync( 0.f );
@@ -8293,7 +8005,7 @@ exec function CryStop()
 {
 	var baron		: CEntity;
 	var baronActor	: CActor;
-
+	
 	baron	= theGame.GetEntityByTag('Baron');
 	if( baron )
 	{
@@ -8319,20 +8031,20 @@ function skilleq_internal(skill : ESkill, optional id : int, optional level : in
 {
 	var witcher : W3PlayerWitcher;
 	var i, size : int;
-
+	
 	witcher = GetWitcherPlayer();
 
 	if(level == 0)
 		level = 1;
-
+		
 	for(i=0; i<level; i+=1)
 	{
 		witcher.AddSkill(skill);
-	}
-
+	}	
+	
 	if(id <= 0)
 		id = witcher.GetFreeSkillSlot();
-
+	
 	if(id < 0)
 	{
 		
@@ -8344,9 +8056,9 @@ function skilleq_internal(skill : ESkill, optional id : int, optional level : in
 				id = witcher.GetSkillSlotIDFromIndex(i);
 				break;
 			}
-		}
+		}			
 	}
-
+	
 	if(id >= 0)
 		witcher.EquipSkill(skill, id);
 }
@@ -8361,18 +8073,18 @@ exec function skilleqtest()
 	thePlayer.AddSkill(S_Magic_s08);
 	thePlayer.AddSkill(S_Magic_s10);
 	thePlayer.AddSkill(S_Magic_s11);
-
-	GetWitcherPlayer().EquipSkill(S_Magic_s08, 8);
-	GetWitcherPlayer().UnequipSkill(8);
-	GetWitcherPlayer().EquipSkill(S_Magic_s08, 8);
-
-	GetWitcherPlayer().EquipSkill(S_Magic_s10, 10);
-
-	GetWitcherPlayer().EquipSkill(S_Magic_s11, 11);
-	GetWitcherPlayer().UnequipSkill(11);
+	
+	GetWitcherPlayer().EquipSkill(S_Magic_s08, 8);	
+	GetWitcherPlayer().UnequipSkill(8);	
+	GetWitcherPlayer().EquipSkill(S_Magic_s08, 8);	
+	
+	GetWitcherPlayer().EquipSkill(S_Magic_s10, 10);	
+	
+	GetWitcherPlayer().EquipSkill(S_Magic_s11, 11);	
+	GetWitcherPlayer().UnequipSkill(11);	
 }
 
-exec function printeqskills()
+exec function printeqskills()	
 {
 	var i : int;
 	var skill : ESkill;
@@ -8383,12 +8095,12 @@ exec function printeqskills()
 	for(i=1; i<=20; i+=1)
 	{
 		unlocked = GetWitcherPlayer().GetSkillOnSlot(i, skill);
-
+		
 		if(!unlocked)
 			LogSkills(i+". SLOT LOCKED");
 		else if(skill == S_SUndefined)
 			LogSkills(i+".");
-		else
+		else		
 			LogSkills(i+". " + skill + ", level = " + GetWitcherPlayer().GetSkillLevel(skill));
 	}
 }
@@ -8421,13 +8133,13 @@ exec function eqmut()
 
 	ids = thePlayer.inv.AddAnItem('Dao mutagen');
 	GetWitcherPlayer().EquipItemInGivenSlot(ids[0], EES_SkillMutagen1, false);
-
+	
 	ids = thePlayer.inv.AddAnItem('Lamia mutagen');
 	GetWitcherPlayer().EquipItemInGivenSlot(ids[0], EES_SkillMutagen1, false);
 }
 
 exec function uneqmut(slot : EEquipmentSlots)
-{
+{	
 	GetWitcherPlayer().UnequipItemFromSlot(slot);
 }
 
@@ -8452,7 +8164,7 @@ exec function ToggleCloseCombat()
 exec function Panther( enable : bool )
 {
 	var r4Player	: CR4Player;
-
+	
 	r4Player	= ( CR4Player ) thePlayer;
 	if( r4Player )
 	{
@@ -8480,7 +8192,7 @@ exec function horseLocalSpace( toggle : bool )
 {
 	var horseComp : W3HorseComponent;
 	horseComp = (W3HorseComponent)thePlayer.GetUsedVehicle().GetComponentByClassName( 'W3HorseComponent' );
-
+	
 	if ( horseComp )
 		horseComp.ToggleLocalSpaceControlls( toggle );
 	else
@@ -8493,9 +8205,9 @@ exec function horseLocalSpace( toggle : bool )
 exec function horseSimpleStamina( toggle : bool )
 {
 	var horseComp : W3HorseComponent;
-
+	
 	horseComp = (W3HorseComponent)thePlayer.GetUsedVehicle().GetComponentByClassName( 'W3HorseComponent' );
-
+	
 	if ( horseComp )
 		horseComp.ToggleSimpleStaminaManagement( toggle );
 	else
@@ -8510,15 +8222,15 @@ exec function showAttRange( attRangeName : name, optional actorTag:name )
 	var i 				:int;
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
 		l_actor.SetDebugAttackRange( attRangeName );
 	}
-
+	
 }
 
 exec function TestAdjustMove( val : bool ) 
@@ -8536,7 +8248,7 @@ exec function eredins()
 {
 	var ent : CEntity;
 	var template : CEntityTemplate;
-
+	
 	template = (CEntityTemplate)LoadResource( "eredin_longsword" );
 	ent = theGame.CreateEntity( template, thePlayer.GetWorldPosition(), thePlayer.GetWorldRotation() );
 	template = (CEntityTemplate)LoadResource( "eredin_hammer" );
@@ -8549,7 +8261,7 @@ exec function attitude( tag : name, flag : bool )
 {
 	var ent : CEntity;
 	var actor : CActor;
-
+	
 	ent = theGame.GetEntityByTag( tag );
 	actor = (CActor)ent;
 	if( flag )
@@ -8568,21 +8280,21 @@ exec function MovePlayerFwd( distance : float, speed : float, optional drawSteel
 	var l_actor 			: CActor;
 	var l_aiTreeDecorator	: CAIPlayerActionDecorator;
 	var l_aiTree			: CAIMoveToPoint;
-
+	
 	if ( thePlayer.IsUsingHorse() )
 		l_actor = (CActor)thePlayer.GetUsedHorseComponent().GetEntity();
 	else
 		l_actor = thePlayer;
-
+	
 	l_aiTree = new CAIMoveToPoint in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	l_aiTree.enterExplorationOnStart 		= false;
 	l_aiTree.params.moveSpeed 				= speed;
 	l_aiTree.params.destinationHeading 		= VecHeading(l_actor.GetHeadingVector());
 	l_aiTree.params.destinationPosition 	= l_actor.GetWorldPosition() + distance*l_actor.GetHeadingVector();
 	l_aiTree.params.maxIterationsNumber 	= 1;
-
+	
 	if ( l_actor == thePlayer )
 	{
 		if ( speed >= 2 )
@@ -8594,19 +8306,19 @@ exec function MovePlayerFwd( distance : float, speed : float, optional drawSteel
 	}
 	else
 		l_aiTree.params.moveType = MT_Walk;
-
+	
 	l_aiTreeDecorator = new CAIPlayerActionDecorator in l_actor;
 	l_aiTreeDecorator.OnCreated();
 	l_aiTreeDecorator.interruptOnInput = true;
-	l_aiTreeDecorator.scriptedAction = l_aiTree;
-
+	l_aiTreeDecorator.scriptedAction = l_aiTree;	
+		
 	if ( drawSteel )
 	{
 		if(!GetWitcherPlayer().IsAnyItemEquippedOnSlot(EES_SteelSword))
 		{
 			return;
 		}
-
+		
 		thePlayer.OnEquipMeleeWeapon(PW_Steel, true);
 	}
 	else if ( drawSilver)
@@ -8615,7 +8327,7 @@ exec function MovePlayerFwd( distance : float, speed : float, optional drawSteel
 		{
 			return;
 		}
-
+		
 		thePlayer.OnEquipMeleeWeapon(PW_Silver, true);
 	}
 	
@@ -8630,21 +8342,21 @@ exec function followNPC()
 	var l_actor 			: CActor;
 	var l_aiTreeDecorator	: CAIPlayerRiderActionDecorator;
 	var l_aiTree			: CAIRiderFollowAction;
-
+	
 	if( thePlayer.IsUsingHorse() )
 		l_actor = (CActor)thePlayer.GetUsedHorseComponent().GetEntity();
 	else
 		return;
-
+	
 	l_aiTree = new CAIRiderFollowAction in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	l_aiTree.params.targetTag = 'bob';
 
 	l_aiTreeDecorator = new CAIPlayerRiderActionDecorator in l_actor;
 	l_aiTreeDecorator.OnCreated();
 	l_aiTreeDecorator.interruptOnInput = true;
-	l_aiTreeDecorator.scriptedAction = l_aiTree;
+	l_aiTreeDecorator.scriptedAction = l_aiTree;	
 
 	if ( l_aiTreeDecorator )
 		l_actor.ForceAIBehavior( l_aiTreeDecorator, BTAP_Emergency);
@@ -8662,14 +8374,14 @@ exec function magicBubble( toggle : bool, optional actorTag : name )
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
 	var l_aiTree		: CAISorceressMagicBubbleActionTree;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	l_aiTree = new CAISorceressMagicBubbleActionTree in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	l_aiTree.deactivate = !toggle;
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -8684,14 +8396,14 @@ exec function upperBody(optional actorTag : name)
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
 	var l_aiTree		: CAIPlayAnimationUpperBodySlotAction;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	l_aiTree = new CAIPlayAnimationUpperBodySlotAction in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	l_aiTree.animName = 'woman_sex_loop';
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -8707,14 +8419,14 @@ exec function shootTest( targetTag : name, optional xbow : bool, optional actorT
 	var l_actors		: array<CActor>;
 	var actionDecorator	: CAICombatModeActionDecorator;
 	var l_aiTree		: CAIShootActionTree;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	actionDecorator = new CAICombatModeActionDecorator in l_actor;
 	actionDecorator.OnCreated();
 	actionDecorator.drawWeaponOnStart = true;
 	actionDecorator.changeBehaviorGraphOnStart = true;
-
+	
 	if ( xbow )
 	{
 		actionDecorator.RightItemType = 'crossbow';
@@ -8725,17 +8437,17 @@ exec function shootTest( targetTag : name, optional xbow : bool, optional actorT
 		actionDecorator.LeftItemType = 'bow';
 		actionDecorator.behGraph = EBG_Combat_Bow;
 	}
-
-
-
-
+	
+	
+	
+	
 	l_aiTree = new CAIShootActionTree in l_actor;
 	l_aiTree.OnCreated();
 	l_aiTree.targetTag = targetTag;
 	l_aiTree.setProjectileOnFire = true;
-
+	
 	actionDecorator.scriptedAction = l_aiTree;
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -8743,16 +8455,16 @@ exec function shootTest( targetTag : name, optional xbow : bool, optional actorT
 			continue;
 		l_actor.ForceAIBehavior( actionDecorator, BTAP_AboveCombat);
 	}
-
+	
 }
 exec function stopUncon(optional actorTag : name)
 {
 	var i :int;
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -8779,7 +8491,7 @@ exec function itemkey(localizedString : string)
 	var i : int;
 	var items : array<SItemUniqueId>;
 	var itemName : name;
-
+	
 	thePlayer.inv.GetAllItems(items);
 	for(i=0; i<items.Size(); i+=1)
 	{
@@ -8814,14 +8526,14 @@ exec function CamOffsetCorrection( optional enable : bool )
 exec function playcam( val : name )
 {
 	var animation : SCameraAnimationDefinition;
-
+	
 	animation.priority = CAP_Highest;
 	animation.blendIn = 0.1f;
 	animation.blendOut = 0.1f;
 	animation.weight = 1.f;
 	animation.speed	= 1.0f;
 	animation.reset = true;
-
+	
 	switch( val )
 	{
 		case 'back':
@@ -8886,12 +8598,12 @@ function printabs_f(optional tag : name, optional fromItems : bool, optional att
 	var logStr : string;
 	var actor : CActor;
 	var val : SAbilityAttributeValue;
-
+	
 	if(!act)
 	{
 		if(tag == '')
 			tag = 'PLAYER';
-
+			
 		if(tag == 'PLAYER')
 		{
 			actor = thePlayer;
@@ -8905,15 +8617,15 @@ function printabs_f(optional tag : name, optional fromItems : bool, optional att
 	{
 		actor = act;
 	}
-
+	
 	actor.GetCharacterStats().GetAbilities(abs,fromItems);
-
+	
 	logStr = "** Printing abilities of <<" + actor + ">> ";
 	if(fromItems)
 		logStr += "with items:";
 	else
 		logStr += "without items:";
-
+	
 	LogStats(logStr);
 	while(abs.Size() > 0)
 	{
@@ -8921,11 +8633,11 @@ function printabs_f(optional tag : name, optional fromItems : bool, optional att
 		ArrayOfNamesRemoveAll(abs, abs[0]);
 	}
 	LogStats("");
-
+	
 	if(attributes)
 	{
 		LogStats("** Attributes:");
-
+		
 		atts = actor.GetAllAttributes();
 		ArraySortNames(atts);
 		for(i=0; i<atts.Size(); i+=1)
@@ -8940,7 +8652,7 @@ function printabs_f(optional tag : name, optional fromItems : bool, optional att
 				LogStats(SpaceFill("'" + atts[i] + "'",35) + ", BASE= " + SpaceFill(NoTrailZeros(val.valueBase),8,ESFM_JustifyRight) + ", MUL= " + SpaceFill(NoTrailZeros(val.valueMultiplicative),8,ESFM_JustifyRight) + ", ADD= " + SpaceFill(NoTrailZeros(val.valueAdditive),8,ESFM_JustifyRight) );
 			}
 		}
-
+		
 		LogStats("");
 	}
 }
@@ -8954,12 +8666,12 @@ function damageitem_g(slot : EEquipmentSlots, perc : float)
 {
 	var max, dur : float;
 	var item : SItemUniqueId;
-
+	
 	if(GetWitcherPlayer().GetItemEquippedOnSlot(slot, item))
 	{
 		max = thePlayer.inv.GetItemMaxDurability(item);
 		dur = thePlayer.inv.GetItemDurability(item);
-
+		
 		dur -= perc * max;
 		thePlayer.inv.SetItemDurabilityScript(item, dur);
 	}
@@ -8974,13 +8686,13 @@ exec function alert()
 exec function muttest(optional mutPotName : name, optional slot : EEquipmentSlots)
 {
 	var ids : array<SItemUniqueId>;
-
+	
 	if(mutPotName == '')
 		mutPotName = 'Mutagen 1';
-
+		
 	if(slot == EES_InvalidSlot)
 		slot = EES_PotionMutagen1;
-
+		
 	ids = thePlayer.inv.AddAnItem(mutPotName);
 	GetWitcherPlayer().EquipItemInGivenSlot(ids[0], slot, false);
 }
@@ -8989,9 +8701,9 @@ exec function cage()
 {
 	var entityTemplate : CEntityTemplate;
 	var spawnedEntity : CEntity;
-
+	
 	entityTemplate = (CEntityTemplate)LoadResource("witches_cage");
-
+	
 	spawnedEntity = theGame.CreateEntity(entityTemplate, thePlayer.GetWorldPosition(), thePlayer.GetWorldRotation());
 	spawnedEntity.ApplyAppearance("roots_on");
 }
@@ -9002,12 +8714,12 @@ exec function snowball( optional actorTag : name)
 	var l_actor 		: CActor;
 	var l_actors		: array<CActor>;
 	var l_aiTree		: CAICiriSnowballFightActionTree;
-
+	
 	l_actors = GetActorsInRange( thePlayer, 1000, 99, actorTag );
-
+	
 	l_aiTree = new CAICiriSnowballFightActionTree in l_actor;
 	l_aiTree.OnCreated();
-
+	
 	for	( i = 0; i < l_actors.Size(); i+= 1 )
 	{
 		l_actor = (CActor) l_actors[i];
@@ -9015,21 +8727,21 @@ exec function snowball( optional actorTag : name)
 			continue;
 		l_actor.ForceAIBehavior( l_aiTree, BTAP_AboveCombat);
 	}
-}
+}	
 
 exec function addtelemetrytag( tag : string )
 {
-	theTelemetry.AddSessionTag( tag );
+	theTelemetry.AddSessionTag( tag );	
 }
 
 exec function remtelemetrytag( tag : string )
 {
-	theTelemetry.RemoveSessionTag( tag );
+	theTelemetry.RemoveSessionTag( tag );	
 }
 exec function giveset ( val : name )
 {
 	var iID : array<SItemUniqueId>;
-
+	
 	switch ( val )
 	{
 		case 'gryphon' :
@@ -9097,29 +8809,29 @@ exec function giveset ( val : name )
 			iID = thePlayer.inv.AddAnItem( 'Wolf Pants 4',1);
 			GetWitcherPlayer().EquipItem(iID[0]);
 			iID = thePlayer.inv.AddAnItem( 'Wolf Boots 4',1);
-			break;
-		}
+			break;	
+		}	
 	}
 }
 
 exec function addtemerianarmor()
 {
 	var iID : array<SItemUniqueId>;
-
+	
 	iID = thePlayer.inv.AddAnItem( 'DLC1 Temerian Armor', 1);
-
+	
 	iID = thePlayer.inv.AddAnItem( 'DLC1 Temerian Boots', 1);
-
+	
 	iID = thePlayer.inv.AddAnItem( 'DLC1 Temerian Gloves', 1);
 
 	iID = thePlayer.inv.AddAnItem( 'DLC1 Temerian Pants', 1);
-
+	
 	GetWitcherPlayer().EquipItem( iID[0] );
 	iID = thePlayer.inv.AddAnItem( 'NGP DLC1 Temerian Armor', 1);
-
+	
 	GetWitcherPlayer().EquipItem( iID[0] );
 	iID = thePlayer.inv.AddAnItem( 'NGP DLC1 Temerian Boots', 1);
-
+	
 	GetWitcherPlayer().EquipItem( iID[0] );
 	iID = thePlayer.inv.AddAnItem( 'NGP DLC1 Temerian Gloves', 1);
 
@@ -9130,27 +8842,27 @@ exec function addtemerianarmor()
 exec function addnilfgaardianarmor()
 {
 	var iID : array<SItemUniqueId>;
-
+	
 	GetWitcherPlayer().EquipItem( iID[0] );
 	iID = thePlayer.inv.AddAnItem( 'NGP DLC5 Nilfgaardian Armor', 1);
-
+	
 	GetWitcherPlayer().EquipItem( iID[0] );
 	iID = thePlayer.inv.AddAnItem( 'NGP DLC5 Nilfgaardian Boots', 1);
-
+	
 	GetWitcherPlayer().EquipItem( iID[0] );
 	iID = thePlayer.inv.AddAnItem( 'NGP DLC5 Nilfgaardian Gloves', 1);
 
 	GetWitcherPlayer().EquipItem( iID[0] );
 	iID = thePlayer.inv.AddAnItem( 'NGP DLC5 Nilfgaardian Pants', 1);
 }
-
+ 
 exec function shieldApp( tag : name )
 {
 	var entity : CEntity;
 	var gplEnt : CGameplayEntity;
 	var shield : CEntity;
 	var inv : CInventoryComponent;
-
+	
 	entity = theGame.GetEntityByTag( tag );
 
 	if( entity )
@@ -9162,75 +8874,19 @@ exec function shieldApp( tag : name )
 	}
 }
 
-exec function UnlockAllTransmogItems()
-{
-	var allItemsArmor : array<name>;
-	var allItemsWeapon : array<name>;
-	var dm : CDefinitionsManagerAccessor = theGame.GetDefinitionsManager();
-	var i : int = 0;
-	var itemName : name;
-
-	allItemsArmor = dm.GetItemsWithTag('Armor');
-	allItemsWeapon = dm.GetItemsWithTag('Weapon');
-
-	for(i = 0; i < allItemsArmor.Size(); i+= 1)
-	{
-		itemName = allItemsArmor[i];
-		if(IsRealAppearanceTemp(itemName) && GetLocStringByKeyExt(thePlayer.GetInventory().GetItemLocalizedNameByName(itemName)) != "")
-		{
-			GetWitcherPlayer().UnlockAppearance(itemName);
-		}
-	}
-	for(i = 0; i < allItemsWeapon.Size(); i+= 1)
-	{
-		itemName = allItemsWeapon[i];
-		if(IsRealAppearanceTemp(itemName) && GetLocStringByKeyExt(thePlayer.GetInventory().GetItemLocalizedNameByName(itemName)) != "")
-		{
-			GetWitcherPlayer().UnlockAppearance(itemName);
-		}
-	}
-}
-
-function IsRealAppearanceTemp(itemName : name) : bool
-{
-	
-	switch(itemName)
-	{
-		case 'Ciri armor 01': return false;
-		case 'Wild Hunt armor 01': return false;
-		case 'Ciri pants 01': return false;
-		case 'Wild Hunt pants 01': return false;
-		case 'q705_bond': return false;
-		case 'ma': return false;
-		case 'Wild Hunt gloves 01': return false;
-		case 'q203 Ghost Sword': return false;
-		case 'q203 Ghost Human Sword': return false;
-		case 'maw': return false;
-		case 'axe_test': return false;
-		case 'mace_test': return false;
-		case 'dwarven_hammer_test': return false;
-		case 'NPC Scoiatael sword 2': return false;
-		case 'Damien sword': return false;
-		case 'NPC Knights steel sword 1': return false;
-		case 'Laundry stick': return false;
-		default: return true;
-	}
-	return true;
-}
-
 exec function SwitchAttach( attach : bool, parentEntityTag : name, childEntityTag : name, optional attachSlot: name )
 {
 	var l_parentEntity	: CEntity;
 	var l_childEntity	: CEntity;
-
+	
 	l_parentEntity 	= theGame.GetEntityByTag( parentEntityTag );
 	l_childEntity 	= theGame.GetEntityByTag( childEntityTag );
-
+	
 	if( !l_parentEntity || !l_childEntity )
 	{
 		return;
 	}
-
+	
 	if( attach )
 	{
 		l_childEntity.CreateAttachment( l_parentEntity, attachSlot );
@@ -9239,7 +8895,7 @@ exec function SwitchAttach( attach : bool, parentEntityTag : name, childEntityTa
 	{
 		l_childEntity.BreakAttachment();
 	}
-
+	
 }
 exec function slide()
 {
@@ -9274,7 +8930,7 @@ exec function hl(x,y,w,h : float)
 exec function imlerithSecondStage( tag : name )
 {
 	var imlerith : CNewNPC;
-
+	
 	imlerith = (CNewNPC)theGame.GetNodeByTag( tag );
 	imlerith.DropItemFromSlot( 'l_weapon', true );
 	imlerith.AddEffectDefault( EET_Frozen, thePlayer, "debug" );
@@ -9284,7 +8940,7 @@ exec function changeStyle()
 {
 	var target : CActor;
 	target = thePlayer.GetTarget();
-
+	
 	if ( target )
 	{
 		target.SignalGameplayEvent('LeaveCurrentCombatStyle');
@@ -9294,7 +8950,7 @@ exec function changeStyle()
 exec function addHair1()
 {
 	var newID : array<SItemUniqueId>;
-
+	
 	newID = thePlayer.inv.AddAnItem('Half With Tail Hairstyle', 1);
 	thePlayer.EquipItem(newID[0]);
 }
@@ -9302,7 +8958,7 @@ exec function addHair1()
 exec function addHair2()
 {
 	var newID : array<SItemUniqueId>;
-
+	
 	newID = thePlayer.inv.AddAnItem('Shaved With Tail Hairstyle', 1);
 	thePlayer.EquipItem(newID[0]);
 }
@@ -9310,7 +8966,7 @@ exec function addHair2()
 exec function addHair3()
 {
 	var newID : array<SItemUniqueId>;
-
+	
 	newID = thePlayer.inv.AddAnItem('Long Loose Hairstyle', 1);
 	thePlayer.EquipItem(newID[0]);
 }
@@ -9318,7 +8974,7 @@ exec function addHair3()
 exec function addHairDLC1()
 {
 	var newID : array<SItemUniqueId>;
-
+	
 	newID = thePlayer.inv.AddAnItem('Short Loose Hairstyle', 1);
 	thePlayer.EquipItem(newID[0]);
 }
@@ -9326,7 +8982,7 @@ exec function addHairDLC1()
 exec function addHairDLC2()
 {
 	var newID : array<SItemUniqueId>;
-
+	
 	newID = thePlayer.inv.AddAnItem('Mohawk With Ponytail Hairstyle', 1);
 	thePlayer.EquipItem(newID[0]);
 }
@@ -9334,7 +8990,7 @@ exec function addHairDLC2()
 exec function addHairDLC3()
 {
 	var newID : array<SItemUniqueId>;
-
+	
 	newID = thePlayer.inv.AddAnItem('Nilfgaardian Hairstyle', 1);
 	thePlayer.EquipItem(newID[0]);
 }
@@ -9400,22 +9056,22 @@ exec function addBearArmors()
 {
 	var lm : W3PlayerWitcher;
 	var exp, prevLvl, currLvl : int;
-
+	
 	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
 	lm = GetWitcherPlayer();
 	prevLvl = lm.GetLevel();
 	currLvl = lm.GetLevel();
-
+		
 	while(currLvl < 60)
 	{
 		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false);
+		lm.AddPoints(EExperiencePoint, exp, false); 
 		currLvl = lm.GetLevel();
 		if(prevLvl == currLvl)
 			break;
 		prevLvl = currLvl;
-	}
-
+	}	
+	
 	thePlayer.inv.RemoveAllItems();
 	thePlayer.inv.AddAnItem('Bear Armor', 1);
 	thePlayer.inv.AddAnItem('Bear Armor 1', 1);
@@ -9437,7 +9093,7 @@ exec function addBearArmors()
 	thePlayer.inv.AddAnItem('Bear Boots 3', 1);
 	thePlayer.inv.AddAnItem('Bear Boots 4', 1);
 	thePlayer.inv.AddAnItem('Bear Boots 5', 1);
-
+	
 	thePlayer.inv.AddAnItem('Bear School steel sword', 1);
 	thePlayer.inv.AddAnItem('Bear School steel sword 1', 1);
 	thePlayer.inv.AddAnItem('Bear School steel sword 2', 1);
@@ -9468,21 +9124,21 @@ exec function addLynxArmors()
 {
 	var lm : W3PlayerWitcher;
 	var exp, prevLvl, currLvl : int;
-
+	
 	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
 	lm = GetWitcherPlayer();
 	prevLvl = lm.GetLevel();
 	currLvl = lm.GetLevel();
-
+		
 	while(currLvl < 60)
 	{
 		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false);
+		lm.AddPoints(EExperiencePoint, exp, false); 
 		currLvl = lm.GetLevel();
 		if(prevLvl == currLvl)
 			break;
 		prevLvl = currLvl;
-	}
+	}	
 
 	thePlayer.inv.RemoveAllItems();
 	thePlayer.inv.AddAnItem('Lynx Armor', 1);
@@ -9528,7 +9184,7 @@ exec function addLynxArmors()
 	thePlayer.inv.AddAnItem('Dye Turquoise',10);
 	thePlayer.inv.AddAnItem('Dye White',10);
 	thePlayer.inv.AddAnItem('Dye Yellow',10);
-
+	
 	EncumbranceBoy( 0 );
 }
 
@@ -9538,7 +9194,7 @@ exec function testappearance()
 	var ids : array<SItemUniqueId>;
 
 	thePlayer.inv.RemoveAllItems();
-
+	
 	thePlayer.inv.AddAnItem( 'Red Wolf Armor 1', 1);
 	thePlayer.inv.AddAnItem( 'Red Wolf Armor 2', 1);
 	thePlayer.inv.AddAnItem( 'Red Wolf Gloves 1', 1);
@@ -9588,21 +9244,21 @@ exec function addGryphonArmors()
 
 	var lm : W3PlayerWitcher;
 	var exp, prevLvl, currLvl : int;
-
+	
 	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
 	lm = GetWitcherPlayer();
 	prevLvl = lm.GetLevel();
 	currLvl = lm.GetLevel();
-
+		
 	while(currLvl < 60)
 	{
 		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false);
+		lm.AddPoints(EExperiencePoint, exp, false); 
 		currLvl = lm.GetLevel();
 		if(prevLvl == currLvl)
 			break;
 		prevLvl = currLvl;
-	}
+	}	
 
 	thePlayer.inv.RemoveAllItems();
 	thePlayer.inv.AddAnItem('Gryphon Armor', 1);
@@ -9658,21 +9314,21 @@ exec function addViperArmors()
 
 	var lm : W3PlayerWitcher;
 	var exp, prevLvl, currLvl : int;
-
+	
 	GetWitcherPlayer().Debug_ClearCharacterDevelopment();
 	lm = GetWitcherPlayer();
 	prevLvl = lm.GetLevel();
 	currLvl = lm.GetLevel();
-
+		
 	while(currLvl < 60)
 	{
 		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
-		lm.AddPoints(EExperiencePoint, exp, false);
+		lm.AddPoints(EExperiencePoint, exp, false); 
 		currLvl = lm.GetLevel();
 		if(prevLvl == currLvl)
 			break;
 		prevLvl = currLvl;
-	}
+	}	
 
 thePlayer.inv.RemoveAllItems();
 thePlayer.inv.AddAnItem('Starting Armor', 1);
@@ -9699,15 +9355,6 @@ thePlayer.inv.AddAnItem('Witcher Silver Sword', 1);
 	thePlayer.inv.AddAnItem('Dye Yellow',10);
 
 	EncumbranceBoy( 0 );
-}
-
-exec function TestLyDyes()
-{
-	thePlayer.inv.AddAnItem('Dye Pale Green',10);
-	thePlayer.inv.AddAnItem('Dye Burgundy',10);
-	thePlayer.inv.AddAnItem('Dye Blue Lavender',10);
-	thePlayer.inv.AddAnItem('Dye Gold',10);
-	thePlayer.inv.AddAnItem('Dye Dreamy Blue',10);
 }
 
 exec function addRelicArmors()
@@ -9899,23 +9546,23 @@ exec function AddAllThMaps ()
 }
 
 exec function addAllSkills(val : int, optional level : int)
-{
+{	
 	var lm : W3PlayerWitcher;
 	var i,exp,k : int;
-
+	
 	if(level < 1)
 	{
 		level = 1;
 	}
-
+	
 	lm = GetWitcherPlayer();
 	for(i=0; i<level; i+=1)
 	{
 		exp = lm.GetTotalExpForNextLevel() - lm.GetPointsTotal(EExperiencePoint);
 		lm.AddPoints(EExperiencePoint, exp, false );
 	}
-
-
+	
+	
 	for ( k=0 ; k < val; k += 1 )
 	{
 		thePlayer.AddSkill(S_Sword_1 );
@@ -9998,7 +9645,7 @@ exec function addAllSkills(val : int, optional level : int)
 		thePlayer.AddSkill(S_Alchemy_s18);
 		thePlayer.AddSkill(S_Alchemy_s19);
 		thePlayer.AddSkill(S_Alchemy_s20);
-
+		
 		
 		thePlayer.AddSkill(S_Perk_01);
 		thePlayer.AddSkill(S_Perk_02);
@@ -10025,6 +9672,211 @@ exec function addAllSkills(val : int, optional level : int)
 	}
 }
 
+exec function secretgwint(optional deckIndex : int)
+{
+	var gwintManager:CR4GwintManager;
+	gwintManager = theGame.GetGwintManager();
+	gwintManager.setDoubleAIEnabled(false);
+	
+	if (deckIndex)
+	{
+		gwintManager.SetEnemyDeckIndex(deckIndex);
+	}
+	
+	gwintManager.testMatch = true;
+	
+	gwintManager.SetForcedFaction(GwintFaction_Neutral);
+
+	if (gwintManager.GetHasDoneTutorial())
+	{
+		gwintManager.gameRequested = true;
+		theGame.RequestMenu( 'DeckBuilder' );
+	}
+	else
+	{
+		theGame.RequestMenu( 'GwintGame' );
+	}
+}
+
+exec function setAIDeck(deckName : name)
+{
+	theGame.GetGwintManager().SetEnemyDeckByName(deckName);
+}
+
+exec function secretgwintAI()
+{
+	var gwintManager:CR4GwintManager;
+	gwintManager = theGame.GetGwintManager();
+	
+	gwintManager.testMatch = true;
+	gwintManager.setDoubleAIEnabled(true);
+	
+	theGame.RequestMenu( 'GwintGame' );
+}
+
+exec function secretdeckbuilder()
+{
+	var gwintManager:CR4GwintManager;
+	gwintManager = theGame.GetGwintManager();
+	
+	gwintManager.testMatch = true;
+	theGame.RequestMenu( 'DeckBuilder' );
+}
+
+exec function resetDecks()
+{
+	theGame.GetGwintManager().OnGwintSetupNewgame();
+}
+
+exec function winGwint( result : bool )
+{
+	theGame.GetGuiManager().GetRootMenu().CloseMenu();
+	if (result)
+	{
+	thePlayer.SetGwintMinigameState( EMS_End_PlayerWon );
+	}
+	else
+	{
+	thePlayer.SetGwintMinigameState( EMS_End_PlayerLost );
+	}
+}
+
+exec function winGwintPanel( result : int )
+{
+	var manager : CR4GuiManager;
+	var gwintMenu : CR4GwintGameMenu;
+	
+	manager = (CR4GuiManager)theGame.GetGuiManager();
+	if ( manager )
+	{
+		gwintMenu = (CR4GwintGameMenu)manager.GetRootMenu();
+		if ( gwintMenu )
+		{
+			gwintMenu.EndGwintMatch( result );
+		}
+	}
+}
+
+exec function unlockDeck( val : int)
+{
+	theGame.GetGwintManager().UnlockDeck(val);
+	theGame.GetGwintManager().SetSelectedPlayerDeck(val);
+}
+
+exec function addCard( cardID : int )
+{
+	theGame.GetGwintManager().AddCardToCollection(cardID);
+}
+
+exec function addCardByName( cardName : name )
+{
+	GetWitcherPlayer().AddGwentCard( cardName, 1 );
+}
+
+exec function givecards ( val : name )
+{
+	switch ( val )
+	{
+		case 'nilfgaard' :
+		{
+			thePlayer.inv.AddAnItem( 'gwint_card_impera_brigade',3);
+			thePlayer.inv.AddAnItem( 'gwint_card_cynthia',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_letho',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_archer_support',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_siege_engineer',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_assire',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_fringilla',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_nauzicaa',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_black_archer',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_siege_support',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_menno',1);
+			break;
+		}
+		case 'monsters' :
+		{
+			thePlayer.inv.AddAnItem( 'gwint_card_imlerith',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_katakan',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_bruxa',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_garkain',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_fleder',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_ghoul',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_nekker',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_grave_hag',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_fire_elemental',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_fogling',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_wyvern',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_leshan',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_witch_velen',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_arachas',3);
+			break;			
+			
+		}
+		case 'scoia' :
+		{
+			thePlayer.inv.AddAnItem( 'gwint_card_saskia',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_havekar_support',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_mahakam',4);
+			thePlayer.inv.AddAnItem( 'gwint_card_isengrim',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_havekar_nurse',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_barclay',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_dennis',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_elf_skirmisher',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_dol_infantry',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_vrihedd_brigade',1);
+			break;	
+			
+		}
+		case 'kingdoms' :
+		{
+			thePlayer.inv.AddAnItem( 'gwint_card_thaler',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_blue_stripes',3);
+			thePlayer.inv.AddAnItem( 'gwint_card_poor_infantry',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_trebuchet',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_natalis',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_esterad',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_siege_tower',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_crinfrid',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_kaedwen',2);
+			thePlayer.inv.AddAnItem( 'gwint_card_witch_hunters',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_ballista_officer',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_ballista',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_stennis',1);
+			thePlayer.inv.AddAnItem( 'gwint_card_siegfried',1);
+			break;	
+			
+		}
+		case 'skellige' :
+		{
+			thePlayer.inv.AddAnItem( 'gwint_card_king_bran_bronze', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_hemdal', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_hjalmar', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_cerys', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_ermion', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_draig', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_holger_blackhand', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_madman_lugos', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_donar_an_hindar', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_udalryk', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_birna_bran', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_blueboy_lugos', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_svanrige', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_olaf', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_berserker', 4 );
+			thePlayer.inv.AddAnItem( 'gwint_card_young_berserker', 4 );
+			thePlayer.inv.AddAnItem( 'gwint_card_clan_an_craite_warrior', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_clan_tordarroch_armorsmith', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_clan_heymaey_skald', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_light_drakkar', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_war_drakkar', 4 );
+			thePlayer.inv.AddAnItem( 'gwint_card_clan_brokvar_archer', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_clan_drummond_shieldmaiden', 4 );
+			thePlayer.inv.AddAnItem( 'gwint_card_clan_dimun_pirate', 1 );
+			thePlayer.inv.AddAnItem( 'gwint_card_cock', 3 );
+			thePlayer.inv.AddAnItem( 'gwint_card_mushroom', 3 );
+		}
+	}
+}
+
 exec function specials(optional off : bool, optional force : bool)
 {
 	GetWitcherPlayer().Debug_EquipTestingSkills(!off, force);
@@ -10039,10 +9891,10 @@ exec function testhorse( level : int)
 {
 	var id    : SItemUniqueId;
 	var newID : SItemUniqueId;
-
+	
 	var arg   : array<SItemUniqueId>;
 	var eqId  : SItemUniqueId;
-
+	
 	switch (level)
 	{
 	default:
@@ -10067,7 +9919,7 @@ exec function testhorse( level : int)
 		thePlayer.inv.AddAnItem( 'Horse Saddle 4', 1);
 		break;
 	}
-
+	
 	
 }
 
@@ -10076,12 +9928,12 @@ exec function additemhorse(itemName : name, cnt : int)
 	var arg   : array<SItemUniqueId>;
 	var eqId : SItemUniqueId;
 	var i : int;
-
+	
 	arg = thePlayer.inv.AddAnItem(itemName, cnt);
-
+	
 	for(i=0; i<arg.Size(); i+=1)
 	{
-		eqId = GetWitcherPlayer().GetHorseManager().MoveItemToHorse(arg[i]);
+		eqId = GetWitcherPlayer().GetHorseManager().MoveItemToHorse(arg[i]);		
 		GetWitcherPlayer().GetHorseManager().EquipItem(eqId);
 	}
 }
@@ -10101,7 +9953,7 @@ exec function printhorse()
 	{
 		LogChannel('HorseMgr', inv.GetItemName(items[i]) + " x" + inv.GetItemQuantity(items[i]));
 	}
-
+	
 	val = CalculateAttributeValue(GetWitcherPlayer().GetHorseManager().GetHorseAttributeValue('vitality', false));
 	LogChannel('HorseMgr', "Vitality: " + val);
 	val = CalculateAttributeValue(GetWitcherPlayer().GetHorseManager().GetHorseAttributeValue('stamina', false));
@@ -10120,9 +9972,9 @@ exec function testBeast()
 	var childEntries : array<CJournalBase>;
 	var descriptionGroup : CJournalCreatureDescriptionGroup;
 	var descriptionEntry : CJournalCreatureDescriptionEntry;
-
+	
 	manager = theGame.GetJournalManager();
-
+	
 	resource = (CJournalResource)LoadResource( "BestiaryBasilisk" );
 	
 	
@@ -10161,15 +10013,15 @@ exec function scaleBubble( magicBubbleTag : name, desiredScale : float, scaleDur
 	var entitesList : array<CEntity>;
 	var magicBubble : W3MagicBubbleEntity;
 	var i : int;
-
+	
 	theGame.GetEntitiesByTag( magicBubbleTag, entitesList );
-
+	
 	if ( entitesList.Size() <= 0 )
 	{
 		LogQuest( "Quest function <<ScaleMagicBubble>>: No entities with tag: '" + magicBubbleTag + "' was found!" );
 		return;
 	}
-
+	
 	for(i=0; i<entitesList.Size(); i+=1)
 	{
 		magicBubble = (W3MagicBubbleEntity)entitesList[i];
@@ -10181,7 +10033,7 @@ exec function scaleBubble( magicBubbleTag : name, desiredScale : float, scaleDur
 }
 
 exec function eq_silver( sword_id : int, optional dir : name)
-{
+{	
 	var swords 		: array<name>;
 	var ids 		: array<SItemUniqueId>;
 	var id			: SItemUniqueId;
@@ -10189,7 +10041,7 @@ exec function eq_silver( sword_id : int, optional dir : name)
 	var j 			: int;
 	var inv 		: CInventoryComponent = thePlayer.inv;
 	var temp_name 	: name;
-
+	
 	swords.PushBack( 'Viper School silver sword' );			
 	swords.PushBack( 'Viper School silver sword' );			
 	swords.PushBack( 'Lynx School silver sword' );			
@@ -10222,7 +10074,7 @@ exec function eq_silver( sword_id : int, optional dir : name)
 	swords.PushBack( 'Silver sword 6' );					
 	swords.PushBack( 'Silver sword 7' );					
 	swords.PushBack( 'Silver sword 8' );					
-
+	
 	if ( dir == 'None' )
 	{
 		for ( i = 1; i < swords.Size(); i += 1 )
@@ -10230,21 +10082,21 @@ exec function eq_silver( sword_id : int, optional dir : name)
 			inv.RemoveItemByName(swords[i],1);
 		}
 	}
-
+	
 	if ( sword_id > 0 )
 	{
 		ids = inv.AddAnItem(swords[sword_id],1);
 		thePlayer.EquipItem(ids[0]);
 		Log("=== SELECTED SWORD NR. : " + sword_id + "  SWORD NAME: " + swords[sword_id]);
 	}
-
+	
 	switch(dir)
 	{
 		case 'next' :
 		{
 			inv.GetItemEquippedOnSlot( EES_SilverSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if ( swords[j] == temp_name )
@@ -10265,7 +10117,7 @@ exec function eq_silver( sword_id : int, optional dir : name)
 		{
 			inv.GetItemEquippedOnSlot( EES_SilverSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if (swords[j] == temp_name)
@@ -10280,17 +10132,17 @@ exec function eq_silver( sword_id : int, optional dir : name)
 					break;
 				}
 			}
-			break;
+			break;	
 		}
-		case 'None':	break;
+		case 'None':	break;	
 	}
-
+	
 	swords.Clear();
 	ids.Clear();
 }
 
 exec function eq_steel( sword_id : int, optional dir : name)
-{
+{	
 	var swords 		: array<name>;
 	var ids 		: array<SItemUniqueId>;
 	var id			: SItemUniqueId;
@@ -10298,7 +10150,7 @@ exec function eq_steel( sword_id : int, optional dir : name)
 	var j 			: int;
 	var inv 		: CInventoryComponent = thePlayer.inv;
 	var temp_name 	: name;
-
+	
 	swords.PushBack( 'Viper School steel sword' ) ;
 	swords.PushBack( 'Viper School steel sword' ) ;
 	swords.PushBack( 'Gryphon School steel sword' ) ;
@@ -10322,25 +10174,25 @@ exec function eq_steel( sword_id : int, optional dir : name)
 	swords.PushBack( 'No Mans Land sword 2' ) ;
 	swords.PushBack( 'No Mans Land sword 3' ) ;
 	swords.PushBack( 'No Mans Land sword 4' ) ;
-	swords.PushBack( 'Rusty Novigraadan sword' ) ;
-	swords.PushBack( 'Novigraadan sword 1' ) ;
-	swords.PushBack( 'Novigraadan sword 2' ) ;
-	swords.PushBack( 'Novigraadan sword 3' ) ;
-	swords.PushBack( 'Novigraadan sword 4' ) ;
+	swords.PushBack( 'Rusty Novigraadan sword' ) ;	
+	swords.PushBack( 'Novigraadan sword 1' ) ;	
+	swords.PushBack( 'Novigraadan sword 2' ) ;	
+	swords.PushBack( 'Novigraadan sword 3' ) ;	
+	swords.PushBack( 'Novigraadan sword 4' ) ;	
 	swords.PushBack( 'Rusty Nilfgaardian sword' ) ;
 	swords.PushBack( 'Nilfgaardian sword 1' ) ;
-	swords.PushBack( 'Nilfgaardian sword 2' ) ;
-	swords.PushBack( 'Nilfgaardian sword 3' ) ;
-	swords.PushBack( 'Nilfgaardian sword 4' ) ;
-	swords.PushBack( 'Rusty Skellige sword' ) ;
-	swords.PushBack( 'Skellige sword 1' ) ;
-	swords.PushBack( 'Skellige sword 2' ) ;
+	swords.PushBack( 'Nilfgaardian sword 2' ) ;	
+	swords.PushBack( 'Nilfgaardian sword 3' ) ;	
+	swords.PushBack( 'Nilfgaardian sword 4' ) ;	
+	swords.PushBack( 'Rusty Skellige sword' ) ;	
+	swords.PushBack( 'Skellige sword 1' ) ;	
+	swords.PushBack( 'Skellige sword 2' ) ;	
 	swords.PushBack( 'Skellige sword 3' ) ;
-	swords.PushBack( 'Skellige sword 4' ) ;
-	swords.PushBack( 'q402 Skellige sword 3' ) ;
+	swords.PushBack( 'Skellige sword 4' ) ;	
+	swords.PushBack( 'q402 Skellige sword 3' ) ;	
 	swords.PushBack( 'Scoiatael sword 1' ) ;
 	swords.PushBack( 'Scoiatael sword 2' ) ;
-	swords.PushBack( 'Scoiatael sword 3' ) ;
+	swords.PushBack( 'Scoiatael sword 3' ) ;	
 	swords.PushBack( 'Inquisitor sword 1' ) ;
 	swords.PushBack( 'Inquisitor sword 2' ) ;
 	swords.PushBack( 'Dwarven sword 1' ) ;
@@ -10359,7 +10211,7 @@ exec function eq_steel( sword_id : int, optional dir : name)
 	swords.PushBack( 'Short sword 2' ) ;
 
 
-
+	
 	if ( dir == 'None' )
 	{
 		for ( i = 1; i < swords.Size(); i += 1 )
@@ -10367,21 +10219,21 @@ exec function eq_steel( sword_id : int, optional dir : name)
 			inv.RemoveItemByName(swords[i],1);
 		}
 	}
-
+	
 	if ( sword_id > 0 )
 	{
 		ids = inv.AddAnItem(swords[sword_id],1);
 		thePlayer.EquipItem(ids[0]);
 		Log("=== SELECTED SWORD NR. : " + sword_id + "  SWORD NAME: " + swords[sword_id]);
 	}
-
+	
 	switch(dir)
 	{
 		case 'next' :
 		{
 			inv.GetItemEquippedOnSlot( EES_SteelSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if ( swords[j] == temp_name )
@@ -10402,7 +10254,7 @@ exec function eq_steel( sword_id : int, optional dir : name)
 		{
 			inv.GetItemEquippedOnSlot( EES_SteelSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if (swords[j] == temp_name)
@@ -10417,17 +10269,17 @@ exec function eq_steel( sword_id : int, optional dir : name)
 					break;
 				}
 			}
-			break;
+			break;	
 		}
-		case 'None':	break;
+		case 'None':	break;	
 	}
-
+	
 	swords.Clear();
 	ids.Clear();
 }
 
 exec function eq_steel_unique( sword_id : int, optional dir : name)
-{
+{	
 	var swords 		: array<name>;
 	var ids 		: array<SItemUniqueId>;
 	var id			: SItemUniqueId;
@@ -10435,7 +10287,7 @@ exec function eq_steel_unique( sword_id : int, optional dir : name)
 	var j 			: int;
 	var inv 		: CInventoryComponent = thePlayer.inv;
 	var temp_name 	: name;
-
+	
 	swords.PushBack( 'Angivare' ) ;
 	swords.PushBack( 'Arbitrator' ) ;
 	swords.PushBack( 'Ardaenye' ) ;
@@ -10472,7 +10324,7 @@ exec function eq_steel_unique( sword_id : int, optional dir : name)
 	swords.PushBack( 'WithcerSilverWolf' ) ;
 	swords.PushBack( 'Gloryofthenorth' ) ;
 	swords.PushBack( 'Torlara' ) ;
-
+	
 	if ( dir == 'None' )
 	{
 		for ( i = 1; i < swords.Size(); i += 1 )
@@ -10480,21 +10332,21 @@ exec function eq_steel_unique( sword_id : int, optional dir : name)
 			inv.RemoveItemByName(swords[i],1);
 		}
 	}
-
+	
 	if ( sword_id > 0 )
 	{
 		ids = inv.AddAnItem(swords[sword_id],1);
 		thePlayer.EquipItem(ids[0]);
 		Log("=== SELECTED SWORD NR. : " + sword_id + "  SWORD NAME: " + swords[sword_id]);
 	}
-
+	
 	switch(dir)
 	{
 		case 'next' :
 		{
 			inv.GetItemEquippedOnSlot( EES_SteelSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if ( swords[j] == temp_name )
@@ -10515,7 +10367,7 @@ exec function eq_steel_unique( sword_id : int, optional dir : name)
 		{
 			inv.GetItemEquippedOnSlot( EES_SteelSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if (swords[j] == temp_name)
@@ -10530,17 +10382,17 @@ exec function eq_steel_unique( sword_id : int, optional dir : name)
 					break;
 				}
 			}
-			break;
+			break;	
 		}
-		case 'None':	break;
+		case 'None':	break;	
 	}
-
+	
 	swords.Clear();
 	ids.Clear();
 }
 
 exec function eq_silver_unique( sword_id : int, optional dir : name)
-{
+{	
 	var swords 		: array<name>;
 	var ids 		: array<SItemUniqueId>;
 	var id			: SItemUniqueId;
@@ -10548,7 +10400,7 @@ exec function eq_silver_unique( sword_id : int, optional dir : name)
 	var j 			: int;
 	var inv 		: CInventoryComponent = thePlayer.inv;
 	var temp_name 	: name;
-
+	
 	swords.PushBack( 'Addandeith' ) ;
 	swords.PushBack( 'Moonblade' ) ;
 	swords.PushBack( 'Aerondight' ) ;
@@ -10574,11 +10426,11 @@ exec function eq_silver_unique( sword_id : int, optional dir : name)
 	swords.PushBack( 'Negotiator' ) ;
 	swords.PushBack( 'Harpy' ) ;
 	swords.PushBack( 'Tlareg' ) ;
-
+	
 	swords.PushBack( 'Breathofthenorth' ) ;
 	swords.PushBack( 'Torzirael' ) ;
 
-
+	
 	if ( dir == 'None' )
 	{
 		for ( i = 1; i < swords.Size(); i += 1 )
@@ -10586,21 +10438,21 @@ exec function eq_silver_unique( sword_id : int, optional dir : name)
 			inv.RemoveItemByName(swords[i],1);
 		}
 	}
-
+	
 	if ( sword_id > 0 )
 	{
 		ids = inv.AddAnItem(swords[sword_id],1);
 		thePlayer.EquipItem(ids[0]);
 		Log("=== SELECTED SWORD NR. : " + sword_id + "  SWORD NAME: " + swords[sword_id]);
 	}
-
+	
 	switch(dir)
 	{
 		case 'next' :
 		{
 			inv.GetItemEquippedOnSlot( EES_SteelSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if ( swords[j] == temp_name )
@@ -10621,7 +10473,7 @@ exec function eq_silver_unique( sword_id : int, optional dir : name)
 		{
 			inv.GetItemEquippedOnSlot( EES_SteelSword, id );
 			temp_name = inv.GetItemName( id );
-
+			
 			for ( j = 1; j < swords.Size(); j += 1 )
 			{
 				if (swords[j] == temp_name)
@@ -10636,11 +10488,11 @@ exec function eq_silver_unique( sword_id : int, optional dir : name)
 					break;
 				}
 			}
-			break;
+			break;	
 		}
-		case 'None':	break;
+		case 'None':	break;	
 	}
-
+	
 	swords.Clear();
 	ids.Clear();
 }
@@ -10648,9 +10500,9 @@ exec function eq_silver_unique( sword_id : int, optional dir : name)
 exec function activateAllGlossaryCharacters()
 {
 	var manager : CWitcherJournalManager;
-
+	
 	manager = theGame.GetJournalManager();
-
+	
 	activateJournalCharacterEntryWithAlias("CharactersAnabelle", manager);
 	activateJournalCharacterEntryWithAlias("CharactersAnnaStenger", manager);
 	activateJournalCharacterEntryWithAlias("CharactersArnvald", manager);
@@ -10707,7 +10559,7 @@ exec function activateAllGlossaryCharacters()
 	activateJournalCharacterEntryWithAlias("CharactersMenge", manager);
 	activateJournalCharacterEntryWithAlias("CharactersMousesack", manager);
 	activateJournalCharacterEntryWithAlias("CharactersMysteriousElf", manager);
-
+	activateJournalCharacterEntryWithAlias("CharactersNataniel", manager);
 	activateJournalCharacterEntryWithAlias("CharactersOtrygg", manager);
 	activateJournalCharacterEntryWithAlias("CharactersPhilippaEilhart", manager);
 	activateJournalCharacterEntryWithAlias("CharactersPriscilla", manager);
@@ -10741,9 +10593,9 @@ exec function activateAllGlossaryCharacters()
 exec function activateAllGlossaryEncyclopedia()
 {
 	var manager : CWitcherJournalManager;
-
+	
 	manager = theGame.GetJournalManager();
-
+	
 	activateJournalGlossaryGroupWithAlias("GlossaryDebugGlossary", manager);
 	activateJournalGlossaryGroupWithAlias("GlossaryWitchers", manager);
 }
@@ -10751,13 +10603,13 @@ exec function activateAllGlossaryEncyclopedia()
 exec function activateAllGlossaryStorybook()
 {
 	var manager : CWitcherJournalManager;
-
+	
 	manager = theGame.GetJournalManager();
-
+	
 	
 	activateJournalStoryBookPageEntryWithAlias("StoryBookPrologueEntry01", manager);
 	activateJournalStoryBookPageEntryWithAlias("StoryBookPrologueEntry02", manager);
-
+	
 	
 	activateJournalStoryBookPageEntryWithAlias("StoryBookChapter1Entry01", manager);
 	activateJournalStoryBookPageEntryWithAlias("StoryBookChapter1Entry02", manager);
@@ -10785,9 +10637,9 @@ exec function activateAllGlossaryStorybook()
 exec function activateAllGlossaryBeastiary()
 {
 	var manager : CWitcherJournalManager;
-
+	
 	manager = theGame.GetJournalManager();
-
+	
 	activateJournalBestiaryEntryWithAlias("BestiaryElemental", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryGolem", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryIceGolem", manager);
@@ -10853,7 +10705,7 @@ exec function activateAllGlossaryBeastiary()
 	activateJournalBestiaryEntryWithAlias("BestiarySilvan", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryWitches", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryGolding", manager);
-
+	
 }
 
 exec function testJournal()
@@ -10886,7 +10738,7 @@ exec function test61257()
 	var i 				: int;
 	var poster			: W3Poster;
 	var component		: CComponent;
-
+		
 	FindGameplayEntitiesInRange( entities, thePlayer, 50, 1000 );
 	for ( i = 0; i < entities.Size(); i += 1 )
 	{
@@ -10940,13 +10792,308 @@ exec function sysmsgtst()
 	theGame.GetGuiManager().HideUserDialog( 0);
 }
 
-exec function testnotify()
+exec function addgwintcards( optional deck : string )
 {
+	switch (deck)
+	{
+		case "1":
+		case "NK":
+		case "Northern":
+		case "Northern Kingdoms":
+			AddDeckNK();
+			break;
+		case "2":
+		case "Nilf":
+		case "Nilfgaard":
+			AddDeckNilf();
+			break;
+		case "3":
+		case "Scoia":
+		case "Scoia'tael":
+			AddDeckScoia();
+			break;
+		case "4": 
+		case "Monst":
+		case "Monster":
+		case "Monsters":
+			AddDeckMonst();
+			break;
+		case "5":
+		case "Ske":
+		case "Skellige":
+			AddDeckSke();
+			break;
+		case "6":
+		case "Neutral":
+			AddDeckNeutral();
+			break;
+		default:
+			AddDeckNeutral();
+			AddDeckNK();
+			AddDeckNilf();
+			AddDeckScoia();
+			AddDeckMonst();
+			AddDeckSke();
+			break;
+	}	
+}
+
+function AddDeckNK()
+{
+	
+	theGame.GetGwintManager().AddCardToCollection( 1002 ); 
+	theGame.GetGwintManager().AddCardToCollection( 1003 ); 
+	theGame.GetGwintManager().AddCardToCollection( 1004 ); 
+	theGame.GetGwintManager().AddCardToCollection( 1005 ); 
+	theGame.GetGwintManager().AddCardToCollection( 100 ); 
+	theGame.GetGwintManager().AddCardToCollection( 101 ); 
+	theGame.GetGwintManager().AddCardToCollection( 102 ); 
+	theGame.GetGwintManager().AddCardToCollection( 103 ); 
+	theGame.GetGwintManager().AddCardToCollection( 105 ); 
+	theGame.GetGwintManager().AddCardToCollection( 109 ); 
+	theGame.GetGwintManager().AddCardToCollection( 126 ); 
+	theGame.GetGwintManager().AddCardToCollection( 127 ); 
+	theGame.GetGwintManager().AddCardToCollection( 130 ); 
+	theGame.GetGwintManager().AddCardToCollection( 130 ); 
+	theGame.GetGwintManager().AddCardToCollection( 130 ); 
+	theGame.GetGwintManager().AddCardToCollection( 140 ); 
+	theGame.GetGwintManager().AddCardToCollection( 140 ); 
+	theGame.GetGwintManager().AddCardToCollection( 160 ); 
+	theGame.GetGwintManager().AddCardToCollection( 170 ); 
+	
+}
+
+function AddDeckNilf()
+{
+	theGame.GetGwintManager().AddCardToCollection( 2002 ); 
+	theGame.GetGwintManager().AddCardToCollection( 2003 ); 
+	theGame.GetGwintManager().AddCardToCollection( 2004 ); 
+	theGame.GetGwintManager().AddCardToCollection( 2005 ); 
+	theGame.GetGwintManager().AddCardToCollection( 200 ); 
+	theGame.GetGwintManager().AddCardToCollection( 201 ); 
+	theGame.GetGwintManager().AddCardToCollection( 202 ); 
+	theGame.GetGwintManager().AddCardToCollection( 203 ); 
+	theGame.GetGwintManager().AddCardToCollection( 205 ); 
+	theGame.GetGwintManager().AddCardToCollection( 206 ); 
+	theGame.GetGwintManager().AddCardToCollection( 207 ); 
+	theGame.GetGwintManager().AddCardToCollection( 208 ); 
+	theGame.GetGwintManager().AddCardToCollection( 209 ); 
+	theGame.GetGwintManager().AddCardToCollection( 210 ); 
+	theGame.GetGwintManager().AddCardToCollection( 211 ); 
+	theGame.GetGwintManager().AddCardToCollection( 212 ); 
+	theGame.GetGwintManager().AddCardToCollection( 213 ); 
+	theGame.GetGwintManager().AddCardToCollection( 214 ); 
+	theGame.GetGwintManager().AddCardToCollection( 215 ); 
+	theGame.GetGwintManager().AddCardToCollection( 217 ); 
+	theGame.GetGwintManager().AddCardToCollection( 218 ); 
+	theGame.GetGwintManager().AddCardToCollection( 219 ); 
+	theGame.GetGwintManager().AddCardToCollection( 220 ); 
+	theGame.GetGwintManager().AddCardToCollection( 221 ); 
+	theGame.GetGwintManager().AddCardToCollection( 230 ); 
+	theGame.GetGwintManager().AddCardToCollection( 231 ); 
+	theGame.GetGwintManager().AddCardToCollection( 235 ); 
+	theGame.GetGwintManager().AddCardToCollection( 236 ); 
+	theGame.GetGwintManager().AddCardToCollection( 240 ); 
+	theGame.GetGwintManager().AddCardToCollection( 241 ); 
+	theGame.GetGwintManager().AddCardToCollection( 245 ); 
+	theGame.GetGwintManager().AddCardToCollection( 245 ); 
+	theGame.GetGwintManager().AddCardToCollection( 245 ); 
+	theGame.GetGwintManager().AddCardToCollection( 245 ); 
+	theGame.GetGwintManager().AddCardToCollection( 250 ); 
+	theGame.GetGwintManager().AddCardToCollection( 250 ); 
+	theGame.GetGwintManager().AddCardToCollection( 250 ); 
+	theGame.GetGwintManager().AddCardToCollection( 255 ); 
+	theGame.GetGwintManager().AddCardToCollection( 260 ); 
+	theGame.GetGwintManager().AddCardToCollection( 261 ); 
+	theGame.GetGwintManager().AddCardToCollection( 265 ); 
+}
+
+function AddDeckScoia()
+{
+	theGame.GetGwintManager().AddCardToCollection( 3002 ); 
+	theGame.GetGwintManager().AddCardToCollection( 3003 ); 
+	theGame.GetGwintManager().AddCardToCollection( 3004 ); 
+	theGame.GetGwintManager().AddCardToCollection( 3005 ); 
+	theGame.GetGwintManager().AddCardToCollection( 300 ); 
+	theGame.GetGwintManager().AddCardToCollection( 301 ); 
+	theGame.GetGwintManager().AddCardToCollection( 302 ); 
+	theGame.GetGwintManager().AddCardToCollection( 303 ); 
+	theGame.GetGwintManager().AddCardToCollection( 305 ); 
+	theGame.GetGwintManager().AddCardToCollection( 306 ); 
+	theGame.GetGwintManager().AddCardToCollection( 307 ); 
+	theGame.GetGwintManager().AddCardToCollection( 308 ); 
+	theGame.GetGwintManager().AddCardToCollection( 309 ); 
+	theGame.GetGwintManager().AddCardToCollection( 310 ); 
+	theGame.GetGwintManager().AddCardToCollection( 311 ); 
+	theGame.GetGwintManager().AddCardToCollection( 312 ); 
+	theGame.GetGwintManager().AddCardToCollection( 313 ); 
+	theGame.GetGwintManager().AddCardToCollection( 320 ); 
+	theGame.GetGwintManager().AddCardToCollection( 321 ); 
+	theGame.GetGwintManager().AddCardToCollection( 322 ); 
+	theGame.GetGwintManager().AddCardToCollection( 325 ); 
+	theGame.GetGwintManager().AddCardToCollection( 326 ); 
+	theGame.GetGwintManager().AddCardToCollection( 330 ); 
+	theGame.GetGwintManager().AddCardToCollection( 331 ); 
+	theGame.GetGwintManager().AddCardToCollection( 332 ); 
+	theGame.GetGwintManager().AddCardToCollection( 335 ); 
+	theGame.GetGwintManager().AddCardToCollection( 336 ); 
+	theGame.GetGwintManager().AddCardToCollection( 337 ); 
+	theGame.GetGwintManager().AddCardToCollection( 340 ); 
+	theGame.GetGwintManager().AddCardToCollection( 341 ); 
+	theGame.GetGwintManager().AddCardToCollection( 342 ); 
+	theGame.GetGwintManager().AddCardToCollection( 343 ); 
+	theGame.GetGwintManager().AddCardToCollection( 344 ); 
+	theGame.GetGwintManager().AddCardToCollection( 350 ); 
+	theGame.GetGwintManager().AddCardToCollection( 351 ); 
+	theGame.GetGwintManager().AddCardToCollection( 352 ); 
+	theGame.GetGwintManager().AddCardToCollection( 355 ); 
+	theGame.GetGwintManager().AddCardToCollection( 360 ); 
+	theGame.GetGwintManager().AddCardToCollection( 365 ); 
+	theGame.GetGwintManager().AddCardToCollection( 366 ); 
+	theGame.GetGwintManager().AddCardToCollection( 367 ); 
+	theGame.GetGwintManager().AddCardToCollection( 368 ); 
+}
+
+function AddDeckMonst()
+{
+	theGame.GetGwintManager().AddCardToCollection( 4002 ); 
+	theGame.GetGwintManager().AddCardToCollection( 4003 ); 
+	theGame.GetGwintManager().AddCardToCollection( 4004 ); 
+	theGame.GetGwintManager().AddCardToCollection( 4005 ); 
+	theGame.GetGwintManager().AddCardToCollection( 400 ); 
+	theGame.GetGwintManager().AddCardToCollection( 401 ); 
+	theGame.GetGwintManager().AddCardToCollection( 402 ); 
+	theGame.GetGwintManager().AddCardToCollection( 403 ); 
+	theGame.GetGwintManager().AddCardToCollection( 405 ); 
+	theGame.GetGwintManager().AddCardToCollection( 407 ); 
+	theGame.GetGwintManager().AddCardToCollection( 410 ); 
+	theGame.GetGwintManager().AddCardToCollection( 413 ); 
+	theGame.GetGwintManager().AddCardToCollection( 415 ); 
+	theGame.GetGwintManager().AddCardToCollection( 417 ); 
+	theGame.GetGwintManager().AddCardToCollection( 420 ); 
+	theGame.GetGwintManager().AddCardToCollection( 423 ); 
+	theGame.GetGwintManager().AddCardToCollection( 425 ); 
+	theGame.GetGwintManager().AddCardToCollection( 427 ); 
+	theGame.GetGwintManager().AddCardToCollection( 430 ); 
+	theGame.GetGwintManager().AddCardToCollection( 433 ); 
+	theGame.GetGwintManager().AddCardToCollection( 435 ); 
+	theGame.GetGwintManager().AddCardToCollection( 437 ); 
+	theGame.GetGwintManager().AddCardToCollection( 440 ); 
+	theGame.GetGwintManager().AddCardToCollection( 443 ); 
+	theGame.GetGwintManager().AddCardToCollection( 445 ); 
+	theGame.GetGwintManager().AddCardToCollection( 447 ); 
+	theGame.GetGwintManager().AddCardToCollection( 450 ); 
+	theGame.GetGwintManager().AddCardToCollection( 451 ); 
+	theGame.GetGwintManager().AddCardToCollection( 452 ); 
+	theGame.GetGwintManager().AddCardToCollection( 453 ); 
+	theGame.GetGwintManager().AddCardToCollection( 455 ); 
+	theGame.GetGwintManager().AddCardToCollection( 456 ); 
+	theGame.GetGwintManager().AddCardToCollection( 457 ); 
+	theGame.GetGwintManager().AddCardToCollection( 460 ); 
+	theGame.GetGwintManager().AddCardToCollection( 461 ); 
+	theGame.GetGwintManager().AddCardToCollection( 462 ); 
+	theGame.GetGwintManager().AddCardToCollection( 463 ); 
+	theGame.GetGwintManager().AddCardToCollection( 464 ); 
+	theGame.GetGwintManager().AddCardToCollection( 470 ); 
+	theGame.GetGwintManager().AddCardToCollection( 471 ); 
+	theGame.GetGwintManager().AddCardToCollection( 472 ); 
+	theGame.GetGwintManager().AddCardToCollection( 475 ); 
+	theGame.GetGwintManager().AddCardToCollection( 476 ); 
+	theGame.GetGwintManager().AddCardToCollection( 477 ); 
+	theGame.GetGwintManager().AddCardToCollection( 478 ); 
+}
+
+function AddDeckSke()
+{
+	theGame.GetGwintManager().AddCardToCollection( 5001 ); 
+	theGame.GetGwintManager().AddCardToCollection( 5002 ); 
+	theGame.GetGwintManager().AddCardToCollection( 501 ); 
+	theGame.GetGwintManager().AddCardToCollection( 502 ); 
+	theGame.GetGwintManager().AddCardToCollection( 503 ); 
+	theGame.GetGwintManager().AddCardToCollection( 504 ); 
+	theGame.GetGwintManager().AddCardToCollection( 505 ); 
+	theGame.GetGwintManager().AddCardToCollection( 506 ); 
+	theGame.GetGwintManager().AddCardToCollection( 507 ); 
+	theGame.GetGwintManager().AddCardToCollection( 508 ); 
+	theGame.GetGwintManager().AddCardToCollection( 509 ); 
+	theGame.GetGwintManager().AddCardToCollection( 510 ); 
+	theGame.GetGwintManager().AddCardToCollection( 511 ); 
+	theGame.GetGwintManager().AddCardToCollection( 512 ); 
+	theGame.GetGwintManager().AddCardToCollection( 513 ); 
+	theGame.GetGwintManager().AddCardToCollection( 515 ); 
+	theGame.GetGwintManager().AddCardToCollection( 515 ); 
+	theGame.GetGwintManager().AddCardToCollection( 515 ); 
+	theGame.GetGwintManager().AddCardToCollection( 517 ); 
+	theGame.GetGwintManager().AddCardToCollection( 517 ); 
+	theGame.GetGwintManager().AddCardToCollection( 517 ); 
+	theGame.GetGwintManager().AddCardToCollection( 518 ); 
+	theGame.GetGwintManager().AddCardToCollection( 519 ); 
+	theGame.GetGwintManager().AddCardToCollection( 520 ); 
+	theGame.GetGwintManager().AddCardToCollection( 520 ); 
+	theGame.GetGwintManager().AddCardToCollection( 520 ); 
+	theGame.GetGwintManager().AddCardToCollection( 521 ); 
+	theGame.GetGwintManager().AddCardToCollection( 521 ); 
+	theGame.GetGwintManager().AddCardToCollection( 521 ); 
+	theGame.GetGwintManager().AddCardToCollection( 522 ); 
+	theGame.GetGwintManager().AddCardToCollection( 522 ); 
+	theGame.GetGwintManager().AddCardToCollection( 522 ); 
+	theGame.GetGwintManager().AddCardToCollection( 523 ); 
+	theGame.GetGwintManager().AddCardToCollection( 524 ); 
+	theGame.GetGwintManager().AddCardToCollection( 525 ); 
+	theGame.GetGwintManager().AddCardToCollection( 526 ); 
+	theGame.GetGwintManager().AddCardToCollection( 527 ); 
+	theGame.GetGwintManager().AddCardToCollection( 22 ); 
+	theGame.GetGwintManager().AddCardToCollection( 22 ); 
+	theGame.GetGwintManager().AddCardToCollection( 22 ); 
+	theGame.GetGwintManager().AddCardToCollection( 23 ); 
+	theGame.GetGwintManager().AddCardToCollection( 23 ); 
+	theGame.GetGwintManager().AddCardToCollection( 23 ); 
+}
+
+function AddDeckNeutral()
+{
+	
+	theGame.GetGwintManager().AddCardToCollection( 0 ); 
+	theGame.GetGwintManager().AddCardToCollection( 0 ); 
+	theGame.GetGwintManager().AddCardToCollection( 0 ); 
+	theGame.GetGwintManager().AddCardToCollection( 1 ); 
+	theGame.GetGwintManager().AddCardToCollection( 1 ); 
+	theGame.GetGwintManager().AddCardToCollection( 1 ); 
+	theGame.GetGwintManager().AddCardToCollection( 2 ); 
+	theGame.GetGwintManager().AddCardToCollection( 2 ); 
+	theGame.GetGwintManager().AddCardToCollection( 2 ); 
+	theGame.GetGwintManager().AddCardToCollection( 3 ); 
+	theGame.GetGwintManager().AddCardToCollection( 4 ); 
+	theGame.GetGwintManager().AddCardToCollection( 5 ); 
+	theGame.GetGwintManager().AddCardToCollection( 6 ); 
+	theGame.GetGwintManager().AddCardToCollection( 7 ); 
+	theGame.GetGwintManager().AddCardToCollection( 8 ); 
+	theGame.GetGwintManager().AddCardToCollection( 9 ); 
+	theGame.GetGwintManager().AddCardToCollection( 10 ); 
+	theGame.GetGwintManager().AddCardToCollection( 11 ); 
+	theGame.GetGwintManager().AddCardToCollection( 12 ); 
+	theGame.GetGwintManager().AddCardToCollection( 13 ); 
+	theGame.GetGwintManager().AddCardToCollection( 14 ); 
+	theGame.GetGwintManager().AddCardToCollection( 15 ); 
+	theGame.GetGwintManager().AddCardToCollection( 16 ); 
+	theGame.GetGwintManager().AddCardToCollection( 17 ); 
+	theGame.GetGwintManager().AddCardToCollection( 18 ); 
+	theGame.GetGwintManager().AddCardToCollection( 19 ); 
+	theGame.GetGwintManager().AddCardToCollection( 19 ); 
+	theGame.GetGwintManager().AddCardToCollection( 19 ); 
+	theGame.GetGwintManager().AddCardToCollection( 20 ); 
+	
+}
+
+
+
+exec function testnotify()
+{	
 	theGame.GetGuiManager().ShowNotification("Some test notification");
 }
 
 exec function testsaveind()
-{
+{	
 	theGame.GetGuiManager().ShowSavingIndicator();
 }
 
@@ -10957,7 +11104,7 @@ exec function questProgress()
 
 	manager = theGame.GetJournalManager();
 	progress = manager.GetQuestProgress();
-
+	
 	LogChannel( 'Quests', "Progress: " + progress + "%" );
 }
 
@@ -10970,9 +11117,9 @@ exec function ResetManualCamera()
 exec function activateGate( tag : name )
 {
 	var gate : CBoatRacingGateEntity;
-
+	
 	gate = (CBoatRacingGateEntity)theGame.GetEntityByTag( tag );
-
+	
 	if( gate )
 	{
 		gate.ActivateGate();
@@ -11000,7 +11147,7 @@ exec function ClearAndStopCanFindPathEnemiesListUpdate( flag : bool )
 
 	if ( flag )
 		player.canFindPathEnemiesList.Clear();
-
+		
 	player.disablecanFindPathEnemiesListUpdate = flag;
 }
 
@@ -11021,7 +11168,7 @@ exec function testgameprogress( perc: float )
 
 exec function makeitrain()
 {
-	RequestWeatherChangeTo('WT_Sun_Shower', 1.0, false);
+	RequestWeatherChangeTo('WT_Rain_Storm', 1.0, false);
 }
 
 exec function stoprain()
@@ -11056,20 +11203,20 @@ exec function gather(optional range : float)
 	var i, breakpointMe : int;
 	var entity : CGameplayEntity;
 	var entityState : name;
-
+	
 	if(range == 0)
 		range = 5;
-
+		
 	FindGameplayEntitiesInSphere(ents, thePlayer.GetWorldPosition(), range, 100000);
-
+	
 	for(i=0; i<ents.Size(); i+=1)
 	{
 		entity = ents[i];
 		entityState = entity.GetCurrentStateName();
-
+		
 		breakpointMe = 0;
 	}
-
+	
 	breakpointMe = 0;
 }
 
@@ -11083,9 +11230,9 @@ exec function zzz()
 	thePlayer.inv.RemoveItemByName('Zireael Sword', -1);
 }
 
-exec function ForceCombatMode( flag : bool )
+exec function ForceCombatMode( flag : bool ) 
 {
-	if ( flag )
+	if ( flag ) 
 		thePlayer.GetPlayerMode().ForceCombatMode( FCMR_QuestFunction );
 	else
 		thePlayer.GetPlayerMode().ReleaseForceCombatMode( FCMR_QuestFunction );
@@ -11099,10 +11246,14 @@ exec function InvertCamera( invert : bool )
 
 exec function balanceadapt()
 {
-	if  ( thePlayer.IsAdaptiveBalance() )
-		thePlayer.SetAdaptiveBalance( false );
+	if  ( thePlayer.IsAdaptiveBalance() ) 
+		thePlayer.SetAdaptiveBalance( false ); 
 		else
-		thePlayer.SetAdaptiveBalance( true );
+		thePlayer.SetAdaptiveBalance( true ); 
+}
+exec function SSPrintJsonObjectsMemoryUsage()
+{
+	theGame.GetSecondScreenManager().PrintJsonObjectsMemoryUsage();
 }
 
 exec function ForceHolster( optional instant : bool )
@@ -11166,7 +11317,7 @@ exec function AreAchievementsDisabled()
 exec function PrintContext()
 {
 	var c : name;
-
+	
 	c = theInput.GetContext();
 	Log( c );
 }
@@ -11174,7 +11325,7 @@ exec function PrintContext()
 exec function ToggleCameraAutoRotation()
 {
 	var camera : CCustomCamera;
-
+		
 	camera = (CCustomCamera)theCamera.GetTopmostCameraObject();
 	if( camera )
 	{
@@ -11190,11 +11341,43 @@ exec function inputTreshold( _inputTreshold : float )
 exec function horseCamMode( mode : int )
 {
 	var horseComp : W3HorseComponent;
-
+	
 	horseComp = (W3HorseComponent)thePlayer.GetUsedVehicle().GetComponentByClassName( 'W3HorseComponent' );
-
+	
 	if ( horseComp )
 		horseComp.cameraMode = mode;
+}
+exec function gwentTournamentCards( optional val : int )
+{
+	if( val )
+	{
+		thePlayer.inv.RemoveItemByName('gwint_card_kayran',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_ciri',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_geralt',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_imlerith',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_philippa',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_leshen',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_draug',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_saskia',1);
+		thePlayer.inv.RemoveItemByName('gwint_card_eithne',1);
+	}
+	else 
+	{
+		thePlayer.inv.AddAnItem('gwint_card_kayran',1);
+		thePlayer.inv.AddAnItem('gwint_card_ciri',1);
+		thePlayer.inv.AddAnItem('gwint_card_geralt',1);
+		thePlayer.inv.AddAnItem('gwint_card_imlerith',1);
+		thePlayer.inv.AddAnItem('gwint_card_philippa',1);
+		thePlayer.inv.AddAnItem('gwint_card_leshen',1);
+		thePlayer.inv.AddAnItem('gwint_card_draug',1);
+		thePlayer.inv.AddAnItem('gwint_card_saskia',1);
+		thePlayer.inv.AddAnItem('gwint_card_eithne',1);
+		thePlayer.inv.AddAnItem('gwint_card_tibor',1);
+		thePlayer.inv.AddAnItem('gwint_card_moorvran',1);
+		thePlayer.inv.AddAnItem('gwint_card_menno',1);
+		thePlayer.inv.AddAnItem('gwint_card_letho',1);
+		thePlayer.inv.AddAnItem('gwint_card_esterad',1);
+	}
 }
 
 exec function EnableSnapToNavMesh( source : name, enable : bool )
@@ -11213,14 +11396,14 @@ exec function horsePanic()
 {
 	var horseComp : W3HorseComponent;
 	var horseActor : CActor;
-
+	
 	horseComp = (W3HorseComponent)thePlayer.GetUsedVehicle().GetComponentByClassName( 'W3HorseComponent' );
-
+	
 	if ( horseComp )
 	{
 		horseActor = (CActor)(horseComp.GetEntity());
 		horseActor.AddAbility( 'DisableHorsePanic' );
-	}
+	}	
 	else
 	{
 		horseComp = (W3HorseComponent)thePlayer.GetHorseCurrentlyMounted().GetComponentByClassName( 'W3HorseComponent' );
@@ -11233,7 +11416,7 @@ exec function pottip(itemName : name)
 {
 	var ids : array<SItemUniqueId>;
 	var null : array<SAttributeTooltip>;
-
+	
 	ids = thePlayer.inv.GetItemsByName(itemName);
 	if(ids.Size() > 0)
 		thePlayer.inv.GetPotionAttributesForTooltip(ids[0], null);
@@ -11265,33 +11448,33 @@ exec function primarec()
 	var i, k, ingQuantity : int;
 	var recipeName, cookedItemName, ingName : name;
 	var logStr : string;
-
+	
 	dm = theGame.GetDefinitionsManager();
 	main = dm.GetCustomDefinition('alchemy_recipes');
-
+	
 	LogChannel('PrimaAlchemyRecipes', "recipe localized name;cooked item localized name;buy price;ingredients list;");
-
+	
 	for(i=0; i<main.subNodes.Size(); i+=1)
 	{
 		dm.GetCustomNodeAttributeValueName(main.subNodes[i], 'name_name', recipeName);
 		dm.GetCustomNodeAttributeValueName(main.subNodes[i], 'cookedItem_name', cookedItemName);
-
+		
 		
 		if(dm.ItemHasTag(cookedItemName, 'Quest') || StrContains(NameToString(cookedItemName), " Blizzard"))
 			continue;
-
+		
 		logStr = GetLocStringByKeyExt(dm.GetItemLocalisationKeyName(recipeName)) + ";" + GetLocStringByKeyExt(dm.GetItemLocalisationKeyName(cookedItemName)) + ";";
 		logStr += dm.GetItemPrice(cookedItemName) + ";";
-
+		
 		
 		ingredients = dm.GetCustomDefinitionSubNode(main.subNodes[i],'ingredients');
 		for(k=0; k<ingredients.subNodes.Size(); k+=1)
-		{
+		{		
 			dm.GetCustomNodeAttributeValueName(ingredients.subNodes[k], 'item_name', ingName);
 			dm.GetCustomNodeAttributeValueInt(ingredients.subNodes[k], 'quantity', ingQuantity);
 			logStr += ingQuantity + ";" + GetLocStringByKeyExt(dm.GetItemLocalisationKeyName(ingName)) + ";";
 		}
-
+		
 		LogChannel('PrimaAlchemyRecipes', logStr);
 	}
 }
@@ -11303,22 +11486,22 @@ exec function primabooks()
 	var itemCategory : name;
 	var strLocName, contents : string;
 	var dm : CDefinitionsManagerAccessor;
-
+		
 	dm = theGame.GetDefinitionsManager();
 	bookNames = dm.GetItemsWithTag('ReadableItem');
 	LogChannel('PrimaBookContents', "book name key;book;contents as HTML text;");
-
+	
 	for(i=0; i<bookNames.Size(); i+=1)
 	{
 		
 		itemCategory = dm.GetItemCategory(bookNames[i]);
 		if(itemCategory == 'alchemy_recipe' || itemCategory == 'crafting_schematic')
 			continue;
-
+			
 		
 		if(dm.ItemHasTag(bookNames[i], 'ThMap'))
 			continue;
-
+	
 		strLocName = dm.GetItemLocalisationKeyName(bookNames[i]);
 		contents = GetLocStringByKeyExt(strLocName + "_text");
 		LogChannel('PrimaBookContents', strLocName + ";" + GetLocStringByKeyExt(strLocName) + ";" + contents + ";");
@@ -11329,7 +11512,7 @@ exec function StartNewGamePlus(filename : string)
 {
 	var saves : array< SSavegameInfo >;
 	var i : int;
-
+	
 	theGame.ListSavedGames(saves);
 	for(i=0; i<saves.Size(); i+=1)
 	{
@@ -11338,7 +11521,7 @@ exec function StartNewGamePlus(filename : string)
 			theGame.StartNewGamePlus(saves[i]);
 			return;
 		}
-	}
+	}	
 }
 
 exec function NewGamePlus( flag : bool )
@@ -11365,9 +11548,9 @@ exec function spawnBoatAndMount()
 	var player : Vector;
 	var rot : EulerAngles;
 	var template : CEntityTemplate;
-
+	
 	FindGameplayEntitiesInRange( entities, thePlayer, 10, 10, 'vehicle' );
-
+	
 	for( i = 0; i < entities.Size(); i = i + 1 )
 	{
 		boat = ( W3Boat )entities[ i ];
@@ -11378,18 +11561,18 @@ exec function spawnBoatAndMount()
 			{
 				vehicle.Mount( thePlayer, VMT_ImmediateUse, EVS_driver_slot );
 			}
-
+			
 			return;
 		}
 	}
 
-	rot = thePlayer.GetWorldRotation();
+	rot = thePlayer.GetWorldRotation();	
 	player = thePlayer.GetWorldPosition();
 	template = (CEntityTemplate)LoadResource( 'boat' );
 	player.Z = 0.0f;
 
 	ent = theGame.CreateEntity(template, player, rot, true, false, false, PM_Persist );
-
+	
 	if( ent )
 	{
 		vehicle = ( CVehicleComponent )( ent.GetComponentByClassName( 'CVehicleComponent' ) );
@@ -11405,11 +11588,11 @@ exec function printtags(actorTag : name)
 	var actor : CActor;
 	var tags : array<name>;
 	var i : int;
-
+	
 	actor = theGame.GetActorByTag(actorTag);
 	if(!actor)
 		return;
-
+	
 	tags = actor.GetTags();
 	LogStats("Printing tags of " + actor);
 	for(i=0; i<tags.Size(); i+=1)
@@ -11441,24 +11624,24 @@ exec function testRescale()
 exec function light()
 {
 	var ids : array<SItemUniqueId>;
-
+	
 	GetWitcherPlayer().UnequipItemFromSlot(EES_Armor);
 	GetWitcherPlayer().UnequipItemFromSlot(EES_Pants);
 	GetWitcherPlayer().UnequipItemFromSlot(EES_Gloves);
 	GetWitcherPlayer().UnequipItemFromSlot(EES_Boots);
-
+	
 	ids.Clear();
 	ids = GetWitcherPlayer().inv.AddAnItem('Gloves 01');
 	GetWitcherPlayer().EquipItem(ids[0]);
-
+	
 	ids.Clear();
 	ids = GetWitcherPlayer().inv.AddAnItem('Pants 01');
 	GetWitcherPlayer().EquipItem(ids[0]);
-
+	
 	ids.Clear();
 	ids = GetWitcherPlayer().inv.AddAnItem('Light armor 01');
 	GetWitcherPlayer().EquipItem(ids[0]);
-
+	
 	ids.Clear();
 	ids = GetWitcherPlayer().inv.AddAnItem('Boots 01');
 	GetWitcherPlayer().EquipItem(ids[0]);
@@ -11508,38 +11691,38 @@ exec function spawnEthereals( optional count : int, optional dist : float, optio
 	var i : int;
 	var template : CEntityTemplate;
 
-	rot = thePlayer.GetWorldRotation();
+	rot = thePlayer.GetWorldRotation();	
 	rot.Yaw += 180;
 
 	template = (CEntityTemplate)LoadResource('ethereal');
 
 	if( count == 0 ) count = 6;
-
+	
 	for(i=0; i<count; i+=1)
-	{
+	{		
 		if(i == 1)
 			rot.Yaw -= 60;
 		else if(i == 2)
 			rot.Yaw -= 60;
 		else if(i == 3)
-			rot = thePlayer.GetWorldRotation();
+			rot = thePlayer.GetWorldRotation();	
 		else if(i == 4)
 			rot.Yaw -= 60;
 		else if(i == 5)
 			rot.Yaw -= 60;
-
+		
 		if(dist == 0) dist = 5.0;
-
+		
 		pos = thePlayer.GetWorldPosition() + VecFromHeading( thePlayer.GetHeading() - i * 60.0 ) * dist;
-
+		
 		ent = theGame.CreateEntity(template, pos, rot);
-
+		
 		((CActor)ent).SetTemporaryAttitudeGroup( 'hostile_to_player', AGP_Default );
-
+		
 		if( level )
 		{
 			if(level == 1)
-			{
+			{	
 				((CNewNPC)ent).AddAbility( 'EtherealSkill_1' );
 			}
 			else if(level == 2)
@@ -11575,7 +11758,7 @@ exec function spawnEthereals( optional count : int, optional dist : float, optio
 }
 
 exec function Addep1Items()
-{
+{	
 	thePlayer.inv.AddAnItem('Crafted Ofir Boots');
 	thePlayer.inv.AddAnItem('Crafted Ofir Gloves');
 	thePlayer.inv.AddAnItem('Crafted Ofir Pants');
@@ -11608,102 +11791,102 @@ exec function Addep2Items()
 	thePlayer.inv.AddAnItem('Guard Lvl1 Boots 1');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Gloves 1');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Pants 1');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl1 Armor 2');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Boots 2');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Gloves 2');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Pants 2');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl1 Armor 3');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Boots 3');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Gloves 3');
 	thePlayer.inv.AddAnItem('Guard Lvl1 Pants 3');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Armor 1');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Boots 1');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Gloves 1');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Pants 1');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Armor 2');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Boots 2');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Gloves 2');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Pants 2');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Armor 3');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Boots 3');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Gloves 3');
 	thePlayer.inv.AddAnItem('Guard Lvl1 A Pants 3');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl2 Armor 1');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Boots 1');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Gloves 1');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Pants 1');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl2 Armor 2');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Boots 2');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Gloves 2');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Pants 2');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl2 Armor 3');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Boots 3');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Gloves 3');
 	thePlayer.inv.AddAnItem('Guard Lvl2 Pants 3');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Armor 1');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Boots 1');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Gloves 1');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Pants 1');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Armor 2');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Boots 2');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Gloves 2');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Pants 2');
-
+	
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Armor 3');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Boots 3');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Gloves 3');
 	thePlayer.inv.AddAnItem('Guard Lvl2 A Pants 3');
-
+	
 	thePlayer.inv.AddAnItem('Knight Geralt Armor 1');
 	thePlayer.inv.AddAnItem('Knight Geralt Boots 1');
 	thePlayer.inv.AddAnItem('Knight Geralt Gloves 1');
 	thePlayer.inv.AddAnItem('Knight Geralt Pants 1');
-
+	
 	thePlayer.inv.AddAnItem('Knight Geralt Armor 2');
 	thePlayer.inv.AddAnItem('Knight Geralt Boots 2');
 	thePlayer.inv.AddAnItem('Knight Geralt Gloves 2');
 	thePlayer.inv.AddAnItem('Knight Geralt Pants 2');
-
+	
 	thePlayer.inv.AddAnItem('Knight Geralt Armor 3');
 	thePlayer.inv.AddAnItem('Knight Geralt Boots 3');
 	thePlayer.inv.AddAnItem('Knight Geralt Gloves 3');
 	thePlayer.inv.AddAnItem('Knight Geralt Pants 3');
-
+	
 	thePlayer.inv.AddAnItem('Knight Geralt A Armor 1');
 	thePlayer.inv.AddAnItem('Knight Geralt A Boots 1');
 	thePlayer.inv.AddAnItem('Knight Geralt A Gloves 1');
 	thePlayer.inv.AddAnItem('Knight Geralt A Pants 1');
-
+	
 	thePlayer.inv.AddAnItem('Knight Geralt A Armor 2');
 	thePlayer.inv.AddAnItem('Knight Geralt A Boots 2');
 	thePlayer.inv.AddAnItem('Knight Geralt A Gloves 2');
 	thePlayer.inv.AddAnItem('Knight Geralt A Pants 2');
-
+	
 	thePlayer.inv.AddAnItem('Knight Geralt A Armor 3');
 	thePlayer.inv.AddAnItem('Knight Geralt A Boots 3');
 	thePlayer.inv.AddAnItem('Knight Geralt A Gloves 3');
 	thePlayer.inv.AddAnItem('Knight Geralt A Pants 3');
-
+	
 	thePlayer.inv.AddAnItem('Toussaint Armor 2');
 	thePlayer.inv.AddAnItem('Toussaint Boots 2');
 	thePlayer.inv.AddAnItem('Toussaint Gloves 2');
 	thePlayer.inv.AddAnItem('Toussaint Pants 2');
-
+	
 	thePlayer.inv.AddAnItem('Toussaint Armor 3');
 	thePlayer.inv.AddAnItem('Toussaint Boots 3');
 	thePlayer.inv.AddAnItem('Toussaint Gloves 3');
 	thePlayer.inv.AddAnItem('Toussaint Pants 3');
-
+	
 	thePlayer.inv.AddAnItem('sq701_geralt_armor');
 	thePlayer.inv.AddAnItem('sq701_ravix_armor');
 	thePlayer.inv.AddAnItem('q705_mandragora_gloves');
@@ -11717,27 +11900,27 @@ exec function Addep2HorseItems()
 	thePlayer.inv.AddAnItem('Toussaint saddle 4');
 	thePlayer.inv.AddAnItem('Toussaint saddle 5');
 	thePlayer.inv.AddAnItem('Toussaint saddle 6');
-
+	
 	thePlayer.inv.AddAnItem('Tourney Geralt Saddle');
 	thePlayer.inv.AddAnItem('Tourney Ravix Saddle');
-
+	
 	thePlayer.inv.AddAnItem('Toussaint horsebag');
-
+	
 	thePlayer.inv.AddAnItem('Toussaint horse blinders');
 	thePlayer.inv.AddAnItem('Toussaint horse blinders 2');
 	thePlayer.inv.AddAnItem('Toussaint horse blinders 3');
 	thePlayer.inv.AddAnItem('Toussaint horse blinders 4');
 	thePlayer.inv.AddAnItem('Toussaint horse blinders 5');
 	thePlayer.inv.AddAnItem('Toussaint horse blinders 6');
-
+	
 	thePlayer.inv.AddAnItem('Monniers horse blinders');
-
+	
 	thePlayer.inv.AddAnItem('q701_cyclops_trophy');
 	thePlayer.inv.AddAnItem('q702_wicht_trophy');
 	thePlayer.inv.AddAnItem('q704_garkain_trophy');
 	thePlayer.inv.AddAnItem('mq7002_spriggan_trophy');
 	thePlayer.inv.AddAnItem('mq7009_griffin_trophy');
-
+	thePlayer.inv.AddAnItem('mq7017_zmora_trophy');
 	thePlayer.inv.AddAnItem('mq7010_dracolizard_trophy');
 	thePlayer.inv.AddAnItem('mq7018_basilisk_trophy');
 	thePlayer.inv.AddAnItem('mh701_sharley_matriarch_trophy');
@@ -11755,12 +11938,12 @@ exec function ssa( dlc : name )
 
 exec function standalone_ep1()
 {
-	GetWitcherPlayer().StandaloneEp1_1();
+	GetWitcherPlayer().StandaloneEp1_1();	
 }
 
 exec function standalone_ep2()
 {
-	GetWitcherPlayer().StandaloneEp2_1();
+	GetWitcherPlayer().StandaloneEp2_1();	
 }
 
 exec function censer( val : float )
@@ -11771,9 +11954,9 @@ exec function censer( val : float )
 exec function rwall()
 {
 	var witcher : W3PlayerWitcher;
-
+	
 	witcher = GetWitcherPlayer();
-
+	
 	witcher.UnequipItem( rw_internal("r1") );
 	witcher.UnequipItem( rw_internal("r2") );
 	witcher.UnequipItem( rw_internal("r4") );
@@ -11783,7 +11966,7 @@ exec function rwall()
 	witcher.UnequipItem( rw_internal("r10") );
 	witcher.UnequipItem( rw_internal("r11") );
 	witcher.UnequipItem( rw_internal("r12") );
-
+	
 	witcher.UnequipItem( rw_internal("r1", false, true) );
 	witcher.UnequipItem( rw_internal("r2", false, true) );
 	witcher.UnequipItem( rw_internal("r4", false, true) );
@@ -11793,7 +11976,7 @@ exec function rwall()
 	witcher.UnequipItem( rw_internal("r10", false, true) );
 	witcher.UnequipItem( rw_internal("r11", false, true) );
 	witcher.UnequipItem( rw_internal("r12", false, true) );
-
+	
 	witcher.UnequipItem( rw_internal("g1") );
 	witcher.UnequipItem( rw_internal("g2") );
 	witcher.UnequipItem( rw_internal("g3") );
@@ -11824,12 +12007,12 @@ function rw_internal(typ : string, optional removeAllExisting : bool, optional o
 	var itemId : SItemUniqueId;
 	var wordAsName : name;
 	var runewordCheck : array<name>;
-
+	
 	
 	type = StrLeft(typ, 1);
 	num = StringToInt(StrRight(typ, StrLen(typ)-1));
 	witcher = GetWitcherPlayer();
-
+	
 	if(type == "r" || type == "R")
 	{
 		type = "Runeword";
@@ -11838,9 +12021,9 @@ function rw_internal(typ : string, optional removeAllExisting : bool, optional o
 	{
 		type = "Glyphword";
 	}
-
-	word = type + " " + num;
-
+	
+	word = type + " " + num;	
+	
 	
 	if     (word == "Runeword 1"   || typ == "Napelnienie"   || typ == "Replenishment")	  	{wordAsName = 'Runeword 1'; type = "Runeword";}
 	else if(word == "Runeword 2"   || typ == "Przeciecie"    || typ == "Severance") 		{wordAsName = 'Runeword 2'; type = "Runeword";}
@@ -11851,8 +12034,6 @@ function rw_internal(typ : string, optional removeAllExisting : bool, optional o
 	else if(word == "Runeword 10"  || typ == "Odnowienie"    || typ == "Rejuvenation") 		{wordAsName = 'Runeword 10'; type = "Runeword";}
 	else if(word == "Runeword 11"  || typ == "Przedluzenie"  || typ == "Prolongation") 		{wordAsName = 'Runeword 11'; type = "Runeword";}
 	else if(word == "Runeword 12"  || typ == "Triumf"        || typ == "Elation") 			{wordAsName = 'Runeword 12'; type = "Runeword";}
-	else if(word == "Runeword 13"  || typ == "Incineration"  || typ == "Incineration") 		{wordAsName = 'Runeword 13'; type = "Runeword";}
-	else if(word == "Runeword 14"  || typ == "Perturbation"  || typ == "Perturbation") 		{wordAsName = 'Runeword 14'; type = "Runeword";}
 	else if(word == "Glyphword 1"  || typ == "Odbicie"       || typ == "Deflection") 		{wordAsName = 'Glyphword 1'; type = "Glyphword";}
 	else if(word == "Glyphword 2"  || typ == "Lekkosc"       || typ == "Levity") 			{wordAsName = 'Glyphword 2'; type = "Glyphword";}
 	else if(word == "Glyphword 3"  || typ == "Rownowaga"     || typ == "Balance") 			{wordAsName = 'Glyphword 3'; type = "Glyphword";}
@@ -11867,13 +12048,11 @@ function rw_internal(typ : string, optional removeAllExisting : bool, optional o
 	else if(word == "Glyphword 17" || typ == "Tarcza"        || typ == "Protection") 		{wordAsName = 'Glyphword 17'; type = "Glyphword";}
 	else if(word == "Glyphword 18" || typ == "Opetanie"      || typ == "Possession") 		{wordAsName = 'Glyphword 18'; type = "Glyphword";}
 	else if(word == "Glyphword 20" || typ == "Eksplozja"     || typ == "Eruption") 			{wordAsName = 'Glyphword 20'; type = "Glyphword";}
-	else if(word == "Glyphword 21" || typ == "Execution"     || typ == "Execution") 		{wordAsName = 'Glyphword 21'; type = "Glyphword";}
-	else if(word == "Glyphword 22" || typ == "Precision"     || typ == "Precision") 		{wordAsName = 'Glyphword 22'; type = "Glyphword";}
-
+	
 	runewordCheck = GetAllRunewordSchematics();
 	if(!runewordCheck.Contains(wordAsName))
 		return GetInvalidUniqueId();
-
+	
 	
 	if(type == "Runeword")
 	{
@@ -11902,10 +12081,10 @@ function rw_internal(typ : string, optional removeAllExisting : bool, optional o
 			itemId = ids[0];
 		}
 	}
-
+	
 	if(!witcher.inv.IsIdValid(itemId))
 		return GetInvalidUniqueId();
-
+	
 	
 	if(removeAllExisting)
 	{
@@ -11919,15 +12098,15 @@ function rw_internal(typ : string, optional removeAllExisting : bool, optional o
 	{
 		witcher.inv.UnenchantItem(itemId);
 	}
-
+	
 	while(witcher.inv.GetItemEnhancementSlotsCount(itemId) < 3)
 	{
 		witcher.inv.AddSlot(itemId);
 	}
-
+	
 	witcher.inv.EnchantItem(itemId, wordAsName, getEnchamtmentStatName(wordAsName));
 	witcher.EquipItem(itemId);
-
+	
 	return itemId;
 }
 
@@ -11946,7 +12125,7 @@ exec function focusboy ( optional fp : int )
 	else
 	{
 		FactsRemove("debug_fact_focus_boy");
-	}
+	}	
 }
 
 exec function startContentEP2(contentName : string)			
@@ -11954,17 +12133,17 @@ exec function startContentEP2(contentName : string)
 	var teleportPosition 	: Vector;
 	var worldName			: String;
 	var shouldTeleport 		: Bool;
-
+		
 	worldName =  theGame.GetWorld().GetDepotPath();
-
+		
 	if(StrFindFirst(worldName, "bob")<0)   
 	{
 		Log("temp.ws:startContentEP2: Use this command only on bob.w2w level.");
 		return;
 	}
-
+	
 	shouldTeleport = true;
-
+	
 	switch(contentName)
 	{
 	
@@ -11980,7 +12159,7 @@ exec function startContentEP2(contentName : string)
 			teleportPosition = Vector(1035, -1194, 7);
 			break;
 		}
-
+		
 		case 'poi_bar_a_03' :
 		{
 			teleportPosition = Vector(401, -1169, 3);
@@ -11992,13 +12171,13 @@ exec function startContentEP2(contentName : string)
 			teleportPosition = Vector(513, -1217, 5);
 			break;
 		}
-
+		
 		case 'poi_car_a_01' :
 		{
 			teleportPosition = Vector(636, -1524, 25);
 			break;
 		}
-
+		
 		case 'poi_car_b_04' :
 		{
 			teleportPosition = Vector(397, -1434, 10);
@@ -12009,14 +12188,14 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(-362, -1914, 69);
 			break;
-		}
-
+		}		
+	
 		case 'poi_car_a_02' :
 		{
 			teleportPosition = Vector(482, -1890, 63);
 			break;
 		}
-
+		
 		case 'poi_san_a_01' :
 		{
 			teleportPosition = Vector(247, -1444, 9);
@@ -12027,14 +12206,14 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(62, -1034, 2);
 			break;
-		}
-
+		}			
+	
 		case 'poi_gor_a_01' :
 		{
 			teleportPosition = Vector(-882, -1572, 83);
 			break;
 		}
-
+		
 		case 'poi_gor_b_02' :
 		{
 			teleportPosition = Vector(-1047, -1201, 158);
@@ -12045,13 +12224,13 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(-1254, -879, 107);
 			break;
-		}
+		}		
 		case 'poi_gor_d_05' :
 		{
 			teleportPosition = Vector(-1126, -29, 49);
 			break;
 		}
-
+		
 		case 'poi_gor_d_06' :
 		{
 			teleportPosition = Vector(-1053, -138, 10);
@@ -12062,14 +12241,14 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(-1011, 227, 49);
 			break;
-		}
+		}	
 
 		case 'poi_vin_a_01' :
 		{
 			teleportPosition = Vector(-785, -511, 37);
 			break;
 		}
-
+		
 		case 'poi_vin_a_02' :
 		{
 			teleportPosition = Vector(-439, -589, 53);
@@ -12080,14 +12259,14 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(-203, -381, 17);
 			break;
-		}
+		}		
 
 		case 'poi_vin_b_04' :
 		{
 			teleportPosition = Vector(134, -337, 11);
 			break;
 		}
-
+		
 		case 'poi_vin_b_05' :
 		{
 			teleportPosition = Vector(41, -99, 2);
@@ -12098,14 +12277,14 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(-194, 310, 6);
 			break;
-		}
+		}	
 
 		case 'poi_ved_a_02' :
 		{
 			teleportPosition = Vector(-476, 666, 4);
 			break;
 		}
-
+		
 		case 'poi_ved_a_03' :
 		{
 			teleportPosition = Vector(-427, 298, 2);
@@ -12116,14 +12295,14 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(-218, 687, 4);
 			break;
-		}
+		}	
 
 		case 'poi_ved_b_05' :
 		{
 			teleportPosition = Vector(-17, 510, 13);
 			break;
 		}
-
+		
 		case 'poi_rav_a_01' :
 		{
 			teleportPosition = Vector(141, -582, 21);
@@ -12134,20 +12313,20 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(-435, -561, 22);
 			break;
-		}
+		}			
 
 		case 'poi_rav_a_04' :
 		{
 			teleportPosition = Vector(244, -664, 3);
 			break;
-		}
+		}	
 
 		case 'poi_rav_b_03' :
 		{
 			teleportPosition = Vector(209, -125, 19);
 			break;
 		}
-
+		
 		case 'poi_myr_a_01' :
 		{
 			teleportPosition = Vector(392, 131, 5);
@@ -12158,100 +12337,100 @@ exec function startContentEP2(contentName : string)
 		{
 			teleportPosition = Vector(660, 148, 4);
 			break;
-		}
+		}	
 
+		
 	
-
 		case 'mq7001' :
 		{
 			teleportPosition = Vector(-469, -1503, 91);
 			break;
-		}
+		}	
 
 		case 'mq7002' :
 		{
 			teleportPosition = Vector(-630, -1206, 109);
 			break;
-		}
-
+		}	
+		
 		case 'mq7003' :
 		{
 			teleportPosition = Vector(790, 40, 4);
 			break;
-		}
-
+		}	
+		
 		case 'mq7004' :
 		{
 			teleportPosition = Vector(-1304, -281, 37);
 			break;
-		}
-
+		}	
+		
 		case 'mq7006' :
 		{
 			teleportPosition = Vector(-948, -751, 63);
 			break;
-		}
-
+		}	
+		
 		case 'mq7007' :
 		{
 			teleportPosition = Vector(286, -1670, 44);
 			break;
-		}
+		}	
 
-
+	
 		case 'mq7009' :
 		{
 			teleportPosition = Vector(-496, -1394, 93);
 			break;
-		}
-
+		}	
+		
 		case 'mq7010' :
 		{
 			teleportPosition = Vector(674, -751, 15);
 			break;
-		}
+		}			
 		case 'mq7011' :
 		{
 			teleportPosition = Vector(-519, -1416, 93);
 			break;
-		}
-
+		}	
+		
 		case 'mq7013' :
 		{
 			teleportPosition = Vector(-576, -1274, 106);
 			break;
-		}
-
+		}	
+		
 		case 'mq7015' :
 		{
 			teleportPosition = Vector(-518, -1326, 95);
 			break;
-		}
+		}	
 
 		case 'mq7017' :
 		{
 			teleportPosition = Vector(428, -54, 11);
 			break;
-		}
-
+		}	
+		
 		case 'mq7018' :
 		{
 			teleportPosition = Vector(5.7, 230, 10.5);
 			break;
-		}
+		}	
 
 		case 'mq7020' :
 		{
 			teleportPosition = Vector(-495, -1540, 91);
 			break;
-		}
-
+		}	
+		
 		case 'mq7021' :
 		{
 			teleportPosition = Vector(-1142, -940, 118);
 			break;
-		}
-
+		}	
+		
 		case 'mq7022' :
 		{
 			teleportPosition = Vector(310, -1029, 5);
@@ -12259,15 +12438,15 @@ exec function startContentEP2(contentName : string)
 		}
 
 	
-
+	
 		case 'blacksmith' :
 		{
 			teleportPosition = Vector(-558, -1370, 91);
 			break;
 		}
-
+		
 	
-
+	
 		case 'th700_prison' :
 		{
 			teleportPosition = Vector(-1167.86, -819.229, 125.85);
@@ -12279,7 +12458,7 @@ exec function startContentEP2(contentName : string)
 			teleportPosition = Vector(-414.49, -1489.24, 90.1729);
 			break;
 		}
-
+		
 		case 'th700_vault' :
 		{
 			teleportPosition = Vector(-656.499, 60.7197, 4.90265);
@@ -12291,45 +12470,45 @@ exec function startContentEP2(contentName : string)
 			teleportPosition = Vector(772.325, -162.962, 15.2514);
 			break;
 		}
-
+		
 		case 'th700_chapel' :
 		{
 			teleportPosition = Vector(-875.6, -1580.38, 85.1843);
 			break;
 		}
-
+		
 		default:
 		{
 			shouldTeleport = false;											
 			Log("temp.ws:startContentEP2: This name was not defined.");
 		}
-
+	
 	}
-
+	
 	if(shouldTeleport) 								
 	{
 		thePlayer.Teleport(teleportPosition);
 	}
 }
 
-exec function addset( itemSet : EItemSetType, optional equip : bool, optional addExp : bool, optional clearGeralt : bool )
+exec function addset( set : EItemSetType, optional equip : bool, optional addExp : bool, optional clearGeralt : bool )
 {
 	var witcher : W3PlayerWitcher;
-
+	
 	witcher = GetWitcherPlayer();
 	FactsAdd( "DebugNoLevelUpUpdates" );
-
+	
 	if( clearGeralt )
 	{
 		witcher.Debug_ClearCharacterDevelopment();
 	}
-
+	
 	if( addExp )
 	{
 		witcher.AddPoints( EExperiencePoint, 85000, false );
 	}
-
-	switch( itemSet )
+	
+	switch( set )
 	{
 		case EIST_Lynx:
 			if(equip)
@@ -12466,11 +12645,11 @@ exec function addset( itemSet : EItemSetType, optional equip : bool, optional ad
 exec function muteq( number : int, optional godMode : int )
 {
 	var mut : EPlayerMutationType;
-
+	
 	GetWitcherPlayer().MutationSystemEnable( true );
 	mut = number;
 	( ( W3PlayerAbilityManager ) GetWitcherPlayer().abilityManager ).DEBUG_DevelopAndEquipMutation( mut );
-
+	
 	if( godMode == 1 )
 	{
 		god_internal();
@@ -12490,7 +12669,7 @@ function mutall_internal()
 {
 	var pam : W3PlayerAbilityManager;
 	var i : int;
-
+	
 	GetWitcherPlayer().MutationSystemEnable( true );
 	pam = ( W3PlayerAbilityManager ) GetWitcherPlayer().abilityManager;
 	for( i=12; i>0; i-=1 )
@@ -12508,20 +12687,20 @@ exec function tmut( optional itemsCount : int )
 {
 	var lm : W3PlayerWitcher;
 	var i,exp : int;
-
+	
 	GetWitcherPlayer().MutationSystemEnable( true );
-
+	
 	if (itemsCount == 0)
 	{
 		itemsCount = 120;
 	}
-
+	
 	thePlayer.inv.AddAnItem( 'Greater mutagen blue', itemsCount );
 	thePlayer.inv.AddAnItem( 'Greater mutagen red', itemsCount );
 	thePlayer.inv.AddAnItem( 'Greater mutagen green', itemsCount );
-
+	
 	GetWitcherPlayer().AddPoints( ESkillPoint, itemsCount, true );
-
+	
 	lm = GetWitcherPlayer();
 	for( i=0; i<30; i+=1 )
 	{
@@ -12539,7 +12718,7 @@ exec function printmut()
 	var str, tmpString : string;
 	var reqMutation : EPlayerMutationType;
 	var colorAdded : bool;
-
+	
 	pam = (W3PlayerAbilityManager)GetWitcherPlayer().abilityManager;
 	mutations = pam.GetMutations();
 	LogMutation( "==========================================================================================" );
@@ -12555,7 +12734,7 @@ exec function printmut()
 			tmpString = "missing localization key";
 		}
 		LogMutation( mutations[ i ].type + " - " + tmpString );
-
+		
 		
 		tmpString = GetWitcherPlayer().GetMutationLocalizedDescription( mutations[ i ].type );
 		if( tmpString == "" )
@@ -12563,7 +12742,7 @@ exec function printmut()
 			tmpString = "missing localization key";
 		}
 		LogMutation( tmpString );
-
+		
 		
 		str = "Mutation is ";
 		colorAdded = false;
@@ -12580,7 +12759,7 @@ exec function printmut()
 			}
 			str += "Green";
 			colorAdded = true;
-		}
+		}		
 		if( mutations[ i ].colors.Contains( SC_Blue ) )
 		{
 			if( colorAdded )
@@ -12594,7 +12773,7 @@ exec function printmut()
 			str += "of no color";
 		}
 		LogMutation( str );
-
+		
 		
 		str = "Required mutations: ";
 		for( j=0; j<mutations[ i ].requiredMutations.Size(); j+=1 )
@@ -12612,19 +12791,19 @@ exec function printmut()
 			str += "None";
 		}
 		LogMutation( str );
-
+		
 		
 		progress = mutations[ i ].progress;
-		LogMutation("Progress " + SpaceFill( pam.GetMutationResearchProgress( mutations[ i ].type ), 3, ESFM_JustifyRight) + "%     Red: " +
-				progress.redUsed + "/" + progress.redRequired +	"     Green: " + progress.greenUsed + "/" + progress.greenRequired +
+		LogMutation("Progress " + SpaceFill( pam.GetMutationResearchProgress( mutations[ i ].type ), 3, ESFM_JustifyRight) + "%     Red: " + 
+				progress.redUsed + "/" + progress.redRequired +	"     Green: " + progress.greenUsed + "/" + progress.greenRequired + 
 				"     Blue: " + progress.blueUsed + "/" + progress.blueRequired + "     SkillPoints: " + progress.skillpointsUsed + "/" + progress.skillpointsRequired );
-
+				
 		
 		if( mutations[ i ].type == EPMT_MutationMaster )
 		{
 			LogMutation( "Stage: " + pam.GetMasterMutationStage() );
 		}
-
+		
 		
 		LogMutation("");
 	}
@@ -12668,21 +12847,21 @@ exec function testEP2Perks()
 	var w		: W3PlayerWitcher;
 	var inv		: CInventoryComponent;
 	var ids		: array<SItemUniqueId>;
-
+	
 	w = GetWitcherPlayer();
 	inv = w.GetInventory();
-
+	
 	FactsAdd( "DebugNoLevelUpUpdates" );
 	w.AddPoints( EExperiencePoint, 25000, false );
-
+	
 	ids = inv.AddAnItem( 'Apple', 15, true, false, false );
 	w.EquipItem( ids[0] );
 	ids = inv.AddAnItem( 'Chicken Sandwich', 15, true, false, false );
 	w.EquipItem( ids[0] );
-
+	
 	ids = inv.AddAnItem( 'Explosive Bolt', 15, true, false, false);
 	w.EquipItem( ids[0] );
-
+	
 	ids = thePlayer.inv.AddAnItem('Grapeshot 3');
 	thePlayer.inv.SingletonItemSetAmmo(ids[0], thePlayer.inv.SingletonItemGetMaxAmmo(ids[0]));
 	ids = thePlayer.inv.AddAnItem('Dwimeritium Bomb 3');
@@ -12691,7 +12870,7 @@ exec function testEP2Perks()
 	thePlayer.inv.SingletonItemSetAmmo(ids[0], thePlayer.inv.SingletonItemGetMaxAmmo(ids[0]));
 	ids = thePlayer.inv.AddAnItem('Devils Puffball 3');
 	thePlayer.inv.SingletonItemSetAmmo(ids[0], thePlayer.inv.SingletonItemGetMaxAmmo(ids[0]));
-
+	
 	theGame.RequestMenuWithBackground( 'CharacterMenu', 'CommonMenu' );
 }
 
@@ -12699,25 +12878,25 @@ exec function mutrev( optional unlockMutations : bool )
 {
 	
 	fb3_internal( 30, 'sign' );
-
+	
 	
 	GetWitcherPlayer().AddAndEquipItem( 'Gnomish sword 2' );
-
+	
 	
 	GetWitcherPlayer().AddAndEquipItem( 'Blizzard 3' );
-
+	
 	
 	GetWitcherPlayer().GainStat( BCS_Focus, 3.f );
-
+	
 	
 	if( unlockMutations )
 	{
 		mutall_internal();
 	}
-
+	
 	
 	GetWitcherPlayer().AddAndEquipItem( 'Mutagen 2' );
-
+	
 	
 	god_internal();
 }
@@ -12725,23 +12904,23 @@ exec function mutrev( optional unlockMutations : bool )
 exec function addsetrec( n : EItemSetType, optional clearInv : bool )
 {
 	var w		: W3PlayerWitcher;
-
+	
 	w = GetWitcherPlayer();
 
 	if( clearInv )
 	{
 		w.Debug_ClearCharacterDevelopment();
 	}
-
+	
 	if( w.GetLevel() < 50 )
 	{
 		w.AddPoints( EExperiencePoint, 85000, false );
 	}
-
+	
 	w.inv.AddAnItem('Infused shard', 30);
 	w.inv.AddMoney( 10000 );
-
-
+	
+	
 	switch( n )
 	{
 		case EIST_Lynx:
@@ -12818,16 +12997,16 @@ exec function addsetrec( n : EItemSetType, optional clearInv : bool )
 			w.inv.AddAnItem( 'Grapeshot 2' );
 			break;
 		default:
-			break;
+			break;	
 	}
 }
 
 exec function countFT()
 {
 		var mapManager : CCommonMapManager = theGame.GetCommonMapManager();
-		var arr1 : array< SAvailableFastTravelMapPin >;
+		var arr1 : array< SAvailableFastTravelMapPin >;	
 		arr1 = mapManager.GetFastTravelPoints(true, false, false, true, true);
-
+		
 		Log( arr1.Size() );
 }
 
@@ -12845,7 +13024,7 @@ exec function rainAnim()
 exec function activateAllBestiaryEP2()
 {
 var manager : CWitcherJournalManager;
-
+	
 	manager = theGame.GetJournalManager();
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryPanther", manager);
@@ -12853,12 +13032,12 @@ var manager : CWitcherJournalManager;
 	activateJournalBestiaryEntryWithAlias("BestiaryQCPigs", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCBigBadWolf", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCEP2Boar", manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryDracolizard", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCDracolizardMatriarch", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCSilverBasilisk", manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiarySharley", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCSharleyMatriarch", manager);
@@ -12866,14 +13045,14 @@ var manager : CWitcherJournalManager;
 	activateJournalBestiaryEntryWithAlias("BestiaryQCSharleyCaptive", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCFTWitch", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCMQ7002Borowy", manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryBarghest", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCNightmare", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCDaphne", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCRapunzel", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCBeanshee", manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryGarkain", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryBruxa", manager);
@@ -12883,25 +13062,25 @@ var manager : CWitcherJournalManager;
 	activateJournalBestiaryEntryWithAlias("BestiaryQCAlphaGarkain", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCDettlaff", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCProtofleder", manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryDagonet", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryCloudGiant"	, manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryGraveir", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryWicht", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCWightCollector", manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryScolopendromorph", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryPaleWidow", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryKikimoraWarrior", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryKikimoraWorker"	, manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryArchespore", manager);
-
+	
 	
 	activateJournalBestiaryEntryWithAlias("BestiaryDarkPixie", manager);
 	activateJournalBestiaryEntryWithAlias("BestiaryQCMoreauGolem", manager);
@@ -13230,7 +13409,7 @@ exec function addEP2Set(setType : string)
 		thePlayer.inv.AddAnItem('Bear Gloves 5',1);
 		thePlayer.inv.AddAnItem('Bear School steel sword 4',1);
 		thePlayer.inv.AddAnItem('Bear School silver sword 4',1);
-
+	
 	}
 	else if (setType == "lynx")
 	{
@@ -13240,7 +13419,7 @@ exec function addEP2Set(setType : string)
 		thePlayer.inv.AddAnItem('Lynx Gloves 5',1);
 		thePlayer.inv.AddAnItem('Lynx School steel sword 4',1);
 		thePlayer.inv.AddAnItem('Lynx School silver sword 4',1);
-
+		
 	}
 	else if (setType == "gryphon")
 	{
@@ -13250,7 +13429,7 @@ exec function addEP2Set(setType : string)
 		thePlayer.inv.AddAnItem('Gryphon Gloves 5',1);
 		thePlayer.inv.AddAnItem('Gryphon School steel sword 4',1);
 		thePlayer.inv.AddAnItem('Gryphon School silver sword 4',1);
-
+		
 	}
 	else if (setType == "wolf")
 	{
@@ -13260,7 +13439,7 @@ exec function addEP2Set(setType : string)
 		thePlayer.inv.AddAnItem('Wolf Gloves 5',1);
 		thePlayer.inv.AddAnItem('Wolf School steel sword 4',1);
 		thePlayer.inv.AddAnItem('Wolf School silver sword 4',1);
-
+		
 	}
 	else if (setType == "manticore1")
 	{
@@ -13279,7 +13458,7 @@ exec function addEP2Set(setType : string)
 		thePlayer.inv.AddAnItem('Red Wolf Gloves 2',1);
 		thePlayer.inv.AddAnItem('Red Wolf School steel sword 2',1);
 		thePlayer.inv.AddAnItem('Red Wolf School silver sword 2',1);
-
+		
 	}
 	else
 	{
@@ -13872,9 +14051,9 @@ exec function addBooksEP2()
 exec function activateAllCharactersEP2()
 {
 	var manager : CWitcherJournalManager;
-
+	
 	manager = theGame.GetJournalManager();
-
+	
 	activateJournalCharacterEntryWithAlias("CharactersAnnaHenrietta", manager);
 	activateJournalCharacterEntryWithAlias("CharactersDamien", manager);
 	activateJournalCharacterEntryWithAlias("CharactersDettlaff", manager);
@@ -13887,7 +14066,7 @@ exec function activateAllCharactersEP2()
 	activateJournalCharacterEntryWithAlias("CharactersUkryty", manager);
 	activateJournalCharacterEntryWithAlias("CharactersVivienne", manager);
 	activateJournalCharacterEntryWithAlias("CharactersHermit", manager);
-
+	activateJournalCharacterEntryWithAlias("CharactersLadyOfTheLake", manager);
 	activateJournalCharacterEntryWithAlias("CharactersBarnabe", manager);
 	activateJournalCharacterEntryWithAlias("CharactersBootblack", manager);
 	activateJournalCharacterEntryWithAlias("CharactersRoach", manager);
@@ -14214,7 +14393,7 @@ exec function breakSync()
 {
 	var syncInstance : CAnimationManualSlotSyncInstance;
 	var syncParent : CEntity;
-
+	
 	syncInstance = theGame.GetSyncAnimManager().GetSyncInstance( 0 );
 	if( syncInstance )
 	{
@@ -14230,7 +14409,7 @@ exec function StopEffect( fx : name, optional entityTag : name )
 {
 	var i : int;
 	var ents : array< CEntity >;
-
+	
 	if( entityTag != '' )
 	{
 		theGame.GetEntitiesByTag( entityTag, ents );
@@ -14239,7 +14418,7 @@ exec function StopEffect( fx : name, optional entityTag : name )
 	{
 		ents.PushBack( thePlayer );
 	}
-
+	
 	for( i=0; i<ents.Size(); i+=1 )
 	{
 		ents[i].StopEffect( fx );
@@ -14264,230 +14443,9 @@ exec function debugforcecrash(crashType : string)
 		Log("temp.ws:debugforcecrash: Should've crashed by now, but certain types of crashed might be disabled or recovered from");
 }
 
-exec function OpenMainMenu()
-{
-	if (!theGame.IsPaused())
-		{
-			theGame.Pause("menus");
-		}
-	theGame.SetMenuToOpen( '' );
-	theGame.RequestMenu('CommonMainMenu');
-}
-
 
 
 exec function writePGO(optional counter : int)
 {
 	theGame.WritePGO(counter);
-}
-
-exec function debugLogoutModioUser()
-{
-	theGame.GetInGameConfigWrapper().SetVarValue('Hidden', 'ModioTermsAccepted', "false");
-	theGame.GetModHandlerSystem().LogoutUserDebug();
-	Log("temp.ws:debugLogoutModioUser called ");
-}
-
-exec function debugClearModioHiddenMods()
-{
-	theGame.GetModHandlerSystem().ClearHiddenModsIds();
-	LogChannel('MODS', "debugClearModioHiddenMods function was called ");
-}
-
-exec function debugClearModioMutedUsers()
-{
-	theGame.GetModHandlerSystem().ClearMutedModioUsers();
-	LogChannel('MODS', "debugClearModioMutedUsers function was called ");
-}
-
-exec function debugRefreshModioMutedUsersList()
-{
-	theGame.GetModHandlerSystem().RefreshMutedModioUsersList();
-	LogChannel('MODS', "debugRefreshModioMutedUsersList function was called ");
-}
-
-exec function setTargetSwitchCooldown( cd: float )
-{
-	thePlayer.SetTargetLockSwitchCooldown( cd );
-	Log("Target lock switch cooldown set to: " + thePlayer.targetLockSwitchCooldown);
-}
-
-exec function setTargetSwitchSwipeDist( dist: float )
-{
-	thePlayer.SetTargetLockSwitchMinSwipeDist( dist );
-	Log("Target lock switch mouse swipe distance set to: " + thePlayer.targetLockSwitchMinSwipeDist);
-}
-
-exec function setAutoClimb(value : bool)
-{
-	thePlayer.setAutoClimb(value);
-}
-
-exec function learnandequipskill( skillName : name )
-{
-	var skill : ESkill = SkillNameToEnum(skillName);
-	
-	
-	
-	
-	((W3PlayerAbilityManager)thePlayer.abilityManager).OnLevelGained(36);
-	
-	AddAndEquipSkill(skill);
-}
-
-exec function setplayerbuild( build : ESkillPresetBuild, attributePoints : int )
-{
-	SetPlayerBuildQuest( build, attributePoints );
-}
-
-exec function testnewcombat()
-{
-	AddAndEquipSkill(S_Sword_s22);    
-	AddAndEquipSkill(S_Sword_s23);    
-	AddAndEquipSkill(S_Sword_s24);
-	AddAndEquipSkill(S_Sword_s25);  
-	AddAndEquipSkill(S_Sword_s26);  
-	AddAndEquipSkill(S_Sword_s27);  
-	AddAndEquipSkill(S_Sword_s28);  
-	AddAndEquipSkill(S_Sword_s29);  
-	AddAndEquipSkill(S_Sword_s30);  
-	AddAndEquipSkill(S_Sword_s31);  
-	AddAndEquipSkill(S_Sword_s32);  
-	AddAndEquipSkill(S_Sword_s33);  
-}
-
-exec function testnewperks()
-{
-	AddAndEquipSkill(S_Perk_23);    
-	AddAndEquipSkill(S_Perk_24);
-	AddAndEquipSkill(S_Perk_25);   
-	AddAndEquipSkill(S_Perk_26);  
-	AddAndEquipSkill(S_Perk_27);  
-	AddAndEquipSkill(S_Perk_28);  
-}
-
-exec function testperk()
-{
-	AddAndEquipSkill(S_Perk_07);    
-}
-
-exec function spawnbear()
-{
-	var template : CEntityTemplate;
-	var pos : Vector;
-	var rot : EulerAngles; 
- 
-	pos = thePlayer.GetWorldPosition() + VecRingRand(1.f,2.f);
-	rot = VecToRotation(thePlayer.GetWorldPosition() - pos);
-
-	template = (CEntityTemplate)LoadResource("bear_lvl1__black");
-	theGame.CreateEntity(template, pos, rot ); 
-}
-
-exec function addgameplayfact(factID : string, optional value : int, optional expires : int)
-{
-	var val : int;
-	var exp : int;
-
-	if(value == 0)
-		val = 1;
-	else
-		val = value;
-
-	if ( expires == 0)
-	    exp = -1;
-	else
-		exp = expires;
-
-	GameplayFactsAdd(factID, val, exp);
-}
-
-exec function printgameplayfact(id : string)
-{
-	Log("Fact <<"+id+">> has val of "+GameplayFactsQuerySum(id));
-}
-
-
-
-exec function ResetBuild()
-{
-	GetWitcherPlayer().ResetCharacterDev();
-}
-
-
-
-exec function SetShowFlag(showFlag : int, enabled : bool)
-{
-	theGame.SetShowFlag( showFlag, enabled );
-}
-
-exec function debugPrintMutedModioUsersList()
-{
-	theGame.GetModHandlerSystem().DebugPrintMutedModioUsersList();
-	LogChannel('MODS', "debugPrintMutedModioUsersList function was called ");
-}
-
-exec function Transmog(slot : CName, optional templateOverride : CName)
-{
-	var itemId : SItemUniqueId;
-	var inv : CInventoryComponent;
-	var witcherPlayer : W3PlayerWitcher;
-	witcherPlayer = (W3PlayerWitcher)thePlayer;
-	
-	inv = witcherPlayer.GetInventory();
-	witcherPlayer.GetItemEquippedOnSlot(SlotNameToEnum(slot), itemId);
-	inv.SetItemTemplateOverride(itemId, templateOverride);
-
-	witcherPlayer.UnequipItemFromSlot(SlotNameToEnum(slot));
-	witcherPlayer.EquipItem(itemId);
-}
-
-exec function ClearTransmog(slot : CName)
-{
-	var itemId : SItemUniqueId;
-	var inv : CInventoryComponent;
-	var witcherPlayer : W3PlayerWitcher;
-	witcherPlayer = (W3PlayerWitcher)thePlayer;
-	
-	inv = witcherPlayer.GetInventory();
-	witcherPlayer.GetItemEquippedOnSlot(SlotNameToEnum(slot), itemId);
-	inv.SetItemTemplateOverride(itemId, '');
-
-	witcherPlayer.UnequipItemFromSlot(SlotNameToEnum(slot));
-	witcherPlayer.EquipItem(itemId);
-}
-
-exec function AbortMeditation()
-{
-	GetWitcherPlayer().MeditationForceAbort(true);
-}
-exec function tptopin(){
-	thePlayer.DebugTeleportToPin();
-}
-
-exec function printAllGameplayBlocks()
-{
-	
-	var actionLocks	: array< array< SInputActionLock > >;
-	var	i, j		: int;	
-	var lockString	: string;
-	
-	actionLocks	= thePlayer.GetAllActionLocks();
-	
-	for( i = 0; i < actionLocks.Size(); i += 1 )
-	{
-		lockString	= ( string ) ( ( EInputActionBlock ) i ) + ":        ";
-		for( j = 0; j < actionLocks[i].Size(); j += 1 )
-		{
-			lockString	+= actionLocks[i][j].sourceName + ", ";
-			Log(lockString);
-		}
-	}
-}
-
-exec function addchain()
-{
-	thePlayer.inv.AddAnItem('Chain Proto',1);
-	thePlayer.inv.AddAnItem('RopeAndHook Projectile',1);
-	thePlayer.inv.AddAnItem('RopeAndHook',1);
 }

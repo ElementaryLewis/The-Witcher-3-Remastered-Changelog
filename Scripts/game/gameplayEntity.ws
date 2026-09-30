@@ -137,7 +137,6 @@ import class CGameplayEntity extends CPeristentEntity
 	
 	import var aimVector : Vector;
 	editable var iconOffset	: Vector;
-	editable var iconUseComponent : bool;
 	
 	public	var highlighted			: bool;					
 	

@@ -6,22 +6,22 @@
 class W3ChooseGwintTurnPopup extends ConfirmationPopupData
 {
 	public var gwintMenuRef : CR4GwintGameMenu;
-
+	
 	protected function OnUserAccept() : void
 	{
 		gwintMenuRef.SetPlayerStarts(true);
 	}
-
+	
 	protected function OnUserDecline() : void
 	{
 		gwintMenuRef.SetPlayerStarts(false);
 	}
-
+	
 	protected function GetAcceptText() : string
 	{
 		return "gwint_choose_start_player_go_first";
 	}
-
+	
 	protected function GetDeclineText() : string
 	{
 		return "gwint_choose_start_player_go_second";
@@ -29,17 +29,17 @@ class W3ChooseGwintTurnPopup extends ConfirmationPopupData
 }
 
 class CR4GwintGameMenu extends CR4GwintBaseMenu
-{
+{	
 	protected var chooseTurnPopup : W3ChooseGwintTurnPopup;
-
+	
 	private var m_fxSetGwintResult : CScriptedFlashFunction;
 	private var m_fxSetWhoStarts : CScriptedFlashFunction;
 	private var m_fxShowTutorial : CScriptedFlashFunction;
-
+	
 	private var playerWon:bool;
 	private var playerForfeited:bool;
 	private var tutorialActive:bool; default tutorialActive = false;
-
+	
 	function EnableJournalTutorialEnries()
 	{
 		var tutSystem : CR4TutorialSystem;
@@ -58,28 +58,29 @@ class CR4GwintGameMenu extends CR4GwintBaseMenu
 		tutSystem.ActivateJournalEntry('gwintpassing');
 		tutSystem.ActivateJournalEntry('endround');
 		tutSystem.ActivateJournalEntry('lifegems');
+		tutSystem.ActivateJournalEntry('protipsgwent');
 		tutSystem.ActivateJournalEntry('findingcards');
-	}
-
+	}	
+	
 	event  OnConfigUI()
-	{
+	{	
 		super.OnConfigUI();
-
+		
 		SendCardValues();
-
+		
 		SendPlayerNames();
-
+		
 		m_fxSetGwintResult = m_flashModule.GetMemberFlashFunction("winGwint");
 		m_fxSetWhoStarts = m_flashModule.GetMemberFlashFunction("setFirstTurn");
 		m_fxShowTutorial = m_flashModule.GetMemberFlashFunction("showTutorial");
-
+		
 		theGame.GetGuiManager().RequestMouseCursor(true);
-
+		
 		if (gwintManager.getDoubleAIEnabled())
 		{
 			m_flashValueStorage.SetFlashBool( "gwint.game.toggleAI", true );
 		}
-
+		
 		if (!gwintManager.GetHasDoneTutorial())
 		{
 			EnableJournalTutorialEnries();
@@ -94,23 +95,23 @@ class CR4GwintGameMenu extends CR4GwintBaseMenu
 				tutorialActive = true;
 			}
 		}
-
+		
 		SendDecksInformation();
-
+		
 		theSound.SoundLoadBank( "gwint_ep2.bnk", true );
 		theSound.EnterGameState( ESGS_Gwent );
-
+		
 		theTelemetry.LogWithName( TE_HERO_GWENT_MATCH_STARTED );
 	}
-
+	
 	event  OnClosingMenu()
 	{
 		super.OnClosingMenu();
-
+		
 		gwintManager.SetHasDoneTutorial(true);
-
+		
 		theGame.GetGuiManager().RequestMouseCursor(false);
-
+		
 		if (thePlayer.GetGwintMinigameState() != EMS_End_PlayerWon && thePlayer.GetGwintMinigameState() != EMS_End_PlayerLost && thePlayer.GetGwintMinigameState() != EMS_End_PlayerForfeited)
 		{
 			if (playerWon)
@@ -124,48 +125,48 @@ class CR4GwintGameMenu extends CR4GwintBaseMenu
 					thePlayer.SetGwintMinigameState( EMS_End_PlayerLost | EMS_End_PlayerForfeited);
 				else
 					thePlayer.SetGwintMinigameState( EMS_End_PlayerLost );
-
+					
 				theTelemetry.LogWithValue( TE_HERO_GWENT_MATCH_ENDED, 0 );
 			}
 		}
-
+		
 		if (chooseTurnPopup)
 		{
 			delete chooseTurnPopup;
 		}
-
+		
 		theSound.LeaveGameState( ESGS_Gwent );
-
+		
 		
 		
 		theSound.SoundEvent( "system_resume" );
-
+		
 		if (!gwintManager.testMatch && theGame.isUserSignedIn())
 		{
 			theGame.FadeOutAsync( 0 );
 			theGame.SetFadeLock( "Gwint_EndFadeOut" );
 		}
 		gwintManager.testMatch = false;
-
+		
 		theSound.SoundUnloadBank( "gwint_ep2.bnk" );
-
+		
 		
 		theGame.GetGwintManager().SetForcedFaction( GwintFaction_Neutral );
 	}
-
+	
 	public function OnQuitGameConfirmed()
 	{
 		playerWon = false;
 		playerForfeited = true;
 		super.OnQuitGameConfirmed();
 	}
-
+	
 	private function SendCardValues():void
 	{
 		var l_flashObject: CScriptedFlashObject;
-
+		
 		l_flashObject = flashConstructor.CreateFlashObject("red.game.witcher3.menus.gwint.GwintCardValues");
-
+		
 		l_flashObject.SetMemberFlashNumber( "weatherCardValue", 5.0f ); 
 		l_flashObject.SetMemberFlashNumber( "hornCardValue", 5.0f );   
 		l_flashObject.SetMemberFlashNumber( "drawCardValue", 1.0f ); 	
@@ -174,32 +175,34 @@ class CR4GwintGameMenu extends CR4GwintBaseMenu
 		l_flashObject.SetMemberFlashNumber( "unsummonCardValue", 2.0f );   
 		l_flashObject.SetMemberFlashNumber( "improveNeighboursCardValue", 4.0f ); 	
 		l_flashObject.SetMemberFlashNumber( "nurseCardValue", 3.0f ); 	
-
+		
 		m_flashValueStorage.SetFlashObject( "gwint.game.cardValues", l_flashObject );
 	}
-
+	
 	private function SendDecksInformation():void
 	{
 		var playerDeck : SDeckDefinition;
+		var enemyDeck : SDeckDefinition;
 		var playerDeckFlash : CScriptedFlashObject;
 		var enemyDeckFlash : CScriptedFlashObject;
-
+		
 		if (tutorialActive)
 		{
-			gwintManager.GetDeck( 'tutorialDeck', 1, playerDeck );
+			playerDeck = gwintManager.GetTutorialPlayerDeck();
 		}
 		else
 		{
 			playerDeck = gwintManager.GetCurrentPlayerDeck();
 		}
-
 		playerDeckFlash = CreateDeckDefinitionFlash(playerDeck);
-		enemyDeckFlash = CreateDeckDefinitionFlash(gwintManager.GetCurrentAIDeck(), gwintManager.GetAdditionalCards());
-
+		
+		enemyDeck = gwintManager.GetCurrentAIDeck();
+		enemyDeckFlash = CreateDeckDefinitionFlash(enemyDeck);
+		
 		m_flashValueStorage.SetFlashObject("gwint.game.player.deck", playerDeckFlash);
 		m_flashValueStorage.SetFlashObject("gwint.game.enemy.deck", enemyDeckFlash);
 	}
-
+	
 	private function SendPlayerNames():void
 	{
 		if (theGame.GameplayFactsQuerySum("q602_geralt_possessed") == 1)
@@ -212,52 +215,52 @@ class CR4GwintGameMenu extends CR4GwintBaseMenu
 		}
 		m_flashValueStorage.SetFlashString("gwint.player.name.two", GetLocStringByKeyExt("gwint_opponent"));
 	}
-
+	
 	event  OnChooseCoinFlip():void
 	{
 		chooseTurnPopup = new W3ChooseGwintTurnPopup in this;
-
+	
 		chooseTurnPopup.SetMessageTitle(GetLocStringByKeyExt("gwint_choose_start_player_popup_title"));
 		chooseTurnPopup.SetMessageText(GetLocStringByKeyExt("gwint_choose_start_player_popup_desc"));
 		chooseTurnPopup.gwintMenuRef = this;
 		chooseTurnPopup.BlurBackground = true;
-
+		
 		RequestSubMenu('PopupMenu', chooseTurnPopup);
 	}
-
+	
 	event  OnMatchResult(pWon : bool):void
 	{
 		playerWon = pWon;
 		playerForfeited = false;
 	}
-
+	
 	event  OnNeutralRoundVictoryAchievement():void
 	{
 		theGame.GetGamerProfile().AddAchievement(EA_GeraltandFriends);
 	}
-
+	
 	event  OnHeroRoundVictoryAchievement():void
 	{
 		theGame.GetGamerProfile().AddAchievement(EA_Allin);
 	}
-
+	
 	event  OnKilledItAchievement():void
 	{
 		theGame.GetGamerProfile().AddAchievement(EA_KilledIt);
 	}
-
+	
 	public function SetPlayerStarts(playerFirst:bool):void
 	{
 		m_fxSetWhoStarts.InvokeSelfOneArg(FlashArgBool(playerFirst));
 	}
-
+	
 	protected function sendTutorialStrings():void
 	{
 		var l_flashArray : CScriptedFlashArray;
 		var maString:string;
-
+		
 		l_flashArray = m_flashValueStorage.CreateTempFlashArray();
-
+		
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_welcome_desc")));
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_startinghand_desc")));
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_unitcardstrength_desc")));
@@ -274,87 +277,14 @@ class CR4GwintGameMenu extends CR4GwintBaseMenu
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_passing_desc")));
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_end_round_desc")));
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_gems_desc")));
-		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_finding_cards_desc"))); 
+		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_protips_desc")));
 		l_flashArray.PushBackFlashString(ReplaceTagsToIcons(GetLocStringByKeyExt("gwint_tut_finding_cards_desc")));
 		
-
 		m_flashValueStorage.SetFlashArray( "gwint.tutorial.strings", l_flashArray );
 	}
-
+	
 	public function EndGwintMatch( result : int )
 	{
 		m_fxSetGwintResult.InvokeSelfOneArg(FlashArgInt(result));
-	}
-
-	public function spawnCardInstances(template:array<int>, player:int, loc:int)
-	{
-		var l_flashArray : CScriptedFlashArray;
-		var i:int;
-		l_flashArray = m_flashValueStorage.CreateTempFlashArray();
-
-		l_flashArray.PushBackFlashInt(player);
-		l_flashArray.PushBackFlashInt(loc);
-
-		for (i = 0; i<template.Size(); i+=1)
-		{
-			l_flashArray.PushBackFlashInt(template[i]);
-		}
-
-		Log( "GFX - GwintMenu - spawnCardInstance");
-		m_flashValueStorage.SetFlashArray("gwent.spawnCardInstance", l_flashArray);
-	}
-
-	public function spawnCardInstance(template:int, player:int, loc:int)
-	{
-		var l_flashArray : CScriptedFlashArray;
-		var i:int;
-		l_flashArray = m_flashValueStorage.CreateTempFlashArray();
-
-		l_flashArray.PushBackFlashInt(player);
-		l_flashArray.PushBackFlashInt(loc);
-		l_flashArray.PushBackFlashInt(template);
-
-		Log( "GFX - GwintMenu - spawnCardInstance");
-		m_flashValueStorage.SetFlashArray("gwent.spawnCardInstance", l_flashArray);
-	}
-
-	public function addCardToDeck(template:int, player:int)
-	{
-		var l_flashArray : CScriptedFlashArray;
-
-		l_flashArray = m_flashValueStorage.CreateTempFlashArray();
-
-		l_flashArray.PushBackFlashInt(player);
-		l_flashArray.PushBackFlashInt(template);
-
-		Log( "GFX - GwintMenu - addCardToDeck");
-		m_flashValueStorage.SetFlashArray("gwent.addCardToDeck", l_flashArray);
-	}
-
-	public function addCardsToDeck(template:array<int>, player:int)
-	{
-		var l_flashArray : CScriptedFlashArray;
-		var i:int;
-
-		l_flashArray = m_flashValueStorage.CreateTempFlashArray();
-
-		l_flashArray.PushBackFlashInt(player);
-		for (i = 0; i<template.Size(); i+=1)
-		{
-			l_flashArray.PushBackFlashInt(template[i]);
-		}
-
-		Log( "GFX - GwintMenu - addCardToDeck");
-		m_flashValueStorage.SetFlashArray("gwent.addCardToDeck", l_flashArray);
-	}
-
-	public function killCard()
-	{
-		var l_flashArray : CScriptedFlashArray;
-
-		l_flashArray = m_flashValueStorage.CreateTempFlashArray();
-
-		Log( "GFX - GwintMenu - killCard");
-		m_flashValueStorage.SetFlashArray("gwent.killCard", l_flashArray);
 	}
 }

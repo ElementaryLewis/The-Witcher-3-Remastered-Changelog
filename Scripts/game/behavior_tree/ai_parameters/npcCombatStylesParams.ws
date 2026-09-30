@@ -1442,7 +1442,6 @@ class CAINpcGregoireCombatStyleParams extends CAINpcCombatStyleParams
 
 
 
-
 class CAINpcVesemirTutorialCombatStyle extends CAINpcCombatStyle
 {
 	function Init()
@@ -1468,8 +1467,6 @@ class CAINpcStyleVesemirTutorialParams extends CAINpcCombatStyleParams
 		
 	}
 };
-
-
 
 
 

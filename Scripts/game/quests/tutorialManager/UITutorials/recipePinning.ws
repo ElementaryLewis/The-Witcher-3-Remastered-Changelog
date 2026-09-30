@@ -17,7 +17,7 @@ state RecipePinning in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		
 		isClosing = false;
 		
-		ShowHint(PIN, POS_ALCHEMY_X, POS_ALCHEMY_Y - 0.035);
+		ShowHint(PIN, POS_ALCHEMY_X, POS_ALCHEMY_Y);
 	}
 	
 	event OnLeaveState( nextStateName : name )
@@ -48,6 +48,9 @@ state RecipePinning in W3TutorialManagerUIHandler extends TutHandlerBaseState
 		if(closedByParentMenu || isClosing)
 			return true;
 			
-		
+		if(hintName == PIN)
+		{
+			ShowHint(SHOP, POS_ALCHEMY_X, POS_ALCHEMY_Y);
+		}		
 	}	
 }

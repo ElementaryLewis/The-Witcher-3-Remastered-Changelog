@@ -14,9 +14,8 @@ state Exploration in W3HorseComponent
 {
 	private var parentActor : CActor;
 	
-	private var isStopping : bool; 
+	private var isStopping : bool;
 	private var isSlowlyStopping : bool;
-	private var keepAlive : bool;
 	private var destSpeed : float;
 	private var currSpeed : float;
 	private var staminaCooldown : float;
@@ -27,8 +26,6 @@ state Exploration in W3HorseComponent
 	private var roadFollowBlock : float;
 	private var speedLocks 	: array<name>;
 	private var speedRestriction : float;
-	private var speedRestriction2 : float;
-	private var turnRestriction : float;
 	private var useSimpleStaminaManagement : bool;
 	private var inclinationCheckCollisionGroups : array<name>;
 	private var waterCheckCollisionGroups : array<name>;
@@ -39,17 +36,11 @@ state Exploration in W3HorseComponent
 	private var shouldGoToCanterAfterStop : bool;
 	private var grassCollider : CComponent;
 	
-	private var currentTreeCollWS : Vector;
-	private var leanCountdownTimer : Float;
-
 	private var currSpeedSound : float;
 	private var desiredSpeedSound : float;
 	
 	private var jumpStartPos, jumpEndPos : Vector;
 	private	var noSaveLock : int;
-
-	private var previousUpdatePosition: Vector;
-	private var currentUpdatePosition: Vector;
 	
 	const var MIN_SPEED : float;
 	const var SLOW_SPEED : float;
@@ -58,15 +49,13 @@ state Exploration in W3HorseComponent
 	const var GALLOP_SPEED : float;
 	const var CANTER_SPEED : float;
 	
-	default keepAlive = false;
 	default isStopping = false;
 	default staminaCooldown = 3.f;
 	default dismountRequest = false;
 	default speedRestriction = 5.f;
-	default speedRestriction2 = 5.f;
-	default turnRestriction = 1.f;
 	default useSimpleStaminaManagement = false;
-		
+	
+	
 	default MIN_SPEED = 0.f;
 	default SLOW_SPEED = 0.5f; 
 	default WALK_SPEED = 1.f;
@@ -82,24 +71,30 @@ state Exploration in W3HorseComponent
 	{
 		super.OnEnterState( prevStateName );
 		
+		theInput.RegisterListener( this, 'OnSpeedPress', 'Canter' );
+		theInput.RegisterListener( this, 'OnSpeedHold', 'Gallop' );
+		theInput.RegisterListener( this, 'OnDecelerate', 'Decelerate' );
+		theInput.RegisterListener( this, 'OnStop', 'Stop' );
+		theInput.RegisterListener( this, 'OnHorseJump', 'HorseJump' );
+		theInput.RegisterListener( this, 'OnHorseDismountKeyboard', 'HorseDismount' );
+		
+		
+		theInput.RegisterListener( this, 'OnHorseKick', 'HorseKick' );
+
 		parentActor = (CActor)(parent.GetEntity());
 		mac = parentActor.GetMovingAgentComponent();
-		grassCollider = parent.GetEntity().GetComponent( "CDynamicColliderComponent4" );
-
+		
 		parentActor.SetBehaviorVariable( 'isCanterEnabled', 0.0 );
 		
 		Prepare();
 		InitCollisionGroups();
 		ResetSoundParameters();
-
-		RegisterOnMountStartedInput();
-
 		
-		RegisterOnMountFinishedInput();
-
 		mac.SetEnabledFeetIK(true);
-
-		leanCountdownTimer = -1;
+		
+		theGame.GetGuiManager().EnableHudHoldIndicator(IK_Pad_B_CIRCLE, IK_None, "panel_input_action_horsedismount", 0.4, 'HorseDismount');
+		
+		grassCollider = parent.GetEntity().GetComponent( "CDynamicColliderComponent4" );
 	}
 
 	event OnLeaveState( nextStateName : name )
@@ -111,8 +106,6 @@ state Exploration in W3HorseComponent
 		
 		mac.SetEnabledFeetIK(true);
 
-		thePlayer.SetLastPositionsBeforeDismount(thePlayer.GetWorldPosition(), parent.GetEntity().GetWorldPosition());
-
 		super.OnLeaveState( nextStateName );
 	}
 
@@ -122,33 +115,12 @@ state Exploration in W3HorseComponent
 		OnBehJumpEnded();
 	}
 	
-	private function RegisterOnMountStartedInput()
-	{
-		theInput.RegisterListener( this, 'OnSpeedPress', 'Canter' );
-		theInput.RegisterListener( this, 'OnSpeedHold', 'Gallop' );
-		theInput.RegisterListener( this, 'OnDecelerate', 'Decelerate' );
-		theInput.RegisterListener( this, 'OnStop', 'Stop' );
-		theInput.RegisterListener( this, 'OnPatternHorseStop', 'PatternHorseStop' );
-	}
-
-	private function RegisterOnMountFinishedInput()
-	{
-		theInput.RegisterListener( this, 'OnHorseJump', 'HorseJump' );
-		theInput.RegisterListener( this, 'OnHorseDismountKeyboard', 'HorseDismount' );
-		
-		
-		theInput.RegisterListener( this, 'OnHorseKick', 'HorseKick' );
-
-		theGame.GetGuiManager().EnableHudHoldIndicator(IK_Pad_B_CIRCLE, IK_None, "panel_input_action_horsedismount", 0.4, 'HorseDismount');
-	}
-
 	private function UnregisterInput()
 	{
 		theInput.UnregisterListener( this, 'Canter' );
 		theInput.UnregisterListener( this, 'Gallop' );
 		theInput.UnregisterListener( this, 'Decelerate' );
 		theInput.UnregisterListener( this, 'Stop' );
-		theInput.UnregisterListener( this, 'PatternHorseStop' );
 		theInput.UnregisterListener( this, 'HorseJump' );
 		theInput.UnregisterListener( this, 'HorseDismount' );
 		
@@ -157,7 +129,7 @@ state Exploration in W3HorseComponent
 		
 		theGame.GetGuiManager().DisableHudHoldIndicator();
 	}
-
+	
 	
 	private var mountingEnded, canDoKickAnim, wantsToKick : bool;	
 	private var mountingAnimationTime : float;
@@ -258,11 +230,6 @@ state Exploration in W3HorseComponent
 	{
 		parent.OnTick( dt );
 		
-		if ( leanCountdownTimer > 0 )
-		{
-			leanCountdownTimer -= dt;
-		}
-
 		
 		parent.ShouldTickInIdle();
 		
@@ -291,20 +258,17 @@ state Exploration in W3HorseComponent
 		
 		
 		
-		if( parent.GetQuestRiderOverride() )
-		{
 		if( dismountRequest || thePlayer.IsActionAllowed( EIAB_Movement ) )
-			{
-					UpdateLogic( dt );
-					UpdateDebugGUI();
-			}
-			else
-			{
-				ResetRotation();
-			}
+		{
+			UpdateLogic( dt );
+			UpdateDebugGUI();
 		}
-	
-		if ( !parent.user && !keepAlive )
+		else
+		{
+			ResetRotation();
+		}
+		
+		if ( !parent.user )
 		{
 			timeAfterDismountFinished += dt;
 			
@@ -321,86 +285,17 @@ state Exploration in W3HorseComponent
 		
 		mountingEnded = false;
 		canDoKickAnim = false;
-
-		turnRestriction = 1.0f;
-		speedRestriction = CANTER_SPEED;
-		speedRestriction2 = CANTER_SPEED;
-
+	
 		parent.OnMountStarted( entity, vehicleSlot );
-
 		LeaveThisState();
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-
-		
-		
-		
-		
-		
 	}
 	
-	event OnEarlyExplorationMountStart( entity : CEntity )
-	{	
-		speedRestriction2 = WALK_SPEED;
-		turnRestriction = 0.7f;
-
-		
-		keepAlive = true;
-	}
-
-	event OnEarlyExplorationMountJump( entity : CEntity )
-	{	
-		speedRestriction2 = TROT_SPEED;
-		turnRestriction = 0.45f;
-	}
-
 	event OnMountFinished( entity : CEntity )
 	{	
 		
-		keepAlive = false;
-
-		
 		mountingEnded = true;
 		canDoKickAnim = false;
-
-		speedRestriction2 = 5.0;
-		turnRestriction = 1.f;
-
-		if ( parent.useEarlyExploration )
-		{
-			
-		}
-
-		if ( IsMountsRemasterEnabled() )
-		{
-			RegisterOnMountFinishedInput();
-			dismountRequest = false; 
-		}
+	
 		parent.OnMountFinished(entity);
 	}
 	
@@ -410,17 +305,10 @@ state Exploration in W3HorseComponent
 		mountingEnded = false;
 		canDoKickAnim = false;
 	
-		if ( IsMountsRemasterEnabled() )
-		{
-			
-			dismountRequest = true;
-		}
-
 		thePlayer.SetBehaviorVariable( 'playerWouldLikeToMove', 0.0f );
 		UnregisterInput();
 		parent.OnDismountStarted( entity );
 	}
-
 	event OnDismountFinished( entity : CEntity, vehicleSlot : EVehicleSlot  )
 	{
 		parent.OnDismountFinished( entity, vehicleSlot );
@@ -432,19 +320,12 @@ state Exploration in W3HorseComponent
 	{
 		parent.OnIdleBegin();
 		isInJumpAnim = false;
-		isInAutoJump = false;
 		isStopping = false;
 		isSlowlyStopping = false;
 		
-		if ( !parent.user && !keepAlive )
+		if ( !parent.user )
 			LeaveThisState();
 		
-		
-		if ( parent.isCart && dismountRequest )
-		{
-			parent.IssueCommandToDismount( DT_normal );
-		}
-
 		ResetForceStop();
 		
 		
@@ -462,8 +343,7 @@ state Exploration in W3HorseComponent
 	
 	event OnHorseFastStopEnd()
 	{
-		
-		if ( dismountRequest && !parent.isCart )
+		if ( dismountRequest )
 			parent.IssueCommandToDismount( DT_normal );
 		
 		isStopping = false;
@@ -566,12 +446,12 @@ state Exploration in W3HorseComponent
 	
 	event OnCanGallop()
 	{
-		return speedRestriction >= CANTER_SPEED && speedRestriction2 >= CANTER_SPEED && CanCanter();
+		return speedRestriction >= CANTER_SPEED && CanCanter();
 	}
 	
 	event OnCanCanter()
 	{
-		if ( speedRestriction >= GALLOP_SPEED && speedRestriction2 >= GALLOP_SPEED )
+		if ( speedRestriction >= GALLOP_SPEED )
 			return true;
 		return false;
 	}
@@ -671,7 +551,6 @@ state Exploration in W3HorseComponent
 		dismountRequest = false;
 		stopRequest 	= false;
 		isInJumpAnim 	= false;
-		isInAutoJump = false;
 		isStopping 		= false;
 		
 		startSlidingTimeStamp 	= -1.f;
@@ -699,16 +578,9 @@ state Exploration in W3HorseComponent
 	
 	private const var INPUTMAG_TROT : float;
 	private const var INPUTMAG_WALK : float;
-
+	
 	default INPUTMAG_TROT = 0.75; 
 	default INPUTMAG_WALK = 0.45; 
-
-	
-	private const var CARRIAGE_SLOW_DIRECTION_DAMPENER : float;
-	private const var CARRIAGE_FAST_DIRECTION_DAMPENER : float;
-	default CARRIAGE_SLOW_DIRECTION_DAMPENER = 4.f;
-	default CARRIAGE_FAST_DIRECTION_DAMPENER = 2.7f;
-
 	
 	private final function ProcessControlInput( lr : float, fb : float, timeDelta : float, useLocalSpace : bool )
 	{
@@ -722,8 +594,7 @@ state Exploration in W3HorseComponent
 		var prevDir	: float;
 		var steeringCorrection : bool;
 		var stickInput : bool;
-		var reverseDirection : float;
-	
+		
 		var keyboardWalkState : int;	
 		
 		if( ( !thePlayer.GetIsMovable() && !dismountRequest ) || speedRestriction == MIN_SPEED )
@@ -795,10 +666,7 @@ state Exploration in W3HorseComponent
 			}
 			
 			dir = AngleNormalize180( dir ) / 180.f;
-			dir = ApplyCarriageTurnDampening(dir);
 			
-			dir = ClampF( dir, -turnRestriction, turnRestriction );
-
 			
 			if(isReversing)
 				dir = 0.f;
@@ -827,8 +695,6 @@ state Exploration in W3HorseComponent
 					rot = 1.5 * dir * inputMagnitude;
 			}
 			
-			rot = ClampF( rot, -turnRestriction, turnRestriction );
-
 			prevDir = parent.InternalGetDirection();
 			
 			if( ( speedLocks.Contains( 'OnStop' ) && AbsF(dir) < 0.17f ) )
@@ -838,7 +704,7 @@ state Exploration in W3HorseComponent
 			}
 			
 			
-			else if ( parent.riderSharedParams.mountStatus != VMS_mountInProgress || IsMountsRemasterEnabled() )
+			else if( parent.riderSharedParams.mountStatus != VMS_mountInProgress )
 			{
 				
 				if ( prevDir > 0.9f && dir < -0.7f )
@@ -867,11 +733,8 @@ state Exploration in W3HorseComponent
 			}
 			
 			
-			reverseDirection = lr;
-			reverseDirection = ApplyCarriageTurnDampening(reverseDirection);
-
-			if( isReversing )
-				parent.InternalSetRotation( reverseDirection );
+			if(isReversing)
+				parent.InternalSetRotation( lr );
 			
 			
 			if( braking )
@@ -941,7 +804,7 @@ state Exploration in W3HorseComponent
 				} 
 			}	
 		}
-		else 
+		else
 		{
 			ResetRotation();
 			
@@ -970,19 +833,6 @@ state Exploration in W3HorseComponent
 		if ( IsRiderInCombatAction() )
 			OnCombatAction( cachedCombatAction );
 	}
-
-	private function ApplyCarriageTurnDampening( initialValue : float ) : float
-	{
-		if ( parent.isCart )
-		{
-			if ( currSpeed <= TROT_SPEED )
-				return initialValue / CARRIAGE_SLOW_DIRECTION_DAMPENER;
-			else
-				return initialValue / CARRIAGE_FAST_DIRECTION_DAMPENER;
-		}
-
-		return initialValue;
-	}
 	
 	private function ShouldApplyCorrection( stickInputX : float, stickInputY : float ) : bool
 	{
@@ -990,13 +840,6 @@ state Exploration in W3HorseComponent
 		var inputHeading : float;
 		var horseHeading : float;
 		var angleDistanceBetweenInputAndHorse : float;
-
-		if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseSteeringCorrection') == "false")
-		{
-			return false;
-		}
-		
-		
 
 		inputVec = GetInputVectorInCamSpace( stickInputX, stickInputY );
 		angleDistanceBetweenInputAndHorse = AbsF( AngleDistance( VecHeading( inputVec ), parent.GetHeading() ) );
@@ -1044,7 +887,6 @@ state Exploration in W3HorseComponent
 	}
 	
 	
-	private var validSteeringCorrectionFound : bool;
 	private function ApplyCorrection( inputVector : Vector, out correctedDir, stickInputX : float, stickInputY : float ) : bool
 	{
 		var stickInput : bool;
@@ -1073,40 +915,17 @@ state Exploration in W3HorseComponent
 
 		if( currSpeed == CANTER_SPEED )
 		{
-			if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-			{
-				speed = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionSpeedCanter'));
-			}
-			else
-			{
-				speed = 18.75; 
-			}
+			speed = 18.75; 
 			
 			if( !stickInput && !thePlayer.GetIsHorseRacing() )
 			{
-				if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-				{
-					dirModifier = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionDirModifierCanter'));
-				}
-				else
-				{
-					dirModifier = 3.0;
-				}
-
+				dirModifier = 3.0;
 				followRoad = true;
 				maxAngleForAdjustingDir = 90.0;
 			}
 			else
 			{
-				if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-				{
-					dirModifier = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionDirModifierCanter'));
-				}
-				else
-				{
-					dirModifier = 2.0;
-				}
-
+				dirModifier = 2.0;
 				speed *= speedModifier;
 				maxAngleForAdjustingDir = 15.0;
 			}
@@ -1115,73 +934,36 @@ state Exploration in W3HorseComponent
 		}
 		else if( currSpeed == GALLOP_SPEED )
 		{
-			if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-			{
-				speed = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionSpeedGallop'));
-			}
-			else
-			{
-				speed = 12.5; 
-			}
+			speed = 12.5; 
 			
 			if ( !stickInput && !thePlayer.GetIsHorseRacing() )
 			{
-				if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-				{
-					dirModifier = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionDirModifierGallop'));
-				}
-				else
-				{
-					dirModifier = 2.0;
-				}
-
+				dirModifier = 2.0;
 				followRoad = true;
 				maxAngleForAdjustingDir = 90.0;
 			}
 			else
 			{
-				if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-				{
-					dirModifier = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionDirModifierGallop'));
-				}
-				else
-				{
-					dirModifier = 2.0;
-					maxAngleForAdjustingDir = 15.0;
-				}
-
+				dirModifier = 2.0;
 				speed *= speedModifier;
+				maxAngleForAdjustingDir = 15.0;
 			}
 			
 			correctedDirV = VecNormalize2D( inputVector * 0.3 + horseHeadingVec * 0.7 );
 		}
 		else
 		{
-			if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-			{
-				speed = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionSpeed')) * speedModifier;
-				dirModifier = StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'CorrectionDirModifier'));
-			}
-			else
-			{
-				speed = 3.75 * speedModifier; 
-				dirModifier = 1.5;
-			}
-
+			speed = 3.75 * speedModifier; 
+			dirModifier = 1.5;
 			maxAngleForAdjustingDir = 90.0;
-
+			
 			correctedDirV = VecNormalize2D( inputVector * 0.4 + horseHeadingVec * 0.6 );
 		}
 		
 		cachedVec = correctedDirV;
 		
 		desiredDirectionVec = inputVector;
-		
-		if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'RoadFollowing') == "false")
-		{
-			followRoad = false;
-		}
-
+			
 		if( followRoad && !thePlayer.GetIsHorseRacing() && roadFollowBlock == 0.0 )
 		{
 			if( mac.StartRoadFollowing( speed, 45.0, 10.0, correctedDirV ) )
@@ -1192,21 +974,8 @@ state Exploration in W3HorseComponent
 		
 		if( !parent.IsInCustomSpot() )
 		{
-			if( !isFollowingRoad)
-			{
-				if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-				{
-					validSteeringCorrectionFound = mac.AdjustRequestedMovementDirectionNavMesh( correctedDirV, speed, StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'SteeringCorrectionMaxAngle')), 10, 6, desiredDirectionVec, false, theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'TreeFiltering') == "true" );
-				}
-				else
-				{
-					validSteeringCorrectionFound = mac.AdjustRequestedMovementDirectionNavMesh( correctedDirV, speed, maxAngleForAdjustingDir, 10, 6, desiredDirectionVec );
-				}
-				
-				
-				
-				validSteeringCorrectionFound = validSteeringCorrectionFound && cachedVec == correctedDirV;
-			}
+			if( !isFollowingRoad )
+				mac.AdjustRequestedMovementDirectionNavMesh( correctedDirV, speed, maxAngleForAdjustingDir, 10, 6, desiredDirectionVec );
 		}
 		else
 		{
@@ -1283,28 +1052,13 @@ state Exploration in W3HorseComponent
 	default NAVDATA_LENGTH_MOD_GALLOP = 10.0;
 	default NAVDATA_LENGTH_MOD_CANTER = 15.0;
 	
-	private function PerformNavDataTest(optional customStartPoint : Vector) : bool
+	private function PerformNavDataTest() : bool
 	{
 		var startPoint, endPoint : Vector;
 		var initialHeading : Vector;
-		var lengthMod, lengthModGallop, lengthModCanter : float;
+		var lengthMod : float;
 		
-		if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'AutoJump') == "true")
-		{
-			lengthModGallop = 4.0;
-			lengthModCanter = 8.0;
-		}
-		else
-		{
-			lengthModGallop = NAVDATA_LENGTH_MOD_GALLOP;
-			lengthModCanter = NAVDATA_LENGTH_MOD_CANTER;
-		}
-
 		startPoint = parent.GetWorldPosition();
-		if (customStartPoint != Vector(0, 0, 0))
-		{
-			startPoint = customStartPoint;
-		}
 		initialHeading = parent.GetHeadingVector();
 		
 		
@@ -1319,11 +1073,11 @@ state Exploration in W3HorseComponent
 		}
 		else if( currSpeed == GALLOP_SPEED )
 		{
-			lengthMod = lengthModGallop;
+			lengthMod = NAVDATA_LENGTH_MOD_GALLOP;
 		}
 		else
 		{
-			lengthMod = lengthModCanter;
+			lengthMod = NAVDATA_LENGTH_MOD_CANTER;
 		}
 		
 		
@@ -1337,7 +1091,7 @@ state Exploration in W3HorseComponent
 		
 		
 		
-		if( theGame.GetWorld().NavigationLineTest( startPoint, endPoint, NAVDATA_RADIUS, false, true, theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'TreeFiltering') == "true") ) 
+		if( theGame.GetWorld().NavigationLineTest( startPoint, endPoint, NAVDATA_RADIUS, false, true ) ) 
 		{		
 			return true;
 		}
@@ -1346,10 +1100,8 @@ state Exploration in W3HorseComponent
 		
 		return false;
 	}
-
+	
 	const var INCLINATION_MAX_ANGLE : float;
-	const var INCLINATION_MAX_ANGLE_CARRIAGE : float;
-	const var INCLINATION_MAX_ANGLE_CARRIAGE_DOWN : float;
 	const var INCLINATION_BASE_DIST : float;
 	const var INCLINATION_TESTS_COUNT_SLOW : int; 
 	const var INCLINATION_TESTS_COUNT_TROT : int;
@@ -1358,8 +1110,6 @@ state Exploration in W3HorseComponent
 	const var INCLINATION_Z_OFFSET : float;
 	
 	default INCLINATION_MAX_ANGLE = 45.0;
-	default INCLINATION_MAX_ANGLE_CARRIAGE = 25.0;
-	default INCLINATION_MAX_ANGLE_CARRIAGE_DOWN = 40.0;
 	default INCLINATION_BASE_DIST = 1.7;		
 	default INCLINATION_TESTS_COUNT_SLOW = 2;	
 	default INCLINATION_TESTS_COUNT_TROT = 3;	
@@ -1367,19 +1117,6 @@ state Exploration in W3HorseComponent
 	default INCLINATION_TESTS_COUNT_CANTER = 7;	
 	default INCLINATION_Z_OFFSET = 2.1;			
 	
-	private function GetInclinationMaxAngle( isDownCheck : bool ) : float
-	{
-		if ( parent.isCart )
-		{
-			if ( isDownCheck )
-				return INCLINATION_MAX_ANGLE_CARRIAGE_DOWN;
-			else
-				return INCLINATION_MAX_ANGLE_CARRIAGE;
-		}
-		else
-			return INCLINATION_MAX_ANGLE;
-	}
-
 	private function PerformInclinationTest( stickInputX : float, stickInputY : float ) : bool
 	{
 		var startPoint, rawEndPoint, tempEndPoint : Vector;
@@ -1465,24 +1202,20 @@ state Exploration in W3HorseComponent
 				}
 			}
 			
-			if( angle < -GetInclinationMaxAngle(true) ) 
+			if( angle < -INCLINATION_MAX_ANGLE ) 
 			{
 				
 				return false;
 			}
-			else if( angle > GetInclinationMaxAngle(false) && !thePlayer.GetIsHorseRacing() ) 
+			else if( angle > INCLINATION_MAX_ANGLE && !thePlayer.GetIsHorseRacing() ) 
 			{
-				if ( parent.isCart )
+				if( currSpeed > TROT_SPEED )
 				{
-					destSpeed = MinF( destSpeed, WALK_SPEED );
-				}
-				else if( currSpeed <= TROT_SPEED )
-				{
-					return false;
+					destSpeed = MinF( currSpeed, TROT_SPEED );
 				}
 				else
 				{
-					destSpeed = TROT_SPEED;
+					return false;
 				}
 			}
 			
@@ -1634,12 +1367,12 @@ state Exploration in W3HorseComponent
 		if( waterDepth < WATER_MAX_DEPTH + addedDepth || waterDepth == 10000.0  || waterDepth < AbsF(currentWaterDepth)  ) 
 		{
 			
-			thePlayer.GetVisualDebug().AddText( 'WaterTest', "WaterIsFine", thePlayer.GetWorldPosition() + Vector( 0.f,0.f,3.0f ), true, , Color( 0, 255, 0 ) );
+			thePlayer.GetVisualDebug().AddText( 'WaterTest', "WaterIsFine", thePlayer.GetWorldPosition() + Vector( 0.f,0.f,2.3f ), true, , Color( 0, 255, 0 ) );
 			return true;
 		}
 		else
 		{
-			thePlayer.GetVisualDebug().AddText( 'WaterTest', "WaterTooDeep", thePlayer.GetWorldPosition() + Vector( 0.f,0.f,3.0f ), true, , Color( 255, 0, 0 ) );
+			thePlayer.GetVisualDebug().AddText( 'WaterTest', "WaterTooDeep", thePlayer.GetWorldPosition() + Vector( 0.f,0.f,2.3f ), true, , Color( 255, 0, 0 ) );
 			
 			
 			
@@ -1759,7 +1492,7 @@ state Exploration in W3HorseComponent
 			
 			
 			
-			if( angle < -GetInclinationMaxAngle(true) || angle > GetInclinationMaxAngle(false) )
+			if( angle < -INCLINATION_MAX_ANGLE || angle > INCLINATION_MAX_ANGLE )
 			{
 				return false;
 			}
@@ -1767,21 +1500,21 @@ state Exploration in W3HorseComponent
 			{
 				
 				angle = GetInclinationBetweenPoints( afterLandingEndPoint, afterLandingEndPoint - parent.GetWorldRight()*0.5 , tempVector, 4.5 );
-				if( angle < -GetInclinationMaxAngle(true) || angle > GetInclinationMaxAngle(false) || angle > 90 )
+				if( angle < -INCLINATION_MAX_ANGLE || angle > INCLINATION_MAX_ANGLE || angle > 90 )
 				{
 					return false;
 				}
 				
 				
 				angle = GetInclinationBetweenPoints( afterLandingEndPoint, afterLandingEndPoint + parent.GetWorldRight()*0.5 , tempVector, 4.5 );
-				if( angle < -GetInclinationMaxAngle(true) || angle > GetInclinationMaxAngle(false) || angle > 90 )
+				if( angle < -INCLINATION_MAX_ANGLE || angle > INCLINATION_MAX_ANGLE || angle > 90 )
 				{
 					return false;
 				}
 				
 				
 				angle = GetLocalInclination( tempVector );
-				if( angle < -GetInclinationMaxAngle(true) || angle > GetInclinationMaxAngle(false) )
+				if( angle < -INCLINATION_MAX_ANGLE || angle > INCLINATION_MAX_ANGLE )
 					return false;
 				else
 					return true;
@@ -1805,7 +1538,7 @@ state Exploration in W3HorseComponent
 			
 			
 			
-			if( angle < -GetInclinationMaxAngle(true) || angle > GetInclinationMaxAngle(false) )
+			if( angle < -INCLINATION_MAX_ANGLE || angle > INCLINATION_MAX_ANGLE )
 			{
 				return false;
 			}
@@ -1813,7 +1546,7 @@ state Exploration in W3HorseComponent
 			{
 				
 				angle = GetLocalInclination( tempVector );
-				if( angle < -GetInclinationMaxAngle(true) || angle > GetInclinationMaxAngle(false) )
+				if( angle < -INCLINATION_MAX_ANGLE || angle > INCLINATION_MAX_ANGLE )
 					return false;
 				else
 					return true;
@@ -1911,76 +1644,6 @@ state Exploration in W3HorseComponent
 
 		return false;
 	}
-
-	
-	
-	
-	
-	private function PerformAutoJumpTest2( stickInputX : float, stickInputY : float ) : bool
-	{
-		var startPoint : Vector;
-		var testedHeading : Vector;
-		var inputVec : Vector;
-		var horseHeadingVec : Vector;
-		var furthestAccessiblePointForJumpTest : Vector;
-		var anticipationDist : float;
-		var afterLandingDist : float;
-		var dbgArrowName : array<name>;
-		var dbgSphereName : array<name>; 
-		
-		startPoint = parent.GetWorldPosition();
-		
-		if( currSpeed == CANTER_SPEED )
-		{
-			anticipationDist = 4.0;
-			afterLandingDist = 3.0;
-		}
-		else
-		{
-			anticipationDist = 4.0;
-			afterLandingDist = 2.0;
-		}
-
-		
-		if( stickInputX || stickInputY )
-		{
-			inputVec = GetInputVectorInCamSpace( stickInputX, stickInputY );
-			horseHeadingVec = parent.GetHeadingVector();
-					
-			testedHeading = VecNormalize2D( inputVec * 0.25 + horseHeadingVec * 1.0 );
-		}
-		else
-		{
-			testedHeading = parent.GetHeadingVector();
-		}
-
-		
-		if (SweepTest(startPoint, VecRotateAxis(testedHeading, Vector(0, 0, 1), Deg2Rad(5)), anticipationDist, 0.8, 0.4) )
-		{
-			thePlayer.GetVisualDebug().AddArrow( dbgArrowName[0], startPoint + Vector(0, 0, 0.8), startPoint + Vector(0, 0, 0.8) + anticipationDist * VecRotateAxis(testedHeading, Vector(0, 0, 1), Deg2Rad(5)), 1, 0.3, 0.3, true, Color( 255, 0, 0 ), true, 10.0 );
-		}
-
-		if (SweepTest(startPoint, VecRotateAxis(testedHeading, Vector(0, 0, 1), Deg2Rad(-5)), anticipationDist, 0.8, 0.4) )
-		{
-			thePlayer.GetVisualDebug().AddArrow( dbgArrowName[0], startPoint + Vector(0, 0, 0.8), startPoint + Vector(0, 0, 0.8) + anticipationDist * VecRotateAxis(testedHeading, Vector(0, 0, 1), Deg2Rad(-5)), 1, 0.3, 0.3, true, Color( 255, 0, 0 ), true, 10.0 );
-		}
-
-		if (SweepTest(startPoint, VecRotateAxis(testedHeading, Vector(0, 0, 1), Deg2Rad(5)), anticipationDist, 0.8, 0.4) 
-			|| SweepTest(startPoint, VecRotateAxis(testedHeading, Vector(0, 0, 1), Deg2Rad(-5)), anticipationDist, 0.8, 0.4))
-		{
-			return false;
-		}
-
-		if( CircleTest( startPoint, testedHeading, anticipationDist, 0.5 ) ) 
-		{
-			if( LineTest( startPoint + testedHeading * anticipationDist, testedHeading, afterLandingDist, 0.0, furthestAccessiblePointForJumpTest ) ) 
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
 	
 	private function GetInputVectorInCamSpace( stickInputX : float, stickInputY : float ) : Vector
 	{
@@ -2072,8 +1735,8 @@ state Exploration in W3HorseComponent
 	
 		endPos = startPos + heading * anticipationDist;
 		
-		((CActor)parent.GetEntity()).GetVisualDebug().AddSphere( 'circleTestEnd', radius, endPos, true, Color( 0, 255, 0 ), 3.0 );
-		((CActor)parent.GetEntity()).GetVisualDebug().AddArrow( 'circleTestLine', startPos, endPos, 1, 0.3, 0.3, true, Color( 0, 255, 0 ), true, 3.0 );
+		
+		
 		
 		if( theGame.GetWorld().NavigationCircleTest( endPos, radius ) )
 		{
@@ -2091,9 +1754,6 @@ state Exploration in W3HorseComponent
 			return false;
 		}
 	}
-	
-	
-	
 	
 	private function SweepTest( startPos : Vector, heading : Vector, anticipationDist : float, heightOffset : float, radius : float ) : bool
 	{
@@ -2116,67 +1776,13 @@ state Exploration in W3HorseComponent
 	
 	
 	
-
-	private function GetMinimumSpeedForStaminaDrain() : float
-	{
-		if ( parent.isCart )
-		{
-			return GALLOP_SPEED;
-		}
-		
-		return CANTER_SPEED;
-	}
-
+	
 	
 	private var isReversing : bool;
 	
 	
-	private function CalculateForwardDisplacement(currentPosition : Vector, previousPosition : Vector, heading : Vector) : float
-	{
-		return VecDot2D(currentPosition - previousPosition, VecNormalize2D(heading));
-	}
 	
-	private function TriggerNavStop()
-	{
-		destSpeed = MIN_SPEED;
-		ToggleSpeedLock( 'OnNavStop', true );
-		if( !isRefusingToGo && parent.isInIdle && CanPlayCollisionAnim() && ( rl != 0.0 || fb != 0.0 ) && !isReversing ) 
-		{
-			parent.GenerateEvent( 'WallCollision' );
-			collisionAnimTimestamp = theGame.GetEngineTimeAsSeconds();
-		}	
-		
-		
-		if(parent.lastRider == thePlayer)
-		{
-			parentActor.SetBehaviorVariable( 'canSlowWalk', 0.0f );
-			isReversing = false;
-		}
-
-		accumulatedForwardDisplacement = 0.f;
-	}
-
-	
-	private function AutoStopIfNeeded(speedFactor : float) : bool
-	{
-		if (!isFollowingRoad && !parent.ShouldIgnoreTests() && !PerformInclinationTest( rl, fb) && !PerformFallJumpTest())
-		{
-			TriggerNavStop();
-			return true;
-		}
-
-		if (!PerformWaterTest(theInput.GetActionValue( 'GI_AxisLeftX' ), theInput.GetActionValue( 'GI_AxisLeftY' ), GetSubmergeDepth()))
-		{
-			TriggerNavStop();
-			return true;
-		}
-
-		return false;
-	}
-
 	private var rl, fb : float; 
-	var accumulatedForwardDisplacement : float;
-
 	private final function UpdateLogic( dt : float )
 	{
 		var actorParent : CActor;
@@ -2186,24 +1792,6 @@ state Exploration in W3HorseComponent
 		
 		var waterDepth : float;
 		var lookatPos : Vector;
-
-		var staminaBreakSpeed : float;
-		var displacementToleranceFactor : float;
-		var outPosition : Vector;
-		var outNormal : Vector;
-		var collisionGroupsNames 			: array<name>;
-		var speedFactor : float;
-		var forwardDisplacement : float;
-		var dbgSphereName : array<name>;
-
-		if (currSpeed == CANTER_SPEED)
-		{
-			speedFactor = 10.0;
-		}
-		else
-		{
-			speedFactor = 5.0;
-		}
 		
 		if(!thePlayer.GetIsHorseRacing())
 			parentActor.SetBehaviorVariable( 'isRearingEnabled', 1.0 );
@@ -2242,14 +1830,7 @@ state Exploration in W3HorseComponent
 		
 		if( thePlayer.GetIsMovable() && IsHorseControllable() && !dismountRequest && !slidingDisablesControll )
 		{
-			if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true")
-			{
-				rl = theInput.GetActionValue( 'GI_AxisLeftX' ) * StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('Controls', 'SteeringSensitivity'));
-			}
-			else
-			{
-				rl = theInput.GetActionValue( 'GI_AxisLeftX' );
-			}
+			rl = theInput.GetActionValue( 'GI_AxisLeftX' );
 			fb = theInput.GetActionValue( 'GI_AxisLeftY' );
 		}
 		else
@@ -2258,6 +1839,7 @@ state Exploration in W3HorseComponent
 			fb = 0.0;
 		}
 
+		
 		
 		
 		
@@ -2290,7 +1872,7 @@ state Exploration in W3HorseComponent
 		
 		actorParent = (CActor)parent.GetEntity();
 		
-		if ( useSimpleStaminaManagement && currSpeed >= GetMinimumSpeedForStaminaDrain() && !isFollowingRoad )
+		if ( useSimpleStaminaManagement && currSpeed > GALLOP_SPEED && !isFollowingRoad )
 		{
 			
 			if(thePlayer.GetIsHorseRacing())
@@ -2302,97 +1884,47 @@ state Exploration in W3HorseComponent
 			{
 				staminaBreak = true;
 				staminaCooldownTimer = 0.f;
-				theGame.HapticStart( "classic_vibro_small_oneshot" );
+				theGame.VibrateControllerVeryLight();	
 			}
 		}
 		
 		destSpeed = MinF( destSpeed, speedRestriction );
-		destSpeed = MinF( destSpeed, speedRestriction2 );
 		
 		if( currSpeed > destSpeed && currSpeed < GALLOP_SPEED )
 			PlayVoicesetSlowerHorse();
 		
-		if ( IsMountsRemasterEnabled() )
-		{
-			ProcessControlInput( rl, fb, dt, parent.IsControllableInLocalSpace() );
-		}
-		else
-		{
-			ProcessControlInput( rl, fb, dt, parent.IsControllableInLocalSpace() || parent.riderSharedParams.mountStatus == VMS_mountInProgress );
-		}
+		ProcessControlInput( rl, fb, dt, parent.IsControllableInLocalSpace() || parent.riderSharedParams.mountStatus == VMS_mountInProgress );
 		
-		((CActor)parent.GetEntity()).SetShouldFilterObstacles( 
-			theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'TreeFiltering') == "true");
-
-		
-		
-
-		if (!PerformAutoJumpTest2(rl, fb))
-		{
-			thePlayer.GetVisualDebug().AddText( 'AutoJumpTest2', "PerformAutoJumpTest2 (space behind)", thePlayer.GetWorldPosition() + Vector( 0.f,0.f,2.7f ), true, , Color( 255, 0, 0 ) );
-		}
-		else
-		{
-			thePlayer.GetVisualDebug().AddText( 'AutoJumpTest2', "PerformAutoJumpTest2 (space behind)" , thePlayer.GetWorldPosition() + Vector( 0.f,0.f,2.7f ), true, , Color( 0, 255, 0 ) );
-		}
-
-		
-		
-		
-		
-		
-		
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-
-		currentUpdatePosition = parentActor.GetWorldPosition();
-		thePlayer.GetVisualDebug().AddText( 'AutoJumpForwardDisplacement', "Forward displacement: " + FloatToString(CalculateForwardDisplacement(currentUpdatePosition, previousUpdatePosition, parentActor.GetHeadingVector())), thePlayer.GetWorldPosition() + Vector( 0.f,0.f,2.4f ), true, , Color( 0, 0, 255 ) );		
-		
-		thePlayer.GetVisualDebug().AddText( 'AutoJumpSpeed', "Delta time scaled speed: " +  FloatToString(dt * currSpeed), thePlayer.GetWorldPosition() + Vector( 0.f,0.f,2.3f ), true, , Color( 0, 0, 255 ) );		
-		
-
-		collisionGroupsNames.PushBack('Static');
-		collisionGroupsNames.PushBack('Terrain');
-		collisionGroupsNames.PushBack('Destructible');
-
-		forwardDisplacement = CalculateForwardDisplacement(currentUpdatePosition, previousUpdatePosition, parentActor.GetHeadingVector());
-
-		if (destSpeed < GALLOP_SPEED)
-		{
-			accumulatedForwardDisplacement = 0.f;
-		}
-		else
-		{
-			accumulatedForwardDisplacement = accumulatedForwardDisplacement + forwardDisplacement;
-		}
-		thePlayer.GetVisualDebug().AddText( 'AutoJumpForwardDisplacementTotal', "Forward displacement total: " + FloatToString(accumulatedForwardDisplacement), thePlayer.GetWorldPosition() + Vector( 0.f,0.f,2.2f ), true, , Color( 0, 0, 255 ) );		
-
-		if(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "false" && !thePlayer.GetIsHorseRacing() && !PerformNavDataTest() && !isInJumpAnim ) 
-		{
+		if( !PerformNavDataTest() && !isInJumpAnim ) 
+		{		
 			if( PerformInclinationTest( rl, fb ) && PerformWaterTest( rl, fb, waterDepth  ) ) 
 			{
 				ToggleSpeedLock( 'OnNavStop', false );
 				
-				
-				
-				
-				
+				if( PerformAutoJumpTest( rl, fb ) )
+				{
+					Jump();
+				}
 				
 				
 				parentActor.SetBehaviorVariable( 'canSlowWalk', 1.0f );
 			}
 			else if( !isFollowingRoad && !parent.ShouldIgnoreTests() )
 			{			
-				TriggerNavStop();
+				destSpeed = MIN_SPEED;
+				ToggleSpeedLock( 'OnNavStop', true );
+				if( !isRefusingToGo && parent.isInIdle && CanPlayCollisionAnim() && ( rl != 0.0 || fb != 0.0 ) && !isReversing ) 
+				{
+					parent.GenerateEvent( 'WallCollision' );
+					collisionAnimTimestamp = theGame.GetEngineTimeAsSeconds();
+				}	
+				
+				
+				if(parent.lastRider == thePlayer)
+				{
+					parentActor.SetBehaviorVariable( 'canSlowWalk', 0.0f );
+					isReversing = false;
+				}
 			}
 			else
 			{
@@ -2401,58 +1933,13 @@ state Exploration in W3HorseComponent
 				
 				parentActor.SetBehaviorVariable( 'canSlowWalk', 1.0f );
 			}
-		}
-		else if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'AutoJump') == "true"
-		 && !thePlayer.GetIsHorseRacing() && !parent.isCart && currSpeed >= GALLOP_SPEED  )
-		{	
-			if (!isFollowingRoad && (speedRestriction == CANTER_SPEED) && !isInJumpAnim && !PerformNavDataTest() && PerformAutoJumpTest2(rl, fb) && PerformWaterJumpTest() && PerformFallJumpTest() && PerformInclinationTest(rl, fb))
-			{
-				currentUpdatePosition = parentActor.GetWorldPosition();
-
-				if (currSpeed == GALLOP_SPEED)
-				{
-					displacementToleranceFactor = 0.8;
-				}
-				else if (currSpeed == CANTER_SPEED)
-				{
-					displacementToleranceFactor = 1.5;
-				}
-
-				if (accumulatedForwardDisplacement > 5.f && (forwardDisplacement < (dt * currSpeed) * displacementToleranceFactor))
-				{
-					isInAutoJump = true;
-					accumulatedForwardDisplacement = 0;
-					Jump();
-				}
-			}
-			else if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'AutoStop') == "true" && !validSteeringCorrectionFound)
-			{
-				AutoStopIfNeeded(speedFactor);
-			}
-		}
-		else if (parent.isCart && !(PerformInclinationTest( rl, fb ) || PerformWaterTest( rl, fb, waterDepth )))
-		{
-			TriggerNavStop();
 		}
 		else
 		{
-			if (theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'AutoStop') == "true" && !validSteeringCorrectionFound)
-			{
-				if (AutoStopIfNeeded(speedFactor) == false)
-				{
-					ToggleSpeedLock( 'OnNavStop', false );
-				
-					
-					parentActor.SetBehaviorVariable( 'canSlowWalk', 1.0f );	
-				}
-			}
-			else
-			{
-				ToggleSpeedLock( 'OnNavStop', false );
-				
-				
-				parentActor.SetBehaviorVariable( 'canSlowWalk', 1.0f );
-			}
+			ToggleSpeedLock( 'OnNavStop', false );
+			
+			
+			parentActor.SetBehaviorVariable( 'canSlowWalk', 1.0f );
 		}
 		
 		if( requestJump )
@@ -2474,11 +1961,6 @@ state Exploration in W3HorseComponent
 		
 		if( staminaBreak )
 		{
-			if ( parent.isCart )
-				staminaBreakSpeed = WALK_SPEED;
-			else
-				staminaBreakSpeed = GALLOP_SPEED;
-
 			if ( staminaCooldownTimer > staminaCooldown )
 			{
 				staminaBreak = false;
@@ -2488,7 +1970,7 @@ state Exploration in W3HorseComponent
 			
 			
 			if(!isReversing)
-				currSpeed = MinF( staminaBreakSpeed, currSpeed );
+				currSpeed = MinF( GALLOP_SPEED, currSpeed );			
 			
 			
 			destSpeed = currSpeed;
@@ -2529,8 +2011,6 @@ state Exploration in W3HorseComponent
 		CalculateSoundParameters( dt );
 		thePlayer.SoundParameter( "horse_speed", currSpeedSound, 'head' ); 
 		actorParent.SoundParameter( "horse_stamina", actorParent.GetStatPercents( BCS_Stamina ) * 100 ); 
-
-		previousUpdatePosition = parentActor.GetWorldPosition();
 	}
 	
 	private var cachedPos : Vector; 
@@ -2628,7 +2108,6 @@ state Exploration in W3HorseComponent
 	
 	private var requestJump 	: bool;
 	private var isInJumpAnim 	: bool;
-	private var isInAutoJump 	: bool;
 	
 	private final function Jump()
 	{
@@ -2645,12 +2124,6 @@ state Exploration in W3HorseComponent
 		var horse : CActor;
 		horse = (CActor)parent.GetEntity();
 		
-		if (isInAutoJump)
-		{
-			horse.SetShouldFilterAutoJumpObstacles( 
-				theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true");
-		}
-
 		isInJumpAnim = true;
 		requestJump = false;
 		startTestingLanding = false;
@@ -2672,17 +2145,10 @@ state Exploration in W3HorseComponent
 	{
 		var horse : CActor;
 		horse = (CActor)parent.GetEntity();
-
-		if (isInAutoJump)
-		{
-			horse.SetShouldFilterAutoJumpObstacles(false);
-			isInAutoJump = false;
-		}
-
+		
 		horse.RemoveAnimEventChildCallback(parent,'Jumping');
 		
 		isInJumpAnim = false;
-		isInAutoJump = false;
 		theGame.ReleaseNoSaveLock( noSaveLock );
 		if ( parent.user == thePlayer )
 			theGame.GetGuiManager().EnableHudHoldIndicator(IK_Pad_B_CIRCLE, IK_None, "panel_input_action_horsedismount", 0.4, 'HorseDismount');
@@ -2735,61 +2201,9 @@ state Exploration in W3HorseComponent
 
 			EndJump();
 			
-			
+			theGame.VibrateControllerLight();	
 			if ( parent.user == thePlayer )
 				theGame.GetGuiManager().EnableHudHoldIndicator(IK_Pad_B_CIRCLE, IK_None, "panel_input_action_horsedismount", 0.4, 'HorseDismount');
-		}
-	}
-
-	event OnSkippingTreeCollision( treeCenterWS : Vector )
-	{
-		var collisionSpeed : float;
-		var velMag : float;
-		var dir : float;
-		var dotProduct : float;
-		var playerWS : Vector;
-		if ( parent.user == thePlayer && !thePlayer.IsCiri() )
-		{
-			playerWS = thePlayer.GetWorldPosition();
-
-			
-
-			if ( VecDistanceSquared( currentTreeCollWS, treeCenterWS ) < 0.0064 ) 
-			{	
-				if ( leanCountdownTimer > 0 )
-				{
-					return false;
-				}
-			}
-			else if ( VecDistance( currentTreeCollWS, playerWS ) < VecDistance( treeCenterWS, playerWS ) + 0.1 ) 
-			{	
-				return false;
-			}
-
-			
-			currentTreeCollWS = treeCenterWS;
-
-			velMag = VecLength2D( GetHorseVelocity() );
-
-			if( currSpeed >= CANTER_SPEED && velMag > 10.0 )
-			{
-				collisionSpeed = 2.f;
-			}
-			else if( currSpeed >= GALLOP_SPEED && velMag > 6.0 )
-			{
-				collisionSpeed = 1.f;
-			}
-			else
-			{
-				collisionSpeed = 0.f;
-			}
-
-			dotProduct = VecDot( thePlayer.GetWorldRight(), VecNormalize( treeCenterWS - playerWS ) );
-			
-			dir = ( dotProduct <= 0 ) ? 1.0 : 0.0;
-
-			thePlayer.OnSkippingTreeCollision( dir, collisionSpeed );
-			leanCountdownTimer = 4.f; 
 		}
 	}
 
@@ -2827,11 +2241,6 @@ state Exploration in W3HorseComponent
 	
 	private function CanCanter() : bool
 	{
-		if ( parent.isCart )
-		{
-			return false;
-		}
-		
 		return ( thePlayer.m_SettlementBlockCanter < 1 ) || ( thePlayer.GetIsHorseRacing() ); 
 	}
 	
@@ -2844,15 +2253,6 @@ state Exploration in W3HorseComponent
 		{
 			if( IsPressed( action ) )			
 			{
-				if(action.patternName == '')
-				{
-					theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_HorseAcceleration,MPTS_Trigger);
-				}
-				else
-				{
-					theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_HorseAcceleration,MPTS_Done);
-				}
-
 				
 				if( accelerateTimestamp + DOUBLE_TAP_WINDOW >= theGame.GetEngineTimeAsSeconds() )
 				{
@@ -2862,7 +2262,7 @@ state Exploration in W3HorseComponent
 				{
 					triedDoubleTap = false;
 				}
-
+				
 				if(CanCanter() && (!IsSpeedLocked() || speedLocks.Contains( 'OnAttack' )) )
 				{
 					if( currSpeed >= CANTER_SPEED )
@@ -2899,29 +2299,16 @@ state Exploration in W3HorseComponent
 				}
 				
 				accelerateTimestamp = theGame.GetEngineTimeAsSeconds();
-				maintainSpeedTimer = 0;				
-			}					
+				maintainSpeedTimer = 0.f;				
+			}			
 			else if( IsReleased( action ) )
-			{	
-				if(action.patternName != '')
-				{
-					theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_HorseStop,MPTS_Done);
-				}
-
+			{
 				shouldGoToCanterAfterStop = false;
 				ToggleSpeedLock( 'OnGallop', false );
 			}
 		}
 	}
-
-	event OnPatternHorseStop( action : SInputAction )
-	{
-		if( IsReleased( action ) && action.patternName != '' && FactsQuerySum("motionpattern_horsestop_trigger") > 0 )
-		{
-			theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_HorseStop,MPTS_Done);
-		}
-	}
-
+	
 	
 	event OnSpeedHold( action : SInputAction )
 	{
@@ -2998,11 +2385,6 @@ state Exploration in W3HorseComponent
 		
 		if ( thePlayer.playerAiming.GetCurrentStateName() == 'Aiming' )
 			return false;
-
-		if ( parent.isCart )
-		{
-			return false;
-		}
 		
 		if( IsHorseControllable() && !IsRiderInCombatAction() && parent.IsFullyMounted() && parent.GetPanicPercent() < 0.99 )
 		{
@@ -3013,7 +2395,7 @@ state Exploration in W3HorseComponent
 			}
 		}
 	}
-
+		
 	event OnHorseDismountKeyboard( action : SInputAction )
 	{
 		if( IsPressed( action ) )
@@ -3028,7 +2410,7 @@ state Exploration in W3HorseComponent
 			}
 		}
 	}
-
+	
 	event OnHorseDismount()
 	{
 		if( !DismountHorse() )
@@ -3056,235 +2438,28 @@ state Exploration in W3HorseComponent
 	{
 		SetupDismount();
 	}
-
-	function PredictVehicleForwardForTurn() : Vector
-	{
-		var vehicleEntity : CEntity = parent.GetEntity();
-		var inputVector : Vector = GetInputVectorInCamSpace( theInput.GetActionValue( 'GI_AxisLeftX' ), theInput.GetActionValue( 'GI_AxisLeftY' ) );
-		var headingAngles : EulerAngles = VecToRotation(parentActor.GetMovingAgentComponent().GetVelocityHeading());
-		var headingDiff : float = AngleDistance(VecHeading(inputVector), headingAngles.Yaw);
-
-		if (currSpeed >= CANTER_SPEED)
-		{
-			return VecRotateAxis(parentActor.GetMovingAgentComponent().GetVelocityHeading(), Vector(0, 0, 1), Deg2Rad(0.5 * headingDiff));
-		}
-		else
-		{
-			return VecRotateAxis(parentActor.GetMovingAgentComponent().GetVelocityHeading(), Vector(0, 0, 1), Deg2Rad(headingDiff));
-		}
-	}
-
-	function IsDynamicDismountPositionValid( vehicleComponent : CVehicleComponent, _position : Vector, speedFactor : float, lineAhead : bool ) : bool
-	{
-		var actorMovingAgentComponent 		: CMovingPhysicalAgentComponent;
-		var vehicleEntity					: CEntity 	= vehicleComponent.GetEntity();
-		var vehiclePosition					: Vector 	= vehicleEntity.GetWorldPosition();
-		var pointA, pointB, outPosition, outNormal : Vector;
-		var collisionGroupsNames 			: array<name>;
-		var dbgSphereName 					: array<name>; 
-		var dbgArrowName 					: array<name>;
-		var pointAhead						: Vector;
-		var radius 							: float;
-		var dummyFloat						: float;
-
-		actorMovingAgentComponent = ( CMovingPhysicalAgentComponent ) thePlayer.GetMovingAgentComponent();
-		
-		collisionGroupsNames.PushBack('Static');
-		collisionGroupsNames.PushBack('Terrain');
-		collisionGroupsNames.PushBack('Destructible');
-		collisionGroupsNames.PushBack('Foliage');
-		collisionGroupsNames.PushBack('Door');
-		
-		pointA = vehiclePosition;
-		pointB = _position;
-		pointA.Z += 1;
-		pointB.Z = pointA.Z;
-		pointAhead = pointB + PredictVehicleForwardForTurn() * speedFactor;
-		radius = 0.4;
-		
-		if (theGame.GetWorld().NavigationComputeZ( pointB, pointB.Z - 2.0, pointB.Z + 1.0, dummyFloat ) == false
-			|| theGame.GetWorld().NavigationComputeZ( pointAhead, pointAhead.Z - 4.0, pointAhead.Z + 1.0, dummyFloat ) == false)
-		{
-			return false;
-		}
-
-		
-		if ( theGame.GetWorld().SweepTest( pointA, pointB, radius, outPosition, outNormal, collisionGroupsNames, StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'TreeSizeThreshold')) ) )
-		{
-			
-			return false;
-		}
-		if (lineAhead)
-		{
-			if (!theGame.GetWorld().NavigationLineTest( pointB, pointAhead, radius, false, true, true )
-				|| theGame.GetWorld().SweepTest( pointB, pointAhead, radius, outPosition, outNormal, collisionGroupsNames, StringToFloat(theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'TreeSizeThreshold')) ))
-			{
-				thePlayer.GetVisualDebug().AddSphere( dbgSphereName[ 0 ], radius, pointB, true, Color( 255, 0, 0 ), 10.0 );
-				thePlayer.GetVisualDebug().AddSphere( dbgSphereName[ 0 ], radius, pointAhead, true, Color( 255, 0, 0 ), 10.0 );
-				thePlayer.GetVisualDebug().AddArrow( dbgArrowName[0], pointB, pointAhead, 1, 0.3, 0.3, true, Color( 255, 0, 0 ), true, 10.0 );
-
-				return false;
-			}
-			else
-			{
-				thePlayer.GetVisualDebug().AddSphere( dbgSphereName[ 0 ], radius, pointB, true, Color( 0, 255, 0 ), 10.0 );
-				thePlayer.GetVisualDebug().AddSphere( dbgSphereName[ 0 ], radius, pointAhead, true, Color( 0, 255, 0 ), 10.0 );
-				thePlayer.GetVisualDebug().AddArrow( dbgArrowName[0], pointB, pointAhead, 1, 0.3, 0.3, true, Color( 0, 255, 0 ), true, 10.0 );
-			}
-		}
-		
-		
-		return true;
-	}
-
-	
-	
-	
-	
-	
-    function FindDynamicDismountDirection( vehicleComponent : CVehicleComponent, speed : float) : float
-	{
-		var vehicleEntity					: CEntity 	= vehicleComponent.GetEntity();
-		var horseComponent					: W3HorseComponent;
-		var LeftDismountPosition 			: Vector;
-		var RightDismountPosition 			: Vector;
-		var BackDismountPosition 			: Vector;
-		var actorMovingAgentComponent 		: CMovingPhysicalAgentComponent;
-		var lookatAngle 					: float 	= AngleDistance(theCamera.GetCameraHeading(), vehicleEntity.GetHeading());
-		var vehiclePosition					: Vector 	= vehicleEntity.GetWorldPosition();
-		
-		var vehicleForward					: Vector 	= PredictVehicleForwardForTurn();
-		var vehicleRight					: Vector 	= VecRotateAxis(vehicleForward, Vector(0, 0, 1), Deg2Rad(-90));
-		var dismountCheckLength				: float		= 1.0;
-		var possibleDirections				: array<float>;
-		var dismountDirection				: float;
-		var speedFactor						: float;
-		
-		if (speed >= CANTER_SPEED)
-		{
-			speedFactor = 5;
-		}
-		else if (speed >= GALLOP_SPEED)
-		{
-			speedFactor = 3;
-		}
-
-		horseComponent = (W3HorseComponent)vehicleComponent;
-		actorMovingAgentComponent =( CMovingPhysicalAgentComponent ) thePlayer.GetMovingAgentComponent();
-		LeftDismountPosition = speedFactor * vehicleForward + vehiclePosition - vehicleRight;
-		RightDismountPosition = speedFactor * vehicleForward + vehiclePosition + vehicleRight;
-		BackDismountPosition = vehiclePosition - vehicleForward * dismountCheckLength;
-		
-		if ( horseComponent )
-		{			
-			if( IsDynamicDismountPositionValid( vehicleComponent, BackDismountPosition, speedFactor, false ) )
-			{
-				possibleDirections.PushBack( 2.0 );
-			}
-			if( IsDynamicDismountPositionValid( vehicleComponent, RightDismountPosition, speedFactor, true ) )
-			{
-				possibleDirections.PushBack( 1.0 );
-			}
-			if( IsDynamicDismountPositionValid( vehicleComponent, LeftDismountPosition, speedFactor, true ) )
-			{
-				possibleDirections.PushBack( 0.0 );
-			}
-			
-			if (theInput.GetActionValue( 'GI_AxisLeftX' ) < 0 && possibleDirections.Contains( 0.0 ))
-			{
-				dismountDirection = 0.0;
-			}
-			else if (theInput.GetActionValue( 'GI_AxisLeftX' ) > 0 && possibleDirections.Contains( 1.0 ))
-			{
-				dismountDirection = 1.0;
-			}
-			else
-			{
-				if( lookatAngle > -45.0f && lookatAngle < 0.0f && possibleDirections.Contains( 1.0 ) )
-				{
-					dismountDirection = 1.0;
-				}
-				else if( lookatAngle > 0.0f && lookatAngle < 45.0f  && possibleDirections.Contains( 0.0 ) )
-				{
-					dismountDirection = 0.0;
-				}
-				else if (possibleDirections.Contains( 1.0 )) 
-				{
-					dismountDirection = 1.0;
-				}
-				else if (possibleDirections.Contains( 0.0 )) 
-				{
-					dismountDirection = 0.0;
-				}
-				else 
-				{
-					dismountDirection = 2.0;
-				}
-			}
-		}
-
-		return dismountDirection;
-	}
 	
 	public function SetupDismount()
 	{
-		if ( parent.user == thePlayer )
-		{
-			thePlayer.OnStopSkippingTreeCollision();
-		}
-
-		parent.GenerateEvent( 'treeCollisionLeanAbort' );
-
-		if ( ( currSpeed == MIN_SPEED && !isSlowlyStopping ) || isStopping || isReversing || parent.isCart ) 
+		if( ( currSpeed == MIN_SPEED && !isSlowlyStopping ) || isStopping || isReversing ) 
 		{
 			OnForceStop();
-			parent.user.SetBehaviorVariable( 'dismountType', 0.f );
+			parent.user.SetBehaviorVariable('dismountType',0.f);
 		}
-		else if ( currSpeed >= GALLOP_SPEED && VecLength2D( GetHorseVelocity() ) > 6.0 )
+		else if( currSpeed >= GALLOP_SPEED && VecLength2D( GetHorseVelocity() ) > 6.0 )
 		{
-			parent.user.SetBehaviorVariable( 'dismountType', 2.f );
+			parent.user.SetBehaviorVariable('dismountType',2.f);
 			destSpeed = GALLOP_SPEED;
 		}
 		else
 		{
-			parent.user.SetBehaviorVariable( 'dismountType', 1.f );
+			parent.user.SetBehaviorVariable('dismountType',1.f);
 			destSpeed = TROT_SPEED;
 		}
 		
-		
-		if ( !thePlayer.IsCiri() && theGame.GetInGameConfigWrapper().GetVarValue( 'NewHorseControls', 'UseNewControls' ) == "true" && theGame.GetInGameConfigWrapper().GetVarValue( 'NewHorseControls', 'ExperimentalDismounts' ) == "true" )
-		{
-			if ( PerformInclinationTest( rl, fb ) )
-			{
-				if( currSpeed >= CANTER_SPEED && VecLength2D( GetHorseVelocity() ) > 10.0 )
-				{
-					parent.user.SetBehaviorVariable( 'dismountType', 6.f );
-					destSpeed = CANTER_SPEED;
-				}
-				else if( currSpeed >= GALLOP_SPEED && VecLength2D( GetHorseVelocity() ) > 6.0 )
-				{
-					parent.user.SetBehaviorVariable( 'dismountType', 5.f );
-					destSpeed = GALLOP_SPEED;
-				}
-				
-				parent.user.SetBehaviorVariable( 'dynamicDismountDirection', FindDynamicDismountDirection( parent, currSpeed ) );
-			}
-		}
-
-		if ( parent.isCart )
-		{
-			
-			if ( parent.isInIdle )
-			{
-				parent.IssueCommandToDismount( DT_normal );
-			}
-		}
-		else if ( !isStopping ) 
-		{
+		if( !isStopping )
 			parent.IssueCommandToDismount( DT_normal );
-		}
 		
-
 		dismountRequest = true;
 	}
 	
@@ -3378,30 +2553,6 @@ state Exploration in W3HorseComponent
 			case MIN_SPEED:
 				speedTimeoutValue = 0.0;
 				break;
-		}
-
-		if (!thePlayer.IsCiri() && dismountRequest && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "true" && theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'ExperimentalDismounts') == "true")
-		{
-			
-			switch( currSpeed )
-			{
-				case CANTER_SPEED:
-				{
-					if( thePlayer.IsInCombat() )
-						speedTimeoutValue = 2.0;
-					else
-						speedTimeoutValue = 0.8;
-					break;
-				}
-				case GALLOP_SPEED:
-				{
-					if( thePlayer.IsInCombat() )
-						speedTimeoutValue = 2.0;
-					else
-						speedTimeoutValue = 1.5;
-					break;
-				}
-			}
 		}
 	}
 	
@@ -3536,7 +2687,7 @@ state Exploration in W3HorseComponent
 	
 	private function CanPlayVoiceset( _currentTime : float ) : bool
 	{
-		return ( parent.user == GetWitcherPlayer() ) && !dismountRequest && thePlayer.IsUsingHorse() && !thePlayer.IsThreatened() && !thePlayer.IsSpeaking() && !thePlayer.IsHorseRidingMuted() && (voicsetTimeStamp + VOICESET_COOLDOWN <= _currentTime );
+		return ( parent.user == GetWitcherPlayer() ) && !dismountRequest && thePlayer.IsUsingHorse() && !thePlayer.IsThreatened() && !thePlayer.IsSpeaking() && (voicsetTimeStamp + VOICESET_COOLDOWN <= _currentTime );
 	}
 	
 	private function GetHorseVelocity() : Vector

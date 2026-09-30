@@ -24,25 +24,11 @@ class W3ConfuseEffect extends W3CriticalEffect
 	{
 		return criticalHitBonus;
 	}
-
-	public function OnTimeUpdated(deltaTime : float)
-	{
-		var i : int;
-
-		if(!isOnPlayer && duration * 0.5 <= duration - timeLeft)
-		{
-			for(i=0; i<allowedHits.Size(); i+=1)
-				allowedHits[i] = true;
-		}
-
-		super.OnTimeUpdated(deltaTime);
-	}
 		
 	event OnEffectAdded(optional customParams : W3BuffCustomParams)
 	{
 		var params : W3ConfuseEffectCustomParams;
 		var npc : CNewNPC;
-		var i : int;
 		
 		super.OnEffectAdded(customParams);
 		
@@ -76,9 +62,6 @@ class W3ConfuseEffect extends W3CriticalEffect
 					npc.SignalGameplayEvent('NoticedObjectReevaluation');
 				}
 			}
-
-			for(i=0; i<allowedHits.Size(); i+=1)
-				allowedHits[i] = false;
 		}
 	}
 	
@@ -119,9 +102,7 @@ class W3ConfuseEffect extends W3CriticalEffect
 		
 		if(npc)
 		{
-			if( !npc.HasBuff( EET_AxiiGuardMe ))
-				npc.ResetTemporaryAttitudeGroup(AGP_Axii);
-				
+			npc.ResetTemporaryAttitudeGroup(AGP_Axii);
 			npc.SignalGameplayEvent('NoticedObjectReevaluation');
 		}
 		

@@ -33,8 +33,8 @@ class CBTTaskSendTutorialEvent extends IBehTreeTask
 			theGame.GetTutorialSystem().OnGuardSwordWarning();
 		if ( guardGeneralWarning )
 			theGame.GetTutorialSystem().OnGuardGeneralWarning();
-		
-		
+		if ( guardLootingWarning )
+			theGame.GetTutorialSystem().OnGuardLootingWarning();
 	}
 }
 

@@ -14,7 +14,7 @@ class CBTTaskLeshyStageMonitor extends IBehTreeTask
 		
 		while ( true )
 		{
-			if ( NoMinionCheck() && owner.GetStatPercents( BCS_Essence ) > 0.2 )
+			if ( MinionNumberCheck() && owner.GetStatPercents( BCS_Essence ) > 0.2 )
 			{
 				owner.ChangeFightStage( NFS_Stage1 );
 				
@@ -29,7 +29,7 @@ class CBTTaskLeshyStageMonitor extends IBehTreeTask
 		return BTNS_Active;
 	}
 	
-	function NoMinionCheck() : bool
+	function MinionNumberCheck() : bool
 	{
 		var npc : CNewNPC = GetNPC();
 		var i : int;

@@ -24,7 +24,7 @@ state CharacterDevelopment in W3TutorialManagerUIHandler extends TutHandlerBaseS
 		isClosing = false;
 		
 		theGame.GetTutorialSystem().HideTutorialHint( OPEN_CHAR_DEV );
-		ShowHint(LEVELING, POS_CHAR_DEV_X + 0.065, POS_CHAR_DEV_Y - 0.3);
+		ShowHint(LEVELING, POS_CHAR_DEV_X, POS_CHAR_DEV_Y);
 		
 		
 		theGame.GetTutorialSystem().uiHandler.UnregisterUIState('CharacterDevelopmentFastMenu');
@@ -54,29 +54,27 @@ state CharacterDevelopment in W3TutorialManagerUIHandler extends TutHandlerBaseS
 		if(closedByParentMenu || isClosing)
 			return true;
 			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		QuitState();
+		if(hintName == LEVELING)
+		{
+			ShowHint(SKILLS, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, , GetHighlightCharDevSkillPoints() );
+		}
+		else if(hintName == SKILLS)
+		{
+			ShowHint(GROUPS, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, , GetHighlightCharDevSkillGroups() );
+		}
+		else if(hintName == GROUPS)
+		{
+			ShowHint(BUY_SKILL, POS_CHAR_DEV_X, POS_CHAR_DEV_Y, ETHDT_Infinite, GetHighlightCharDevSkills() );
+		}
+		else if(hintName == SKILL_EQUIPPING)
+		{
+			
+			ShowHint(EQUIP_SKILL, .05f , POS_CHAR_DEV_Y, ETHDT_Infinite, GetHighlightCharDevSkillSlotGroup1() );
+		}
+		else if(hintName == SKILL_UNEQUIPPING)
+		{
+			QuitState();
+		}
 	}
 	
 	public final function OnBoughtSkill(skill : ESkill)

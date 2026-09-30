@@ -43,7 +43,6 @@ enum EClimbDistanceType
 	ECDT_Normal	= 0,
 	ECDT_Close	= 1,
 	ECDT_Far	= 2,
-	ECDT_FarRemaster = 3,
 }
 
 
@@ -124,12 +123,11 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	
 	
 	private	editable			var	autoClimb				: bool;					default	autoClimb				= false;
-	private	editable			var	autoClimbOnAir			: bool;					default	autoClimbOnAir			= true;
-	private editable			var	inputAngleToEnter		: float;				default	inputAngleToEnter		= 60.0f;
+	private	editable			var	autoClimbOnAir			: bool;					default	autoClimbOnAir			= false;
+	private editable			var	inputAngleToEnter		: float;				default	inputAngleToEnter		= 180.0f;
 	private editable			var	inputAngleToRun			: float;				default	inputAngleToRun			= 45.0f;
 	private						var	inputAttemptsTop		: bool;
 	private						var	inputDirection			: Vector;
-	private						var doesInputMatchDirection	: bool;
 	private editable			var	inputAirHold			: bool;					default	inputAirHold			= true;
 	private editable			var	inputAirTimeGap			: bool;					default	inputAirTimeGap			= false;
 	private editable			var	inputTimeGapCheck		: float;				default	inputTimeGapCheck		= 0.3f;
@@ -142,11 +140,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	private						var adjustInitialRotDone	: bool;
 	private						var adjustRotDone			: bool;
 	private						var adjustTransDone			: bool;
-	
-	private						var adjustTransHandsDone	: bool;
-	private						var climbArriveAt			: Vector;
-	private						var climbDistance			: float;
-	
 	
 	private						var adjustSpeedMax			: float;				default	adjustSpeedMax			= 12.0f;
 	private						var adjustSpeedRequire		: bool;
@@ -175,7 +168,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	private editable			var	behAnimAdjustInitRot	: name;					default	behAnimAdjustInitRot	= 'ClimbInitialRotate';
 	private editable			var	behAnimAdjustRot		: name;					default	behAnimAdjustRot		= 'ClimbStartRotate';
 	private editable			var	behAnimAdjustTrans		: name;					default	behAnimAdjustTrans		= 'ClimbStartTranslate';
-	private editable			var	behAnimAdjustTransHands	: name;					default	behAnimAdjustTransHands	= 'ClimbTranslateHands';
 	private editable			var	behAnimEnded			: name;					default	behAnimEnded			= 'ClimbCanEnd';
 	private editable			var	behAnimCanWalk			: name;					default	behAnimCanWalk			= 'ClimbCanWalk';
 	private editable			var	behAnimCanRun			: name;					default	behAnimCanRun			= 'ClimbCanRun';
@@ -189,8 +181,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	private editable			var	behDisableHandsIK		: name;					default	behDisableHandsIK		= 'ClimbDisableHandsIK';
 	private editable			var	behDisableHandLIK		: name;					default	behDisableHandLIK		= 'ClimbDisableHandLIK';
 	private editable			var	behDisableHandRIK		: name;					default	behDisableHandRIK		= 'ClimbDisableHandRIK';
-
-	private editable			var	behDisableCollision		: name;					default	behDisableCollision		= 'ClimbDisableCollision';
 	
 	
 	private editable			var	behHeightTypeEnum		: name;					default	behHeightTypeEnum		= 'ClimbHeightType';
@@ -202,8 +192,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	private editable			var	behToRun				: name;					default	behToRun				= 'ClimbEndsRunning';
 	private editable			var	behVarEnd				: name;					default	behVarEnd				= 'ClimbCanEndMode';
 	private editable			var	behAnimSpeed			: name;					default	behAnimSpeed			= 'ClimbAnimSpeed';
-
-	private editable			var	behDestinationBlend		: name;					default	behDestinationBlend		= 'ClimbUseDestinationMotionBlend';
 	
 	
 	
@@ -332,8 +320,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		
 		vectorUp	= Vector( 0.0f,0.0f, 1.0f );
-
-		InitDrawDebug();
 	}
 	
 	
@@ -350,13 +336,8 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		curPlayerStateType								= FindPlayerState();
 		m_ExplorationO.m_SharedDataO.m_ClimbStateTypeE	= curPlayerStateType;
-
 		
-
-		if ( !doesInputMatchDirection )
-		{
-			return false;
-		}
+		
 		
 		
 		if( !OracleWantsToEnter() )
@@ -400,8 +381,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	function StateCanEnter( curStateName : name ) : bool
 	{	
 		
-		autoClimb = ((bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'AutoClimbObstacles'));
-		autoClimb = ((bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'AutoClimbObstaclesWithoutSprint'));	
 		if( !InputWantsToEnter() )
 		{
 			return false;
@@ -474,7 +453,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		adjustRotDone			= false;	
 		adjustTransDone			= false;	
-		adjustTransHandsDone	= false;
 		
 		
 		m_ExplorationO.m_OwnerMAC.SetEnabledFeetIK( false );
@@ -489,7 +467,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		handIKqueuedL			= false;
 		handIKqueuedR			= false;
 		
-		m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( Vector( 0, 0, leftHandOffsetCur ), Vector(0,0,rightHandOffsetCur ) );
+		m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( leftHandOffsetCur, rightHandOffsetCur );
 		
 		adjust2Dduration		= 0.0f;	
 		
@@ -503,9 +481,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		
 		thePlayer.AbortSign();
-
-		dtt = 0;
-		i = 0;
 	}
 	
 	
@@ -549,7 +524,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behAnimAdjustInitRot, 	'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behAnimAdjustRot, 		'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behAnimAdjustTrans, 		'OnAnimEvent_SubstateManager' );
-		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behAnimAdjustTransHands, 	'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behDisablePelvisTrans,	'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behEnableIK, 				'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behEnableHandsIK, 		'OnAnimEvent_SubstateManager' );
@@ -558,7 +532,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behDisableHandsIK, 		'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behDisableHandLIK, 		'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behDisableHandRIK, 		'OnAnimEvent_SubstateManager' );
-		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behDisableCollision, 		'OnAnimEvent_SubstateManager' );
 	}
 	
 	
@@ -593,9 +566,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 				{
 					if( m_ExplorationO.m_InputO.IsModuleConsiderable() )
 					{
-						if ( m_ExplorationO.m_SharedDataO.m_UseRemasterAnimsB )
-							m_ExplorationO.m_SharedDataO.SetRunStartingFoot();
-
 						m_ExplorationO.SendAnimEvent( behGoToRun );
 						m_ExplorationO.m_OwnerE.SetBehaviorVariable( behVarEnd, ( float ) ( int ) ECR_Run );
 						return 'Idle';
@@ -648,7 +618,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	{		
 		var posCur	: Vector;
 		
-
+		
 		
 		if( adjustSpeedRequire )
 		{
@@ -669,8 +639,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		
 		CheckVerticalSlideEnd();
-
-		DrawDebug( _Dt );
 	}
 	
 	
@@ -724,7 +692,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		thePlayer.SetBehaviorVariable( 'inJumpState', 0.f );
 		
 		thePlayer.ReapplyCriticalBuff();
-		EnableCollision( true );
 		
 	}
 	
@@ -744,7 +711,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behAnimAdjustInitRot );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behAnimAdjustRot );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behAnimAdjustTrans );
-		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behAnimAdjustTransHands );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behDisablePelvisTrans );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behEnableIK );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behEnableHandsIK );
@@ -753,7 +719,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behDisableHandsIK );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behDisableHandLIK );
 		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behDisableHandRIK );
-		m_ExplorationO.m_OwnerE.RemoveAnimEventCallback( behDisableCollision );
 	}
 	
 	
@@ -826,7 +791,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		else if( animEventName == behAnimAdjustTrans && !adjustTransDone )
 		{
 			duration	= GetEventDurationFromEventAnimInfo( animInfo );
-			StartMovementAdjustorTranslation( duration, animInfo );
+			StartMovementAdjustorTranslation( duration );
 			
 			
 			
@@ -834,12 +799,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 			{
 				pelvisTransState	= EOCS_Starting;
 			}
-		}
-
-		else if( animEventName == behAnimAdjustTransHands && !adjustTransHandsDone )
-		{
-			duration	= GetEventDurationFromEventAnimInfo( animInfo );
-			StartMovementAdjustorHandTranslation( duration );
 		}
 		
 		
@@ -884,13 +843,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		else if( animEventName == behDisableHandRIK )
 		{
 			StopHandIK( false, true );
-		}
-		else if( animEventName == behDisableCollision )
-		{
-			if ( animEventType == AET_DurationStart )
-				EnableCollision( false );
-			else if ( animEventType == AET_DurationEnd )
-				EnableCollision( true );
 		}
 		
 		
@@ -1068,61 +1020,26 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		{
 			return true;
 		}
-		
-		
-		if( autoClimb 
-			&& m_ExplorationO.m_InputO.IsModuleConsiderable() 
-			&& AbsF( m_ExplorationO.m_InputO.GetHeadingDiffFromPlayerF() ) <= ((float)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'AutoClimbAngleToEnter'))	 ) 
-			
+		else
 		{
-			
-			
-			
-			
-
-			return true;
+			return false;
 		}
 		
 		
-		if( m_ExplorationO.GetStateTypeCur() == EST_OnAir && m_ExplorationO.m_SharedDataO.m_JumpTypeE != EJT_Fall )
-		{
-			if( autoClimbOnAir && m_ExplorationO.m_InputO.IsModuleConsiderable() )
-			{
-				return true;
-			}
-			if( inputAirHold && m_ExplorationO.m_InputO.IsExplorationPressed() )
-			{
-				return true;
-			}
-			if( inputAirTimeGap && m_ExplorationO.m_InputO.GetExplorationLastJustPressedTime( ) < inputTimeGapCheck )
-			{
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	
 	private function ComputeInput()
 	{
-		var angleDiffDegrees : float;
-
 		inputAttemptsTop	= !thePlayer.GetIsRunning(); 
-
-		if( m_ExplorationO.m_InputO.IsModuleConsiderable() && m_ExplorationO.GetStateCur() != 'Jump' && m_ExplorationO.GetStateCur() != 'AirCollision' )
+		
+		if( m_ExplorationO.m_InputO.IsModuleConsiderable() )
 		{
 			inputDirection	= m_ExplorationO.m_InputO.GetMovementOnPlaneNormalizedV();
-			doesInputMatchDirection = true;
 		}
 		else
 		{		
 			inputDirection	= m_ExplorationO.m_OwnerE.GetWorldForward();
-
-			angleDiffDegrees = AbsF( AngleDistance( m_ExplorationO.m_InputO.GetHeadingOnPlaneF(), m_ExplorationO.m_OwnerE.GetHeading() ) );
-
-			
-			doesInputMatchDirection = angleDiffDegrees <= 60.f || !m_ExplorationO.m_InputO.IsModuleConsiderable();
 		}
 	}
 	
@@ -1133,6 +1050,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		var logFails		: bool;
 		var	distanceType	: EClimbDistanceType;
 		var	requireInputDir : bool;
+		
 		
 		logFails		= m_ExplorationO.m_InputO.IsExplorationJustPressed();
 		originPosition	= m_ExplorationO.m_OwnerE.GetWorldPosition();
@@ -1153,18 +1071,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		
 		m_ClimbOracleO.GetClimbData( heightTarget, vaultingFound, vaultEndsFalling, platformFound, climbPoint, wallNormal );
-
-		if(autoClimb && !m_ExplorationO.m_InputO.IsExplorationPressed())
-		{
-			if( thePlayer.GetIsSprinting() || ((bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'AutoClimbObstaclesWithoutSprint')))
-			{
-				return vaultingFound == ECRV_NoVault || !vaultEndsFalling;
-			}
-			else
-			{
-				return heightTarget < 0.75f && vaultingFound == ECRV_NoVault;
-			}
-		}
 		
 		return true;
 	}
@@ -1179,15 +1085,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		}
 		else if( curPlayerStateType == ECRT_Running )
 		{
-			if( autoClimb && !m_ExplorationO.m_InputO.IsExplorationPressed() )
-			{
-				return ECDT_Close;
-			}
-
-			if ( theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewProbe') )
-				return ECDT_FarRemaster;
-			else
-				return ECDT_Far;
+			return ECDT_Far;
 		}
 		else if( curPlayerStateType == ECRT_AirColliding )
 		{
@@ -1205,11 +1103,11 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		
 		
-		
-		
-		
-		
-		
+		if( curPlayerStateType == ECRT_Running && heightTarget < 0.75f )
+		{
+			LogExplorationClimb( "Climb skipped because of running state and height < 0.75f" );
+			return false;
+		}
 		
 		
 		if( curPlayerStateType == ECRT_Running && heightTarget >= 3.0f )
@@ -1223,7 +1121,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		}
 		
 		
-		if( curPlayerStateType == ECRT_Running || curPlayerStateType == ECRT_Jumping )
+		if( curPlayerStateType == ECRT_Running )
 		{
 			dot	= VecDot( wallNormal, inputDirection );
 			if( dot > -0.65f )
@@ -1343,8 +1241,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	private function SetBehaviorData()
 	{
 		
-		m_ExplorationO.m_SharedDataO.SetFotForward( (bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbReverseFeet') );
-		thePlayer.SetUseNewAnimations( (bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'UseNewAnimations') );	
+		m_ExplorationO.m_SharedDataO.SetFotForward();
 		SetTranslationToBehaviour();
 		m_ExplorationO.m_OwnerE.SetBehaviorVariable( behVarEnd, ( float ) ( int ) ECR_NotReady );
 		m_ExplorationO.m_OwnerE.SetBehaviorVariable( behHeightTypeEnum, ( float ) ( int ) climbCur.type );
@@ -1360,15 +1257,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		{
 			m_ExplorationO.m_SharedDataO.m_JumpTypeE	= EJT_Fall;
 			m_ExplorationO.m_OwnerE.SetBehaviorVariable( 'JumpType', ( float ) ( int ) EJT_Fall );
-		}
-
-		if ( theGame.GetInGameConfigWrapper().GetVarValue( 'RemasterCombat', 'ClimbUseDestinationMotionBlend' ) && climbCur.type == ECHT_Step )
-		{
-			SetClimbUseDestinationMotionBlend( true );
-		}
-		else
-		{
-			SetClimbUseDestinationMotionBlend( false );
 		}
 	}
 	
@@ -1428,7 +1316,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		var characterPos		: Vector;
 		var	translationGoesBack	: bool;
 		var	isCiri				: bool;
-		var posCorrection 		: float;
 		
 		
 		
@@ -1449,6 +1336,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		translation			+= wallNormal * characterRadius;
 		
 		
+		
 		translationBackDist	= MaxF( 0.0f, VecDot( translation, wallNormal ) );
 		
 		isCiri	= false;
@@ -1464,7 +1352,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		{
 			translationBackDist	+= 0.05f;
 		}
-
 		
 		
 		
@@ -1474,12 +1361,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 			
 			
 			translation			-= wallNormal * ( characterRadius - climbCur.forwardDistExact );
-
-			posCorrection = ((float)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbExtraArrivalDistance'));
-			if ( posCorrection != 0 )
-			{
-				translation -= wallNormal * posCorrection;
-			}
 		}
 		
 		translation.Z			= heightToAdd;
@@ -1488,14 +1369,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		adjustInitiallRotat		= initialrotation;
 		adjustRotation			= rotation;
 		adjustTranslation		= translation;
-		thePlayer.GetVisualDebug().AddSphere( 'signEntity', 2.4f, adjustTranslation, true, Color( 255, 0, 0 ), 3.f );
-
-		climbArriveAt = climbPoint + (-wallNormal) * ((float)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbExtraArrivalDistance'));
-		if ( vaultingFound == ECRV_NoVault )
-			climbArriveAt += (-wallNormal) * characterRadius;
-		else
-			climbArriveAt.Z += 0.2f;
-		climbDistance = VecDistance( climbArriveAt, characterPos );
 		
 		
 		adjustInitialRotDone	= false;
@@ -1511,38 +1384,9 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 			StartMovementAdjustorInitialTranslation( translationBackDist * wallNormal );
 		}
 	}
-
-	
-	private function StartMovementAdjustorHandTranslation( duration : float )
-	{
-		var movAdj 			: CMovementAdjustor;
-		var ticket 			: SMovementAdjustmentRequestTicket;
-
-		if( noAdjustor )
-		{
-			return;
-		}
-		
-		if( adjustTranslation == Vector( 0, 0, 0 ) )
-		{
-			return;
-		}
-
-		AdjustAnimationSpeedAndDuration( duration );
-		
-		
-		movAdj = m_ExplorationO.m_OwnerMAC.GetMovementAdjustor();
-		ticket = movAdj.CreateNewRequest( 'ClimbAdjustHandTranslation' );
-		movAdj.AdjustLocationVertically( ticket, true );
-
-		movAdj.AdjustmentDuration( ticket, duration );
-		movAdj.SlideBy( ticket, adjustTranslation );
-
-		adjustTransHandsDone	= true;
-	}
 	
 	
-	private function StartMovementAdjustorTranslation( duration : float, animInfo : SAnimationEventAnimInfo )
+	private function StartMovementAdjustorTranslation( duration : float )
 	{
 		var movAdj 			: CMovementAdjustor;
 		var ticket 			: SMovementAdjustmentRequestTicket;
@@ -1552,8 +1396,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		var speed			: float;
 		var timeRequired	: float;
 		var animSpeedCoef	: float;
-		var speedAdjustmentDisabled : bool = ((bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbDisableAnimSpeedCorrection'));
-		var useNewSlide : bool = (bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewSlide') && climbCur.requiredState != ECRT_Jumping && vaultingFound == ECRV_NoVault && climbCur.requiredState != ECRT_Landed && !thePlayer.IsCiri();
 		
 		if( noAdjustor )
 		{
@@ -1564,11 +1406,11 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		{
 			return;
 		}
-
+		
 		
 		distance	= VecLength( adjustTranslation );
 		speed		= distance / duration;
-		if( speed > adjustSpeedMax && !speedAdjustmentDisabled )
+		if( speed > adjustSpeedMax )
 		{
 			timeRequired		= distance / adjustSpeedMax;
 			animSpeedCoef		= duration / timeRequired;
@@ -1580,39 +1422,11 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		
 		
 		movAdj	= m_ExplorationO.m_OwnerMAC.GetMovementAdjustor();
-		ticket	= movAdj.CreateNewRequest( 'ClimbAdjusTranslation' );
+		ticket	= movAdj.CreateNewRequest( 'ClimbAdjusTranslation' );		
+		movAdj.AdjustmentDuration( ticket, duration );
 		movAdj.AdjustLocationVertically( ticket, true );
-
-		if ( !((bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbDisableMovementAdjustment')) )
-		{
-			if ( !useNewSlide )
-			{
-				if ( m_ExplorationO.m_SharedDataO.m_UseRemasterAnimsB && vaultingFound == ECRV_Vault && climbCur.requiredState != ECRT_Jumping )
-				{
-					AdjustAnimationSpeedAndDuration( duration );
-				}
-
-				movAdj.AdjustmentDuration( ticket, duration );
-				movAdj.SlideBy( ticket, adjustTranslation );
-			}
-			else
-			{
-				if ( m_ExplorationO.m_InputO.IsModuleConsiderable() && m_ExplorationO.m_InputO.IsSprintPressed() )
-				{
-					adjustSpeedRequire = true;
-					adjustSpeedEndTime = m_ExplorationO.GetStateTimeF() + duration;
-					animSpeedCoef = 1 + StringToFloat( theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbIncreaseAnimationSpeedWhenSprinting') );
-					ApplyAnimationSpeed( animSpeedCoef );
-				}
-
-				movAdj.BindToEventAnimInfo( ticket, animInfo );
-				movAdj.ScaleAnimation( ticket, true, true, false );
-				movAdj.MaxLocationAdjustmentDistance( ticket, false, climbDistance * 2 ); 
-				movAdj.SlideTo( ticket, climbArriveAt );
-				movAdj.NotifyScript( ticket, this, 'OnSlideFinish', MAN_AdjustmentEnded );
-				thePlayer.GetVisualDebug().AddSphere( 'arrivePoint', 0.1f, climbArriveAt, true, Color( 255, 0, 0 ), 10.f );
-			}
-		}
+		
+		movAdj.SlideBy( ticket, adjustTranslation );
 		
 		
 		
@@ -1620,38 +1434,9 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		adjust2Dduration	= duration;
 		adjust2Translation	= Vector( adjustTranslation.X, adjustTranslation.Y, 0.0f );
 		adjust2Speed		= VecLength2D( adjust2Translation ) / duration;
-
+		
 		
 		adjustTransDone	= true;
-	}
-
-	event OnSlideFinish( requestName : name, notify : EMovementAdjustmentNotify )
-	{
-		thePlayer.GetVisualDebug().AddSphere( 'slideFin', 0.1f, thePlayer.GetWorldPosition(), true, Color( 0, 0, 255 ), 10.f );
-	}
-
-	
-	private function AdjustAnimationSpeedAndDuration( out duration : float )
-	{
-		var distance		: float;
-		var animSpeedCoef	: float;
-		var thresholdDist : float;
-
-		var speedAdjustmentDisabled : bool = ((bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbDisableAnimSpeedCorrection'));
-
-		if ( speedAdjustmentDisabled )
-			return;
-		
-		distance = VecDistance2D( climbPoint, m_ExplorationO.m_OwnerMAC.GetWorldPosition() );
-		thresholdDist = climbCur.forwardDistExact * 1.25f;
-		if ( distance > thresholdDist )
-		{
-			animSpeedCoef = thresholdDist / distance;
-			adjustSpeedRequire = true;
-			duration = duration / animSpeedCoef;
-			adjustSpeedEndTime = m_ExplorationO.GetStateTimeF() + duration;
-			ApplyAnimationSpeed( animSpeedCoef );
-		}
 	}
 	
 	
@@ -1954,7 +1739,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 			{			
 				rightHandOffsetCur	= BlendLinearF( rightHandOffsetCur, rightHandOffset, _Dt * handIKBlendSpeedIn );
 			}
-			m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( Vector( 0, 0, leftHandOffsetCur ), Vector( 0, 0, rightHandOffsetCur ) );
+			m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( leftHandOffsetCur, rightHandOffsetCur );
 		}
 		
 		else if( handIKEnabled && !handIKEnabledLeft && !handIKEnabledRight && leftHandOffsetCur == 0.0f && rightHandOffsetCur == 0.0f )
@@ -2020,7 +1805,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	
 	private function SetTranslationToBehaviour()
 	{
-		if( noPelvisCorection || (bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewSlide') )
+		if( noPelvisCorection )
 		{
 			return;
 		}
@@ -2031,7 +1816,7 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	
 	private function ResetTranslationToBehaviour()
 	{
-		if( noPelvisCorection || (bool)theGame.GetInGameConfigWrapper().GetVarValue('RemasterCombat', 'ClimbNewSlide') )
+		if( noPelvisCorection )
 		{
 			return;
 		}
@@ -2156,8 +1941,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	{
 		var colorAux		: Color;
 		
-		var macVelocity : Vector;
-		var macSpeed : float;
 		
 		m_ClimbOracleO.OnVisualDebug( frame, flag, active );
 		
@@ -2173,12 +1956,8 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 		frame.DrawText( "IK: " + leftHandOffsetCur,  handIKLRayCollision, colorAux );
 		frame.DrawLine( handIKRRayOrigin, handIKRRayEnd, colorAux );		
 		frame.DrawText( "IK: " + rightHandOffsetCur, handIKRRayCollision, colorAux );
-
 		
-		colorAux	= Color( 80, 200, 80 );
-		macVelocity	= m_ExplorationO.m_OwnerMAC.GetVelocity();
-		macSpeed = VecLength2D( macVelocity );
-		frame.DrawText( "Speed: " + macSpeed, climbPoint + Vector( 0.0f, 0.0f, 1.5f ) + VecFromHeading( adjustRotation ) * 2.0f , colorAux );
+		
 		return true;
 	}
 	
@@ -2199,73 +1978,6 @@ class CExplorationStateClimb extends CExplorationStateAbstract
 	{
 		return climbCur.requiredState + ", " + climbCur.type + ", " + climbCur.requiredVault + ", " + climbCur.requiredPlatform;
 		
-	}
-
-	
-	private var debugSphereNames : array<name>;
-	private function InitDrawDebug()
-	{
-		debugSphereNames.Clear();
-		debugSphereNames.PushBack('sp1');
-		debugSphereNames.PushBack('sp2');
-		debugSphereNames.PushBack('sp3');
-		debugSphereNames.PushBack('sp4');
-		debugSphereNames.PushBack('sp5');
-		debugSphereNames.PushBack('sp6');
-		debugSphereNames.PushBack('sp7');
-		debugSphereNames.PushBack('sp8');
-		debugSphereNames.PushBack('sp9');
-		debugSphereNames.PushBack('sp10');
-		debugSphereNames.PushBack('sp11');
-		debugSphereNames.PushBack('sp12');
-		debugSphereNames.PushBack('sp13');
-		debugSphereNames.PushBack('sp14');
-		debugSphereNames.PushBack('sp15');
-		debugSphereNames.PushBack('sp16');
-		debugSphereNames.PushBack('sp17');
-		debugSphereNames.PushBack('sp18');
-		debugSphereNames.PushBack('sp19');
-		debugSphereNames.PushBack('sp20');
-		debugSphereNames.PushBack('sp21');
-		debugSphereNames.PushBack('sp22');
-		debugSphereNames.PushBack('sp23');
-		debugSphereNames.PushBack('sp24');
-	}
-
-	
-	private var i : int;
-	private var dtt : float;
-	private var firstPos : Vector;
-	private function DrawDebug( _Dt : float )
-	{
-		dtt += _Dt;
-		i = (int)((dtt / 0.05));
-		
-		if ( i == 0 )
-			firstPos = thePlayer.GetWorldPosition();
-		
-		thePlayer.GetVisualDebug().AddSphere( debugSphereNames[i], 0.1, thePlayer.GetWorldPosition(), true, Color( 255, 255, 0 ), 10.0 );
-
-		thePlayer.GetVisualDebug().AddLine( 'lineStartToFinish', firstPos, thePlayer.GetWorldPosition(), true, Color( 255, 0, 0 ), 10.f );
-	}
-
-	
-	public function SetClimbUseDestinationMotionBlend( enabled : bool )
-	{
-		m_ExplorationO.SetBehaviorParamBool( behDestinationBlend, enabled );
-	}
-
-	
-	public function EnableCollision( en : bool )
-	{
-		thePlayer.EnableStaticCollisions( en );
-		thePlayer.EnableDynamicCollisions( en );
-	}
-
-	
-	public function GetCurrentClimbHeightType() : EClimbHeightType
-	{
-		return climbCur.type;
 	}
 }
 

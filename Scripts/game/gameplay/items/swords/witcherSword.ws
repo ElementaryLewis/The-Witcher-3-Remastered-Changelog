@@ -409,16 +409,6 @@ import class CWitcherSword extends CItemEntity
 				enchantmentFx = 'runeword_elation';
 				break;
 			}
-			case 'Runeword 13':
-			{
-				enchantmentFx = 'runeword_incineration';
-				break;
-			}
-			case 'Runeword 14':
-			{
-				enchantmentFx = 'runeword_perturbation';
-				break;
-			}
 		}
 		return enchantmentFx;
 	}

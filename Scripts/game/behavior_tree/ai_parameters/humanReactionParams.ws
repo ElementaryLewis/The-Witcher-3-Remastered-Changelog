@@ -482,8 +482,6 @@ class CAIPhilippaReactionsTree extends CAINpcReactionsTree
 };
 
 
-
-
 class CAIBruxaCommonerReactionTree extends CAINpcReactionsTree
 {
 	function Init()

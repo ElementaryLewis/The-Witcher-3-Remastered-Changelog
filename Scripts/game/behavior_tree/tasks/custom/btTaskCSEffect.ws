@@ -548,14 +548,7 @@ class CBehTreeTaskCSEffect extends IBehTreeTask
 	
 	final function FinisherSyncAnim()
 	{
-		if ( GetActor().HasAbility( 'UseFinisherSyncAnim2' ) )
-		{
-			theGame.GetSyncAnimManager().SetupSimpleSyncAnim2( finisherAnimName, thePlayer, GetActor() );
-		}
-		else
-		{
-			theGame.GetSyncAnimManager().SetupSimpleSyncAnim( finisherAnimName, thePlayer, GetActor() );
-		}
+		theGame.GetSyncAnimManager().SetupSimpleSyncAnim( finisherAnimName, thePlayer, GetActor() );
 	}
 	
 	final function CombatCheck() : bool
@@ -716,7 +709,7 @@ class CBehTreeTaskCSEffect extends IBehTreeTask
 			distanceFromRootToBone = VecDistance( bonePos, owner.GetWorldPosition() );
 		}
 		
-		if ( !owner.IsInFistFightMiniGame() && owner.IsVulnerable() && ( !IsThisStagger() || IsCliffBehindMe() ) && !owner.IsInInterior() && owner.EnablePhysicalMovement(true) && !owner.IsRagdollPaused())
+		if ( !owner.IsInFistFightMiniGame() && owner.IsVulnerable() && ( !IsThisStagger() || IsCliffBehindMe() ) && !owner.IsInInterior() && owner.EnablePhysicalMovement(true) )
 		{
 			mac.SnapToNavigableSpace( false );
 			isInPotentialRagdoll = true;

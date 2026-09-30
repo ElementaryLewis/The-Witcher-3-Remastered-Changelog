@@ -43,33 +43,3 @@ enum EEncounterSpawnGroup
 	ESG_SecondaryCommunity,
 	ESG_OptionalCommunity,
 };
-
-
-
- function GetEncounterGroupDefaultLimit(group : EEncounterSpawnGroup) : int
-{
-	
-	
-	
-	
-	
-
-	if ( group == ESG_Important )
-	{
-		return 100;
-	}
-	else if ( group == ESG_CoreCommunity )
-	{
-		return 60;
-	}
-	else if ( group == ESG_SecondaryCommunity )
-	{
-		return 60;
-	}
-	else if ( group == ESG_OptionalCommunity )
-	{
-		return 20;
-	}
-
-	return 20;
-}

@@ -11,7 +11,7 @@ enum EActorImmortalityMode
 	AIM_Unconscious				
 }
 
-enum EActorImmortalityChannel
+enum EActorImmortalityChanel
 {
 	
 	AIC_Default = 1,
@@ -21,7 +21,7 @@ enum EActorImmortalityChannel
 	AIC_Fistfight = 16,
 	AIC_SyncedAnim = 32,
 	AIC_WhiteRaffardsPotion = 64,
-	AIC_Cheat = 128
+	AIC_IsAttackableByPlayer = 128
 	
 }
 
@@ -335,9 +335,7 @@ enum ETimescaleSource
 	ETS_HorseMelee,
 	ETS_FinisherInput,
 	ETS_TutorialFight,
-	ETS_InstantKill,
-	ETS_Meditation,
-
+	ETS_InstantKill
 }
 
 
@@ -1082,7 +1080,6 @@ struct STutorialMessage
 	editable saved var hintPromptPosY : float;				
 	editable saved var hintPromptDuration : float;			
 	editable saved var hintPromptCloseFact : string;		
-	editable saved var extraInfo : string;					
 	
 	editable saved var markAsSeenOnShow : bool;				
 	

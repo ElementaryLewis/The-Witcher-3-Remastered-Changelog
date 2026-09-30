@@ -12,7 +12,6 @@ state TraverseExploration in CPlayer extends Base
 	default running = false;
 	
 	private var prevState : name;
-
 	
 	
 	
@@ -21,153 +20,46 @@ state TraverseExploration in CPlayer extends Base
 	event OnEnterState( prevStateName : name )
 	{
 		super.OnEnterState(prevStateName);
+		
 		prevState = prevStateName;
 		running = true;
+		
+		parent.AddTimer( 'UpdateTraverser', 0.f, true, false, TICK_PrePhysics );
 		
 		
 		theGame.GetGameCamera().ChangePivotPositionController('Default');
 		theGame.GetGameCamera().ChangePivotDistanceController('Default');
+		
+		ProcessExploration();
+	}
 	
-		if( exploration.type == ET_Ladder )
-		{
-			InitLadderTraverse( prevStateName );
-		}
-		else
-		{
-			parent.AddTimer( 'UpdateTraverser', 0.f, true, false, TICK_PrePhysics );
-			ProcessExploration();
-		}
-	}
-
-	entry function InitLadderTraverse( prevStateName : name )
-	{
-		
-		parent.ActionTraverseExploration( exploration );
-		parent.ActivateAndSyncBehavior( 'Gameplay' );
-
-		if( prevStateName == 'Swimming' )
-		{
-			thePlayer.substateManager.SetBehaviorParamBool( 'fromWaterToLadder', true );
-		}
-	}
-
-
-
-
-	event OnLadderStepFinished()
-	{
-		var traverser : CScriptedExplorationTraverser = parent.GetTraverser();
-		traverser.AdjustStep();
-	}
-
-
-
-	event OnLadderJumpOnStarted()
-	{
-
-	}
-
-	event OnLadderJumpOnFinished()
-	{
-		
-	}
-
-
-
-	event OnInitialLadderMotionStarted()
-	{
-		
-		
-		if( !thePlayer.IsCiri())
-			thePlayer.SetUseNewLadderAnimations( true ); 
-	}
-
-	event OnInitialLadderMotionFinished()
-	{
-		thePlayer.substateManager.SetBehaviorParamBool( 'fromWaterToLadder', false );
-		
-
-		thePlayer.substateManager.m_SharedDataO.SetCanJumpOnLadder( false );
-	}
-
-
-
-	event OnLadderLoopStarted()
-	{
-		thePlayer.substateManager.m_SharedDataO.SetCanGetOffLadder(true);
-		thePlayer.substateManager.SetBehaviorParamBool( 'ladderAtEnd' , false);
-		thePlayer.substateManager.SetBehaviorParamBool( 'ladderCanMoveFromCatch', false );
-	}
-
-	event OnLadderLoopFinished()
-	{
-		
-		
-	}
-
-
-
-	event OnSlideStarted()
-	{
-		thePlayer.substateManager.m_SharedDataO.SetCanGetOffLadder( true ); 
-	}
-
-	event OnSlideFinished()
-	{
-		thePlayer.substateManager.m_SharedDataO.SetLadderGetOffInterrupted(true); 
-	}																				  
-
-
-
-	event OnGettingOffLadderStarted()
-	{	
-
-	}
-
-	event OnGettingOffLadderFinished()
-	{
-		
-		thePlayer.substateManager.m_SharedDataO.SetLadderGetOffInterrupted(true); 
-	}																			  	  
 	
-
-
-
 	event OnCanLeaveState( newState : name )
 	{
 		if ( newState == 'PlayerDialogScene' ) 
 		{
 			return true;
 		}
-		if(exploration.type == ET_Ladder)
-		{
-			return true;
-		}
-
+	
 		return !running;
 	}
-
+	
 	event OnLeaveState( nextStateName : name )
 	{ 
 		var traverser 			: CScriptedExplorationTraverser = parent.GetTraverser();
 		LogAssert( !traverser, "TraverseExploration::SetExploration, 'traverser' is still set" );
 		LogAssert( exploration.valid, "TraverseExploration::OnLeaveState, 'exploration' is still valid" );
 	
-		thePlayer.OnFinishTraversingExploration();
-
+		traverser = NULL;
 		exploration.valid = false;
 		
-		if(exploration.type != ET_Ladder) 
-		{
-			parent.RemoveTimer( 'UpdateTraverser' );
-		}
+		parent.RemoveTimer( 'UpdateTraverser' );
 		
 		
 		super.OnLeaveState(nextStateName);
 		
 		
 		thePlayer.SetLadderCamReset(false);
-		running = false;
 	}
 	
 	
@@ -176,9 +68,10 @@ state TraverseExploration in CPlayer extends Base
 	event OnGameCameraPostTick( out moveData : SCameraMovementData, dt : float )
 	{	
 		var input : float;	
-
+	
 		moveData.pivotRotationController.StopRotating();		
 		moveData.pivotRotationController.SetDesiredHeading(thePlayer.GetHeading(),0.4f);
+		
 		if(thePlayer.GetLadderCamReset())
 			moveData.pivotRotationController.SetDesiredPitch(-15.f,0.7f);
 		else
@@ -186,14 +79,15 @@ state TraverseExploration in CPlayer extends Base
 			input = theInput.GetActionValue('GI_AxisLeftY');
 			moveData.pivotRotationController.SetDesiredPitch(input * 30,0.5f);
 		}
+		
 		if(thePlayer.GetExplCamera())
 		{	
 			moveData.pivotPositionController.SetDesiredPosition( thePlayer.GetWorldPosition() , 15.f );
 			moveData.pivotDistanceController.SetDesiredDistance( 1.5f );	
 			moveData.pivotPositionController.offsetZ = 1.15f;
+			
 			DampVectorSpring( moveData.cameraLocalSpaceOffset, moveData.cameraLocalSpaceOffsetVel, Vector( 6.0f, -3.1f, 1.2f ), 2.0f, dt );
 		}
-		
 	}
 	
 	

@@ -3,8 +3,11 @@
 /** 	THE WITCHER© is a trademark of CD PROJEKT S. A.
 /** 	The Witcher game is based on the prose of Andrzej Sapkowski. 
 /***********************************************************************/
-class W3RedPlagueProjectile extends W3LeshyRootProjectile{
-		default projExpired = false;	default collisions = 0;
+class W3RedPlagueProjectile extends W3LeshyRootProjectile
+{
+	
+	default projExpired = false;
+	default collisions = 0;
 	
 	var surface : CGameplayFXSurfacePost;
 	
@@ -31,21 +34,65 @@ class W3RedPlagueProjectile extends W3LeshyRootProjectile{
 		surface.AddSurfacePostFXGroup(this.GetWorldPosition(),  0.3,  5,  2 ,  1,  1 );	
 		this.PlayEffect('line_fx');
 	}
-	function SetOwner( actor : CActor )	{		owner = actor;	}		event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )	{	
-		var victim 			: CGameplayEntity;
-				if(collidingComponent)			victim = (CGameplayEntity)collidingComponent.GetEntity();		else			victim = NULL;				if ( victim && victim == ((CActor)caster).GetTarget() )		{			collisions += 1;						if ( collisions == 1 )			{				this.StopEffect( 'ground_fx' );				projPos = this.GetWorldPosition();
-				theGame.GetWorld().StaticTrace( projPos + Vector(0,0,3), projPos - Vector(0,0,3), projPos, normal );				projRot = this.GetWorldRotation();				fxEntity = theGame.CreateEntity( fxEntityTemplate, projPos, projRot );				fxEntity.PlayEffect( 'attack_fx1', fxEntity );				fxEntity.DestroyAfter( 10.0 );
-				GCameraShake(1.0, true, fxEntity.GetWorldPosition(), 30.0f);				DelayDamage( 0.01 );				AddTimer('TimeDestroyNew', 5.0, false);				projExpired = true;
 
-				surface.AddSurfacePostFXGroup(fxEntity.GetWorldPosition(),  0.3,  5,  2 ,  2,  1 );			}		}
+	function SetOwner( actor : CActor )
+	{
+		owner = actor;
+	}
+	
+	event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
+	{	
+		var victim 			: CGameplayEntity;
+		
+		if(collidingComponent)
+			victim = (CGameplayEntity)collidingComponent.GetEntity();
+		else
+			victim = NULL;
+		
+		if ( victim && victim == ((CActor)caster).GetTarget() )
+		{
+			collisions += 1;
+			
+			if ( collisions == 1 )
+			{
+				this.StopEffect( 'ground_fx' );
+				projPos = this.GetWorldPosition();
+				theGame.GetWorld().StaticTrace( projPos + Vector(0,0,3), projPos - Vector(0,0,3), projPos, normal );
+				projRot = this.GetWorldRotation();
+				fxEntity = theGame.CreateEntity( fxEntityTemplate, projPos, projRot );
+				fxEntity.PlayEffect( 'attack_fx1', fxEntity );
+				fxEntity.DestroyAfter( 10.0 );
+				GCameraShake(1.0, true, fxEntity.GetWorldPosition(), 30.0f);
+				DelayDamage( 0.01 );
+				AddTimer('TimeDestroyNew', 5.0, false);
+				projExpired = true;
+
+				surface.AddSurfacePostFXGroup(fxEntity.GetWorldPosition(),  0.3,  5,  2 ,  2,  1 );
+			}
+		}
 		RemoveTimer('SurfacePostFXTimer');
-				delete damageAction;	}		function DelayDamage( time : float )	{		AddTimer('DelayDamageTimerNew',time,false);	}		timer function DelayDamageTimerNew( delta : float , id : int)	{
+		
+		delete damageAction;
+	}
+	
+	function DelayDamage( time : float )
+	{
+		AddTimer('DelayDamageTimerNew',time,false);
+	}
+	
+	timer function DelayDamageTimerNew( delta : float , id : int)
+	{
 		var attributeName 	: name;
 		var victims 		: array<CGameplayEntity>;
 		var rootDmg 		: float;
-		var i 				: int;		
-		attributeName = GetBasicAttackDamageAttributeName(theGame.params.ATTACK_NAME_HEAVY, theGame.params.DAMAGE_NAME_PHYSICAL);		rootDmg = MaxF( RandRangeF(300,200) , CalculateAttributeValue(((CActor)caster).GetAttributeValue(attributeName)) + 200.0  );
-				damageAction = new W3DamageAction in this;		damageAction.SetHitAnimationPlayType(EAHA_ForceYes);		damageAction.attacker = owner;
+		var i 				: int;
+		
+		attributeName = GetBasicAttackDamageAttributeName(theGame.params.ATTACK_NAME_HEAVY, theGame.params.DAMAGE_NAME_PHYSICAL);
+		rootDmg = MaxF( RandRangeF(300,200) , CalculateAttributeValue(((CActor)caster).GetAttributeValue(attributeName)) + 200.0  );
+		
+		damageAction = new W3DamageAction in this;
+		damageAction.SetHitAnimationPlayType(EAHA_ForceYes);
+		damageAction.attacker = owner;
 		
 		
 		FindGameplayEntitiesInRange( victims, fxEntity, 2, 99, , FLAG_OnlyAliveActors );
@@ -61,15 +108,46 @@ class W3RedPlagueProjectile extends W3LeshyRootProjectile{
 					victims[i].OnRootHit();
 				}
 			}
-		}		
-		delete damageAction;	}		event OnRangeReached()	{
+		}
+		
+		delete damageAction;
+	}
+	
+	event OnRangeReached()
+	{
 		var normal : Vector;
-				StopAllEffects();		StopProjectile();				if( !projExpired )		{			projExpired = true;			projPos = this.GetWorldPosition();
-			theGame.GetWorld().StaticTrace( projPos + Vector(0,0,3), projPos - Vector(0,0,3), projPos, normal );			projRot = this.GetWorldRotation();			fxEntity = theGame.CreateEntity( fxEntityTemplate, projPos, projRot );			fxEntity.PlayEffect( 'attack_fx1', fxEntity );			GCameraShake(1.0, true, fxEntity.GetWorldPosition(), 30.0f);
-			DelayDamage( 0.3 );			fxEntity.DestroyAfter( 10.0 );			AddTimer('TimeDestroyNew', 5.0, false);
+		
+		StopAllEffects();
+		StopProjectile();
+		
+		if( !projExpired )
+		{
+			projExpired = true;
+			projPos = this.GetWorldPosition();
+			theGame.GetWorld().StaticTrace( projPos + Vector(0,0,3), projPos - Vector(0,0,3), projPos, normal );
+			projRot = this.GetWorldRotation();
+			fxEntity = theGame.CreateEntity( fxEntityTemplate, projPos, projRot );
+			fxEntity.PlayEffect( 'attack_fx1', fxEntity );
+			GCameraShake(1.0, true, fxEntity.GetWorldPosition(), 30.0f);
+			DelayDamage( 0.3 );
+			fxEntity.DestroyAfter( 10.0 );
+			AddTimer('TimeDestroyNew', 5.0, false);
 
-			surface.AddSurfacePostFXGroup(fxEntity.GetWorldPosition(),  0.3,  5,  2 ,  2,  1 );			}
-		RemoveTimer('SurfacePostFXTimer');	}		function Expired() : bool	{		return projExpired;	}		timer function TimeDestroyNew( deltaTime : float, id : int )	{		Destroy();	}}
+			surface.AddSurfacePostFXGroup(fxEntity.GetWorldPosition(),  0.3,  5,  2 ,  2,  1 );	
+		}
+		RemoveTimer('SurfacePostFXTimer');
+	}
+	
+	function Expired() : bool
+	{
+		return projExpired;
+	}
+	
+	timer function TimeDestroyNew( deltaTime : float, id : int )
+	{
+		Destroy();
+	}
+}
 
 class W3RedPlagueGroundEffect extends CEntity
 {

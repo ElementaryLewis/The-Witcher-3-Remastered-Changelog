@@ -5,16 +5,12 @@
 /***********************************************************************/
 import struct SAreaMapPinInfo
 {
-	import var areaName : name;
+	import var areaType : int;
 	import var position : Vector;
 	import var worldPath : string;
-	import var flashAreaName : string;
 	import var requiredChunk : name;
 	import var localisationName : name;
 	import var localisationDescription : name;
-	import var recommendedLevel : int;
-	import var isVisible : bool;
-	import var isEnabled : bool;
 };
 
 import struct SEntityMapPinInfo
@@ -27,8 +23,6 @@ import struct SEntityMapPinInfo
 	import var fastTravelTeleportWayPointTag		: name;
 	import var fastTravelTeleportWayPointPosition	: Vector;
 	import var fastTravelTeleportWayPointRotation	: EulerAngles;
-	import var transportPairedEntityName			: name;
-	import var pocketIdx							: int;
 }
 
 import struct SCommonMapPinInstance
@@ -71,7 +65,7 @@ struct SAvailableFastTravelMapPin
 {
 	var tag	: name;
 	var type : name;
-	var area : name;
+	var area : EAreaName;
 }
 
 import abstract class CCommonMapManager extends IGameSystem
@@ -89,13 +83,8 @@ import abstract class CCommonMapManager extends IGameSystem
 	private var m_borderTeleportPosition : Vector;
 	private var m_borderTeleportRotation : EulerAngles;
 	
-	private var m_lastGlobalFastTravelArea : name;
+	private var m_lastGlobalFastTravelArea : int;
 	private var m_lastGlobalFastTravelPosition : Vector;
-	
-	private var savedFastTravelPinTag		: name;
-	private var savedFastTravelArea			: name;
-
-	private var storeNextFastTravel			: bool;
 	
 	import final function InitializeMinimapManager( minimapModule : CR4HudModule );
 	import final function SetHintWaypointParameters( maxRemovalDistance : float, minPlacingDistance : float, refreshInterval : float, pathfindingTolerance : float, maxCount : int );
@@ -103,11 +92,11 @@ import abstract class CCommonMapManager extends IGameSystem
 	import final function IsFastTravellingEnabled() : bool;
 	import final function EnableFastTravelling( enable : bool );
 	import final function IsEntityMapPinKnown( tag : name ) : bool;
-	import final function SetEntityMapPinKnown( tag : name, optional enabled : bool );
+	import final function SetEntityMapPinKnown( tag : name, optional set : bool );
 	import final function IsEntityMapPinDiscovered( tag : name ) : bool;
-	import final function SetEntityMapPinDiscovered( tag : name, optional enabled : bool );
+	import final function SetEntityMapPinDiscovered( tag : name, optional set : bool );
 	import final function IsEntityMapPinDisabled( tag : name ) : bool;
-	import final function SetEntityMapPinDisabled( tag : name, optional enabled : bool );
+	import final function SetEntityMapPinDisabled( tag : name, optional set : bool );
 	import final function IsQuestPinType( type : name ) : bool;
 	import final function IsUserPinType( type : name ) : bool;
 	import final function GetUserPinNames( out names : array< name > );
@@ -137,19 +126,19 @@ import abstract class CCommonMapManager extends IGameSystem
 	import final function UseInteriorsForQuestMapPins( use : bool );
 	import final function EnableShopkeeper( tag : name, enable : bool );
 	import final function EnableMapPath( tag : name, enable : bool, lineWidth : float, segmentLength : float, color : Color );
-	import final function EnableDynamicMappin( tag : name, enable : bool, type : name, optional useAgents : bool, optional showAlways : bool );
+	import final function EnableDynamicMappin( tag : name, enable : bool, type : name, optional useAgents : bool );
 	import final function InvalidateStaticMapPin( entityName : name );
-	import final function ToggleUserMapPin( area : name, position : Vector, type : int, fromSelectionPanel : bool, out indexToAdd : int, out indexToRemove : int ) : int;
+	import final function ToggleUserMapPin( area : EAreaName, position : Vector, type : int, fromSelectionPanel : bool, out indexToAdd : int, out indexToRemove : int ) : int;
 	import final function GetUserMapPinLimits( out waypointPinLimit : int, out otherPinLimit : int ) : int;
 	import final function GetUserMapPinCount() : int;
-	import final function GetUserMapPinByIndex( index : int, out id : int, out area : name, out mapPinX : float, out mapPinY : float, out type : int ) : bool;
+	import final function GetUserMapPinByIndex( index : int, out id : int, out area : int, out mapPinX : float, out mapPinY : float, out type : int ) : bool;
 	import final function GetUserMapPinIndexById( id : int ) : int;
 	import final function GetIdOfFirstUser1MapPin( id : int ) : bool;
-	import final function GetCurrentArea() : name;
+	import final function GetCurrentArea() : int;
 	import final function NotifyPlayerEnteredBorder( interval : float, position : Vector, rotation : EulerAngles ) : int;
 	import final function NotifyPlayerExitedBorder() : int;
-	import final function IsWorldAvailable( area : name ) : bool;
-	import final function GetWorldContentTag( area : name ) : name;
+	import final function IsWorldAvailable( area : int ) : bool;
+	import final function GetWorldContentTag( area : int ) : name;
 	import final function GetWorldPercentCompleted( area : int ) : int;
 	import final function DisableMapPin( pinName : string, disable : bool ) : bool;
 	import final function GetDisabledMapPins() : array< string >;
@@ -160,7 +149,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		theGame.GetGlobalEventsManager().OnScriptedEvent( SEC_OnMapPinChanged );
 	}
 
-	public function SetEntityMapPinDiscoveredScript(isFastTravelPoint : bool, tag : name, optional enabled : bool )
+	public function SetEntityMapPinDiscoveredScript(isFastTravelPoint : bool, tag : name, optional set : bool )
 	{
 		var previouslyDiscovered : bool;
 		var mapPinType : name;
@@ -173,20 +162,20 @@ import abstract class CCommonMapManager extends IGameSystem
 
 		previouslyDiscovered = IsEntityMapPinDiscovered( tag );
 
-		SetEntityMapPinDiscovered(tag, enabled);
+		SetEntityMapPinDiscovered(tag, set);
 		
 		
-		if( !previouslyDiscovered && isFastTravelPoint && enabled)
+		if( !previouslyDiscovered && isFastTravelPoint && set)
 		{
 			CheckExplorerAchievement();
 		}
 		
-		if ( !previouslyDiscovered && enabled  )
+		if ( !previouslyDiscovered && set  )
 		{
 			mapPinType = GetMappinType( tag );
 			if ( mapPinType == 'NoticeBoard' || mapPinType == 'NoticeBoardFull' )
 			{
-				UpdateHud( 'noticeboard', mapPinType );
+				UpdateHud( 'noticeboard' );
 				m_guiManager = theGame.GetGuiManager();
 				m_guiManager.RegisterNewMappinEntry('noticeboard','noticeboard');
 			}
@@ -206,25 +195,24 @@ import abstract class CCommonMapManager extends IGameSystem
 						mapPinType == 'Plegmund' ||
 						mapPinType == 'KnightErrant' ||
 						mapPinType == 'WineContract' ||
-						mapPinType == 'SignalingStake' 
-
+						mapPinType == 'SignalingStake'
 					)
 			{
-				UpdateHud( mapPinType, mapPinType );
+				UpdateHud( mapPinType );
 				m_guiManager = theGame.GetGuiManager();
 				m_guiManager.RegisterNewMappinEntry( mapPinType, mapPinType );
 			}
 			else if ( mapPinType == 'Entrance' )
 			{
-				UpdateHud( 'entrance', mapPinType );
+				UpdateHud( 'entrance' );
 				m_guiManager = theGame.GetGuiManager();
-				m_guiManager.RegisterNewMappinEntry('entrance','entrance'); 
+				m_guiManager.RegisterNewMappinEntry('entrance','entrance');
 			}
 			else
 			{
 				if( ShouldDisplayHudUpdateByType( mapPinType ))
 				{
-					UpdateHud( tag, mapPinType );
+					UpdateHud( tag );
 					m_guiManager = theGame.GetGuiManager();
 					m_guiManager.RegisterNewMappinEntry(tag,mapPinType);
 				}
@@ -299,19 +287,19 @@ import abstract class CCommonMapManager extends IGameSystem
 				}
 				pin.tag  = entityMapPins[ j ].entityName;
 				pin.type = entityMapPins[ j ].entityType;
-				pin.area = areaMapPins[ i ].areaName;
+				pin.area = areaMapPins[ i ].areaType;
 				pins.PushBack( pin );
 			}
 		}
 		return pins;
 	}
 	
-	public function UpdateHud( mappinTag : name, mapPinType : name )
+	public function UpdateHud( mappinTag : name )
 	{
 		var hud : CR4ScriptedHud;
 		
 		hud = (CR4ScriptedHud)theGame.GetHud();
-		hud.OnMapPinUpdate( mappinTag, mapPinType );
+		hud.OnMapPinUpdate( mappinTag );
 	}
 	
 	function OnGameStarted()
@@ -333,33 +321,32 @@ import abstract class CCommonMapManager extends IGameSystem
 		DBG_UpdateShownPins();
 	}
 
-	function  GetCurrentJournalArea( out areaName : name )
+	function  GetCurrentJournalArea() : int
 	{
-		areaName = GetCurrentJournalAreaByPosition( thePlayer.GetWorldPosition() );
+		return GetCurrentJournalAreaByPosition( thePlayer.GetWorldPosition() );
 	}
 
-	function GetCurrentJournalAreaByPosition( position : Vector ) : name
+	function  GetCurrentJournalAreaByPosition( position : Vector ) : int
 	{
 		return GetJournalAreaByPosition( GetCurrentArea(), position );
 	}
 
-	function GetJournalAreaByPosition( area : name, position : Vector ) : name
+	function GetJournalAreaByPosition( area : int, position : Vector ) : int
 	{
-		if ( area == 'AN_NMLandNovigrad'  )
+		if ( area == AN_NMLandNovigrad  )
 		{
 			
 			
 			
 			if ( position.X > 970 || position.Y < 1600 )
 			{
-				return 'AN_Velen';
+				return AN_Velen;
 			}
 		}
-		else if ( area == 'AN_Prologue_Village_Winter'  )
+		else if ( area == AN_Prologue_Village_Winter  )
 		{
-			return 'AN_Prologue_Village';
+			return AN_Prologue_Village;
 		}
-
 
 		return area;
 	}
@@ -402,7 +389,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		theGame.GetGuiManager().GetHudEventController().RunEvent_MinimapModule_NotifyPlayerDismountedBoat();
 	}
 	
-	function  GetCustomMapPinDefinition( out definitions : array< SCustomMapPinDefinition > )
+	function GetCustomMapPinDefinition( out definitions : array< SCustomMapPinDefinition > )
 	{
 		var definition : SCustomMapPinDefinition;
 		
@@ -441,7 +428,6 @@ import abstract class CCommonMapManager extends IGameSystem
 		types.PushBack( 'KnightErrant' );
 		types.PushBack( 'WineContract' );
 		types.PushBack( 'SignalingStake' );
-
 	}
 	
 	function GetDiscoverableMapPinTypes( out types : array< name > )
@@ -483,7 +469,6 @@ import abstract class CCommonMapManager extends IGameSystem
 		types.PushBack( 'KnightErrant' );
 		types.PushBack( 'WineContract' );
 		types.PushBack( 'SignalingStake' );
-
 	}
 	
 	function GetDisableableMapPinTypes( out regularTypes : array< name >, out disabledTypes : array< name > )
@@ -525,7 +510,6 @@ import abstract class CCommonMapManager extends IGameSystem
 		disabledTypes.PushBack( 'WineContractDisabled' );
 		regularTypes.PushBack(  'SignalingStake' );
 		disabledTypes.PushBack( 'SignalingStakeDisabled' );
-
 	}
 	
 	event OnStartTeleportingPlayerToPlayableArea( position : Vector, rotation : EulerAngles )
@@ -583,18 +567,11 @@ import abstract class CCommonMapManager extends IGameSystem
 		return (CR4HudModuleMinimap2)hud.GetHudModule( "Minimap2Module" );
 	}
 
-	
 	function  GetAreaMappinsFileName( out filePath : string )
 	{
 		filePath = "game\world.w2am";
 	}
 
-	
-	
-	
-	
-
-	
 	function  GetAreaMappinsData( out mappins : array< SAreaMapPinInfo > )
 	{
 		var i		: int;
@@ -602,60 +579,26 @@ import abstract class CCommonMapManager extends IGameSystem
 		mappins.Clear();
 
 		
-		FillAreaMapPinInfo( mappins, 'AN_NMLandNovigrad',           185,  -190,  "levels\novigrad\novigrad.w2w",                    'content4',  'map_location_novigrad',       'map_description_novigrad' );
-		FillAreaMapPinInfo( mappins, 'AN_Skellige_ArdSkellig',     -567,   665,  "levels\skellige\skellige.w2w",                    'content5',  'map_location_skellige',       'map_description_skellige' );
-		FillAreaMapPinInfo( mappins, 'AN_Kaer_Morhen',              1720, -1098, "levels\kaer_morhen\kaer_morhen.w2w",              'content6',  'map_location_kaer_morhen',    'map_description_kaer_morhen' );
-		FillAreaMapPinInfo( mappins, 'AN_Prologue_Village',         797,   250,  "levels\prolog_village\prolog_village.w2w",        'content2',  'map_location_prolog_village', 'map_description_prolog_village' );
-		FillAreaMapPinInfo( mappins, 'AN_Wyzima',                   519,   252,  "levels\wyzima_castle\wyzima_castle.w2w",          'content3',  'map_location_wyzima_castle',  'map_description_wyzima_castle' );
-		FillAreaMapPinInfo( mappins, 'AN_Island_of_Myst',          -9999, -9999, "levels\island_of_mist\island_of_mist.w2w",        'content7',  'map_location_island_of_myst', 'map_description_island_of_myst' );
-		FillAreaMapPinInfo( mappins, 'AN_Spiral',                  -9999, -9999, "levels\the_spiral\spiral.w2w",   			      	'content10', 'map_location_spiral',         'map_description_spiral' );
-		FillAreaMapPinInfo( mappins, 'AN_Prologue_Village_Winter',  797,   250,  "levels\prolog_village_winter\prolog_village.w2w", 'content12', 'map_location_prolog_village', 'map_description_prolog_village' );
-		FillAreaMapPinInfo( mappins, 'AN_Velen',                    176,   91,   "levels\novigrad\novigrad.w2w",                    'content4',  'map_location_no_mans_land',   'map_description_no_mans_land' );
-		
-		
-		
-	}
+		FillAreaMapPinInfo( mappins, AN_NMLandNovigrad,           185,  -190,  "levels\novigrad\novigrad.w2w",                    'content4',  'map_location_novigrad',       'map_description_novigrad' );
+		FillAreaMapPinInfo( mappins, AN_Skellige_ArdSkellig,     -567,   665,  "levels\skellige\skellige.w2w",                    'content5',  'map_location_skellige',       'map_description_skellige' );
+		FillAreaMapPinInfo( mappins, AN_Kaer_Morhen,              1720, -1098, "levels\kaer_morhen\kaer_morhen.w2w",              'content6',  'map_location_kaer_morhen',    'map_description_kaer_morhen' );
+		FillAreaMapPinInfo( mappins, AN_Prologue_Village,         797,   250,  "levels\prolog_village\prolog_village.w2w",        'content2',  'map_location_prolog_village', 'map_description_prolog_village' );
+		FillAreaMapPinInfo( mappins, AN_Wyzima,                   519,   252,  "levels\wyzima_castle\wyzima_castle.w2w",          'content3',  'map_location_wyzima_castle',  'map_description_wyzima_castle' );
+		FillAreaMapPinInfo( mappins, AN_Island_of_Myst,          -9999, -9999, "levels\island_of_mist\island_of_mist.w2w",        'content7',  'map_location_island_of_myst', 'map_description_island_of_myst' );
+		FillAreaMapPinInfo( mappins, AN_Spiral,                  -9999, -9999, "levels\the_spiral\spiral.w2w",   			      'content10', 'map_location_spiral',         'map_description_spiral' );
+		FillAreaMapPinInfo( mappins, AN_Prologue_Village_Winter,  797,   250,  "levels\prolog_village_winter\prolog_village.w2w", 'content12', 'map_location_prolog_village', 'map_description_prolog_village' );
+		FillAreaMapPinInfo( mappins, AN_Velen,                    176,   91,   "levels\novigrad\novigrad.w2w",                    'content4',  'map_location_no_mans_land',   'map_description_no_mans_land' );
 
-	function  GetDeprecatedAreaName( area : int ) : name
-	{
-		switch(area)
-		{
-			case 0:
-				return 'AN_Undefined';
-			case 1:
-				return 'AN_NMLandNovigrad';
-			case 2:
-				return 'AN_Skellige_ArdSkellig';
-			case 3:
-				return 'AN_Kaer_Morhen';
-			case 4:
-				return 'AN_Prologue_Village';
-			case 5:
-				return 'AN_Wyzima';
-			case 6:
-				return 'AN_Island_of_Myst';
-			case 7:
-				return 'AN_Spiral';
-			case 8:
-				return 'AN_Prologue_Village_Winter';
-			case 9:
-				return 'AN_Velen';
-			case 10:
-				return 'AN_CombatTestLevel';
-			case 11:
-				return 'AN_Bob';
-			default:
-			{
-				return '';
-			}
-		}
+		
+		
+		
 	}
 	
-	private function FillAreaMapPinInfo( out mappins : array< SAreaMapPinInfo >, areaType : CName, areaPinX : int, areaPinY : int, worldPath : string, requiredChunk : name, localisationName : name, localisationDescription : name )
+	private function FillAreaMapPinInfo( out mappins : array< SAreaMapPinInfo >, areaType : EAreaName, areaPinX : int, areaPinY : int, worldPath : string, requiredChunk : name, localisationName : name, localisationDescription : name )
 	{
 		var info 	: SAreaMapPinInfo;
 
-		info.areaName = areaType;
+		info.areaType = areaType;
 		info.position.X = areaPinX;
 		info.position.Y = areaPinY;
 		info.position.Z = 0;
@@ -669,14 +612,14 @@ import abstract class CCommonMapManager extends IGameSystem
 	
 	public function ForceSettingLoadingScreenVideoForWorld( worldName : string )
 	{
-		var area : name;
+		var area : int;
 		var manager : CWitcherJournalManager = theGame.GetJournalManager();
 		if ( manager )
 		{
-			if ( m_lastGlobalFastTravelArea != '' )
+			if ( m_lastGlobalFastTravelArea != 0 )
 			{
 				area = GetJournalAreaByPosition( m_lastGlobalFastTravelArea, m_lastGlobalFastTravelPosition );
-				m_lastGlobalFastTravelArea = '';
+				m_lastGlobalFastTravelArea = 0;
 			}
 			else
 			{
@@ -703,14 +646,12 @@ import abstract class CCommonMapManager extends IGameSystem
 			rotation.Pitch = 0.f;
 			thePlayer.TeleportWithRotation( position, rotation );
 			UseMapPin( destinationPinTag, false ); 
-
-
-
+			
 			theGame.RequestAutoSave( "fast travel", true );
 		}
 	}
 	
-	function PerformGlobalFastTravelTeleport( destinationArea : name, destinationPinTag : name )
+	function PerformGlobalFastTravelTeleport( destinationArea : int, destinationPinTag : name )
 	{
 		var worldPath : string;
 		var position : Vector;
@@ -733,9 +674,7 @@ import abstract class CCommonMapManager extends IGameSystem
 				
 				theGame.ScheduleWorldChangeToMapPin( worldPath, destinationPinTag );
 			}
-
-
-
+			
 			theGame.RequestAutoSave( "fast travel", true ); 
 		}
 	}
@@ -766,52 +705,34 @@ import abstract class CCommonMapManager extends IGameSystem
 
 	
 	
-	function GetAreaFromWorldPath( worldPath : string, optional noWinterPrologVillage : bool ) : name
+	function GetAreaFromWorldPath( worldPath : string, optional noWinterPrologVillage : bool ) : int
 	{
 		var i : int;
 		var areaMapPins : array< SAreaMapPinInfo >;
-		var area : name;
+		var area : int;
 
 		areaMapPins = GetAreaMapPins();
 	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
 	    {
 			if ( areaMapPins[ i ].worldPath == worldPath )
 			{
-				area = areaMapPins[ i ].areaName;
+				area = areaMapPins[ i ].areaType;
 				if ( !noWinterPrologVillage )
 				{
-					if ( area == 'AN_Prologue_Village_Winter' )
+					if ( area == AN_Prologue_Village_Winter )
 					{
 						
-						area = 'AN_Prologue_Village';
+						area = AN_Prologue_Village;
 					}
 				}
 				return area;
 			}
 		}
-		return '';
-	}
-
-	function GetAreaFromFlashName( flashName : string ) : name
-	{
-		var i : int;
-		var areaMapPins : array< SAreaMapPinInfo >;
-		var area : name;
-
-		areaMapPins = GetAreaMapPins();
-	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
-	    {
-			if ( areaMapPins[ i ].flashAreaName == flashName )
-			{
-				area = areaMapPins[ i ].areaName;
-				return area;
-			}
-		}
-		return '';
+		return AN_Undefined;
 	}
 
 
-	function GetMapName( areaType : name ) : string
+	function GetMapName( areaType : int ) : string
 	{
 		var i : int;
 		var areaMapPins : array< SAreaMapPinInfo >;
@@ -820,7 +741,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		areaMapPins = GetAreaMapPins();
 	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
 	    {
-			if ( areaMapPins[ i ].areaName == areaType )
+			if ( areaMapPins[ i ].areaType == areaType )
 			{
 				mapName = StrAfterLast( areaMapPins[ i ].worldPath, StrChar( 92 ) ); 
 				mapName = StrReplace( mapName, ".w2w", "" );
@@ -830,7 +751,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		return "";
 	}
 	
-	function GetWorldPathFromAreaType( areaType : name ) : string
+	function GetWorldPathFromAreaType( areaType : int ) : string
 	{
 		var i : int;
 		var areaMapPins : array< SAreaMapPinInfo >;
@@ -838,7 +759,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		areaMapPins = GetAreaMapPins();
 	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
 	    {
-			if ( areaMapPins[ i ].areaName == areaType )
+			if ( areaMapPins[ i ].areaType == areaType )
 			{
 				return areaMapPins[ i ].worldPath;
 			}
@@ -846,7 +767,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		return "";
 	}
 	
-	function GetLocalisationNameFromAreaType( areaType : name ) : name
+	function GetLocalisationNameFromAreaType( areaType : int ) : name
 	{
 		var i : int;
 		var areaMapPins : array< SAreaMapPinInfo >;
@@ -854,7 +775,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		areaMapPins = GetAreaMapPins();
 	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
 	    {
-			if ( areaMapPins[ i ].areaName == areaType )
+			if ( areaMapPins[ i ].areaType == areaType )
 			{
 				return areaMapPins[ i ].localisationName;
 			}
@@ -862,7 +783,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		return '';
 	}
 
-	function GetLocalisationDescriptionFromAreaType( areaType : name ) : name
+	function GetLocalisationDescriptionFromAreaType( areaType : int ) : name
 	{
 		var i : int;
 		var areaMapPins : array< SAreaMapPinInfo >;
@@ -870,7 +791,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		areaMapPins = GetAreaMapPins();
 	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
 	    {
-			if ( areaMapPins[ i ].areaName == areaType )
+			if ( areaMapPins[ i ].areaType == areaType )
 			{
 				return areaMapPins[ i ].localisationDescription;
 			}
@@ -878,9 +799,18 @@ import abstract class CCommonMapManager extends IGameSystem
 		return '';
 	}
 	
-	event OnManageFastTravelAreas( operation : EQuestManageFastTravelOperation, enable : bool, show : bool, affectedAreas : array< name > )
+	event OnManageFastTravelAreas( operation : EQuestManageFastTravelOperation, enable : bool, show : bool, affectedAreas : array< int > )
 	{
-		
+		var i, j : int;
+		var tags : array< name >;
+
+		var area : EAreaName;
+		var path : string;
+
+		for ( i = 0; i < affectedAreas.Size(); i += 1 )
+		{
+			
+		}
 	}
 
 	event OnManageFastTravelPoints( operation : EQuestManageFastTravelOperation, enable : bool, show : bool, affectedFastTravelPoints : array< name > )
@@ -917,7 +847,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		areaMapPins = GetAreaMapPins();
 	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
 	    {
-			if(ignoreVelenAndPrologueWinter && (areaMapPins[i].areaName == 'AN_Velen' || areaMapPins[i].areaName == 'AN_Prologue_Village_Winter' ) )
+			if(ignoreVelenAndPrologueWinter && (areaMapPins[i].areaType == AN_Velen || areaMapPins[i].areaType == AN_Prologue_Village_Winter) )
 				continue;
 				
 			entityMapPins = GetEntityMapPins( areaMapPins[ i ].worldPath );
@@ -953,7 +883,7 @@ import abstract class CCommonMapManager extends IGameSystem
 				}
 				pin.tag  = entityMapPins[ j ].entityName;
 				pin.type = entityMapPins[ j ].entityType;
-				pin.area = areaMapPins[ i ].areaName;
+				pin.area = areaMapPins[ i ].areaType;
 				pins.PushBack( pin );
 			}
 		}
@@ -971,7 +901,7 @@ import abstract class CCommonMapManager extends IGameSystem
 		areaMapPins = GetAreaMapPins();
 	    for ( i = 0; i < areaMapPins.Size(); i += 1 )
 	    {
-			if(ignoreVelenAndPrologueWinter && (areaMapPins[i].areaName == 'AN_Velen' || areaMapPins[i].areaName == 'AN_Prologue_Village_Winter' ) )
+			if(ignoreVelenAndPrologueWinter && (areaMapPins[i].areaType == AN_Velen || areaMapPins[i].areaType == AN_Prologue_Village_Winter) )
 				continue;
 				
 			entityMapPins = GetEntityMapPins( areaMapPins[ i ].worldPath );
@@ -1196,46 +1126,6 @@ import abstract class CCommonMapManager extends IGameSystem
 	{
 		return m_dbgAllowFT;
 	}
-
-	function SetNextFastTravelStored( shouldStore : bool )
-	{	
-		storeNextFastTravel = shouldStore;
-	}
-
-	function OnFastTravelInitiated( pinTag: name, areaID : name )
-	{
-		if ( storeNextFastTravel )
-		{
-			SetDesiredFastTravelPoint(pinTag,areaID);
-		}
-	}
-	
-	public function SetDesiredFastTravelPoint (PinTag : name, areaID : name)
-	{
-		savedFastTravelPinTag = PinTag;
-		savedFastTravelArea = areaID;
-	}
-
-	public function GetDesiredFastTravelPoint() : name
-	{
-		return savedFastTravelPinTag;
-	}
-	
-	public function GetDesiredFastTravelAreaID() :name
-	{
-		return savedFastTravelArea;
-	}
-	
-
-	
-	public function IsFastTravelRestrictedToCurrentArea() : bool
-	{
-
-		return false;
-	}
-	
-
-	
 }
 
 exec function ShowPinsFTInfo()
@@ -1374,7 +1264,7 @@ exec function gotoSkellige()
 	theGame.ScheduleWorldChangeToMapPin( "levels\skellige\skellige.w2w", '' );
 	theGame.RequestAutoSave( "fast travel", true );
 }
-exec function gotoKaerMorhen()
+exec function gotoKaerMohren()
 {
 	theGame.ScheduleWorldChangeToMapPin( "levels\kaer_morhen\kaer_morhen.w2w", '' );
 	theGame.RequestAutoSave( "fast travel", true );
@@ -1390,14 +1280,6 @@ exec function gotoPrologWinter()
 	theGame.ScheduleWorldChangeToMapPin( "levels\prolog_village_winter\prolog_village.w2w", '' );
 	theGame.RequestAutoSave( "fast travel", true );
 }
-
-exec function gotoBob()
-{
-	theGame.ScheduleWorldChangeToMapPin( "dlc\bob\data\levels\bob\bob.w2w", '' );
-	theGame.RequestAutoSave( "fast travel", true );
-}
-
-
 
 exec function knowMapPin( tag : name )
 {

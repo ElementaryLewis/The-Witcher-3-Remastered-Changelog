@@ -101,11 +101,3 @@ class W3StandaloneDismantleInitData extends W3SingleMenuInitData
 {
 	public var m_ingredientsForMissingDecoctions		: array<name>;
 }
-
-class W3StartupMenuInitData extends W3MenuInitData
-{
-	public var requestPage : EStartupPageId;
-	public var reopenMenu : bool;
-	public var reopenMenuName : name;
-	public var forceShow : bool; default forceShow = false;
-}

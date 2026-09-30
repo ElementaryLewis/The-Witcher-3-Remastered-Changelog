@@ -196,7 +196,7 @@ import class CGame extends CObject
 	import final function FadeOutAsync( optional fadeTime : float , optional fadeColor : Color  );
 	
 	
-	import final function FadeInAsync( optional fadeTime : float , optional fadeColor : Color  );
+	import final function FadeInAsync( optional fadeTime : float  );
 	
 	
 	import final function IsFading() : bool;
@@ -244,9 +244,7 @@ import class CGame extends CObject
 	import final function GetGameplayConfigIntValue( propName : name ) : int;
 	
 	import final function GetGameplayConfigEnumValue( propName : name ) : int;
-
-	import final function GetMotionPatternsMode_DualGrip() : int;
-
+	
 	
 	import final function SetAIObjectsLooseTime( time : float );
 	
@@ -266,53 +264,28 @@ import class CGame extends CObject
 	import final function ToggleRTEnabled() : void;
 	
 	import final function GetHDRSupported() : bool;
-	import final function GetHDREnabled() : bool;
-	import final function SetHDRMenuActive( hdrMenuActive : bool ) : void;
-	import final function SetHDRMenuActiveAsStandalone( hdrMenuActiveAsStandalone : bool ) : void;
-	import final function SetHDRMenuFadePercentage( hdrFadePercentage : float ) :void;
+	import final function SetHDRMenuActive( hdrMenuActive: bool) : void;
 	import final function IsIntelGPU() : bool;
 	import final function GetRTEnabled() : bool;
 	import final function GetRTSupported() : bool;
 	import final function GetHairWorksEnabled() : bool;
 	import final function GetDLSSEnabled() : bool;
 	import final function GetFSREnabled() : bool;
-	import final function GetFSRVersion() : string;
-	import final function GetFSRFramegenSupported() : bool;
-	import final function GetFSRFramegenEnabled() : bool;
-	import final function GetAMDAntiLagSupported() : bool;
-	import final function GetAMDAntiLagEnabled() : bool;
 	import final function GetTAAEnabled() : bool;
 	import final function GetXESSEnabled() : bool;
-	import final function GetXESSFGEnabled() : bool;
-	import final function GetXELLEnabled() : bool;
 	import final function GetRTAOEnabled() : bool;
-	import final function GetGTAOEnabled() : bool;
 	import final function GetRTREnabled() : bool;
-	import final function GetRTShadowsEnabled() : bool;
-	import final function GetPTEnabled() : bool;
 	import final function GetDLSSGEnabled() : bool;
-	import final function GetDLSSGEnabledDynamic() : bool;
 	import final function GetDLSSGSupported() : bool;
-	import final function GetDLSSGVSyncSupported() : bool;
 	import final function GetReflexEnabled() : bool;
 	import final function GetReflexSupported() : bool;
-	import final function GetDLSSRREnabled() : bool;
-	import final function GetDLSSRRSupported() : bool;
-	import final function GetHardwareLinearSweptSpheresSupport() : bool;
 	import final function GetMotionBlurEnabled() : bool;
-	import final function AreModsEnabled() : bool;
-
-	import final function GetIsPs5Pro() : bool;
-	import final function GetPSSREnabled() : bool;
-	import final function GetPreviewOptionsEnabled() : bool;
-
+	
 	import final function GetGameResource() : CGameResource;
 
 	import final function GetPhotomodeEnabled() : bool;
 	import final function SetPhotomodeEnabled( photomodeEnabled: bool ) : void;
 	
-	import final function SetPhotomodeCameraCanMove( canMove : bool ) : void;
-
 	public function GetToggleButtonCaption() : string
 	{
 		if (theGame.GetRTEnabled()) {

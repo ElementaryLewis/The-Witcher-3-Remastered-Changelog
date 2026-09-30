@@ -5,16 +5,13 @@
 /***********************************************************************/
 class CBTTaskSignalGameplayEvent extends IBehTreeTask
 {
-	var onActivate 			: bool;
-	var onDeactivate		: bool;
-	var onSuccess 			: bool;
-	var onTaggedEntity		: bool;
-	var tagToFind			: name;
-	var onMultipleEntities	: bool;
+	var onActivate 		: bool;
+	var onDeactivate	: bool;
+	var onSuccess 		: bool;
+	var onTaggedEntity	: bool;
+	var tagToFind		: name;
 	
-	var eventName 			: name;
-	var npc					: array<CNewNPC>;
-	var i					: int;
+	var eventName : name;
 	
 	function IsAvailable() : bool
 	{
@@ -32,14 +29,7 @@ class CBTTaskSignalGameplayEvent extends IBehTreeTask
 		}
 		else if( onActivate && onTaggedEntity )
 		{
-			if (onMultipleEntities)
-			{
-				SignalMultipleEntitiesByTag();
-			}
-			else
-			{
-				theGame.GetNPCByTag(tagToFind).SignalGameplayEvent( eventName );
-			}
+			theGame.GetNPCByTag(tagToFind).SignalGameplayEvent( eventName );
 		}
 		
 		return BTNS_Active;
@@ -53,14 +43,7 @@ class CBTTaskSignalGameplayEvent extends IBehTreeTask
 		}
 		else if( onDeactivate && onTaggedEntity )
 		{
-			if (onMultipleEntities)
-			{
-				SignalMultipleEntitiesByTag();
-			}
-			else
-			{
-				theGame.GetNPCByTag(tagToFind).SignalGameplayEvent( eventName );
-			}
+			theGame.GetNPCByTag(tagToFind).SignalGameplayEvent( eventName );
 		}
 	}
 	
@@ -72,24 +55,7 @@ class CBTTaskSignalGameplayEvent extends IBehTreeTask
 		}
 		else if( onSuccess && success && onTaggedEntity )
 		{
-			if (onMultipleEntities)
-			{
-				SignalMultipleEntitiesByTag();
-			}
-			else
-			{
-				theGame.GetNPCByTag(tagToFind).SignalGameplayEvent( eventName );
-			}
-		}
-	}
-	
-	function SignalMultipleEntitiesByTag()
-	{
-		theGame.GetNPCsByTag( tagToFind, npc );
-		
-		for (i = 0; i<npc.Size(); i+=1)
-		{
-			npc[i].SignalGameplayEvent( eventName );
+			theGame.GetNPCByTag(tagToFind).SignalGameplayEvent( eventName );
 		}
 	}
 	
@@ -99,11 +65,10 @@ class CBTTaskSignalGameplayEventDef extends IBehTreeTaskDefinition
 {
 	default instanceClass = 'CBTTaskSignalGameplayEvent';
 
-	editable var eventName			: name;
-	editable var onActivate 		: bool;
-	editable var onDeactivate 		: bool;
-	editable var onSuccess 			: bool;
-	editable var onTaggedEntity		: bool;
-	editable var tagToFind			: name;
-	editable var onMultipleEntities	: bool;
+	editable var eventName		: name;
+	editable var onActivate 	: bool;
+	editable var onDeactivate 	: bool;
+	editable var onSuccess 		: bool;
+	editable var onTaggedEntity	: bool;
+	editable var tagToFind		: name;
 }

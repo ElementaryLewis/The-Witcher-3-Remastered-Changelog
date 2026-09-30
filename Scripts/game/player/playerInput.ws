@@ -382,7 +382,7 @@ class CPlayerInput
 		size = EnumGetMax('EInputActionBlock')+1;
 		for(i=0; i<size; i+=1)
 		{
-			if ( exceptions.Contains(i) || i == EIAB_CameraLock || i == EIAB_NonPatternAlternatives )
+			if ( exceptions.Contains(i) || i == EIAB_CameraLock )
 				continue;
 			
 			BlockAction(i, sourceName, lock, saveLock, onSpawnedNullPointerHackFix, isFromQuest, isFromPlace);
@@ -572,15 +572,12 @@ class CPlayerInput
 	
 	
 	
-
+	
 	
 	
 	event OnAltQuen( action : SInputAction )
-	{
-		var mouserControllerScheme : MouserControllerScheme = theInput.GetMouserControllerScheme();
-
-		if(GetIsAltSignCastingPressed() && IsPressed( action ) && !GetWitcherPlayer().IsCurrentSignChanneled() && 
-			(mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Comfort))
+	{	
+		if(altSignCasting && !theInput.LastUsedPCInput() && IsPressed( action ) && theInput.IsActionPressed('CastSign') && !GetWitcherPlayer().IsCurrentSignChanneled())
 		{
 			AltCastSign(ST_Quen);
 		}
@@ -589,15 +586,10 @@ class CPlayerInput
 	
 	event OnCommSprint( action : SInputAction )
 	{
-		var mouserControllerScheme : MouserControllerScheme;
-
 		if( IsPressed( action ) )
 		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-
 			
-			if(GetIsAltSignCastingPressed() && !GetWitcherPlayer().IsCurrentSignChanneled() &&
-				(mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Comfort))
+			if(altSignCasting && !theInput.LastUsedPCInput() && theInput.IsActionPressed('CastSign') && !GetWitcherPlayer().IsCurrentSignChanneled())
 			{
 				AltCastSign(ST_Aard);
 				return false;
@@ -724,27 +716,13 @@ class CPlayerInput
 	event OnCommSpawnHorse( action : SInputAction )
 	{
 		var isSpawnHorseSecondTap : bool;
-
 		isSpawnHorseSecondTap = false;
 		
-
-		
-		if(action.patternName == '')
-		{
-			theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_HorseCall,MPTS_Trigger);
-		}
-		else
-		{
-			theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_HorseCall,MPTS_Done);
-		}
-
 		if( IsPressed( action ) )
 			return false;
-
+		
 		isSpawnHorseSecondTap = pressTimestamp + DOUBLE_TAP_WINDOW >= theGame.GetEngineTimeAsSeconds();
-		
 
-		
 		if( IsActionAllowed( EIAB_CallHorse ) 
 			&& !thePlayer.IsInInterior() && !thePlayer.IsInAir()
 			&& (isSpawnHorseSecondTap || theInput.LastUsedPCInput()) )
@@ -812,7 +790,7 @@ class CPlayerInput
 		
 		if( IsActionAllowed(EIAB_OpenCharacterPanel) )
 		{
-			theGame.RequestMenuWithBackground( 'CharacterMenuDupe', 'CommonMenu' );	
+			theGame.RequestMenuWithBackground( 'CharacterMenu', 'CommonMenu' );	
 		}
 		else
 		{
@@ -944,8 +922,7 @@ class CPlayerInput
 	{
 		if( IsReleased(action) )
 		{
-			
-			StartMeditation();
+			PushMeditationScreen();
 		}
 	}
 	
@@ -955,26 +932,9 @@ class CPlayerInput
 		{
 			return;
 		}
-		if ( GetWitcherPlayer().CanOpenMeditationMenu() )
+		if( IsActionAllowed(EIAB_OpenMeditation) )
 		{
 			theGame.RequestMenuWithBackground( 'MeditationClockMenu', 'CommonMenu' );
-		}
-		else
-		{
-			thePlayer.DisplayActionDisallowedHudMessage(EIAB_OpenMeditation);
-		}	
-	}
-
-	function StartMeditation()
-	{
-		if ( theGame.IsBlackscreenOrFading() )
-		{
-			return;
-		}
-
-		if ( GetWitcherPlayer().CanOpenMeditationMenu() )
-		{
-			GetWitcherPlayer().Meditate();
 		}
 		else
 		{
@@ -1116,22 +1076,9 @@ class CPlayerInput
 	event OnCommSteelSword( action : SInputAction )
 	{
 		var duringCastSign : bool;
-		var mouserControllerScheme : MouserControllerScheme;
 		
 		if(IsPressed(action))
-		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-
-			if ( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Dynamic )
-			{
-				if ( !GetWitcherPlayer().IsCurrentSignChanneled() )
-				{
-					AltCastSign(ST_Yrden);
-				}
-				return false;
-			}
 			processedSwordHold = false;
-		}
 		
 		if ( theInput.LastUsedGamepad() && theInput.IsActionPressed('Alternate') )
 		{
@@ -1156,22 +1103,9 @@ class CPlayerInput
 	event OnCommSilverSword( action : SInputAction )
 	{
 		var duringCastSign : bool;
-		var mouserControllerScheme : MouserControllerScheme;
 		
 		if( IsPressed(action) )
-		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-
-			if ( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Dynamic )
-			{
-				if ( !GetWitcherPlayer().IsCurrentSignChanneled() )
-				{
-					AltCastSign(ST_Aard);
-				}
-				return false;
-			}
 			processedSwordHold = false;
-		}
 		
 		if ( theInput.LastUsedGamepad() && theInput.IsActionPressed('Alternate') )
 		{
@@ -1197,16 +1131,9 @@ class CPlayerInput
 	event OnCommSheatheAny( action : SInputAction )
 	{
 		var duringCastSign : bool;
-		var mouserControllerScheme : MouserControllerScheme;
 		
 		if( IsPressed( action ) )
 		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-			if ( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Dynamic )
-			{
-				return false;
-			}
-
 			if ( thePlayer.GetBIsInputAllowed() && thePlayer.GetWeaponHolster().IsMeleeWeaponReady() )
 			{
 				thePlayer.PushCombatActionOnBuffer( EBAT_Sheathe_Sword, BS_Pressed );
@@ -1221,47 +1148,17 @@ class CPlayerInput
 	
 	event OnCommSheatheSteel( action : SInputAction )
 	{
-		var mouserControllerScheme : MouserControllerScheme;
-
-		if( IsPressed( action ) )
+		if( IsPressed( action ) && thePlayer.IsWeaponHeld( 'steelsword' ) && !processedSwordHold)
 		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-			if ( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Dynamic )
-			{
-				if (!GetWitcherPlayer().IsCurrentSignChanneled())
-				{
-					AltCastSign(ST_Yrden);
-				}
-				return false;
-			}
-
-			if (thePlayer.IsWeaponHeld( 'steelsword' ) && !processedSwordHold )
-			{
-				OnCommSheatheAny(action);
-			}
+			OnCommSheatheAny(action);
 		}
 	}
 	
 	event OnCommSheatheSilver( action : SInputAction )
 	{
-		var mouserControllerScheme : MouserControllerScheme;
-
-		if( IsPressed( action ) )
+		if( IsPressed( action ) && thePlayer.IsWeaponHeld( 'silversword' ) && !processedSwordHold)
 		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-			if ( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Dynamic )
-			{
-				if (!GetWitcherPlayer().IsCurrentSignChanneled())
-				{
-					AltCastSign(ST_Aard);
-				}
-				return false;
-			}
-
-			if ( thePlayer.IsWeaponHeld( 'silversword' ) && !processedSwordHold )
-			{
-				OnCommSheatheAny(action);
-			}
+			OnCommSheatheAny(action);
 		}
 	}
 		
@@ -1479,20 +1376,7 @@ class CPlayerInput
 	private final function DrinkPotion(action : SInputAction, upperSlot : bool) : bool
 	{
 		var witcher : W3PlayerWitcher;
-
-		if(action.patternName == '')
-		{
-			theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_PotionUsePrimary,MPTS_Trigger);
-		}
-		else if(action.patternName == 'UseConsumableUpGroup' && theGame.GetTutorialSystem().switchTutorialManager.inMotionPatternTutorial)
-		{
-			theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_PotionUsePrimary,MPTS_Done);
-		}
-		else if(action.patternName == 'UseConsumableDownGroup' && theGame.GetTutorialSystem().switchTutorialManager.inMotionPatternTutorial)
-		{
-			theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_PotionUseSecondary,MPTS_Done);
-		}
-
+		
 		
 		witcher = GetWitcherPlayer();
 		if(CheckRadialMenu())
@@ -1571,8 +1455,8 @@ class CPlayerInput
 	
 	
 	private var radialPotionUpperTimer, radialPotionLowerTimer : bool;
-	public function SetRadialPotionUpperTimer(enabled:bool){radialPotionUpperTimer = enabled;}
-	public function SetRadialPotionLowerTimer(enabled:bool){radialPotionLowerTimer = enabled;}
+	public function SetRadialPotionUpperTimer(set:bool){radialPotionUpperTimer = set;}
+	public function SetRadialPotionLowerTimer(set:bool){radialPotionLowerTimer = set;}
 	
 	private function CheckRadialMenu() : bool
 	{
@@ -1653,22 +1537,9 @@ class CPlayerInput
 	
 	event OnCommDrinkPotion1( action : SInputAction )
 	{
-		var mouserControllerScheme : MouserControllerScheme;
-
 		
 		if(thePlayer.IsCiri())
 			return false;
-
-		mouserControllerScheme = theInput.GetMouserControllerScheme();
-
-		if( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Dynamic )
-		{
-			if ( IsPressed( action ) && !GetWitcherPlayer().IsCurrentSignChanneled())  
-			{
-				AltCastSign(ST_Axii);
-			}
-			return false;
-		}
 		
 		if( !IsActionAllowed( EIAB_QuickSlots ) )
 		{
@@ -1699,22 +1570,10 @@ class CPlayerInput
 	event OnCommDrinkPotion2( action : SInputAction )
 	{
 		var witcher : W3PlayerWitcher;
-		var mouserControllerScheme : MouserControllerScheme;
 		
 		
 		if(thePlayer.IsCiri())
 			return false;
-
-		mouserControllerScheme = theInput.GetMouserControllerScheme();
-
-		if( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Dynamic )
-		{
-			if ( IsPressed( action ) && !GetWitcherPlayer().IsCurrentSignChanneled())  
-			{
-				AltCastSign(ST_Quen);
-			}
-			return false;
-		}
 		
 		if( !IsActionAllowed( EIAB_QuickSlots ) )
 		{
@@ -1930,62 +1789,27 @@ class CPlayerInput
 	
 	event OnExpFocus( action : SInputAction )
 	{
-		var inGameConfigWrapper : CInGameConfigWrapper;
-		var isAccessibilityFocusToggle : bool;
-		var isFocusStart : bool;
-		var isFocusStop : bool;
-		var mouserControllerScheme : MouserControllerScheme;
-		
-		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();	
-		isAccessibilityFocusToggle = inGameConfigWrapper.GetVarValue('Accessibility', 'FocusToggle') == "true";
-		if (isAccessibilityFocusToggle)
-		{
-			if ( IsReleased( action )  )
-			{ 
-				isFocusStart = !theGame.GetFocusModeController().IsActive();
-				isFocusStop = theGame.GetFocusModeController().IsActive();
-			}
-			if ( IsPressed( action ) && !GetIsAltSignCastingPressed() )
-				return false;
-		}
-		else
-		{
-			isFocusStart = IsPressed( action );
-			isFocusStop = IsReleased( action );
-		}
-
 		
 		if(!thePlayer.IsCiri())
 		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-
-			if(GetIsAltSignCastingPressed())
+			if(altSignCasting && !theInput.LastUsedPCInput() && theInput.IsActionPressed('CastSign') && !GetWitcherPlayer().IsCurrentSignChanneled())
 			{
-				if((isFocusStart || isAccessibilityFocusToggle) && !GetWitcherPlayer().IsCurrentSignChanneled() )
+				if(IsPressed( action ))
 				{
 					theGame.GetFocusModeController().Deactivate(); 
-
-					if (mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Dynamic)
-					{
-						AltCastSign(ST_Igni);
-					}
-					else if (mouserControllerScheme == MouserControllerScheme_Comfort)
-					{
-						AltCastSign(ST_Yrden);
-					}
+					AltCastSign(ST_Igni);
 					return false;
 				} 
-				else if ( isFocusStop && GetWitcherPlayer().IsCurrentSignChanneled())
+				else if (IsReleased( action ) && GetWitcherPlayer().IsCurrentSignChanneled())
 				{
 					thePlayer.AbortSign();
 				}
 			}
 		}
 		
-
 		if(thePlayer.IsCiri() && IsActionAllowed(EIAB_ExplorationFocus))
 		{
-			if( isFocusStart )
+			if( IsPressed( action ) )
 			{
 				if( thePlayer.GoToCombatIfNeeded() )
 				{
@@ -1994,14 +1818,14 @@ class CPlayerInput
 				}
 				theGame.GetFocusModeController().Activate();
 			}
-			else if( isFocusStop )
+			else if( IsReleased( action ) )
 			{
 				theGame.GetFocusModeController().Deactivate();
 			}
 		}
 		else if(IsActionAllowed(EIAB_ExplorationFocus) && !GetWitcherPlayer().IsCurrentSignChanneled()) 
 		{
-			if( isFocusStart )
+			if( IsPressed( action ) )
 			{
 				
 				if( thePlayer.GoToCombatIfNeeded() )
@@ -2012,7 +1836,7 @@ class CPlayerInput
 				theGame.GetFocusModeController().Activate();
 				
 			}
-			else if( isFocusStop )
+			else if( IsReleased( action ) )
 			{
 				theGame.GetFocusModeController().Deactivate();
 			}
@@ -2094,17 +1918,11 @@ class CPlayerInput
 	event OnCbtAttackLight( action : SInputAction )
 	{
 		var allowed, checkedFists 			: bool;
-		var mouserControllerScheme : MouserControllerScheme;		
-
 		
 		if( IsPressed(action) )
 		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
-
-
 			
-			if(GetIsAltSignCastingPressed() && !GetWitcherPlayer().IsCurrentSignChanneled() &&
-				mouserControllerScheme == MouserControllerScheme_None)
+			if(altSignCasting && !theInput.LastUsedPCInput() && theInput.IsActionPressed('CastSign') && !GetWitcherPlayer().IsCurrentSignChanneled())
 			{
 				AltCastSign(ST_Axii);
 				return false;
@@ -2154,34 +1972,21 @@ class CPlayerInput
 	{
 		var allowed, checkedSword : bool;
 		var outKeys : array<EInputKey>;
-		var mouserControllerScheme : MouserControllerScheme;
-
 		
 		if ( thePlayer.GetBIsInputAllowed() )
 		{
-			mouserControllerScheme = theInput.GetMouserControllerScheme();
 			
-			
-			if (GetIsAltSignCastingPressed()  && 
-				(mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Comfort))
+			if(altSignCasting && !theInput.LastUsedPCInput() && theInput.IsActionPressed('CastSign') && !GetWitcherPlayer().IsCurrentSignChanneled())
 			{
-				if (IsPressed( action ) && !GetWitcherPlayer().IsCurrentSignChanneled())
+				if(IsPressed( action ))
 				{
-					if (mouserControllerScheme == MouserControllerScheme_None)
-					{
-						AltCastSign(ST_Yrden);
-					}
-					else if (mouserControllerScheme == MouserControllerScheme_Comfort)
-					{
-						AltCastSign(ST_Igni);
-					}
+					AltCastSign(ST_Yrden);
+					return false;
 				}
-				else if (IsReleased(action) && GetWitcherPlayer().IsCurrentSignChanneled() &&
-					mouserControllerScheme == MouserControllerScheme_Comfort)
+				else if (IsReleased( action ))
 				{
-					thePlayer.AbortSign();
+					return false;
 				}
-				return false;
 			}
 			
 		
@@ -2360,7 +2165,7 @@ class CPlayerInput
 			return false;
 		}
 		
-		if( IsPressed(action) && (thePlayer.CanUseSkill(S_Sword_s01) || thePlayer.CanUseSkill(S_Sword_s35)) )	
+		if( IsPressed(action) && thePlayer.CanUseSkill(S_Sword_s01) )	
 		{			
 			thePlayer.PrepareToAttack();
 			thePlayer.SetPlayedSpecialAttackMissingResourceSound(false);
@@ -2481,47 +2286,11 @@ class CPlayerInput
 			thePlayer.ProcessCombatActionBuffer();		
 		}
 	}
-
-	private var dodgePressedTime : float; default dodgePressedTime = -1.f;
-	private var rollPressedTime : float; default rollPressedTime = -1.f;
 	
 	event OnCbtCiriDodge( action : SInputAction )
-	{
-		if ( theInput.LastUsedGamepad() && IsPressed( action ) )
+	{	
+		if( IsActionAllowed(EIAB_Dodge) && IsPressed(action) && thePlayer.IsAlive() )	
 		{
-			if ( thePlayer.GetIsSprintToggled() )	
-				thePlayer.SetSprintToggle( false );
-
-			thePlayer.AddTimer( 'HoldDodgeToSprintTimer', 0.2f, true );
-			dodgePressedTime = theGame.GetEngineTimeAsSeconds();
-		}
-		else if( IsActionAllowed(EIAB_Dodge) && thePlayer.IsAlive() )
-		{
-			if ( theInput.LastUsedGamepad() )
-			{
-				if ( !(!thePlayer.IsInsideInteraction() && IsReleased(action)) )
-				{
-					return false;
-				}
-
-				if ( IsReleased( action ) )
-				{
-					thePlayer.RemoveTimer( 'HoldDodgeToSprintTimer' );
-
-					if ( thePlayer.GetIsSprintToggled() )
-					{
-						thePlayer.SetSprintToggle( false );
-						dodgePressedTime = -1.f;
-						return false;
-					}
-					else if ( dodgePressedTime + 0.2f < theGame.GetEngineTimeAsSeconds() )
-					{
-						dodgePressedTime = -1.f;
-						return false;
-					}
-				}
-			}
-
 			if ( thePlayer.IsInCombatAction() && thePlayer.GetCombatAction() == EBAT_Ciri_SpecialAttack && thePlayer.GetBehaviorVariable( 'isCompletingSpecialAttack' ) <= 0 )
 			{
 				thePlayer.PushCombatActionOnBuffer( EBAT_Ciri_Dodge, BS_Pressed );
@@ -2558,38 +2327,14 @@ class CPlayerInput
 	{
 		if ( theInput.LastUsedGamepad() && IsPressed( action ) )
 		{
-			
-			if ( thePlayer.GetIsSprintToggled() )	
-				thePlayer.SetSprintToggle( false );
-
-			thePlayer.AddTimer( 'HoldRollToSprintTimer', 0.2f, true );
-			rollPressedTime = theGame.GetEngineTimeAsSeconds();
+			thePlayer.StartDodgeTimer();
 		}
 		else if( IsActionAllowed(EIAB_Dodge) && thePlayer.IsAlive() )	
 		{
 			if ( theInput.LastUsedGamepad() )
 			{
-				if ( !( !thePlayer.IsInsideInteraction() && IsReleased(action)) )
-				{
+				if ( !(thePlayer.IsDodgeTimerRunning() && !thePlayer.IsInsideInteraction() && IsReleased(action)) )
 					return false;
-				}
-
-				if ( IsReleased( action ) )
-				{
-					thePlayer.RemoveTimer( 'HoldRollToSprintTimer' );
-
-					if ( thePlayer.GetIsSprintToggled() )
-					{
-						thePlayer.SetSprintToggle( false );
-						rollPressedTime = -1.f;
-						return false;
-					}
-					else if ( rollPressedTime + 0.2f < theGame.GetEngineTimeAsSeconds() )
-					{
-						rollPressedTime = -1.f;
-						return false;
-					}
-				}
 			}
 			
 			if ( thePlayer.IsInCombatAction() && thePlayer.GetCombatAction() == EBAT_Ciri_SpecialAttack && thePlayer.GetBehaviorVariable( 'isCompletingSpecialAttack' ) <= 0 )
@@ -2623,71 +2368,27 @@ class CPlayerInput
 			thePlayer.DisplayActionDisallowedHudMessage(EIAB_Dodge);
 		}
 	}
-
+	
 	event OnCbtDodge( action : SInputAction )
-	{
-		var mouserControllerScheme : MouserControllerScheme;
-
-
-		
-		CheckDodgeRollOnProjectile();
-
-		if ( theInput.LastUsedPCInput() )
+	{		
+		if ( IsPressed(action) )
 		{
-			if ( IsPressed( action ) )
+			
+			if(altSignCasting && !theInput.LastUsedPCInput() && theInput.IsActionPressed('CastSign'))
 			{
-				thePlayer.EvadePressed( EBAT_Dodge );
-			}
-		}
-		else
-		{
-			if ( IsPressed(action) )
-			{
-				mouserControllerScheme = theInput.GetMouserControllerScheme();
-
 				
-				if(GetIsAltSignCastingPressed() && 
-					(mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Comfort))
-				{
-					
-					
-					return false;
-				}
-				else
 				
-				{
-					if ( thePlayer.GetIsSprintToggled() )	
-						thePlayer.SetSprintToggle( false );
-
-					thePlayer.AddTimer( 'HoldDodgeToSprintTimer', 0.2f, true );
-					dodgePressedTime = theGame.GetEngineTimeAsSeconds();
-				}
-			}
-			else if ( IsReleased( action ) )
+			}			
+			else
+			
 			{
-				thePlayer.RemoveTimer( 'HoldDodgeToSprintTimer' );
-
-				if ( thePlayer.GetIsSprintToggled() )
-					thePlayer.SetSprintToggle( false );
-					
-				else if ( dodgePressedTime + 0.2f >= theGame.GetEngineTimeAsSeconds() )
-				{
-					thePlayer.EvadePressed( EBAT_Dodge );
-				}
-
-				dodgePressedTime = -1.f;
+				thePlayer.EvadePressed(EBAT_Dodge);
 			}
 		}
 	}
 	
 	event OnCbtRoll( action : SInputAction )
-	{
-		var mouserControllerScheme : MouserControllerScheme;
-
-		CheckDodgeRollOnProjectile();
-
-
-
+	{		
 		if ( theInput.LastUsedPCInput() )
 		{
 			if ( IsPressed( action ) )
@@ -2699,70 +2400,26 @@ class CPlayerInput
 		{
 			if ( IsPressed( action ) )
 			{
-				mouserControllerScheme = theInput.GetMouserControllerScheme();
-
 				
-				if(GetIsAltSignCastingPressed() && 
-					(mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Comfort))
+				if(altSignCasting && theInput.IsActionPressed('CastSign'))
 				{
 					return false;					
 				}
 				
 				else
 				{
-					if ( thePlayer.GetIsSprintToggled() )	
-						thePlayer.SetSprintToggle( false );
-
-					thePlayer.AddTimer( 'HoldRollToSprintTimer', 0.2f, true );
-					rollPressedTime = theGame.GetEngineTimeAsSeconds();
+					thePlayer.StartDodgeTimer();
 				}
 			}
 			else if ( IsReleased( action ) )
 			{
-				thePlayer.RemoveTimer( 'HoldRollToSprintTimer' );
-
-				if ( thePlayer.GetIsSprintToggled() )
-					thePlayer.SetSprintToggle( false );
-					
-				else if ( rollPressedTime + 0.2f >= theGame.GetEngineTimeAsSeconds() )
+				if ( thePlayer.IsDodgeTimerRunning() )
 				{
-					thePlayer.EvadePressed( EBAT_Roll );
+					thePlayer.StopDodgeTimer();
+					if ( !thePlayer.IsInsideInteraction() )
+						thePlayer.EvadePressed(EBAT_Roll);
 				}
-
-				rollPressedTime = -1.f;
-			}
-		}
-	}
-
-	public function CheckDodgeRollOnProjectile()
-	{
-		var ents : array<CGameplayEntity>;
-		var arrowEntity : W3ArrowProjectile;
-		var casterEntity : W3PlayerWitcher;
-		var victimEntity : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
-		var pos : Vector;
-		var i : int;
-
-		pos = thePlayer.GetWorldPosition();
-		FindGameplayEntitiesInSphere(ents, pos, 6, 1000, '', FLAG_ExcludeTarget, thePlayer);
-
-		
-		for (i = 0; i < ents.Size(); i += 1)
-		{
-			arrowEntity = (W3ArrowProjectile)ents[i];
-			if (arrowEntity)
-			{
-				casterEntity = (W3PlayerWitcher)arrowEntity.caster;
-				victimEntity = (W3PlayerWitcher)arrowEntity.victim;
-			}
-			if (arrowEntity && !casterEntity && !victimEntity)
-			{
-				thePlayer.SetIsDodgingProjectile( true );
-				thePlayer.AddTimer('CheckSkillActivationOnProjectileDodgeRoll', 0.3f );
-
 				
-				GetWitcherPlayer().GainAdrenalineFromPerk31( 'dodge' );
 			}
 		}
 	}
@@ -2775,7 +2432,7 @@ class CPlayerInput
 
 	public function GetIsAltSignCastingPressed() : bool
 	{
-		return altSignCasting && theInput.IsActionPressed('CastSign') && !theInput.LastUsedPCInput();
+		return altSignCasting  &&  theInput.IsActionPressed('CastSign');
 	}
 	
 	public function SetIsAltSignCasting(enable : bool)
@@ -2800,11 +2457,6 @@ class CPlayerInput
 		if ( thePlayer.IsHoldingItemInLHand() && thePlayer.IsUsableItemLBlocked() )
 		{
 			thePlayer.DisplayActionDisallowedHudMessage(EIAB_Undefined, false, false, true);
-			return;
-		}
-		if( !IsActionAllowed(EIAB_NonPatternAlternatives))
-		{
-			thePlayer.DisplayActionDisallowedHudMessage(EIAB_NonPatternAlternatives, false, false, true);
 			return;
 		}
 
@@ -2854,15 +2506,18 @@ class CPlayerInput
 	event OnCastSign( action : SInputAction )
 	{
 		var signSkill : ESkill;
-		var mouserControllerScheme : MouserControllerScheme;
 
 		if( altSignCasting )
 			thePlayer.ApplyCastSettings(); 
 		
 		
-		if( altSignCasting && !theInput.LastUsedPCInput() && !action.isActivatedWithPattern )
+		if(altSignCasting && !theInput.LastUsedPCInput())
 		{
-			if(IsPressed( action ))
+			if(IsPressed( action ) && (theInput.GetActionValue( 'LockAndGuard' ) > 0) && !GetWitcherPlayer().IsCurrentSignChanneled()) 
+			{
+				AltCastSign(ST_Igni);
+			}
+			else if(IsPressed( action ))
 			{
 				thePlayer.BlockAction(EIAB_Interactions, 'NGE_CastSign_Block');
 				thePlayer.BlockAction(EIAB_InteractionAction, 'NGE_CastSign_Block');
@@ -2894,11 +2549,6 @@ class CPlayerInput
  if ( thePlayer.IsHoldingItemInLHand() && thePlayer.IsUsableItemLBlocked() )
 			{
 				thePlayer.DisplayActionDisallowedHudMessage(EIAB_Undefined, false, false, true);
-				return false;
-			}
-			if( !IsActionAllowed(EIAB_NonPatternAlternatives) && !action.isActivatedWithPattern)
-			{
-				thePlayer.DisplayActionDisallowedHudMessage(EIAB_NonPatternAlternatives, false, false, true);
 				return false;
 			}
 			
@@ -2983,11 +2633,7 @@ class CPlayerInput
 					thePlayer.DisplayActionDisallowedHudMessage(EIAB_ThrowBomb);
 					return false;
 				}
-				if(!IsActionAllowed(EIAB_NonPatternAlternatives) && !action.isActivatedWithPattern)
-				{
-					thePlayer.DisplayActionDisallowedHudMessage(EIAB_NonPatternAlternatives, false, false, true);
-					return false;
-				}
+				
 				if ( thePlayer.IsHoldingItemInLHand() && !thePlayer.IsUsableItemLBlocked() )
 				{
 					thePlayer.SetPlayerActionToRestore ( PATR_ThrowBomb );
@@ -3036,11 +2682,6 @@ class CPlayerInput
 			if(!IsActionAllowed(EIAB_ThrowBomb))
 			{
 				thePlayer.DisplayActionDisallowedHudMessage(EIAB_ThrowBomb);
-				return false;
-			}
-			if(!IsActionAllowed(EIAB_NonPatternAlternatives))
-			{
-				thePlayer.DisplayActionDisallowedHudMessage(EIAB_NonPatternAlternatives, false, false, true);
 				return false;
 			}
 			else if(GetWitcherPlayer().GetBombDelay(GetWitcherPlayer().GetItemSlot(selectedItemId)) > 0 )
@@ -3094,18 +2735,8 @@ class CPlayerInput
 	
 	event OnCbtThrowItem( action : SInputAction )
 	{			
-		var isUsableItem, isRangedWeapon, isCrossbowPattern, isBomb, isBombPattern, ret : bool;
-		var itemId : SItemUniqueId;
-		var mouserControllerScheme : MouserControllerScheme = theInput.GetMouserControllerScheme();
-
-		if( GetIsAltSignCastingPressed() && mouserControllerScheme == MouserControllerScheme_Comfort )
-		{
-			if ( IsPressed( action ) && !GetWitcherPlayer().IsCurrentSignChanneled())  
-			{
-				AltCastSign(ST_Axii);
-			}
-			return false;
-		}
+		var isUsableItem, isCrossbow, isBomb, ret : bool;
+		var itemId : SItemUniqueId;		
 		
 		
 		if(thePlayer.IsInAir() || thePlayer.GetWeaponHolster().IsOnTheMiddleOfHolstering())
@@ -3113,109 +2744,80 @@ class CPlayerInput
 			
 		if( thePlayer.IsSwimming() && !thePlayer.OnCheckDiving() && thePlayer.GetCurrentStateName() != 'AimThrow' )
 			return false;
-			
+				
 		itemId = thePlayer.GetSelectedItemId();
-		isCrossbowPattern = action.patternName == 'CrossbowGroup';
-		isBombPattern = action.patternName == 'BombThrowGroup';
 		
-		if(!thePlayer.inv.IsIdValid(itemId) && !isCrossbowPattern && !isBombPattern)
+		if(!thePlayer.inv.IsIdValid(itemId))
 			return false;
-
-		isRangedWeapon = ( thePlayer.inv.IsItemRangedWeapon(itemId) || isCrossbowPattern ) && !isBombPattern;
-		if(!isRangedWeapon)
+		
+		isCrossbow = thePlayer.inv.IsItemCrossbow(itemId);
+		if(!isCrossbow)
 		{
-			isBomb = thePlayer.inv.IsItemBomb(itemId) || isBombPattern;
+			isBomb = thePlayer.inv.IsItemBomb(itemId);
 			if(!isBomb)
 			{
 				isUsableItem = true;
 			}
 		}
 		
-		if( isRangedWeapon )
+		
+		
+		
+		if( isCrossbow )
 		{
-			if(action.patternName == '')
+			if ( IsActionAllowed(EIAB_Crossbow) )
 			{
-				theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_Crossbow,MPTS_Trigger);
+				if( IsPressed(action))
+				{
+					if ( thePlayer.IsHoldingItemInLHand() && !thePlayer.IsUsableItemLBlocked() )
+					{
+
+						
+						thePlayer.SetPlayerActionToRestore ( PATR_Crossbow );
+						thePlayer.OnUseSelectedItem( true );
+						ret = true;						
+					}
+					else if ( thePlayer.GetBIsInputAllowed() && !thePlayer.IsCurrentlyUsingItemL() )
+					{
+						thePlayer.SetIsAimingCrossbow( true );
+						thePlayer.SetupCombatAction( EBAT_ItemUse, BS_Pressed );
+						
+						
+						ret = true;
+					}
+				}
+				else
+				{
+
+					if ( thePlayer.GetIsAimingCrossbow() && !thePlayer.IsCurrentlyUsingItemL() )
+					{
+						thePlayer.SetupCombatAction( EBAT_ItemUse, BS_Released );
+						
+						
+						thePlayer.SetIsAimingCrossbow( false );
+						ret = true;
+					}
+				}
 			}
 			else
 			{
-				theGame.GetTutorialSystem().switchTutorialManager.UpdateMotionPatternTutorialState(MPTT_Crossbow,MPTS_Done);
+				if ( !thePlayer.IsInShallowWater() )
+					thePlayer.DisplayActionDisallowedHudMessage(EIAB_Crossbow);				
 			}
-
-			if (thePlayer.inv.IsItemCrossbow(itemId) || isCrossbowPattern)
-			{
-				if ( IsActionAllowed(EIAB_Crossbow) && thePlayer.rangedWeapon )
-				{
-					if( IsPressed(action))
-					{
-						if (isCrossbowPattern)
-						{
-							GetWitcherPlayer().SelectQuickslotItem( EES_RangedWeapon );
-						}
-
-						if ( thePlayer.IsHoldingItemInLHand() && !thePlayer.IsUsableItemLBlocked() )
-						{
-							thePlayer.SetPlayerActionToRestore ( PATR_Crossbow );
-							thePlayer.OnUseSelectedItem( true );
-							ret = true;						
-						}
-						else if ( thePlayer.GetBIsInputAllowed() && !thePlayer.IsCurrentlyUsingItemL() )
-						{
-							thePlayer.SetIsAimingCrossbow( true );
-							thePlayer.SetupCombatAction( EBAT_ItemUse, BS_Pressed );
-							ret = true;
-						}
-					}
-					else
-					{
-						if ( thePlayer.GetIsAimingCrossbow() && !thePlayer.IsCurrentlyUsingItemL() )
-						{
-							thePlayer.SetupCombatAction( EBAT_ItemUse, BS_Released );				
-							thePlayer.SetIsAimingCrossbow( false );
-							
-							ret = true;
-						}
-					}
-				}
-				else
-				{
-					if ( !thePlayer.IsInShallowWater() )
-						thePlayer.DisplayActionDisallowedHudMessage(EIAB_Crossbow);				
-				}
+			
+			if ( IsPressed(action) )
+				thePlayer.AddTimer( 'IsItemUseInputHeld', 0.00001, true );
+			else
+				thePlayer.RemoveTimer('IsItemUseInputHeld');
 				
-				if ( IsPressed(action) )
-					thePlayer.AddTimer( 'IsItemUseInputHeld', 0.00001, true );
-				else
-					thePlayer.RemoveTimer('IsItemUseInputHeld');
-					
-				return ret;
-			}
-
+			return ret;
 		}
 		else if(isBomb)
 		{
-			if (isBombPattern)
-			{
-				if (thePlayer.inv.IsItemCrossbow(itemId))
-				{
-					thePlayer.CleanCombatActionBuffer();
-					thePlayer.SetIsAimingCrossbow( false );
-					thePlayer.OnRangedForceHolster( false, true );
-				}
-
-				thePlayer.inv.GetItemEquippedOnSlot(EES_Petard1, itemId);
-				if (thePlayer.inv.IsIdValid(itemId))
-				{
-					GetWitcherPlayer().SelectQuickslotItem( EES_Petard1 );
-				}
-				
-			}
-
 			return OnThrowBomb(action);
 		}
 		else if(isUsableItem && !thePlayer.IsSwimming() )
 		{
-
 			if( IsActionAllowed(EIAB_UsableItem) )
 			{
 				if(IsPressed(action) && thePlayer.HasStaminaToUseAction(ESAT_UsableItem))
@@ -3224,6 +2826,7 @@ class CPlayerInput
 					thePlayer.OnUseSelectedItem();
 					return true;
 				}
+
 			}
 			else
 			{
@@ -3236,10 +2839,9 @@ class CPlayerInput
 	
 	event OnCbtThrowItemHold( action : SInputAction )
 	{
-		var isBomb, isRangedWeapon, isUsableItem : bool;
-
+		var isBomb, isCrossbow, isUsableItem : bool;
 		var itemId : SItemUniqueId;
-
+		
 		
 		if(thePlayer.IsInAir() || thePlayer.GetWeaponHolster().IsOnTheMiddleOfHolstering() )
 			return false;
@@ -3252,8 +2854,8 @@ class CPlayerInput
 		if(!thePlayer.inv.IsIdValid(itemId))
 			return false;
 		
-		isRangedWeapon = thePlayer.inv.IsItemRangedWeapon(itemId);
-		if(!isRangedWeapon)
+		isCrossbow = thePlayer.inv.IsItemCrossbow(itemId);
+		if(!isCrossbow)
 		{
 			isBomb = thePlayer.inv.IsItemBomb(itemId);
 			if(isBomb)
@@ -3265,16 +2867,13 @@ class CPlayerInput
 				isUsableItem = true;
 			}
 		}
-
 		
 		
 		if(IsPressed(action))
 		{
-			if( isRangedWeapon )
+			if( isCrossbow && !IsActionAllowed(EIAB_Crossbow) )
 			{
-				if (thePlayer.inv.IsItemCrossbow (itemId)&& !IsActionAllowed(EIAB_Crossbow))
-					thePlayer.DisplayActionDisallowedHudMessage(EIAB_Crossbow);
-
+				thePlayer.DisplayActionDisallowedHudMessage(EIAB_Crossbow);
 				return false;
 			}
 			
@@ -3331,7 +2930,7 @@ class CPlayerInput
 				}
 				else
 				{
-					if ( thePlayer.inv.IsItemRangedWeapon( thePlayer.inv.GetItemFromSlot( 'l_weapon' ) ) )
+					if ( thePlayer.inv.IsItemCrossbow( thePlayer.inv.GetItemFromSlot( 'l_weapon' ) ) )
 					{
 						thePlayer.OnRangedForceHolster();
 					}
@@ -3340,9 +2939,7 @@ class CPlayerInput
 						throwStage = (int)thePlayer.GetBehaviorVariable( 'throwStage', (int)TS_Stop);
 						
 						if(throwStage == TS_Start || throwStage == TS_Loop)
-						{
 							player.ThrowingAbort();
-						}
 					}
 				}
 			}
@@ -3357,11 +2954,8 @@ class CPlayerInput
 		
 		inputVector.Y = inputVector.Y  * -1.f;
 		inputHeading =	VecHeading( inputVector );
-
-		if ( thePlayer.isModernTargetLockEnabled )
-			newLockTarget = thePlayer.GetNewLockTarget( thePlayer.GetDisplayTarget(), 180.f, 1.f, inputHeading );
-		else
-			newLockTarget = thePlayer.GetScreenSpaceLockTarget( thePlayer.GetDisplayTarget(), 180.f, 1.f, inputHeading );
+		
+		newLockTarget = thePlayer.GetScreenSpaceLockTarget( thePlayer.GetDisplayTarget(), 180.f, 1.f, inputHeading );
 
 		if ( newLockTarget )
 			thePlayer.ProcessLockTarget( newLockTarget );
@@ -3376,8 +2970,6 @@ class CPlayerInput
 
 	event OnCbtLockAndGuard( action : SInputAction )
 	{
-		var mouserControllerScheme : MouserControllerScheme = theInput.GetMouserControllerScheme();
-
 		if(thePlayer.IsCiri() && !GetCiriPlayer().HasSword())
 			return false;
 		
@@ -3385,9 +2977,8 @@ class CPlayerInput
 		if( IsReleased(action) )
 		{
 			
-			if(GetIsAltSignCastingPressed() && GetWitcherPlayer().IsCurrentSignChanneled() &&
-				(mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Dynamic))
-			{
+			if(altSignCasting && !theInput.LastUsedPCInput() && theInput.IsActionPressed('CastSign') && GetWitcherPlayer().IsCurrentSignChanneled())
+			{				
 				thePlayer.AbortSign();
 			}
 			
@@ -3405,17 +2996,9 @@ class CPlayerInput
 		if( IsPressed(action) )
 		{
 			
-			if(GetIsAltSignCastingPressed() && !GetWitcherPlayer().IsCurrentSignChanneled())
+			if(altSignCasting && !theInput.LastUsedPCInput() && theInput.IsActionPressed('CastSign') && !GetWitcherPlayer().IsCurrentSignChanneled())
 			{
-				if (mouserControllerScheme == MouserControllerScheme_None || mouserControllerScheme == MouserControllerScheme_Dynamic)
-				{
-					AltCastSign(ST_Igni);
-				}
-				else if (mouserControllerScheme == MouserControllerScheme_Comfort)
-				{
-					AltCastSign(ST_Yrden);
-				}
-
+				AltCastSign(ST_Igni);
 				return false;
 			}
 			
@@ -3457,7 +3040,7 @@ class CPlayerInput
 	}
 	
 	event OnCbtCameraLock( action : SInputAction )
-	{
+	{	
 		if( IsPressed(action) )
 		{
 			if ( thePlayer.IsThreatened() || thePlayer.IsActorLockedToTarget() )
@@ -3466,10 +3049,7 @@ class CPlayerInput
 				{
 					return false;
 				}
-				else if (
-					!thePlayer.IsHardLockEnabled() &&
-					( ( thePlayer.GetDisplayTarget() && (CActor)( thePlayer.GetDisplayTarget() ) ) || thePlayer.moveTarget ) &&
-					IsActionAllowed(EIAB_HardLock))
+				else if ( !thePlayer.IsHardLockEnabled() && thePlayer.GetDisplayTarget() && (CActor)( thePlayer.GetDisplayTarget() ) && IsActionAllowed(EIAB_HardLock))
 				{	
 					if ( thePlayer.bLAxisReleased )
 						thePlayer.ResetRawPlayerHeading();
@@ -3661,7 +3241,7 @@ class CPlayerInput
 			return false;
 		}
 		
-		if(IsReleased(action) && theInput.IsActionPressed( 'DebugInput' ))
+		if(IsReleased(action))
 			thePlayer.DebugTeleportToPin();
 	}
 	

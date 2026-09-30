@@ -14,7 +14,6 @@ class CR4GlossaryTutorialsMenu extends CR4ListBaseMenu
 	private var m_fxSetTitle			: CScriptedFlashFunction;
 	private var m_fxSetText				: CScriptedFlashFunction;
 	private var m_fxSetImage			: CScriptedFlashFunction;
-	private var m_fxSetEntryTag			: CScriptedFlashFunction;
 	
 	private var resetSelection : bool;
 	
@@ -42,8 +41,7 @@ class CR4GlossaryTutorialsMenu extends CR4ListBaseMenu
 				}
 			
 		}
-
-		m_fxSetEntryTag = m_flashModule.GetMemberFlashFunction("setEntryTag");
+		
 		m_fxSetTitle = m_flashModule.GetMemberFlashFunction("setTitle");
 		m_fxSetText = m_flashModule.GetMemberFlashFunction("setText");
 		m_fxSetImage = m_flashModule.GetMemberFlashFunction("setImage");
@@ -66,7 +64,11 @@ class CR4GlossaryTutorialsMenu extends CR4ListBaseMenu
 		var str : string;
 		l_entry = (CJournalTutorial)m_journalManager.GetEntryByTag( tag );
 		str = l_entry.GetImagePath();
-		if( str != "" )
+		if( str == "" )
+		{
+			m_fxSetImage.InvokeSelfOneArg(FlashArgString("empty_texture.PNG"));
+		}
+		else
 		{
 			m_fxSetImage.InvokeSelfOneArg(FlashArgString(str));
 		}
@@ -193,9 +195,9 @@ class CR4GlossaryTutorialsMenu extends CR4ListBaseMenu
 		
 		
 		l_entry = (CJournalTutorial)m_journalManager.GetEntryByTag( entryName );
-		description = ReplaceTagsToIcons(GetLocStringById( l_entry.GetDescriptionStringId()));
-		title = GetLocStringById( l_entry.GetNameStringId());
-		m_fxSetEntryTag.InvokeSelfOneArg(FlashArgString(NameToString(entryName)));
+		description = ReplaceTagsToIcons(GetLocStringById( l_entry.GetDescriptionStringId()));	
+		title = GetLocStringById( l_entry.GetNameStringId());	
+		
 		m_fxSetTitle.InvokeSelfOneArg(FlashArgString(title));
 		m_fxSetText.InvokeSelfOneArg(FlashArgString(description));
 	}	
@@ -208,27 +210,5 @@ class CR4GlossaryTutorialsMenu extends CR4ListBaseMenu
 	{
 		
 		
-	}
-
-	event  OnCloseMenu()
-	{
-		var commonMenu : CR4CommonMenu;
-		var glossaryMainMenu : CR4GlossaryMainMenu;
-		
-		commonMenu = (CR4CommonMenu)m_parentMenu;
-		glossaryMainMenu = (CR4GlossaryMainMenu)m_parentMenu;
-		
-		if( commonMenu )
-		{
-			commonMenu.ChildRequestCloseMenu();
-		}
-		if(glossaryMainMenu)
-		{
-			glossaryMainMenu.ChildRequestCloseMenu();
-		}
-		
-		theSound.SoundEvent( 'gui_global_quit' );
-		
-		CloseMenu();
 	}
 }

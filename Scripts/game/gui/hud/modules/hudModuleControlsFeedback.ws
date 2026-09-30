@@ -16,12 +16,8 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 	private var m_displayDiveDown		: bool;
 	private var m_displayGallop			: bool;
 	private var m_displayCanter			: bool;
-
-	private var m_displayFocus			: bool;
-
 	private	var m_movementLockType 		: EPlayerMovementLockType;
 	private var m_lastUsedPCInput		: bool;
-	private var m_mouserControllerScheme : MouserControllerScheme;
 	private var m_CurrentHorseComp		: W3HorseComponent;
 	
 	private var m_altSignCasting		: bool; 
@@ -113,7 +109,7 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 		}
 		
 		
-		if(thePlayer.GetInputHandler().GetIsAltSignCastingPressed()) 
+		if(!theInput.LastUsedPCInput() && thePlayer.GetInputHandler().GetIsAltSignCasting() && theInput.IsActionPressed('CastSign')) 
 		{
 			m_altSignCasting = true;
 		}
@@ -133,13 +129,9 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 		{
 			UpdateInputContextActions();
 		}
-		else if( m_mouserControllerScheme != theInput.GetMouserControllerScheme() )
-		{
-			UpdateInputContextActions();
-		}
 		else if( m_currentInputContext == thePlayer.GetExplorationInputContext() || m_currentInputContext == 'JumpClimb' )
 		{
-			if( m_displaySprint != thePlayer.IsActionAllowed(EIAB_RunAndSprint) || thePlayer.movementLockType != m_movementLockType || m_displayCallHorse != thePlayer.IsActionAllowed(EIAB_CallHorse) || m_displayJump	!= thePlayer.IsActionAllowed(EIAB_Jump) || m_displayFocus != thePlayer.IsActionAllowed(EIAB_ExplorationFocus) )
+			if( m_displaySprint != thePlayer.IsActionAllowed(EIAB_RunAndSprint) || thePlayer.movementLockType != m_movementLockType || m_displayCallHorse != thePlayer.IsActionAllowed(EIAB_CallHorse) || m_displayJump	!= thePlayer.IsActionAllowed(EIAB_Jump) )
 			{
 				UpdateInputContextActions();
 			}
@@ -256,10 +248,8 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 			m_displaySprint 	= thePlayer.IsActionAllowed(EIAB_RunAndSprint);
 			m_displayCallHorse 	= thePlayer.IsActionAllowed(EIAB_CallHorse);
 			m_lastUsedPCInput 	= theInput.LastUsedPCInput();
-			m_mouserControllerScheme = theInput.GetMouserControllerScheme();
 			m_displayDiveDown 	= thePlayer.OnAllowedDiveDown();
 			m_displayJump		= thePlayer.IsActionAllowed(EIAB_Jump);
-			m_displayFocus		= thePlayer.IsActionAllowed(EIAB_ExplorationFocus);
 			
 			m_CurrentHorseComp = thePlayer.GetUsedHorseComponent();
 			m_displayGallop 	= m_CurrentHorseComp.OnCanGallop();
@@ -290,8 +280,7 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 					}
 					if( !thePlayer.IsCiri() )
 					{
-						if( m_displayFocus )
-							l_ActionsArray.PushBack('Focus');
+						l_ActionsArray.PushBack('Focus');
 						if( m_displayCallHorse )
 						{
 							l_ActionsArray.PushBack('SpawnHorse');
@@ -401,31 +390,11 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 			if(m_altSignCasting)
 			{				
 				l_ActionsArray.Clear();
-
-				if (m_mouserControllerScheme == MouserControllerScheme_None) 
-				{
-					l_ActionsArray.PushBack('CbtRoll');
-					l_ActionsArray.PushBack('AttackLight');
-					l_ActionsArray.PushBack('Dodge');
-					l_ActionsArray.PushBack('AttackHeavy');
-					l_ActionsArray.PushBack('LockAndGuard');
-				}
-				else if (m_mouserControllerScheme == MouserControllerScheme_Comfort)
-				{
-					l_ActionsArray.PushBack('CbtRoll');
-					l_ActionsArray.PushBack('ThrowItem');
-					l_ActionsArray.PushBack('Dodge');
-					l_ActionsArray.PushBack('LockAndGuard');
-					l_ActionsArray.PushBack('AttackHeavy');
-				}
-				else if (m_mouserControllerScheme == MouserControllerScheme_Dynamic)
-				{
-					l_ActionsArray.PushBack('SilverSword');		
-					l_ActionsArray.PushBack('DrinkPotion1');	
-					l_ActionsArray.PushBack('DrinkPotion2');	
-					l_ActionsArray.PushBack('SteelSword');		
-					l_ActionsArray.PushBack('LockAndGuard');
-				}
+				l_ActionsArray.PushBack('CbtRoll');
+				l_ActionsArray.PushBack('AttackLight');
+				l_ActionsArray.PushBack('Dodge');
+				l_ActionsArray.PushBack('AttackHeavy');
+				l_ActionsArray.PushBack('LockAndGuard');
 			}			
 			
 			
@@ -434,7 +403,7 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 				curAction = l_ActionsArray[i];
 				outKeys.Clear();
 				outKeysPC.Clear();
-				theInput.GetPadKeysForAction(curAction, outKeys ); 
+				theInput.GetPadKeysForAction(curAction, outKeys );
 				
 				
 				
@@ -528,29 +497,26 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 				
 				if(m_altSignCasting)
 				{
-					if (m_mouserControllerScheme == MouserControllerScheme_None) 
-					{
-						if( curAction == 'CbtRoll')				outKeys.PushBack(IK_Pad_A_CROSS);
-						else if ( curAction == 'AttackLight')	outKeys.PushBack(IK_Pad_X_SQUARE);
-						else if ( curAction == 'Dodge')			outKeys.PushBack(IK_Pad_B_CIRCLE);
-						else if ( curAction == 'AttackHeavy')	outKeys.PushBack(IK_Pad_Y_TRIANGLE);
-						else if ( curAction == 'LockAndGuard')	outKeys.PushBack(IK_Pad_LeftTrigger);
+					if( curAction == 'CbtRoll')
+					{					
+						
+						outKeys.PushBack(IK_Pad_A_CROSS);
 					}
-					else if (m_mouserControllerScheme == MouserControllerScheme_Comfort)
+					else if ( curAction == 'AttackLight') 
 					{
-						if( curAction == 'CbtRoll')				outKeys.PushBack(IK_Pad_A_CROSS);
-						else if ( curAction == 'ThrowItem')		outKeys.PushBack(IK_Pad_X_SQUARE);
-						else if ( curAction == 'Dodge')			outKeys.PushBack(IK_Pad_B_CIRCLE);
-						else if ( curAction == 'LockAndGuard')	outKeys.PushBack(IK_Pad_Y_TRIANGLE);
-						else if ( curAction == 'AttackHeavy')	outKeys.PushBack(IK_Pad_RightTrigger);
+						outKeys.PushBack(IK_Pad_X_SQUARE);
 					}
-					else if (m_mouserControllerScheme == MouserControllerScheme_Dynamic)
+					else if ( curAction == 'Dodge') 
 					{
-						if( curAction == 'SilverSword')			outKeys.PushBack(IK_Pad_DigitRight);
-						else if ( curAction == 'DrinkPotion1')	outKeys.PushBack(IK_Pad_DigitUp);
-						else if ( curAction == 'DrinkPotion2')	outKeys.PushBack(IK_Pad_DigitDown);
-						else if ( curAction == 'SteelSword')	outKeys.PushBack(IK_Pad_DigitLeft);
-						else if ( curAction == 'LockAndGuard')	outKeys.PushBack(IK_Pad_LeftTrigger);
+						outKeys.PushBack(IK_Pad_B_CIRCLE);
+					}
+					else if ( curAction == 'AttackHeavy') 
+					{
+						outKeys.PushBack(IK_Pad_Y_TRIANGLE);
+					}
+					else if ( curAction == 'LockAndGuard') 
+					{
+						outKeys.PushBack(IK_Pad_RightTrigger);
 					}
 				}
 				
@@ -600,7 +566,14 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 							labelPrefix = "<font color=\"#FCAD36\">" + bracketOpeningSymbol + StrReplace(GetLocStringByKeyExt("ControlLayout_press")," -","") + bracketClosingSymbol + "</font>";						
 						break;
 					case 'HorseDismount':
-						labelPrefix = "<font color=\"#FCAD36\">" + bracketOpeningSymbol + GetLocStringByKeyExt("ControlLayout_hold") + bracketClosingSymbol + "</font>";
+						if ( m_lastUsedPCInput )
+						{
+							labelPrefix = "";
+						}
+						else
+						{
+							labelPrefix = "<font color=\"#FCAD36\">" + bracketOpeningSymbol + GetLocStringByKeyExt("ControlLayout_hold") + bracketClosingSymbol + "</font>";
+						}
 						break;
 					case 'Run':
 						
@@ -669,88 +642,41 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 					else if (showCiriObjective)
 						actionLabel = GetLocStringByKeyExt("panel_journal_quest_objectives");
 				}
-				
-				else if(m_altSignCasting)
-				{
-					if (m_mouserControllerScheme == MouserControllerScheme_None) 
-					{
-						if( curAction == 'CbtRoll')				
-						{		
-							actionLabel = GetLocStringById(1061945);
-							
-						}
-						else if ( curAction == 'AttackLight')	
-						{
-							actionLabel = GetLocStringById(1066290);
-							
-						}
-						else if ( curAction == 'Dodge') 		
-						{
-							actionLabel = GetLocStringById(1066292);
-							
-						}
-						else if ( curAction == 'AttackHeavy') 	
-						{
-							actionLabel = GetLocStringById(1066293);
-							
-						}
-						else if ( curAction == 'LockAndGuard')	
-						{
-							actionLabel = GetLocStringById(1066291);
-							
-						}
-					}
-					else if (m_mouserControllerScheme == MouserControllerScheme_Comfort)
-					{
-						if( curAction == 'CbtRoll')	
-						{		
-							actionLabel = GetLocStringById(1061945);
-						}
-						else if ( curAction == 'ThrowItem')	
-						{
-							actionLabel = GetLocStringById(1066290);
-						}
-						else if ( curAction == 'Dodge')	
-						{
-							actionLabel = GetLocStringById(1066292);
-						}
-						else if ( curAction == 'LockAndGuard')	
-						{
-							actionLabel = GetLocStringById(1066293);
-						}
-						else if ( curAction == 'AttackHeavy')	
-						{
-							actionLabel = GetLocStringById(1066291);
-						}
-					}
-					else if (m_mouserControllerScheme == MouserControllerScheme_Dynamic)
-					{
-						if( curAction == 'SilverSword')	
-						{		
-							actionLabel = GetLocStringById(1061945);
-						}
-						else if ( curAction == 'DrinkPotion1')	
-						{
-							actionLabel = GetLocStringById(1066290);
-						}
-						else if ( curAction == 'DrinkPotion2')	
-						{
-							actionLabel = GetLocStringById(1066292);
-						}
-						else if ( curAction == 'SteelSword')	
-						{
-							actionLabel = GetLocStringById(1066293);
-						}
-						else if ( curAction == 'LockAndGuard')	
-						{
-							actionLabel = GetLocStringById(1066291);
-						}
-					}
-				}
 				else
 				{					
 					actionLabel = GetLocStringByKeyExt("panel_input_action_"+StrLower(curAction));
 				}
+				
+				
+				if(m_altSignCasting)
+				{
+					if( curAction == 'CbtRoll')				
+					{		
+						actionLabel = GetLocStringById(1061945);
+						
+					}
+					else if ( curAction == 'AttackLight')	
+					{
+						actionLabel = GetLocStringById(1066290);
+						
+					}
+					else if ( curAction == 'Dodge') 		
+					{
+						actionLabel = GetLocStringById(1066292);
+						
+					}
+					else if ( curAction == 'AttackHeavy') 	
+					{
+						actionLabel = GetLocStringById(1066293);
+						
+					}
+					else if ( curAction == 'LockAndGuard')	
+					{
+						actionLabel = GetLocStringById(1066291);
+						
+					}
+				}
+				
 				
 				if(theGame.IsLanguageArabic())
 					bindingGFxData.SetMemberFlashString("label", labelPrefix + " <font color=\"#FFFFFF\">" + actionLabel + "</font>" );
@@ -763,8 +689,7 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 		
 		
 		
-		
-		
+		if( l_ActionsArray.Size() > 0 )
 		{
 			m_flashValueStorage.SetFlashArray( KEY_CONTROLS_FEEDBACK_LIST, l_FlashArray );
 			
@@ -794,6 +719,11 @@ class CR4HudModuleControlsFeedback extends CR4HudModuleBase
 		l_flashModule.SetX( tempX );
 		l_flashModule.SetY( tempY );	
 	}
+	
+	event OnControllerChanged()
+	{
+		
+	}	
 
 	event OnInputHandled(NavCode:string, KeyCode:int, ActionId:int)
 	{

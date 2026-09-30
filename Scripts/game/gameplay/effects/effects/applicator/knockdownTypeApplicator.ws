@@ -87,11 +87,8 @@ class W3Effect_KnockdownTypeApplicator extends W3ApplicatorEffect
 		}
 		
 		
-		
 		appliedType = ModifyHitSeverityBuff(target, appliedType);
 		
-
-
 		
 		params.effectType = appliedType;
 		params.creator = GetCreator();

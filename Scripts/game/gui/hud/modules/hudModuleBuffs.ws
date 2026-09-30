@@ -18,7 +18,7 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 	private var bDisplayBuffs : bool; default bDisplayBuffs = true;
 	
 	private var m_runword5Applied : bool; default m_runword5Applied = false;
-		
+	
 	
 	
 
@@ -61,7 +61,6 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 		var oilEffect : W3Effect_Oil;
 		var aerondightEffect	: W3Effect_Aerondight;
 		var effectType : EEffectType;
-		var minAttributeValue, maxAttributeValue : SAbilityAttributeValue;
 
 		if ( !CanTick( timeDelta ) )
 			return true;
@@ -166,12 +165,6 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 						
 						extraValue = ( ( W3Effect_BasicQuen ) effectArray[i] ).GetStacks();
 						
-					}
-					else if ( effectType == EET_ConvergenceTheory )
-					{
-						theGame.GetDefinitionsManager().GetAbilityAttributeValue('ConvergenceTheoryEffect', 'spell_power', minAttributeValue, maxAttributeValue);
-						extraValue = ( int )( minAttributeValue.valueMultiplicative * 100 );
-						extraValue *= ( ( W3Effect_ConvergenceTheory ) effectArray[i] ).GetStacks() * thePlayer.GetSkillLevel(S_Magic_s37);
 					}
 					else if( effectType == EET_Mutation3 )
 					{						
@@ -329,7 +322,7 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 					
 					format = 2;
 				}
-				else if ( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff || effectType == EET_BasicQuen || effectType == EET_ConvergenceTheory )
+				else if ( effectType == EET_Mutation7Buff || effectType == EET_Mutation7Debuff || effectType == EET_BasicQuen )
 				{
 					
 					format = 4;
@@ -338,7 +331,7 @@ class CR4HudModuleBuffs extends CR4HudModuleBase
 				{
 					
 					format = 3;
-				}				
+				}
 				
 				l_flashObject = m_flashValueStorage.CreateTempFlashObject();
 				l_flashObject.SetMemberFlashBool("isVisible",_currentEffects[i].ShowOnHUD());

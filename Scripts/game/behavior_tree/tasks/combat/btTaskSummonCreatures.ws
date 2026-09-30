@@ -36,7 +36,7 @@ class CBTTaskSummonCreatures extends CBTTaskAttack
 	{
 		if ( preventActivationUntilMinionsAreDead )
 		{
-			return NoMinionCheck();
+			return MinionNumberCheck();
 		}
 		return true;
 	}
@@ -64,8 +64,8 @@ class CBTTaskSummonCreatures extends CBTTaskAttack
 		{
 			SleepOneFrame();
 		}
-
-		if ( NoMinionCheck() || !dontResummonUntilMinionsAreDead )
+		
+		if ( ( dontResummonUntilMinionsAreDead && MinionNumberCheck() ) || !dontResummonUntilMinionsAreDead )
 		{
 			SummonCreatures();
 		}
@@ -107,8 +107,8 @@ class CBTTaskSummonCreatures extends CBTTaskAttack
 						minDistance = cameraToPlayerDistance*1.2;
 						maxDistance = ( maxDistance + ( cameraToPlayerDistance - minDistance ))*1.2;
 					}
-					spawnPos = VecConeRand( theCamera.GetCameraHeading(), 360 - (theCamera.GetFov() + 20), minDistance, maxDistance );
-					freeSpawnPos = thePlayer.GetWorldPosition() - spawnPos;
+					spawnPos = VecConeRand( (theCamera.GetCameraHeading() ), 180, minDistance, maxDistance );
+					freeSpawnPos = theCamera.GetCameraPosition() - spawnPos;
 					theGame.GetWorld().StaticTrace( freeSpawnPos + Vector(0,0,3), freeSpawnPos - Vector(0,0,3), freeSpawnPos, normal );
 				}
 				else
@@ -213,7 +213,7 @@ class CBTTaskSummonCreatures extends CBTTaskAttack
 		}
 	}
 	
-	function NoMinionCheck() : bool
+	function MinionNumberCheck() : bool
 	{
 		var npc : CNewNPC = GetNPC();
 		var i : int;
@@ -243,7 +243,7 @@ class CBTTaskSummonCreatures extends CBTTaskAttack
 		{
 			if ( minions.Size() < 1 )
 			{
-				NoMinionCheck();
+				MinionNumberCheck();
 			}
 			for ( i = 0; i < minions.Size(); i += 1 )
 			{
