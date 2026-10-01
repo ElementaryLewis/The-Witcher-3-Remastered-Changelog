@@ -64,7 +64,6 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 		super.OnLeaveState(nextStateName);
 		
 		
-		theSound.SoundEvent("gui_meditation_close");
 
 		theGame.GetGameCamera().EnableManualControl( true );
 	}
@@ -310,6 +309,8 @@ state Meditation in W3PlayerWitcher extends MeditationBase
 		{
 			theInput.RestoreContext('Meditation', false);
 		}
+
+		theSound.SoundEvent("gui_meditation_close");
 
 		if ( waitForStandUpFinish )
 		{

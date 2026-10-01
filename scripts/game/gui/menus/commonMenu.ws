@@ -1639,8 +1639,7 @@ class CR4CommonMenu extends CR4MenuBase
 	
 	
 	public function SetMeditationMode(value:bool, optional time:float, optional noFade:bool):void
-	{	
-		theSound.SoundEvent("system_resume"); 
+	{
 		if(value)
 			theGame.Unpause("MeditationLock");
 		if (m_mode_meditation != value)
@@ -1665,9 +1664,10 @@ class CR4CommonMenu extends CR4MenuBase
 			if (m_mode_meditation)
 			{
 				m_had_meditation = true;
+				theSound.SoundEvent("system_resume"); 
+				theSound.SoundEvent("gui_meditation_open");
 			}
 		}
-		theSound.SoundEvent("gui_meditation_open");
 	}
 	
 	public function StopMeditation()

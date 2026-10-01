@@ -425,9 +425,11 @@ class CR4StartupExperienceMenu extends CR4MenuBase
 		{
 			case TCI_Telemetry:
 				theTelemetry.TelemetryConsentChanged( value );
+				
 			break;
 			case TCI_Marketing:
 				theTelemetry.MarketingConsentChanged( value );
+				theGame.GetInGameConfigWrapper().SetVarValue( 'Gameplay', 'MarketingConsent', value ? "true" : "false" );
 			break;
 		}
 	}
