@@ -1,0 +1,14 @@
+*Sorted by Notepad++; Grouped by Lewis Elementary*
+
+===== .en (7) =====
+environment\definitions\env_nomansland\env_nml_global_dark_sunset.env
+environment\definitions\env_novigrad\env_novigrad_storm.env
+environment\definitions\env_prologue\env_grey_sky.env
+environment\definitions\env_prologue\env_prolog_colors_cinematic_tonemapping.env
+environment\definitions\env_prologue\env_prolog_colors_v1_b_sunset.env
+environment\definitions\env_prologue\env_prolog_colors_v1_b_sunset_clear.env
+environment\definitions\kaer_morhen\kaer_morhen_global\env_kaer_morhen_v09_tm.env
+
+===== .w2w (2) =====
+levels\kaer_morhen\kaer_morhen.w2w
+levels\novigrad\novigrad.w2w
