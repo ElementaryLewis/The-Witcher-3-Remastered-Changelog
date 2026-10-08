@@ -426,6 +426,7 @@
         <tags>magic_s13</tags>
         <PhysicalDamage type="add" min="3" max="12"/>
 		<SilverDamage type="add" min="3" max="12"/>
+        <discharge_percent type="add" min="0.1" />
 		
 		<!-- chance multiplier for knockdown -->
 		<chance_multiplier type="add" min="0.15" />
