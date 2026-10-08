@@ -1,31 +1,31 @@
-MapIndex;RequestID;ProductID;TitleKey;ReasonKey;GameItemName;DirectlyGranted;Inherent
-1;-1;GOG;;;Greater mutagen red;1;0
-2;-1;WITCHER_3;;;EP2 mask 01;1;0
-3;-1;WITCHER_ANY;;;Toussaint horse blinders 4;1;0
-4;-1;GWENT;;;gwint_card_francesca_platinium;1;0
-5;-1;GOG2;;;Glyph yrden greater;1;0
-6;1;WITCHER_NG_STEEL_SWORD;steel_sword;steel_sword_reason;Dol Blathanna longsword;0;0
-7;2;WITCHER_NG_SILVER_SWORD;silver_sword;silver_sword_reason;White Widow of Dol Blathanna;0;0
-8;3;WITCHER_NG_ARMOR;armor;armor_reason;Dol Blathanna Armor;0;0
-9;5;WITCHER_NG_TROUSERS;trousers;trousers_reason;Dol Blathanna Pants;0;0
-10;6;WITCHER_NG_BOOTS;boots;boots_reason;Dol Blathanna Boots;0;0
-11;4;WITCHER_NG_GLOVES;gloves;gloves_reason;Dol Blathanna Gloves;0;0
-12;7;WITCHER_ROACH;roach_gwent_card;roach_gwent_card_reason;gwint_card_roach;0;0
-13;10;WITCHER_FIRE_HORSE_SADDLEBAGS_TWITCH;item_name_w3r_fire_horsebags;item_desc_w3r_fire_bag;Fire Horse Saddlebags;0;0
-14;11;WITCHER_FIRE_HORSE_BLINDERS_TWITCH;item_name_w3r_fire_blindings;item_desc_w3r_fire_blinder;Fire Horse Blinders;0;0
-15;12;WITCHER_FIRE_HORSE_SADDLE_TWITCH;item_name_w3r_fire_saddle;item_desc_w3r_fire_saddle;Fire Horse Saddle;0;0
-16;13;WITCHER_FIRE_HORSE_SADDLEBAGS_BILIBILI;item_name_w3r_fire_horsebags;item_desc_w3r_fire_bag;Fire Horse Saddlebags;0;0
-17;14;WITCHER_FIRE_HORSE_BLINDERS_BILIBILI;item_name_w3r_fire_blindings;item_desc_w3r_fire_blinder;Fire Horse Blinders;0;0
-18;15;WITCHER_FIRE_HORSE_SADDLE_BILIBILI;item_name_w3r_fire_saddle;item_desc_w3r_fire_saddle;Fire Horse Saddle;0;0
-19;16;WITCHER_WOLF_BANDANA;item_name_w3r_wolf_mask;item_desc_w3r_wolf_mask;Wolf Bandana;0;0
-20;17;WITCHER_RABBLE_ROUSER_HAIR;haircut_w3r_troublemaker_01;haircut_w3r_troublemaker_01;;1;0
-21;18;WITCHER_SCARLET_CREST_ARMOR;item_name_w3r_fire_armor;item_category_w3r_fire_armor_description;Scarlet Crest Armor;0;0
-22;19;WITCHER_SCARLET_CREST_BOOTS;item_name_w3r_fire_boots;item_category_w3r_fire_boots_description;Scarlet Crest Boots;0;0
-23;20;WITCHER_SCARLET_CREST_GAUNTLETS;item_name_w3r_fire_gloves;item_category_w3r_fire_gloves_description;Scarlet Crest Gauntlets;0;0
-24;21;WITCHER_SCARLET_CREST_TROUSERS;item_name_w3r_fire_pants;item_category_w3r_fire_pants_description;Scarlet Crest Trousers;0;0
-25;-1;WITCHER_STEEL_VIXEN;;;Steel Vixen;0;1
-26;-1;WITCHER_SILVER_VIXEN;;;Silver Vixen;0;1
-27;-1;WITCHER_TIGER_ARMOR;;;White Tiger Armor;0;1
-28;-1;WITCHER_TIGER_BOOTS;;;White Tiger Boots;0;1
-29;-1;WITCHER_TIGER_PANTS;;;White Tiger Pants;0;1
-30;-1;WITCHER_TIGER_GLOVES;;;White Tiger Gloves;0;1
+MapIndex;RequestID;ProductID;TitleKey;ReasonKey;GameItemName;DirectlyGranted;Inherent;Version
+1;-1;GOG;;;Greater mutagen red;1;0;1
+2;-1;WITCHER_3;;;EP2 mask 01;1;0;1
+3;-1;WITCHER_ANY;;;Toussaint horse blinders 4;1;0;1
+4;-1;GWENT;;;gwint_card_francesca_platinium;1;0;1
+5;-1;GOG2;;;Glyph yrden greater;1;0;1
+6;1;NG_STEEL_SWORD;steel_sword;steel_sword_reason;Dol Blathanna longsword;0;0;2
+7;2;NG_SILVER_SWORD;silver_sword;silver_sword_reason;White Widow of Dol Blathanna;0;0;2
+8;3;NG_ARMOR;armor;armor_reason;Dol Blathanna Armor;0;0;2
+9;5;NG_TROUSERS;trousers;trousers_reason;Dol Blathanna Pants;0;0;2
+10;6;NG_BOOTS;boots;boots_reason;Dol Blathanna Boots;0;0;2
+11;4;NG_GLOVES;gloves;gloves_reason;Dol Blathanna Gloves;0;0;2
+12;7;ROACH;roach_gwent_card;roach_gwent_card_reason;gwint_card_roach;0;0;2
+13;10;FIRE_HORSE_SADDLEBAGS_TWITCH;item_name_w3r_fire_horsebags;item_desc_w3r_fire_bag;Fire Horse Saddlebags;0;0;2
+14;11;FIRE_HORSE_BLINDERS_TWITCH;item_name_w3r_fire_blindings;item_desc_w3r_fire_blinder;Fire Horse Blinders;0;0;2
+15;12;FIRE_HORSE_SADDLE_TWITCH;item_name_w3r_fire_saddle;item_desc_w3r_fire_saddle;Fire Horse Saddle;0;0;2
+16;13;FIRE_HORSE_SADDLEBAGS_BILIBILI;item_name_w3r_fire_horsebags;item_desc_w3r_fire_bag;Fire Horse Saddlebags;0;0;2
+17;14;FIRE_HORSE_BLINDERS_BILIBILI;item_name_w3r_fire_blindings;item_desc_w3r_fire_blinder;Fire Horse Blinders;0;0;2
+18;15;FIRE_HORSE_SADDLE_BILIBILI;item_name_w3r_fire_saddle;item_desc_w3r_fire_saddle;Fire Horse Saddle;0;0;2
+19;16;WOLF_BANDANA;item_name_w3r_wolf_mask;item_desc_w3r_wolf_mask;Wolf Bandana;0;0;2
+20;17;RABBLE_ROUSER_HAIR;haircut_w3r_troublemaker_01;haircut_w3r_troublemaker_01;;1;0;1
+21;18;SCARLET_CREST_ARMOR;item_name_w3r_fire_armor;item_category_w3r_fire_armor_description;Scarlet Crest Armor;0;0;2
+22;19;SCARLET_CREST_BOOTS;item_name_w3r_fire_boots;item_category_w3r_fire_boots_description;Scarlet Crest Boots;0;0;2
+23;20;SCARLET_CREST_GAUNTLETS;item_name_w3r_fire_gloves;item_category_w3r_fire_gloves_description;Scarlet Crest Gauntlets;0;0;2
+24;21;SCARLET_CREST_TROUSERS;item_name_w3r_fire_pants;item_category_w3r_fire_pants_description;Scarlet Crest Trousers;0;0;2
+25;-1;STEEL_VIXEN;;;Steel Vixen;0;1;1
+26;-1;SILVER_VIXEN;;;Silver Vixen;0;1;1
+27;-1;TIGER_ARMOR;;;White Tiger Armor;0;1;1
+28;-1;TIGER_BOOTS;;;White Tiger Boots;0;1;1
+29;-1;TIGER_PANTS;;;White Tiger Pants;0;1;1
+30;-1;TIGER_GLOVES;;;White Tiger Gloves;0;1;1
