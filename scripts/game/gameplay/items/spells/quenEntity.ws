@@ -93,9 +93,9 @@ statemachine class W3QuenEntity extends W3SignEntity
 		shieldHealth = CalculateAttributeValue(owner.GetSkillAttributeValue(skillEnum, 'shield_health', false, true));
 		initialShieldHealth = shieldHealth;
 		
-		if ( owner.CanUseSkill(S_Magic_s14))
+		if ( owner.CanUseSkill(S_Magic_s13))
 		{			
-			dischargePercent = CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_s14, 'discharge_percent', false, true)) * owner.GetSkillLevel(S_Magic_s14);
+			dischargePercent = CalculateAttributeValue(owner.GetSkillAttributeValue(S_Magic_s13, 'discharge_percent', false, true)) * owner.GetSkillLevel(S_Magic_s13);
 			if( owner.GetPlayer().IsSetBonusActive( EISB_Bear_2 ) )
 			{
 				theGame.GetDefinitionsManager().GetAbilityAttributeValue( GetSetBonusAbility( EISB_Bear_2 ), 'quen_dmg_boost', min, max );
@@ -209,7 +209,7 @@ statemachine class W3QuenEntity extends W3SignEntity
 				PlayEffect( effects[1].castEffect );
 			}
 			
-			if( witcherOwner && witcherOwner.CanUseSkill( S_Magic_s14) && witcherOwner.IsSetBonusActive( EISB_Bear_2 ) )
+			if( witcherOwner && witcherOwner.CanUseSkill( S_Magic_s13) && witcherOwner.IsSetBonusActive( EISB_Bear_2 ) )
 			{
 				PlayEffect( 'default_fx_bear_abl2' );
 				witcherOwner.PlayEffect( 'quen_lasting_shield_bear_abl2' );
@@ -421,7 +421,7 @@ state ShieldActive in W3QuenEntity extends Active
 		
 		caster.GetActor().PlayEffect(GetLastingFxName());
 		
-		if( witcher && witcher.IsSetBonusActive( EISB_Bear_2 ) && witcher.CanUseSkill( S_Magic_s14 ) )
+		if( witcher && witcher.IsSetBonusActive( EISB_Bear_2 ) && witcher.CanUseSkill( S_Magic_s13 ) )
 		{
 			witcher.PlayEffect( 'quen_force_discharge_bear_abl2_armour' );
 		}
@@ -598,7 +598,7 @@ state ShieldActive in W3QuenEntity extends Active
 				
 			
 			
-			if (!damageData.IsDoTDamage() && casterActor == thePlayer && damageData.attacker != casterActor && ( GetWitcherPlayer().CanUseSkill(S_Magic_s14) || parent.wasSignSupercharged ) && parent.dischargePercent > 0 && !damageData.IsActionRanged() && VecDistanceSquared( casterActor.GetWorldPosition(), damageData.attacker.GetWorldPosition() ) <= 13 ) 
+			if (!damageData.IsDoTDamage() && casterActor == thePlayer && damageData.attacker != casterActor && ( GetWitcherPlayer().CanUseSkill(S_Magic_s13) || parent.wasSignSupercharged ) && parent.dischargePercent > 0 && !damageData.IsActionRanged() && VecDistanceSquared( casterActor.GetWorldPosition(), damageData.attacker.GetWorldPosition() ) <= 13 ) 
 			
 			{
 				action = new W3DamageAction in theGame.damageMgr;
@@ -858,7 +858,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 		
 				
 				
-				if( witcher && ( witcher.CanUseSkill( S_Magic_s14 ) || parent.wasSignSupercharged ) && witcher.IsSetBonusActive( EISB_Bear_2 ) )
+				if( witcher && ( witcher.CanUseSkill( S_Magic_s13 ) || parent.wasSignSupercharged ) && witcher.IsSetBonusActive( EISB_Bear_2 ) )
 				
 				{
 					parent.PlayHitEffect( 'quen_rebound_sphere_bear_abl2', rot );
@@ -1001,7 +1001,7 @@ state QuenChanneled in W3QuenEntity extends Channeling
 			
 			
 			
-			if( casterActor == thePlayer && parent.dischargePercent > 0 && !damageData.IsActionRanged() && IsRequiredAttitudeBetween( thePlayer, damageData.attacker, true) && ( GetWitcherPlayer().CanUseSkill(S_Magic_s14) || parent.wasSignSupercharged ) && VecDistanceSquared( casterActor.GetWorldPosition(), damageData.attacker.GetWorldPosition() ) <= 13 ) 
+			if( casterActor == thePlayer && parent.dischargePercent > 0 && !damageData.IsActionRanged() && IsRequiredAttitudeBetween( thePlayer, damageData.attacker, true) && ( GetWitcherPlayer().CanUseSkill(S_Magic_s13) || parent.wasSignSupercharged ) && VecDistanceSquared( casterActor.GetWorldPosition(), damageData.attacker.GetWorldPosition() ) <= 13 ) 
 			
 			{
 				action = new W3DamageAction in theGame.damageMgr;

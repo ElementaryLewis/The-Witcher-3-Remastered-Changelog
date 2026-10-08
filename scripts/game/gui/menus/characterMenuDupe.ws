@@ -100,6 +100,8 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 		UpdateData(true);
 		
 		m_fxSetTooltipState.InvokeSelfTwoArgs( FlashArgBool( thePlayer.upscaledTooltipState ), FlashArgBool( true ) );
+
+		TryRemoveCharDevTutorial(); 
 	}
 
 	protected function BlockClosing( locked : bool )
@@ -2293,7 +2295,9 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt)  + "<br>" + GetLocStringByKeyExt("attribute_name_staminaregen") + ": +" + NoTrailZeros((arg_stamina * 100) * skillLevel) + "/" + GetLocStringByKeyExt("per_second");
 				break;
 			case S_Magic_s13:
-				baseString = GetLocStringByKeyExtWithParams(locKey);
+				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s13, 'discharge_percent', false, false)) * skillLevel;
+				argsInt.PushBack(RoundMath(arg*100));
+				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				break;
 			case S_Magic_s14:
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Magic_s14, 'discharge_percent', false, false)) * skillLevel;
@@ -2675,8 +2679,8 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_24, 'spell_power', false, true) * skillLevel;
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_24, 'staminaRegen', false, true) * skillLevel;
-				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
-				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				argsFloat.PushBack( ability.valueMultiplicative*100 );
+				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt, argsFloat);
 				break;
 			case S_Perk_25:
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Perk_25, 'vitality', false, true) * skillLevel;
@@ -3564,6 +3568,15 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 		
 		
 		m_flashValueStorage.SetFlashInt("on.skill.selected", id);
+	}
+
+	public function TryRemoveCharDevTutorial()
+	{
+		if(theGame.GetTutorialSystem().IsTutorialQueued('TutorialCharDevOpen'))
+		{
+			theGame.GetTutorialSystem().HideTutorialHint('TutorialCharDevOpen');
+			theGame.GetTutorialSystem().MarkMessageAsSeen('TutorialCharDevOpen');
+		}
 	}
 }
 

@@ -1800,7 +1800,7 @@ class CR4MapMenu extends CR4MenuBase
 		LogChannel('WORLDMAP', "OnSwitchToInterior" );
 	}
 
-	event  OnUserMapPinSet( posX : float, posY : float, type : int, fromSelectionPanel : bool )
+	event  OnUserMapPinSet( posX : float, posY : float, type : int, fromSelectionPanel : bool, insideBounds : bool )
 	{
 		var manager	: CCommonMapManager = theGame.GetCommonMapManager();
 		var worldPath : string;
@@ -1832,7 +1832,7 @@ class CR4MapMenu extends CR4MenuBase
 		{
 			realType += 1;
 		}
-		if ( !manager.ToggleUserMapPin( realShownArea, position, realType, fromSelectionPanel, idToAdd, idToRemove ) )
+		if ( !manager.ToggleUserMapPin( realShownArea, position, realType, fromSelectionPanel, insideBounds, idToAdd, idToRemove ) )
 		{
 			showNotification( GetLocStringByKeyExt("panel_hud_message_actionnotallowed") );
 		}

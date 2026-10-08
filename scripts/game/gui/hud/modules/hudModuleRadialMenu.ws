@@ -40,6 +40,8 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 	private var m_swappedAcceptCancel			: bool;
 	private var m_tutorialsHidden				: bool;
 	private var _currentSelection				: string; 
+
+	private var m_desaturatedFields				: array<string>;
 	
 	
 	default m_shown = false;
@@ -867,6 +869,12 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 		}
 		
 		category = inv.GetItemCategory(boltItemId);
+
+		if(m_desaturatedFields.Contains("Slot1") && category == 'petard')
+			return false;
+		
+		
+		
 		
 		if(category == 'petard')
 			GetWitcherPlayer().SelectQuickslotItem( EES_Petard1 );
@@ -1326,6 +1334,17 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 		
 		
 		
+
+		if(value)
+		{
+			if(!m_desaturatedFields.Contains(fieldName))
+				m_desaturatedFields.PushBack(fieldName);
+		}
+		else
+		{
+			while(m_desaturatedFields.Contains(fieldName))
+				m_desaturatedFields.Remove(fieldName);
+		}
 		
 		
 		m_fxSetDesaturatedSFF.InvokeSelfTwoArgs(FlashArgBool(value),FlashArgString(fieldName));

@@ -214,7 +214,6 @@ class CR4IngameMenu extends CR4MenuBase
 	private var m_modLoadingStateMachine: CR4ModMenuModLoadStates;
 	private var m_modVerificationStateMachine : CR4ModVerificationStates;
 	private var cachedVerifData 			:	W3ModVerificationPopupData;
-	private var cachedMarketingData	: W3MarketingPopupData;
 	private var m_popupIndex : int;
 	private var m_lastRequestedSaveInfo : SSavegameInfo;
 	private var m_lastAttemptedSaveId	: int;
@@ -1116,25 +1115,6 @@ class CR4IngameMenu extends CR4MenuBase
 		}
 	}
 	
-	public function StartShowCustomDialogMarketing( checkedConsentChoices : int )
-	{
-		var marketData	: W3MarketingPopupData;
-		var l_flashObject : CScriptedFlashObject;
-		var GFxButtonsListData : CScriptedFlashArray;
-
-		marketData = new W3MarketingPopupData in theGame;
-		marketData.Init( checkedConsentChoices );
-		
-		l_flashObject = marketData.GetGFxData( m_flashValueStorage );
-		GFxButtonsListData = marketData.GetGFxButtons( m_flashValueStorage );
-		l_flashObject.SetMemberFlashArray( "ButtonsList", GFxButtonsListData );
-
-		cachedMarketingData = marketData;
-		m_flashValueStorage.SetFlashObject( "ingamemenu.MarketingWindow", l_flashObject );
-
-		theGame.GetMarketingProxy().OnConsentFlowCompleted();
-	}
-	
 	
 	
 	
@@ -1205,12 +1185,12 @@ class CR4IngameMenu extends CR4MenuBase
 		var settingsArray : CScriptedFlashArray;
 		var setting : CScriptedFlashObject;
 
-		var telemetryConsent : bool = mInGameConfigWrapper.GetVarValue('Gameplay', 'TelemetryConsent');
+		var telemetryConsent : bool = mInGameConfigWrapper.GetVarValue('Gameplay', 'GameTelemetryConsent');
 
 		settingsArray = m_flashValueStorage.CreateTempFlashArray();
 
 		setting = m_flashValueStorage.CreateTempFlashObject();
-			setting.SetMemberFlashUInt( "tag", NameToFlashUInt('TelemetryConsent') );
+			setting.SetMemberFlashUInt( "tag", NameToFlashUInt('GameTelemetryConsent') );
 			setting.SetMemberFlashString( "current", telemetryConsent );
 		settingsArray.PushBackFlashObject( setting );
 
@@ -1265,9 +1245,6 @@ class CR4IngameMenu extends CR4MenuBase
 				prepareBigMessageSwitchPopUp();
 			}
 		}
-
-		
-		theGame.GetMarketingProxy().OnMainMenuLanding();
 		
 		if(theGame.GetModHandlerSystem() && theGame.GetModHandlerSystem().HasFailedMods() )
 		{
@@ -1394,8 +1371,6 @@ class CR4IngameMenu extends CR4MenuBase
 		l_flashObject.SetMemberFlashString("TextLoginInfo", loginInfo);
 			
 		m_flashValueStorage.SetFlashObject( "ingamemenu.ReminderWindow", l_flashObject );
-
-		theGame.GetMarketingProxy().OnConsentFlowCompleted();
 	}
 
 	public function HideErrorWindow()
@@ -1916,7 +1891,7 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		
 		
-		if( optionName == 'TelemetryConsent' )
+		if( optionName == 'GameTelemetryConsent' )
 		{
 			m_flashValueStorage.SetFlashBool( "options.show_spinner", true );
 			
@@ -1925,7 +1900,7 @@ class CR4IngameMenu extends CR4MenuBase
 			return true;
 		}
 		
-		if( optionName == 'MarketingConsent' )
+		if( optionName == 'MarketingTelemetryConsent' )
 		{
 			value = ( optionValue == "true" );
 			theTelemetry.MarketingConsentChanged( value );
@@ -2604,6 +2579,7 @@ class CR4IngameMenu extends CR4MenuBase
 		updateRTAOOptionChanged();
 		updateRTROptionChanged();
 		updatePTHairOptionChanged();
+		updateFGorLLOptionChangedCommon();
 	}
 
 	
@@ -2649,9 +2625,17 @@ class CR4IngameMenu extends CR4MenuBase
 		var dataObject : CScriptedFlashObject;
 		var dataArray : CScriptedFlashArray;
 
-		if ( !theGame.GetRTSupported() ) return; 
-
 		dataArray = m_flashValueStorage.CreateTempFlashArray();
+
+		dataObject = m_flashValueStorage.CreateTempFlashObject();
+		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('EnableRT') );
+		dataObject.SetMemberFlashBool( "disabled", !theGame.GetRTSupported() );
+		if (!theGame.GetRTSupported())
+		{
+			
+			dataObject.SetMemberFlashString( "current", "0" );
+		}
+		dataArray.PushBackFlashObject(dataObject);
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
 		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('PTEnable') );
@@ -2768,6 +2752,7 @@ class CR4IngameMenu extends CR4MenuBase
 		}
 		else
 		{
+			dataObject.SetMemberFlashString( "current", theGame.GetDynamicResolutionScalingEnabled() ? "1" : "0" );
 			dataObject.SetMemberFlashBool( "disabled", false );
 		}
 
@@ -3013,7 +2998,9 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		var reflexLLEnabled : bool;
 		var dlssgEnabled : bool;
+		var dlssgSupported : bool;
 		var dlssgEnabledDynamic : bool;
+		var DLSSGMaxNumFrames : int;
 
 		
 		var fsrFrameGenEnabled : bool;
@@ -3028,7 +3015,9 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		reflexLLEnabled = theGame.GetReflexEnabled();
 		dlssgEnabled = theGame.GetDLSSGEnabled();
+		dlssgSupported = theGame.GetDLSSGSupported();
 		dlssgEnabledDynamic = theGame.GetDLSSGEnabledDynamic();
+		DLSSGMaxNumFrames = theGame.GetDLSSGMaxNumFrames();
 		fsrFrameGenEnabled = theGame.GetFSRFramegenEnabled();
 		amdAntiLagEnabled = theGame.GetAMDAntiLagEnabled();
 		xeFGEnabled = theGame.GetXESSFGEnabled();
@@ -3099,15 +3088,14 @@ class CR4IngameMenu extends CR4MenuBase
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
 		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_DLSSG') );
-		if ( !dlssgEnabled )
-		{
-			dataObject.SetMemberFlashString( "current", "0" );
-		}
-		dataObject.SetMemberFlashBool( "disabled", vendorName == "intel" || vendorName == "amd" || !theGame.GetDLSSGSupported()  );
+		if ( mInGameConfigWrapper.GetVarValue('Graphics', 'Virtual_DLSSG') == "-1" ) dataObject.SetMemberFlashString( "current", dlssgEnabled ? "1" : "0" );
+		if ( !dlssgSupported ) dataObject.SetMemberFlashString( "current", "0" );
+		dataObject.SetMemberFlashBool( "disabled", vendorName == "intel" || vendorName == "amd" || !dlssgSupported  );
 		dataArray.PushBackFlashObject(dataObject);
 
 		dataObject = m_flashValueStorage.CreateTempFlashObject();
 		dataObject.SetMemberFlashUInt( "tag", NameToFlashUInt('Virtual_DLSSG_Count') );
+		if ( mInGameConfigWrapper.GetVarValue('Graphics', 'Virtual_DLSSG_Count') == "-1" ) dataObject.SetMemberFlashString( "current", IntToString( DLSSGMaxNumFrames - 1 ) );
 		dataObject.SetMemberFlashBool( "disabled", !dlssgEnabled || dlssgEnabledDynamic );
 		dataArray.PushBackFlashObject(dataObject);
 
@@ -4968,17 +4956,12 @@ class CR4IngameMenu extends CR4MenuBase
 	
 	event  OnSetCheckboxesClicked(index:int, value : bool)
 	{		
-		if(cachedMarketingData)
-			cachedMarketingData.OnCheckboxValueChanged(index, value);
+		
 	}
 	
 	event  OnInputHandled(NavCode:string, KeyCode:int, ActionId:int)
 	{
-		if (cachedMarketingData && cachedMarketingData.valid)
-		{
-			cachedMarketingData.OnUserFeedback(NavCode);
-		}
-		else if(cachedVerifData && cachedVerifData.valid)
+		if(cachedVerifData && cachedVerifData.valid)
 		{
 			cachedVerifData.OnUserFeedback(NavCode);
 		}
@@ -5011,11 +4994,6 @@ class CR4IngameMenu extends CR4MenuBase
 	}
 	
 	
-	
-	public function CallMarketingPopup( optional checkedConsentChoices : int ) : void
-	{
-		StartShowCustomDialogMarketing( checkedConsentChoices );
-	}
 	
 	
 	

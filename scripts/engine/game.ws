@@ -294,12 +294,14 @@ import class CGame extends CObject
 	import final function GetDLSSGEnabledDynamic() : bool;
 	import final function GetDLSSGSupported() : bool;
 	import final function GetDLSSGVSyncSupported() : bool;
+	import final function GetDLSSGMaxNumFrames() : int;
 	import final function GetReflexEnabled() : bool;
 	import final function GetReflexSupported() : bool;
 	import final function GetDLSSRREnabled() : bool;
 	import final function GetDLSSRRSupported() : bool;
 	import final function GetHardwareLinearSweptSpheresSupport() : bool;
 	import final function GetMotionBlurEnabled() : bool;
+	import final function GetDynamicResolutionScalingEnabled() : bool;
 	import final function AreModsEnabled() : bool;
 
 	import final function GetIsPs5Pro() : bool;

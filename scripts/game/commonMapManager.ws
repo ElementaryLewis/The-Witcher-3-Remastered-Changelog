@@ -139,7 +139,7 @@ import abstract class CCommonMapManager extends IGameSystem
 	import final function EnableMapPath( tag : name, enable : bool, lineWidth : float, segmentLength : float, color : Color );
 	import final function EnableDynamicMappin( tag : name, enable : bool, type : name, optional useAgents : bool, optional showAlways : bool );
 	import final function InvalidateStaticMapPin( entityName : name );
-	import final function ToggleUserMapPin( area : name, position : Vector, type : int, fromSelectionPanel : bool, out indexToAdd : int, out indexToRemove : int ) : int;
+	import final function ToggleUserMapPin( area : name, position : Vector, type : int, fromSelectionPanel : bool, insideBounds : bool, out indexToAdd : int, out indexToRemove : int ) : int;
 	import final function GetUserMapPinLimits( out waypointPinLimit : int, out otherPinLimit : int ) : int;
 	import final function GetUserMapPinCount() : int;
 	import final function GetUserMapPinByIndex( index : int, out id : int, out area : name, out mapPinX : float, out mapPinY : float, out type : int ) : bool;

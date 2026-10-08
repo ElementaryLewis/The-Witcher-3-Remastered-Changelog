@@ -229,8 +229,6 @@ import class CR4Game extends CCommonGame
 
 	import final function GetCityLightManager() : CCityLightManager;
 
-	import final function GetMarketingProxy() : CR4MarketingScriptProxy;
-
 	import final function GetGuiManager() : CR4GuiManager;
 
 	import final function GetGlobalEventsScriptsDispatcher() : CR4GlobalEventsScriptsDispatcher;

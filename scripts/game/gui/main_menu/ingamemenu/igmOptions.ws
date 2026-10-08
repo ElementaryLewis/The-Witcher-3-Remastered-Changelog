@@ -12,6 +12,7 @@ enum IgmOptionsAmbientOcclusion
 
 enum IgmOptionsAntiAliasing
 {
+	IGMOPT_AA_FSR = 2,
 	IGMOPT_AA_XESS = 3,
 	IGMOPT_AA_DLSS = 4
 };
@@ -773,6 +774,7 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 	var isDLSSGEnabledDynamic : bool;
 	var isDLSSGSupported	  : bool;
 	var isDLSSGVSyncSupported : bool;
+	var DLSSGMaxNumFrames	  : int;
 	var isReflexSupported	  : bool;
 	var isReflexEnabled	 	  : bool;
 	var isDLSSRREnabled	  	  : bool;
@@ -868,6 +870,7 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 	isDLSSGEnabledDynamic = theGame.GetDLSSGEnabledDynamic();
 	isDLSSGSupported = theGame.GetDLSSGSupported();
 	isDLSSGVSyncSupported = theGame.GetDLSSGVSyncSupported();
+	DLSSGMaxNumFrames = theGame.GetDLSSGMaxNumFrames();
 	isReflexSupported = theGame.GetReflexSupported();
 	isReflexEnabled = theGame.GetReflexEnabled();
 	isDLSSRREnabled = theGame.GetDLSSRREnabled();
@@ -1021,15 +1024,27 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 			}
 
 			startingValue = optionValue;
-			if (disableIfDLSSGAndSet1 && isDLSSGEnabled) optionValue = "1";
-			if (enableIfRTSupported && !isRTSupported) optionValue = "0"; 
-			if (enableIfHDRSupported && !isHDRSupported) optionValue = "0"; 
-			if (enableIfLinearSweptSpheresSupported && !isLinearSweptSpheresSupported) optionValue = "0"; 
-			if (enableIfPTHair && !IngameMenu_IsPTHairAvailable()) optionValue = "0"; 
-			if (optionName == 'Virtual_HairWorksLevel' && disableIfIntelGPU && isIntelGPU) optionValue = "0"; 
-			if (optionName == 'Virtual_Reflex' && !isReflexSupported) optionValue = "0"; 
-			if (optionName == 'Virtual_FSRFramegen' && !isFSRFramegenSupported) optionValue = "0"; 
-			if (optionName == 'AMDAntiLag' && !isAMDAntiLagSupported) optionValue = "0"; 
+
+			
+			
+			if (optionName == 'EnableDLSSRR' && !isDLSSRRSupported) optionValue = optionValue = "0";
+			if (enableIfRTSupported && !isRTSupported) optionValue = optionValue = "0";
+			if (enableIfHDRSupported && !isHDRSupported) optionValue = optionValue = "0";
+			if (optionName == 'PTHairQualityMode' && ( !IngameMenu_IsPTHairAvailable() || !isLinearSweptSpheresSupported )) optionValue = "0" ; 
+			if (optionName == 'EnableRT' && !isRTSupported) optionValue = optionValue = "0";
+			if (optionName == 'Virtual_HairWorksLevel' && isIntelGPU) optionValue = "0";
+			if (optionName == 'Virtual_Reflex' && !isReflexSupported) optionValue = "0";
+			if (optionName == 'Virtual_FSRFramegen' && !isFSRFramegenSupported) optionValue = "0";
+			
+			if (optionName == 'Virtual_DLSSG' && optionValue == "-1" ) optionValue = isDLSSGEnabled ? "1" : "0";
+			if (optionName == 'Virtual_DLSSG' && !isDLSSGSupported ) optionValue = "0";
+			
+			if (optionName == 'Virtual_DLSSG_Count' && optionValue == "-1") optionValue = IntToString( DLSSGMaxNumFrames - 1 );
+			if (optionName == 'AMDAntiLag' && !isAMDAntiLagSupported) optionValue = "0";
+
+			
+			if (optionName == 'Virtual_Reflex' && isDLSSGEnabled) optionValue = "1";
+
 
 			optionObject.SetMemberFlashUInt( "type", IngameMenu_GetOptionTypeFromString(optionDisplayType) );
 			optionObject.SetMemberFlashUInt( "tag", NameToFlashUInt(optionName) );

@@ -1392,6 +1392,18 @@ import class CR4TutorialSystem extends IGameSystem
 		queuedTutorials.Clear();
 		uiHandler.ClearAllListeners();
 	}
+
+	public final function IsTutorialQueued(tutorialScriptTag : name):bool
+	{
+		var i : int;
+
+		for(i = 0; i < queuedTutorials.Size(); i+=1)
+		{
+			if(queuedTutorials[i].tutorialScriptTag == tutorialScriptTag)
+				return true;
+		}
+		return false;
+	}
 	
 	
 	

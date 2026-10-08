@@ -2583,20 +2583,26 @@ quest function AddItemsToRewardChest()
 			LogQuest( "Quest function <<AddItemsToRewardChest>>: item name <<" + eligibleRewards[i].itemName + ">> is not a valid item name, skipping!");
 			continue;
 		}
-		if(FactsQuerySum(eligibleRewards[i].grantedFactId) > 0)
+		if(eligibleRewards[i].directlyGranted)
 		{
-			LogQuest( "Quest function <<AddItemQuest>>: <<" + eligibleRewards[i].itemName + ">> is granted directly only, skipping!");
+			LogQuest( "Quest function <<AddItemQuest>>: <<" + eligibleRewards[i].itemName + ">> is granted directly, skipping!");
+			continue;
+		}
+		
+		if(FactsQueryLatestValue(eligibleRewards[i].grantedFactId) >= eligibleRewards[i].version)
+		{
+			LogQuest( "Quest function <<AddItemQuest>>: <<" + eligibleRewards[i].itemName + ">> is already granted, skipping!");
 			continue;
 		}
 
 		addedIds.Clear();
-		addedIds = chestInventory.AddAnItem(eligibleRewards[i].itemName, 1, true);
+		addedIds = chestInventory.AddAnItem(eligibleRewards[i].itemName, 1, true, false, false, true);
 		
 		
-		if (addedIds.Size() != 0)
+		if (addedIds.Size() != 0 && addedIds[0] != GetInvalidUniqueId())
 		{
 			
-			FactsSet(eligibleRewards[i].grantedFactId, 1);
+			FactsSet(eligibleRewards[i].grantedFactId, eligibleRewards[i].version);
 		}
 	}
 

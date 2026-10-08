@@ -46,6 +46,12 @@ enum ELadderState
 	ELS_Slide
 }
 
+enum EBlendMode
+{
+	EBM_In,
+	EBM_Out
+}
+
 
 
 class CExplorationStateInteraction extends CExplorationStateAbstract
@@ -82,10 +88,19 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 	private 			var ladderCloseJumpDistance : float; 		default ladderCloseJumpDistance = 1.f;
 	private 			var ladderLongJumpDistance 	: float;		default ladderLongJumpDistance = 3.f;
 	private 			var ladderJumpDistance		: float;		default ladderJumpDistance = 4.f;
-	private 			var ladderSlideOffset		: float;		
-	private 			var ladderSlideBlendOutTime : float; 		default ladderSlideBlendOutTime = 0.2f;
-	private 			var ladderCurrentSlideBlendTime : float;	default ladderCurrentSlideBlendTime = 0.f;
 
+	
+	private 			var ladderBlendHandIK		: bool;			default ladderBlendHandIK = false;	
+	private 			var ladderIKBlendDuration 	: float; 		default ladderIKBlendDuration = 0.f;
+	private 			var ladderIKCurrentBlendTime: float;		default ladderIKCurrentBlendTime = 0.f;
+	private 			var ladderIKBlendMode		: EBlendMode;
+	private 			var	boneRightHand			: name;			default	boneRightHand			= 'r_hand';
+	private				var	boneLeftHand			: name;			default	boneLeftHand			= 'l_hand';
+	private 			var	boneIndexRightHand		: int;
+	private 			var	boneIndexLeftHand		: int;
+	private 			var offsetLeft				: float;
+	private 			var offsetRight 			: float;
+	
 	private 			var ladderRemasterFeaturesEnabled : bool;
 	private				var canInterruptGetOff		: bool;			default canInterruptGetOff 		= false;
 	private 			var ladderAbove				: bool;
@@ -94,10 +109,6 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 	private 			var ladderPrevState			: ELadderState;
 	private 			var remasterAnimsUsed		: bool;
 	private 			var traverser				: CScriptedExplorationTraverser;
-	private 			var boneLeftHand 			: name; 		default boneLeftHand 			= 'l_hand';
-	private 			var boneRightHand 			: name; 		default boneRightHand 			= 'r_hand';
-	private 			var boneLeftFoot 			: name; 		default boneLeftFoot 			= 'l_foot';
-	private 			var boneRightFoot 			: name; 		default boneRightFoot 			= 'r_foot';
 
 	
 	private				var	behAnimPlayerControl	: name;			default	behAnimPlayerControl	= 'PlayerCanTakeControl';
@@ -114,6 +125,8 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 	private 			var behGetOffMotion			: name;			default behGetOffMotion			= 'GetOffMotion';
 	private 			var behJumpInitialRot 		: name;			default behJumpInitialRot		= 'InitialRotation';
 	private 			var behSlideAdjustment		: name; 		default behSlideAdjustment		= 'AdjustSlide';
+	private 			var behEnableHandIK			: name;			default behEnableHandIK			= 'BlendHandIK';
+	private 			var behDisableHandIK		: name; 		default behDisableHandIK		= 'DisableHandIK';
 
 	
 	private 			var behAngleOfApproach		: name;			default behAngleOfApproach		= 'ladderStartAngle';
@@ -166,6 +179,9 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 		m_StateTypeE		= EST_Locked;
 		m_InputContextE		= EGCI_JumpClimb; 
 		m_HolsterIsFastB	= true;
+
+		boneIndexRightHand	= m_ExplorationO.m_OwnerE.GetBoneIndex( boneRightHand );
+		boneIndexLeftHand	= m_ExplorationO.m_OwnerE.GetBoneIndex( boneLeftHand );
 
 		
 		
@@ -504,6 +520,8 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behGetOffMotion, 'OnAnimEvent_SubstateManager' );
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behJumpInitialRot, 'OnAnimEvent_SubstateManager');
 		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behSlideAdjustment, 'OnAnimEvent_SubstateManager');
+		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behEnableHandIK, 'OnAnimEvent_SubstateManager');
+		m_ExplorationO.m_OwnerE.AddAnimEventCallback( behDisableHandIK, 'OnAnimEvent_SubstateManager');
 	}
 	
 	
@@ -786,10 +804,25 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 
 	private function GetOffUpdate( _Dt : float )
 	{
+		var resLeft, resRight : float;
+		ladderIKCurrentBlendTime += _Dt;
+
 		
+		if( ladderBlendHandIK )
+		{
+			if( ladderIKBlendMode == EBM_In )
+				CalcIKOffset(true, 0.31);
+
+			resLeft = BlendIK( _Dt, offsetLeft ,ladderIKBlendMode );
+			resRight = BlendIK( _Dt, offsetRight ,ladderIKBlendMode );
+			m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( Vector( -resLeft, resLeft * 0.4, 0 ), Vector( resRight, resRight * 0.4, 0 ) );
+		}
 		if( ladderPrevState == ELS_Slide)
 		{
-			BlendSlideIK( _Dt );
+			resLeft = BlendIK( _Dt, offsetLeft,EBM_Out );
+			resRight = BlendIK( _Dt, offsetRight,EBM_Out );
+			m_ExplorationO.m_OwnerMAC.SetFeetIKOffsets( Vector( -resLeft, 0, 0 ), Vector( resRight, 0, 0 ) );
+			m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( Vector( -resLeft, -resLeft, 0 ), Vector( resRight, -resRight, 0 ) );
 		}
 	}
 
@@ -843,43 +876,103 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 			thePlayer.SetSprintToggle( false );
 		}
 		
-		
-		if(m_ExplorationO.m_SharedDataO.m_ladderInProximity)
-		{
-			m_ExplorationO.m_SharedDataO.m_ladderInProximity.CalcBoundingBox( ladderBbox );
-			ladderWidth = MaxF( ladderBbox.Max.X - ladderBbox.Min.X, ladderBbox.Max.Y - ladderBbox.Min.Y );
-			ladderSlideOffset = ladderWidth / 2 - 0.31f; 
-		}
-		else
-		{
-			ladderSlideOffset = 0;
-		}
+		CalcIKOffset(true, 0.31f); 
 		m_ExplorationO.m_OwnerMAC.SetEnabledFeetOffsetIK( true );
-		m_ExplorationO.m_OwnerMAC.SetFeetIKOffsets( Vector( -ladderSlideOffset, 0, 0 ), Vector( ladderSlideOffset, 0, 0 ) );
+		m_ExplorationO.m_OwnerMAC.SetFeetIKOffsets( Vector( -offsetLeft, 0, 0 ), Vector( offsetRight, 0, 0 ) );
 		m_ExplorationO.m_OwnerMAC.SetEnabledHandsIK( true );
-		m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( Vector( -ladderSlideOffset, -ladderSlideOffset, 0 ), Vector( ladderSlideOffset, -ladderSlideOffset, 0 ) );
+		m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( Vector( -offsetLeft, -offsetLeft, 0 ), Vector( offsetRight, -offsetRight, 0 ) );
 		
 		ChangeLadderState( ELS_Slide, prevState );
 	}
 
-	private function BlendSlideIK( _Dt : float )
+	private function CalcIKOffset( optional estimated : bool, optional correction : float ) 
 	{
-		var blendOffset : float;
-		var weight 		: float;
+		var ladderWidth : float;
+		var ladderBbox : Box;
+		var ladderEntity : W3LadderInteraction;
+		var ladderExpComp : CExplorationComponent;
 
-		ladderCurrentSlideBlendTime += _Dt;
+		var leftHand : Vector;
+		var rightHand : Vector;
 
-		weight = 1 - ( ladderCurrentSlideBlendTime / ladderSlideBlendOutTime );
-		if( weight > 0 )
+		var worldToLoc : Matrix;
+
+		ladderEntity = m_ExplorationO.m_SharedDataO.m_ladderInProximity;
+		ladderExpComp = (CExplorationComponent)ladderEntity.GetComponentByClassName( 'CExplorationComponent' );
+		
+		if( ladderEntity && ladderExpComp)
 		{
-			blendOffset = weight * ladderSlideOffset;
-			m_ExplorationO.m_OwnerMAC.SetFeetIKOffsets( Vector( -blendOffset, 0, 0 ), Vector( blendOffset, 0, 0 ) );
-			m_ExplorationO.m_OwnerMAC.SetHandsIKOffsets( Vector( -blendOffset, -blendOffset, 0 ), Vector( blendOffset, -blendOffset, 0 ) );
+			ladderEntity.CalcBoundingBox( ladderBbox );
+			ladderWidth = MaxF( ladderBbox.Max.X - ladderBbox.Min.X, ladderBbox.Max.Y - ladderBbox.Min.Y );
+
+			if( estimated )
+			{
+				offsetLeft = ladderWidth / 2 - correction; 
+				offsetRight = ladderWidth / 2 - correction;
+				return;
+			}
+
+			rightHand = m_ExplorationO.m_OwnerE.GetBoneWorldPositionByIndex( boneIndexRightHand );
+			leftHand = m_ExplorationO.m_OwnerE.GetBoneWorldPositionByIndex( boneIndexLeftHand );
+
+			worldToLoc = MatrixGetInverted( ladderExpComp.GetLocalToWorld() );
+
+			thePlayer.GetVisualDebug().AddSphere('lhand', 0.05f, rightHand, true, Color(255,0,0), -1.f);
+			thePlayer.GetVisualDebug().AddSphere('rhand', 0.05f, leftHand, true, Color(255,0,0), -1.f);
+
+			rightHand = VecTransform(worldToLoc, rightHand);
+			leftHand = VecTransform(worldToLoc, leftHand);
+
+			
+			if( leftHand.Z + rightHand.Z < leftHand.X + rightHand.X)
+			{
+				offsetLeft  =  ladderWidth / 2 - AbsF( leftHand.Z );
+				offsetRight =  ladderWidth / 2 - AbsF( rightHand.Z );
+			}
+			else
+			{
+				offsetLeft  =  ladderWidth / 2 - AbsF( leftHand.X );
+				offsetRight =  ladderWidth / 2 - AbsF(rightHand.X );
+			}
+			
 		}
 		else
 		{
-			ResetIKOffsets();
+			offsetLeft = 0;
+			offsetRight = 0;
+			
 		}
+	}
+
+	private function BlendIK( _Dt : float, blendValue : float, blendMode : EBlendMode ) : float
+	{
+		var weight 		: float;
+		var res 		: float;
+
+		if( blendMode == EBM_Out )
+		{
+			weight = 1 - ( ladderIKCurrentBlendTime / ladderIKBlendDuration );
+			if( weight > 0 )
+			{
+				res = blendValue *weight;
+			}
+			else
+			{
+				ResetIKOffsets();
+				res = 0.f;
+			}
+		}
+		else if( blendMode == EBM_In )
+		{
+			weight = MinF( ladderIKCurrentBlendTime / ladderIKBlendDuration, 1.f );
+			if( weight == 1.f)
+			{
+				ladderBlendHandIK = false;
+			}
+			res = blendValue * weight;
+		}
+
+		return res;
 	}
 
 	private function ResetIKOffsets()
@@ -975,11 +1068,14 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 
 		ladderCanUpdateVerticalMovement = false;
 		hasValidEndpoint = false;
+		ladderIKBlendDuration = 0.f;
 
 		
 		ResetIKOffsets();
-		ladderCurrentSlideBlendTime = 0.f;
-		ladderSlideOffset = 0.f;
+		ladderIKCurrentBlendTime = 0.f;
+		offsetLeft = 0.f;
+		offsetRight = 0.f;
+		ladderBlendHandIK = false;
 
 		if( thePlayer.IsCiri() ) 
 		{
@@ -1085,9 +1181,8 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 			movAdj.BlendIn( ticket, 0.1 );
 
 		}
-
 		
-		if
+		else if
 		(
 			( animEventName ==  behGetOffMotionStart || animEventName == behGetOffMotion ) &&
 			  !movAdj.IsRequestActive( movAdj.GetRequest( 'LadderSlideGetOffRequest' ) ) &&
@@ -1111,17 +1206,14 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 			movAdj.BindToEventAnimInfo( ticket, animInfo );	
 			movAdj.SlideTo( ticket, targetPosition );	
 		}
-
-
-		if( animEventName == behJumpInitialRot ) 
+		else if( animEventName == behJumpInitialRot ) 
 		{
 			ticket = movAdj.CreateNewRequest( 'LadderJumpInitialRot' );
 			traverser.CalculateInitialJumpYaw( targetYaw, ladderTargetPositionOffset );
 			movAdj.BindToEventAnimInfo( ticket, animInfo );	
 			movAdj.RotateTo( ticket, targetYaw );
 		}
-
-		if( animEventName == behSlideMotionDelay)
+		else if( animEventName == behSlideMotionDelay)
 		{
 			
 			m_ExplorationO.m_MoverO.SetVerticalSpeed( - ladderSlideSpeed );
@@ -1131,38 +1223,47 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 			verticalMovementParams.m_GravityDownF = -2;
 			m_ExplorationO.m_MoverO.SetVerticalMovementParams(verticalMovementParams);
 		}
-
 		
-		if( animEventName == behSlideAdjustment && !movAdj.IsRequestActive( movAdj.GetRequest( 'LadderAdjustmentRequest' ) ) )
+		else if( animEventName == behSlideAdjustment && !movAdj.IsRequestActive( movAdj.GetRequest( 'LadderAdjustmentRequest' ) ) )
 		{
 			ticket = movAdj.CreateNewRequest(  'LadderAdjustmentRequest' );
 			ownerLocToWorld = m_ExplorationO.m_OwnerE.GetLocalToWorld();
-			transformedVec = VecTransform( ownerLocToWorld, Vector( 0, ladderSlideOffset - 0.05, 0 ) ) ;
+			transformedVec = VecTransform( ownerLocToWorld, Vector( 0, offsetLeft - 0.05, 0 ) ) ;
 			movAdj.BindToEventAnimInfo( ticket, animInfo );
 			movAdj.SlideTo( ticket,  transformedVec );
 		}
-
+		else if( animEventName == behEnableHandIK && !ladderBlendHandIK )
+		{
+			ladderIKBlendDuration = GetEventDurationFromEventAnimInfo(animInfo);
+			ladderBlendHandIK = true;
+			ladderIKBlendMode = EBM_In;
+			m_ExplorationO.m_OwnerMAC.SetEnabledHandsIK( true );
+		}
+		else if( animEventName == behDisableHandIK && !ladderBlendHandIK )
+		{
+			ladderIKCurrentBlendTime = 0.f;
+			ladderBlendHandIK = true;
+			ladderIKBlendDuration = GetEventDurationFromEventAnimInfo(animInfo);
+			ladderIKBlendMode = EBM_Out;
+		}
 		
-		if( animEventName == behCatchInterrupt )
+		else if( animEventName == behCatchInterrupt )
 		{
 			ladderJumpOn = false;
 			ladderCanMoveAfterCatch = true;
 			m_ExplorationO.m_SharedDataO.SetCanGetOffLadder(true); 
 		}
-
-		if( animEventName == 'AnimEndAUX' )
+		else if( animEventName == 'AnimEndAUX' )
 		{		
 			SetReadyToChangeTo( 'Idle' );
 		}
-
 		
-		if( animEventName == behAnimPlayerControl )
+		else if( animEventName == behAnimPlayerControl )
 		{
 			canInterruptGetOff = true;
 		}
-
 		
-		if( animEventName == behTransMotion && !movAdj.IsRequestActive( movAdj.GetRequest( 'LadderAnimTranslation' ) ) )
+		else if( animEventName == behTransMotion && !movAdj.IsRequestActive( movAdj.GetRequest( 'LadderAnimTranslation' ) ) )
 		{
 			animName = GetAnimNameFromEventAnimInfo( animInfo );
 			eventDuration = GetEventDurationFromEventAnimInfo( animInfo );
@@ -1174,8 +1275,7 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 			movAdj.BindToEventAnimInfo( ticket, animInfo );	
 			movAdj.SlideTo( ticket, targetPosition );
 		}
-
-		if( animEventName == behRotMotion && !movAdj.IsRequestActive( movAdj.GetRequest( 'LadderAnimRotation' ) ))
+		else if( animEventName == behRotMotion && !movAdj.IsRequestActive( movAdj.GetRequest( 'LadderAnimRotation' ) ))
 		{
 			animName = GetAnimNameFromEventAnimInfo( animInfo );
 			eventDuration = GetEventDurationFromEventAnimInfo( animInfo );

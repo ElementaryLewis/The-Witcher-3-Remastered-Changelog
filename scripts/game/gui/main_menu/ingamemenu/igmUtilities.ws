@@ -485,7 +485,6 @@ function InGameMenu_CreateControllerData(flashStorageUtility : CScriptedFlashVal
 					htmlNewline + actionPress + GetLocStringByKeyExt("Quen") +
 					htmlNewline +
 					htmlNewline + "A - " + GetLocStringByKeyExt("ControlLayout_Roll") +
-					htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint") +
 					htmlNewline + actionPress + GetLocStringByKeyExt("Aard")
 				);
 			}
@@ -502,8 +501,7 @@ function InGameMenu_CreateControllerData(flashStorageUtility : CScriptedFlashVal
 					"X - " + GetLocStringByKeyExt("panel_groupname_strong_attack") +
 					htmlNewline + "Y - " + GetLocStringByKeyExt("panel_groupname_fast_attack") +
 					htmlNewline + "B - " + GetLocStringByKeyExt("ControlLayout_Dodge") +
-					htmlNewline + "A - " + GetLocStringByKeyExt("ControlLayout_Roll") +
-					htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint")
+					htmlNewline + "A - " + GetLocStringByKeyExt("ControlLayout_Roll")
 				);
 			}
 			else
@@ -562,16 +560,16 @@ function InGameMenu_CreateControllerData(flashStorageUtility : CScriptedFlashVal
 	
 	
 	if(quickSignCasting)
-		currentData.SetMemberFlashString("txtAButton", GetLocStringByKeyExt("ControlLayout_Roll") + htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint") + htmlNewline + actionPress + GetLocStringByKeyExt("Aard"));
+		currentData.SetMemberFlashString("txtAButton", GetLocStringByKeyExt("ControlLayout_Roll") + htmlNewline + actionPress + GetLocStringByKeyExt("Aard"));
 	else
-		currentData.SetMemberFlashString("txtAButton", GetLocStringByKeyExt("ControlLayout_Roll") + htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint"));
+		currentData.SetMemberFlashString("txtAButton", GetLocStringByKeyExt("ControlLayout_Roll"));
 	
 	
 	
 	if(quickSignCasting)
-		currentData.SetMemberFlashString("txtBButton", GetLocStringByKeyExt("ControlLayout_Dodge") + htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint") + htmlNewline + actionPress + GetLocStringByKeyExt("Quen"));
+		currentData.SetMemberFlashString("txtBButton", GetLocStringByKeyExt("ControlLayout_Dodge") + htmlNewline + actionPress + GetLocStringByKeyExt("Quen"));
 	else
-		currentData.SetMemberFlashString("txtBButton", GetLocStringByKeyExt("ControlLayout_Dodge") + htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint"));
+		currentData.SetMemberFlashString("txtBButton", GetLocStringByKeyExt("ControlLayout_Dodge"));
 	
 		
 	
@@ -1085,7 +1083,6 @@ function InGameMenu_CreateControllerDataCiri(flashStorageUtility : CScriptedFlas
 				htmlNewline + "Y - " + GetLocStringByKeyExt("panel_groupname_fast_attack") +
 				htmlNewline +
 				htmlNewline + "B - " + GetLocStringByKeyExt("ControlLayout_Dodge") +
-				htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint") +
 				htmlNewline +
 				htmlNewline + "A - " + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint")
 			);
@@ -1105,7 +1102,6 @@ function InGameMenu_CreateControllerDataCiri(flashStorageUtility : CScriptedFlas
 				htmlNewline + "Y - " + GetLocStringByKeyExt("panel_groupname_fast_attack") +
 				htmlNewline +
 				htmlNewline + "B - " + GetLocStringByKeyExt("ControlLayout_Dodge") +
-				htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint") +
 				htmlNewline +
 				htmlNewline + "A - " + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint")
 			);
@@ -1117,7 +1113,7 @@ function InGameMenu_CreateControllerDataCiri(flashStorageUtility : CScriptedFlas
 	}
 	
 	currentData.SetMemberFlashString("txtAButton", actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint"));
-	currentData.SetMemberFlashString("txtBButton", GetLocStringByKeyExt("ControlLayout_Dodge") + htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_RunSprint"));
+	currentData.SetMemberFlashString("txtBButton", GetLocStringByKeyExt("ControlLayout_Dodge"));
 	if ( thePlayer.HasAbility('CiriCharge'))
 		currentData.SetMemberFlashString("txtYButton", GetLocStringByKeyExt("panel_groupname_fast_attack") + htmlNewline + actionHold + GetLocStringByKeyExt("ControlLayout_CiriCharge"));
 	else

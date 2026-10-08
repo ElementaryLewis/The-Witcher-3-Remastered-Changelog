@@ -125,6 +125,7 @@ import struct SEligibleRewardDesc
 {
 	import var itemName : name;
 	import var grantedFactId : string;
+	import var version : Uint8;
 	import var directlyGranted : bool;
 }
 
@@ -451,23 +452,6 @@ import class CR4GuiManager extends CGuiManager
 			ingameMenu = (CR4IngameMenu)(menuBase.GetSubMenu());
 			if (ingameMenu)	{
 				ingameMenu.StartShowCustomDialogGalaxySignInReminder();
-			}
-		} 
-		
-		return true;
-	}
-	
-	event  OnShowMarketingWindow( checkedConsentChoices : int )
-	{
-		var menuBase 	: CR4MenuBase;
-		var ingameMenu 	: CR4IngameMenu;
-		
-		menuBase = (CR4MenuBase)(theGame.GetGuiManager().GetRootMenu());
-			
-		if (menuBase){
-			ingameMenu = (CR4IngameMenu)(menuBase.GetSubMenu());
-			if (ingameMenu)	{
-				ingameMenu.StartShowCustomDialogMarketing( checkedConsentChoices );
 			}
 		} 
 		

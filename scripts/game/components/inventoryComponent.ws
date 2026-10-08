@@ -920,8 +920,8 @@ import class CInventoryComponent extends CComponent
 
 	
 	
-	import private final function AddMultiItem( item : name, optional quantity : int, optional informGui : bool , optional markAsNew : bool , optional lootable : bool  ) : array<SItemUniqueId>;
-	import private final function AddSingleItem( item : name, optional informGui : bool , optional markAsNew : bool , optional lootable : bool   ) : SItemUniqueId;
+	import private final function AddMultiItem( item : name, optional quantity : int, optional informGui : bool , optional markAsNew : bool , optional lootable : bool , optional forceAdd : bool  ) : array<SItemUniqueId>;
+	import private final function AddSingleItem( item : name, optional informGui : bool , optional markAsNew : bool , optional lootable : bool , optional forceAdd : bool   ) : SItemUniqueId;
 
 	public final function SimpleAddItem(item : name) : SItemUniqueId
 	{
@@ -929,7 +929,7 @@ import class CInventoryComponent extends CComponent
 	}
 
 	
-	public final function AddAnItem(item : name, optional quantity : int, optional dontInformGui : bool, optional dontMarkAsNew : bool, optional showAsRewardInUIHax : bool) : array<SItemUniqueId>
+	public final function AddAnItem(item : name, optional quantity : int, optional dontInformGui : bool, optional dontMarkAsNew : bool, optional showAsRewardInUIHax : bool, optional forceAdd : bool) : array<SItemUniqueId>
 	{
 		var arr : array<SItemUniqueId>;
 		var i : int;
@@ -944,7 +944,7 @@ import class CInventoryComponent extends CComponent
 			}
 			else
 			{
-				arr.PushBack(AddSingleItem(item, !dontInformGui, !dontMarkAsNew));
+				arr.PushBack(AddSingleItem(item, !dontInformGui, !dontMarkAsNew, true, forceAdd));
 			}
 
 			quantity = 1;
@@ -953,11 +953,11 @@ import class CInventoryComponent extends CComponent
 		{
 			if(quantity < 2 ) 
 			{
-				arr.PushBack(AddSingleItem(item, !dontInformGui, !dontMarkAsNew));
+				arr.PushBack(AddSingleItem(item, !dontInformGui, !dontMarkAsNew, true, forceAdd));
 			}
 			else
 			{
-				arr = AddMultiItem(item, quantity, !dontInformGui, !dontMarkAsNew);
+				arr = AddMultiItem(item, quantity, !dontInformGui, !dontMarkAsNew, true, forceAdd);
 			}
 		}
 
