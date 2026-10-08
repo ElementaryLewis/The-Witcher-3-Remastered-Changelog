@@ -56,7 +56,8 @@ For instance:
 | ---------------- |:-----------:| ------------:|
 | [4.04b](https://raw.githubusercontent.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/refs/heads/main/CR2W_summary/CR2W_changed-list.txt "Bundled 1.32 vs 4.00") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%204.04b%20vs%205.00b.txt "Scripts 4.04b vs 5.00b") | 2026/09/29 |
 | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%204.04b%20vs%205.00b.txt "Bundled 4.04b vs 5.00b") | [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00b%20vs%205.00c.txt "Bundled 5.00b vs 5.00c") | 2026/10/01 |
-| [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00b%20vs%205.00c.txt "Bundled 5.00c vs 5.XX") | [5.XX]("Bundled 5.00b vs 5.XX") | 2026/XX/XX |
+| [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00b%20vs%205.00c.txt "Bundled 5.00b vs 5.00c") | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00c%20vs%205.01.txt" Bundled 5.00c vs 5.01") | 2026/10/08 |
+| [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00c%20vs%205.01.txt" Bundled 5.00c vs 5.01") | [5.XX]( Bundled 5.01 vs 5.XX") | 2026/XX/XX |
 
 
 #### Our Discord Servers:
