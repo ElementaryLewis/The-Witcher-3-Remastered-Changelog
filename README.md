@@ -29,7 +29,8 @@ For instance:
 | ---------------- |:-----------:| ------------:|
 | [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/e8a76234533a6a3f5928f55b0e6ea0e32b03539c "Scripts 4.04 vs 4.04a_REDkit") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/e026f253c8790ebcfe545188eb0ae77978dc1178 "Scripts 4.04b vs 5.00b") | 2026/09/29 |
 | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/e026f253c8790ebcfe545188eb0ae77978dc1178 "Scripts 4.04b vs 5.00b") | [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/214904d1349a26ee174a2c2f7721c5d73ba6357c "Scripts 5.00b vs 5.00c") | 2026/10/01 |
-| [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/214904d1349a26ee174a2c2f7721c5d73ba6357c "Scripts 5.00b vs 5.00c") | [5.XX]( "Scripts 5.00c vs 5.XX") | 2026/XX/XX |
+| [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/214904d1349a26ee174a2c2f7721c5d73ba6357c "Scripts 5.00b vs 5.00c") | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7459ce831d2b9f2ded4b5541fc5004b4d67efcca "Scripts 5.00c vs 5.01") | 2026/10/08 |
+| [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7459ce831d2b9f2ded4b5541fc5004b4d67efcca "Scripts 5.00c vs 5.01") | [5.XX]("Scripts 5.01 vs 5.XX") | 2026/XX/XX |
 
 
 ### XML
