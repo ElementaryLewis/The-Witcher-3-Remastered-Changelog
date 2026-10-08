@@ -37,7 +37,8 @@ For instance:
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
 | [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/15e2b662b3a9145e7d24e72c4e8ab37aac0f2db3 "XML 4.02 vs 4.03") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/bbdc09e016e5c0add4321a1140e19deff0e402eb "Scripts 4.04b vs 5.00b") | 2026/09/29 |
-| [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/bbdc09e016e5c0add4321a1140e19deff0e402eb "XML 4.04b vs 5.00") | [5.XX]( "XML 5.00b vs 5.XX") | 2026/XX/XX |
+| [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/bbdc09e016e5c0add4321a1140e19deff0e402eb "XML 4.04b vs 5.00") | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/21100530393759f26995511355feb37de88d1ad9 "XML 5.00b vs 5.01") | 2026/10/08 |
+| [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/21100530393759f26995511355feb37de88d1ad9 "XML 5.00b vs 5.01") | [5.0X]( "XML 5.01 vs 5.XX") | 2026/XX/XX |
 
 ### CSV
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
