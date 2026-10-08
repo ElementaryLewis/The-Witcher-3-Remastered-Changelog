@@ -1,0 +1,101 @@
+Sorted by Notepad++ ; Group by ChatGPT
+
+.as (8)
+gameplay\gui_new\actionscript\red\game\witcher3\menus\character_menu\CharacterSkillsGridModule.as
+gameplay\gui_new\actionscript\red\game\witcher3\menus\character_menu\ModuleSkillsSocketsDupe.as
+gameplay\gui_new\actionscript\red\game\witcher3\menus\mainmenu\IngameMenu.as
+gameplay\gui_new\actionscript\red\game\witcher3\menus\worldmap\HubMap.as
+gameplay\gui_new\actionscript\red\game\witcher3\menus\worldmap\MapMenu.as
+gameplay\gui_new\actionscript\red\game\witcher3\slots\SlotBase.as
+gameplay\gui_new\actionscript\red\game\witcher3\slots\SlotSkillGrid.as
+gameplay\gui_new\actionscript\red\game\witcher3\slots\SlotSkillSocket.as
+
+.env (32)
+dlc\bob\data\environment\definitions\foggy\fog_tm.env
+dlc\bob\data\environment\definitions\quests\q702\q702_wight.env
+dlc\bob\data\environment\definitions\quests\q702\q702_wight_cs.env
+dlc\bob\data\environment\definitions\quests\q704\704_cloud.env
+dlc\bob\data\environment\definitions\quests\q704\704_cloud_sunny.env
+dlc\bob\data\environment\definitions\quests\q704\704_forrest.env
+dlc\bob\data\environment\definitions\quests\q704\704_forrest_cs2.env
+dlc\bob\data\environment\definitions\quests\q704\fairytale\q704_fairyland.env
+dlc\bob\data\environment\definitions\quests\q704\q704_snow2.env
+dlc\bob\data\environment\definitions\quests\q704\q704_snow2_cs.env
+dlc\bob\data\environment\definitions\quests\q704\temp\q704_detlaff_arena_prod_room.env
+dlc\bob\data\environment\definitions\rainy\rain_tm.env
+dlc\bob\data\environment\definitions\sunny\sunny_bob_v4_fog_trans.env
+dlc\bob\data\environment\definitions\sunny\sunny_bob_v7.env
+dlc\bob\data\environment\definitions\sunny\sunny_colors_warm.env
+environment\definitions\env_nomansland\env_nml_global_dark_sunset.env
+environment\definitions\env_novigrad\env_novigrad_dark_clouds.env
+environment\definitions\env_novigrad\env_novigrad_dark_clouds_heavy.env
+environment\definitions\env_novigrad\env_novigrad_dark_clouds_heavy_rain_color.env
+environment\definitions\env_novigrad\env_novigrad_global\env_novigrad_city.env
+environment\definitions\env_novigrad\env_novigrad_grey_sky.env
+environment\definitions\env_novigrad\env_novigrad_sunset.env
+environment\definitions\env_prologue\env_grey_sky.env
+environment\definitions\env_prologue\env_prolog_colors_cinematic_tonemapping.env
+environment\definitions\env_prologue\env_prolog_colors_v1_b_sunset.env
+environment\definitions\env_skellige\env_skellige_brown.env
+environment\definitions\env_skellige\env_winter_skellige.env
+environment\definitions\env_winter\env_winter_epilog_white_grass.env
+environment\definitions\kaer_morhen\kaer_morhen_battle\wip\kaer_morhen_battle.env
+environment\definitions\kaer_morhen\kaer_morhen_battle\wip\kaer_morhen_battle_preview_01.env
+environment\definitions\kaer_morhen\kaer_morhen_global\env_kaer_morhen_v09_tm.env
+environment\definitions\kaer_morhen\kaer_morhen_global\env_kaer_morhen_vesemir_v0_hour_3_30.env
+
+.fla (7)
+gameplay\gui_new\fla\witcher3\hud\hud_bossfocus.fla
+gameplay\gui_new\fla\witcher3\hud\hud_horsepanic.fla
+gameplay\gui_new\fla\witcher3\hud\hud_horsestamina.fla
+gameplay\gui_new\fla\witcher3\hud\hud_oxygenbar.fla
+gameplay\gui_new\fla\witcher3\hud\hud_timeleft.fla
+gameplay\gui_new\fla\witcher3\menus\mainmenu\panel_ingamemenu.fla
+gameplay\gui_new\fla\witcher3\popups\popup_message.fla
+
+.redswf (9)
+gameplay\gui_new\swf\character\panel_character_dupe.redswf
+gameplay\gui_new\swf\hud\hud_bossfocus.redswf
+gameplay\gui_new\swf\hud\hud_horsepanicbar.redswf
+gameplay\gui_new\swf\hud\hud_horsestaminabar.redswf
+gameplay\gui_new\swf\hud\hud_oxygenbar.redswf
+gameplay\gui_new\swf\hud\hud_timeleft.redswf
+gameplay\gui_new\swf\mainmenu\panel_ingamemenu.redswf
+gameplay\gui_new\swf\popups\popup_message.redswf
+gameplay\gui_new\swf\worldmap\panel_worldmap.redswf
+
+.swf (9)
+gameplay\gui_new\swf\character\panel_character_dupe.swf
+gameplay\gui_new\swf\hud\hud_bossfocus.swf
+gameplay\gui_new\swf\hud\hud_horsepanicbar.swf
+gameplay\gui_new\swf\hud\hud_horsestaminabar.swf
+gameplay\gui_new\swf\hud\hud_oxygenbar.swf
+gameplay\gui_new\swf\hud\hud_timeleft.swf
+gameplay\gui_new\swf\mainmenu\panel_ingamemenu.swf
+gameplay\gui_new\swf\popups\popup_message.swf
+gameplay\gui_new\swf\worldmap\panel_worldmap.swf
+
+.w2anims (4)
+animations\interaction\finishers\man_finishers.w2anims
+animations\man\movement\man_geralt_exploration.w2anims
+animations\man\movement\man_geralt_swimming.w2anims
+animations\woman\movement\woman_movement.w2anims
+
+.w2beh (1)
+gameplay\behaviors\pc\behaviorgraph\pc_gameplay.w2beh
+
+.w2ent (1)
+environment\architecture\human\redania\novigrad\lighthouse\ighthouse_interior_ladder_3_floor_exploration.w2ent
+
+.w2phase (4)
+dlc\bob\data\quests\bob_tutorial.w2phase
+dlc\ep1\data\quests\cyrograf_structure.w2phase
+quests\prologue\q001_beginning.w2phase
+quests\prologue\quest_files\anywhere.w2phase
+
+.w2w (5)
+dlc\bob\data\levels\bob\bob.w2w
+levels\kaer_morhen\kaer_morhen.w2w
+levels\novigrad\novigrad.w2w
+levels\prolog_village\prolog_village.w2w
+levels\skellige\skellige.w2w
