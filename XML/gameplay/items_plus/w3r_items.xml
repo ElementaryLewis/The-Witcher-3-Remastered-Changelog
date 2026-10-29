@@ -54,7 +54,7 @@
 				<weight type="base" min="1"/>
 			</ability>
 			
-			<ability name="Fire Horse blinders _Stats">
+			<ability name="Fire Horse Blinders _Stats">
 				<panic type="add" always_random="false" min="70" max="70"/>
 			</ability>
 
@@ -229,7 +229,7 @@
 			</item>
 			
 			<item
-				name							="Fire Horse blinders"
+				name							="Fire Horse Blinders"
 				category						="horse_blinder"
 				price							="150"
 				weight							="0.2"
@@ -244,7 +244,7 @@
 			>
 				<tags>							Blinders, mod_horse
 				</tags>
-				<base_abilities>				<a>Fire Horse blinders _Stats</a>
+				<base_abilities>				<a>Fire Horse Blinders _Stats</a>
 				</base_abilities>
 			</item>
 			
