@@ -2083,7 +2083,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||Attroupement
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||À la prochaine.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Où as-tu rencontré Priscilla ?
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|Tandis qu'alentour, la rue n'était que bruissements, figure altière de royal désarroi, relevant sa toilette de ses doigts délicats, une femme sculpturale s'élança vivement.
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|Tandis qu'alentour, la rue n'était que bruissements, figure altière de royal désarroi, relevant sa toilette de ses doigts délicats, une femme sculpturale s'élança vivement.
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Verbeux.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Il me rappelle furieusement quelque chose…
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Magnifique.
@@ -5474,6 +5474,7 @@
 412649|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|NVGT_Q202_00412649|Encore un candidat au suicide… Bon, écoutez-moi bien si vous voulez pas aller nourrir les poissons.
 412650|3abcbb2d|item_name_mh104_contract_text|CUSTOM|Notices||Qu'il soit rendu public que l'armée impériale a besoin d'un homme qui connaisse bien la région, chasseur ou éclaireur, par exemple, pour nous aider à retrouver une patrouille disparue.<br><br>Il est possible que les soldats aient été la proie d'un monstre. Si cette hypothèse est avérée, quiconque rapportera la tête du monstre se verra remettre une récompense par le soussigné. Lequel est en outre disposé à fournir de plus amples informations sur l'incident.<br><br>Gloire à l'empereur !<br><br>Milan Noran, commandant de la division en poste à Oreton
 412833|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\nml_burrows_soltis_default.w2scene"|Choice line||Qui sont les Dames de la forêt ?
+412838|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_kaer_trolde_sjusta.w2scene"|Comment text||EXT. Dialogue with Sjusta the tailor, in front of his workshop.
 412917|00000000||CJournalResource "gameplay\journal\quests\giant.journal"|Journal||Explorez les ruines d'Urskar et cherchez des traces de la présence de Hjalmar à l'aide de vos sens de sorceleur.
 413007|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|HJOR_Q201_00413007|Le cœur était déformé. C'est un mauvais présage.
 413009|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|UDAL_Q201_00413009|Un mauvais présage pour qui ? Pour moi ? Parle, que va-t-il m'arriver ?
@@ -7055,6 +7056,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|Je ne peux pas accepter. Je suis désolé de ne pas vous l'avoir ramené vivant.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|Vous avez parlé de sirènes… On en trouve beaucoup sur Undvik ?
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|Ça ouais, c'est rien de le dire… Plus que sur les autres îles…
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] SKIP TO CHEATING MENGE
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|Sous Dornal, dans les égouts… mais tu devras passer par le Lacis, et supporter la puanteur des miséreux.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|Cette bête était peut-être mise à prix.
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|Il y a peut-être une prime à la clef. Il me faut un trophée.
@@ -14787,6 +14789,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|Vous ne trouverez pas de monstres à Novigrad. Le Feu Éternel brûle entre ces murs.
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|Le Feu… Le Feu brûle dans mon cœur !
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Épées et ravioles
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to the merchants
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Read notice board
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to Ernst
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Hear the clients talking
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|Leif, fils d'Erik…
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|Kjall, fils d'Olaf…
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|Mort dans la gloire…
@@ -22597,11 +22603,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|Ha ha ha ha ha ha !
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|À très bientôt.
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|Hi hi hi hi hi hi !
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook1: Pig Roasters
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|Geralt a lancé le signal !
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|Je suis prête !
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|Un déluge digne du Ragh nar Roog !
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|Gloire !
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|Hael !
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook: Closed Vault Gate
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|Un nouveau venu ?
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|La meilleure épée ne vaut rien au bout d'un bras chétif, c'est pas vrai ?
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|Je me demande si on l'a eu…
@@ -23001,6 +23010,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|On voudrait s'amuser tranquilles, d'accord ?
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|Ah, super. Quel con ! Il a complètement cassé l'ambiance.
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|Je vais vous laisser. Mais… vous pourriez peut-être vous trouver un endroit plus intime, non ?
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|Caranthir est un loyaliste. Pour Ge'els, c'est une autre histoire…
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|Souverain bien-aimé, qu'Eredin a empoisonné.
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|Donne-moi une minute, je reviens tout de suite.
@@ -23008,6 +23018,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|Tu es… pitoyable.
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|Une dernière parole ?
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|Écarte-toi, vieillard… et tu auras la vie sauve.
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Fast forward time by meditating
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Dites à Sukrus d'embarquer les caisses.
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Faites le guet.
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Découvrez ce que veut Sukrus.
@@ -30799,6 +30810,7 @@
 576811|00000000||CStoryScene "quests\epilogues\quest_files\q505_ciri_free\scenes\q505_03_ciri.w2scene"|Line text|GRLT_Q505_00576811|Aucune idée.
 576812|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|GRLT_Q001_00576812|Non, pas comme tout le monde. La femme que je cherche s'habille en noir et blanc et sent le lilas et la groseille.
 576814|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|MRRR_Q001_00576814|Deux schnaps !
+576815|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||[EN] G and V look at each other surprised, then with admiration at CY, then they pause.
 576818|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00576818|Tu dormais, oncle Vesemir.
 576819|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Choice line||Ne fais pas la maligne.
 576821|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Choice line||Très bien, trinquons.
@@ -31832,6 +31844,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Je connais la suite.
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|Eh, salut !
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|Je vais vous donner un conseil. Si vous ne savez pas chanter juste, chantez fort !
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Check in with the sentinels
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Place an Yrden trap OR dispatch the guard with Axii or Sword
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Ignite the woodcart
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Signal the all clear at the warehouse
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Je sais, j'ai suivi votre piste.
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|Tu as atterri chez les Moires, et lui chez Keira.
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|Oui. Au lieu de me conduire au repaire d'Avallac'h, le portail m'a précipitée au beau milieu du marais de Torséchine.
@@ -33801,6 +33817,7 @@
 589857|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_08b_yen_about_megascope.w2scene"|Line text|YENN_SQ302_00589857|Un cristal de mégascope ? Mince, il est fêlé… mais il peut peut-être encore fonctionner.
 589877|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|ARNV_Q206_00589877|Pourquoi m'avez-vous aidé ?
 589879|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|BECC_Q206_00589879|Parce que je veux savoir pourquoi tu as trahi mon père, mon frère et notre clan ! Je veux l'entendre de ta bouche !
+589896|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||[EN] EXT. KAER MORHEN LOWER COURTYARD. D *The lower courtyard is full of training equipmen: weapons, dummies, swords and shields. Vesemir, Lambert and Eskel are already there. Geralt and Ciri join, Ciri doing her best to look meek whilst Vesemir is angry with her. Everyone else is relaxed*
 589898|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b05a_01_returned_with_arnvald.w2scene"|Line text|GRLT_Q206_00589898|Pourquoi les avez-vous trahis ? Parlez si vous tenez à la vie.
 589901|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|PHIL_SQ302_00589901|Vilgefortz l'a bien fait. J'emploie la même méthode : culture de tissus sur pierres précieuses.
 589902|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|MGLA_SQ302_00589902|C'est de la folie… te falloir… -ouvoir… te placer… -rand danger…
@@ -41126,7 +41143,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||Fantôme d'enfant
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||Tuez les goules.
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|Laisse-moi tranquille, Geralt ! Tu vas me faire tomber !
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|Tu tiens une épée, pas un rouleau à pâtisserie ! Frappe avec le poignet, pas avec le coude. Recommence !
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|Tu tiens une épée, pas un rouleau à pâtisserie ! Frappe avec le poignet, pas avec le coude. Recommence !
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||Laisse-moi passer.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|Laisse-moi passer.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|Entendu, vas-y. La route est ouverte.
@@ -51442,6 +51459,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Pimentons un peu tout ça.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Ça vous dit une partie de cartes ?
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||C'est l'heure d'aller se coucher.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[EN] [DEBUG] [Skip to Eskel Drunk.]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|Ah ah, voilà la clef.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||Contrat : monstre de la forêt
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||Épouse disparue
@@ -51644,7 +51662,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|Hmm… Les carottes sont cuites ?
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|J'aime le bruit blanc de l'eau.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|Raté, c'est pas le mot de passe.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||Patrouille disparue - Récompense
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||Annonce :<br><br>Des soldats au service de Sa Majesté impériale, Emhyr var Emreis, ont disparu en mission commandée. Une récompense attend quiconque contribuera à les retrouver. Pour de plus amples informations, adressez-vous à l'intendant du camp de l'armée centrale.
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||Lettre de Roland Treugger pour Hammond.
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||Salon de jeu numéro 1.<br><br>Mois en cours.<br><br>Dépenses : 38 756 couronnes<br><br>Frais généraux : 5 294 couronnes<br><br>Taxes d'organisation : 3 875 couronnes<br><br>Débiteurs<br><br>Comte Tybalt : 1 285 couronnes – limite de paiement : fin du mois (non négociable)<br><br>Sasha : 956 couronnes – limite de paiement : milieu du mois prochain (délai supplémentaire de deux semaines possible avec une augmentation du taux de 35 %)<br><br>Finneas : 5 148 couronnes – paiement en retard, dernier avertissement<br><br>Bernard Tulle : dette remboursée<br><br>Patrick Noisetier : avertissement adressé, procédure de recouvrement lancée
@@ -53999,6 +54016,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|Je ferai de mon mieux. À bientôt.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Demandez aux occupants du camp s'ils ont vu le ravisseur de Jaskier.
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|Hmm. À bientôt.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[EN] [DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Trouvez un moyen d'entrer dans la cabane.
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Je m'en occupe.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Le prix est insuffisant.
@@ -56787,6 +56805,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||Dégagez le passage et libérez l'elfe.
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Plongée
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Maintenez <<DiveDown>> pour nager vers le fond ou <<DiveUp>> pour remonter vers la surface.<br><br>Surveillez bien votre souffle ! S'il tombe à zéro, vous vous noierez !
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[EN] [DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||Voici mon invitation.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|La voilà mon invitation. Elle est à vous, si vous voulez.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|Et comment, que je la veux.
@@ -56885,6 +56904,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|Suffisamment pour me payer un lopin de terre au Kovir, où je compte finir mes jours en m'en mettant plein la panse.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|Pas mal. C'est pas donné à tout le monde de connaître sa cote.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|La plupart des gens préfèrent ne pas être mis à prix.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||Annonce concernant des soldats disparus
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|Mais que fais-tu ici ? Tu m'offres ta tête sur un plateau ?
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||J'ai envie de fuguer, de passer du temps en tête-à-tête avec toi.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|Les banquets sont si prévisibles sur Skellige. Beuverie, vantardise éhontée et les inévitables rixes…
@@ -57494,7 +57514,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||Leçons de gwynt
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||J'accepte actuellement des élèves désireux d'apprendre à jouer au gwynt. Ne seront retenus que les sujets disciplinés, faisant preuve d'esprit de déduction et réellement désireux d'apprendre. Les aptitudes particulières sont les bienvenues. Aux élèves revient le soin de fournir leur propre jeu.<br><br>Je cherche en outre des joueurs plus expérimentés susceptibles de présenter un défi qui permette à chacun d'améliorer sa science du jeu.<br><br>Sac-à-souris, druide
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||Regardez dans les profondeurs pour vous élever.
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||Clef de l'antre du katakan
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||Clef légèrement rouillée.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||Clef de la morgue d'Oxenfurt
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||Une vieille clef ternie.
@@ -58000,6 +58019,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||Première carte d'Adalbert Kermith
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||Carte indiquant où trouver les symboles relatifs aux sorceleurs de l'École du Chat.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||Tuez les bandits.
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||Clef de la cachette du katakan
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||Recruté par le professeur Slavko Atimstein pour intégrer son groupe de recherche, j'ai entrepris l'étude de l'École du Griffon des sorceleurs. Mon point de départ : la crypte située sous la colline de Torséchine. Selon le professeur, on y trouvait la dernière demeure d'un "griffon" et il souhaita trouver le moyen d'y accéder.<br><br>J'ai rapidement découvert plusieurs sites dignes d'intérêt, marqués à l'aide du symbole figurant sur le médaillon des sorceleurs de l'École du Griffon. J'ai indiqué les positions sur cette carte.<br><br>Edwin Greloff. Assistant en Histoire naturelle de l'académie d'Oxenfurt.
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||Putain vérolée ! J'ai perdu la première carte préparée à l'intention du professeur Atimstein lors d'une partie de gwynt. Me voilà condamné à retourner au camp de base près de la crypte sous la colline de Torséchine pour tout recommencer… Dans l'intervalle, j'indiquerai les autres sites intéressants sur cette carte.<br><br>Edwin Greloff. Assistant en Histoire naturelle de l'académie d'Oxenfurt.
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||Magnifique. Le professeur Slavko Atimstein va être furieux. Je perds la première carte au gwynt, et voilà qu'on me fauche la deuxième pendant que je me trouve légèrement indisposé suite à une dure nuit au casino. Impossible d'arriver les mains vides au poste situé près de la crypte sous la colline de Torséchine : le professeur me disséquerait sur-le-champ. Les quatre nouveaux sites indiqués sur cette carte devraient suffire à apaiser son courroux.<br><br>Edwin Greloff. Assistant en Histoire naturelle de l'académie d'Oxenfurt.
@@ -62955,6 +62975,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||DIRECTEUR - PROJET GALAXY
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||DIRECTEUR - PROJET SITE INTERNET
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||RESPONSABLES
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||INGÉNIEURS
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||PROGRAMMATION ADDITIONNELLE
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||INFOGRAPHIE ADDITIONNELLE
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||SÉQUENCES ANIMÉES
@@ -75223,6 +75244,12 @@
 1154231|29b1a878|Turysta|CEntityTemplate "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\characters\mq7015_tourist_man.w2ent"|Entity display name||Touriste
 1154248|0c83681f|Turystka|CEntityTemplate "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\characters\mq7015_tourist_woman.w2ent"|Entity display name||Touriste
 1154250|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7004_bleeding_tree\scenes\mq7004_07_ending.w2scene"|Line text|JLBJ_MQ7004_01154250|Au moins, la dame ne souffrira plus dans l'arbre. Maintenant, prenez votre argent et partez.
+1154255|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Choice line||The blackmailers are at Dun Tynne.
+1154256|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Choice line||Didn't run into any trouble?
+1154259|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01154259|Les ravisseurs sont au manoir Dun Tynne et je pense que Rhena est avec eux.
+1154261|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|DTLF_Q703_01154261|Dun Tynne… Dun Tynne est un homme mort.
+1154265|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01154265|Les bandits ont tenté de voler un joyau, le Cœur de Toussaint… mais je les ai coiffés au poteau.
+1154267|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01154267|Je vais leur proposer un marché. Quand j'aurai vérifié que Rhena est bel et bien là… je vous ferai signe de venir. On libérera Rhena et on mettra un terme à cette histoire.
 1154305|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_08_match_girl.w2scene"|Line text|GRLT_Q704_01154305|Très bien. Jouons. Si vous perdez, le ruban est à moi.
 1154307|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_08_match_girl.w2scene"|Line text|TG02_Q704_01154307|Ne vous faites pas trop d'illusions. Je suis imbattable au gwynt.
 1154324|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_08_match_girl.w2scene"|Line text|TG02_Q704_01154324|Perdu, l'ami. Si vous voulez toujours ce ruban, va falloir allonger la monnaie.
@@ -75352,7 +75379,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|Dernier ressort ? Pourquoi ça ?
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|Ah. Un être est en mesure d'invoquer Dettlaff. Il possède l'autorité, et même le pouvoir, pour le forcer à apparaître où il le souhaite.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|Alors, ces décoctions, ça avance ?
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||Charles Lanzano
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|Vous ne ressemblez point à un carrier.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|Encore vous ? Bon, j'écoute, que voulez-vous ?
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||Je peux voir vos marchandises ?
@@ -76478,6 +76504,9 @@
 1161842|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|TNM02_Q701_01161842|Essayons de trouver le prochain indice.
 1161852|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|GRLT_Q701_01161852|Vous voulez vous battre ? Approchez.
 1161854|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|TNM01_Q701_01161854|Quel toupet !
+1161876|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01161876|Je sais où sont les ravisseurs. Je sais aussi comment les atteindre et…
+1161882|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|DTLF_Q703_01161882|Vous adhérez à un code… Mais si vous décidiez qu'il ne s'applique pas à moi… vous m'élimineriez ?
+1161884|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|DTLF_Q703_01161884|Inutile de répondre. Je connais la réponse et je ne supporte pas le mensonge… Vous le feriez. Bien. Ça signifie que vous avez véritablement des principes.
 1161898|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_gp_unicorn_grlt_cmnts.w2scene"|Line text|GRLT_Q701_01161898|Allons, reste calme.
 1161900|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_gp_unicorn_grlt_cmnts.w2scene"|Line text|GRLT_Q701_01161900|Rah ! Je l'avais presque.
 1161902|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_gp_unicorn_grlt_cmnts.w2scene"|Line text|GRLT_Q701_01161902|Merde.
@@ -90981,9 +91010,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||Notes du premier bailli de la hanse de Filibert Quatre-doigts
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||Profits et pertes pour le mois de Blathe<br><br>Jour 3<br>Des reptiles volants nichent dans les collines des Champs-Éplorés. Ils se sont mis à dévorer nos hommes. Récemment, ils ont arraché Gilbert du haut du mur. Il était généralement très vigilant, mais n'importe qui baisse un peu sa garde pour se soulager. Filibert est furieux. Le coût de formation d'une recrue pour en faire un membre opérationnel de notre groupe n'est point négligeable. Et il est regrettable de voir ces frais finir en déjections de monstre.<br>Jour 7<br>Nous avons tendu une embuscade à une caravane de marchands arrivant de l'est de Toussaint. Ils n'avaient pas de garde et n'ont opposé aucune résistance, mais nous n'avons pourtant fait presque aucun profit : les guenilles qu'ils transportaient n'auraient intéressé que des sauvages de Skellige et personne parmi nous n'a l'intention de se rendre là-bas. Filibert est encore devenu fou de rage et a tué un des marchands, un dénommé Lumierex. Les autres sont repartis vers l'est.<br>Jour 11<br>Nos éclaireurs ont pisté trois hommes qui se faufilaient à travers bois. Tous étaient vêtus comme des mendiants, ce qu'ils ont prétendu être. Nous n'avons point été dupes. Après les avoir un peu rudoyés, nous avons découvert qu'ils étaient des bijoutiers transportant de l'or des mines de Maecht. Il n'y avait que du minerai brut, mais de qualité prometteuse. Filibert a ordonné l'exécution des bijoutiers. Il exècre les menteurs.<br>Jour 17<br>Une expédition de l'Académie impériale de Castel Graupian a établi son camp de l'autre côté de la Sans-Retour. Les érudits ne sont point réputés pour leur richesse, mais ceux-ci ont des tentes spacieuses et d'importantes réserves d'alcool. Ils ont donc scellé leur destin. Filibert a envoyé quelques hommes s'occuper d'eux.<br>Jour 23<br>Voilà près de deux semaines que rien d'intéressant ne s'est présenté sur la grand-route. En attendant, des chevaliers errants ont capturé d'autres de nos gars. Deux ont péri. Un autre n'a été que légèrement blessé et a pu s'enfuir. Nous avons perdu de l'équipement de grande valeur. Filibert a ordonné que le blessé soit flagellé pour son imprudence. Son corps épuisé n'a pas supporté le traitement et il a péri.<br>Jour 24<br>Notre chance a tourné. Nous avons intercepté une caravane de vignerons revenant du sud. Ils avaient vendu leur marchandise et transportait une forte somme d'argent. D'après les premiers calculs, le butin se monte à environ quatre cents couronnes pour chacun d'entre nous. Filibert n'a pas encore décidé si nous partagerons à parts égales.<br>Jour 28<br>L'unité envoyée à la ferme Basane n'est jamais revenue avec les provisions. Nos réserves s'amenuisent. Un homme ne peut point vivre que d'alcool et personne n'a encore trouvé comment manger de l'or. Nous devons piller quelques villages.<br>Jour 30<br>Je vais à présent effectuer un récapitulatif final du mois de Blathe. Nos caisses sont bien remplies, elles débordent même. Cette situation devrait perdurer au moins un mois.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|Que faites-vous là, messire ?! C'est une audience privée. Geralt, qu'est-ce que ça signifie ? Avez-vous manigancé tout cela à mon insu ?
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||Note du scribe du tournoi.
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||Note du scribe du tournoi.
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||Tournoi international de chevalerie ayant pour marraine Dame Vivienne de Tabris, 1275<br><br>Participants inscrits et qualifiés pour participer aux épreuves :<br><br>Grégoire de la Gorgone, vainqueur du dernier tournoi. Il ne participera pas à la compétition générale, mais livrera le combat final contre le chevalier ayant remporté le plus de points. (Tout semble indiquer que Grégoire défendra son titre.)<br><br>Anséis, prince de Lyrie et de Riv, qui nous rejoint pour la troisième fois d'affilée.<br><br>Horm Akerspaark, prince de Maecht, qui serait du même sang que l'empereur Emhyr, présent pour son quatrième tournoi.<br><br>Baron Palmerin de Launfal pour sa sixième participation au tournoi.<br><br>Donimir de Troy, un chevalier redanien participant pour la première fois au tournoi.<br><br>Rainfarn d'Attre, vainqueur de l'édition de 1269, pour sa septième participation au tournoi.<br><br>Guy de Bois-Fresnes de Metinna (cousin issu de germain de Reynart de Bois-Fresnes, un des chevaliers errants de Sa Majesté) pour sa troisième participation au tournoi.<br><br>Delwyn de Creigiau, un jeune chevalier participant pour la première fois au tournoi.<br><br>Tailles de Dorndal, un chevalier de l'Ordre de la Rose-Ardente, pour sa première participation au tournoi.<br><br>Llinos de Metinna pour sa troisième participation au tournoi.<br><br>Guillaume de Launfal (neveu du baron Palmerin) pour sa première participation au tournoi. [addendum] En raison d'une blessure, Guillaume a cédé sa place à un autre chevalier.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||Notes de Vivienne
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||Notes de Vivienne
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||Dépenses de Blathe à Feainn<br><br>14 aunes de tissu : 80 couronnes<br>chaussures (peau de dragon) : 140 couronnes<br>selle de course : 280 couronnes<br>crème magique : 1400 couronnes (total)
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||Journal
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||Cher journal !<br>Cela fait trois semaines que dame Orianna m'a sorti de la rue. J'ai enfin à manger et à boire, et je joue avec d'autres enfants tous les jours. C'est encore mieux qu'à la maison, parce qu'à la maison il y avait rarement à manger, et quand maman est morte, il n'y avait plus à manger du tout.<br><br>Aujourd'hui, j'ai joué avec Miri et Tomm. Tout d'abord, nous avons joué à Chair d'oie, puis à cache-cache et au jeu de jonchet. Après, nous avons joué à chat. C'était très amusant ! Plus tard, un chariot de dame Orianna est arrivé, chargé d'un tas de nourriture. Il y avait des beignets, des fruits, des gâteaux et plein d'autres choses délicieuses. Dame Orianna est la meilleure !<br><br>Dame Orianna est venue nous voir tôt ce matin. Elle nous a d'abord parlé, puis elle a chanté et ensuite elle a emmené Johnny dans l'autre pièce. Nous étions tous jaloux. Quand il est revenu, il était un peu pâle et il avait de petites marques rouges sur le cou, mais il avait aussi un énorme sac de chocolats ! Miri dit que dame Orianna emmène parfois un enfant et qu'elle lui fait des choses. Je n'ai pas bien compris quoi, mais il obtient ensuite un cadeau de sa part. La prochaine fois, j'espère qu'elle me choisira !<br><br>Il pleut aujourd'hui, alors je m'ennuie. Tomm dit que je suis stupide, mais je ne le crois point, parce que lui aussi est stupide. Si dame Orianna vient demain, j'aurai peut-être un cadeau. Ça lui apprendra !<br><br>Elle m'a choisi ! Dame Orianna est venue et elle m'a choisi ! Je l'ai accompagnée dans l'autre pièce. Elle m'a dit de lui montrer mon cou et là elle m'a mordu. Ça ne faisait pas vraiment mal, j'ai seulement eu des vertiges après. Mais ce n'est pas important, parce qu'elle m'a donné une épée en bois ! Personne n'en a de pareille ! Tomm sera vert de jalousie !
@@ -94071,7 +94100,6 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||CONCEPTION
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||INGÉNIERIE
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||DIRECTEUR
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||INGÉNIEURS
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||COORDINATEUR DE L'INFOGRAPHIE CONCEPTUELLE
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||ARTISTE CONCEPTUEL EXPÉRIMENTÉ
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||INFOGRAPHISTE DES PERSONNAGES EXPÉRIMENTÉ
@@ -94317,7 +94345,7 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||Fermer
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||Pour récupérer vos récompenses, connectez-vous à GOG GALAXY 2.0 et lancez le jeu.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||Pour récupérer vos récompenses et accéder au menu des mods, connectez-vous à REDlauncher et lancez le jeu.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||Champ de vue
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||Caméra
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||Effet
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||Mise au point automatique
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||Ouverture
@@ -95461,7 +95489,7 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||Axii peut affecter deux cibles simultanément mais, dans ce cas, l'effet est $I$ % plus faible.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||Axii peut affecter deux cibles simultanément.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||Bouclier explosif
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Chaque fois que le bouclier généré par Quen est détruit, les ennemis sont repoussés. La puissance de l'effet de répulsion augmente en fonction de votre rang. 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Chaque fois que le bouclier généré par Quen est détruit, les ennemis sont repoussés. La puissance de l'effet de répulsion augmente en fonction de votre rang. Renvoie $I$ % des dégâts absorbés vers l'attaquant.
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||Aard étendu
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||Augmente la portée d'Aard de $I$ mètre(s).
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||Piège magique
@@ -95532,7 +95560,7 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||Effet de surprise
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||Toucher les ennemis à l'aide d'une bombe augmente vos dégâts de corps à corps de $I$ % pendant 10 secondes.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||Techniques de l'École du Griffon
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente de $I$ % l'intensité de vos signes et de $I$ % votre regain de vigueur.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente de $I$ % l'intensité de vos signes et de $F$ % votre regain de vigueur.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||Techniques de l'École de la Manticore
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente vos dégâts à l'épée de $I$ % et les dégâts de vos bombes de $I$ %.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||Métabolisme stimulé
@@ -95685,8 +95713,8 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||Souffle du Nord
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||Tor Lara
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||Tor Zireael
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||Champ de vue
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||Inclinaison
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||Caméra
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||Solide armure, prête à résister à des dizaines d'années d'usage sur la Voie. 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||Armure du paroare huppé
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||Bottes du paroare huppé
@@ -95791,8 +95819,8 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||La cible n'avance pas vers vous lorsque vous lancez le signe Axii. De plus, l'efficacité d'Axii pendant les conversations augmente.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||La cible n'avance pas vers vous lorsque vous lancez le signe Axii. De plus, l'efficacité d'Axii pendant les conversations augmente.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||Axii peut affecter deux cibles simultanément mais, dans ce cas, l'effet est $I$ % plus faible.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Chaque fois que le bouclier généré par Quen est détruit, les ennemis sont repoussés. La puissance de l'effet de répulsion augmente en fonction de votre rang. 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Chaque fois que le bouclier généré par Quen est détruit, les ennemis sont repoussés. La puissance de l'effet de répulsion augmente en fonction de votre rang. 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Chaque fois que le bouclier généré par Quen est détruit, les ennemis sont repoussés. La puissance de l'effet de répulsion augmente en fonction de votre rang. Renvoie $I$ % des dégâts absorbés vers l'attaquant.
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Chaque fois que le bouclier généré par Quen est détruit, les ennemis sont repoussés. La puissance de l'effet de répulsion augmente en fonction de votre rang. Renvoie $I$ % des dégâts absorbés vers l'attaquant.
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||Augmente la portée d'Aard de $I$ mètre(s).
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||Augmente la portée d'Aard de $I$ mètre(s).
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||Libère une décharge d'énergie magique qui inflige des dégâts aux ennemis et les ralentit dans un rayon de 14 mètres. Augmente les dégâts de $I$ %.
@@ -95860,8 +95888,8 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||Manger des aliments vous rend de la vitalité pendant $I$ minutes.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||Toucher les ennemis à l'aide d'une bombe augmente vos dégâts de corps à corps de $I$ % pendant 10 secondes.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||Toucher les ennemis à l'aide d'une bombe augmente vos dégâts de corps à corps de $I$ % pendant 10 secondes.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente de $I$ % l'intensité de vos signes et de $I$ % votre regain de vigueur.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente de $I$ % l'intensité de vos signes et de $I$ % votre regain de vigueur.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente de $I$ % l'intensité de vos signes et de $F$ % votre regain de vigueur.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente de $I$ % l'intensité de vos signes et de $F$ % votre regain de vigueur.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente vos dégâts à l'épée de $I$ % et les dégâts de vos bombes de $I$ %.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||Chaque pièce d'armure intermédiaire augmente vos dégâts à l'épée de $I$ % et les dégâts de vos bombes de $I$ %.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||Consomme de l'adrénaline et réduit le coût d'intoxication des potions de $I$ % par point d'adrénaline. N'affecte pas les décoctions mutagènes.
@@ -96502,7 +96530,7 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1478682|760b621c|credits_PRINCIPAL_DEVELOPER_TECHNOLOGY_ENGINEERS|CUSTOM|Credits||INGÉNIEURS PRINCIPAUX EN DÉVELOPPEMENT DE TECHNOLOGIE
 1478683|264d1be9|credits_MANAGER_AND_DISTINGUISHED_ENGINEER|CUSTOM|Credits||RESPONSABLE ET INGÉNIEUR ÉMÉRITE
 1478684|7d13e6be|credits_PERFLAB_QA_ENGINEER|CUSTOM|Credits||INGÉNIEUR DE L'ASSURANCE QUALITÉ SPÉCIALISÉ EN PERFORMANCES
-1478685|449c30c5|credits_LEAD_GRAPHICS_ENGINEER|CUSTOM|Credits||INGÉNIEUR GRAPHIQUE
+1478685|449c30c5|credits_LEAD_GRAPHICS_ENGINEER|CUSTOM|Credits||RESPONSABLE DES INGÉNIEURS GRAPHIQUES
 1478686|735a3a1a|credits_SENIOR_GRAPHICS_ENGINEERS|CUSTOM|Credits||INGÉNIEURS GRAPHIQUES SENIORS
 1478687|38a28ad5|credits_GRAPHICS_ENGINEERS|CUSTOM|Credits||INGÉNIEURS GRAPHIQUES
 1478688|0ba8017a|credits_VOICE-OVER_RECORDING_AND_TRANSLATION_PARTNERS|CUSTOM|Credits||PARTENAIRES DE TRADUCTION ET ENREGISTREMENT DES DOUBLAGES
@@ -96553,7 +96581,7 @@ vous devez d'abord terminer la quête <font color="#CD7D03">Un poète sous press
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||RESPONSABLE CQA ET L&D SENIOR
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||Cheveux de fauteur de troubles.
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||ÉQUIPES DE DÉVELOPPEMENT DE CD PROJEKT RED
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||CRÉATEUR DU MOD HDPR
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||CRÉATEUR DU MOD HDRP
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||INGÉNIEUR DU SON SENIOR
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||ANIMATEURS DE GAMEPLAY EXPERTS
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||INGÉNIEUR EXPERT, COORDINATEUR

@@ -2084,7 +2084,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||Dav v Guildhallu
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Zatím.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Kde ses potkal s Priscillou?
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|Kolem mě ulice svým hlukem burácela, Velkolepého strádání chmurný to obrázek, Pod lemem šatů stehna hebká jako oblázek, Vznešená žena kolem mě ve spěchu trmácela.
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|Kolem mě ulice svým hlukem burácela, Velkolepého strádání chmurný to obrázek, Pod lemem šatů stehna hebká jako oblázek, Vznešená žena kolem mě ve spěchu trmácela.
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Utahaný.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Někde už jsem slyšel něco podobně strašného...
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Nádhera.
@@ -2254,6 +2254,7 @@
 362292|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362292|Sním tady.
 362339|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362339|Pro začátek mi pověz, jaké vzpomínky na tu ženu máš.
 362474|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_09a_dudu_irina_chat.w2scene"|Line text|DDBV_Q305_00362474|Dobrý, jsem v pořádku!
+362517|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||Katakan
 362614|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362614|Udělej si pohodlí a zkus se uvolnit.
 362710|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\zoltan_chivay_default.w2scene"|Line text|GRLT_ZOLTAN_00362710|Zoltane?
 362722|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\zoltan_chivay_default.w2scene"|Choice line||Co přesně tady děláš?
@@ -3868,6 +3869,7 @@
 389706|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_02_harald_confrontation.w2scene"|Line text|SDRU1_SQ204_00389706|Je mnohem víc než to. Díky němu se lesy hemží zvěří a naše ženy rodí silné děti. Díky moci Ducha lesa jsme nejlepší lovci na ostrovech.
 390026|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_00_peasants_alarm.w2scene"|Line text|SVR1_SQ204_00390026|Arnulf je mrtvej!
 390028|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_00_peasants_alarm.w2scene"|Line text|SVR1_SQ204_00390028|Tvůj bratr, zavražděnej! Sakra, no tak, lidi, musíme ho sundat!
+390062|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest2.journal"|Journal||Kur
 390095|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390095|Skvrna... wyverní olej.
 390101|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390101|Cukr… A kousky něčeho namočeného ve wyverním oleji… Hmm… draslík?
 390103|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390103|Vypadá to, že tu bombu vyrobili tady...
@@ -5475,6 +5477,7 @@
 412649|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|NVGT_Q202_00412649|Další, co ho táhne vzrušení, co? Tak dobře poslouchej, jinak skončíš na dně moře.
 412650|3abcbb2d|item_name_mh104_contract_text|CUSTOM|Notices||Na vědomí se dává, že císařské vojsko hledá muže, který se vyzná ve zdejší oblasti - například lovce či průzkumníka - který nám pomůže najít hlídku, jež se ztratila.<br><br>Je možné, že tito vojáci padli za oběť nějaké příšeře. Pokud se toto podezření potvrdí, každému, kdo přinese hlavu této šelmy, vyplatí níže podepsaný odměnu. Také o celé příhodě poskytne další informace.<br><br>Sláva císaři!<br><br>-Milan Noran, velitel divize umístěné ve vesnici Rudná
 412833|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\nml_burrows_soltis_default.w2scene"|Choice line||Kdo jsou Dámy lesa?
+412838|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_kaer_trolde_sjusta.w2scene"|Comment text||EXT. Dialogue with Sjusta the tailor, in front of his workshop.
 412917|00000000||CJournalResource "gameplay\journal\quests\giant.journal"|Journal||Prozkoumej rozvaliny Urskaru pomocí zaklínačských smyslů a najdi známky Hjalmarovy přítomnosti.
 413007|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|HJOR_Q201_00413007|Srdce bylo znetvořené. To je vždy zlé znamení.
 413009|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|UDAL_Q201_00413009|Je to zlé znamení i pro mě? Slyšíš mě? Co se stane se mnou?
@@ -7056,6 +7059,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|Nemůžu si ty peníze vzít. Je mi líto, že jsem ti ho nemohl přivést živého.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|Říkals něco o sirénách... je jich na Undviku hodně?
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|Straaaaášně moc... Víc než na jiných ostrovech.
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] PŘESKOČIT A PODVÉST MENGEHO
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|V katakombách pod Zlatou čtvrtí, ale budeš muset projít přes Odkrojek a vydržet přitom smrad chudoby.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|Třeba za donesení trofeje dostanu odměnu.
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|Třeba je na něj odměna. Potřebuju trofej.
@@ -14789,6 +14793,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|V Novigradu žádné příšery nenajdeš. Mezi těmito zdmi hoří Věčný oheň.
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|Oheň... V srdci mi hoří Oheň!
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||O knedlících a mečích
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HÁK: Promluv si s kupci
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HÁK: Přečti si nástěnku
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HÁK: Promluv si s Ernestem
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HÁK: Poslechni si, co říkají zákazníci
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|Leif, syn Erikův...
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|Kjall, syn Olafův...
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|Zhynul ve slávě...
@@ -22599,11 +22607,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|…
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|Uvidíme se velmi brzy.
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|…
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Začátek úkolu
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hák1: Prasata na rožeň
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|Geralt ti dal znamení!
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|Jsem připravená!
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|Leje! Přišel na nás dešťový Ragh nar Roog!
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|Pro čest!
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|Hael!
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hák: Zavřená brána od pokladnice
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|Nováček?
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|I ten nejlepší meč stojí za hovno, když s ním mává slaboch, co myslíš?
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|Zajímalo by mě, jestli ho to sejmulo.
@@ -23003,6 +23014,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|Přestaň nám kazit zábavu, jasný?
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|Skvělý. Ufff… ten hajzl mě úplně vykolejil.
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|Tak já si tedy půjdu po svém, ale příště byste si měli najít nějaké odlehlejší místo.
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Začátek úkolu
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|Caranthir je věrný stoupenec, ale Ge'els - to je jiný příběh...
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|A čirou náhodou Eredin našeho milovaného panovníka otrávil.
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|Počkej na mě chviličku. Hned se vrátím.
@@ -23010,6 +23022,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|Ubohé… Prostě ubohé…
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|Nějaká poslední slova?
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|Z cesty, starče… Tvůj život ušetřím.
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Dej si meditaci pro ukrácení času
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Řekni Sukrusovi, aby vzal bedny.
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Zůstaň na hlídce.
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Zjisti, co Sukrus chce.
@@ -30801,6 +30814,7 @@
 576811|00000000||CStoryScene "quests\epilogues\quest_files\q505_ciri_free\scenes\q505_03_ciri.w2scene"|Line text|GRLT_Q505_00576811|Netuším.
 576812|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|GRLT_Q001_00576812|Ne jako každý, a ne ledajakou. Ta moje voní po šeříku a angreštu a obléká se do černé a bílé.
 576814|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|MRRR_Q001_00576814|Hej, dvakrát šnaps!
+576815|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||[EN] G and V look at each other surprised, then with admiration at CY, then they pause.
 576818|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00576818|Ale tys spal, strýčku Vesemire.
 576819|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Choice line||Z toho se nevykroutíš.
 576821|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Choice line||Tak jo, dám si.
@@ -31834,6 +31848,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Dál už to znám.
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|Ahoj, ty tam!
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|Dám ti radu. Když neumíš zpívat dobře, zpívej nahlas!
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Ohlas se u hlídek
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Nastraž past pomocí znamení Yrden NEBO se strážce zbav buď znamením Axie, nebo mečem
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Zapal vozík
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Dej signál, že je ve skladišti čistý vzduch
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Já vím, sledoval jsem tvoje stopy.
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|Přišla jsi k Ježibabám a k baronovi a on narazil na Keiru.
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|Ne, nesetkali. Z portálu jsem nevystoupila v Avallac'hově skrýši, ale přímo uprostřed Křivušských Blat.
@@ -33803,6 +33821,7 @@
 589857|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_08b_yen_about_megascope.w2scene"|Line text|YENN_SQ302_00589857|Krystal z megaskopu? Kruci, je popraskaný... Ale třeba to nebude vadit.
 589877|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|ARNV_Q206_00589877|Proč jste mi pomohli?
 589879|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|BECC_Q206_00589879|Protože chci slyšet, proč jsi zradil mého otce, bratra i celý náš klan! Koukej mi to říct do očí!
+589896|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||[EN] EXT. KAER MORHEN LOWER COURTYARD. D *The lower courtyard is full of training equipment
 589898|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b05a_01_returned_with_arnvald.w2scene"|Line text|GRLT_Q206_00589898|Proč jsi je zradil? Mluv, nebo dokončím, co jsem začal.
 589901|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|PHIL_SQ302_00589901|Vilgefortz to zvládl. Používám stejnou metodu - pěstuju tkáň na drahokamech.
 589902|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|MGLA_SQ302_00589902|To je šílenství... ...potřebovat... ...moc... ...ystavíš... ...kému nebezpe...
@@ -41128,7 +41147,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||Duch chlapce
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||Zabij ghúly.
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|Neruš mě, Geralte! Zakopnu a spadnu!
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|Co si myslíš, že máš v ruce? Meč, nebo cep? Úder musí jít ze zápěstí, ne z lokte! Znovu!
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|Co si myslíš, že máš v ruce? Meč, nebo cep? Úder musí jít ze zápěstí, ne z lokte! Znovu!
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||Nech mě projít.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|Nech mě projít.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|No dobře, tak si jdi. Máš cestu volnou.
@@ -50366,6 +50385,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Ale když se Geralt pokusil z věže odejít, přízrak odhalil svou pravou povahu. Ukázalo se, že co Geralt považoval za ducha nevinné dívky, byla ve skutečnosti morová panna - smrt a nemoc v podobě přízraku.<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Možná že něco z toho, co dívka řekla, Geralta varovalo, nebo za to mohly jeho zaklínačské instinkty - každopádně Geralt věděl, s kým má tu čest, doslova vteřinu předtím, než Anabel odhalila svou pravou povahu. Její duch byl ve skutečnosti morová panna, strašlivý přízrak šířící smrt a mor.<br>
 1058855|00000000||Unnamed CJournalResource|Journal||Zběhové
+1058856|00000000||Unnamed CJournalResource|Journal||Skupina vojáků, kteří patřili k temerské armádě, opustili své stanoviště a zběhli. Tito muži byli neuvěřitelně dobře vycvičeni a zabíjeli lidi na potkání. Naposledy se o nich vědělo, že rozbili tábor v nedalekých lesích.
 1058857|00000000||Unnamed CJournalResource|Journal||Zběhové v lesích
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||Geralt tábor zběhů našel a všechny zavraždil! Z podělaných zběhů se mi chce zvracet! Žebrali o milost, ale Geralt jim žádnou neprokázal! Pak jim sebral všechny věci a prodal je.
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||Měli bychom to prověřit. Pro jistotu.
@@ -51445,6 +51465,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Trochu se pobavíme.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Co takhle zahrát si karty?
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Je čas jít na kutě.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[DEBUG] DEBUG - Přeskočit k opilému Eskelovi - DEBUG
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|Hah. Tady je klíč.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||Zakázka: Lesní šelma
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||Pohřešovaná manželka
@@ -51647,7 +51668,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|Špatný, když poslechneš. Špatný, když neposlechneš.
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|Chtěl bych projít po špičkách mezi tulipány.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|Ne. To není správný heslo.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||Ztratila se hlídka - Odměna
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||Oznámení:<br><br>Vojáci ve službě Jeho císařské výsosti Emhyra var Emreis se ztratili při výkonu služby. Odměna bude vyplacena za jakoukoliv pomoc při jejich nalezení. Více informací poskytne zásobovací důstojník tábora skupiny armád Střed.
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||Dopis Rolanda Treuggera Hammondovi.
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||Herní salon č. 1.<br><br>Současný měsíc. <br>Výdaje – 38 756 korun <br>Režie – 5294 korun<br>Organizační daně – 3875 korun<br><br>Dlužníci<br>Hrabě Tybalt – 1285 korun – termín platby – konec měsíce – nelze smlouvat <br>Saša - 956 korun – termín platby – prostředek příštího měsíce – možné odložit o dva týdny s nárůstem úroku o 35 procent. <br>Finneas – 5148 korun – termín platby – poslední varování. <br>Bernard Tulle – dluh splacen. <br>Patrik Ořešák – dostal varování – vymáhání zahájeno.
@@ -54002,6 +54022,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|Žádné potíže nemám v úmyslu. Zatím.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Zeptej se kohokoliv z tábora, jestli neviděl Marigoldova únosce.
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|Mhm. Měj se.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[EN] [DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Najdi cestu do chalupy.
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Postarám se o to.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Musíš mi dát víc.
@@ -56788,6 +56809,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||Odstraň zábrany ze dveří a osvoboď elfku.
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Potápění
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Podržením <<DiveDown>> se potápíš níže nebo pomocí <<DiveUp>> poplaveš směrem k hladině.<br><br>Dávej pozor na dech – když ti dojde, utopíš se!
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[EN] [DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||Tady je má pozvánka.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|Tady je má pozvánka. Je celá tvoje, jestli chceš.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|Jo, tu si rád vezmu.
@@ -56885,6 +56907,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|Dost na to, abych si koupil sídlo v Koviru, kde budu jíst ovoce až do konce života.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|To není špatný. Ne každému se poštěstí, aby znal cenu za svou hlavu.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|Většina lidí by dala přednost tu cenu nemít.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||Oznámení o pohřešovaných vojácích
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|Ale proč jsi přišel? Abys mi usnadnil život?
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||Chci s tebou utéct, abychom někde mohli být sami.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|Hostiny na Skellige jsou tak předvídatelné. Chlemtající opilci, nehorázné chvástání, což vede k nevyhnutelným pranicím…
@@ -57493,7 +57516,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||Lekce gwintu
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||V současné době přijímám žáky na lekce v hraní gwintu. Budu učit pouze ty, kteří se prokážou kázní, logickým uvažováním a vůlí se učit. Obzvláště vítáni jsou všichni mimořádně nadaní. Žáci si musí obstarat svůj vlastní balíček.<br><br>Také hledám zkušenější hráče, kteří budou představovat výzvu a příležitost pro vzájemné zlepšení dovedností.<br><br>- Myšilov, druid
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||Pohleď do hlubin a buď povznesen.
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||Klíč od doupěte katakana
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||Trochu zarezlý klíč.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||Klíč od oxenfurtské márnice
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||Zašlý starý klíč.
@@ -57999,6 +58021,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||První mapa Adalberta Kermitha
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||Mapa ukazující, kde lze najít symboly spojené se zaklínači ze školy Kočky.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||Zabij zbojníky.
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||Klíč od katakanovy skrýše
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||Poté, co mě profesor Slavko Atimstein najal do své výzkumné skupiny, jsem zahájil své studium zaklínačů ze školy Gryfa. Mým pracovištěm byly kobky pod Křivušským pahorkem. Profesor tvrdil, že se jedná o místo posledního odpočinku jednoho z "Gryfů", a přál si, abych našel cestu dovnitř.<br><br>Rychle jsem objevil hned několik zajímavých míst, z nichž každé bylo označeno piktogramem ve tvaru zaklínačského medailonu školy Gryfa. Tato místa jsem označil na této mapě.<br><br>Edwin Greloff. Pomocná vědecká síla Fakulty přírodovědné na Oxenfurtské akademii.
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||Prašivej zkurvenec s kapavkou. První mapu, kterou jsem zhotovil pro profesora Atimsteina, jsem prohrál v gwintu. Teď se musím vrátit na základnu v kobkách pod Křivušským pahorkem a začít znovu. Mezitím jsem na této mapě vyznačil další zajímavá místa.<br><br>Edwin Greloff. Pomocná vědecká síla Fakulty přírodovědné na Oxenfurtské akademii.
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||Nádhera. Profesor Slavko Atimstein bude zuřit. První mapu jsem prohrál v gwintu, druhou mapu mi ukradli, když jsem byl mírně unaven po náročné noci v kasinu. Nemůžu na základnu u hrobek pod Křivušským pahorkem dorazit s prázdnýma rukama, nebo mě profesor vykuchá zaživa. Čtyři nová místa vyznačená na této mapě mě snad před jeho hněvem uchrání.<br><br>Edwin Greloff. Pomocná vědecká síla Fakulty přírodovědné na Oxenfurtské akademii.
@@ -62955,6 +62978,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||ŘEDITEL - PROJEKT GALAXY
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||ŘEDITEL - WEB
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||VEDOUCÍ
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||TECHNICI
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||DALŠÍ PROGRAMOVÁNÍ
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||DALŠÍ GRAFIKA
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||ANIMOVANÉ PŘÍBĚHOVÉ SEKVENCE
@@ -75354,7 +75378,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|Krajní případy? Kulový. Proč?
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|Ach. Je zde jedna bytost, která dokáže Dettlaffa přivolat. Má k tomu oprávnění i moc, aby ho donutila zjevit se na daném místě.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|Jak je na tom ten odvar? Jde to?
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||Karel Lanzano
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|Ty mi jako lamač nepřijdeš.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|Zase ty? No tak ven s tím - co chceš?
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||Ukážeš mi zboží?
@@ -90983,9 +91006,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||Zápisky Prvního správce tlupy Filiberta Čtyřprsťáka
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||Zisky a ztráty za měsíc blathe<br><br>Den třetí<br>Hnízdo lítavejch ještěrů v kopcích v Divočině. Začali požírat naše lidi. Naposledy chňapli Gilberta, čapli ho rovnou z hradeb. Gilbert se obvykle měl hodně na pozoru, ale každej se nechá ukolíbat, když si musí odskočit. Filibert zuří. Náklady na výcvik plně užitečnýho člena naší skupiny z jednoho z čerstvejch nováčků nejsou zanedbatelný. A aby se ty náklady proměnily v trus nějaký příšery – to je akorát plejtvání.<br>Den sedmej<br>Přepadli jsme karavanu kupčíků, co cestovali z východního Toussaintu. Neměli stráže a nekladli žádnej odpor, ale ani tak jsme na tom skorem vůbec nic netrhli – ty hadry z příze, co vezli, by mohly zajímat tak leda skelligský křováky s holou zadnicí a z naší skupiny se na výpravu tím směrem nikdo nechystá. Filibert začal zase zuřit a jednoho z těch kupčíků zabil, nějakýho chlapa jménem Lumierex. Ten zbytek pláchnul na východ.<br>Den jedenáctej<br>Naši zvědové vystopovali tři chlapy, co se plížili lesem. Byli převlečený za žebráky a tvrdili, že to taky žebráci jsou. Ale my se nenechali napálit. Když jsme si s nima trochu pohráli, přiznali, že jsou klenotníci a vezou zlato z maechtskejch dolů. Jen surovou rudu, ale slibný jakosti. Filibert ty klenotníky nařidil zabít. Lháře totiž strašně nesnáší.<br>Den sedumnáctej<br>Výprava z císařský akademie na Castel Graupian rozbila stan na druhým břehu Sansretouru. O učencích se ví, že se ve zlatě zrovna netopěj, ale tyhle maj prostorný stany a strašnou spoustu chlastu. Jejich osud byl tim pádem zpečetěnej. Filibert za nima poslal pár chlapů.<br>Den dvacátej třetí<br>Už jsou to aspoň dva tejdny, co se na cestě objevilo něco zajímavýho. Bludný rytíři mezitim pochytali pár dalších našich chlapů. Dva umřeli, jeden byl jen zraněnej a uprchnul. Ztratili jsme vybavení v hodnotě spousty korun. Filibert nařídil toho zraněnýho dát do klády za nedbalost. Jeho ochablý tělo to nevydrželo a umřel.<br>Den dvacátej čtvrtej<br>Štěstí se obrátilo. Zachytili jsme vinařskou karavanu, jak se vracela z jihu. Prodali svoje zboží a měli u sebe spoustu peněz. Podle předběžnejch výpočtů to dělá asi čtyři stovky korun pro každýho z nás. Filibert se ještě nerozhodnul, jestli si to rozdělíme rovným dílem.<br>Den dvacátej osmej<br>Jednotka poslaná na statek Basane se se zásobama nevrátila. Jídla moc nemáme. Jen na chlastu se přežívat nedá, a žrát zlato se taky ještě nikdo nenaučil. Musíme vyplenit pár vesnic.<br>Den třicátej<br>Teď udělám celkový vyučtování za měsíc blathe. Jsme v černejch - a jak. Vypadá to, že v týhle oblasti ještě jeden měsíc zůstanem.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|Proč jsi tady, pane?! Toto je soukromé slyšení. Geralte, co to má znamenat? Je to snad nějaký pletich, který jsi zosnoval za mými zády?
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||Psaní od turnajového písaře.
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||Psaní od turnajového písaře.
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||Mezinárodní rytířský přebor pod záštitou paní Vivienne de Tabris, 1275<br><br>Účastníci zapsaní a způsobilí k účasti v soutěži:<br><br>Gregor de Gorgon, vítěz loňského přeboru. Nebude se účastnit běžné soutěže, ale bude bojovat v posledním zápase proti rytíři, jenž získá nejvíce bodů. (Vše nasvědčuje tomu, že Gregor svůj titul obhájí.)<br><br>Anséis, princ lyrijský a rivský, který se k nám přidal potřetí v řadě<br><br>Horm Akerspaark, princ maechtský, který je údajně krve císaře Emhyra, nyní přijel na svůj čtvrtý přebor<br><br>baron Palmerin de Launfal, přeboru se účastní pošesté<br><br>Donimir z Troy, rytíř redanský, na přeboru je poprvé<br><br>Rainfarn z Attre, na přeboru je posedmé, vítěz ročníku 1269<br><br>Guy de Bois-Fresnes z Metinny (bratranec Reynarta de Bois-Fresnes z druhého kolene, jeden z bludných rytířů Její Milosti), na přeboru je potřetí<br><br>Delwyn z Creigiau, mladý rytíř, na přeboru je poprvé<br><br>Tailles z Dorndalu, rytíř Řádu planoucí růže, na přeboru je poprvé<br><br>Llinos z Metinny, na přeboru je potřetí<br><br>Guillaume de Launfal (synovec barona Palmerina), na přeboru je poprvé.<br>[pozdější dodatek] Guillaume kvůli zranění přenechal své místo v přeboru jinému rytíři.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||Vivienniny zápisky
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||Vivienniny zápisky
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||Výdaje za blathe - feainn<br><br>14 loktů látky: 80 korun<br>boty (dračí kůže): 140 korun<br>závodní sedlo: 280 korun<br>kouzelný krém: 1400 korun (celkem)
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||Památníček
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||Můj milý deníčku!<br>Už jsou to tři tejdny od toho dne, co mě paní Orianna vzala z ulice. Konečně mám co jíst a pít a každej den si hraju s ostatníma dětmama. Je to dokonce lepčejší než doma, protože doma bylo jídla málo, a co umřela mamka, nebylo už jídlo vůbec žádný.<br><br>Neska jsem si hrál s Miri a Tommem – nejdřív jsme si hráli berany berany duc, pak na schovku a pak s klacíkama. Pak jsme si hráli na babu. Moc mě to bavilo! Pak přijel kočár od paní Orianny a přivezl spoustu jídla. Byly tam loupáky, ovoce a dort a spousta dalších dobrot. Paní Orianna je nejlepčejší!<br><br>Neska ráno za náma paní Orianna přijela. Nejdřív si s náma povídala, pak nám zpívala a pak si vzala Jeníka do vedlejšího pokoje. Všichni jsme mu záviděli. Když se vrátil, byl trochu bledej a na krku měl malý červený pupínky, ale taky měl obrovitánskej pytel čokoládiček! Miri říká, že paní Orianna si občas některý děcko vezme a něco s ním dělá, já tomu moc nerozuměl, ale pak od ní dostane dárek. Doufám, že příště si tam vezme mě!<br><br>Neska prší a já se strašně nudím. Tomm říkal, že jsem pitomej, ale já mu nevěřím, páč on je taky pitomej. Třeba zejtra přijede paní Orianna a já od ní dostanu dárek. To bude čubrnět!<br><br>Vybrala si mě! Paní Orianna přijela a vybrala si mě! Šel jsem s ní do vedlejšího pokoje a ona mi řekla, ať jí ukážu krk, a pak mě tak jakoby kousla. Moc to nebolelo, jen se mi pak trochu motala hlava. Ale na tom nezáleží, protože mi dala dřevěnej mečák! Takovej nikdo nemá! Tomm zbledne závistí!
@@ -94072,7 +94095,6 @@
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||DESIGNÉŘI
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||TECHNICI
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||MANAŽER
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||TECHNICI
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||KOORDINÁTOR KONCEPTOVÝCH GRAFIKŮ
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||ODBORNÝ KONCEPTOVÝ GRAFIK
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||ODBORNÝ GRAFIK POSTAV
@@ -94318,7 +94340,7 @@
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||Zavřít
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||Odměny si vyzvedneš tak, že se přihlásíš na GOG GALAXY 2.0 a spustíš hru.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||Odměny a přístup k nabídce modů získáš tak, že se přihlásíš na REDlauncher a spustíš hru.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||Zorné pole
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||Kamera
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||Efekt
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||Automatické ohnisko
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||Apertura
@@ -95462,7 +95484,7 @@
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||Axie dokáže ovlivnit dva cíle najednou, ale účinek je o $I$ % slabší.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||Axie dokáže ovlivnit dva cíle najednou.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||Výbušný štít
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Kdykoliv se štít ze znamení Quen rozbije, odstrčí nepřátele dozadu. Síla odstrčení se zvyšuje s úrovní schopnosti. 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Kdykoliv se štít ze znamení Quen rozbije, odstrčí nepřátele dozadu. Síla odstrčení se zvyšuje s úrovní schopnosti. Odrazí $I$ % pohlceného poškození zpět na útočníka. 
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||Dálkový Aard
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||Zvyšuje dosah znamení Aard o několik yardů (konkrétně o $I$).
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||Magická past
@@ -95533,7 +95555,7 @@
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||Prvek překvapení
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||Zásah nepřátel petardou ti na 10 sekund zvýší kontaktní poškození o $I$ %.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||Techniky školy Gryfa
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Každá část střední zbroje zvyšuje sílu znamení o $I$ % a regeneraci výdrže o $I$ / sek.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Každá část střední zbroje zvyšuje sílu znamení o $I$ % a regeneraci výdrže o $F$ / sek.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||Techniky školy Mantikory
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||Každá část střední zbroje zvyšuje ranivost meče o $I$ % a poškození petardami o $I$ %.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||Zrychlení metabolismu
@@ -95686,8 +95708,8 @@
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||Dech Severu
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||Tor Lara
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||Tor Zireael
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||Zorné pole
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||Náklon
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||Kamera
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||Odolná zbroj, která ustojí desítky let na Stezce.
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||Zbroj šarlatového chocholu
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||Boty šarlatového chocholu
@@ -95792,8 +95814,8 @@
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||Cíl se při sesílání znamení Axie nepohybuje směrem ke Geraltovi. Zvyšuje efektivitu Axie v konverzacích.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||Cíl se při sesílání znamení Axie nepohybuje směrem ke Geraltovi. Zvyšuje efektivitu Axie v konverzacích.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||Axie dokáže ovlivnit dva cíle najednou, ale účinek je o $I$ % slabší.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Kdykoliv se štít ze znamení Quen rozbije, odstrčí nepřátele dozadu. Síla odstrčení se zvyšuje s úrovní schopnosti. 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Kdykoliv se štít ze znamení Quen rozbije, odstrčí nepřátele dozadu. Síla odstrčení se zvyšuje s úrovní schopnosti. 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Kdykoliv se štít ze znamení Quen rozbije, odstrčí nepřátele dozadu. Síla odstrčení se zvyšuje s úrovní schopnosti. Odrazí $I$ % pohlceného poškození zpět na útočníka. 
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Kdykoliv se štít ze znamení Quen rozbije, odstrčí nepřátele dozadu. Síla odstrčení se zvyšuje s úrovní schopnosti. Odrazí $I$ % pohlceného poškození zpět na útočníka. 
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||Zvyšuje dosah znamení Aard o několik yardů (konkrétně o $I$).
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||Zvyšuje dosah znamení Aard o několik yardů (konkrétně o $I$).
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||Vyvolá magický výboj, který poškodí a zpomalí nepřátele v okruhu 14 yardů. Zvyšuje poškození o $I$ %.
@@ -95861,8 +95883,8 @@
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||Snězené jídlo doplňuje po dobu $I$ minut zdraví.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||Zásah nepřátel petardou ti na 10 sekund zvýší kontaktní poškození o $I$ %.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||Zásah nepřátel petardou ti na 10 sekund zvýší kontaktní poškození o $I$ %.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Každá část střední zbroje zvyšuje sílu znamení o $I$ % a regeneraci výdrže o $I$ / sek.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Každá část střední zbroje zvyšuje sílu znamení o $I$ % a regeneraci výdrže o $I$ / sek.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Každá část střední zbroje zvyšuje sílu znamení o $I$ % a regeneraci výdrže o $F$ / sek.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Každá část střední zbroje zvyšuje sílu znamení o $I$ % a regeneraci výdrže o $F$ / sek.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||Každá část střední zbroje zvyšuje ranivost meče o $I$ % a poškození petardami o $I$ %.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||Každá část střední zbroje zvyšuje ranivost meče o $I$ % a poškození petardami o $I$ %.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||Spotřebuje adrenalin a sníží náročnost elixírů na toxicitu o $I$ % za každý bod adrenalinu. Neplatí pro mutagenové odvary.
@@ -96554,7 +96576,7 @@
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||HLAVNÍ CQA A MANAŽER UČENÍ A VÝVOJE
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||Výtržnický účes.
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||VÝVOJÁŘSKÉ TÝMY CD PROJEKT RED
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||TVŮRCE MODŮ HDPR
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||TVŮRCE MODŮ HDRP
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||HLAVNÍ ZVUKOVÝ TECHNIK
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||ODBORNÝ HERNÍ ANIMÁTOR
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||ODBORNÝ TECHNIK, KOORDINÁTOR

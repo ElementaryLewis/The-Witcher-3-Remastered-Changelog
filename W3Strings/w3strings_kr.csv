@@ -888,7 +888,7 @@
 182700|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00182700|형태를 바꾸는 것이 어찌 해롭단 말인가.
 182702|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00182702|기억하라! 괴물을 결정짓는 건 겉모습이 아닌...
 182704|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도덕성을 잊는 것...
-182706|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||사악한 본성인 것을...
+182706|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||이자와 같은 비열한...
 182708|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00182708|이자와 같은 비열한 본성이라는 것을!
 182715|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00182715|도덕성을 잊는 것... 그리고 과식하는 것...
 182717|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NRW3_Q305_00182717|그 말이 맞구나, 위쳐! 저자의 더러운 의심이
@@ -896,7 +896,7 @@
 182721|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NRW3_Q305_00182721|도플러는 살아서, 내 딸과 결혼할 것이다.
 182723|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NRW3_Q305_00182723|괴물일지라도, 그 사랑이 두려움 없이 진실하므로.
 182731|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00182731|이것이 이야기의 끝이오, 그리고 우리의 교훈은...
-182742|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||그가 괴물이 아니라는 것이오...
+182742|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||모습을 바꾸는 자는 괴물이 아니오...
 182744|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도플러를 사랑해주시오...
 182752|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00182752|모습을 바꾸는 자는 괴물이 아니오.
 182754|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00182754|도플러를 사랑해 주시오... 그... 물고기처럼.
@@ -1498,7 +1498,7 @@
 339562|00000000||CJournalResource "gameplay\journal\quests\family.journal"|Journal||러버킨을 따라가자.
 340839|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\irina_renarde_default.w2scene"|Line text|IRIN_IRINA_00340839|아, 위쳐. 반가워요.
 341216|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||난 쾌락을 위해 괴물을 죽이지...
-341218|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||가장 추악한 야수들을 사냥하는 것...
+341218|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||가장 추악한 야수들을 죽이는 것…
 341228|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00341228|그대! 공주님의 명이오! 오시오!
 341230|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NPEM1_Q305_00341230|어서 올라가 봐! 빨리 무대로 올라가!
 341232|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NPEM2_Q305_00341232|배신자 녀석을 지하 감옥에 던져!
@@ -2029,7 +2029,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||길드 집회소의 군중
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||잘 있어.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||프리실라를 어디에서 만났어?
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|거리의 소음이 주위를 감싸네, 슬픔 속에, 장엄한 고통의 심상으로. 고고한 여인이 발걸음을 재촉하네, 앙증맞은 손가락이 드레스를 한껏 움키고.
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|거리의 소음이 주위를 감싸네, 슬픔 속에, 장엄한 고통의 심상으로. 고고한 여인이 발걸음을 재촉하네, 앙증맞은 손가락이 드레스를 한껏 움키고.
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||장황해.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||어디선가 엄청 비슷한 걸 들어본 적이 있는데...
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||아름답군.
@@ -2199,6 +2199,8 @@
 362292|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362292|여기서 꿈을 꿔요.
 362339|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362339|그럼, 그분과 관련된 당신의 기억을 말해주세요.
 362474|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_09a_dudu_irina_chat.w2scene"|Line text|DDBV_Q305_00362474|난 진짜 괜찮다니까.
+362517|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] Katakan
+362518|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] Ciastko
 362614|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362614|그럼, 편안한 자세로 긴장을 푸세요.
 362710|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\zoltan_chivay_default.w2scene"|Line text|GRLT_ZOLTAN_00362710|졸탄?
 362722|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\zoltan_chivay_default.w2scene"|Choice line||넌 여기서 정확히 뭘 하고 있는 거지?
@@ -2401,7 +2403,7 @@
 367986|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NPM1_Q305_00367986|오늘 이 정의롭고 고귀한 연회에...
 367988|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NPM1_Q305_00367988|공주의 약혼을 축하하기 위해 한자리에 모였소!
 367990|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|GRLT_Q305_00367990|오호라, 괴물 한 마리 보이지 않는구나.
-367992|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||어쩌면 관객들 사이에...
+367992|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||그가 두려움에 관객들 사이에...
 367994|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||그는 숨었을지도...
 367996|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NRW3_Q305_00367996|그러나 야수와 공주? 안 되지, 안 될 일이오.
 367998|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Line text|NRW3_Q305_00367998|어찌 되었든 저기 오는군, 마지막 연회를 즐기러!
@@ -3414,6 +3416,8 @@
 382824|00000000||CStoryScene "quests\generic_quests\skellige\quest_files\mh206_fiend_ruins\scenes\mh206_03_near_lair.w2scene"|Line text|GRLT_MH206_00382824|이번에는 못 빠져나간다...
 382835|00000000||CJournalResource "gameplay\journal\quests\q105witches.journal"|Journal||오두막으로 가서 소년에게 말을 걸자.
 382839|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00382839|또 희생자로군.
+382870|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] BidDebugQuestDescription1 dewscription i ciastka
+382871|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] BidDebugQuestDescription2 description
 383030|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_05c_8_folan_gmpl_dlgs.w2scene"|Line text|FLAN_Q202_00383030|좋아... 땅만 지랄같이 단단하지 않았으면 아주 뿌리를 내릴뻔했네.
 383032|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_05c_8_folan_gmpl_dlgs.w2scene"|Line text|FLAN_Q202_00383032|난 여기서 기다리고 있겠네.
 383034|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_05c_8_folan_gmpl_dlgs.w2scene"|Line text|FLAN_Q202_00383034|내가 엄호하겠네. 시야를 확보할 수 있게 자리를 잡겠어.
@@ -3813,6 +3817,8 @@
 389706|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_02_harald_confrontation.w2scene"|Line text|SDRU1_SQ204_00389706|그 이상의 존재야. 정령 덕분에 숲엔 사냥감이 풍부해지고, 여자들은 튼튼한 아이를 낳지. 정령의 힘으로 우리가 섬에서 가장 뛰어난 사냥꾼으로 거듭난 걸세.
 390026|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_00_peasants_alarm.w2scene"|Line text|SVR1_SQ204_00390026|아르눌프가 죽었어!
 390028|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_00_peasants_alarm.w2scene"|Line text|SVR1_SQ204_00390028|네 동생이 살해당했다고! 빌어먹을, 다들 모여! 그 자식을 죽여야 돼!
+390062|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest2.journal"|Journal||[PL] [DEBUG] Kur
+390063|00000000||Unnamed CJournalResource|Journal||[PL] [DEBUG] BidDebug 2
 390095|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390095|자국... 와이번 기름이야.
 390101|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390101|설탕... 그리고 와이번 오일에 담아 둔 덩어리... 흠... 포타슘인가?
 390103|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390103|여기에서 폭탄을 만들었던 것 같군...
@@ -4387,6 +4393,9 @@
 394356|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_07_eskel_on_forktail_death.w2scene"|Choice line||옌이 이게 왜 필요한지 알려주던가?
 394367|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_03_happy_leshy_reward.w2scene"|Line text|SWR3_SQ204_00394367|다른 장로들을 처리하고 왔어. 너만 남았지.
 394390|00000000||CJournalResource "gameplay\journal\quests\family.journal"|Journal||남작의 딸, 타마라를 옥센푸르트에서 찾자.
+394391|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] [Skorup]<br><br>Si ju lejter, mówi hejter<br>Hejtuję świata syf i wciskam ENTER<br>Śląski bęben dudni coraz głośniej<br>Martwią się wylansowani goście<br>Owszem, czuję się doskonale<br>Cudze szanuję, swoje głośno chwalę<br>Wiesz, ja go palę - przypicowany goguś<br>My są stąd, weź kup sobie globus<br>SI ziomuś, siła intelektu<br>wbijamy na jana do kanonu lektur<br>W TV stek bzdur, nie będę oglądał<br>Wolę jak Janek król pod Wiedniem posprzątać.
+394392|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] [BU]<br><br>Szczytna inicjacja, szybka interpretacja<br>Rap misja u siebie istotna jak delegacja<br>Świetna intuicja, super inscenizacja<br>Mamy swoje insygnia w sidłach interesanta<br>stanowcza ingerencja o szczerych intencjach<br>Ta systematyczna iskra to samodzielna inwencja<br>Zsolidaryzowana przez siedmiu solistów<br>Spłynął inkaust do bitu przez solidny impuls<br>Stajnia inna niż reszta, śląski solenizant<br>Staż imponujący big up MaxFloRec świta!<br>Choć był czas, że trawiła go szpetna intryga<br>Dzisiaj wzbija się, zakwita jak sativa przy indica.<br><br>[Refren - GrubSon]<br>SI - siedmiu chłopa z MaxFlo ogrodu<br>SI - tyś jedyna niczym poezja<br>Mi - dają kopa bez pardonu Ci<br>Si - si - silesia!
+394393|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] [Bob One]<br>To jest seryjna infekcja, sekcja instynkt, lekcja pierwsza<br>To trzęsie tłumem tak jak epilepsja<br>To Silesia koneksja, sprawna ingerencja<br>Siedmiu innych dusz w materię Twego serca<br>To samozwańcza izba<br>Tych co skaczą po bicie, kiedy Ty się po nim ślizgasz<br>Kiedy wchodzimy na scenę Ty odchodzisz przy gwizdach<br>Samurajska impreza, to i krew będzie bryzgać<br>Nie wierzysz? Zapytaj szoguna i spytaj ile grobów<br>Ma na sumieniu siódemka tych typów co kładzie wrogów<br>Tak że pakują swój tobół ruszają do innych robót,<br>A ci wierni słowu innym wciąż mówią: "Ty weź się obudź!"
 394409|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_02_harald_confrontation.w2scene"|Line text|SDRU1_SQ204_00394409|물론 사냥꾼이 되려는 자들이 신성한 의식에서 모두 살아남진 못해. 하지만 위쳐 역시 비슷한 대가를 치르지 않나?
 394905|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_03_dead_leshy_reward.w2scene"|Line text|SVR6_SQ204_00394905|이만 네 갈 길이나 가. 여기에 이제 괴물은 없으니까!
 394923|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_06_d_puffins_thank.w2scene"|Line text|NBAR1_Q305_00394923|정말 대단한데! 아주 본때를 보여줬어! 하나, 둘... 등 뒤로! 그리고, 벽돌로 빡!
@@ -4398,8 +4407,8 @@
 395084|c5872ed5|item_name_q305_script_drama_title1|CUSTOM|Book||체인질링 구조
 395087|c5872ed6|item_name_q305_script_drama_title2|CUSTOM|Book||도플러의 구원
 395088|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||괴물 도감을 읽고 삼림의 정령에 대한 정보를 더 살펴보자.
-395101|8863a4f6|item_name_q305_script_drama_title2_text|CUSTOM|Book||위쳐: "사악하기 그지없는 괴물 처치, 난 이를 위해 태어났지, 나는 소명에 따라 죽일 뿐, 돈 때문에 죽이지 않는다." - 위협적으로.<br><br>위쳐: "아마 그는 공포에 질려 손님 사이 숨어있을지도 모르지." - 의혹을 담아.<br><br>위쳐: "인간의 마음에 체인질링을 맡아 키울 사랑이 생겨날 수 있을 것 같군!" - 깜짝 놀란 듯이.<br><br>위쳐: "내면에 깔린 본심이라는 것을, 이 정직하지 못한 악당의 경우처럼!" - 혐오감을 담아<br><br>위쳐: "모습을 바꿀 수 있는 자는 괴물이 아니다." - 격식을 갖춰.
-395102|86aecc57|item_name_q305_script_drama_title1_text|CUSTOM|Book||위쳐: "사악하기 그지없는 괴물 처치, 난 이를 위해 태어났지, 나는 소명에 따라 죽일 뿐, 돈 때문에 죽이지 않는다." - 위협적으로.<br><br>위쳐: "아마 그는 공포에 질려 손님 사이 숨어있을지도 모르지." - 의혹을 담아.<br><br>위쳐: "인간의 마음에 체인질링을 맡아 키울 사랑이 생겨날 수 있을 것 같군!" - 깜짝 놀란 듯이.<br><br>위쳐: "내면에 깔린 본심이라는 것을, 이 정직하지 못한 악당의 경우처럼!" - 혐오감을 담아<br><br>위쳐: "모습을 바꿀 수 있는 자는 괴물이 아니다." - 격식을 갖춰.
+395101|8863a4f6|item_name_q305_script_drama_title2_text|CUSTOM|Book||위쳐: "가장 추악한 야수들을 죽이는 것... 그게 내가 만들어진 이유요. 그것이 나의 사명, 돈만을 좇지 않소." - 위협적으로.<br><br>위쳐: "그가 두려움에 관객들 사이에, 숨어 있을지도?" - 의혹을 담아.<br><br>위쳐: "인간의 마음은 체인질링도 품을 수 있단 말인가!" - 깜짝 놀란 듯이.<br><br>위쳐: "이자와 같은 비열한 본성이라는 것을!" - 혐오감을 담아<br><br>위쳐: "모습을 바꾸는 자는 괴물이 아니오." - 격식을 갖춰.
+395102|86aecc57|item_name_q305_script_drama_title1_text|CUSTOM|Book||위쳐: "가장 추악한 야수들을 죽이는 것... 그게 내가 만들어진 이유요. 그것이 나의 사명, 돈만을 좇지 않소." - 위협적으로.<br><br>위쳐: "그가 두려움에 관객들 사이에, 숨어 있을지도?" - 의혹을 담아.<br><br>위쳐: "인간의 마음은 체인질링도 품을 수 있단 말인가!" - 깜짝 놀란 듯이.<br><br>위쳐: "이자와 같은 비열한 본성이라는 것을!" - 혐오감을 담아<br><br>위쳐: "모습을 바꾸는 자는 괴물이 아니오." - 격식을 갖춰.
 395109|30de4dc9|item_name_q305_theatre_glossary_2|CUSTOM|Book||노비그라드 극장의 역사
 395116|6b78e5e3|item_name_q305_theatre_glossary_2_text|CUSTOM|Book||노비그라드 희극 왕의 왕관을 씌울 만한 곳은 볼리에르의 머리 정도일 것이다. 그의 작품은 부르주아들이 벌이는 범죄, 특히 과장된 경건함에서 자비 없는 재미를 끌어냈다. 아아, 이 위대한 극작가는 그의 유머 센스를 결코 이해하지 못한 이터널 파이어 성직자들의 신전 눅눅한 감방에서 젊음의 꽃을 채 피우지도 못한 채 숨졌다.
 395117|30de4dc8|item_name_q305_theatre_glossary_1|CUSTOM|Book||노비그라드 극장 논평
@@ -4535,17 +4544,17 @@
 396627|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_16a_player_one.w2scene"|Line text|GRLT_Q302_00396627|생각이 바뀌었다. 게임은 안 하는 게 좋겠군.
 396629|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_16a_player_one.w2scene"|Line text|NNBM1_Q302_00396629|아무도 강요 안 해. 급한 일부터 해결하고 와.
 396631|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도덕성을 잊는 것...
-396633|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||사악한 본성인 것을...
+396633|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||이자와 같은 비열한...
 396635|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도덕성을 잊는 것...
-396637|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||사악한 본성인 것을...
+396637|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||이자와 같은 비열한...
 396639|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도덕성을 잊는 것...
-396641|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||사악한 본성인 것을...
+396641|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||이자와 같은 비열한...
 396645|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_16a_player_one.w2scene"|Line text|NNBM1_Q302_00396645|운빨 보게! 하, 끝내주는군!
-396647|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||그가 괴물이 아니라는 것이오...
+396647|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||모습을 바꾸는 자는 괴물이 아니오...
 396649|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도플러를 사랑해주시오...
-396651|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||그가 괴물이 아니라는 것이오...
+396651|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||모습을 바꾸는 자는 괴물이 아니오...
 396653|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도플러를 사랑해주시오...
-396655|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||그가 괴물이 아니라는 것이오...
+396655|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||모습을 바꾸는 자는 괴물이 아니오...
 396657|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_08_the_play.w2scene"|Choice line||도플러를 사랑해주시오...
 396659|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_16a_player_one.w2scene"|Line text|GRLT_Q302_00396659|이겼군.
 396671|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_16b_player_two.w2scene"|Line text|NNBM2_Q302_00396671|이제 게임 할 준비가 됐나 봐?
@@ -7004,6 +7013,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|이 돈은 받을 수 없어. 무사히 데려올 수 없어서 아쉽게 됐군.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|운드비크엔 사이렌이 많이 있나?
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|응, 많지. 다른 섬보다 훨씬.
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] SKIP TO CHEATING MENGE
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|길도르프 아래의 하수구네. 비츠를 지나야 하지. 그 동네 거지들의 악취를 참아야 할 거네.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|이걸 가져가면 꽤 받을 수 있겠어.
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|현상금이 걸렸을지도 모르니 전리품을 챙겨야겠군.
@@ -14737,6 +14747,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|이 노비그라드에선 괴물 그림자 하나 보지 못할 거다! 이터널 파이어가 우리 곁에 타오르고 계시니까.
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|불꽃이 내 심장 속에서 타오른다...!
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||검과 만두 사이에서
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to the merchants
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Read notice board
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to Ernst
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Hear the clients talking
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|에릭의 아들 레이프...
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|올라프의 아들 키얄...
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|영광의 죽음을...
@@ -22548,11 +22562,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|히히히히히히!
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|금방 보게 될 거야.
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|히히히히히히!
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook1: Pig Roasters
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|게롤트가 신호를 줬어요!
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|준비됐어!
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|쏟아진다! 라그 나 루그가 온 것 같네!
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|영광을 위해!
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|반가워!
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook: Closed Vault Gate
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|신입인가?
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|칼이 아무리 좋아봤자 휘두르는 놈이 등신이면 다 쓸모없어.
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|그놈 죽었으려나?
@@ -22952,6 +22969,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|우리 좀 방해하지 마.
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|하, 짜증 나네. 분위기를 완전히 조져놨잖아. 시발 이거 어쩔 거야!
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|그럼 난 가보도록 하지. 다음부턴 좀... 은밀한 장소를 찾는 게 어때?
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|카란티어는 충성스럽지만, 게엘스는... 다르네.
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|그리고 에레딘이... 우리의 위대한 왕을 독살했네.
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|잠깐만. 금방 올게.
@@ -22959,6 +22977,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|한심하군... 정말 한심해...
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|남길 말 있나?
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|비켜라, 늙은이... 그러면 살려주지.
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Fast forward time by meditating
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||수크루스에게 상자들을 가져가라고 하자.
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||보초를 서자.
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||수크루스가 원하는 게 뭔지 알아보자.
@@ -31783,6 +31802,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||나머지 내용은 알고 있단다.
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|안녕!
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|팁을 하나 주지. 네가 음치라면, 그냥 크게 불러!
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Check in with the sentinels
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Place an Yrden trap OR dispatch the guard with Axii or Sword
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Ignite the woodcart
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Signal the all clear at the warehouse
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||알아, 네 흔적을 따라갔단다.
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|너는 크론들을, 녀석은 키이라를 만났지.
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|네, 그랬죠. 포털을 통과하고 나니, 아발라크의 은신처가 아니라 곱사등이 늪지 한복판에 떨어졌거든요.
@@ -41077,7 +41100,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||소년 유령
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||구울을 처치하자.
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|건드리지 마요, 게롤트! 넘어진단 말이에요!
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|그건 거품기가 아니라 검이야! 팔꿈치가 아니라 손목을 사용해야지! 다시!
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|그건 거품기가 아니라 검이야! 팔꿈치가 아니라 손목을 사용해야지! 다시!
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||지나가게 해 줘.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|날 보내라.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|알았어, 가. 길은 열려 있어.
@@ -50314,6 +50337,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||그러나 게롤트가 탑을 나가려 하자, 악령은 그 본성을 드러냈다. 게롤트가 순진한 여인의 영혼인 줄 알았던 것은 사실 죽음과 질병이 혼령으로 실체화된 역병의 여인이었던 것이다.<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||게롤트가 여인의 말에서 뭔가 위화감을 느꼈을 수도 있고, 위쳐로서의 본능이 제때 경종을 울린 것일 수도 있다. 어찌 되었든, 게롤트는 아나벨이 본성을 드러내기 직전에 자기 앞에 있는 상대의 정체를 알아차렸다. 그 영혼은 사실 죽음과 역병을 퍼뜨리는 끔찍한 악령인 역병의 여인, 페스타였다.<br>
 1058855|00000000||Unnamed CJournalResource|Journal||탈영병
+1058856|00000000||Unnamed CJournalResource|Journal||[EN] [DEBUG]A group of soldiers, who were part of the Temerian Army, have abandoned their posts and deserted. These men are incredibly well trained and will attack people on site. They were last known to be making camp within the woods around (prologue)
 1058857|00000000||Unnamed CJournalResource|Journal||숲 속 탈영병
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||게롤트는 탈영병 주둔지를 찾아서 모조리 처치했다. 잔혹한 탈영병들은 구역질난다. 이들은 자비를 구했으나 게롤트는 이를 행하지 않았다. 그리고 나서 그는 물건을 챙겨 팔아치웠다.
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||가서 살펴봐야 해. 혹시 모르니까.
@@ -51393,6 +51417,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||놀아보자고.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||카드 한 판 어때?
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||이제 자러 갈 시간이야.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||에스켈이 취하도록 건너뛴다.
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|하. 열쇠를 찾았어.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||의뢰 : 숲 속의 짐승
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||사라진 아내
@@ -51595,7 +51620,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|해도 망하고, 안 해도 망한다.
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|튤립 사이로 통통 튀는 게 좋아.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|아니. 틀린 암호야.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||정찰병이 실종됨 - 보상 있음
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||공지:<br><br>제국 황제, 에미르 바 엠레이스 폐하를 위해 제국에 복무 중인 병사들이 임무 수행 중 사라지고 있다. 이들을 찾는 데 어떤 형태로건 도움을 주는 자는 보수를 받을 것이다. 정보가 더 필요하다면 중앙군 주둔지 병참장교를 찾도록.
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||함몬드에게 보내는 롤랜드 트루거의 편지이다.
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||놀이용 살롱 1번.<br><br>이번 달.<br><br>경비 - 38,756 크라운<br><br>고정비 - 5,294 크라운<br><br>기구 세금 3,875 크라운<br><br>채무자<br><br>티발트 백작 - 1,285 크라운 - 지불 만기일 - 월말 - 협상 불가<br><br>사샤 - 956 크라운 - 지불 만기일 - 다음 달 중순 - 이자율을 35 퍼센트 높이면 2주 연장 가능.<br><br>피니어스 - 5,148 크라운 - 지불 지연 - 마지막 경고.<br><br>베르나르 튈 - 빚 청산됨.<br><br>패트릭 하젤넛 - 경고 발생함 - 수집 절차 시작.
@@ -53071,10 +53095,10 @@
 1065414|051a014c|cinematic_text_at_midnight|CUSTOM|Cinematic text||자정
 1065415|00000000||CStoryScene "quests\part_1\quest_files\q203_him\scenes\q203_22_tell_udalryk_about_witcher_style.w2scene"|Line text|UDAL_Q203_01065415|계속될 거야...
 1065418|00000000||CJournalResource "gameplay\journal\quests\mq1020wildhorse.journal"|Journal||주인과 이야기하자.
-1065420|69070a51|item_name_q305_script_comedy_title1_text|CUSTOM|Book||위쳐: "사악하기 그지없는 괴물 처치, 난 이를 위해 태어났지, 나는 소명에 따라 죽일 뿐, 돈 때문에 죽이지 않는다." - 명랑하고 대담하게.<br><br>위쳐: "아마 그는 공포에 질려 손님 사이 숨어있을지도 모르지." - 열정적이고, 생기있게.<br><br>위쳐: "인간의 마음에 체인질링을 맡아 키울 사랑이 생겨날 수 있을 것 같군!" - 기뻐하며.<br><br>위쳐: "내면에 깔린 본심이라는 것을, 이 정직하지 못한 악당의 경우처럼!" - 혐오감을 담아<br><br>위쳐: "모습을 바꿀 수 있는 자는 괴물이 아니다." - 격식을 갖춰.
+1065420|69070a51|item_name_q305_script_comedy_title1_text|CUSTOM|Book||위쳐: "가장 추악한 야수들을 죽이는 것... 그게 내가 만들어진 이유요. 그것이 나의 사명, 돈만을 좇지 않소." - 위협적으로.<br><br>위쳐: "그가 두려움에 관객들 사이에, 숨어 있을지도?" - 의혹을 담아.<br><br>위쳐: "인간의 마음은 체인질링도 품을 수 있단 말인가!" - 깜짝 놀란 듯이.<br><br>위쳐: "이자와 같은 비열한 본성이라는 것을!" - 혐오감을 담아<br><br>위쳐: "모습을 바꾸는 자는 괴물이 아니오." - 격식을 갖춰.
 1065423|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq315_talar\scenes\sq315_06a_troll_gameplay.w2scene"|Line text|TRL2_SQ315_01065423|어... 너... 너어어...
 1065425|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq315_talar\scenes\sq315_06a_troll_gameplay.w2scene"|Line text|TRL2_SQ315_01065425|오그 머저리 아니다! 오그 탈라 찾았다! 오그 찾는다!
-1065426|6abbe2f0|item_name_q305_script_comedy_title2_text|CUSTOM|Book||위쳐: "사악하기 그지없는 괴물 처치, 난 이를 위해 태어났지, 나는 소명에 따라 죽일 뿐, 돈 때문에 죽이지 않는다." - 명랑하고 대담하게.<br><br>위쳐: "아마 그는 공포에 질려 손님 사이 숨어있을지도 모르지." - 열정적이고, 생기있게.<br><br>위쳐: "인간의 마음에 체인질링을 맡아 키울 사랑이 생겨날 수 있을 것 같군!" - 기뻐하며.<br><br>위쳐: "내면에 깔린 본심이라는 것을, 이 정직하지 못한 악당의 경우처럼!" - 혐오감을 담아<br><br>위쳐: "모습을 바꿀 수 있는 자는 괴물이 아니다." - 격식을 갖춰.
+1065426|6abbe2f0|item_name_q305_script_comedy_title2_text|CUSTOM|Book||위쳐: "가장 추악한 야수들을 죽이는 것... 그게 내가 만들어진 이유요. 그것이 나의 사명, 돈만을 좇지 않소." - 위협적으로.<br><br>위쳐: "그가 두려움에 관객들 사이에, 숨어 있을지도?" - 의혹을 담아.<br><br>위쳐: "인간의 마음은 체인질링도 품을 수 있단 말인가!" - 깜짝 놀란 듯이.<br><br>위쳐: "이자와 같은 비열한 본성이라는 것을!" - 혐오감을 담아<br><br>위쳐: "모습을 바꾸는 자는 괴물이 아니오." - 격식을 갖춰.
 1065448|4bc088ee|gwint_name_letho|CUSTOM|Gwint||걸렛의 레토
 1065449|176e7074|gwint_desc_letho|CUSTOM|Gwint||"위쳐는 잠자리서 죽음을 맞는 법이 없지."
 1065491|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_05d_levers_revelations.w2scene"|Line text|GRLT_Q205_01065491|건널 수 없겠군... 수문을 열 수 있다면 아래로 가야겠어.
@@ -53950,6 +53974,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|걱정하지 마세요. 나중에 봬요.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||캠프에서 단델라이온의 납치범을 목격한 사람이 있는지 물어보자.
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|네. 나중에 봬요.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[EN] [DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||오두막으로 들어갈 방법을 찾아보자.
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||내가 처리하지.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||적절한 보상을 받고 싶은데.
@@ -55798,7 +55823,13 @@
 1073334|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_07_01_gp_geralt_on_brans_corpse.w2scene"|Line text|GRLT_Q206_01073334|비르나 브랜... 끔찍하게 죽었군.
 1073337|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b01_01_becca_on_investigating.w2scene"|Line text|BECC_Q206_01073337|루고스를 도와주셨다면서요. 저를 도와주셨던 것처럼.
 1073339|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Line text|GRLT_SET_01073339|[EN] Did I kill Steingrim in 201?
+1073340|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[EN] [DEBUG] Yes
+1073341|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[EN] [DEBUG] No
 1073343|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Line text|GRLT_SET_01073343|[EN] Did I help Crach kill the Ice Giant (complete q202)?
+1073344|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[EN] [DEBUG] Enough!
+1073345|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[EN] [DEBUG] Yes
+1073346|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[EN] [DEBUG] No
+1073347|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[EN] [DEBUG] Enough!
 1073349|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b02_07_gp_geralt_becca_on_escaping.w2scene"|Line text|BECC_Q206_01073349|빨리 나와요! 여기서 나가야 돼요!
 1073353|00000000||CJournalResource "gameplay\journal\tutorial\camerapad.journal"|Journal||시점
 1073354|00000000||CJournalResource "gameplay\journal\tutorial\camerapad.journal"|Journal||<<GI_AxisRight>>을(를) 이용해 시점을 바꿔 보세요.
@@ -56738,6 +56769,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||입구 장애물을 치우고 엘프를 구출하자.
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||잠수하기
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||<<DiveDown>>을(를) 길게 눌러 잠수하거나 <<DiveUp>>을(를) 눌러 수면으로 헤엄치십시오.<br><br>숨이 부족하면 익사하니 호흡에 유의하십시오!
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[EN] [DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||이게 내 초대장이다.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|내 초대장이다. 원한다면 다 주지.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|오, 고맙게 받을게.
@@ -56835,6 +56867,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|이 일이 끝나면 코비어에 집을 마련하고 과일이나 따 먹으며 여생을 보낼 수 있을 정도지.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|괜찮군. 지 현상금이 얼만지 모르고 죽는 놈들도 많거든.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|애초에 현상금이 걸리는 게 이상한 거야.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||실종된 병사들에 대한 공고.
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|근데 왜 온 거지? 내 수고를 덜어주려고?
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||함께 도망쳐서 우리만의 시간을 보내고 싶은데.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|스켈리게 축제가 뻔하지. 술이나 퍼마시고 침 튀기며 자랑이나 늘어놓다 소란이나 피우겠지...
@@ -57444,7 +57477,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||궨트 전수
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||내 지금 궨트 즐기는 법을 배워 볼 제자를 모집 중이라네. 난 오직 절제력, 논리적 사고, 그리고 배우려는 의지를 보이는 이들만 가르칠 걸세. 특별히 적성이 있는 이들이라면 무척 환영하겠네. 제자로 들어오려면 꼭 자기 덱을 가지고 비축해둬야 한다네.<br><br> 또한 동료로서 도전거리를 주고, 우리 모두가 서로 실력을 키워 나갈 기회를 제공할 더 숙련된 참가자도 찾고 있지.<br><br> -에르미온, 드루이드.
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||위로 올라가기 위해 아래를 보라
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||카타칸 소굴 열쇠
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||조금 녹슨 열쇠.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||옥센푸르트 영안실 열쇠
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||빛바랜 낡은 열쇠다.
@@ -57951,6 +57983,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||아달버트 케르미스의 첫 번째 지도
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||살쾡이 교단 위쳐를 어디서 찾을 수 있는지에 대한 표식이 있는 지도.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||도적떼를 처치하자.
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||카타칸의 은신처 열쇠.
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||슬라프코 아팀스타인 교수님께 고용돼 그의 탐사단에 합류한 다음, 나는 그리핀 교단 위쳐에 대한 연구를 시작했다. 내 작업의 중심은 곱사등이 언덕 아래 무덤이다. 교수님은 이 곳이 "그리핀 일족" 중 한 사람의 안식처라 하시고, 안으로 들어갈 방법을 찾길 비셨다.<br><br>나는 신속히 그리핀 교단 위쳐 메달 모양 상형문자가 표시된 흥미로운 지역들을 찾아냈다. 이 지도에 그 지점을 표시해 둔다.<br><br>에드윈 그렐로프. 옥센푸르트 대학 자연사 조교.
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||빌어먹을 매독 환자 새끼. 궨트 한 판 치다 아팀스타인 교수님께 드릴 첫 번째 지도를 잃어 버렸다. 이제 곱사등이 언덕 아래 무덤 근처에 있는 베이스 캠프로 돌아가 처음부터 다시 시작해야 한다. 그 사이엔, 이 지도에 흥미가 가는 지점들을 표시해 두겠다.<br><br>에드윈 그렐로프. 옥센푸르트 대학 자연사 조교.
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||잘 한다. 슬라프코 아팀스타인 교수님께서 얼마나 화내실까. 첫 지도는 궨트에서 잃고, 두 번째는 도박장에서 고된 밤을 보내고 나서 잠깐 혼이 나간 새 털리다니. 곱사등이 언덕 근처 무덤에 있는 본거지에 빈 손으로 돌아갔다가는, 교수님이 그 자리에서 날 산 채로 해부하실 게다. 이 지도에 표시해 둔 새로운 네 곳으로 분노가 잠재워졌음 좋겠는데.<br><br>에드윈 그렐로프. 옥센푸르트 대학 자연사 조교.
@@ -58091,7 +58124,7 @@
 1078305|07cca517|attribute_name_focus_gain|CUSTOM|Abilities||아드레날린 점수 획득
 1078306|119b2106|attribute_name_poison_resistance_perc|CUSTOM|Abilities||중독 저항
 1078307|5b67b700|item_name_theatre_glossary_1|CUSTOM|Quest items||발라드와 찬송가
-1078308|f943a70c|item_name_theatre_glossary_1_text|CUSTOM|Quest items||<b>늑대의 폭풍</b><br><br>그 흉터들이 저 망할 별들이 지닌 우리의 운명을 엮기 위해<br>그대의 부드러운 애무를 바라고 있다네<br>내 마음을 가르고는, 그대의 사랑이<br>우리 둘이 하나가 되는 얼기설기 얽힌 운명을 공언하지<br><br>합창<br>그대는 오는 아침에 내 꿈에서 달아나지<br>그대의 향기 - 나무열매 타르트, 라일락만큼 달콤하지<br>그대가 울 때 반짝거리는 보랏빛 눈 속<br> 폭풍에 묶여 있는 갈까마귀를 꿈꾼다네<br><br>2.<br>그대의 마음을 찾으러 들어간 폭풍 속에서 늑대를 따라갔지,<br>그 정열은 커져만 가는 노여움이 대신하고,<br>그대를 뜨거운 포옹 속에 잡아두기 위해 <br>냉기 속에서 돌처럼 딱딱해졌다네<br><br>합창<br>그대는 오는 아침에 내 꿈에서 달아나지<br>그대의 향기 - 나무열매 타르트, 라일락만큼 달콤하지<br>그대가 울 때 반짝거리는 보랏빛 눈 속<br> 폭풍에 묶여 있는 갈까마귀를 꿈꾼다네<br><br>3.<br>나는 운명이 우리를 하나로 살아가게 할 지,<br>아니면 우리가 엮인 사랑의 우연이 그렇게 할지 알 수 없다네<br>그 소원을 속삭였을 때 모든 것이 시작되지<br>이것이 그대가 찾아내지 못했던 사랑을 만들어낼까<br><br>합창<br>그대는 오는 아침에 내 꿈에서 달아나지<br>그대의 향기 - 나무열매 타르트, 라일락만큼 달콤하지<br>그대가 울 때 반짝거리는 보랏빛 눈 속<br> 폭풍에 묶여 있는 갈까마귀를 꿈꾼다네<br>
+1078308|f943a70c|item_name_theatre_glossary_1_text|CUSTOM|Quest items||<b>늑대의 폭풍</b><br><br>1.<br>그대 손길 새겨진 상처들이<br>그리움 아린 야속한 밤<br>찢긴 가슴엔 그대만이 남아<br>벅찬 운명에 속절없이 무릎 꿇네<br><br>합창<br>햇살에 희미해진 꿈에<br>라일락 구스베리 향기만<br>보랏빛 눈동자에 흐른 눈물<br>닿을 듯 아른거리는데<br><br>2.<br>폭풍 속에 헤매는 늑대요<br>그대의 심장 찾아가리<br>차갑게 얼어 부서진대도<br>뜨거운 마음으로 안아 녹이리라<br><br>합창<br>햇살에 희미해진 꿈에<br>라일락 구스베리 향기만<br>보랏빛 눈동자에 흐른 눈물<br>닿을 듯 아른거리는데<br><br>3.<br>이 길 끝에 그대가 기다릴까<br>운명에 묶인 사랑일까<br>홀로 속삭인 나의 소원에<br>운명처럼 묶여버린 사람일까<br><br>합창<br>햇살에 희미해진 꿈에<br>라일락 구스베리 향기만<br>보랏빛 눈동자에 흐른 눈물<br>닿을 듯 아른거리는데<br>
 1078309|00000000||CJournalResource "gameplay\journal\glossary\debugglossary.journal"|Journal||<i>그렇죠, 대장, "다람쥐", 제대로 아셨습니다. 그들이 옛 언어로 자신을 부르는 호칭이죠. 누군가는 이놈들이 모자에 다람쥐 꼬리를 묶어두는 데서 유래했다 합니다. 하지만 딴 놈들은 이 치들이 숲에서 살고 견과류만 까먹어서 그렇다고 주장하기도… </i><br>--길에서 엿들은 이야기<br><br> "스코이아'텔"은 인간의 방식에 맞서 싸우는 비인간 게릴라를 포괄적으로 부르는 호칭이다. 이들의 부대 규모는 몇 명에서 이십여 명의 전사들까지며, 대부분은 엘프와 드워프고, 이와 함께 몇 명의 하플링과 노움으로 구성된다. 이들은 수 년간의 차별과 탄압 끝에 무기를 들기로 결심했다. 그들의 고귀하며 고결하기까지 한 목표에도 불구하고, 스코이아’텔은 인간 병사들과 시민들을 다루는 데에서 비교를 불허하는 잔인함으로 유명하다. <br><br> 스코이아’텔은 닐프가드와의 첫 전쟁 중 창설됐지만, 제국과 휴전협정을 체결했음에도 싸움을 계속했으며, 숲길에 덫을 놓고 고립된 마을과 홀로 다니는 여행자들을 공격했다. 닐프가드와의 두 번째 전쟁과 그에 이은 엘프들의 자치주인 돌 블라타나 설립 이후, 많은 스코이아’텔은 무기를 내려 놓았다 – 하지만 가장 흉포한 폭도들은 이제는 자유가 아니라 개인적인 복수를 위해 싸움을 이어 갔다. 스코이아’텔의 잔혹함에 대한 기억은 아직도 수많은 사람들, 그리고 말썽꾸러기 아이들을 겁주기 위해 반란군의 전설적인 지휘관 이오베스나 아이센그림 파올리타나의 이름을 언급하는 부모들 사이에 살아 있다.
 1078310|0be0b93a|item_desc_theatre_glossary_1|CUSTOM|Quest items||프리실라가 쓴 발라드.
 1078311|00000000||CJournalResource "gameplay\journal\glossary\debugglossary.journal"|Journal||<i>수은 세 방울… 초석 두 숟갈… 왕수 한 잔에 1온스의…젠장! 살려면 도망쳐! </i><br>--페트루스 보너스, 연금술사, 세 손가락 피트로 널리 알려짐<br><br> 연금술은 다양한 마법 물질을 혼합하는 기술이다. 이는 위쳐의 직무를 행하는 데 있어 특히 중요하다. 이를 이용해 특별한 영약, 폭탄, 그리고 검날에 바르면 특별한 적 상대로 피해를 크게 올리는 기름을 만들 수 있어서이다. <br><br> 연금술은 무척이나 귀하거나 단 하나밖에 없는 재료를 채집하는 것, 비밀스러운 제조법에 대한 폭넓은 지식, 그리고 오랜 끈기가 필요하다. 옥센푸르트 대학서 우리 연금술 강사님이 자주 언급하신 말은 “훌륭한 고대의 연금술은 어떠한 고난 속에서도 지식과 진실에 대해 집요하게 탐구하는 몇 명에게만 그 신비가 밝혀진다.”였다. <br><br> 이는 꽤나 사실이겠지만 나는 이를 연마하는 것이 현자의 돌을 발견하는 것으로 이어진다 할지라도, 증류기와 정련기 그리고 측정용 실린더 앞에서 오랜 시간을 쓸 가치는 없다고 금세 결론내렸다. 그럼에도 불구하고 나는 이 과목을 존중하는데, 연금술에서 증류주를 만드는 기초인 증류 공정을 발견한 덕이다.
@@ -60993,6 +61026,8 @@
 1085184|2b68f23c|gwint_faction_ability_nr|CUSTOM|Gwint Additional||라운드에서 승리할 때마다 내 덱에서 카드를 한 장 뽑는다.
 1085185|a9f665ff|gwint_faction_ability_scoia|CUSTOM|Gwint Additional||전투 첫 턴을 누가 시작할지 결정한다.
 1085186|41b55515|gwint_faction_ability_nml|CUSTOM|Gwint Additional||각 라운드 이후 무작위로 괴물 부대 카드 한 장을 전장에 남겨 둔다.
+1085192|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentresolution.journal"|Journal||[PL] [DEBUG] [DEBUG]When both players have passed, the strength of all their cards on the battlefield is added up.<br> The player with the lowest total strength loses the round and a gem is removed from underneath his or her portrait.<br><br>All cards on the battlefield are removed after each round and sent to the discard pile.<br><br>In the event of a draw, both players must remove a gem.<br><br>Once a player has lost both gems, his or her opponent wins the game. If the game ends on a draw, the players play an immediate rematch.
+1085220|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentroundend.journal"|Journal||[PL] [DEBUG] [DEBUG]A round will end when both players have chosen to pass. If only one player passes, the other is free to keep on placing cards on the battlefield until he or she chooses to pass as well by holding down <<Gwent_Pass>>.<br><br>At that point both totals are compared, the highest one wins a round and all the cards, including weather cards, are removed from the battlefield.
 1085223|00000000||Unnamed CJournalResource|Journal||영웅 카드
 1085232|0bc74e6e|item_name_lesser_green_mutagen|CUSTOM|Additional||하급 녹색 변이 인자
 1085233|53cf55c7|item_name_lesser_blue_mutagen|CUSTOM|Additional||하급 청색 변이 인자
@@ -62910,6 +62945,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||DIRECTOR - GALAXY PROJECT
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||DIRECTOR - WEBSITE PROJECT
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||LEADS
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ENGINEERS
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||ADDITIONAL PROGRAMMING
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||ADDITIONAL ART
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||ANIMATED STORYBOOK SEQUENCES
@@ -75308,7 +75344,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|최후의 수단이라고? 젠장. 어째서?
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|아아... 디틀라프를 소환할 수 있는 존재가 딱 한 분 계시긴 하다네. 강제로 디틀라프를 나타나게 할 권위도, 그럴 만한 힘도 있지.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|탕약은 어때? 잘 돼 가나?
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||찰스 란자노
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|당신은 석공이 아닌 것 같은데.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|또 왔어? 그래, 원하는 게 뭐야?
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||뭘 팔고 있지?
@@ -75362,6 +75397,9 @@
 1155498|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_02_regis_intro.w2scene"|Line text|REGI_Q702_01155498|그럴 만한 이유가 있을 거야. 확신하네. 디틀라프는 단순히 목이 마르거나 따분하다고 해서 사람을 죽이고 다니는 타락한 친구는 아니니까.
 1155503|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_02_regis_intro.w2scene"|Choice line||정당한 이유가 뭐가 있겠어?
 1155504|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_02_regis_intro.w2scene"|Choice line||어떻게 그렇게 확신하지?
+1155506|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02b_vampire_attack.w2scene"|Line text|BPSM03_Q704_01155506|아악!
+1155508|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02b_vampire_attack.w2scene"|Line text|GRLT_Q704_01155508|젠장.
+1155512|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02b_vampire_attack.w2scene"|Line text|GRLT_Q704_01155512|하나 더 처리했군.
 1155513|00000000||CJournalResource "dlc\bob\journal\quests\sq703winewars.journal"|Journal||베레달 백작과 대화하자.
 1155514|00000000||CJournalResource "dlc\bob\journal\quests\sq703winewars.journal"|Journal||베레달 백작을 호위하여 근처의 검은 표범 서식처로 가자.
 1155515|00000000||CJournalResource "dlc\bob\journal\quests\sq703winewars.journal"|Journal||베레달 백작을 보호하자.
@@ -75438,9 +75476,11 @@
 1155833|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_12_giant.w2scene"|Line text|GRLT_Q704_01155833|어... 이 이야기가 행복한 결말로 끝나길 바라. 나한테나, 너한테나, 모두에게나.
 1155835|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_12_giant.w2scene"|Line text|SYAN_Q704_01155835|그건 너한테 달렸을지도 모르겠는데.
 1155837|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_12_giant.w2scene"|Line text|GRLT_Q704_01155837|그게 무슨 뜻이지?
+1155845|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02b_vampire_attack.w2scene"|Line text|BBA05_Q704_01155845|위쳐! 정말 고마워!
 1155906|00000000||CJournalResource "dlc\bob\journal\quests\q704truth.journal"|Journal||뱀파이어를 죽이자.
 1155911|9503cfc2|credits_KAER_MORHEN_THEME|CUSTOM|Credits||KAER MORHEN'S THEME
 1155912|bc0a5b99|credits_ARRANGED_BY|CUSTOM|Credits||ARRANGED BY
+1155914|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02b_vampire_attack.w2scene"|Line text|BBA05_Q704_01155914|젠장! 어쩌지?!
 1155922|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_02_regis_intro.w2scene"|Line text|GRLT_Q702_01155922|인간 사회에 적응을 못 해서... 화가 난 거라고?
 1155924|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7010_airborne_cattle\scenes\mq7010_02_gp_worker_chats.w2scene"|Line text|TPM01_MQ7010_01155924|저 망할 놈의 말을 믿으라고? 젖소가 또 우리를 깔아뭉개면 어쩔 건데?
 1155926|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7010_airborne_cattle\scenes\mq7010_02_gp_worker_chats.w2scene"|Line text|TPM02_MQ7010_01155926|하, 슬리자드 두 마리를 잡았다고...? 왜, 열 마리라 그러지?
@@ -90935,9 +90975,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||네 손가락 필리버트 한자 동맹의 일등 관리인의 기록
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||블라데의 달 손익 기록<br><br>3일<br>날아다니는 파충류들이 쓸쓸한 들판의 언덕 지대에 둥지를 틀었다. 놈들은 우리 동료들을 즐겨 먹게 되었다. 가장 최근에는 성벽 위에 서있던 길버트를 곧장 낚아챘다. 길버트는 항상 주의를 기울이는 편이었지만, 누구라도 뱃속의 물을 비워낼 때는 경계심을 약간 늦추기 마련이다. 필리버트는 분노했다. 신참을 우리 무리에 도움이 될 정도로 쓸 만한 놈으로 교육시키는 데에는 적지 않은 비용이 든다. 그런 비용을 투자한 대상이 괴물의 똥 무더기로 변하는 것은 유감스러운 손실이다.<br>7일<br>투생 동쪽에서 오고 있던 상단을 습격했다. 그들에게는 호위 인력이 없었고 저항도 하지 않았다. 하지만 우리는 사실상 아무런 이익도 얻지 못했다. 그들이 수송하고 있던 조잡한 누더기는 맨 궁둥이의 스켈리게 야만인이나 흥미를 보일 것이었다. 그리고 우리 중에 그곳으로 항해할 사람은 아무도 없다. 분노한 필리버트는 상인들 중 루미에렉스라는 남자를 하나 죽였다. 나머지는 동쪽으로 다시 돌아갔다.<br>11일<br>우리 정찰대가 숲을 염탐하며 돌아다니던 세 사람을 붙잡았다. 이들은 거지 차림을 하고 있었고 본인들이 거지라고 주장했다. 우리는 속지 않았다. 약간 거칠게 다루어 주자, 그들이 매치트 광산으로부터 금을 나르고 있던 보석 상인이라는 것이 밝혀졌다. 가공되지 않은 광석 상태이기는 했지만 그래도 기대가 되는 품질이었다. 필리버트는 이 보석 상인들을 죽이라 명령했다. 그는 거짓말쟁이를 몹시 싫어한다.<br>17일<br>카스텔 그라우피안 제국 대학에서 온 탐사대가 생르투 건너편에 야영지를 차렸다. 학자들은 과한 부에 시달리는 그런 부류는 아니지만, 널찍한 텐트와 상당한 양의 술을 지니고 있다. 따라서 그들의 운명은 정해졌다. 필리버트는 그곳으로 몇몇 부하들을 보냈다.<br>23일<br>대로에서 뭐라도 흥미로운 것이 나타난 지 거의 이주가 다되어간다. 한편 방랑 기사들이 우리 동료들을 더 찾아냈다. 둘은 죽었고 한 명은 부상만 입고 탈출했다. 그리고 우리는 상당한 값어치의 장비를 잃었다. 필리버트는 부주의함을 죄목으로 그자에게 태형을 명령했다. 그의 쇠약해진 몸은 버티지 못했고 죽고 말았다.<br>24일<br>대박이 났다. 남쪽에서 돌아오고 있던 포도 장인의 상단을 붙잡았다. 그들은 상품을 팔고 돌아오는 참이었고 상당한 액수의 현금을 지니고 있었다. 일단 대략 추정되는 것만으로도 우리 각자에게 400크라운씩이 돌아가는 수준이다. 다만 이 돈을 동일한 액수로 나눌지는 필리버트가 아직 결정하지 않았다.<br>28일<br>보급품을 보충해오라고 바잔 농장으로 보냈던 부대가 아직 돌아오지 않았다. 식량이 빠듯하다. 사람은 술만 마시고 살 수는 없다. 그리고 금을 먹을 방법은 아직 아무도 알아내지 못했다. 마을 몇 곳을 털어야겠다.<br>30일<br>이제 블라데의 달 마지막 정산을 해야겠다. 흑자다. 확실히. 다음 달에도 이 지역에 머무를 것 같다.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|왜 여기 계신 거죠?! 이건 사적인 대화예요. 게롤트, 이게 대체 어떻게 된 거죠? 저 몰래 무슨 계획을 꾸미고 계셨던 건가요?
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||토너먼트 서기에게서 온 쪽지.
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||토너먼트 서기에게서 온 쪽지.
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||국제 기사 토너먼트, 레이디 비비엔 드 타브리스 후원, 1275<br><br>승인받은 시합 참가자:<br><br>그레고리 드 고르곤, 작년 토너먼트 우승자. 일반적인 시합에는 불참. 가장 많은 점수를 얻은 기사와 마지막 결승전을 치를 예정. (정황상 그레고리가 자신의 칭호를 지켜낼 것 같음.)<br><br>안세이스, 리리아와 리비아의 왕자. 세 번 연속 참가.<br><br>호름 아커스파크, 매치느의 왕자. 에미르 황제와 같은 핏줄이라는 소문이 있음. 네 번째 참가.<br><br>팔메린 드 런펄 남작, 토너먼트 여섯 번째 참가.<br><br>트로이의 도니미르, 르다니아 기사, 토너먼트 첫 참가.<br><br>아트레의 레인파른, 토너먼트 일곱 번째 참가, 1269년 우승자.<br><br>메티나의 가이 드 부아-프레스네스 (전하 산하의 방랑 기사인 레이나트 드 부아-프랑수아의 두 번째 사촌), 토너먼트 세 번째 참가<br><br>크레이기우의 델윈, 젊은 기사, 토너먼트 첫 참가<br><br>돈달의 타일레스, 플레이밍 로즈 기사단의 기사, 토너먼트 첫 참가<br><br>메티나의 를리노스, 토너먼트 세 번째 참가<br>기욤 드 런펄 (팔메린 남작의 조카), 토너먼트 첫 참가. [덧] 부상으로 인해, 기욤은 토너먼트 참가권을 다른 기사에게 양도함.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||비비엔의 쪽지
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||비비엔의 쪽지
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||블라데 – 페아인 지출 비용<br><br>천 14엘: 80 크라운<br>신발(용 가죽): 140 크라운<br>말  안장: 280 크라운<br>마법 크림: (총) 1400 크라운
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||일기장
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||일기장에게!<br>레이디 오리아나가 나를 길거리에서 데려오신지 3주가 지났어. 나는 드디어 뭔가를 먹고 마시고, 매일 다른 아이들과 놀아. 심지어 집에 있는 것보다 나아. 집에는 먹을 게 거의 없고 엄마가 돌아가셨을 때는 음식이라고는 아무것도 없었거든.<br><br>오늘 난 미리랑 톰이랑 놀았어. 처음에는 오리, 오리, 거위 놀이를 하고 나중엔 숨바꼭질, 막대 집기 놀이를 했어. 그리고는 술래잡기를 했어. 정말 재밌었어! 그때 레이디 오리오나가 보낸 수레가 왔는데 음식이 잔뜩 실려 있었어. 달콤한 빵, 과일, 케이크, 그것 말고도 또 맛있는 것들 잔뜩. 레이디 오리아나가 최고야!<br><br>레이디 오리아나가 아침 일찍 우리를 찾아오셨어. 처음엔 우리랑 이야기를 하시다가, 나중엔 노래를 불러주셨어. 그리고는 조니를 다른 방으로 데려가셨어. 우리는 모두 걔를 부러워하고 있어. 그 애가 돌아왔을 때는 약간 창백했고 목에는 작은 빨간 자국이 나있었지만 초콜릿이 자아안뜩 담긴 주머니도 받았어! 미리 말이 가끔 레이디 오리아나가 아이를 데려가서 뭔가를 한다고 했어. 정확히 뭘 말하는 건지는 이해하지 못했지만, 어쨌든 다들 그분께 선물을 받아오는 거야. 다음번엔 그분이 날 데려가셨으면 좋겠어!<br><br>오늘은 비가 내리고 정말 심심해. 톰 말이 난 멍청하대. 하지만 난 그 애 말을 믿지 않아. 왜냐하면 걔도 멍청하니까. 어쩌면 내일은 레이디 오리아나가 오셔서 나도 선물을 받을 수 있을지도 몰라. 그럼 걔가 부러워하겠지!<br><br>그분이 날 선택하셨어! 레이디 오리아나가 오셔서는 나를 선택하셨어! 나는 그분과 다른 방으로 갔어. 그분은 내게 목을 보여 달라고 하셨고, 뭐랄까 내 목을 무시더라고. 그다지 아프지는 않았어. 그냥 나중에 어지러웠을 뿐이야. 하지만 그게 중요한 게 아니야. 내게 나무칼을 선물하셨거든! 이런 걸 가진 사람은 아무도 없는데! 톰이 엄청 배 아파할 거야!
@@ -94025,7 +94065,6 @@
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||DESIGNERS
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||ENGINEERING
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||MANAGER
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ENGINEERS
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||CONCEPT ARTIST COORDINATOR
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||EXPERT CONCEPT ARTIST
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||EXPERT CHARACTER ARTIST
@@ -94271,7 +94310,7 @@
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||닫기
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||보상을 받으려면 GOG GALAXY 2.0에 로그인하고 게임을 실행하세요.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||보상을 받고 모드 메뉴를 이용하려면, REDlauncher에 로그인하고 게임을 실행하세요.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||시야각
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||카메라
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||효과
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||자동 초점
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||조리개
@@ -95418,7 +95457,7 @@ Joy-Con 2 (R)를 분리해 옆으로 놓으면 마우스처럼 사용할 수 있
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||액시가 동시에 두 명의 대상에게 영향을 줄 수 있지만, 효과가 $I$% 약해진다.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||액시가 동시에 두 명의 대상에게 영향을 줄 수 있다.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||폭발 방어막
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||쿠엔 방어막이 파괴될 때마다 적을 밀어낸다. 밀어내는 힘은 스킬 레벨에 따라 증가한다. 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||쿠엔 방어막이 파괴될 때마다 적을 밀어낸다. 밀어내는 힘은 스킬 레벨에 따라 증가한다. 흡수한 피해의 $I$%를 공격자에게 되돌린다.
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||광범위 아드
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||아드의 사정거리가 $I$미터 증가한다.
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||마법 덫
@@ -95489,7 +95528,7 @@ Joy-Con 2 (R)를 분리해 옆으로 놓으면 마우스처럼 사용할 수 있
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||의외의 효과
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||폭탄으로 적을 맞히면 10초 동안 근접 피해량이 $I$% 증가한다.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||그리핀 교단의 기술
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||일반 갑옷 한 부위당 표식 강도가 $I$% 증가하고 초당 원기 재생이 $I$ 증가한다.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||일반 갑옷 한 부위당 표식 강도가 $I$% 증가하고 초당 원기 재생이 $F$ 증가한다.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||만티코어 교단의 기술
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||일반 갑옷 한 부위당 검 피해량이 $I$% 증가하고 폭탄 피해량이 $I$% 증가한다.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||대사 촉진
@@ -95642,8 +95681,8 @@ Joy-Con 2 (R)를 분리해 옆으로 놓으면 마우스처럼 사용할 수 있
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||북부의 숨결
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||토르 라라
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||토르 지라엘
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||시야각
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||틸트
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||카메라
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||수십 년 동안의 여정을 견딜 수 있도록 만들어진 튼튼한 갑옷입니다. 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||다홍색 볏 갑옷
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||다홍색 볏 부츠
@@ -95748,8 +95787,8 @@ Joy-Con 2 (R)를 분리해 옆으로 놓으면 마우스처럼 사용할 수 있
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||액시를 시전하는 동안 대상이 게롤트 쪽으로 이동하지 않는다. 대화 중에 액시의 효과가 증가한다.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||액시를 시전하는 동안 대상이 게롤트 쪽으로 이동하지 않는다. 대화 중에 액시의 효과가 증가한다.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||액시가 동시에 두 명의 대상에게 영향을 줄 수 있지만, 효과가 $I$% 약해진다.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||쿠엔 방어막이 파괴될 때마다 적을 밀어낸다. 밀어내는 힘은 스킬 레벨에 따라 증가한다. 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||쿠엔 방어막이 파괴될 때마다 적을 밀어낸다. 밀어내는 힘은 스킬 레벨에 따라 증가한다. 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||쿠엔 방어막이 파괴될 때마다 적을 밀어낸다. 밀어내는 힘은 스킬 레벨에 따라 증가한다. 흡수한 피해의 $I$%를 공격자에게 되돌린다.
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||쿠엔 방어막이 파괴될 때마다 적을 밀어낸다. 밀어내는 힘은 스킬 레벨에 따라 증가한다. 흡수한 피해의 $I$%를 공격자에게 되돌린다.
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||아드의 사정거리가 $I$미터 증가한다.
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||아드의 사정거리가 $I$미터 증가한다.
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||마력을 방출하여 14미터 범위 내의 적에게 피해를 주고 느려지게 한다. 피해량이 $I$% 증가한다.
@@ -95817,8 +95856,8 @@ Joy-Con 2 (R)를 분리해 옆으로 놓으면 마우스처럼 사용할 수 있
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||음식을 섭취하면 $I$분 동안 체력이 재생된다.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||폭탄으로 적을 맞히면 10초 동안 근접 피해량이 $I$% 증가한다.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||폭탄으로 적을 맞히면 10초 동안 근접 피해량이 $I$% 증가한다.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||일반 갑옷 한 부위당 표식 강도가 $I$% 증가하고 초당 원기 재생이 $I$ 증가한다.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||일반 갑옷 한 부위당 표식 강도가 $I$% 증가하고 초당 원기 재생이 $I$ 증가한다.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||일반 갑옷 한 부위당 표식 강도가 $I$% 증가하고 초당 원기 재생이 $F$ 증가한다.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||일반 갑옷 한 부위당 표식 강도가 $I$% 증가하고 초당 원기 재생이 $F$ 증가한다.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||일반 갑옷 한 부위당 검 피해량이 $I$% 증가하고 폭탄 피해량이 $I$% 증가한다.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||일반 갑옷 한 부위당 검 피해량이 $I$% 증가하고 폭탄 피해량이 $I$% 증가한다.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||아드레날린을 소모하여 아드레날린 점수 하나당 포션의 중독도를 $I$% 감소시킨다. 변이 인자 탕약에는 영향을 주지 않는다.
@@ -96510,7 +96549,7 @@ Joy-Con 2 (R)를 분리해 옆으로 놓으면 마우스처럼 사용할 수 있
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||SENIOR CQA AND L&D MANAGER
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||선동가 머리.
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||CD PROJEKT RED DEVS TEAMS
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDPR MOD CREATOR
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDRP MOD CREATOR
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||SENIOR AUDIO ENGINEER
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||EXPERT GAMEPLAY ANIMATOR
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||EXPERT ENGINEER, COORDINATOR

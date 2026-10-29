@@ -2083,7 +2083,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||Tömeg a céhházban
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Viszlát.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Hol találkoztál Priscillával?
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|Körülöttem hullámzó utcazaj, a gyásznak ájerét fenséges szorongás képe oldja: kecses ujjakkal emeli ruhája szegélyét, lábát fürgén szedi a rangbéli dáma, mellettem elsuhan.
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|Körülöttem hullámzó utcazaj, a gyásznak ájerét fenséges szorongás képe oldja: kecses ujjakkal emeli ruhája szegélyét, lábát fürgén szedi a rangbéli dáma, mellettem elsuhan.
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Szószátyár.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Hallottam valami egész hasonlót valahol…
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Gyönyörű.
@@ -5474,6 +5474,7 @@
 412649|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|NVGT_Q202_00412649|Ez is szereti az izgalmakat. Hát jól figyelj, különben tengeri temetésed lesz.
 412650|3abcbb2d|item_name_mh104_contract_text|CUSTOM|Notices||Közhírré tétetik, hogy a Császári Hadsereg a vidéket jól ismerő embert keres – vadászt vagy felderítőt –, aki segítene meglelni egy eltűnt őrjáratot.<br><br>Lehetséges, hogy a katonák egy szörnyetegnek estek áldozatul. Ha a gyanú beigazolódik, alulírott gazdag jutalomban részesíti a bestia fejének felmutatóját. Ezenkívül további információkkal is szolgálhatok az esetről.<br><br>Dicsőség a császárnak!<br><br>Milan Noran, az Oretonban állomásozó hadosztály parancsnoka
 412833|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\nml_burrows_soltis_default.w2scene"|Choice line||Kik az Erdei Asszonyok?
+412838|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_kaer_trolde_sjusta.w2scene"|Comment text||EXT. Dialogue with Sjusta the tailor, in front of his workshop.
 412917|00000000||CJournalResource "gameplay\journal\quests\giant.journal"|Journal||Derítsd fel Urskar romjait, és witcher érzékeid segítségével keress Hjalmar jelenlétére utaló nyomokat!
 413007|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|HJOR_Q201_00413007|A szív torz volt. Mindig rossz ómen.
 413009|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|UDAL_Q201_00413009|Rossz ómen nekem is? Hallod? Velem mi lesz?
@@ -7055,6 +7056,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|Nem fogadhatom el. Sajnálom, hogy nem tudtam élve visszahozni.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|Szirénekről beszéltél… Undvikon sok van?
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|Annyi, de annnnyi… Más szigeteken még több…
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] SKIP TO CHEATING MENGE
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|A Gildorf alatti csatornarendszerben. A Koldusnegyeden át juthatsz le, ha jól bírod a bűzt és a nyomort.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|Talán lesz vérdíj, ha elviszem a trófeát.
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|Talán van vérdíj? Kelleni fog egy trófea.
@@ -14788,6 +14790,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|Novigradban nem találsz szörnyeket. Az Örök Tűz ég e falak között.
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|Tűz… Tűz lobog a szívemben!
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Kardok s gombócok
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to the merchants
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Read notice board
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to Ernst
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Hear the clients talking
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|Erik fia Leif…
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|Olaf fia Kjall…
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|Dicső módon halt…
@@ -23002,6 +23008,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|Ne zavarj a szórakozásban, rendben?
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|Remek. *Fújtat* Ez a hülye teljesen elszúrta a hangulatomat.
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|Akkor inkább odébb állok. De… talán ti is kereshetnétek valami meghittebb helyet…?
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|Caranthir hűséges, viszont Ge'els… Na ő már másik történet…
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|És úgy tűnik, Eredin mérgezte meg szeretett uralkodónkat.
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|Egy percet kérek. Mindjárt visszajövök.
@@ -23009,6 +23016,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|Szánalmas… Egyszerűen szánalmas….
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|Utolsó szavak?
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|El az utamból vénember… És akkor megkímélem az életedet.
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Fast forward time by meditating
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Szólj Sukrusnak, hogy vihetik a ládákat!
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Állj őrt!
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Tudd meg, mit akar Sukrus!
@@ -30800,6 +30808,7 @@
 576811|00000000||CStoryScene "quests\epilogues\quest_files\q505_ciri_free\scenes\q505_03_ciri.w2scene"|Line text|GRLT_Q505_00576811|Fogalmam sincs.
 576812|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|GRLT_Q001_00576812|Nem úgy, mint mindenki, és nem is akármilyen nőt. Az enyémnek orgona- és egresillata van, a ruhája csupa fekete és fehér.
 576814|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|MRRR_Q001_00576814|Két pálinka rendel!
+576815|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||G and V look at each other surprised, then with admiration at CY, then they pause.
 576818|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00576818|De hiszen aludtál, Vesemir bácsi.
 576819|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Choice line||Ebből nem magyarázod ki magad.
 576821|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Choice line||Jó, iszom egyet.
@@ -31833,6 +31842,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||A többit már tudom.
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|Hé, te!
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|Adok egy tanácsot. Ha nem tudsz jól énekelni, énekelj hangosan!
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Check in with the sentinels
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Place an Yrden trap OR dispatch the guard with Axii or Sword
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Ignite the woodcart
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Signal the all clear at the warehouse
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Tudom. Követtem a nyomaidat.
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|Te a Fúriáknál kötöttél ki, ő Keiránál.
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|Igen, nem sikerült. Amikor átléptem a portálon, Avallac'h rejteke helyett a Görbeláp kellős közepén kötöttem ki.
@@ -33802,6 +33815,7 @@
 589857|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_08b_yen_about_megascope.w2scene"|Line text|YENN_SQ302_00589857|Egy megaszkóp kristály? A fenébe, repedt… de lehet, hogy még működik.
 589877|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|ARNV_Q206_00589877|Miért segítettetek?
 589879|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|BECC_Q206_00589879|Mert hallani akarom, miért árultad el apámat, a bátyámat és a klánomat! Mondd a szemembe!
+589896|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||EXT. KAER MORHEN LOWER COURTYARD. D - The lower courtyard is full of training equipment
 589898|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b05a_01_returned_with_arnvald.w2scene"|Line text|GRLT_Q206_00589898|Miért árultad el őket?! Beszélj, vagy befejezem, amit elkezdtek!
 589901|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|PHIL_SQ302_00589901|Vilgefortz meg tudta csinálni. Ugyanazt a metódust követem – szövetek növesztése drágaköveken.
 589902|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|MGLA_SQ302_00589902|Ez őrület… …kell… …nergi… …de te…. …agy veszé…
@@ -41127,7 +41141,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||Fiú szelleme
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||Öld meg a ghoulokat!
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|Ne piszkálj már, Geralt! Elbotlok és leesek!
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|Ez kard vagy tojástörő? Csuklóból üss, ne könyökből! Újra!
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|Ez kard vagy tojástörő? Csuklóból üss, ne könyökből! Újra!
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||Engedj át.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|Engedj át.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|Jó, menj. Szabad az út.
@@ -50364,6 +50378,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Ám amikor Geralt megpróbált kilépni a toronyból, a lidérc elárulta valódi kilétét. Kiderült, hogy amit Geralt ártatlan lány kísértetének hitt, az valójában egy himlőlidérc: lidércformát öltött halál és dögvész.<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Meglehet, a lány szavaiban volt valami, ami óvatosságra intette Geraltot, esetleg witcher ösztönei figyelmeztették még időben… akárhogy is történt, szó szerint egy pillanattal azelőtt tudta meg, kivel is van dolga, hogy Anabelle elárulta valódi kilétét. A szellem valójában himlőlidérc volt, dögvészt és halált terjesztő rettentő kísértet.
 1058855|00000000||Unnamed CJournalResource|Journal||Dezertőrök
+1058856|00000000||Unnamed CJournalResource|Journal||Egy csapatnyi katona a temeri hadseregből elhagyta őrhelyét és dezertált. Ezek az emberek hihetetlenül jól képzettek, bárkit megtámadnak, aki az útjukba kerül. Az utolsó hírek szerint a környező erdőségben táboroznak (prológus).
 1058857|00000000||Unnamed CJournalResource|Journal||Dezertőrök az erdőben
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||Geralt megtalálta a dezertőrök táborát, és mindenkit lemészárolt! Felfordul a gyomrom az átkozott dezertőröktől! Kegyelemért könyörögtek, de Geralt nem adott nekik. Aztán magához vette a holmijukat, és később eladott mindent.
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||Meg kéne néznünk. Csak a biztonság kedvéért.
@@ -51443,6 +51458,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Szórakozzunk kicsit.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Mit szólnál egy kártyapartihoz?
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Ideje aludni.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[EN] [DEBUG] [Skip to Eskel Drunk.]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|Hah. Itt a kulcs.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||Megbízás: Erdei bestia
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||Eltűnt feleség
@@ -51645,7 +51661,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|Akár tetszik, akár nem, kinyalhatod a seggem.
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|Tipegnék tulipánok terebélyes terepén.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|Nem. Nem ez a jelszó.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||Eltűnt őrjárat – Jutalom
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||Bejelentés:<br><br>Ő császári felsége, Emhyr var Emreis szolgálatában álló katonák tűntek el kötelességük teljesítése közben. Jutalom jár annak, aki segít megtalálni őket. Bővebb információért keressétek a központi hadsereg táborának szállásmesterét!
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||Roland Treugger levele Hammondhoz.
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||1. sz. játékszalon.<br><br>Aktuális hónap.<br><br>Kiadások – 38756 korona<br><br>Fenntartási költség – 5294 korona<br><br>Szervezeti adók – 3875 korona<br><br>Adósok<br><br>Tybalt gróf – 1285 korona , fizetési határidő – hónap vége , nem alku tárgya.<br><b>Sasha – 956 korona, fizetési határidő – hónap közepe, két hetes hosszabbítás lehetséges 35 százalékos kamatemeléssel.<br><br>Finneas – 5148 korona, fizetés késik – utolsó figyelmeztetés.<br><br>Bernard Tulle – adósság törlesztve.<br><br>Patrick Hazelnut – figyelmeztetés kézbesítve, behajtási eljárás megindítva.
@@ -54000,6 +54015,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|Nem tervezem. Viszlát.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Kérdezz körbe, hogy a táborban látta-e valaki Dandelion elrablóját!
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|Ühüm. Viszlát.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[EN] [DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Találj utat a kunyhóba!
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Elintézem.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Fizesd meg érte a díjat!
@@ -56786,6 +56802,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||Tisztítsd meg az ajtónyílást és szabadítsd ki a tündét!
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Merülés
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Az alámerüléshez a(z) <<DiveDown>> gombot, a felszínre bukkanáshoz a(z) <<DiveUp>> gombot nyomd meg.<br><br>Figyelj a levegődre – ha elfogy, megfulladsz!
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[EN] [DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||Tessék, a meghívóm.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|Tessék, a meghívóm. A tiéd, ha akarod.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|Igen, örömmel elfogadom.
@@ -56883,6 +56900,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|Elég hozzá, hogy birtokot vegyek Kovirban, ahol gyümölcsöt eszegetve heverészhetek életem végéig.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|Nem rossz. Nem sokan ismerik meg a fejükre kitűzött vérdíjat.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|A legtöbben nem szeretnék, ha vérdíj lenne a fejükön.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||Hirdetmény eltűnt katonákról.
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|De miért jöttél? Hogy megkönnyítsd az életem?
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||Szeretnék megszökni veled és kettesben tölteni egy kis időt.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|Skelligi lakomák – olyan kiszámíthatók. Nyáladzó részegek, pimasz dicsekvők, és az elkerülhetetlen viták, amelyek végül…
@@ -57491,7 +57509,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||Gwynt oktatás!
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||Tanulókat oktatnék a gwynt szabályaira. Csak azokat veszem magam mellé, akik fegyelmet, logikus gondolkodást és tanulni akarást mutatnak. A különleges tehetséggel rendelkezőket még nagyobb örömmel várom. A tanulóknak be kell szerezniük saját kártyapaklijukat.<br><br>Tapasztaltabb játékosokat is keresek, hogy kihívást támasszanak, és közösen tudjuk csiszolgatni tudásunkat.<br><br>-Ermion, druida
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||Tekints a mélybe, hogy felemeltess
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||Katakanodú kulcsa
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||Kissé rozsdás kulcs.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||Az oxenfurti halottasház kulcsa
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||Patinás öreg kulcs.
@@ -57997,6 +58014,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||Adalbert Kermith első térképe
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||Térkép a witcherek Macska iskolájához köthető szimbólumok fellelhetőségéről.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||Öld meg a banditákat!
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||Kulcs a katakan búvóhelyéhez.
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||Miután Slavko Atimstein professzor rávett, hogy csatlakozzak a kutatócsoporthoz, tanulmányozni kezdtem a witcherek Griff iskoláját. A műveleti bázis a Görbedomb sírboltja volt, ahol a professzor szerint egy „griffet” helyeztek örök nyugalomra – ezért akart módot találni a bejutásra.<br><br>Hamarosan találtam néhány érdekes helyet, amiket a Griff iskola medáljának piktogramjával jelöltek meg. Feltüntettem őket ezen a térképen.<br><br>Edwin Greloff, az Oxenfurti Akadémia természettudományi karának adjunktusa
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||A szifiliszes kurvaanyját a bánatos szar világnak! Gwynten elvesztettem az Atimstein professzornak készített első térképet. Most mehetek vissza a görbedombi sírbolt melletti alaptáborba, hogy elölről kezdjem. Így legalább térképre kerülnek azok a helyek is, amik az előzőn még nem szerepeltek.<br><br>Edwin Greloff, az Oxenfurti Akadémia természettudományi karának adjunktusa
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||Gyönyörű. Slavko Atimstein professzor dühönghet: az első térképet gwynten vesztettem el, a másodikat ellopták tőlem, miközben gyengélkedtem egy kaszinóban töltött görbe este nyomán. Ha üres kézzel megyek vissza a Görbedomb melletti táborba a prof elevenen megnyúz. A négy új helyszín, amit ezen a térképen jelöltem, talán elég lesz, hogy megóvjon a haragjától.<br><br>Edwin Greloff, az Oxenfurti Akadémia természettudományi karának adjunktusa
@@ -62954,6 +62972,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||GALAXY PROJEKT – IGAZGATÓ
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||WEBOLDAL PROJEKT – IGAZGATÓ
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||VEZETŐK
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||MÉRNÖKÖK
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||TOVÁBBI PROGRAMOZÁS
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||TOVÁBBI GRAFIKA
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||ANIMÁLT STORYBOOK SZEKVENCIÁK
@@ -75353,7 +75372,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|Végszükség? A fenébe is! Miért?
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|Agh. Van egy lény, aki képes megidézni Dettlaffot. A tekintélyével és a hatalmával rászoríthatja, hogy egy adott helyen megjelenjen.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|Minden rendben? A főzettel hogy állsz?
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||Charles Lanzano
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|Te nem tűnsz kőfejtőnek.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|Megint te? Ki vele, mit akarsz?
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||Megmutatod az árudat?
@@ -90984,9 +91002,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||A főbíró jegyzetei Négyujjú Filibert bandájáról
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||Bevételek és kiadások blathe havában<br><br>Harmadik nap<br>Champs-Désolés dombjai közt szárnyas hüllők fészkelnek. Egymás után zabálják fel az embereinket. Legutóbb Gilbertet ragadták el, mikor a falon őrködött. Gilbert elővigyázatos fickó volt, de senki se lehet örökké éber – pláne ha épp a hólyagját üríti. Filibert dühös. Egy zöldfülű újoncból teljes értékű bandatagot faragni nem olcsó mulatság. Ha félúton szörnytáp lesz belőle, az színtiszta pazarlás.<br>Hetedik nap<br>Megtámadtunk egy kelet-Toussaintból jött kereskedőkaravánt. Nem voltak fegyveres őrök, akik ellenállhattak volna, de alig fogtunk rajtuk valamit: a náluk lévő rongyokért egy petákot se adna senki a csupasz seggű skelligei vadembereken kívül, akiket akkor lássunk, mikor a hátunk közepét. Filibert megint feldühödött és megölt egy kereskedőt, bizonyos Lumierexet. A többi visszakotródott keletre.<br>Tizenegyedik nap<br>A felderítőink három embert láttak settenkedni az erdőben. Koldusgúnyát viseltek, és váltig állították, hogy azok is. Nem dőltünk be nekik. Némi keménykedés árán kiderítettük, hogy ékszerészek, és aranyat hoznak Maecht bányáiból. Finomítatlan érc, de ígéretes a minősége. Filibert megparancsolta, hogy végezzünk az ékszerészekkel. Szenvedélyesen gyűlöli a hazudozókat.<br>Tizenhetedik nap<br>Castel Graupia császári akadémiájának egy expedíciója ütött tábort a Sansretour túlpartján. A tudósok nem épp a gazdagságukról nevezetesek, de a sátraik szép nagyok voltak, és bőven hoztak magukkal alkoholt is. Ez megpecsételte a sorsukat. Filibert odaküldött pár embert.<br>Huszonharmadik nap<br>Majd’ két hete már, hogy utoljára zsákmány érkezett az országúton. A kóborlovagok viszont egyre több cimboránkat kapják el. Kettő meghalt, egy harmadik sebet kapott, de sikerült meglépnie. Komoly pénzt érő felszerelés veszett oda. Filibert megkorbácsoltatta a sebesültet a gondatlanságáért. Ez már sok volt a legyengült szervezetének: belehalt.<br>Huszonnegyedik nap<br>Fordult a szerencsénk. Elkaptunk egy délről visszatérő borkaravánt. A portékájuk mind elkelt, úgyhogy rengeteg pénz volt náluk. Előzetes számításaim szerint a zsákmányból mindegyikünknek jut vagy négyszáz korona. Filibert még nem döntött, egyenlően dobjuk-e szét.<br>Huszonnyolcadik nap<br>A Basane farmra küldött csapat nem tért vissza az utánpótlással. Fogytán az élelem. Az ember nem él meg alkoholon, az aranyat meg, mint tudjuk, nem lehet megenni. Ki kell fosztanunk pár falut.<br>Harmincadik nap<br>Megcsinálom a komplett blathe havi elszámolást. Mínuszban vagyunk – nem is kicsit. Úgy fest, itt kell maradnunk még egy hónapig.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|Mit keresel itt, uram? Ez négyszemközti megbeszélés. Geralt, mit jelentsen ez? Miben mesterkedtek ti ketten a tudtom nélkül?
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||Levél a tornajegyzőtől.
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||Levél a tornajegyzőtől.
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||Az 1275. évi nemzetközi lovagi torna Vivienne de Tabris úrhölgy védnöksége alatt<br><br> A regisztrált résztvevők, akik jogosultak a részvételre:<br><br>Gregoire de Gorgon, a tavalyi verseny győztese. Nem vesz rész az általános megméretésen de a záróesemény során megmérkőzik azzal a lovaggal, aki a legtöbb pontot szerzi. (Minden jel arra mutat, hogy Gregoire meg fogja védeni címét.)<br><br>Anséis, Lyria és Rívia hercege, harmadszor indul három év alatt<br><br>Horm Akerspaark, Maecht hercege, állítólag Emhyr császár vére, negyedszer indul a tornán<br><br>Palmerin de Launfal báró, hatodszor áll sorompóba<br><br>Donimir de Troy, redániai lovag, első alkalommal versenyez<br><br>Rainfarn var Attre, hetedik alkalommal versenyez, az 1269-es torna győztese<br><br>Guy de Bois-Fresnes Metinnából (őfelsége kóborlovagja, Reynart de Bois-Fresnes másodunokatestvére), harmadszor versenyez<br><br>Creigiaui Delwyn, ifjú lovag, először áll sorompóba<br><br>Tailles de Dorndal, a Lángoló Rózsa rend lovagja, első alkalommal versenyez<br><br>Metinnai Llinos, harmadik alkalommal versenyez<br>Guillaume de Launfal (Palmerin báró unokaöccse), első alkalommal versenyez. [későbbi kiegészítés] Sérülése miatt Guillaume átadta helyét a versenyen egy másik lovagnak.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||Vivienne feljegyzései
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||Vivienne feljegyzései
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||Blathe – Feainn költségek<br><br>14 vég gyolcs: 80 korona<br>cipő (sárkánybőr): 140 korona<br>versenynyereg: 280 korona<br>varázskrém: 1400 korona (összesen)
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||Napló
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||Kedves naplóm!<br>Már három hét telt el, mióta Lady Orianna felkarolt az utcáról. Végre van mit ennem és innom, és mindennap játszhatok a többi gyerekkel. Ez még jobb, mint otthon, mert otthon ritkán volt mit enni, és amikor a mama meghalt, egyáltalán nem volt semmi ennivaló.<br><br>Ma Mirivel és Tomm-mal játszottam – először kiszámolósat játszottunk, aztán bújócskáztunk, aztán mikádóztunk. Utána meg fogócskáztunk. Nagyon jól éreztem magam! Aztán jött egy kocsi Lady Oriannától, és volt rajta sok-sok ennivaló. Volt édes péksütemény, gyümölcs és torta, és sok más finom dolog. Lady Orianna a legjobb!<br><br>Lady Orianna ma korán reggel meglátogatott bennünket. Először beszélgetett velünk, aztán énekelt nekünk, majd átvitte Johnnyt a másik szobába. Mind féltékenyek voltunk rá. Amikor visszajött, egy kicsit sápadt volt, és kis, piros foltok voltak a nyakán, de volt nála egy óóóriási zacskó csokoládé! Miri azt mondja, hogy néha Lady Orianna elvisz egy gyereket és csinál vele valamit, nem igazán értettem, hogy mit, de utána ajándékot kapnak tőle. Remélem, hogy legközelebb engem visz!<br><br>Ma esik és nagyon unatkozom. Tomm azt mondta hülye vagyok, de nem hiszek neki, mert ő a hülye. Talán Lady Orianna eljön holnap és kapok tőle ajándékot. Akkor majd úgy kell neki!<br><br>Engem választott! Lady Orianna eljött, és engem választott! Átmentem vele a másik szobába, azt mondta, hogy mutassam meg neki a nyakam, és akkor egy kicsit megharapott. Nem igazán fájt, csak később egy kicsit szédültem. De ez nem fontos, mert adott nekem egy fakardot! Senkinek sincs ilyenje! Tomm bele fog sárgulni!
@@ -94074,7 +94092,6 @@ Wine</i></font> küldetéseinek eléréséhez teljesítened kell a <font color="
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||TERVEZŐK
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||MÉRNÖKI FELADATOK
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||MENEDZSER
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||MÉRNÖKÖK
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||KONCEPCIÓGRAFIKUS KOORDINÁTOR
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||SZAKÉRTŐ KONCEPCIÓGRAFIKUS
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||SZAKÉRTŐ KARAKTERMŰVÉSZ
@@ -94320,7 +94337,7 @@ Wine</i></font> küldetéseinek eléréséhez teljesítened kell a <font color="
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||Bezár
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||Jutalmaid átvételéhez jelentkezz be a GOG GALAXY 2.0 felületén, majd indítsd el a játékot.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||Jutalmaid átvételéhez és a Mod menü eléréséhez jelentkezz be a REDlauncher felületén, majd indítsd el a játékot.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||Látómező
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||Kamera
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||Hatás
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||Autofókusz
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||Rekesz
@@ -95467,7 +95484,7 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||Az Axii egyszerre hathat két célpontra, de a hatás $I$%-kal gyengébb.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||Az Axii egyszerre hathat két célpontra.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||Robbanó pajzs
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Valahányszor a Quen pajzs megtörik, visszalöki az ellenségeket. A visszalökés ereje a ranggal növekszik. 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Valahányszor a Quen pajzs megtörik, visszalöki az ellenségeket. A visszalökés ereje a ranggal növekszik. Az elnyelt sebzés $I$%-át visszaveri a támadóra. 
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||Messzehordó Aard
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||Növeli az Aard hatótávolságát $I$ méterrel.
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||Mágikus csapda
@@ -95538,7 +95555,7 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||A meglepetés ereje
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||Ha bombával találod el az ellenséget, közelharci sebzésed $I$%-kal nő 10 másodpercig.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||A Griff iskola technikái
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||A közepes páncél minden egyes darabja $I$%-kal növeli a Jelek erősségét és $I$/mp mértékben az állóképesség regenerációját.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||A közepes páncél minden egyes darabja $I$%-kal növeli a Jelek erősségét és $F$/mp mértékben az állóképesség regenerációját.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||A Mantikór iskola technikái
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||Minden közepes páncél $I$%-kal növeli a kard sebzését és $I$%-kal a bombasebzést.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||Anyagcsere-erősítés
@@ -95556,7 +95573,7 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1449932|116f57df|skill_viper_school_techniques_name|CUSTOM|All||A Vipera iskola technikái
 1449933|3939c028|skill_viper_school_techniques_description|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a maximális életerőt és $I$%-kal a méregsebzést.
 1449934|00b70d22|skill_wolven_school_techniques_name|CUSTOM|All||A Farkas iskola technikái
-1449935|40bb2985|skill_wolven_school_techniques_description|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a Jelek erősségét és $I$%-kal az állóképesség regenerációját.
+1449935|40bb2985|skill_wolven_school_techniques_description|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a fegyverek sebzését és $I$%-kal a Jelek erősségét.
 1451248|7572161d|panel_confirmation_text_sellJunk|CUSTOM|Menu||Biztosan eladsz minden kacatot?
 1451249|6b6c7458|panel_inventory_sellJunk|CUSTOM|Menu||Kacat eladása
 1451250|8f211a50|panel_confirmation_title_sellJunk|CUSTOM|Menu||Minden kacat eladása
@@ -95691,8 +95708,8 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||Észak lehelete
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||Tor Lara
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||Tor Zireael
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||Látómező
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||Döntés
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||Kamera
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||Strapabíró páncél, amely évtizedekig bírja az Utat. 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||Vörös kardinálispinty páncél
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||Vörös kardinálispinty csizma
@@ -95797,8 +95814,8 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||A célpont nem mozog Geralt felé, amíg az Axiit használja. Növeli az Axii hatékonyságát beszélgetések során.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||A célpont nem mozog Geralt felé, amíg az Axiit használja. Növeli az Axii hatékonyságát beszélgetések során.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||Az Axii egyszerre hathat két célpontra, de a hatás $I$%-kal gyengébb.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Valahányszor a Quen pajzs megtörik, visszalöki az ellenségeket. A visszalökés ereje a ranggal növekszik. 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Valahányszor a Quen pajzs megtörik, visszalöki az ellenségeket. A visszalökés ereje a ranggal növekszik. 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Valahányszor a Quen pajzs megtörik, visszalöki az ellenségeket. A visszalökés ereje a ranggal növekszik. Az elnyelt sebzés $I$%-át visszaveri a támadóra. 
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Valahányszor a Quen pajzs megtörik, visszalöki az ellenségeket. A visszalökés ereje a ranggal növekszik. Az elnyelt sebzés $I$%-át visszaveri a támadóra. 
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||Növeli az Aard hatótávolságát $I$ méterrel.
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||Növeli az Aard hatótávolságát $I$ méterrel.
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||Mágikus kisülést bocsát ki, amely sebzi és lelassítja az ellenséget 14 méter sugarú körben. $I$%-kal növeli a sebzést.
@@ -95866,8 +95883,8 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||Az evés utáni életerő-regeneráció $I$ percig tart.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||Ha bombával találod el az ellenséget, közelharci sebzésed $I$%-kal nő 10 másodpercig.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||Ha bombával találod el az ellenséget, közelharci sebzésed $I$%-kal nő 10 másodpercig.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||A közepes páncél minden egyes darabja $I$%-kal növeli a Jelek erősségét és $I$/mp mértékben az állóképesség regenerációját.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||A közepes páncél minden egyes darabja $I$%-kal növeli a Jelek erősségét és $I$/mp mértékben az állóképesség regenerációját.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||A közepes páncél minden egyes darabja $I$%-kal növeli a Jelek erősségét és $F$/mp mértékben az állóképesség regenerációját.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||A közepes páncél minden egyes darabja $I$%-kal növeli a Jelek erősségét és $F$/mp mértékben az állóképesség regenerációját.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||Minden közepes páncél $I$%-kal növeli a kard sebzését és $I$%-kal a bombasebzést.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||Minden közepes páncél $I$%-kal növeli a kard sebzését és $I$%-kal a bombasebzést.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||Adrenalint fogyasztva adrenalinpontonként $I$%-kal csökkenti a főzetek főzetmérgezési költségét. Nem befolyásolja a mutagénpárlatokat.
@@ -95884,8 +95901,8 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1458395|7428f9c5|skill_survival_instinct_description_level_3|CUSTOM|All||A maximális életerőt $I$%-kal növeli.
 1458476|fee39520|skill_viper_school_techniques_description_level_2|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a maximális életerőt és $I$%-kal a méregsebzést.
 1458477|fee39521|skill_viper_school_techniques_description_level_3|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a maximális életerőt és $I$%-kal a méregsebzést.
-1458478|e3c8517d|skill_wolven_school_techniques_description_level_2|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a Jelek erősségét és $I$%-kal az állóképesség regenerációját.
-1458479|e3c8517e|skill_wolven_school_techniques_description_level_3|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a Jelek erősségét és $I$%-kal az állóképesség regenerációját.
+1458478|e3c8517d|skill_wolven_school_techniques_description_level_2|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a fegyverek sebzését és $I$%-kal a Jelek erősségét.
+1458479|e3c8517e|skill_wolven_school_techniques_description_level_3|CUSTOM|All||A közepes páncélzat minden egyes darabja $I$%-kal növeli a fegyverek sebzését és $I$%-kal a Jelek erősségét.
 1458480|b43af73f|monster_armor_reduction_vulnerability_name|CUSTOM|All||Páncélfelőrlés
 1458481|bb5e14c8|monster_armor_reduction_vulnerability_description|CUSTOM|All||Az erős páncéllal rendelkező szörnyek sebezhetőek a páncélromboló támadásokkal szemben.
 1459746|12bf9777|panel_mods_verification_failed_load_mods_desc|CUSTOM|All||Néhány mod betöltése sikertelen
@@ -96559,7 +96576,7 @@ Joy-Con 2 (R)-t egérként úgy, hogy leválasztod és az oldalára helyezed. Ez
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||RANGIDŐS CQA ÉS L&D-MENEDZSER
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||Uszító frizura.
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||CD PROJEKT RED FEJLESZTÉSI CSAPATOK
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDPR MOD ALKOTÓ
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDRP MOD ALKOTÓ
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||RANGIDŐS HANGMÉRNÖK
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||SZAKÉRTŐ JÁTÉKMENET-ANIMÁTOR
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||SZAKÉRTŐ MÉRNÖK, KOORDINÁTOR

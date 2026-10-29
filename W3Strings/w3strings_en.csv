@@ -2085,7 +2085,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||Mob
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||See you.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Where'd you meet Priscilla?
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|Around me thundered the noise of the street. In mourning, an image of majestic distress. With dainty fingers lifting the hem of her dress. A stately woman strode by with hurrying feet.
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|Around me thundered the noise of the street. In mourning, an image of majestic distress. With dainty fingers lifting the hem of her dress. A stately woman strode by with hurrying feet.
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Verbose.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Heard something awfully similar somewhere…
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Beautiful.
@@ -3053,6 +3053,7 @@
 378633|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||Find the leshen by using your Witcher Senses to follow the sounds it makes.
 378634|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||Kill the leshen.
 378676|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_00378676|Did I handle the Baron's men peacefully during q101_agent (Inn at the Crossroads, looking for Hendrik)?
+378678|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes, and I avoided a fight. [DEBUG]
 378680|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||No, I kicked their asses. [DEBUG]
 378682|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|GRLT_Q303_00378682|One more time… Can we talk?
 378684|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|CCLP_Q303_00378684|Sigi you like. Talk me with.
@@ -5489,6 +5490,7 @@
 412649|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|NVGT_Q202_00412649|Another thrill seeker. Well, then listen close, lest you end in a watery grave.
 412650|3abcbb2d|item_name_mh104_contract_text|CUSTOM|Notices||Let it be known that the Imperial Army is in need of a man who knows the area - a hunter or a scout, for example - to help us find a missing patrol.<br><br>It is possible the soldiers fell prey to a monster. If this suspicion is confirmed, anyone delivering the beast's head will be paid a reward by the undersigned. Address any and all questions to the same individual.<br><br>Glory to the Emperor!<br><br>-Milan Noran, commander of the division stationed in Oreton
 412833|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\nml_burrows_soltis_default.w2scene"|Choice line||Who are the Ladies of the Wood?
+412838|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_kaer_trolde_sjusta.w2scene"|Comment text||EXT. Dialogue with Sjusta the tailor, in front of his workshop.
 412917|00000000||CJournalResource "gameplay\journal\quests\giant.journal"|Journal||Explore the ruins of Urskar and search for signs of Hjalmar's presence using your Witcher Senses.
 413007|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|HJOR_Q201_00413007|The heart was deformed. An ill omen always.
 413009|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|UDAL_Q201_00413009|An ill omen for me as well? Hear me? What'll become of me?
@@ -7070,6 +7072,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|Can't accept this coin. I'm sorry I wasn't able to bring him back alive.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|You mentioned sirens. Many on Undvik?
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|So, soo many. More'n on other isles.
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] SKIP TO CHEATING MENGE
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|Sewers beneath Gildorf, but you'll have to enter through the Bits, endure the stench of poverty on the way.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|Might be a bounty for bringing in the trophy.
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|Maybe there's a bounty? Need a trophy.
@@ -30892,6 +30895,7 @@
 576811|00000000||CStoryScene "quests\epilogues\quest_files\q505_ciri_free\scenes\q505_03_ciri.w2scene"|Line text|GRLT_Q505_00576811|I have no idea.
 576812|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|GRLT_Q001_00576812|Not like everyone, and not just any woman. Mine smells of lilac and gooseberries, dresses in black and white.
 576814|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|MRRR_Q001_00576814|Two schnappses!
+576815|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||G and V look at each other surprised, then with admiration at CY.
 576818|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00576818|But you were asleep, Uncle Vesemir.
 576819|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Choice line||Won't weasel out of this.
 576821|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Choice line||Fine, I'll have a drink.
@@ -33894,6 +33898,7 @@
 589857|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_08b_yen_about_megascope.w2scene"|Line text|YENN_SQ302_00589857|A megascope crystal? Damn, it's cracked… but it could still work.
 589877|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|ARNV_Q206_00589877|Why did you help me?
 589879|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|BECC_Q206_00589879|Because I want to hear why you betrayed my father, my brother and our clan! Say it to my face!
+589896|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||EXT. KAER MORHEN LOWER COURTYARD. D - The lower courtyard is full of training equipment , weapons, dummies, swords and shields. Vesemir, Lambert and Eskel are already there. Geralt and Ciri join, Ciri doing her best to look meek whilst Vesemir is angry with her. Everyone else is relaxed.
 589898|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b05a_01_returned_with_arnvald.w2scene"|Line text|GRLT_Q206_00589898|Why'd you betray them? Talk. Or I'll finish what I started.
 589901|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|PHIL_SQ302_00589901|Vilgefortz did it. I'm employing the same method - cultivating tissue on precious stones.
 589902|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|MGLA_SQ302_00589902|It's madness… …need… ...ower… ...ut your…. …reat dange…
@@ -41231,7 +41236,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||Boy's Ghost
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||Kill the ghouls.
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|Don't bother me, Geralt! I'll trip and fall!
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|Is that a sword or an eggbeater? Strike from the wrist, not your elbow! Again!
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|Is that a sword or an eggbeater? Strike from the wrist, not your elbow! Again!
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||Lemme pass.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|Lemme through.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|Right, move on. Road's open.
@@ -43198,6 +43203,7 @@
 1038698|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|VOW3_MQ0004_01038698|But I sees he ain't listenin'. Just starin' at me pan, like a magpie at a copper! "Lend it to me, gran, I'll give it back come morn." Was right baffled, for what's he doin' fryin' in the dark? But I've got a soft 'eart, so I gave it to 'im.
 1038703|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|VOW3_MQ0004_01038703|Oh, dearie! Since you're goin' in there, mind lookin' around for me fryin' pan? Rogue borrowed it from me, then left without returnin' it!
 1038705|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|GRLT_MQ0004_01038705|What's that, again?
+1038706|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Comment text||Geralt is surprised, looks at old woman, puzzled.
 1038707|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0005_dwarfsmith\scenes\mq0005_03_arsonist_found.w2scene"|Choice line||Fine - but no more arson.
 1038711|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0005_dwarfsmith\scenes\mq0005_03_arsonist_found.w2scene"|Line text|GRLT_MQ0005_01038711|Fine, I'll agree to that… if you swear to stop playing with fire. Fail to do that and I'll come back, and someone'll get hurt.
 1038713|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0005_dwarfsmith\scenes\mq0005_03_arsonist_found.w2scene"|Line text|TPM3_MQ0005_01038713|Of course, master witcher! I swear on me dead mum! Your gold… and here's to your health! Down with the Black Ones and nonhumans alike!
@@ -43217,6 +43223,7 @@
 1038744|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Choice line||Truly a fascinating tale.
 1038745|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Choice line||Interesting… then what happened?
 1038747|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|GRLT_MQ0004_01038747|Fascinating story. Any chance you're nearing the end?
+1038748|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Comment text||The old lady gives G an offended look, continues her story.
 1038750|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|GRLT_MQ0004_01038750|Interesting. What happened then?
 1038752|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|VOW3_MQ0004_01038752|Afore dawn, another rode up to the hut. But come morn, only the first fellow left. Locked the door, hopped on his horse, and that were all I saw of him - and me pan! 'Twere old, black with soot, not worth much, I 'spose - but I've no other!
 1038754|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|VOW3_MQ0004_01038754|Will you 'elp me, dearie? Bring an ol' widow her pan? I could never break down that door meself… And in truth I'm afeared to go in anyroad. Such a stench waftin' out. Methinks the other fellow… well, that he's lyin' there.
@@ -44346,6 +44353,7 @@
 1043184|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_priestess_01.w2scene"|Line text|SPR1_VSET_01043184|Begone from here!
 1043185|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_02_villagers.w2scene"|Choice line||Did you know there's a crypt below?
 1043186|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_02_villagers.w2scene"|Choice line||Farewell.
+1043187|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_02_villagers.w2scene"|Comment text||The peasants look at each other, confused, intrigued.
 1043189|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_02_villagers.w2scene"|Line text|GRLT_MQ1057_01043189|Farewell. The Allgod show you favor.
 1043193|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_priestess_02.w2scene"|Line text|SPR2_VSET_01043193|Away with you.
 1043195|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_priestess_03.w2scene"|Line text|SPR3_VSET_01043195|No amount of prayer can help you now.
@@ -44545,6 +44553,12 @@
 1043764|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043764|This is getting old. Some overgrown brute murdered a whole swarm of drowners.
 1043766|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\scenes\q102_v_03_geralt_on_searching_village.w2scene"|Line text|GRLT_Q102_01043766|Oughta look among the villagers. Might find one brave enough to help me.
 1043767|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||Talk to the hunter.
+1043769|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_01043769|[DEBUG] Did I meet the Baron's men in the Inn at the Crossroads while looking for Hendrik?
+1043770|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes [DEBUG]
+1043771|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] No [DEBUG]
+1043773|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_01043773|[DEBUG] [DEBUG] Did I insult someone during q101 (looking for Hendrik)? [DEBUG]
+1043774|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes [DEBUG]
+1043775|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] No [DEBUG]
 1043777|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043777|Troll. Haven't seen one this big in a while… Gotta be ancient.
 1043798|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||Follow the Nilfgaardian soldiers' tracks using your Witcher Senses.
 1043810|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_02_lair.w2scene"|Line text|GRLT_MQ4003_01043810|Cozy troll abode. Long as I'm here, might as well look around.
@@ -49976,9 +49990,11 @@
 1057764|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_21c_mousesack_lab.w2scene"|Line text|GRLT_Q201_01057764|Yennefer, watch out! Get back! Lemme do what I need to do!
 1057766|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_21c_mousesack_lab.w2scene"|Line text|YENN_Q201_01057766|I shan't leave you with this! We'll defeat them together!
 1057770|00000000||CStoryScene "quests\part_2\quest_files\q309_casablanca\scenes\q309_01c_triss_on_way_to_olivier.w2scene"|Line text|TRSS_Q309_01057770|Geralt, over here…
+1057772|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Comment text||G begins to walk, gran follows him as if she wanted to enter the hut behind him. G stops her.
 1057774|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_01_meet_old_woman.w2scene"|Line text|GRLT_MQ0004_01057774|You should wait here. Just in case.
 1057775|00000000||CJournalResource "gameplay\journal\quests\mq1022bordertroll.journal"|Journal||It turned out the dubious musical talents belonged to a troll. Geralt felt the monster might be a danger to people living nearby, so he decided to end its life.<br>
 1057776|8c841e3f|Odolan|CEntityTemplate "quests\minor_quests\prologue_village\quest_files\mq0003_freshwater\characters\mq0003_farmer.w2ent"|Entity display name||Odolan
+1057777|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_03_frying_pan_to_woman.w2scene"|Comment text||G begins to leave, but the gran stops him.
 1057779|00000000||CStoryScene "quests\minor_quests\prologue_village\quest_files\mq0004_locked_shed\scenes\mq0004_03_frying_pan_to_woman.w2scene"|Line text|GRLT_MQ0004_01057779|Dead. Round up a few boys and bury him outside the village. Deep, so the necrophages don't dig him up. And take my advice… don't mention this to the Nilfgaardians.
 1057780|cdecf119|item_name_lore_skellige_island|CUSTOM|Book||Skellige: Its History and Geography
 1057781|442e4cd3|item_desc_lore_skellige_island|CUSTOM|Book||Contains numerous factoids and tidbits about the Skellige Isles.
@@ -50371,6 +50387,7 @@
 1058711|00000000||CJournalResource "gameplay\journal\characters\baron.journal"|Journal||In exchange for information about Cirilla, the baron asked Geralt to find his wife, Anna, and their daughter Tamara. Both had disappeared without a trace some time ago, and Phillip was slowly losing hope of ever seeing them again. Under these circumstances, a witcher was a gift from the gods.<br>
 1058712|00000000||CJournalResource "gameplay\journal\characters\baron.journal"|Journal||Yet the baron had hid certain facts from Geralt, such as his wife's recent pregnancy, her subsequent miscarriage and his own predilection towards strong drink and violent quarrels.<br>
 1058717|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|VSMR_Q001_01058717|What do you think - should we start by reviewing the fundamentals, or go right to free training?
+1058719|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||Ciri fetches a sword, Vesemir turns to watch her with an admonishing look, then turns back to G.
 1058721|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_07a_burial_chats.w2scene"|Line text|SBR1_Q201_01058721|This here's my chance, don't you see?! This one ballad could make me Clan Tuirseach's court skald.
 1058722|00000000||CJournalResource "gameplay\journal\characters\baron.journal"|Journal||It turned out the baron would drink regularly and to excess, and Geralt got a first-hand view of how dangerous he can be to those around him during such moments when he returned to talk to the baron about what he had learned from the Pellar. Phillip had known from the start that his wife and daughter had fled, not disappeared, but, torn between shame and concern over their fate, he had tried to save face while still doing all he could to find them.<br>
 1058723|00000000||CJournalResource "gameplay\journal\characters\baron.journal"|Journal||On this subject there was no denying his determination. Paying no heed to the fact that a confrontation with the Crones might end tragically for him, he decided to ride into the swamps and try to free Anna from their clutches.<br>
@@ -50483,6 +50500,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Yet when Geralt tried to leave the tower, the wraith revealed its true nature. It turned out what Geralt took to be the ghost of an innocent girl was in fact a plague maiden - death and disease in spirit form.<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Perhaps there was something in the girl's words that had put Geralt on his guard, or perhaps his witcher instincts simply warned him in time - either way, Geralt knew what he was dealing with a literal second before Anabelle revealed her true nature. The spirit was in fact a pesta - a plague maiden, a terrible wraith which spreads death and pestilence.<br>
 1058855|00000000||Unnamed CJournalResource|Journal||Deserters
+1058856|00000000||Unnamed CJournalResource|Journal||[DEBUG]A group of soldiers, who were part of the Temerian Army, have abandoned their posts and deserted. These men are incredibly well trained and will attack people on site. They were last known to be making camp within the woods around (prologue)
 1058857|00000000||Unnamed CJournalResource|Journal||Deserters in the woods
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||Geralt found the deserter camp and murder killed everyone! Bloody deserters make me sick! They begged for mercy but Geralt was having none of it! Then he took all their stuff and sold it.
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||We should investigate. Just in case.
@@ -50851,17 +50869,23 @@
 1060205|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||mh103
 1060206|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||mh305
 1060207|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||mh303
+1060208|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||[DEBUG] mh104
 1060210|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_21c_mousesack_lab.w2scene"|Line text|YENN_Q201_01060210|Hrmph. The shameless schemer.
+1060211|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||[DEBUG] TEMP Minor Testing Def
+1060212|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||[DEBUG] mq1015
 1060214|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_01.w2scene"|Line text|NDRW1_VSET_01060214|Bloody scram.
 1060216|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_01.w2scene"|Line text|NDRW1_VSET_01060216|I'm not drunkh.
 1060218|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_01.w2scene"|Line text|NDRW1_VSET_01060218|Run! Leg it!
 1060220|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_01.w2scene"|Line text|NDRW1_VSET_01060220|Cheap wine's good, 'cause it's good and cheap.
 1060222|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_01.w2scene"|Line text|NDRW1_VSET_01060222|Leave me be.
+1060223|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||[DEBUG] mq1012
+1060224|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||[DEBUG] mq1057
 1060226|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_02.w2scene"|Line text|NDRW1_VSET_01060226|I love you.
 1060228|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_02.w2scene"|Line text|NDRW1_VSET_01060228|Wee Willie Winkie runs through the town…
 1060230|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_02.w2scene"|Line text|NDRW1_VSET_01060230|Aaaaaargh!
 1060232|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_02.w2scene"|Line text|NDRW1_VSET_01060232|I'll tell you all.
 1060234|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_drunk_woman_02.w2scene"|Line text|NDRW1_VSET_01060234|Darlin'!
+1060235|00000000||CJournalResource "gameplay\journal\quests\tempminortestingquestquest.journal"|Journal||[DEBUG] mq1037
 1060237|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_36_zoltan_beer.w2scene"|Line text|GRLT_Q310_01060237|I do. It's why I'm here. Can only trust you to get this done.
 1060239|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_36_zoltan_beer.w2scene"|Line text|ZOLT_Q310_01060239|Hmm… If that's how you want ot put it… All right, leave it to me, I'll think of somethin'. And where might you be headed?
 1060240|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_41_zoltan_pickup.w2scene"|Choice line||So what'd you do? How'd you get 'em drunk?
@@ -51293,6 +51317,7 @@
 1061656|00000000||CJournalResource "gameplay\journal\characters\vesemir.journal"|Journal||Vesemir always said no witcher had ever died in his bed, so death in combat surely awaited him as well. Death's wait ended on that mournful day when the Wild Hunt descended on Kaer Morhen in pursuit of Ciri. Vesemir gave his all to protect his former ward, whom he had always treated like an adopted granddaughter, and died a hero's death at the hands of Imlerith, the Hunt's cruel general.
 1061657|00000000||Unnamed CJournalResource|Journal||Geralt of Rivia
 1061658|00000000||CJournalResource "gameplay\journal\characters\geralt.journal"|Journal||Many cannot fathom the friendship Geralt of Rivia and I, Dandelion, have shared all these years. When we first began breaking bread together, spiteful tongues said he'd be better off cutting my throat and dumping my body in a hollow tree - before I provoked someone else into doing the same to us both. Those individuals spoke out of pure jealousy, for Geralt was my dearest friend, a fact which he gave ample evidence of on numerous occasions.<br><br>I could say a great deal about that world-famous monster hunter, the man known in Elder Speech as Gwynbleidd, or, in our younger (yet no less noble) tongue, as the White Wolf. For Geralt of Rivia is a truly exceptional individual. A brief encounter might tempt one to label him a mere swinger of swords, a simple monster-catcher, a rough-and-tumble practitioner of a dirty trade - but peer closer and you will soon discover he is a man of unplumbed depths, unique views and vast, world-spanning experience.<br><br>On the surface, he is introverted, tight-lipped, one might even say gruff, but underneath lies an overflowing sea of goodwill, good humor, and an honest readiness to help his friends, be it with a bit of sound advice or the masterful application of his blade.<br><br>Setting aside cumbersome false modesty, I can say that I know his story better than any man alive. I was with him through hard times and good, helping with wise advice, warm words and razor wit. As a result, I am a vital part of his story, both in its earlier and present portions. It is thus my duty to continue my chronicle and, for the benefit of future generations, put in writing the next chapter of his deeds and exploits.<br>
+1061659|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_02_villagers.w2scene"|Comment text||Brief pause. G nods.
 1061661|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_02_villagers.w2scene"|Line text|VPEA4_MQ1057_01061661|Tell us, master… Were he terrible angered at our meagre offerin's?
 1061664|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_04_fugas.w2scene"|Line text|GRLT_MQ1057_01061664|Can think of quite a few other, more fitting nicknames.
 1061666|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1057_fugas\scenes\mq1057_04_fugas.w2scene"|Line text|FUGA_MQ1057_01061666|Now you listen to me, witcher. Have you no other duties, missions? Swamp's dangerous, got its share of true terrors. Tend to them, I harm no one.
@@ -51579,6 +51604,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Let's have some fun.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||How about a round of cards?
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Time to go to sleep.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[DEBUG] [Skip to Eskel Drunk.]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|Hah. Here's the key.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||Contract: Woodland Beast
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||Missing Wife
@@ -51781,7 +51807,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|Damned if you do, damned if you don't.
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|I like to tiptoe through the tulips.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|Nope. Not the password.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||Patrol Gone Missing - Reward
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||Announcement:<br><br>Soldiers in the service of His Imperial Majesty Emhyr var Emreis went missing while performing their duties. A reward shall be paid to anyone who assists in finding them. For more information see the quartermaster at the Army Group 'Center' camp.
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||Roland Treugger's letter to Hammond.
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||Gaming salon no. 1.<br><br>Current month.<br><br>Outlays – 38,756 crowns<br><br>Overhead – 5,294 crowns<br><br>Organizational taxes 3,875 crown<br><br>Debtors<br><br>Count Tybalt – 1,285 crowns – payment deadline – end of the month – non-negotiable<br><br>Sasha - 956 crowns – payment deadline – middle of next month – two week extension possible with a rate increase of 35 percent.<br><br>Finneas – 5,148 crown – payment late – last warning.<br><br>Bernard Tulle – debt repaid.<br><br>Patrick Hazelnut – warning issued – collections procedures initiated.
@@ -54143,6 +54168,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|Certainly don't plan to. See you.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Ask if anyone from the camp has seen Dandelion's abductor.
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|Mhm. See you.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Find a way into the hut.
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||I'll tend to it.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Gotta pay my price.
@@ -55993,7 +56019,13 @@
 1073334|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_07_01_gp_geralt_on_brans_corpse.w2scene"|Line text|GRLT_Q206_01073334|Birna Bran… Horrific death.
 1073337|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b01_01_becca_on_investigating.w2scene"|Line text|BECC_Q206_01073337|I heard you helped Lugos - as you helped me with the hym.
 1073339|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Line text|GRLT_SET_01073339|Did I kill Steingrim in 201?
+1073340|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes
+1073341|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG] No
 1073343|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Line text|GRLT_SET_01073343|Did I help Crach kill the Ice Giant (complete q202)?
+1073344|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG] Enough!
+1073345|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes
+1073346|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG] No
+1073347|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG] Enough!
 1073349|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b02_07_gp_geralt_becca_on_escaping.w2scene"|Line text|BECC_Q206_01073349|Leave that! We must flee this place!
 1073353|00000000||CJournalResource "gameplay\journal\tutorial\camerapad.journal"|Journal||Camera
 1073354|00000000||CJournalResource "gameplay\journal\tutorial\camerapad.journal"|Journal||Rotate the camera using <<GI_AxisRight>>
@@ -56935,6 +56967,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||Clear the doorway and free the elf.
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Diving
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Hold <<DiveDown>> to dive or <<DiveUp>> to swim toward the surface.<br><br>Watch your breath – if it runs out, you’ll drown!
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||Here's my invite.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|Here's my invite. All yours if you want it.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|Yeah, gladly take it.
@@ -57033,6 +57066,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|Enough to buy me an estate in Kovir, where I will lie about eating fruit till the end of my days.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|Not bad. Not every man gets to know the price on his head.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|Most men would prefer not to have one.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||Notice about missing soldiers
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|But why have you come? To make my life easier?
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||Wanna run away with you, spend some time alone.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|Feasts in Skellige - so predictable. Slobbering drunks, brazen boasting, and the inevitable rows that result…
@@ -57674,7 +57708,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||Gwent Lessons
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||I am currently taking on pupils for lessons in the playing of gwent. I shall only teach those who display discipline, a logical mindset and the will to learn. Those with special aptitude are particularly welcome. Pupils must acquire and supply their own decks.<br><br> I also am seeking more experienced players as partners to provide a challenge and a chance for the mutual improvement of our skills.<br><br> -Ermion, druid
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||Look to the depths to be lifted up
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||Key to katakan lair
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||Slightly rusted key.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||Key to Oxenfurt morgue
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||Tarnished old key.
@@ -58181,6 +58214,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||Adalbert Kermith's first map
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||Map showing where symbols relating to the Cat School of witchers can be found.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||Kill the bandits.
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||Key to katakan's hideout.
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||After being recruited by Professor Slavko Atimstein to join his research group, I began a study of the Griffin School of witchers. My base of operations was the tomb under the Crookback Hills. The professor claimed this was the final resting place for one of the "griffins" and wished to find a way inside it.<br><br>I quickly discovered a range of places of interest, each marked with a pictogram in the shape of a Griffin School witcher medallion. I've marked these points on this map.<br><br>Edwin Greloff. Adjunct in Natural History at Oxenfurt Academy
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||Ploughing syphilitic son of a poxy whore. I lost the first map I prepared for Professor Atimstein in a game of gwent. I must now return to my base camp near the tomb under Crookback Hills and start anew. Meanwhile, I will mark further points of interest on this map.<br><br>Edwin Greloff. Adjunct in Natural History at Oxenfurt Academy
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||Beautiful. Professor Slavko Atimstein will be furious. I lost the first map in a game of gwent, and then the second was stolen from me while I was slightly indisposed after a hard night in the casino. I cannot arrive empty-handed at the station near the tomb under Crookback Hills or the professor will vivisect me on the spot. The four new locations I have marked on this map might be enough to protect me from his wrath.<br><br>Edwin Greloff. Adjunct in Natural History at Oxenfurt Academy
@@ -59631,6 +59665,37 @@
 1082270|90b01927|map_location_retting_ponds|CUSTOM|Maps||Arette
 1082271|cabac5c8|map_description_retting_ponds|CUSTOM|Maps||Novigrad has always attracted those in search of a better life. Some of them found no welcome within the city walls, and so built huts outside the city.
 1082272|2d1d46a9|map_location_fyresdal|CUSTOM|Maps||Fyresdal
+1082274|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082274|[DEBUG] Welcome to chicken test. Tell me what you chosen during part 1.
+1082277|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] Yes, I found Hjalmar and Cerys
+1082278|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] No, I didn't bother to look
+1082280|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082280|[DEBUG] Did you help Cerys or Hjalmar with "massacre in Kaer Trolde" quest, or did you skip it?
+1082281|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I helped Cerys to discover who did it
+1082282|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I helped Hjalmar to punish the berserkers
+1082283|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I skipped it, I'm no tool
+1082285|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082285|[DEBUG] What did you do with Keira?
+1082286|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I helped her in elf mage hidout, and that's it
+1082287|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I did her entire storyline, and killed her
+1082288|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I did her entire storyline, and let her go
+1082289|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I did her storyline, and asked her to go to Kaer Morhen
+1082291|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082291|[DEBUG] What did you do with Sara, the godling in haunted house?
+1082292|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I let her stay in the house
+1082293|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I chased her out or told banker to do it
+1082295|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082295|[DEBUG] Did you help Triss with her mage issues?
+1082296|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I helped her evacuate mages from Novigrad
+1082297|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] I didn't bother to help her
+1082299|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082299|[DEBUG] Is Triss your Girlfriend?
+1082300|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] Yep, I luv her so much!
+1082301|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] Nope, I hate redheads
+1082303|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082303|[DEBUG] Is Yennefer your Girlfriend?
+1082304|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] Hell yeah!
+1082305|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] Nope.
+1082307|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082307|[DEBUG] Did you kill Whoreson Junior?
+1082308|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] Yes, he deserved it
+1082309|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] No, not sure why though
+1082311|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082311|[DEBUG] Ok, you're done. Good luck.
+1082313|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Line text|CORN_ENDGAME_01082313|[DEBUG] Did you help Vernon Roche with his Ves problem?
+1082314|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] Yes
+1082315|00000000||CStoryScene "quests\dialogues_junk\endgame_chicken_test.w2scene"|Choice line||[DEBUG] No
 1082316|228f7968|map_description_fyresdal|CUSTOM|Maps||Those living here are tough on the outside, but soft and tender within.
 1082319|442de93a|map_location_fayrlund|CUSTOM|Maps||Fayrlund
 1082320|39a01bf9|map_description_fayrlund|CUSTOM|Maps||This small village has gained great renown as home to the best hunters in Skellige.
@@ -63193,6 +63258,7 @@ upon removal!
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||DIRECTOR - GALAXY PROJECT
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||DIRECTOR - WEBSITE PROJECT
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||LEADS
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ENGINEERS
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||ADDITIONAL PROGRAMMING
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||ADDITIONAL ART
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||ANIMATED STORYBOOK SEQUENCES
@@ -72376,21 +72442,34 @@ upon removal!
 1128788|00000000||CStoryScene "dlc\ep1\data\quests\main_npcs\voicesets\vset_iris.w2scene"|Line text|IRIS_VSET_01128788|Hhhhsssssss…
 1128790|00000000||CStoryScene "dlc\ep1\data\quests\main_npcs\voicesets\vset_iris.w2scene"|Line text|IRIS_VSET_01128790|Sssss hhssssss…
 1128800|00000000||CJournalResource "dlc\ep1\journal\quests\mq6002cannibals.journal"|Journal||"Witcher" has become a synonym for "monster slayer" in many minds. While accurate as far as it goes, this does not encompass the whole truth, for witchers take on a broad variety of other tasks besides the slaying of monsters. For example, they sometimes use their superhuman senses to find missing persons. Such a lost individual was the subject of the notice hung by a certain Otto Bamber, an herbalist residing near Oxenfurt.<br>
+1128804|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Geralt addressing Roach after she has been transformed into a demonic mare. Here: demon Roach is spooked.
 1128806|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128806|Easy. Easy!
+1128807|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Geralt addressing Roach after she has been transformed into a demonic mare. Here: demon Roach is spooked.
 1128809|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128809|Stop. Enough.
+1128810|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Geralt addressing Roach after she has been transformed into a demonic mare. Here: demon Roach is spooked.
 1128812|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128812|You oughta be spooking them. C'mon!
+1128813|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Geralt addressing Roach after she has been transformed into a demonic mare. Here: demon Roach was spooked, has started to calm down.
 1128815|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128815|All over now.
+1128816|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Geralt is addressing Roach after she has been transformed into a demonic mare. Here: demon Roach was spooked, has started to calm down.
 1128818|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128818|Hey… It's nothing, it's fine.
 1128820|00000000||CStoryScene "dlc\ep1\data\quests\main_npcs\default_dialogues\olgierd_default.w2scene"|Choice line||Nice saber.
 1128821|00000000||CStoryScene "dlc\ep1\data\quests\main_npcs\default_dialogues\olgierd_default.w2scene"|Choice line||You and Ofier - curious about the king there.
 1128825|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\mq6001_ofir_merchant\scenes\mq6001_01_gameplay_hook.w2scene"|Line text|HKMER_MQ6001_01128825|I have for you an offer, white-haired man.
+1128828|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128830|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128830|Whooaaa, devil's spawn.
+1128831|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128833|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128833|Slow it down.
+1128834|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128836|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128836|What the hell's gotten into you? Slower.
+1128837|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128839|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128839|Take a rest, now.
+1128840|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128842|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128842|Whoooaaaa! Slow down!
+1128843|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128845|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128845|Where's the fire? Ease up.
+1128846|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128848|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128848|Nice and slow, now.
+1128849|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Roach is in demon form. G gives the command for her to slow down.
 1128851|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128851|Whoaa…!
 1128853|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_15_tent_guillaume.w2scene"|Choice line||Should try the water method.
 1128854|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_15_tent_guillaume.w2scene"|Choice line||Need to perform the egg ritual.
@@ -72419,15 +72498,25 @@ upon removal!
 1128938|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\mq6001_ofir_merchant\scenes\mq6001_02_default_dialogue.w2scene"|Line text|HKMER_MQ6001_01128938|I might have been more cautious. Should you encounter the diagrams, return them, and thankful I shall be.
 1128940|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\mq6001_ofir_merchant\scenes\mq6001_02_default_dialogue.w2scene"|Line text|HKMER_MQ6001_01128940|Duplicates I will make, with markings your craftsmen understand. A gift for you.
 1128942|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\mq6001_ofir_merchant\scenes\mq6001_02_default_dialogue.w2scene"|Line text|GRLT_MQ6001_01128942|I'll keep that in mind.
+1128943|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128945|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128945|Now run! Fast!
+1128946|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128948|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128948|Show me whatcha got!
+1128949|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128951|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128951|Yaa, yaa! Faster, faster!
+1128952|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128954|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128954|Giddy-up! Haa!
+1128955|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128957|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128957|Come on!
+1128958|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128960|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128960|Full speed ahead!
+1128961|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128963|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128963|Rraa! Go on!
+1128964|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128966|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128966|Yee-haah!
+1128967|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128969|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128969|Get going!
+1128970|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Command to demon Roach - she is now much faster.
 1128972|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01128972|Gimme it all!
 1128981|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|GRLT_SQ701_01128981|Let me finish. Second method's less than reliable. To put it simply, might work, might not.
 1128997|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|GRLT_SQ701_01128997|Not ready to do that yet.
@@ -75635,7 +75724,6 @@ upon removal!
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|Last resort? The hell. Why?
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|Agh. There is a being who can summon Dettlaff. Possesses the authority, even the power, to force him to appear in a given place.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|Decoction coming along? Doing all right?
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||Charles Lanzano
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|You don't look a quarryman to me.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|You again? Well, out with it - what do you want?
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||Show me your goods?
@@ -75841,7 +75929,10 @@ upon removal!
 1156332|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Line text|REGI_Q704_01156332|Begone.
 1156334|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Line text|GRLT_Q704_01156334|I can't let…
 1156336|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Line text|REGI_Q704_01156336|I insist.
+1156337|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Comment text||After a moment's hesitation, Geralt reluctantly nods and starts to walk away. He's exhausted and walks slowly. Regis kneels by Dettlaff, who's slowly regaining consciousness.
 1156339|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Line text|REGI_Q704_01156339|I'm sorry.
+1156340|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Comment text||Regis kills Dettlaff.
+1156341|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Comment text||[PL] Mija jakiś czas. Geralt widzi Regisa - wludzkiej postaci, ale zbryzganego krwią, z szaleństwem w oczach. Wygląda obco, groźnie.
 1156361|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7004_bleeding_tree\scenes\mq7004_03_witch.w2scene"|Line text|LRWCH_MQ7004_01156361|Stand.
 1156370|00000000||CStoryScene "dlc\bob\data\quests\monster_hunts\quest_files\mh701_tectonic_terror\scenes\mh701_03_cellar_onliners.w2scene"|Line text|GRLT_MH701_01156370|Tunnels - not the work of kikimores, that's certain. Too big for any insectoid.
 1156371|00000000||CJournalResource "dlc\bob\journal\quests\q704starting.journal"|Journal||Ask Orianna where to find the Unseen Elder.
@@ -80291,6 +80382,7 @@ upon removal!
 1176841|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|VADI_Q704_01176841|Hmm… I, too, would prefer a city calmed, but to reveal so dear a secret to a witcher…
 1176843|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|GRLT_Q704_01176843|Orianna, I don't have time for that. Folk're dying and--
 1176845|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|VADI_Q704_01176845|And I'm about to mount my horse. So either ride with me, or finish this moving monologue alone.
+1176846|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||Beat.
 1176850|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03b_diva_and_family.w2scene"|Line text|GRLT_Q704_01176850|Meaning?
 1176852|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03b_diva_and_family.w2scene"|Line text|VADI_Q704_01176852|Meaning that I… Wait. Smell that?
 1176854|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03b_diva_and_family.w2scene"|Line text|GRLT_Q704_01176854|Blood.
@@ -81221,6 +81313,9 @@ upon removal!
 1179826|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_00_contract.w2scene"|Line text|GRLT_SQ703_01179826|Who what?
 1179828|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_00_contract.w2scene"|Line text|KNOB_SQ703_01179828|Ehh… my daughter. I always return from my travels with some souvenir or another. She looks forward to them tremendously.
 1179830|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_00_contract.w2scene"|Line text|KNOB_SQ703_01179830|But we did not meet to chat about my family. We must discuss our venture, must we not?
+1179831|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||EXT. ORIANNA'S HOUSE. D/N - Orianna, VD, runs into Geralt in the doorway. She was clearly on her way out, and clearly in something of a rush to leave.
+1179833|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||Beat. VD and G stare one another down for a moment.
+1179842|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||[PL] Wyciemnienie
 1179844|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_02_contract_completed.w2scene"|Line text|KGD1_SQ703_01179844|Made no mention, did he?
 1179852|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_02_contract_completed.w2scene"|Line text|KGD1_SQ703_01179852|Ten years back his lass, Clarissa's her name, took a spill off her horse. Been bedridden ever since, cannot walk of her own.
 1179854|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_02_contract_completed.w2scene"|Line text|KGD1_SQ703_01179854|She'd been the life of the house before the calamity, a merry sprite what filled every corner with joy. Count would oft take her out on trips - she loved animals, too.
@@ -81355,7 +81450,9 @@ upon removal!
 1180260|00000000||CStoryScene "qa\trailer\d_cs704_siege_begins\q704_01_audience.w2scene"|Line text|ANHE_Q704_01180260|If it's war this Dettlaff wants, it's war he shall have.
 1180262|00000000||CStoryScene "qa\trailer\d_cs704_siege_begins\q704_01_audience.w2scene"|Line text|ANHE_Q704_01180262|Geralt, get to work. This time I'll hear no excuses. Palmerin, you--
 1180265|00000000||CStoryScene "qa\trailer\d_cs704_siege_begins\q704_01_audience.w2scene"|Line text|GRLT_Q704_01180265|Get her out of here!
+1180269|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Comment text||Geralt digs Regis out from under the pile of debris (Regis was knocked out by Dettlaff at the start of the fight which just ended).
 1180271|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Line text|REGI_Q704_01180271|Akh akh akh!
+1180272|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_10_detlaff_dies.w2scene"|Comment text||Geralt and Regis walk up to Dettlaff, who's injured, unconscious.
 1180275|00000000||CStoryScene "dlc\bob\data\quests\secondary_npcs\default_dialogues\default_butler.w2scene"|Line text|GRLT_DEFAULT_01180275|Her name's Marlene. She was once the very beautiful and proud heiress to the Trastamara estate.
 1180277|00000000||CStoryScene "dlc\bob\data\quests\secondary_npcs\default_dialogues\default_butler.w2scene"|Line text|GRLT_DEFAULT_01180277|One evening, when she was holding a banquet for friends, a beggar came to her gate seeking alms. He had a bowl and a spoon with him. He sat outside her fence and waited.
 1180289|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q705_epilog\scenes\q705_13_found_syanna.w2scene"|Line text|GRLT_Q705_01180289|Didn't have it easy, give you that much. Still no excuse for what you did.
@@ -84388,12 +84485,15 @@ upon removal!
 1189207|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|GRLT_Q701_01189207|Easy…
 1189253|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_14c_roderick_interrogated.w2scene"|Line text|TNM01_Q703_01189253|What… what do you want?
 1189255|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_14c_roderick_interrogated.w2scene"|Line text|TNM01_Q703_01189255|I… I was a fool.
+1189256|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||Geralt stands in Orianna's path, preventing her from exiting.
 1189258|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|GRLT_Q704_01189258|Bloodbath in the streets… that's "irritating"? I'd probably use a stronger term.
 1189260|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\th700_red_wolf\scenes\th700_01_prison_oneliners.w2scene"|Line text|GRLT_TH700_01189260|Hm, wonder if I'll find anything Merten left behind here.
 1189262|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|VADI_Q704_01189262|Well, you know… I'm getting on in years. Not easily impressed. Takes a bit more to get me worked up.
 1189264|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|VADI_Q704_01189264|My, my. It seems my dear Regis needs to be reprimanded. He's become rather… indiscreet.
+1189265|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||Beat. VD probes Geralt with her gaze.
 1189267|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\th700_red_wolf\scenes\th700_02_crypt_oneliners.w2scene"|Line text|GRLT_TH700_01189267|The cave Merten mentioned. Need to look around.
 1189269|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_12_briefing_before_dun_tynne.w2scene"|Line text|DAMI_Q703_01189269|We have two objectives - to find Her Illustrious Highness' sister and capture the men who blackmailed the vampire.
+1189270|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||VD and Geralt prepare to ride.
 1189272|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|GRLT_Q704_01189272|Where're we going?
 1189274|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\th700_red_wolf\scenes\th700_03_vault_oneliners.w2scene"|Line text|GRLT_TH700_01189274|Temple Merten wrote about, seems like. Should look around, might find something interesting.
 1189276|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_07e_young_lovers_gpl.w2scene"|Line text|BCM01_Q703_01189276|Are they even? Because the right cuff seems somewhat higher to me…
@@ -86489,10 +86589,12 @@ upon removal!
 1193916|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\voicesets_imported\vset_toussaint_old_man_36.w2scene"|Line text|TOM36_VSET_01193916|Good day.
 1193918|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\voicesets_imported\vset_toussaint_old_man_36.w2scene"|Line text|TOM36_VSET_01193918|Not good.
 1193920|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\voicesets_imported\vset_toussaint_old_man_36.w2scene"|Line text|TOM36_VSET_01193920|What's going on here?
+1193921|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||Beat. As Orianna takes a moment to think.
 1193923|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|VADI_Q704_01193923|Know what? Come with me. I must tend to a certain matter. Then we'll talk.
 1193925|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|GRLT_Q704_01193925|Dammit. Argh, fine.
 1193927|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|GRLT_Q704_01193927|If I was talking to a human now, I'd say that every moment we delay brings another death. Thing is, doubt that moves you at all.
 1193929|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Line text|VADI_Q704_01193929|Frankly, not in the least.
+1193930|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_03_diva_intro.w2scene"|Comment text||Beat.
 1193931|00000000||CStoryScene "qa\trailer\d_cs702_regis_cage\q702_11_regis_sacrifice_done_alternative.w2scene"|Choice line||Saw the moment when Dettlaff and de la Croix first met.
 1193933|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_14_gp_vineyard_comments.w2scene"|Line text|GRLT_Q701_01193933|In the cellar, gotta be…
 1193935|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_15_bruxa.w2scene"|Line text|BRAG_Q701_01193935|You are wrong.
@@ -90266,6 +90368,7 @@ upon removal!
 1205117|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_22_gp_horseride_more_reactions.w2scene"|Line text|BCW03_Q701_01205117|Don't look, child!
 1205119|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_22_gp_horseride_more_reactions.w2scene"|Line text|BCW02_Q701_01205119|Our Lady, the Duchess!
 1205120|00000000||CJournalResource "dlc\bob\journal\quests\q703art.journal"|Journal||It seemed as if matters had come to a head and the witcher would finally face he who had for some time succeeded in slinking from Geralt's grip like a snake. The Cintrian was to appear at a soirée hosted by "Mandragora" - an exclusive club that brought together all manner of artists who thought very highly of themselves. As I see it, they were a host of individuals whom nature had denied any significant talent. Thus, they opted not to produce more and better work, but instead to whimper into the ears of wealthy patrons - a practice for which I have always had the utmost contempt. But back to the Cintrian - Geralt and Anna Henrietta decided they would attend the soirée and nab this scoundrel dog.<br>
+1205121|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Comment text||Plays after unlocking the Hasta la Vista achievement.
 1205123|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01205123|Hasta la vista!
 1205125|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_01205125|Archespores'll sprout again. Should destroy the area if I wanna get rid of them for good.
 1205126|e550e7ee|location_name_car_mushroom_house|CUSTOM|Blood and Wine Locations||Abandoned Storehouse
@@ -91272,9 +91375,9 @@ upon removal!
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||Notes by the First Bailiff to the Hanse of Filibert Fourfingers
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||Profits and Losses for the Month of Blathe<br><br>Day Three<br>Flying reptilians nest in the hills of the Champs-Désolés. They’ve taken to eating our men. Most recently they snatched up Gilbert, plucked him right off the wall. Gilbert was usually quite alert, but every man drops his guard a bit when emptying his water. Filibert’s furious. The cost of schooling a fresh-faced recruit into a functional member of our group is not inconsiderable. To have that cost turned into monster droppings – that’s regrettable waste.<br>Day Seven<br>We ambushed a caravan of merchants trekking from eastern Toussaint. They had no guards and put up no resistance, yet still we made virtually no profit – the shoddy rags they carried could only interest bare-bummed Skellige wildmen, and none of our group plans to voyage in that direction. Filibert grew furious yet again and killed one of the merchants, a man named Lumierex. The rest set off back east.<br>Day Eleven<br>Our scouts tracked down three men sneaking through the woods. They were all dressed as beggars and claimed to be such. We weren’t fooled. After a bit of rough play, they were revealed to be jewelers carrying gold from the mines of Maecht. Unrefined ore only, but of promising grade. Filibert ordered the jewelers killed. He hates liars with a passion.<br>Day Seventeen<br>An expedition from the Imperial Academy at Castel Graupian’s pitched tent on the other side of the Sansretour. Scholars are not known to suffer from excess wealth, yet these have capacious tents and ample amounts of alcohol. Thus their fate was sealed. Filibert sent a few men their way.<br>Day Twenty-Three<br>It’s been almost two weeks since anything of interest came along the high road. Meanwhile, knights errant have caught more of our lads. Two died, one was merely wounded and escaped. We lost equipment worth a great many crowns. Filibert ordered the wounded man flogged for carelessness. His weary body couldn’t take it and he died.<br>Day Twenty-Four<br>Our luck has turned. We caught a vintner’s caravan returning from the South. They had sold their goods and were carrying a great deal of coin. Preliminary calculations estimate takings of around four hundred crowns for each of us. Filibert has yet to decide if we will divide it equally.<br>Day Twenty-Eight<br>The unit sent to Basane Farm never returned with supplies. The vittles situation is tight. Man cannot live on alcohol alone, nor has anyone yet found a way to eat gold. We must plunder a few villages.<br>Day Thirty<br>I shall now perform a final accounting of the month of Blathe. We are in the black – and how. It seems we shall stay in this area another month.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|Why are you here, sir?! This is a private audience. Geralt, what is the meaning of this? Is this some scheme you've hatched unbeknownst to me?
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||Note from the tourney scribe.
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||Note from the tourney scribe.
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||The International Knights’ Tourney under the patronage of Lady Vivienne de Tabris, 1275<br><br> Participants registered and qualified to take part in the contest:<br><br>Gregoire de Gorgon, winner of last year’s tourney. He shall not participate in the general competition, but shall fight in the final bout against the knight who earns the most points. (All signs seem to indicate Gregoire will defend his title.)<br><br>Anséis, Prince of Lyria and Rivia, joining us for the third time in a row<br><br>Horm Akerspaark, Prince of Maecht, rumored to be of the Emperor Emhyr’s blood, here for his fourth tourney<br><br>Baron Palmerin de Launfal, his sixth time in the tourney<br><br>Donimir of Troy, a Redanian knight, his first time in the tourney<br><br>Rainfarn of Attre, for the seventh time in the tourney, victor of the 1269 edition<br><br>Guy de Bois-Fresnes of Metinna (a second cousin of Reynart de Bois-Fresnes, one of Her Grace’s knights errant), third time in the tourney<br><br>Delwyn of Creigiau, a young knight, in the tourney for the first time<br><br>Tailles of Dorndal, a knight of the Order of the Flaming Rose, first time in the tourney<br><br>Llinos of Metinna, third time in the tourney<br><br>Guillaume de Launfal (Baron Palmerin’s nephew), first time in the tourney. [later addendum] Due to injury, Guillaume has transferred his place in the tourney to another knight.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||Vivienne's notes
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||Vivienne's notes
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||Blathe - Feainn Expenses<br><br>14 ells of cloth: 80 crowns<br>shoes (dragon skin): 140 crowns<br>racing saddle: 280 crowns<br>magic cream: 1400 crowns (total)
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||Diary
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||Dear Diary,<br>It’s been three weeks since Lady Orianna took me off the street. At last I've something to eat and drink and play with other children every day. It’s even better than at home, for at home there rarely was anything to eat and when mummy died, there was never anything at all.<br><br>Today I played with Miri and Tomm – first we played Duck, duck, goose, then hide and seek, then pick-a-stick. Then we played tag. I had a lot of fun! Then a cart from Lady Orianna came and there was lots of food. There were sweet rolls, fruit and cake, and many other tasty things. Lady Orianna is the best!<br><br>Lady Orianna visited us early in the morning. First she talked with us, then she sang to us, and then she took Johnny to the other room. We were all jealous of him. When he came back, he was a little pale and had small red marks on his neck, but he also had a huuuge bag of chocolates! Miri says sometimes Lady Orianna takes a child and does something to them, I didn’t really understand what, but then they get a gift from her. I hope next time she takes me!<br><br>Today’s rainy and I’m really bored. Tomm said I’m stupid, but I don’t believe him because he's stupid, too. Maybe Lady Orianna will come tomorrow and I’ll get a gift from her. That will show him!<br><br>She chose me! Lady Orianna came and chose me! I went to the other room with her, she told me to show her my neck, and then she kind of bit me. It didn’t really hurt, I just felt dizzy later. But that’s not important because she gave me a wooden sword! Nobody has one like that! Tomm will be so jealous!
@@ -94362,7 +94465,6 @@ upon removal!
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||DESIGNERS
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||ENGINEERING
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||MANAGER
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ENGINEERS
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||CONCEPT ARTIST COORDINATOR
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||EXPERT CONCEPT ARTIST
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||EXPERT CHARACTER ARTIST
@@ -94609,7 +94711,7 @@ upon removal!
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||Close
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||To claim your rewards, sign into GOG GALAXY 2.0 and launch the game.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||To claim your rewards and access the Mod Menu, sign into REDlauncher and launch the game.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||FOV
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||Camera
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||Effect
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||Autofocus
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||Aperture
@@ -95763,7 +95865,7 @@ Use the Joy-Con 2 (R) as a mouse by detaching it and placing it on its side. You
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||Axii can influence two targets simultaneously, but the effect is $I$% weaker.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||Axii can influence two targets simultaneously.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||Exploding Shield
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Whenever Quen shield breaks, it pushes enemies back. Push-back strength increases with skill level. 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Whenever Quen shield breaks, it pushes enemies back. Push-back strength increases with skill level. Reflects $I$% of absorbed damage back to the attacker.
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||Far-Reaching Aard
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||Increases Aard range by $I$ yard(s).
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||Magic Trap
@@ -95834,7 +95936,7 @@ Use the Joy-Con 2 (R) as a mouse by detaching it and placing it on its side. You
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||Element of Surprise
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||Hitting enemies with a bomb increases your melee damage by $I$% for 10 seconds.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||Griffin School Techniques
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Each piece of Medium Armor increases Sign intensity by $I$% and Stamina regeneration by $I$/s.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Each piece of Medium Armor increases Sign intensity by $I$% and Stamina regeneration by $F$/s.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||Manticore School Techniques
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||Each piece of Medium Armor increases sword damage by $I$% and bomb damage by $I$%.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||Metabolic Boost
@@ -95987,8 +96089,8 @@ Use the Joy-Con 2 (R) as a mouse by detaching it and placing it on its side. You
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||Breath of the North
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||Tor Lara
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||Tor Zireael
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||FOV
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||Tilt
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||Camera
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||Sturdy armor ready to weather decades on the Path. 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||Scarlet Crest armor
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||Scarlet Crest boots
@@ -96093,8 +96195,8 @@ Use the Joy-Con 2 (R) as a mouse by detaching it and placing it on its side. You
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||Target does not move towards Geralt while Axii is being cast. Increases the effectiveness of Axii in conversations.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||Target does not move towards Geralt while Axii is being cast. Increases the effectiveness of Axii in conversations.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||Axii can influence two targets simultaneously, but the effect is $I$% weaker.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Whenever Quen shield breaks, it pushes enemies back. Push-back strength increases with skill level. 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Whenever Quen shield breaks, it pushes enemies back. Push-back strength increases with skill level. 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Whenever Quen shield breaks, it pushes enemies back. Push-back strength increases with skill level. Reflects $I$% of absorbed damage back to the attacker.
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Whenever Quen shield breaks, it pushes enemies back. Push-back strength increases with skill level. Reflects $I$% of absorbed damage back to the attacker.
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||Increases Aard range by $I$ yard(s).
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||Increases Aard range by $I$ yard(s).
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||Releases a magic discharge that damages and slows enemies within a 14-yard radius. Increases damage by $I$%.
@@ -96162,8 +96264,8 @@ Use the Joy-Con 2 (R) as a mouse by detaching it and placing it on its side. You
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||Consuming food regenerates Vitality for $I$ minutes.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||Hitting enemies with a bomb increases your melee damage by $I$% for 10 seconds.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||Hitting enemies with a bomb increases your melee damage by $I$% for 10 seconds.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Each piece of Medium Armor increases Sign intensity by $I$% and Stamina regeneration by $I$/s.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Each piece of Medium Armor increases Sign intensity by $I$% and Stamina regeneration by $I$/s.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Each piece of Medium Armor increases Sign intensity by $I$% and Stamina regeneration by $F$/s.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Each piece of Medium Armor increases Sign intensity by $I$% and Stamina regeneration by $F$/s.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||Each piece of Medium Armor increases sword damage by $I$% and bomb damage by $I$%.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||Each piece of Medium Armor increases sword damage by $I$% and bomb damage by $I$%.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||Consumes Adrenaline and reduces the Toxicity cost of potions by $I$% per Adrenaline point. Does not affect mutagen decoctions.
@@ -96855,7 +96957,7 @@ Use the Joy-Con 2 (R) as a mouse by detaching it and placing it on its side. You
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||SENIOR CQA AND L&D MANAGER
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||Rabble-rouser hair.
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||CD PROJEKT RED DEVS TEAMS
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDPR MOD CREATOR
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDRP MOD CREATOR
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||SENIOR AUDIO ENGINEER
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||EXPERT GAMEPLAY ANIMATOR
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||EXPERT ENGINEER, COORDINATOR
@@ -96872,4 +96974,6 @@ Use the Joy-Con 2 (R) as a mouse by detaching it and placing it on its side. You
 1482478|0ef3c538|camera_view_close|CUSTOM|W310||Close
 1482484|e0ba6bdf|camera_view_modern|CUSTOM|W310||Modern
 1482499|12e45a91|camera_view_original|CUSTOM|W310||Original
-1483605|002efcc2|dede|CEntityTemplate "qa\ly\narrative\mpieprzowski\tutoria_test_different_assets\test_characters\test_morvel.w2ent"|Entity display name||Morvel
+1486815|b7811d3e|credits_GRAPHICS_ENGINEER|CUSTOM|Credits||GRAPHICS ENGINEER
+1486816|28d7dbab|credits_ASSOCIATE_LEAD_GAMEPLAY_ENGINEER|CUSTOM|Credits||ASSOCIATE LEAD GAMEPLAY ENGINEER
+1486817|518fecf0|credits_COMMUNITY_AND_SOCIAL_MEDIA_MANAGERS|CUSTOM|Credits||COMMUNITY AND SOCIAL MEDIA MANAGERS

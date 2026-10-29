@@ -2084,7 +2084,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||公會的群眾
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||再見。
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||你是哪裡認識普西拉的？
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|朝陽灑街市，人嘈車馬雜。忽暼愁容面，快步披黑麻。
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|朝陽灑街市，人嘈車馬雜。忽暼愁容面，快步披黑麻。
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||廢話連篇。
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||怎麼感覺我以前聽過…
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||太美了！
@@ -7056,6 +7056,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|我不能收這筆錢，抱歉我沒辦法讓他活著回來。
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|你剛提到女海妖，烏德維克島有很多女海妖嗎？
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|多得不行啊，比別的島還要多。
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[移除錯誤] 跳至欺騙曼吉
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|吉爾多夫下的下水道裡，但你得從比茲區那邊進去，一路忍受貧民的惡臭。
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|或許這戰利品有懸賞金可換。
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|說不定有懸賞金？要拿個戰利品才行。
@@ -14789,6 +14790,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|諾維格瑞裡不會有任何怪物。永恆之火也在城牆裡燃燒。
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|火…我的心頭有火在燒！
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||寶劍與餃子
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to the merchants
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Read notice board
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to Ernst
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Hear the clients talking
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|列夫，艾瑞克之子…
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|凱裘，歐拉夫之子…
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|願榮耀與你同在…
@@ -22599,11 +22604,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|嘻嘻嘻嘻嘻嘻！
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|期待與你再會。
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|嘻嘻嘻嘻嘻嘻！
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook1: Pig Roasters
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|傑洛特發送信號了！
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|我準備好了！
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|下雨了！終末之戰開始了！
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|為了榮耀！
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|好！
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook: Closed Vault Gate
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|新來的？
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|就算劍再好，在懦夫手上也沒屁用，對吧？
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|你覺得他死了嗎？
@@ -23003,6 +23011,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|我們在玩，別插進來行不行？
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|咳，好啦，這白癡讓我現在沒心情了。
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|不打擾你們了。下次... 找個隱密點的地方行嗎？
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|卡蘭希爾忠心耿耿，不過蓋爾就不一樣了…
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|就在那時，艾瑞汀毒害了我們愛戴的統治者。
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|等我一分鐘，馬上回來。
@@ -23010,6 +23019,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|可悲，真可悲啊。
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|有什麼遺言嗎？
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|老頭，你滾一邊去的話，我就考慮饒你一命。 
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Fast forward time by meditating
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||叫蘇克魯斯拿走箱子
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||看住現場
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||了解蘇克魯斯要什麼
@@ -30800,6 +30810,7 @@
 576811|00000000||CStoryScene "quests\epilogues\quest_files\q505_ciri_free\scenes\q505_03_ciri.w2scene"|Line text|GRLT_Q505_00576811|不知道。
 576812|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|GRLT_Q001_00576812|我可不一樣，不是想隨便找個女人。我想找的女人有丁香和醋栗的味道，身上穿著黑白衣服。
 576814|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|MRRR_Q001_00576814|來兩杯烈酒！
+576815|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||[EN] G and V look at each other surprised, then with admiration at CY, then they pause.
 576818|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00576818|但維瑟米爾叔叔，你那時睡著啦。
 576819|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Choice line||可別想打混過關。
 576821|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Choice line||好吧，我就來一杯吧。
@@ -31833,6 +31844,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||接下來的事我都知道了。
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|嘿，你好！
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|我給你點建議。唱不好就唱大聲點！
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Check in with the sentinels
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Place an Yrden trap OR dispatch the guard with Axii or Sword
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Ignite the woodcart
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Signal the all clear at the warehouse
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||我知道，我跟蹤了妳的足跡。
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|你和老巫嫗和男爵一起抵達，而男爵遇到了凱拉。
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|沒錯，沒碰到。穿過傳送門，我人不是到了阿瓦拉克的藏身處，而是落到了駝背泥沼中央。
@@ -33802,6 +33817,7 @@
 589857|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_08b_yen_about_megascope.w2scene"|Line text|YENN_SQ302_00589857|是千里鏡的水晶？可惡，都破損了…但還可以用。
 589877|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|ARNV_Q206_00589877|你為什麼要幫我？
 589879|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|BECC_Q206_00589879|因為我要聽聽你為什麼要背叛我的父親、兄弟和家族！我要你當面跟我解釋清楚！
+589896|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||[EN] EXT. KAER MORHEN LOWER COURTYARD. D *The lower courtyard is full of training equipment
 589898|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b05a_01_returned_with_arnvald.w2scene"|Line text|GRLT_Q206_00589898|你為什麼要背叛他們？說清楚，不然我要親自處理了。
 589901|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|PHIL_SQ302_00589901|威爾吉佛茲就成功了，我用的方法和他一樣，也是在寶石上培養生物組織。
 589902|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|MGLA_SQ302_00589902|這太瘋狂…你可能需…強大力量…也會陷…極大…危險…
@@ -41127,7 +41143,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||小男孩的幽靈
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||殺死食屍鬼
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|別煩我，傑洛特！我會跌倒啦！
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|你拿的是劍還是打蛋器？用手腕揮劍，不要用手肘！再來一次！
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|你拿的是劍還是打蛋器？用手腕揮劍，不要用手肘！再來一次！
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||讓我過去。
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|讓我過去。
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|好，走吧。路通了。
@@ -51440,6 +51456,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||來找樂子吧。
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||要來玩局牌嗎？
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||該去睡了。
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[DEBUG] [跳到艾斯凱爾喝醉的時候。]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|哈，鑰匙在這裡。
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||委託：林中怪獸
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||妻子失蹤
@@ -51642,7 +51659,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|做了也錯，不做也錯。
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|我喜歡踮腳走過鬱金香田。
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|不對，暗語錯了。
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||巡邏隊失蹤－有獎賞
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||公告：<br><br>服務大帝陛下恩希爾‧恩瑞斯的士兵們，在執行勤務的時候下落不明。若協助找到士兵，便可領取獎賞。預知詳情請向中央軍營軍需官詢問。
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||羅蘭德‧楚戈給哈蒙德的信。
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||1號博弈場收入支出表。<br><br>本月。<br><br>支出：38,756克朗。<br><br>固定成本：5,294克朗<br><br>組織稅：3,875克朗<br><br>債務人<br><br>泰伯特伯爵：1,285克朗──償還期限：月底──不可寬延<br><br>莎莎：956克朗──償還期限：下月中──可寬延二週，利率增加35%。<br><br>費尼亞斯：5,148克朗──已逾期──最後警告。<br><br>伯納德‧土里：已還清。<br><br>派崔克‧海左納：已給予警告──開始討債程序。
@@ -53997,6 +54013,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|我是沒這個打算。回頭見。
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||詢問營地中沒有人看到綁架丹德里恩的人
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|嗯，回頭見。
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[EN] [DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||找到進入小屋的方式
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||交給我處理吧。
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||你要付我的價錢錢。
@@ -56782,6 +56799,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||清空門口，解救精靈
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||潛水
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||長按 <<DiveDown>> 下潛或長按 <<DiveUp>> 上浮。<br><br>注意所剩空氣──空氣耗盡就會溺斃！
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[DEBUG] [跳到最後。]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||這是我的邀請函。
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|這是我的邀請函。要的話這些都是你的了。
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|很好，那我就恭敬不如從命了。
@@ -56879,6 +56897,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|夠讓我在科維爾買間房子，悠悠閒閒地躺著吃水果吃一輩子。
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|還不錯嘛，不是所有人都能知道自己的人頭值多少錢的。
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|大多人不會希望自己的人頭值錢。
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||關於失蹤士兵的告示。
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|但你為什麼會來？是來給我個方便嗎？
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||我想跟妳私奔，一起享受獨處的時間。
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|史凱利傑的盛宴太好預測了。一堆醉漢、自我吹噓、還有無可避免的爭執，最後…
@@ -57487,7 +57506,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||昆特牌課程
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||我目前正在招收想學昆特牌的學生。我只收遵守紀律、思考邏輯清楚、有心取勝的學生。特別歡迎有天賦的人。學生必須自備牌組。<br><br>我也想尋找經驗豐富的玩家挑戰，互相切磋牌技。<br><br> －德魯伊爾米亞
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||凝視深淵，反得抬舉
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||卡塔卡恩巢穴的鑰匙
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||有點生鏽的鑰匙。
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||奧森弗特停屍間的鑰匙
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||污損的舊鑰匙。
@@ -57992,6 +58010,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||亞多伯特‧凱米斯的第一張地圖
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||顯示貓學派狩魔獵人相關符號地點的地圖。
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||殺死土匪
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||卡塔卡恩藏身處的鑰匙
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||我受到斯拉弗可‧亞提姆斯坦的邀請加入他的研究團隊，於是開始研究獅鷲獸學派狩魔獵人。我的研究基地在駝背山丘底下的墓穴。教授表示這是獅鷲獸學派其中一員的長眠之地，希望找到進入的途徑。我很快發現許多可以深究的地點，每一個都有獅鷲獸派狩魔獵人的徽章上的符號標記著。這些地點我在本地圖上標出。<br><br>艾德文‧格雷洛夫，奧森弗特學院自然歷史兼職講師
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||媽的賤貨龜兒子，我第一張為亞提姆斯坦教授準備的地圖昆特牌輸掉了，現在必須回到駝背山丘墓穴附近的基地重新開始。我發現的地點會在本地圖上標出。<br><br>艾德文‧格雷洛夫，奧森弗特學院自然歷史兼職講師
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||太好了，斯拉弗可‧亞提姆斯坦教授一定會火冒三丈。我的第一張地圖玩昆特牌輸掉了，第二張地圖又在一個在賭場待太晚、身體不舒服的夜裡被偷走了。我不能空手回到駝背山丘墓穴附近的基地，不然教授一定會把我活宰了。我在本地圖上標出四個新地點，希望他不會太生氣。<br><br>艾德文‧格雷洛夫，奧森弗特學院自然歷史兼職講師
@@ -62945,6 +62964,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||總監 - GALAXY 計畫
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||總監 - 網站計畫
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||組長
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||工程師
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||額外程式設計
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||額外美術
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||故事書動畫鏡頭
@@ -75344,7 +75364,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|逼不得已？胡說。為什麼？
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|唉，有個生物可以召喚狄拉夫出來。他有權力，甚至有能力，強迫他在指定地點露面。
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|煎藥煮得如何？還順利嗎？
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||查爾斯・蘭佐諾
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|你看起來不像是採石場的工人啊。
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|又是你？快說吧，你想幹嘛？
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||拿點商品給我看看吧？
@@ -90973,9 +90992,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||四指菲力伯特商人工會第一任管家的筆記
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||花開月收入與損失<br><br>第三天<br>荒蕭原野的山丘上有飛天蜥蜴築了巢，我們的好幾個手下被吃了。最近被抓走的是吉伯特，他被他們直直抓去撞牆。吉伯特通常都會保持警覺，但是所有男人在尿尿的時候難免都會卸下警戒。菲力伯特勃然大怒。要把菜鳥訓練成組織裡頭可以出任務的人員可要花上不少成本。這些成本現在全變成了怪物大便，真是有夠浪費。<br>第七天<br>我們襲擊了一隊從東陶森特來的商隊。他們沒帶守衛，而且毫不抵抗，但是我們什麼錢都沒賺到，他們只帶了些只有史凱利傑的光屁股野人會有興趣的破布，我們還沒打算淪落到那種地步。菲力伯特又生氣了，殺死了其中一個名叫路梅雷克的商人。其他商人掉頭回去東邊了。<br>第十一天<br>我們的偵查兵找到了三個想偷偷溜過森林的傢伙。他們穿得像乞丐一樣，還說自己沒錢。但我們可不是笨蛋。來點硬的過後，他們才說自己是珠寶商，身上帶著梅赫特礦坑來的黃金。雖然只有還沒精鍊的礦石，但是等級似乎很不錯。菲力伯特下令殺死那些珠寶商。他痛恨騙子。<br>第十七天<br>葛勞皮恩堡帝國學院來的遠征隊在桑司雷多河的另一側紮了營。大家都知道學者沒什麼錢，但是他們的帳篷很寬廣，而且他們還帶著許多酒類。因此菲力伯特決定了他們的命運，派了幾個人手去找他們。<br>第二十三天<br>兩週以來大路上都沒什麼有趣的收穫。而且，我們又有人被流浪騎士給抓走了。兩個人死了，另一個受傷逃跑。我們損失的裝備值好大一筆錢。菲力伯特下令鞭打受傷的那傢伙，懲罰他的粗心大意。他的身體承受不了，結果死了。<br>第二十四天<br>我們轉運了。我們逮到一隊從南方回來的釀酒師商隊。他們賣出了商品，身上帶了一堆現金。初步估計我們每個人可以分到四百克朗。菲力伯特還沒決定是否要平均分配。<br>第二十八天<br>我們派去巴善農場的小隊沒帶著補給回來。食糧快不夠吃了。我們不可能靠酒精存活，而且黃金也不能拿來吃。這下得去搶幾座村莊才行。<br>第三十天<br>在此計算花開月的的最後收支。我們賺到了錢。看來下個月可以繼續待在這一區。
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|你為什麼在這裡，先生？這是私人會面。傑洛特，這是什麼意思？你是不是瞞著我在醞釀什麼計劃？
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||比武大賽抄寫員寫的紙條。
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||比武大賽抄寫員寫的紙條。
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||1275年國際騎士比武大賽，薇薇安‧塔布里司夫人主持<br><br>報名並符合資格參賽騎士：<br><br>格瑞果列‧高貢，去年大賽冠軍。他不需參加一般比賽，而是與分數最高的騎士一決勝負。（一切跡象都顯示格瑞果列將衛冕成功。）<br><br>里瑞亞與利維亞的安賽斯王子，連續第三年參賽<br><br>霍姆‧雅克斯巴克，梅赫特的王子，謠傳是恩希爾大帝的血親，今年第四度參賽<br><br>勞恩法爾的派爾梅琳男爵，今年第六度參賽<br><br>特洛伊的多尼米爾，來自瑞達尼亞的騎士，今年初次參賽<br><br>亞卓的雷恩法，今年第七度參賽，1269年大賽冠軍<br><br>蓋伊‧波弗雷尼，來自馬提那，是女爵陛下流浪騎士雷納特‧波弗雷尼的第二個表親，今年第三度參賽<br><br>克萊吉奧的戴爾文，一位年輕的騎士，今年初次參賽<br><br>敦達爾的泰雷斯，烈焰薔薇騎士團的成員，今年初次參賽<br><br>馬提那的力諾斯，今年第三度參賽<br><br>吉勞米‧勞恩法爾（派爾梅琳男爵的姪子），今年初次參賽。[事後附註]吉勞米由於受傷之故退賽，已將參賽資格轉移給另外一位騎士。
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||薇薇恩的筆記
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||薇薇恩的筆記
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||花開節與烈日節支出：<br><br>14尺布：80克朗<br>鞋子（龍皮）：140克朗<br>賽馬用馬鞍：280克朗<br>魔法霜：1400克朗（總計）
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||日記
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||親愛的日記！<br>歐立安娜小姐收留流落街頭的我已經三個星期了。我總算有東西可以吃、有東西可以喝，而且我每天都可以跟其他小孩子玩耍。這裡甚至比家裡更好，因為家裡很少有東西可以吃，媽咪死掉的時候甚至完全沒有食物。<br><br>我今天跟米利和湯姆一起玩，我們先玩了蘿蔔蹲，後來又完了捉迷藏，後來又去撿樹枝。然後我們又玩了鬼抓人。我玩得好開心！然後歐立安娜小姐推了輛推車來，裡面裝的全部都是食物。裡面有蛋糕捲、水果和蛋糕，還有其他好多好吃的東西。最喜歡歐立安娜小姐了！<br><br>歐立安娜小姐一大早來找我們。她先跟我們聊了一下天，然後唱歌給我們聽，接著把強尼帶到另一個房間。我們都好嫉妒他。他回來的時候臉色有點蒼白，脖子上還有小小的紅色印記，但是他手上握了包好大好大的巧克力！米利說有時候歐立安娜小姐會帶個小孩走、對他們做點事，我聽不太懂，但是她會給他們禮物。希望下一次她會選上我！<br><br>今天下雨了，我好無聊。湯姆說我很笨，但我不相信他，因為他也很笨。或許歐立安娜小姐明天會來，還會送我禮物。到時候看誰比較聰明！<br><br>我被選中了！歐立安娜小姐選了我！我跟她去了另一間房間，她叫我把脖子給她看，然後她咬了我一口。感覺不太痛，只是有點暈。不過暈也沒關係，因為她給了我一把木劍！其他人都沒有！湯姆肯定會很嫉妒！
@@ -94062,7 +94081,6 @@
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||設計師
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||工程
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||經理
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||工程師
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||概念美術專員
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||專業概念美術設計
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||專業人物美術設計
@@ -94308,7 +94326,7 @@
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||關閉
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||登入 GOG GALAXY 2.0 並啟動遊戲以領取獎勵。
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||登入 REDlauncher 啟動遊戲以領取獎勵、使用模組選單。
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||視角
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||鏡頭
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||效果
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||自動對焦
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||光圈
@@ -95453,7 +95471,7 @@ Joy-Con 2 的手勢即可使用法印、炸彈、十字弓和其他更多物品�
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||亞克席之印可同時影響兩個目標，但效果降低 $I$%。
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||亞克席之印可同時影響兩個目標。
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||爆裂之盾
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||昆恩之印護盾受迫解除時，敵方被迫後退。逼退敵方的強度隨等級增加。 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||昆恩之印護盾受迫解除時，敵方被迫後退。逼退敵方的強度隨等級增加。將吸收傷害的 $I$% 反彈給攻擊者。 
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||遠距阿爾德
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||阿爾德之印範圍增加 $I$ 碼。
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||魔法陷阱
@@ -95524,7 +95542,7 @@ Joy-Con 2 的手勢即可使用法印、炸彈、十字弓和其他更多物品�
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||出奇制勝
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||若以炸彈擊中敵方，10 秒內近戰傷害提升 $I$%。
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||獅鷲學派技巧
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||每裝備一件中量甲，法印強度提升 $I$%，每秒精力恢復提升 $I$。
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||每裝備一件中量甲，法印強度提升 $I$%，每秒精力恢復提升 $F$。
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||飛獅學派技巧
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||每裝備一件中量甲，長劍傷害提升 $I$%，炸彈傷害提升 $I$%。
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||代謝強化
@@ -95677,8 +95695,8 @@ Joy-Con 2 的手勢即可使用法印、炸彈、十字弓和其他更多物品�
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||北方氣息
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||托爾勞拉
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||托爾吉薇艾兒
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||視角
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||抬鏡
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||鏡頭
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||不怕抵禦數十年遠行風霜的堅韌護甲。 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||猩紅羽飾護甲
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||猩紅羽飾靴子
@@ -95783,8 +95801,8 @@ Joy-Con 2 的手勢即可使用法印、炸彈、十字弓和其他更多物品�
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||傑洛特施放亞克席之印時，目標不會朝他移動。提升對話中亞克席之印的效果。
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||傑洛特施放亞克席之印時，目標不會朝他移動。提升對話中亞克席之印的效果。
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||亞克席之印可同時影響兩個目標，但效果降低 $I$%。
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||昆恩之印護盾受迫解除時，敵方被迫後退。逼退敵方的強度隨等級增加。 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||昆恩之印護盾受迫解除時，敵方被迫後退。逼退敵方的強度隨等級增加。 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||昆恩之印護盾受迫解除時，敵方被迫後退。逼退敵方的強度隨等級增加。將吸收傷害的 $I$% 反彈給攻擊者。 
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||昆恩之印護盾受迫解除時，敵方被迫後退。逼退敵方的強度隨等級增加。將吸收傷害的 $I$% 反彈給攻擊者。 
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||阿爾德之印範圍增加 $I$ 碼。
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||阿爾德之印範圍增加 $I$ 碼。
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||施放魔法，對半徑 14 碼內的敵方造成傷害並使敵方速度放慢。傷害提升 $I$%。
@@ -95852,8 +95870,8 @@ Joy-Con 2 的手勢即可使用法印、炸彈、十字弓和其他更多物品�
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||進食可讓生命值恢復 $I$ 分鐘。
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||若以炸彈擊中敵方，10 秒內近戰傷害提升 $I$%。
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||若以炸彈擊中敵方，10 秒內近戰傷害提升 $I$%。
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||每裝備一件中量甲，法印強度提升 $I$%，每秒精力恢復提升 $I$。
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||每裝備一件中量甲，法印強度提升 $I$%，每秒精力恢復提升 $I$。
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||每裝備一件中量甲，法印強度提升 $I$%，每秒精力恢復提升 $F$。
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||每裝備一件中量甲，法印強度提升 $I$%，每秒精力恢復提升 $F$。
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||每裝備一件中量甲，長劍傷害提升 $I$%，炸彈傷害提升 $I$%。
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||每裝備一件中量甲，長劍傷害提升 $I$%，炸彈傷害提升 $I$%。
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||消耗腎上腺素，每一點腎上腺素可讓藥水毒性消耗降低 $I$%。突變誘發物煎藥不適用。
@@ -96545,7 +96563,7 @@ Joy-Con 2 的手勢即可使用法印、炸彈、十字弓和其他更多物品�
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||資深法令遵循品保及學習與成長經理
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||煽動者髮型。
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||CD PROJEKT RED 開發團隊
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDPR 模組製作者
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDRP 模組製作者
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||資深音訊工程師
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||專業遊玩動畫師
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||專業工程師／專員

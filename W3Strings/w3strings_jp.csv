@@ -2084,7 +2084,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||ギルド集会所の群衆
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||じゃあな
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||プリシラと出会ったのはどこだ？
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|「周囲で街の騒音がとどろいた。喪に服す、荘厳なる悲嘆の心。華奢なる指が彼女のドレスの裾を持ち上げる。女性は急ぎ足で駆け抜けて行く」
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|「周囲で街の騒音がとどろいた。喪に服す、荘厳なる悲嘆の心。華奢なる指が彼女のドレスの裾を持ち上げる。女性は急ぎ足で駆け抜けて行く」
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||冗長だな
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||そっくりな物を聞いたことがある…
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||美しいな
@@ -3051,6 +3051,7 @@
 378633|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||ウィッチャーの感覚を使い、音を追ってレーシェンを見つける。
 378634|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||レーシェンを倒す。
 378676|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_00378676|[DEBUG] Did I keep my cool with the baron's men in q101_agent? [DEBUG]
+378678|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes, and I avoided a fight. [DEBUG]
 378680|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes, and then I kicked their asses. [DEBUG]
 378682|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|GRLT_Q303_00378682|もう一度聞く… 話せるか？
 378684|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|CCLP_Q303_00378684|シギは、お前が好き。話せる
@@ -7059,6 +7060,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|この金は受け取れない。連れ戻せなくてすまなかった
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|セイレーンだが… アンドヴィクには多いのか？
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|そりゃあ、もう、たくさんだ… 他のどの島より…
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] メンジをだますシーンへ飛ぶ
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|ギルドルフ地下の下水道だが、ビッツを通って行かねばならない。貧困の悪臭に耐えてな
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|証を持ち帰れば、報奨金が出るかもしれん
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|報奨金が出るかもしれんな。討伐の証が必要だ
@@ -14792,6 +14794,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|ノヴィグラドに怪物はいない。壁の内側では、〈永遠の炎〉が燃えているのだから
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|炎が… 我が心に燃えている！
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||剣と団子
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to the merchants
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Read notice board
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to Ernst
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Hear the clients talking
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|エリクの子、レイフ…
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|オラフの子、ヒャール…
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|魂よ、安らかに…
@@ -22606,11 +22612,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|ヒーッヒッヒッヒッヒッヒ！
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|近いうちに会いましょう
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|ヒーッヒッヒッヒッヒッヒ！
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook1: Pig Roasters
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|ゲラルトの合図よ！
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|いくわよ！
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|大雨だ！ ラグ・ナ・ログの時が来る
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|スケリッジに栄光を！
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|よう！
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook: Closed Vault Gate
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|新入りか？
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|最高の剣でも、弱い奴が使うんじゃ価値がないだろ？
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|今ので仕留めたかな？
@@ -23010,6 +23019,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|まったく、白けさせないでおくれよ
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|やれやれ。ハァー… この馬鹿のお陰で萎えちまったよ
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|すまん。ただ… もう少し人目につかない場所でやったらどうだ…？
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|カランシールは忠臣だ。だがゲールズは違う…
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|その敬愛なる前王を毒殺したのはエレディンだ
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|少し待ってくれ。すぐに戻る
@@ -23017,6 +23027,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|哀れだ… 実に哀れだ…
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|遺言はあるか？
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|老いぼれが邪魔をするな… 命だけは助けてやる
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Fast forward time by meditating
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||スクルスに木箱を持っていくよう伝える。
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||見張りをする。
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||スクルスの目的を確かめる。
@@ -30153,6 +30164,7 @@
 573554|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00573554|ごめんなさい、ヴェセミルおじさん
 573556|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00573556|「ゼリカニアに生息するヒョウに似た斑紋によって判別する。また、相貌の病的な白さによっても区別できる」
 573557|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|VSMR_Q001_00573557|うーむ。ちゃんと勉強してたのか。だがな、それでもきちんと…
+573584|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq306_maverick\set_dependent_variables.w2scene"|Line text|GRLT_SET_00573584|[PL] Nothing to Chicken Test for q306_maverick right now.
 573592|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_dockworker_02.w2scene"|Line text|NDKWR2_VSET_00573592|お前は健康そうだな
 573594|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_dockworker_02.w2scene"|Line text|NDKWR2_VSET_00573594|うわ！ 何のつもりだ… 落ち着けって！
 573596|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_dockworker_02.w2scene"|Line text|NDKWR2_VSET_00573596|クソったれ…
@@ -30268,6 +30280,8 @@
 574220|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq306_maverick\scenes\sq306_01_02_register_with_scribe.w2scene"|Line text|GRLT_SQ306_00574220|払える
 574221|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq306_maverick\scenes\sq306_01_02_register_with_scribe.w2scene"|Line text|NVSC2_SQ306_00574221|ではお名前を。参加票を発行します
 574222|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq306_maverick\scenes\sq306_01_02_register_with_scribe.w2scene"|Line text|GRLT_SQ306_00574222|リヴィアのゲラルトだ
+574225|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq306_maverick\set_dependent_variables.w2scene"|Choice line||[PL] [DEBUG] Yes, I have a good card deck
+574226|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq306_maverick\set_dependent_variables.w2scene"|Choice line||[PL] [DEBUG] No, I have a shitty card deck
 574237|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_1_ally_crach.w2scene"|Choice line||戦うのはケィア・モルヘンでだけだ
 574238|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_1_ally_crach.w2scene"|Choice line||ニルフガードと言ったな
 574240|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_1_ally_crach.w2scene"|Line text|GRLT_Q402_00574240|そうか… これ以上、お前に迷惑はかけられん。それでは
@@ -30808,6 +30822,7 @@
 576811|00000000||CStoryScene "quests\epilogues\quest_files\q505_ciri_free\scenes\q505_03_ciri.w2scene"|Line text|GRLT_Q505_00576811|どうだろうな
 576812|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|GRLT_Q001_00576812|誰でもいいわけじゃない。特定の女性だ。リラとスグリの香りがして、黒と白の服を着てる
 576814|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|MRRR_Q001_00576814|2杯もってきてくれ！
+576815|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||G and V look at each other surprised, then with admiration at CY, then they pause.
 576818|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00576818|ヴェセミルおじさん眠ってたじゃない
 576819|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Choice line||言い訳するな
 576821|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Choice line||ああ。飲もう
@@ -31841,6 +31856,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||そこから先は知ってる
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|元気？
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|いいこと教えてあげる。音痴なら、大きな声で歌うのよ！
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Check in with the sentinels
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Place an Yrden trap OR dispatch the guard with Axii or Sword
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Ignite the woodcart
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Signal the all clear at the warehouse
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||知ってる。足跡を追ってきたんだ
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|お前は妖婆たちの元へ、彼はキーラの元へ飛ばされた
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|ええ。ダメだった。〈門〉を抜けたらアヴァラックの隠れ家じゃなくて、クルックバック湿原の真ん中に落ちたの
@@ -33810,6 +33829,7 @@
 589857|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_08b_yen_about_megascope.w2scene"|Line text|YENN_SQ302_00589857|メガスコープの水晶？ 割れてるわ… でもまだ使えるかも
 589877|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|ARNV_Q206_00589877|なぜ助けた？
 589879|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|BECC_Q206_00589879|なぜ父を、兄を、そして一族を裏切ったか聞きたいからよ！ 面と向かって言いなさい！
+589896|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||EXT. KAER MORHEN LOWER COURTYARD. D - The lower courtyard is full of training equipment
 589898|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b05a_01_returned_with_arnvald.w2scene"|Line text|GRLT_Q206_00589898|なぜ同朋を裏切った？ 話さないなら命はないと思え
 589901|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|PHIL_SQ302_00589901|ヴィルジフォルツはやった。同じ方法を使う… 石の上で組織を培養するの
 589902|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|MGLA_SQ302_00589902|正気じゃな… 相当な… 必要よ… 危険… ぎるわ…
@@ -41138,7 +41158,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||少年の幽霊
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||グールを倒す。
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|ゲラルト、邪魔しないでよ！ 転んじゃう！
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|お前が持ってるのは泡立て器か？ 肘じゃなく手首で突け！ もう1回！
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|お前が持ってるのは泡立て器か？ 肘じゃなく手首で突け！ もう1回！
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||通らせろ
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|通らせろ
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|ああどうぞ。通行可能です
@@ -44448,6 +44468,12 @@
 1043764|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043764|これは少し古いな。育ち過ぎた怪物がここにいたドラウナーを皆殺しにしたんだ
 1043766|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\scenes\q102_v_03_geralt_on_searching_village.w2scene"|Line text|GRLT_Q102_01043766|村で聞き込みをしてみるか。協力してくれる村人がいるかもしれん
 1043767|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||狩人と話す。
+1043769|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_01043769|[DEBUG] Did I meet Baron's men in the tavern? [DEBUG]
+1043770|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes [DEBUG]
+1043771|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] No [DEBUG]
+1043773|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_01043773|[DEBUG] Did I tell someone he stank? [DEBUG]
+1043774|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Yes [DEBUG]
+1043775|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] No [DEBUG]
 1043777|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043777|これほど大きいトロールは珍しい… 高齢なのだろう
 1043798|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||ウィッチャーの感覚を使い、ニルフガード軍兵士の痕跡を追う。
 1043810|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_02_lair.w2scene"|Line text|GRLT_MQ4003_01043810|こぢんまりしたトロールの家だ。覗かせてもらうとするか
@@ -50378,6 +50404,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||しかし、ゲラルトが塔から脱出しようとすると、悪霊が正体を現した。ゲラルトが清らかな乙女の亡霊だと思ったものは、ペスタと呼ばれる死と疫病の権化のような幽体だったのだ。<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||彼女の言葉の中に、ゲラルトを警戒させる何かがあったのか、それともウィッチャーとしての本能が彼に危険を告げたのか― いずれにせよ、アナベルが真の姿を現すその寸前に、ゲラルトは目の前にいるものの正体に気づいていた。死と悪疫を振りまく恐ろしい悪霊、ペスタこそが、この亡霊の正体だったのだ。<br>
 1058855|00000000||Unnamed CJournalResource|Journal||脱走兵たち
+1058856|00000000||Unnamed CJournalResource|Journal||テメリア軍の一員だった兵士の一団が、持ち場を放棄して脱走した。この者たちは驚くほどよく訓練されており、人を見ればその場で攻撃する。最後に彼らが（序章）付近の森でキャンプを張っていたことがわかっている。
 1058857|00000000||Unnamed CJournalResource|Journal||森の脱走兵たち
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||ゲラルトは脱走兵のキャンプを発見して皆殺しにした！ 忌々しい脱走兵には吐き気がする！ 奴らは慈悲を求めたがゲラルトにそんなものはなかった！ 彼はその後奴らの持ち物を全て奪って売り払った。
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||調べてみよう。万一ということがある
@@ -51461,6 +51488,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||楽しもう
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||カードでもやるか？
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||もう寝る時間だ
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[DEBUG] [Skip to Eskel Drunk.]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|よし、鍵があった
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||依頼：森の獣
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||行方不明の妻
@@ -51663,7 +51691,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|「進むも地獄、退くも地獄」
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|「チューリップ畑を忍び足で歩きたい」
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|駄目だ。合言葉が違う
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||行方不明の巡回兵：報酬
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||布告：<br><br>エムヒル・ヴァル・エムレイス陛下に仕える兵士が、任務の途中で行方不明になった。発見のため尽力した者には報酬が与えられる。詳細は、中央軍キャンプの補給将校に確認すること。
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||ローランド・トロイガーからハモンドへの手紙。
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||1番卓<br><br>今月分：<br><br>支出 - 38,756クラウン<br><br>諸経費 - 5,294クラウン<br><br>組織税 - 3,875クラウン<br><br>債務者：<br><br>ティバルト伯爵 - 1,285クラウン、支払い期日は今月末日、交渉不可。<br><br>サシャ - 956クラウン、支払い期日は来月中旬、利率を35%引き上げで2週間の延長可。<br><br>フィネアス - 5,148クラウン、支払い遅延につき最終警告。<br><br>バーナード・テュル - 借金返済済み。<br><br>パトリック・ヘーゼルナッツ - 警告済み、回収手続きを開始。
@@ -54018,6 +54045,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|もちろんそのつもり。じゃあね
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||ダンディリオンを連れ去った相手を見た者がいないか尋ねる。
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|ええ、じゃあね
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||小屋に入る方法を見つける。
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||引き受けよう
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||こちらで決めた額を払ってもらう
@@ -55865,7 +55893,13 @@
 1073334|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_07_01_gp_geralt_on_brans_corpse.w2scene"|Line text|GRLT_Q206_01073334|ビルナ・ブラン… 悲惨な最後だな
 1073337|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b01_01_becca_on_investigating.w2scene"|Line text|BECC_Q206_01073337|私を助けてくれたように、ルゴスにも力を貸したと聞いたわ
 1073339|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Line text|GRLT_SET_01073339|201でシュタイングリムは倒したか？
+1073340|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG]はい
+1073341|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG]いいえ
 1073343|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Line text|GRLT_SET_01073343|クラフを手伝って氷の巨人を倒したか？
+1073344|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG]もういい！
+1073345|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG]はい
+1073346|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG]いいえ
+1073347|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\set_dependent_variables.w2scene"|Choice line||[DEBUG]もういい！
 1073349|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b02_07_gp_geralt_becca_on_escaping.w2scene"|Line text|BECC_Q206_01073349|そんなのいいから！ ここから逃げないと！
 1073353|00000000||CJournalResource "gameplay\journal\tutorial\camerapad.journal"|Journal||カメラ
 1073354|00000000||CJournalResource "gameplay\journal\tutorial\camerapad.journal"|Journal||<<GI_AxisRight>>を使ってカメラを動かす。
@@ -56805,6 +56839,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||通路の障害物を取り除き、エルフを解放する。
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||潜水
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||<<DiveDown>>を長押しして深く潜り、<<DiveUp>>を長押しして水面に向かって泳ぐ。<br><br>呼吸には気をつけよう。呼吸できなくなると、溺れてしまう！
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||これが招待状だ
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|これが招待状だ。欲しければ持って行け
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|ああ。喜んで受け取るよ
@@ -56902,6 +56937,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|コヴィリに土地を買うのに十分な額だ。のんびり果物でも食って余生を過ごせるぞ
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|悪くない。自分の首にかけられた金額が知れてラッキーだよ
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|普通は懸賞金なんてかけられない方が嬉しいだろうがな
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||行方不明の兵士に関する掲示
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|何しに来た？ 俺の余生を楽にしにきてくれたのか？
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||一緒に抜け出して、2人で過ごしたい
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|スケリッジの宴は… いつも同じよ。涎を垂らす酔っ払い、厚かましい自慢、そしていつも喧嘩になって…
@@ -57510,7 +57546,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||グウェントのレッスン
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||グウェント競技に関するレッスンの生徒を募集する。ただし生徒は自制心、論理的思考能力、そして学ぶことへの意欲を持つ者でなくてはならない。特に才能のある生徒は歓迎する。生徒はデッキを自分で用意すること。<br><br>また互いに技術の向上をはかれるような、対戦しがいのある相手も探している。<br><br>ドルイド、エルミオン
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||持ち上げるには、底を見よ
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||カタカンの巣の鍵
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||少し錆びついている鍵。
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||オクセンフルトの死体安置所の鍵
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||汚れた古い鍵。
@@ -57654,6 +57689,7 @@
 1077442|00000000||CJournalResource "gameplay\journal\quests\sunken treasure.journal"|Journal||ウィッチャーの感覚を使い、沈んだ財宝を見つける。
 1077456|5bad976f|item_desc_mq1028_muggs_papers|CUSTOM|Book||無記名の家の譲渡証書。
 1077465|00000000||CStoryScene "living_world\dialogue\skellige\ard_skellig\shop_herbalist_community_herbalist_01.w2scene"|Line text|SDRU2_SHOP_01077465|来たな！ 我が番人にして救世主よ！ おかげさまで家族の元に戻れたぞ
+1077467|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_ferlund_blacksmith_01.w2scene"|Line text|SBH2_SHOP_01077467|[DEBUG] Merchant welcomes Geralt to Ferlund Village, his shop and thanks him again for the rescue.
 1077468|00000000||CJournalResource "gameplay\journal\bestiary\icegolem.journal"|Journal||氷のエレメンタル
 1077469|00000000||Unnamed CJournalResource|Journal||火のエレメンタル
 1077470|00000000||CJournalResource "gameplay\journal\bestiary\lycanthrope.journal"|Journal||ウルフヘジン
@@ -58016,6 +58052,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||アダルバート・カーミスの最初の地図
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||ウィッチャーの猫流派に関連する印が見つかる場所を示す地図。
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||盗賊を倒す。
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||カタカンの隠れ家の鍵
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||スラヴコ・アティムシュタイン教授からリサーチグループに誘われた後、私はグリフィン流派のウィッチャーの研究を始めた。拠点はクルックバックの丘の下にある墓だ。教授は最後の「グリフィン」がそこに眠っていると主張し、中へ入る道を探そうとしていた。<br><br>すぐに面白い場所が見つかった。グリフィン流派のウィッチャーのメダルの姿をした絵が記されていた。場所は地図に記す。<br><br>オクセンフルト学院博物学科助手、エドウィン・グレロフ
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||クソ。アティムシュタイン教授のために用意した最初の地図をグウェントで失ってしまった。クルックバックの丘の下の墓近くにあるベースキャンプに戻って、作業を再開しなければならない。その間に、何かあればこの地図に記しておこう。<br><br>オクセンフルト学院博物学科助手、エドウィン・グレロフ
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||素晴らしい。スラヴコ・アティムシュタイン教授は激怒するだろう。最初の地図はグウェントで失った。2番目の地図は賭場ですった後、ちょっとやる気をなくしている間に盗まれた。成果なくクルックバックの丘の下の墓近くにある拠点へ戻る訳にはいかない。教授に解剖されてしまうだろう。この地図には4つ新しい場所を記した。これで教授の怒りを免れるだろう。<br><br>オクセンフルト学院博物学科助手、エドウィン・グレロフ
@@ -61058,7 +61095,38 @@
 1085184|2b68f23c|gwint_faction_ability_nr|CUSTOM|Gwint Additional||ラウンドに勝つと、デッキから1枚カードを引く。
 1085185|a9f665ff|gwint_faction_ability_scoia|CUSTOM|Gwint Additional||デュエルの開始時に先攻か後攻かを選択できる。
 1085186|41b55515|gwint_faction_ability_nml|CUSTOM|Gwint Additional||各ラウンドの後に、ランダムに選ばれた1枚の怪物カードが戦場に設置される。
+1085187|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Deck Builder
+1085188|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]This is the deck builder page, which will allow you to tweak your decks.<br><br> On the left are all the cards you own, and on the right is your deck in its current state.<br><br>You can have up to 4 decks, one for each faction. Factions become available once you have unlocked them.<br><br>Add or remove cards as you please, but make sure that your deck has at least:<br><br>• 1 leader card<br><br>• 22 unit cards<br><br>• 10 special card
+1085189|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Main Game
+1085190|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentmaingame.journal"|Journal||[DEBUG] [DEBUG]The goal of the game is to win two rounds against your opponent.<br><br>Round:<br><br>Players take turns playing one card on the battlefield.<br><br>Players may pass if they wish to by holding down <<Gwent_Pass>><br><br>Passing means sitting out the entire round. The other player is free to keep playing cards one at a time, until he or she also chooses to pass.<br><br>Both players have only the cards in their hand available for the whole game.
+1085191|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Resolution
+1085192|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentresolution.journal"|Journal||[EN] [PL] [DEBUG] [DEBUG]When both players have passed, the strength of all their cards on the battlefield is added up.<br> The player with the lowest total strength loses the round and a gem is removed from underneath his or her portrait.<br><br>All cards on the battlefield are removed after each round and sent to the discard pile.<br><br>In the event of a draw, both players must remove a gem.<br><br>Once a player has lost both gems, his or her opponent wins the game. If the game ends on a draw, the players play an immediate rematch.
+1085193|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Unit Range
+1085194|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentunitrange.journal"|Journal||[DEBUG] [DEBUG]This is the unit's range icon. It indicates the row on the battlefield where the card will be played.<br><br>Close Range (+ icon)<br><br>Longe Range (+ icon)<br><br>Siege Range (+ icon)
+1085199|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]This is a unit card.<br><br>This is its value. When placed on the battlefield, the strength value in the top corner of the card is added to its player’s total.
+1085200|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Unit Card
+1085201|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Deck
+1085202|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]This is your deck.
+1085203|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Discard Pile
+1085204|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]And this is your discard pile.
+1085205|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Leaders
+1085206|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]These are the leaders of each army. Each player has one leader with a special ability that can be used once during the game.
+1085216|00000000||Unnamed CJournalResource|Journal||[DEBUG] {DEBUG]Some unit cards have special abilities , this “Crinfrid Reavers Dragon Hunter”, for example, has a “Tight Bond” ability which will double the strength of other “Crinfrid Reavers Dragon Hunter” cards placed next to it.<br><br>Your starting deck only has one, though… If you want to build a mighty deck, you’ll need to search the world for others.
+1085217|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Crinfrid Reavers Dragon Hunter
+1085218|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Weather cards are a type of special card. Weather effects will decrease the strength of ALL cards on the battlefield, including your own, in a specific Range.<br><br>Frost affects close range.<br><br>Fog affects long range.<br><br>Rain affects siege range.<br><br>There are more special cards for you to find in the world. Some special cards may remove weather effects, others even double the strength of some units on the battlefield.
+1085219|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Weather
+1085220|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentroundend.journal"|Journal||[EN] [PL] [DEBUG] [DEBUG]A round will end when both players have chosen to pass. If only one player passes, the other is free to keep on placing cards on the battlefield until he or she chooses to pass as well by holding down <<Gwent_Pass>>.<br><br>At that point both totals are compared, the highest one wins a round and all the cards, including weather cards, are removed from the battlefield.
+1085221|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Round End
+1085222|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]There is no shame in passing and letting your opponent win a round. Play smart, play the long game or play aggressively by using high cards in the first round.<br><br>Find more special cards in the world, add them to your deck and increase the chances of drawing one with your starting hand.<br><br>Each deck also has its own heroes, high value cards who cannot be affected or hurt by any special cards. These heroes can turn a battle.
 1085223|00000000||Unnamed CJournalResource|Journal||ヒーローカード
+1085224|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]One last thing, each faction comes with its own style of play and its own passive ability. <br><br>NILFGAARD <br> BACKSTAB: Wins on a draw.<br><br>NORTHEN REALMS <br>  MORALE BOOST: Get an extra card every time you win a battle.<br><br>SCOIA'TAEL <br> AMBUSH: Decide who starts first.<br><br>NO MAN's LAND <br> TOUGH SKIN: Keep a random unit on the battlefield after each round.<br><br>Find the one that suits you best.
+1085225|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Faction Abilities
+1085226|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentskiptutorial.journal"|Journal||[DEBUG] [DEBUG]Press <<Gwent_Skip_Tutorial>> to skip the tutorial.
+1085227|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Skip Tutorial
+1085228|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentinspect.journal"|Journal||[DEBUG] [DEBUG]Press <<Gwent_Inspect>> to inspect your hand.
+1085229|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Inspect your hand
+1085230|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Inspect your hand
+1085231|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentinspectpc.journal"|Journal||[DEBUG] [DEBUG]Press <<Gwent_Inspect>> to inspect your hand
 1085232|0bc74e6e|item_name_lesser_green_mutagen|CUSTOM|Additional||緑の変異誘発剤（弱）
 1085233|53cf55c7|item_name_lesser_blue_mutagen|CUSTOM|Additional||青の変異誘発剤（弱）
 1085234|bcdc43b8|item_name_q301_crematory_key|CUSTOM|Additional||下水道の格子の鍵
@@ -62975,6 +63043,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||DIRECTOR - GALAXY PROJECT
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||DIRECTOR - WEBSITE PROJECT
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||LEADS
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ENGINEERS
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||ADDITIONAL PROGRAMMING
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||ADDITIONAL ART
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||ANIMATED STORYBOOK SEQUENCES
@@ -75369,7 +75438,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|最終手段？ 大げさだな。なぜだ？
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|デトラフを呼び出せる存在がいるのだ。その資格を持ち、強大な力まである。どこへでも彼を引っ張り出せるだろう
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|煎じ薬は完成しそうか？ うまくいってるのか？
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||シャルル・ランツァーノ
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|石掘人のようには見えんな
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|またか？ まあ、言ってみろ… 何が欲しい？
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||商品を見せてくれるか？
@@ -90998,9 +91066,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||フィリベルト・フォーフィンガー武装商人団の第一管財人の記録
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||ブラス月の損益<br><br>3日<br>シャン・デゾレの丘に飛竜種が巣を作った。我々の仲間を食べることを覚えたらしい。最近ではギルバートが突然掴まれて連れて行かれた。ギルバートは普段から注意深い性格だったが、放尿中は誰でもいくらか無防備になるものだ。フィリベルトは激怒した。新人を教育して商人団の役に立つ兵士として育成するには相当の費用がかかっている。それを怪物の糞に変えられるような損失を見過ごすことはできない。<br>7日<br>東トゥサンから移動中だった商人のキャラバンを襲撃。護衛もなく、抵抗もしなかったが、我々の利益もなかった。奴らの運んでいた粗悪なボロ布は、まともな着物を知らないスケリッジの野蛮人しか欲しがらない代物だった。もちろん、スケリッジに行く予定などない。フィリベルトはまたかんしゃくを起こし、商人の1人でルミエールという名の男を殺した。残りの商人は東へ逃げ帰って行った。<br>11日<br>3人の男が密かに森を通り抜けようとしているところを、偵察係が発見。3人ともみすぼらしい恰好で、物乞いを名乗っていた。だが、我々は騙されなかった。少しの間手荒に調べたところ、メヒトの鉱山から黄金を運ぶ途中の宝石商人だと分かった。原石だけだが、かなりの価値が見込める品質だという。フィリベルトは宝石商を殺すよう命じた。彼は嘘つきを心から憎んでいるのだ。<br>17日<br>帝立大学の実地研究チームが調査にやって来て、サンルトゥールの反対側のカステル・グローピアンで野営しているという。学者はありあまる富を持っているわけではないが、この連中は大人数が入れるテントと大量の酒を持っていた。それが運の尽きだったわけだ。フィリベルトは手下を数人向かわせた。<br>23日<br>もう2週間ほど、街道をろくな獲物が通らない。その一方で、仲間たちが次々に遍歴の騎士どもに捕まっている。そのうち2人が死に、1人が怪我をしただけで逃げてきた。かなりの高額になる装備を失った。フィリベルトは怪我をした男を不注意の罰として鞭打ちにするよう命じたが、怪我で弱った体では耐え切れず死んでしまった。<br>24日<br>やっと運が向いてきた。南から戻る途中のワイン商人のキャラバンを捕まえた。品物を売った帰りで、かなりの額の現金を持っていた。単純に分ければ、仲間の全員が1人400クラウンずつ手に入る計算だ。ただし、フィリベルトが平等に山分けするかどうかは別の話だ。<br>28日<br>バゼニ牧場に物資を取りに行った部隊が戻らない。食糧が厳しい状況になってきた。人間は酒だけでは生きられないし、金塊を食う方法もない。いくつか村を襲いに行くしかなさそうだ。<br>30日<br>ブラス月の最終決算を出さねば。今月も黒字だ。当然だが。どうやら、来月もここに残ることになりそうだ。
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|どうしてあなたがここに！？ 個人的な話なのに。ゲラルト、どういうこと？ 私を何かの策にはめようとしているの？
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||トーナメントの書記が書いたメモ。
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||トーナメントの書記が書いたメモ。
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||1275年 国際騎士トーナメント、見届け役はヴィヴィアン・ド・タブリス嬢<br><br>申し込みを受け付け、競技への参加資格があると認められた参加者：<br><br>前年度トーナメント王者グレゴアール・ド・ゴルゴン。一般の競技には参加せず、最も多い点数を獲得した選手との決勝戦にのみ出場。（あらゆる予想材料が彼の王座防衛を示唆。）<br><br>アンセイス、ライリアおよびリヴィアの王子。3年連続で出場<br><br>ホルム・アケルスパーク、メヒトの王子。エムヒル皇帝と血縁の噂あり、トーナメント出場は4度目<br><br>パルメリン・ド・ローンファル男爵、トーナメントには6回目の出場<br><br>トロイのドニミル、レダニアの騎士、トーナメントは初参加<br><br>アトレのレインファーン、トーナメント出場7回目、1269年大会王者<br><br>メティナのガイ・ド・ボア・フレンヌ（公爵閣下に仕える騎士の1人レイナルト・ド・ボア・フレンヌのまたいとこ）トーナメント出場は3回目<br><br>クレイジューのデルウィン、年少の騎士、トーナメントは初出場<br><br>ドーンダルのテイルズ、炎の薔薇の騎士団に所属する騎士。トーナメントは初出場<br><br>メティナのルリノス、トーナメント出場は3回目<br>ギョーム・ド・ローンファル（パルメリン男爵の甥）、トーナメント初出場 [追加情報] ギョームは怪我のため出場資格を別の騎士と交代。
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||ヴィヴィアンのメモ
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||ヴィヴィアンのメモ
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||ブラス月、フィアイン月の支出<br><br>布 14エレ：80クラウン<br>靴（竜革）：140クラウン<br>競争用の鞍：280クラウン<br>魔法の軟膏：1400クラウン（合計）
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||日記
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||今日の日記<br>レディ・オリアンナが街角から引き取ってくれてから3週間になる。やっと食べ物と飲み物にありつけて、毎日他の子供たちと遊んでいる。家よりもいいくらい。家ではめったに食事をとれず、ママが死んだ時には食べ物が全然なかった。<br><br>今日はミリとトムと遊んだ。最初はハンカチ落とし、次にかくれんぼ、それから棒崩しをした。それから鬼ごっこも。すごく楽しかった！ それからレディ・オリアンナの荷物が来て、食べ物がたくさん入っていた。甘いロールパンと、果物と、ケーキと、他にもたくさんおいしいものがあった。レディ・オリアンナは最高！<br><br>朝早くレディ・オリアンナが訪ねてきた。まずは皆と話してから、歌を歌ってくれて、それからジョニーを別の部屋に連れていった。皆ジョニーがうらやましかった。戻ってきたジョニーは少し顔色が悪くて、首に小さな赤い跡がついていたけど、すごく大きなチョコレートの袋を持っていた！ ミリはレディ・オリアンナが時々子供を連れていって何かをすると言うけど、何かはよく分からないし、そのあとでプレゼントがもらえるみたい。次は私を連れていってくれますように！<br><br>今日は雨ですごく退屈。トムに馬鹿と言われたけど、トムも馬鹿だから彼の言うことは信じない。きっとレディ・オリアンナが明日来て私にプレゼントをくれる。それで彼に思い知らせてやる！<br><br>私を選んでくれた！ レディ・オリアンナが来て私を選んだ！ 一緒に別の部屋へ行くと、首を見せるように言われて、噛まれた感じがした。痛みはなくて、あとから少しフラフラした。でもそれはどうでもいい、木の剣を貰ったんだから！ こんな物は誰も持ってない！ トムは真っ青になるはず！
@@ -94087,7 +94155,6 @@
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||DESIGNERS
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||ENGINEERING
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||MANAGER
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ENGINEERS
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||CONCEPT ARTIST COORDINATOR
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||EXPERT CONCEPT ARTIST
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||EXPERT CHARACTER ARTIST
@@ -94332,7 +94399,7 @@
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||閉じる
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||報酬を取得するには、GOG GALAXY 2.0にログインしてゲームを起動してください。
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||報酬およびMODメニューにアクセスするには、REDlauncherにログインしてゲームを起動してください。
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||視野角
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||カメラ
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||エフェクト
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||オートフォーカス
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||絞り
@@ -95477,7 +95544,7 @@ Joy-Con 2 (R)を取り外して側面を下に向けて置くと、マウスと�
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||アクスィーを標的2体にかけられるようになるが、効果は$I$%弱まる。
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||アクスィーを標的2体にかけられるようになる。
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||爆発盾
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||クエンの盾が壊れる時に敵を後退させる。後退する度合いはランクに応じて強まる。 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||クエンの盾が壊れる時に敵を後退させる。後退する度合いはランクに応じて強まる。受けたダメージの$I$%を敵に与える。 
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||広範囲化
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||アードの効果範囲が$I$ヤード伸びる。
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||魔法の罠
@@ -95548,7 +95615,7 @@ Joy-Con 2 (R)を取り外して側面を下に向けて置くと、マウスと�
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||奇襲戦術
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||敵を爆薬で攻撃すると、10秒間近接ダメージが$I$%増加する。
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||グリフィン流派の技術
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||中装防具の各部位につき、印力が$I$%、気力の自然回復が毎秒$I$アップする。
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||中装防具の各部位につき、印力が$I$%、気力の自然回復が毎秒$F$アップする。
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||マンティコア流派の技術
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||中装防具の各部位につき、剣のダメージが$I$%、爆薬のダメージが$I$%増加する。
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||代謝の活性化
@@ -95701,8 +95768,8 @@ Joy-Con 2 (R)を取り外して側面を下に向けて置くと、マウスと�
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||ブレス・オブ・ザ・ノース
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||トール・ララ
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||トール・ジルエアエル
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||視野角
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||傾き
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||カメラ
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||長き放浪の旅に耐えられる頑丈な鎧。 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||深紅の冠羽の鎧
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||深紅の冠羽のブーツ
@@ -95807,8 +95874,8 @@ Joy-Con 2 (R)を取り外して側面を下に向けて置くと、マウスと�
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||アクスィーの詠唱中に標的が接近しなくなる。また、アクスィーの会話中の効果が強化される。
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||アクスィーの詠唱中に標的が接近しなくなる。また、アクスィーの会話中の効果が強化される。
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||アクスィーを標的2体にかけられるようになるが、効果は$I$%弱まる。
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||クエンの盾が壊れる時に敵を後退させる。後退する度合いはランクに応じて強まる。 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||クエンの盾が壊れる時に敵を後退させる。後退する度合いはランクに応じて強まる。 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||クエンの盾が壊れる時に敵を後退させる。後退する度合いはランクに応じて強まる。受けたダメージの$I$%を敵に与える。 
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||クエンの盾が壊れる時に敵を後退させる。後退する度合いはランクに応じて強まる。受けたダメージの$I$%を敵に与える。 
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||アードの効果範囲が$I$ヤード伸びる。
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||アードの効果範囲が$I$ヤード伸びる。
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||魔法を放ち、14ヤード以内にいる敵にダメージを与えて動きを遅くする。ダメージが$I$%増加する。
@@ -95876,8 +95943,8 @@ Joy-Con 2 (R)を取り外して側面を下に向けて置くと、マウスと�
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||食料を消費すると体力が$I$分間回復する。
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||敵を爆薬で攻撃すると、10秒間近接ダメージが$I$%増加する。
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||敵を爆薬で攻撃すると、10秒間近接ダメージが$I$%増加する。
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||中装防具の各部位につき、印力が$I$%、気力の自然回復が毎秒$I$アップする。
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||中装防具の各部位につき、印力が$I$%、気力の自然回復が毎秒$I$アップする。
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||中装防具の各部位につき、印力が$I$%、気力の自然回復が毎秒$F$アップする。
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||中装防具の各部位につき、印力が$I$%、気力の自然回復が毎秒$F$アップする。
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||中装防具の各部位につき、剣のダメージが$I$%、爆薬のダメージが$I$%増加する。
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||中装防具の各部位につき、剣のダメージが$I$%、爆薬のダメージが$I$%増加する。
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||アドレナリンを消費して、アドレナリン1ごとに霊薬を飲む際の中毒度の上昇を$I$%おさえる。変異抽出液には効果がない。
@@ -96569,7 +96636,7 @@ Joy-Con 2 (R)を取り外して側面を下に向けて置くと、マウスと�
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||SENIOR CQA AND L&D MANAGER
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||扇動者の髪型。
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||CD PROJEKT RED DEVS TEAMS
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDPR MOD CREATOR
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDRP MOD CREATOR
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||SENIOR AUDIO ENGINEER
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||EXPERT GAMEPLAY ANIMATOR
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||EXPERT ENGINEER, COORDINATOR

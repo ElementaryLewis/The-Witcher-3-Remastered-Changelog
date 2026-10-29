@@ -2079,7 +2079,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||Güruh
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Görüşürüz.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Priscilla ile nerede tanıştınız?
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|Sokağın gürültüsü etrafımda gürlüyordu. Matemde, göz alan bir elemin imgesi. Zarif parmaklarıyla elbisesinin kenarını sıyırıyordu. Etkileyici bir kadın hızlı adımlarla ilerledi.
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|Sokağın gürültüsü etrafımda gürlüyordu. Matemde, göz alan bir elemin imgesi. Zarif parmaklarıyla elbisesinin kenarını sıyırıyordu. Etkileyici bir kadın hızlı adımlarla ilerledi.
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Laf kalabalığı.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Bir yerde buna acayip benzeyen bir şey duymuştum…
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Güzel.
@@ -2249,6 +2249,8 @@
 362292|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362292|Rüya gördüğüm yer burası.
 362339|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362339|Başlangıç olarak bana bu kadınla ilgili bir anını anlat.
 362474|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_09a_dudu_irina_chat.w2scene"|Line text|DDBV_Q305_00362474|Ben iyiyim, bir şeyim yok.
+362517|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] Katakan
+362518|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] Ciastko
 362614|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_14_dreamer_dreams.w2scene"|Line text|DREA_Q301_00362614|Rahatına bak ve gevşemeye çalış.
 362710|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\zoltan_chivay_default.w2scene"|Line text|GRLT_ZOLTAN_00362710|Zoltan?
 362722|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\zoltan_chivay_default.w2scene"|Choice line||Burada tam olarak ne işin var?
@@ -3045,6 +3047,7 @@
 378633|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||Leşenin çıkardığı sesi takip etmek için Efsunger Hisleri'ni kullanarak leşeni bul.
 378634|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||Leşeni öldür.
 378676|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_00378676|q101_agent (Kavşaktaki Han'da Hendrik'i arama) esnasında Baron'un adamlarının icabına barışçıl yoldan mı baktım?
+378678|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Evet, kavgadan kaçındım. [DEBUG]
 378680|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||Hayır, bastım kıçlarına tekmeyi. [DEBUG]
 378682|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|GRLT_Q303_00378682|Bir kez daha… Konuşabilir miyiz?
 378684|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|CCLP_Q303_00378684|Sigi gibi sen. Konuşur benle.
@@ -3465,6 +3468,8 @@
 382824|00000000||CStoryScene "quests\generic_quests\skellige\quest_files\mh206_fiend_ruins\scenes\mh206_03_near_lair.w2scene"|Line text|GRLT_MH206_00382824|Bu defa kaçamayacak…
 382835|00000000||CJournalResource "gameplay\journal\quests\q105witches.journal"|Journal||Kulübeye gidip oğlanla konuş.
 382839|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00382839|Bir kurban daha.
+382870|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] BidDebugQuestDescription1 dewscription i ciastka
+382871|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] BidDebugQuestDescription2 description
 383030|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_05c_8_folan_gmpl_dlgs.w2scene"|Line text|FLAN_Q202_00383030|Nihayet… Toprak bu kadar sert olmasa kök salmıştım anasını satayım.
 383032|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_05c_8_folan_gmpl_dlgs.w2scene"|Line text|FLAN_Q202_00383032|Ben burada bekleyeceğim.
 383034|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_05c_8_folan_gmpl_dlgs.w2scene"|Line text|FLAN_Q202_00383034|Ben seni korurum. Konumumu devi görüş alanımda tutacak şekilde ayarlayacağım.
@@ -3864,6 +3869,8 @@
 389706|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_02_harald_confrontation.w2scene"|Line text|SDRU1_SQ204_00389706|O, bundan çok daha fazlasıdır. Onun sayesinde orman av hayvanı kaynıyor, kadınlarımız güçlü bebekler taşıyor. Bizi Adalar'ın en iyi avcıları yapan Ağaçlık Ruhu'nun kudretidir.
 390026|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_00_peasants_alarm.w2scene"|Line text|SVR1_SQ204_00390026|Arnulf ölmüş!
 390028|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_00_peasants_alarm.w2scene"|Line text|SVR1_SQ204_00390028|Kardeşin, öldürülmüş! Kahretsin, hadi millet, onu indirmemiz gerek!
+390062|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest2.journal"|Journal||[PL] [DEBUG] Kur
+390063|00000000||Unnamed CJournalResource|Journal||[PL] [DEBUG] BidDebug 2
 390095|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390095|Bir leke… Ejderan yağı.
 390101|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390101|Şeker…ve ejderan yağına batırılmış bir maddenin öbek öbek parçaları. Hım… Potasyum mu?
 390103|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_04_02_geralt_on_clues.w2scene"|Line text|GRLT_Q303_00390103|Görünüşe göre bombayı burada yapmışlar…
@@ -4438,6 +4445,9 @@
 394356|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_07_eskel_on_forktail_death.w2scene"|Choice line||Yen bunu neden istediğinden bahsetti mi?
 394367|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_03_happy_leshy_reward.w2scene"|Line text|SWR3_SQ204_00394367|Diğer ihtiyarların işini bitirdik. Sadece biri kaldı.
 394390|00000000||CJournalResource "gameplay\journal\quests\family.journal"|Journal||Baronun kızı Tamara'yı Oxenfurt'ta bul.
+394391|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] [Skorup]<br><br>Si ju lejter, mówi hejter<br>Hejtuję świata syf i wciskam ENTER<br>Śląski bęben dudni coraz głośniej<br>Martwią się wylansowani goście<br>Owszem, czuję się doskonale<br>Cudze szanuję, swoje głośno chwalę<br>Wiesz, ja go palę – przypicowany goguś<br>My są stąd, weź kup sobie globus<br>SI ziomuś, siła intelektu<br>wbijamy na jana do kanonu lektur<br>W TV stek bzdur, nie będę oglądał<br>Wolę jak Janek król pod Wiedniem posprzątać.
+394392|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] [BU]<br><br>Szczytna inicjacja, szybka interpretacja<br>Rap misja u siebie istotna jak delegacja<br>Świetna intuicja, super inscenizacja<br>Mamy swoje insygnia w sidłach interesanta<br>stanowcza ingerencja o szczerych intencjach<br>Ta systematyczna iskra to samodzielna inwencja<br>Zsolidaryzowana przez siedmiu solistów<br>Spłynął inkaust do bitu przez solidny impuls<br>Stajnia inna niż reszta, śląski solenizant<br>Staż imponujący big up MaxFloRec świta!<br>Choć był czas, że trawiła go szpetna intryga<br>Dzisiaj wzbija się, zakwita jak sativa przy indica.<br><br>[Refren – GrubSon]<br>SI – siedmiu chłopa z MaxFlo ogrodu<br>SI – tyś jedyna niczym poezja<br>Mi – dają kopa bez pardonu Ci<br>Si – si – silesia!
+394393|00000000||CJournalResource "gameplay\journal\quests\BidDebugQuest.journal"|Journal||[PL] [DEBUG] [Bob One]<br>To jest seryjna infekcja, sekcja instynkt, lekcja pierwsza<br>To trzęsie tłumem tak jak epilepsja<br>To Silesia koneksja, sprawna ingerencja<br>Siedmiu innych dusz w materię Twego serca<br>To samozwańcza izba<br>Tych co skaczą po bicie, kiedy Ty się po nim ślizgasz<br>Kiedy wchodzimy na scenę Ty odchodzisz przy gwizdach<br>Samurajska impreza, to i krew będzie bryzgać<br>Nie wierzysz? Zapytaj szoguna i spytaj ile grobów<br>Ma na sumieniu siódemka tych typów co kładzie wrogów<br>Tak że pakują swój tobół ruszają do innych robót,<br>A ci wierni słowu innym wciąż mówią: „Ty weź się obudź!"
 394409|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_02_harald_confrontation.w2scene"|Line text|SDRU1_SQ204_00394409|Tamam, avcı olmak üzere yola koyulan her delikanlı kutsal ayinden sağ çıkamıyor. Ama efsunger de benzer bir bedelle yaratılmıyor mu?
 394905|00000000||CStoryScene "quests\sidequests\skellige\quest_files\sq204_forest_spirit\scenes\sq204_03_dead_leshy_reward.w2scene"|Line text|SVR6_SQ204_00394905|O yüzden yoluna gitmen en iyisi, çünkü buralarda hiç canavar kalmadı!
 394923|00000000||CStoryScene "quests\part_1\quest_files\q305_blanka\scenes\q305_06_d_puffins_thank.w2scene"|Line text|NBAR1_Q305_00394923|Ne manzara ama! Gösterdin onlara günlerini! Bir, iki… Arkadan dolan! Sonra bam! Tam kafaya…
@@ -7037,6 +7047,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|Bu parayı kabul edemem. Nişanlını canlı geri getirmeyi başaramadığım için üzgünüm.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|Sirenlerden bahsettin. Undvik'te çok mu var?
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|Çok da laf mı, bir dolu. Diğer adalarda da var.
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] MENGE'Yİ ALDATMAYA ATLA
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|Gildorf'un altındaki lağımda ama oraya Kırıntılar'dan girmen, yol boyunca yoksulluğun pis kokusuna katlanman gerekiyor.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|Bu ganimeti götürmek bir ödül getirebilir.
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|Belki bir ödül vardır. Bir av ganimeti gerek bana.
@@ -14770,6 +14781,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|Novigrad'da canavar falan bulamayacaksın. Bu surların içinde Ebedi Ateş yanar.
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|Ateş… Ateş yüreğimde yanıyor!
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Kılıçlar ve Börekler
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] KANCA: Tüccarlarla konuş
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] KANCA: İlan tahtasını oku
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] KANCA: Ernst ile konuş
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] KANCA: Müşterilerin konuşmalarını dinle
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|Erik'in oğlu Leif…
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|Olaf'ın oğlu Kjall…
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|Şerefiyle can verdi…
@@ -22584,11 +22599,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|Hiihiihiihiihiihii!
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|Pek yakında görüşürüz.
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|Hiihiihiihiihiihii!
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook1: Pig Roasters
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|Geralt işareti verdi!
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|Hazırım!
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|Yağdır! Ragh nar Roog'u yağdır üstümüze!
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|Şeref için!
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|Selam olsun!
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook: Closed Vault Gate
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|Yeni misin sen?
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|Onu savuran kol zayıfsa en iyi kılıç bile bir boka yaramaz, ha?
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|Acaba bu onun işini bitirdi mi?
@@ -22988,6 +23006,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|Eğlencemizi bozmayı kes, tamam mı?
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|Ah, ne güzel. Of, bu herif hepten keyfimi kaçırdı benim.
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|Ben yolunuzdan çekileyim o zaman. Ama…biraz daha kuytu bir yer bulabilirsiniz belki.
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Görev Başlangıcı
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|Caranthir, kralına bağlıdır ama Ge'els… O apayrı bir hikâye.
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|Ve işin aslı, Eredin sevgili hükümdarımızı zehirledi.
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|Bana bir dakika ver. Hemen döneceğim.
@@ -22995,6 +23014,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|Acınası… Tek kelimeyle acınası.
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|Son sözün var mı?
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|Çekil yolumdan ihtiyar… Ben de canını bağışlayayım.
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Meditasyon yaparak zamanı ileri sar
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Sukrus'a kasaları almasını söyle.
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Gözcülük yap.
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Sukrus'un ne istediğini öğren.
@@ -31819,6 +31839,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Gerisini biliyorum.
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|Selam!
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|Sana bir tavsiye. İyi şarkı söyleyemiyorsan, yüksek sesle söyle!
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Nöbetçilerle görüş
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Bir Yrden tuzağı yerleştir YA DA Axii veya Kılıçla muhafızın işini bitir
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Tahta arabayı tutuştur
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Depoda her şey temiz işaretini ver
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Biliyorum, izlerini takip ettim.
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|Sen Kocakarılar'a bulaştın, o da Keira'ya rastladı.
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|Evet, başaramadık. Portaldan geçtikten sonra, Avallac'h'ın gizlenme yeri yerine, doğrudan Kambur Batağı'nın ortasına indim.
@@ -41113,7 +41137,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||Oğlan Hayaleti
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||Gûlları öldür.
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|Beni rahatsız etme Geralt! Kayıp düşerim!
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|Kılıç mı tutuyorsun, yumurta çırpıcı mı? Bileğinden savuracaksın, dirseğinden değil! Bir daha!
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|Kılıç mı tutuyorsun, yumurta çırpıcı mı? Bileğinden savuracaksın, dirseğinden değil! Bir daha!
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||Bırak geçeyim.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|Bırak geçeyim.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|Peki, devam et. Yol açık.
@@ -44423,6 +44447,12 @@
 1043764|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043764|Bu iş kabak tadı vermeye başladı. Aşırı gelişmiş azmanın teki koca bir garkolan sürüsünü katletmiş.
 1043766|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\scenes\q102_v_03_geralt_on_searching_village.w2scene"|Line text|GRLT_Q102_01043766|Köylülerin arasına baksam iyi olur. Bana yardım edecek kadar cesur bilini bulurum belki.
 1043767|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||Avcıyla konuş.
+1043769|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_01043769|[DEBUG] Kavşaktaki Han'da Hendrik'i ararken Baron'un adamlarıyla karşılaştım mı?
+1043770|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Evet [DEBUG]
+1043771|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Hayır [DEBUG]
+1043773|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_01043773|[DEBUG] [DEBUG] q101 (Hendrik'i arama) esnasında birine hakaret ettim mi? [DEBUG]
+1043774|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Evet [DEBUG]
+1043775|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Hayır [DEBUG]
 1043777|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043777|Trol. Bir süredir böyle büyüğünü görmemiştim… Yaşı epey var herhâlde.
 1043798|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||Efsunger Hisleri'ni kullanarak Nilfgaardlı askerlerin izlerini takip et.
 1043810|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_02_lair.w2scene"|Line text|GRLT_MQ4003_01043810|Sıcacık bir trol meskeni. Madem buradayım etrafa bir göz atabilirim.
@@ -50350,6 +50380,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Ancak Geralt kuleden çıkmaya kalkıştığında heyula gerçek yüzünü ortaya çıkardı. Meğerse Geralt'ın masum bir kadının hayaleti sandığı şey aslında ölüm ve hastalığın ruha bürünmüş hâliydi.<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Belki kızın sözlerinde Geralt'ı tedirgin eden bir şey vardı ya da sadece efsunger içgüdüleri onu zamanında uyarmıştı. İki türlü de Geralt, Anabelle gerçek yüzünü ortaya çıkarmadan önce bir yeniden doğuşla karşı karşıya olduğunu biliyordu. Ruh aslında bir pestaydı: bir veba bakiresi, ölüm ve veba yayan korkunç bir heyula.<br>
 1058855|00000000||Unnamed CJournalResource|Journal||Asker Kaçakları
+1058856|00000000||Unnamed CJournalResource|Journal||[DEBUG]Temerya Ordusu'nun parçası olan bir grup asker, nöbet yerlerini bırakıp kaçtı. Bu adamlar oldukça iyi eğitimliler ve gördükleri insanlara derhâl saldıracaklar. En son, civardaki ormanda kamp yaptıkları görülmüş.
 1058857|00000000||Unnamed CJournalResource|Journal||Ormandaki asker kaçakları
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||Geralt, asker kaçaklarının kampını buldu ve herkesi katletti! Şerefsiz firariler beni hasta ediyor! Merhamet dilediler ama Geralt merhamet göstermedi! Sonra ise sahip oldukları her şeyi aldı ve sattı.
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||Araştırmamız gerek. Ne olur ne olmaz.
@@ -51433,6 +51464,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Hadi biraz eğlenelim.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Bir el kart oynamaya ne dersiniz?
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Yatma vakti.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[DEBUG] [Sarhoş Eskel'e atla.]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|Hah. İşte anahtar.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||Kontrat: Ağaçlığın Canavarı
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||Karım Kayıp
@@ -51635,7 +51667,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|Aşağı tükürsen sakal, yukarı tükürsen bıyık.
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|Tereyağından kıl çekmeyi severim.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|Olmadı. Parola bu değil.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||Devriye Kayboldu, Ödül
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||Duyuru:<br><br>İmparatorluk Majesteleri Emhyr var Emreis'e hizmet veren askerler, görevleri başındayken kaybolmuşlardır. Bulunmalarına yardım eden olursa ödül verilecektir. Daha fazla bilgi edinmek için "Merkez" Ordu Grubu kampındaki levazım subayı ile görüşün.
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||Roland Treugger'ın Hammond'a mektubu.
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||Oyun salonu no. 1<br><br>Şu anki ay.<br><br>Giderler - 38.756 kron<br><br>İdari harcamalar - 5.294 kron<br><br>Vergiler - 3.875 kron<br><br>Borçlular<br><br>Kont Tybalt - 1.285 kron, son ödeme tarihi ay sonu, tartışmaya kapalı<br><br>Sasha - 956 kron, son ödeme tarihi gelecek ayın ortası, %35 faiz artışıyla iki hafta uzatmak mümkün.<br><br>Finneas - 5.148 kron, ödeme gecikti, son uyarı.<br><br>Bernard Tulle - borç ödendi.<br><br>Patrick Hazelnut - uyarı verildi, borç toplama prosedürü başlatıldı.
@@ -53987,6 +54018,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|Öyle bir niyetim yok, emin ol. Görüşürüz.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Kamptakilere Dandelion'ı kaçıran kişiyi görüp görmediklerini sor.
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|Hı hı. Görüşürüz.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[DEBUG] SONA ATLA [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Kulübeye girmenin bir yolunu bul.
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||İlgileneceğim.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Ücreti konuşalım.
@@ -56740,6 +56772,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||Girişi temizle ve elfi serbest bırak.
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Dalma
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Dalmak için <<DiveDown>>, yüzeye doğru yüzmek için <<DiveUp>> tuşunu basılı tut.<br><br>Nefesine dikkat et, biterse boğulursun!
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[DEBUG] [Sona atla.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||İşte davetiyem.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|İşte davetiyem. İsterseniz hepsi sizindir.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|Evet, memnuniyetle alırız.
@@ -56838,6 +56871,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|Bana Kovir'de, içinde hayatımın sonuna dek yan gelip yatıp meyve yiyebileceğim bir malikâne aldıracak kadar.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|Fena değilmiş. Her adam başına konan ödül tutarını öğrenme şansını yakalayamaz.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|Çoğu adam başında hiç olmamasını yeğler.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||Kayıp askerler hakkında ilan
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|Peki buraya neden geldin? Hayatımı kolaylaştırmak için mi?
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||Seninle kaçıp baş başa vakit geçirmek istiyorum.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|Skellige ziyafetleri, hep aynı. Ağzından salyalar akan sarhoşlar, arsızca böbürlenenler ve sonuç olarak bunların kaçınılmaz kavgaları…
@@ -57447,7 +57481,6 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||Gvent Dersleri
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||Gvent oynama derslerine yeni öğrenciler kabul ediyorum. Yalnızca disiplin, mantıklı düşünme yetisi ve öğrenme isteği gösterenlere ders vereceğim. Özel kabiliyetleri olanlar ise ayrıca davetlimdir. Öğrencilerin kendi destlerine sahip olmaları gerekmektedir.<br><br>Ayrıca hem mücadele etmek hem de karşılıklı olarak yeteneklerimizi geliştirmek için tecrübeli oyuncuları da partner olarak kabul ediyorum.<br><br>- Ermion, druid
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||Yükselmek için derinliklere bak
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||Katakan ini anahtarı
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||Hafiften paslanmış anahtar.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||Oxenfurt morgu anahtarı
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||Kararmış eski anahtar.
@@ -57590,6 +57623,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1077442|00000000||CJournalResource "gameplay\journal\quests\sunken treasure.journal"|Journal||Efsunger Hisleri'ni kullanarak batık hazineyi bul.
 1077456|5bad976f|item_desc_mq1028_muggs_papers|CUSTOM|Book||Taşıyana bir evin mülkiyet hakkını veren tapu.
 1077465|00000000||CStoryScene "living_world\dialogue\skellige\ard_skellig\shop_herbalist_community_herbalist_01.w2scene"|Line text|SDRU2_SHOP_01077465|Ah! İşte burada! Koruyucum, kurtarıcım! Tekrar soydaşlarımla birlikteyim, senin sayende.
+1077467|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_ferlund_blacksmith_01.w2scene"|Line text|SBH2_SHOP_01077467|[DEBUG] Tüccar, Geralt'ın Ferlund Köyü'ndeki dükkânına gelmesini hoşça karşılar ve onu kurtardığı için bir kez daha teşekkür eder.
 1077468|00000000||CJournalResource "gameplay\journal\bestiary\icegolem.journal"|Journal||Buz Elementalleri
 1077469|00000000||Unnamed CJournalResource|Journal||Ateş Elementalleri
 1077470|00000000||CJournalResource "gameplay\journal\bestiary\lycanthrope.journal"|Journal||Ulfedin
@@ -57952,6 +57986,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||Adalbert Kermith'in ilk haritası
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||Efsungerlerin Kedi Okulu'yla ilgili simgelerin nerede bulunabileceğini gösteren harita.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||Haydutları öldür.
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||Katakanın gizlenme yerinin anahtarı.
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||Profesör Slavko Atimstein tarafından araştırma grubuna alındıktan sonra, efsungerlerin Grifin Okulu hakkında bir çalışma yapmaya başladım. Araştırmamın esas noktası, Kambur Tepeleri'nin altındaki bir mezardı. Profesör, buranın grifinlerin ebedi istirahatgâhı olduğunu söyledi ve oraya girmenin bir yolunu bulabilmeyi istediğini belirtti.<br><br>Hızlı bir şekilde konuyla alakalı bir dizi yer buldum ve bunları Grifin Okulu efsungerlerinin madalyonları şeklindeki bir piktogramla işaretledim. Bu noktaları haritada işaretledim.<br><br> Edwin Greloff. Oxenfurt Akademisi Doğa Tarihi Yardımcı Profesörü
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||Koduğumun frengili orospusunun, sifilitik evladı.  Profesör Atimstein için hazırladığım ilk haritayı, bir el gventte kaybettim. Şimdi Kambur Tepeler'in altındaki mezarlığın oraya kurduğum kampıma dönmeli ve baştan başlamalıyım. Bu süreçte, ilginç yerleri haritada işaretleyeceğim.<br><br>Edwin Greloff. Oxenfurt Akademisi'nde Doğa Tarihi Konuk Öğretim Görevlisi
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||Çok güzel. Profesör Slavko Atimstein çılgına dönecek. İlk haritayı bir gvent oyununda kaybettim, ikincisi de kumarhanede geçirdiğim yoğun gecenin ardından yaşadığım küçük rahatsızlık sırasında çalındı. Kambur Tepeler'in altındaki mezarın yanına kurduğumuz istasyona elim boş dönemem, yoksa profesör beni parçalara ayırır. Haritaya işaretlediğim dört yeni konum belki beni öfkesinden korumaya yeter.<br><br>Edwin Greloff. Oxenfurt Akademisi'nde Doğa Tarihi Konuk Öğretim Görevlisi
@@ -60934,7 +60969,38 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1085184|2b68f23c|gwint_faction_ability_nr|CUSTOM|Gwint Additional||Her kazandığın turda destenden bir kart çek.
 1085185|a9f665ff|gwint_faction_ability_scoia|CUSTOM|Gwint Additional||Bir savaşın başında ilk kimin oynayacağına sen karar ver.
 1085186|41b55515|gwint_faction_ability_nml|CUSTOM|Gwint Additional||Her turun ardından bir tane rastgele seçilmiş Canavar Birim Kartı savaş meydanında kalır.
+1085187|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Deste Hazırlayıcı
+1085188|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Burası destelerini düzenlemene olanak tanıyan deste hazırlayıcı sayfasıdır.<br><br>Solda sahip olduğun tüm kartlar, sağda ise şu anki destenin mevcut hâli bulunur.<br><br>Her fraksiyon için bir tane olmak üzere en fazla 4 desten olabilir. Fraksiyonlar, onları açtığın zaman kullanılabilir olur.<br><br>Dilediğin gibi kart ekleyip çıkarabilirsin ancak destende en az:<br><br>• 1 lider kartı<br><br>• 22 birim kartı<br><br>• 10 özel kart olduğundan emin ol.
+1085189|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Ana Oyun
+1085190|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentmaingame.journal"|Journal||[DEBUG] [DEBUG]Oyunun amacı rakibine karşı iki tur kazanmaktır.<br><br>Tur:<br><br>Oyuncular sırayla savaş meydanı üzerine birer kart yerleştirirler.<br><br>İsteyen oyuncu <<Gwent_Pass>> düğmesini basılı tutarak pas geçebilir.<br><br>Pas geçmek tüm tur boyunca beklemek demektir. Diğer oyuncu, pas geçmeyi seçene dek, her seferinde tek kart olmak üzere oynamaya devam eder.<br><br>İki oyuncu da tüm oyun boyunca sadece ellerindeki kartları kullanabilir.
+1085191|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Sonucun Belirlenmesi
+1085192|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentresolution.journal"|Journal||[PL] [DEBUG] [DEBUG]İki oyuncu da pas geçtiğinizde, savaş meydanındaki tüm kartların kuvveti toplanır.<br><br>Daha düşük toplam kuvvete sahip olan oyuncu turu kaybeder ve portresinin altından bir taş kaldırılır.<br><br>Her tur sonrası savaş meydanındaki tüm kartlar kaldırılıp ıskarta yığınına gönderilir.<br><br>Berabere kalınması durumunda iki oyuncu da birer taş kaldırmak zorundadır.<br><br>Bir oyuncu her iki taşını da kaybettiğinde, rakibi oyunu kazanır. Oyun beraberlikle sonuçlanırsa oyuncular hemen bir rövanş oynarlar.
+1085193|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Birim Menzili
+1085194|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentunitrange.journal"|Journal||[DEBUG] [DEBUG]Bu, birim menzili ikonudur. Kartın savaş meydanında hangi safta oynanacağını gösterir.<br><br>Yakın Menzil (+ ikon)<br><br>Uzun Menzil (+ ikon)<br><br>Kuşatma Menzili (+ ikon)
+1085199|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Bu, bir birim kartıdır.<br><br>Bu da değeridir. Savaş meydanına yerleştirildiği zaman, kartın üst köşesindeki kuvvet değeri, oyuncunun toplam kuvvet değerine eklenir.
+1085200|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Birim Kartı
+1085201|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Deste
+1085202|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Bu, desten.
+1085203|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Iskarta Yığını
+1085204|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Bu da ıskarta yığının.
+1085205|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Liderler
+1085206|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Bunlar iki ordunun liderleridir. Her oyuncunun oyunda yalnızca bir kez kullanabileceği özel kabiliyeti bulunan bir lideri vardır.
+1085216|00000000||Unnamed CJournalResource|Journal||[DEBUG] {DEBUG]Bazı birim kartlarının özel kabiliyetleri bulunur. Örneğin bu "Crinfrid Yağmacıları Ejderha Avcısı" kartının, hemen yanına yerleştirilen başka bir "Crinfrid Yağmacıları Ejderha Avcısı" kartının kuvvetini iki katına çıkaran bir "Sıkı Bağ" kabiliyeti bulunmaktadır.<br><br>Ancak başlangıç desten bu kartlardan sadece bir tane barındırır… Kuvvetli bir deste yapmak istiyorsan diğerleri için dünyayı araştırman gerekir.
+1085217|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Crinfrid Yağmacıları Ejderha Avcısı
+1085218|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Hava şartı kartları bir özel kart türüdür. Hava şartı etkisi, savaş alanında belli bir Menzil'deki, kendi kartların dâhil olmak üzere TÜM kartların kuvvetini azaltır.<br><br>Ayaz, yakın menzili etkiler.<br><br>Sis, uzun menzili etkiler.<br><br>Yağmur, kuşatma menzilini etkiler.<br><br>Dünyada bulabileceğin daha fazla özel kartlar mevcuttur. Bazı özel kartlar, hava şartı etkilerini ortadan kaldırabilir, bazıları ise savaş meydanındaki bazı birimlerim kuvvetini iki katına çıkarır.
+1085219|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Hava Şartı
+1085220|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentroundend.journal"|Journal||[PL] [DEBUG] [DEBUG]Bir tur, iki oyuncu da pas geçmeye karar verdiğinde sona erer. Oyunculardan biri pas geçtiği zaman diğeri, kendisi de <<Gwent_Pass>> düğmesini basılı tutarak pas geçmeyi seçmediği sürece, istediği gibi savaş meydanına kart yerleştirmeye devam edebilir.<br><br>İki oyuncu da pas geçtiği zaman ikisinin de toplam puanı karşılaştırılır ve en yüksek puanlı oyuncu turu kazanır. Bunun ardından hava şartı kartları dâhil tüm kartlar savaş meydanından kaldırılır.
+1085221|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Tur Sonu
+1085222|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Pas geçip rakibin bir tur kazanmasına izin vermekte utanılacak bir taraf yoktur. Akıllıca oyna, süreye yayarak oyna ya da ilk turda yüksek kartlarını kullanarak saldırganca oyna.<br>Dünyayı gezerek daha fazla özel kart bul, onları destene ekle ve başlangıç elinle onlardan birini çekme olasılığını artır.<br>Ayrıca her destenin kendi kahramanları bulunur, bunlar herhangi bir özel karttan etkilenmeyen ya da zarar görmeyen yüksek değerli kartlardır. Bu kahramanlar savaşın seyrini değiştirebilir.
 1085223|00000000||Unnamed CJournalResource|Journal||Kahraman Kartları
+1085224|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Son bir şey daha: Her fraksiyon, kendi oynanış tarzı ve pasif kabiliyeti ile gelir. <br><br>NILFGAARD <br> ARKADAN BIÇAKLAMA: Berabere kalma durumunda kazan.<br><br>KUZEY DİYARLARI <br> MORAL YÜKSELTME: Savaş kazandığın her sefer fazladan bir kart kazan.<br><br>SCOIA'TAEL <br> PUSU: Kimin ilk başlayacağına karar ver.<br><br>SAHİPSİZ TOPRAKLAR <br> KALIN DERİ: Her tur sonrası savaş meydanında rastgele bir birim bırak.<br><br>Sana en uygun olanı seç.
+1085225|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Fraksiyon Kabiliyetleri
+1085226|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentskiptutorial.journal"|Journal||[DEBUG] [DEBUG]Eğitimi atlamak için <<Gwent_Skip_Tutorial>> düğmesine bas.
+1085227|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Eğitimi Atla
+1085228|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentinspect.journal"|Journal||[DEBUG] [DEBUG]Elini incelemek için <<Gwent_Inspect>> düğmesine bas.
+1085229|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Elini incele
+1085230|00000000||Unnamed CJournalResource|Journal||[DEBUG] [DEBUG]Elini incele
+1085231|00000000||CJournalResource "gameplay\journal\tutorial\tutgwentinspectpc.journal"|Journal||[DEBUG] [DEBUG]Elini incelemek için <<Gwent_Inspect>> düğmesine bas.
 1085232|0bc74e6e|item_name_lesser_green_mutagen|CUSTOM|Additional||Zayıf yeşil mutajen
 1085233|53cf55c7|item_name_lesser_blue_mutagen|CUSTOM|Additional||Zayıf mavi mutajen
 1085234|bcdc43b8|item_name_q301_crematory_key|CUSTOM|Additional||Lağımdaki ızgaranın anahtarı
@@ -62839,6 +62905,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||YÖNETMEN - GALAXY PROJESİ
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||YÖNETMEN - İNTERNET SİTESİ PROJESİ
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||YÖNETİCİLER
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||MÜHENDİSLER
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||İLAVE PROGRAMLAMA
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||İLAVE SANAT
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||ANİMASYONLU HİKÂYE KİTABI SEKANSLARI
@@ -63370,6 +63437,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1090670|9823623a|item_name_glowingingot|CUSTOM|Item||Parlayan cevher külçesi
 1090671|6cf97a05|credits_QA_TECHNICIANS|CUSTOM|Credits||KG TEKNİSYENLERİ
 1090672|00000000||Unnamed CJournalResource|Journal||DLC7
+1090673|00000000||CJournalResource "gameplay\journal\quests\mq1051nilfgaard.journal"|Journal||[DEBUG] Geralt, bir Nilfgaardlı devriyesinin kaybolduğunu ve kaybolan devriye hakkında bilgi verecek kişinin ödüllendireceğini bildiren bir ilan buldu.
 1090674|00000000||CJournalResource "gameplay\journal\quests\mq1051nilfgaard.journal"|Journal||Kontrat sahibi ile konuş.
 1090682|00000000||CStoryScene "dlc\dlc12\data\quest\quest_files\scenes\mq2052_06_finale.w2scene"|Line text|GRLT_MQ2052_01090682|Yer, burası olmalı…
 1090684|00000000||CStoryScene "dlc\dlc12\data\quest\quest_files\scenes\mq2052_06_finale.w2scene"|Line text|GRLT_MQ2052_01090684|Çıkabilirsiniz. Planınızı öğrendim.
@@ -64112,6 +64180,8 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1093719|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7001_rest_in_peace\scenes\mq7001_00_oneliners.w2scene"|Line text|GRLT_MQ7001_01093719|Burası temiz.
 1093721|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7001_rest_in_peace\scenes\mq7001_00_oneliners.w2scene"|Line text|GRLT_MQ7001_01093721|Ah, tıpkı dediği gibi.
 1093723|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7001_rest_in_peace\scenes\mq7001_00_oneliners.w2scene"|Line text|GRLT_MQ7001_01093723|Gül çalılığının altında… Pekâlâ.
+1093725|4c1be80a|item_name_mq7008_notice|CUSTOM|Notices||[PL] Zaginął rycerz
+1093726|07968c42|item_name_mq7008_notice_text|CUSTOM|Notices||[PL] Śmiałkowi, który zdecyduje się położyć kres moim zmartwieniom i tym samym odnaleźć mego ukochanego, Ruperta de Nuragus, oferuję nagrodę w postaci dozgonnej wdzięczności i pokaźnego mieszka złota. Sprawa jest niecierpiąca zwłoki, gdyż kilka dni temu Rupert wyruszył na wyprawę ku chwale mojej, ślubując na czubatkę beauclairską i od tego czasu słuch po nim zaginął. <br><br>Marianna de Nuragus
 1093802|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q603_bank\scenes\q603_01b_guards_chatting.w2scene"|Line text|AUGD2_Q603_01093802|Er Kleiner. Sana tekrar hatırlatıyorum: Bir asker dik durur, göğsünü gururla kabartır.
 1093804|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q603_bank\scenes\q603_02b_clerks_chatting.w2scene"|Line text|AURK1_Q603_01093804|Babergé Yumurtası. Topazlarla süslenmiş beyaz altın ve sedef. Madam Villepin'e satıldı.
 1093806|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q603_bank\scenes\q603_02b_clerks_chatting.w2scene"|Line text|AURK2_Q603_01093806|Ametist taşlarla bezenmiş, ipek Haaki Elbisesi. Artırmayı iki bin krondan açıyorum.
@@ -64232,6 +64302,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1094369|00000000||CJournalResource "dlc\bob\journal\quests\mq7021leftbehind.journal"|Journal||Efsunger Hisleri'ni kullanarak Hugo'nun izini ara.
 1094370|00000000||CJournalResource "dlc\bob\journal\quests\mq7021leftbehind.journal"|Journal||Rakiplerini alt et.
 1094371|00000000||CJournalResource "dlc\bob\journal\quests\mq7021leftbehind.journal"|Journal||Kayıp parçayı gölden çıkar.
+1094392|dbc828fa|mq7008_shrine_dedication|CUSTOM|Posters||[DEBUG] Dedykacja dla rycerza, który zginął chroniąc wioski przed Czartem.
 1094393|00000000||CJournalResource "dlc\bob\journal\quests\mq7001restinpeace.journal"|Journal||Ölüm Sizi Ayırana Dek
 1094394|00000000||CJournalResource "dlc\bob\journal\quests\mq7001restinpeace.journal"|Journal||Mezarlıktan gelen sesleri araştır.
 1094395|00000000||CJournalResource "dlc\bob\journal\quests\mq7001restinpeace.journal"|Journal||Efsunger Hisleri'ni kullanarak mahzenmezarı ara.
@@ -67057,6 +67128,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1105859|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7002_stubborn_knight\scenes\mq7002_02_approach_knight.w2scene"|Choice line||Dörtboynuzlu Ravix.
 1105866|b654820b|error_save_not_compatible|CUSTOM|DLC||Oyunun bu sürümüyle oluşturulmuş kayıtlar, önceki oyun sürümleriyle uyumsuz olacaktır.
 1105867|950aea5d|error_save_not_compatible_PS4|CUSTOM|DLC||Oyunun bu sürümüyle oluşturulmuş kayıtlar, önceki oyun sürümleriyle uyumsuz olacaktır.
+1105868|0f2019a1|mq7006_virtue_generosity_poster|CUSTOM|Default||[DEBUG] [Debug] Test
 1105872|a8e42575|mq7006_virtue_of_generosity_poster|CUSTOM|Blood and Wine||Malını başkaları ile paylaşamayan adama iyi denilemez. Hayatta ve öldükten sonra huzur bulmak için cömertlik şarttır.
 1105873|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7002_stubborn_knight\scenes\mq7002_02_approach_knight.w2scene"|Line text|GRLT_MQ7002_01105873|Adım Geralt. Ne armam, ne bir ilkem, ne de kuş tüylü bir miğferim var. Ben bir efsungerim.
 1105887|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7002_stubborn_knight\scenes\mq7002_02_approach_knight.w2scene"|Line text|TK02_MQ7002_01105887|Onur içiiiiin!
@@ -67155,6 +67227,9 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1106207|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\scenes\mq7015_07_tourists_near_statue.w2scene"|Line text|BCM03_MQ7015_01106207|Ah, diğerleri gibi bir heykel işte. Çıplak bir adam. Olağanüstü bir şey yok ortada.
 1106209|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\scenes\mq7015_07_tourists_near_statue.w2scene"|Line text|BCM02_MQ7015_01106209|Cinsel organları da… Abartılmış kesinlikle.
 1106211|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\scenes\mq7015_07_tourists_near_statue.w2scene"|Line text|BCM02_MQ7015_01106211|Hıh.
+1106216|708438b5|item_name_mq7011_document|CUSTOM|Book||[DEBUG] Dokument bankowy.
+1106217|0bacee77|item_name_mq7011_document_text|CUSTOM|Book||[DEBUG] Treść dokumentu bankowego.
+1106218|94f2f0bb|item_desc_mq7011_document|CUSTOM|Book||[DEBUG] Dokument niezbędny do uzyskania dostępu do konta w banku.
 1106242|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\scenes\mq7015_06_in_the_house.w2scene"|Line text|GRLT_MQ7015_01106242|Tamam. Sende kalsınlar.
 1106250|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7020_songs_of_glory\scenes\mq7020_06_geralt_vs_duvall.w2scene"|Line text|BEDU_MQ7020_01106250|O turnuvayı kesinlikle ben kazanırdım. Matmazel Vivienne şu an çoktan yatağımı ısıtıyor olurdu!
 1106251|00000000||CJournalResource "dlc\bob\journal\quests\mq7004bleedingtree.journal"|Journal||Geralt, Castel Ravello'nun biraz uzağında, oduncu Jacob'ın astığı bir nota denk geldi. Oduncu, büyüden korkmayan ve bir cadının karşısına çıkabilecek birisini arıyordu. Başka bir ihtimal yoktu, bu tam olarak bir efsungeri tanımlıyordu. Dolayısıyla, notun kahramanımızın ilgisini çekmesi ve Jacob'ı ziyaret etmeye karar vermesi şaşırtıcı olmadı.<br>
@@ -68053,6 +68128,8 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1109443|29ff58a9|preset_value_fullscreen|CUSTOM|Additional||Tam Ekran
 1109463|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q602_wedding\scenes\q602_08_wedding_halflings_gwent.w2scene"|Line text|HFLNG4_Q602_01109463|Kaybedenin bu lanet kulakları takması gibi aptalca bir fikir kime aitti?
 1109465|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q602_wedding\scenes\q602_08_wedding_halflings_gwent.w2scene"|Line text|HFLNG2_Q602_01109465|Sana! Hatırlamıyor musun?
+1109466|d4a3159b|item_name_mq7003_gems|CUSTOM|Quest items||[DEBUG] Elf Anahtar Taşları
+1109467|f44e3767|mq7003_herbs|CUSTOM|Quest items||[DEBUG] Hazmettirici Otlar
 1109512|00000000||CJournalResource "dlc\ep1\journal\quests\q604mansion.journal"|Journal||Efsunger Hisleri'ni kullanarak anıyı onarmanın bir yolunu bul.
 1109529|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q604_mansion\scenes\q604_10_study.w2scene"|Line text|DCAT_Q604_01109529|Efendi von Everec'in çalışma odası. Burada arkana sanatlarına kendini kaptırır giderdi.
 1109550|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q604_mansion\scenes\q604_06_bury_iris_remains.w2scene"|Line text|GRLT_Q604_01109550|Bu, Iris olsa gerek… Kahretsin.
@@ -70586,6 +70663,8 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1124263|f6372f0e|item_name_ep1_poi_30_note_text|CUSTOM|EP1_Living_World||[Şişeye yapıştırılmış kartın üzerinde "Araknosidal Madde" yazıyor ama altında zar zor okunabilen bir etiket daha var]<br><br>Yoğunlaştırılmış araknomorf cinsiyet feromonları (dişi).<br>Madde, göz ve deride tahrişe sebebiyet verir. Yutulması hâlinde hemen en yakındaki hekime görünülmelidir.<br>Kapalı ortamlarda kullanmayınız.<br>Kullanımı: Maddenin yarım litresi 2 parçalık toprak üzerine yayılır. Koku, 4 veya 5 erkek araknomorfu çekebilir.
 1124344|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_beauclair_bank_clerks.w2scene"|Line text|BBN03_SHOP_01124344|Bir ikilem var… Zzz… Zor ikilem… Zzzzzz….
 1124346|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_beauclair_bank_clerks.w2scene"|Line text|BBN03_SHOP_01124346|Zzz… Para… Hep… Öhöm… Haklı.
+1124348|b01a4811|item_name_q706_wagon_key|CUSTOM|Item||[DEBUG] Klucz
+1124349|da91774b|item_desc_q706_wagon_key|CUSTOM|Item||[DEBUG] Klucz do nilfgaardzkiego wozu więziennego.
 1124357|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7011_wheres_my_money\scenes\mq7011_02_clerk_a.w2scene"|Line text|BBNW01_MQ7011_01124357|Üst katta mesela? Kayıtlarda? Ya da aşağıda, arşivde? Onlara sormalısınız efendim.
 1124365|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7011_wheres_my_money\scenes\mq7011_02_clerk_a.w2scene"|Line text|BBNW01_MQ7011_01124365|Cianfanelli Bankası'na hoş geldiniz, paranıza kendi paramızmış gibi bakarız, vesaire vesaire… Nasıl yardımcı olabilirim efendim?
 1124379|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7011_wheres_my_money\scenes\mq7011_02_clerk_e.w2scene"|Line text|GRLT_MQ7011_01124379|A38 Kodlu İzin lazımdı da. Bir suretini sizden alabilir miyim acaba?
@@ -71350,6 +71429,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1126957|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_11_duels.w2scene"|Line text|GRLT_SQ701_01126957|Üçünde de kaybettin Tailles. Benimle dördüncü kez yüzleşmek isteyip istemediğini ciddi bir şekilde düşünmelisin.
 1126958|bd93f447|item_name_ff701_notice|CUSTOM|Blood and Wine Fluff||Yumruk Dövüşü!
 1126959|a35d9e25|item_name_ff701_notice_text|CUSTOM|Blood and Wine Fluff||Hey, sert çocuk!<br><br>Kayınbiraderini dövdüğün için kendini yenilmez mi hissediyorsun?<br>Komşular geldiğini görünce kenara mı çekiliyor?<br>Kalbinde şiddet mi var?<br><br>Belki de Beauclair Dövüş Ustası unvanı için dövüşmenin vakti geldi de geçiyor!<br><br>Üç şampiyonu da yen ve bizzat Üstat ile karşılaşma onuruna layık ol!<br><br>San Sebastian ve limandaki bahisçilerden daha fazlasını öğrenebilirsin.
+1126960|74a1aa01|item_desc_ff701_notice|CUSTOM|Notices||[DEBUG] Bir ilan
 1126962|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q601_intro\scenes\q601_12_olgierd_confrontation.w2scene"|Line text|OLGB02_Q601_01126962|Tipi kayık suratında bir şey büyümüş. Ofierli frengisi falan mı kaptın yoksa?
 1126964|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q601_intro\scenes\q601_12_olgierd_confrontation.w2scene"|Line text|GRLT_Q601_01126964|Öyle de denebilir.
 1126966|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q601_intro\scenes\q601_12_olgierd_confrontation.w2scene"|Line text|OLGD_Q601_01126966|Ne demek istediğimi gayet iyi biliyorsun bence, yüzündeki işarete bakılırsa.
@@ -72946,6 +73026,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1135403|28e8cf52|glyphword19_desc|CUSTOM|EP1_Misc||Bir düşmana Aard ile vurduğunda Dayanıklılık'ı tazelenmeye başlamadan önce $F$ saniyelik bir gecikme olur. Bu gecikmenin etkisi düşman ölene dek kalır.
 1135404|d189d82b|item_name_mq6005_nephrite|CUSTOM|EP1_Quest||Yeşim
 1135409|65a3b0e9|Runesmith|CEntityTemplate "dlc\ep1\data\gameplay\community\shops_and_craftsmen\enchanter\enchanter_01_lvl_0.w2ent"|Entity display name||Rün Yazıcısı
+1135441|74f33c11|item_name_mq7022_armor_strong|CUSTOM|Item||[DEBUG] [DEBUG] Wyjątkowy pancerz
 1135444|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7011_wheres_my_money\scenes\mq7011_geralt_thrown_out.w2scene"|Line text|BBG01_MQ7011_01135444|Toz ol baş belası.
 1135449|e7682e0b|panel_title_enchanting|CUSTOM|EP1_Misc||Efsunlama
 1135450|9502d401|panel_enchanting_notification_enchant_done|CUSTOM|EP1_Misc||Eşya Efsunlandı
@@ -73687,6 +73768,8 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1140353|00000000||CStoryScene "dlc\ep1\data\quests\quest_files\q602_wedding\scenes\q602_07_wedding_shani_met.w2scene"|Line text|GRLT_Q602_01140353|Siktir git.
 1140356|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7011_wheres_my_money\scenes\mq7011_03_cianfanelli_intervention.w2scene"|Line text|CNFN_MQ7011_01140356|Bu konularda elim kolum bağlı Geralt. Ama bu bankacılık işlerini çabuk anlıyorsun gördüğüm kadarıyla. Bir çırpıda halledersin bu işleri.
 1140357|e5492b3b|item_name_burning_rose_steel_sword_schematic|CUSTOM|EP1||Şema: Yanan Gül Tarikatı kılıcı
+1140462|987d1b14|item_name_sq705_brooch_item|CUSTOM|Quest items||[DEBUG] Gümüş broş
+1140463|595de7fa|item_name_sq705_signet_ring|CUSTOM|Quest items||[DEBUG] Mühür yüzüğü
 1140464|c7ed4d33|credits_SENIOR_EXECUTIVE_PRODUCER|CUSTOM|Credits||KIDEMLİ BAŞ YAPIMCI
 1140465|f43545fb|credits_STORY_DIRECTOR|CUSTOM|Credits||HİKÂYE DİREKTÖRÜ
 1140466|bcf356a4|credits_ENGLISH_ADAPTATION_DIRECTOR|CUSTOM|Credits||İNGİLİZCEYE UYARLAMA YÖNETMENİ
@@ -74936,6 +75019,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1153724|3151256c|item_desc_th700_vault_journal|CUSTOM|Blood and Wine TH||Büyük Dilenci imzalı, iyi muhafaza edilmiş günlük
 1153725|610f8905|item_desc_th700_lake_journal|CUSTOM|Blood and Wine TH||Küflenmiş kâğıt parçası.
 1153726|2293bef1|item_desc_th700_chapel_journal|CUSTOM|Blood and Wine TH||Günlükten koparılmış birkaç sayfa.
+1153727|fa16cdab|item_name_th700_alchemy_book|CUSTOM|Dialog line||[DEBUG] Simya Üzerine En Mükemmel Resimli Bilimsel Eser...
 1153733|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7011_wheres_my_money\scenes\mq7011_00_hook.w2scene"|Line text|TNM02_MQ7011_01153733|Seni tekrar görmek güzel.
 1153748|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7004_bleeding_tree\scenes\mq7004_06_tree_spirit.w2scene"|Line text|GRLT_MQ7004_01153748|Bana kulak ver, ağaç kabuğunun altında saklanan! Bugün gerçekten kim olduğunu hatırla!
 1153749|4b80e2f6|duchessguard|CEntityTemplate "dlc\bob\data\gameplay\community\community_npcs\guards\guard_lvl2_halberd.w2ent"|Entity display name||Dükalık Muhafızı
@@ -75223,7 +75307,6 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|Son çare mi? Hadi oradan. Niyeymiş?
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|Ah. Dettlaff'ı çağırabilecek bir varlık var. Onu belirlenen bir mekâna çağırabilecek yetkiye ve hatta güce sahip bir kişi.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|Kaynatılmış öz bitmek üzere mi? Her şey yolunda, değil mi?
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||Charles Lanzano
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|Bana pek taş ocağı işçisi gibi görünmedin.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|Yine mi sen? Eh, dökül bakalım, ne istiyorsun?
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||Mallarına bir göz atabilir miyim?
@@ -77469,6 +77552,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1166559|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_05_interrogation.w2scene"|Line text|SYAN_Q704_01166559|Kulağa tam Dettlaff'lik bir davranış gibi geliyor… Fakat buraya bana sadece son meseleleri anlatmak için geldiğinden şüpheliyim. O yüzden lütfen sadede gel.
 1166562|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_05_interrogation.w2scene"|Line text|SYAN_Q704_01166562|Normalde, sana defolup gitmeni söylerdim. Fakat… Bana söylediklerinden, bu meseleyle alakası olmayan halkın öldüğü anlaşılıyor. Planın bir parçası değiller. Dettlaff sadece hak edenleri öldürecekti. Başka kimseye dokunmayacaktı.
 1166599|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7001_rest_in_peace\scenes\mq7001_13_guard.w2scene"|Line text|BBA01_MQ7001_01166599|Teşekkürler efsunger.
+1166623|a6b95412|cinematic_text_outskirts_of_city|CUSTOM|Cinematic text||[DEBUG] Na obrzeżach miasta
 1166625|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_06_regis_info_inject.w2scene"|Line text|GRLT_Q704_01166625|Hıhı. Uzun uzadıya ve detaylı bir şekilde. Gidelim.
 1166639|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7001_rest_in_peace\scenes\mq7001_13_guard.w2scene"|Line text|BBA01_MQ7001_01166639|Lebioda'nın yaraları aşkına! Bu da neydi…?!
 1166641|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_02b_investigation_in_castel_ravello.w2scene"|Line text|GRLT_Q703_01166641|Ya vampire şantaj yapan Fabricio ise? Bunu düşündün mü hiç?
@@ -86266,6 +86350,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1194344|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_21_duchess_after_fight.w2scene"|Line text|LEPA_Q701_01194344|Kargıcılar, yaratıkla ilgilenin!
 1194346|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_21_duchess_after_fight.w2scene"|Line text|PLMN_Q701_01194346|Bağışla. Gençliğimdeki gibi çevik değilim.
 1194348|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_21_duchess_after_fight.w2scene"|Line text|GRLT_Q701_01194348|Cesurca savaştın. Yardımın için teşekkürler.
+1194362|d77fef14|panel_button_hud_interaction_debung|CUSTOM|Interaction||[DEBUG] Odszpuntuj
 1194363|bd875098|panel_button_hud_interaction_touch|CUSTOM|ep2 additional||Dokun
 1194365|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_20_gp_sharley_fight.w2scene"|Line text|LEPA_Q701_01194365|Çok yazık! Yığıldı Palmerin yere, verdi son nefesini!
 1194375|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7021_left_behind\scenes\mq7021_04_find_missing_guy.w2scene"|Line text|BCM03_MQ7021_01194375|Yanımda kal, lütfen!
@@ -87029,6 +87114,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1196181|00000000||CStoryScene "dlc\bob\data\quests\secondary_npcs\default_dialogues\default_slavko_atimstein.w2scene"|Line text|SLAV_DEFAULT_01196181|Toussaint bir zamanlar, merhum efsanevi elf zırhçısı olan Tyen'sail'in yurduydu. Efsungerler dünyanın dört bir köşesinden gelerek ona plakalarını, zırhlarını yaptırıyordu.
 1196183|00000000||CStoryScene "dlc\bob\data\quests\secondary_npcs\default_dialogues\default_slavko_atimstein.w2scene"|Line text|GRLT_DEFAULT_01196183|Adını duymuştum, dediklerine göre bu işin en iyisiydi.
 1196185|00000000||CStoryScene "dlc\bob\data\quests\secondary_npcs\default_dialogues\default_slavko_atimstein.w2scene"|Line text|SLAV_DEFAULT_01196185|Geri dönmüşsün! Pekâlâ, ne diyorsun? Büyük ustanın şemalarını bulmaya yardım edecek misin? Efsunger zırhı olanları?
+1196187|fb4634d6|panel_button_hud_interaction_cut_rope|CUSTOM|Interaction||[DEBUG] Utnij linę
 1196189|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\voicesets_imported\vset_toussaint_traveler_woman_31.w2scene"|Line text|TTVW31_VSET_01196189|Terbiye yoksunları!
 1196191|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\voicesets_imported\vset_toussaint_traveler_woman_31.w2scene"|Line text|TTVW31_VSET_01196191|Seni…! Seni hödük!
 1196193|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\voicesets_imported\vset_toussaint_traveler_woman_31.w2scene"|Line text|TTVW31_VSET_01196193|Sen ne…? Sen ne halt ediyorsun?
@@ -90851,7 +90937,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||Blathe Ayındaki Kâr ve Zarar<br><br>Üçüncü Gün<br>Champs-Désolés vadilerindeki uçan sürüngenlerin yuvası. Adamlarımızı yakalayıp yemişlerdi. En son da duvardan Gilbert'ı kapıp götürdüler. Gilbert genelde tetiktedir ama su dökerken herkes biraz olsun gardını indirir. Filibert çok öfkelendi. Yeni yetme bir elemanı grubumuzun iş görür bir üyesi hâline getirmenin bedeli küçük bir şey değil ki bu bedelin canavarlara yem olması ise külliyen heba olması demek oluyor.<br>Yedinci Gün<br>Doğu Toussaint'dan yola çıkmış bir tüccar kervanını pusuya düşürdük. Koruyan kimse yoktu ve karşı da koymadılar fakat yine gerçek bir kazanç sağlayamadık. Taşıdıkları eski püskü kıyafetler anadan doğma dolaşan Skellige yabanilerinin ilgisini çekecek cinstendi ve o grubumuzun planlarından hiçbirinde de o yöne doğru gitmek yoktu. Ama Filibert yine küplere binip tüccarlardan Lumierex diye birini öldürdü. Kalanı doğuya doğru yol almaya devam etti.<br>On Birinci Gün<br>Kâşiflerimiz gizlice ormandan geçen üç kişinin izini sürdü. Üçü de dilenci gibi giyinmişti ve öyle olduklarını iddia ediyorlardı. Fakat bizi kandıramadılar. Birazcık sert davrandıktan sonra Maecht madenlerinden altın getiren kuyumcular olduklarını itiraf ettiler. Filibert kuyumcuları öldürmeyi emretti. Yalan söyleyenlere karşı ayrı bir nefret besliyor.<br>On Yedinci Gün<br>Sansretour'un diğer tarafında Castel Graupian'dan İmparatorluk Akademesi'nden çıkmış bir grup kamp kurmuş. Âlimlerin normalde varlık içinde yüzmediği bilinse de bunların geniş çadırları ve bol miktarda da alkolü vardı. O yüzden kaderleri belli olmuştu. Filibert birkaç adamı yanlarına yolladı.<br>Yirmi Üçüncü Gün<br>Ana yoldan ilgi çekecek bir şey gelmeyeli neredeyse iki hafta oldu. Bu sırada gezgin şövalyeler daha da fazla adamımızı yakaladı. İkisi öldü, biriyse sadece yaralanıp kaçtı. Nice kron değerinde teçhizat kaybettik. Filibert, ihmalkârlığından ötürü yaralı adamın dövülmesini emretti. Bitkin bedeni de bunu kaldıramayınca adam öldü.<br>Yirmi Dördüncü Gün<br>Şansımız döndü. Güneyden dönen bir şarap tüccarı kervanı yakaladık. Bütün mallarını satmışlardı ve yüklü para taşıyorlardı. Ön hesaplamalara göre adam başı dört yüz civarı kron düşüyor. Yine de eşit şekilde paylaşıp paylaşmayacağımıza Filibert karar verecek.<br>Yirmi Sekizinci Gün<br>Basane Çiftliği'ne gönderilen birim malzemelerle döndü. Erzak durumu sıkı. Ne bir tek alkolle yaşanır ne de altın karın doyurur. Birkaç köyü yağmalamalıyız.<br>Otuzuncu Gün<br>Artık Blathe ayının son bir muhasebesini yapacağım. Daha çok toplamamız gerek, fazla fazla hem de… Bu bölgede bir ay daha geçireceğiz.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|Neden buradasınız efendim? Bu özel bir görüşme. Geralt, bu da ne demek oluyor? Benden habersiz bir işler mi çeviriyorsun yoksa?
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||Leydi Vivienne de Tabris himayesinde düzenlenen Uluslararası Şövalyeler Turnuvası, 1275<br><br> Kayıt olmuş ve yarışmada yer almaya hak kazanmış katılımcılar:<br><br>Gregoire de Gorgon, geçen seneki turnuva galibi. Açık mücadelede yer almayacak ancak en çok puan alan şövalye ile son gösteride mücadele edecek (Tüm işaretler Gregoire'nin unvanını koruyacağını gösteriyor).<br><br>Anséis, Liriya ve Rivia Prensi, üst üste üçüncü defa bizlere katılıyor<br><br>Horm Akerspaark, Maecht Prensi, İmparator Emhyr'in kanından olduğu iddia ediliyor, turnuvaya dördüncü kez katılıyor<br><br>Baron Palmerin de Launfal, turnuvaya altıncı katılışı<br><br>Truvalı Donimir, Redanya şövalyesi, turnuvaya ilk defa katılıyor<br><br>Attreli Rainfarn, turnuvaya yedinci katılışı, 1269 yılı galibi<br><br>Metinnalı Guy de Bois-Fresnes (Majesteleri'nin gezgin şövalyesi Reynart de Bois-Fresnes'in kardeşten torunu), turnuvaya üçüncü katılışı<br><br>Creigiaulu Delwyn, genç bir şövalye, turnuvaya ilk katılışı<br><br>Dorndallı Tailles, Yanan Gül Tarikatı şövalyesi, turnuvaya ilk katılışı<br><br>Metinnalı Llinos, turnuvaya üçüncü katılışı<br><br>Guillaume de Launfal (Baron Palmerin'in yeğeni), turnuvaya ilk katılışı. [sonradan ilave] Guillaume sakatlandığı için onun yerine başka bir şövalye katılacak.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||Vivienne'in notları
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||Vivienne'in notları
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||Blathe - Feainn Giderler<br><br>14 arşın kumaş: 80 kron<br>ayakkabı (ejderha derisi): 140 kron<br>yarış eyeri: 280 kron<br>büyülü krem: 1400 kron (toplam)
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||Günlük
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||Sevgili Günlük!<br>Leydi Orianna beni sokaklardan kurtardığından bu yana üç hafta geçti. Nihayet bir şeyler yiyip içebiliyorum ve her gün diğer çocuklarla oynuyorum. Burası evde olmaktan çok daha güzel çünkü evimdeyken yiyecek pek bir şey bulunmuyordu ve anneciğim öldüğünde artık hiç yemek bulamaz olmuştum.<br><br>Bugün Miri ve Tomm ile oynadım. Önce yağ satarım bal satarım oynadık, sonra saklambaç, en son ise çubuk toplamaca. Sonra elim sende oynadık. Bayağı eğlendim! Sonra Leydi Orianna'ya ait bir araba geldi, içi yiyecek doluydu. Kahvaltı poğaçaları, meyveler, pasta ve bir sürü tatlı şey vardı. Leydi Orianna çok iyi biri!<br><br>Sabahleyin Leydi Orianna bizi ziyaret etti. Önce bizle biraz konuştu, sonra bize şarkı söyledi ve sonra da Johnny'yi diğer odaya götürdü. Hepimiz onu kıskandık. Geri döndüğünde rengi biraz solmuştu ve boynunda ufak, kırmızı izler vardı ama yanında kocaman bir paket çikolata ile döndü! Miri diyor ki bazen Leydi Orianna çocuklardan birini alıp ona bazı şeyler yaparmış. Ne olduğunu tam anlamadım ama ayrıca çocuğa hediye de verirmiş. Umarım bir sonraki sefere beni seçer!<br><br>Bugün yağmurlu ve canım çok sıkılıyor. Tomm aptal olduğumu söyledi ama ona inanmıyorum çünkü bence asıl o aptal. Yarın belki Leydi Orianna gelir ve bana bir hediye verir. Tomm gününü görecek!<br><br>Beni seçti! Leydi Orianna geldi ve beni seçti! Onunla birlikte diğer odaya gittim. Bana boynumu göstermemi söyledi ve sonra beni birazcık ısırdı. Pek acıtmadı ama sonra biraz başım döndü. Hiç önemli değil çünkü bana tahtadan bir kılıç verdi! Kimsede böyle bir kılıç yok! Tomm bunu görünce moraracak!
@@ -93235,6 +93321,27 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1217576|61a904ba|menu_goty_starting_message|CUSTOM|ep2 additional4||<I>Witcher 3: Wild Hunt - Game of the Year Edition</I>'a hoş geldin!
 1217582|a7f0c0a4|menu_goty_starting_message_alt|CUSTOM|ep2 additional4||<I>Witcher 3: Wild Hunt - Complete Edition</I>'a hoş geldin!
 1217650|396485f4|menu_goty_starting_message_content|CUSTOM|ep2 additional4||Bu sürüm, iki eklenti paketi <font color='#31aed6'>Hearts of Stone</font> ve <font color='#b83e34'>Blood and Wine</font> da dâhil olmak üzere oyunun tüm ilave içeriğini bünyesinde barındırmaktadır.<br><br>Yeni bir oyuna başlamak, hem Wild Hunt'ın hem de eklenti paketlerinin içeriğini baştan sona oynamanı sağlar. Ayrıca Ana Menü'den uygun seçeneği seçerek, her bir eklenti paketini tek başına da oynayabilirsin.
+1218223|00017fd6|cat|CEntityTemplate "quests\main_quests\prologue\quest_files\q003_trauma\characters\trash\q003_cat.w2ent"|Entity display name||[DEBUG] Kedi
+1218226|05a3d847|chava|CEntityTemplate "quests\npcs\secondary\chava.w2ent"|Entity display name||[DEBUG] Chava
+1218227|06580989|panam|CEntityTemplate "quests\npcs\main\panam.w2ent"|Entity display name||[DEBUG] PanAm
+1218230|480f9d86|valentinothug|CEntityTemplate "quests\main_quests\prologue\quest_files\q003_trauma\characters\trash\q003_chava_thug.w2ent"|Entity display name||[DEBUG] Valentino Eşkıyası
+1218283|640d3162|chava_man|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_chava_man.w2ent"|Entity display name||[DEBUG] Chava adam
+1218284|1593f914|chinese _food_seller|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_chinese_mech.w2ent"|Entity display name||[DEBUG] Çin yemeği satıcısı
+1218286|df70a355|cool_guy|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_cool_guy.w2ent"|Entity display name||[DEBUG] Havalı çocuk
+1218288|7a77e2f8|cute_girl|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_cute_girl.w2ent"|Entity display name||[DEBUG] Tatlı kız
+1218289|d11f2071|detective_hodge|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_detective_hodge.w2ent"|Entity display name||[DEBUG] Dedektif Hodge
+1218291|8beab031|fashion_commercial|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_fashion_comm_voice.w2ent"|Entity display name||[DEBUG] Moda reklamı
+1218293|bfd11725|fat_guy|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_fat_guy.w2ent"|Entity display name||[DEBUG] Şişman adam
+1218320|b4834da6|geeky_girl|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_geeky_girl.w2ent"|Entity display name||[DEBUG] İnek kız
+1218323|bff875b1|miguel|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_miguel.w2ent"|Entity display name||[DEBUG] Miguel
+1218326|8175d561|paul_night|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_paul_night_voice.w2ent"|Entity display name||[DEBUG] Paul Night
+1218328|f2834ef6|police_av|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_police_av_voice.w2ent"|Entity display name||[DEBUG] Polis AV
+1218330|b43de715|police_officer|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_police_officer_cell.w2ent"|Entity display name||[DEBUG] Polis memuru
+1218332|f283837c|policeman|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_policeman_inventory.w2ent"|Entity display name||[DEBUG] Polis
+1218334|7b352a11|shop_ai|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_shop_ai_avatar.w2ent"|Entity display name||[DEBUG] Dükkân YZ
+1218336|ba51ad1d|trauma_team_medic|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_trauma_team.w2ent"|Entity display name||[DEBUG] Travma Takımı sıhhiyeci
+1218339|8a7a254d|weapon_commercial|CEntityTemplate "quests\main_quests\prologue\quest_files\q001_intro\characters\q001_weapon_comm_voice.w2ent"|Entity display name||[DEBUG] Silah reklamı
+1218342|6ec1c881|big_brother|CEntityTemplate "quests\npcs\main\big_brother.w2ent"|Entity display name||[DEBUG] Büyük Kardeş
 1218613|d51df3d9|credits_TURKISH_LOCALIZATION|CUSTOM|Credits||TÜRKÇE YERELLEŞTİRME
 1218614|01cf71ef|credits_ASSISTANT_PROJECT_MANAGEMENT|CUSTOM|Credits||YARDIMCI PROJE YÖNETİCİSİ
 1219104|26c593fd|panel_advanced|CUSTOM|4k_support||GELİŞMİŞ
@@ -93938,7 +94045,6 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||TASARIMCILAR
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||MÜHENDİSLİK
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||YÖNETİCİ
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||MÜHENDİSLER
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||KONSEPT SANATÇI KOORDİNATÖRÜ
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||UZMAN KONSEPT SANATÇISI
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||UZMAN KARAKTER SANATÇISI
@@ -94184,7 +94290,7 @@ Bunu yapmak için <<ThrowItem>> düğmesini basılı tut ve nişan al. Ardından
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||Kapat
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||Ödüllerini almak için GOG GALAXY 2.0'da oturum açıp oyunu başlat.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||Ödüllerini almak ve Mod Menüsüne erişmek için REDlauncher'da oturum açıp oyunu başlat.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||Görüş Alanı
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||Kamera
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||Efekt
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||Otomatik Odak
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||Açıklık
@@ -95331,7 +95437,7 @@ Joy-Con 2 (R)'yi yerinden çıkarıp yan tarafının üzerine koyarak bir fare g
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||Axii aynı anda iki hedefi etkileyebilir ama etkisi %$I$ daha zayıftır.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||Axii aynı anda iki hedefi etkileyebilir.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||Patlayan Kalkan
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Quen kalkanı kırıldığında düşmanları geriye savurur. Geri savurma gücü kademeyle birlikte artar.
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Quen kalkanı kırıldığında düşmanları geriye savurur. Geri savurma gücü kademeyle birlikte artar. Emilen hasarın %$I$ kadarını saldırana geri yansıtır.
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||Uzağa Erişen Aard
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||Aard menzilini $I$ metre artırır.
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||Büyü Tuzağı
@@ -95402,7 +95508,7 @@ Joy-Con 2 (R)'yi yerinden çıkarıp yan tarafının üzerine koyarak bir fare g
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||Sürpriz Unsuru
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||Düşmanları bir bombayla vurmak, yakın dövüş hasarını 10 saniyeliğine %$I$ artırır.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||Grifin Okulu Teknikleri
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Her bir Orta Ağırlıkta Zırh parçası İşaret şiddetini %$I$ ve Dayanıklılık tazelenmesini %$I$ artırır.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Her bir Orta Ağırlıkta Zırh parçası İşaret şiddetini %$I$ ve Dayanıklılık tazelenmesini %$F$ artırır.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||Mentikor Okulu Teknikleri
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||Her bir orta ağırlıkta zırh parçası, kılıç hasarını %$I$ ve bomba hasarını %$I$ artırır.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||Metabolizma Hızlandırıcı
@@ -95555,8 +95661,8 @@ Joy-Con 2 (R)'yi yerinden çıkarıp yan tarafının üzerine koyarak bir fare g
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||Kuzey Nefesi
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||Tor Lara
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||Tor Zireael
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||Görüş Alanı
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||Tilt
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||Kamera
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||Yol'da onlarca yıl yıpranmaya hazır sağlam zırh.
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||Kızıl Sorguç Zırhı
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||Kızıl Sorguç çizmeleri
@@ -95661,8 +95767,8 @@ Joy-Con 2 (R)'yi yerinden çıkarıp yan tarafının üzerine koyarak bir fare g
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||Axii kullanılırken hedef kişi Geralt'a doğru adım atmaz. Axii'nin diyaloglar esnasındaki etkisini yükseltir.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||Axii kullanılırken hedef kişi Geralt'a doğru adım atmaz. Axii'nin diyaloglar esnasındaki etkisini yükseltir.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||Axii aynı anda iki hedefi etkileyebilir ama etkisi %$I$ daha zayıftır.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Quen kalkanı kırıldığında düşmanları geriye savurur. Geri savurma gücü kademeyle birlikte artar.
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Quen kalkanı kırıldığında düşmanları geriye savurur. Geri savurma gücü kademeyle birlikte artar.
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Quen kalkanı kırıldığında düşmanları geriye savurur. Geri savurma gücü kademeyle birlikte artar. Emilen hasarın %$I$ kadarını saldırana geri yansıtır.
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Quen kalkanı kırıldığında düşmanları geriye savurur. Geri savurma gücü kademeyle birlikte artar. Emilen hasarın %$I$ kadarını saldırana geri yansıtır.
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||Aard menzilini $I$ metre artırır.
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||Aard menzilini $I$ metre artırır.
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||14 metrelik bir alandaki düşmanlara hasar veren ve onları yavaşlatan sihirli bir boşalma yayar. Hasarı %$I$ artırır.
@@ -95730,8 +95836,8 @@ Joy-Con 2 (R)'yi yerinden çıkarıp yan tarafının üzerine koyarak bir fare g
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||Yiyecek tüketmek $I$ dakika boyunca Can tazeler.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||Düşmanları bir bombayla vurmak, yakın dövüş hasarını 10 saniyeliğine %$I$ artırır.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||Düşmanları bir bombayla vurmak, yakın dövüş hasarını 10 saniyeliğine %$I$ artırır.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Her bir Orta Ağırlıkta Zırh parçası İşaret şiddetini %$I$ ve Dayanıklılık tazelenmesini %$I$ artırır.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Her bir Orta Ağırlıkta Zırh parçası İşaret şiddetini %$I$ ve Dayanıklılık tazelenmesini %$I$ artırır.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Her bir Orta Ağırlıkta Zırh parçası İşaret şiddetini %$I$ ve Dayanıklılık tazelenmesini %$F$ artırır.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Her bir Orta Ağırlıkta Zırh parçası İşaret şiddetini %$I$ ve Dayanıklılık tazelenmesini %$F$ artırır.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||Her bir orta ağırlıkta zırh parçası, kılıç hasarını %$I$ ve bomba hasarını %$I$ artırır.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||Her bir orta ağırlıkta zırh parçası, kılıç hasarını %$I$ ve bomba hasarını %$I$ artırır.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||Adrenalin tüketir ve iksirlerin Toksisite maliyetini Adrenalin puanı başına %$I$ azaltır. Kaynatılmış Mutajen özlerini etkilemez.
@@ -96423,7 +96529,7 @@ Joy-Con 2 (R)'yi yerinden çıkarıp yan tarafının üzerine koyarak bir fare g
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||KIDEMLİ CQA VE L&D YÖNETİCİSİ
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||Kışkırtıcı saç.
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||CD PROJEKT RED GELİŞTİRİCİ EKİPLERİ
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDPR MOD YAPIMCISI
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||HDRP MOD YAPIMCISI
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||KIDEMLİ SES MÜHENDİSİ
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||UZMAN OYNANIŞ ANİMATÖRÜ
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||UZMAN MÜHENDİS, KOORDİNATÖR

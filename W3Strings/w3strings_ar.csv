@@ -2039,7 +2039,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||‮رجل عصابة في (جيلدهال)
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||‮إلى اللقاء.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||‮‮كيف قابلت (بريسيلا)؟
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|‮من حولي رعد ضجيج الشارع، وفي الحداد، صورة استغاثة مهيبة، بأصابع رقيقة ترفع حاشية فستانها، تمشي كالمرأة الأنيقة بقدم متسارعة.
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|‮من حولي رعد ضجيج الشارع، وفي الحداد، صورة استغاثة مهيبة، بأصابع رقيقة ترفع حاشية فستانها، تمشي كالمرأة الأنيقة بقدم متسارعة.
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||‮‮مطول.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||‮سمعت عن شيء مشابه جدًا في مكان آخر...
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||‮رائع.
@@ -7011,6 +7011,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|‮لا يمكنني قبول هذه النقود، وأنا آسف أنني لم أتمكن من إعادته إليكِ حيًا.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|‮بشأن جنيات البحر، هل عددهن كبير في (أوندڤيك)؟
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|‮للغاية... وتزيد أعدادهن في الجزر الأخرى...
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||‮[DEBUG] SKIP TO CHEATING MENGE
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|في المجارير أسفل (جيلدورف)، ولكن سيتعين عليك الدخول عبر حي الفقراء، وتحمّل رائحة الفقر الكريهة في طريقك.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|‮قد تكون إعانة لجلب اللقب.
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|‮ربما تكون مكافأة؟ احتاج اللقب.
@@ -14744,6 +14745,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|‮لن تجد أي وحوش في (نوڨيجراد)، حيث تحترق النار الأزلية داخل هذه الجدران.
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|‮النار... النار تحترق في قلبي!
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮من السيوف والفطائر المحلاة
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] [!debug only!] HOOK: Talk to the merchants
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] [!debug only!] HOOK: Read notice board
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] [!debug only!] HOOK: Talk to Ernst
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] [!debug only!] HOOK: Hear the clients talking
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|‮(ليف)، ابن (إريك)...
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|‮(كجال)، ابن (أولاف)...
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|‮مات بشرف...
@@ -22554,11 +22559,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|هييهييهييهييهييهييه!
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|نراك قريبًا جدًا.
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|هييهييهييهييهييهييه!
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||‮[PL] [DEBUG] [!debug only!] Quest Start
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||‮[PL] [DEBUG] [!debug only!] Hook1: Pig Roasters
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|‮لقد أعطى (جيرالت) الإشارة!
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|‮أنا مستعدة!
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|‮‮صب! مطر (راج نار روج) نفسه علينا!
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|‮من أجل للمجد!
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|‮مرحى!
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||‮[PL] [DEBUG] [!debug only!] Hook: Closed Vault Gate
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|‮ضيف جديد؟
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|‮لا تساوي أفضل النِصَالُ شيئًا إذا كانت اليد التي تأرجحها ضعيفة، هه؟
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|‮أتساءل عما إذا كان قد قُتل؟
@@ -22958,6 +22966,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|‮‮كف عن إفساد متعتنا، حسنًا؟
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|‮‮رائع. هذا الوغد عكر مزاجي تمامًا.
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|‮‮دعاني أغرب عن طريقكما. فقط... ربما، ابحثا عن مكان أكثر خصوصية...
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] [!debug only!] Quest Start
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|‮‮(كارانثير) موالٍ له ولكن (جيلز)... تلك قصة أخرى
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|‮وفي الواقع سمم (إيريدين) ملكنا الحبيب.
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|‮امنحيني دقيقة. سأعود على الفور.
@@ -22965,6 +22974,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|‮مثير للشفقة...
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|‮ألديك ما تقوله قبل موتك؟
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|‮ابتعد عن طريقي أيها الرجل العجوز... وسوف أدخر لك حياتك.
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] [!debug only!] Fast forward time by meditating
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮أخبر (سوكروس) بأن يأخذ صندوق البضائع.
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮ابق منتبهًا.
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮اعثر على ما يريده (سوكروس).
@@ -31789,6 +31799,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||‮أعلم البقية.
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|‮هاي، من هناك!
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|‮إليك بعض النصائح. إذا لم تتمكن من الغناء جيدًا، فغني بصوت مرتفع!
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] Check in with the sentinels
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] Place an Yrden trap OR dispatch the guard with Axii or Sword
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] Ignite the woodcart
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||‮[PL] [DEBUG] Signal the all clear at the warehouse
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||‮أعلم ذلك، لقد تتبعت أثركما.
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|‮‮أنت هبطتِ مع الحيزبونات، وفر هو إلى (كيرا).
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|‮‮نعم لقد فشلنا في هذا. فحالما ولجنا إلى البوابة وبدلاً من الذهاب إلى مخبأ (إڤالاسي)، سقطت مباشرةً في وسط مستنقع (كروكباك).
@@ -41083,7 +41097,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||‮شبح غلام
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||‮‮اقتل الغيلان.
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|‮لا تزعجني يا (جيرالت)! سأتعثر وأقع!
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|‮هل هذا سيف أم خافق بيض؟ اضرب من رسغك وليس كوعك! مرة أخرى!
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|‮هل هذا سيف أم خافق بيض؟ اضرب من رسغك وليس كوعك! مرة أخرى!
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||‮دعني أمر.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|‮دعني أمر.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|‮حسنًا، تقدم. الطريق مفتوح.
@@ -50322,6 +50336,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||‮‮ولكن عندما حاول (جيرالت) مغادرة البرج، كشف الشبح طبيعته الحقيقية. وتبين أن ما اعتقده (جيرالت) شبحاً لفتاة بريئة هو في الحقيقة فتاة مصابة بالطاعون - الموت والمرض في شكل شبح.<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||‮‮‮ربما كان هناك شيء في كلمات الفتاة جعل (جيرالت) قلقاً، أو ربما وصل إليه تحذير من حواس الويتشر في الوقت المناسب، على أية حال، فقد عرف (جيرالت) مع من يتعامل قبل ثوان معدودة من كشف (آنابيل) عن طبيعتها الحقيقة. لقد كانت الروح في الحقيقة هي روح فتاة الطاعون، شبح مرعب ينشر الموت والأوبئة.<br>
 1058855|00000000||Unnamed CJournalResource|Journal||‮‮الفارون من الجيش
+1058856|00000000||Unnamed CJournalResource|Journal||‮‮فرت مجموعة من الجنود التابعة لجيش (تيميريا) وتركت مواقعها. هؤلاء الرجال مدربون بشكل كبير وسيهاجمون الرجال المتواجدين في الموقع. آخر ما عرف عنهم هو أنهم معسكرون في الغابة القريبة (المقدمة)
 1058857|00000000||Unnamed CJournalResource|Journal||‮‮الفارون من الجيش في الغابة
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||‮‮عثر (جيرالت) على معسكر الفارين وقتل الجميع! الفارون من الجيش يثيرون اشمئزازي! توسلوا إلى (جيرالت) طلبًا للرحمة ولكنه لم تأخذهم به أي رحمة! ثم أخذ كل أغراضهم وباعها!
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||‮يجب أن نتحقق من الأمر على سبيل الاحتياط.
@@ -51401,6 +51416,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||‮فلنحظَ ببعض المرح.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||‮ما رأيكما بلعب جولة من الورق؟
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||‮حان وقت النوم.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||‮[EN] [DEBUG] [Skip to Eskel Drunk.]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|‮هاه. ها هو المفتاح.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||‮عقد للتخلص من وحش الغابة
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||‮الزوجة المفقودة
@@ -51603,7 +51619,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|اللعنة عليك إذا فعلت ذلك، واللعنة عليك إذا لم تفعل ذلك.
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|أحب التجول بين أزهار التيوليب.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|لا، ليست هذه كلمة السر الصحيحة.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||‮مكافأة للعثور على دورية مفقودة
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||‮إعلان:<br><br>فُقِد بعض الجنود الذين يعملون تحت إمرة سمو الإمبراطور (إمهير ڤار إمريس) أثناء تأديتهم لواجباتهم. وسيحصل أي شخص يساعدنا في العثور عليهم على مكافأة سخية. للحصول على المزيد من المعلومات، يُرجى مقابلة ضابط الإمداد والتموين بمعسكر الجيش المركزي.
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||‮خطاب من (رونالد تروجر) إلى (هاموند)
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||سجل دخل وإنفاق صالون المقامرة رقم (1) <br> الشهر الحالي <br> الإنفاق 38.756 كراون <br> والنفقات العامة 5.294 كراون<br> والضرائب التنظيمية 3.875 كراون <br> المدينين <br> تيبالت الحساب 1.285 كراون -  موعد السداد – نهاية الشهر -  عير القابل للتفاوض  <br> ساشا 956 كراون -  موعد السداد منتصف الشهر التالي ويمكن تمديد أسبوعين إضافيين معه زيادة 35 بالمائة <br> فينيس 5.1487 كروان – تأخر السداد آخر تحذير <br> برنارد تولي – سداد الدين  <br> باتيرك هازلنت – إصدار تحذير البدء في إجراءات التحصيل.
@@ -53958,6 +53973,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|‮لا أنوي ذلك بالتأكيد. إلى اللقاء.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||‮‮ اسأل عما إذا كان هناك أي شخص من المعسكر قد رأى مختطف (داندليون).
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|‮مم، إلى اللقاء.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||‮[EN] [DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||‮‮ أوجد طريقًا لدخول الكوخ.
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||‮سأتولى هذا الأمر.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||‮يجب أن تدفع مكافأتي.
@@ -56746,6 +56762,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||‮قم بإخلاء المدخل وحرر (الإلف).
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||‮الغوص
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||اضغط مطولًا على <<DiveDown>> للغطس، واضغط على <<DiveUp>> للسباحة نحو السطح.<br><br>راقب مستوى تنفسك، إذا نفد منك الهواء، فستغرق!
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||‮[EN] [DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||ها هي دعوتي.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|ها هي دعوتي. إنها لكما إذا أردتما ذلك.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|أجل، سنأخذها بكل سرور.
@@ -56844,6 +56861,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|‮ما يكفي لأشتري منزلا في (كوفير)، حيث أستلقي وأتناول الفاكهة لآخر يوم في حياتي.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|‮ليس سيئًا، لا يحظى كل رجل بمعرفة مقدار مكافأة قتله.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|‮معظم الرجال يودون ألا تكون هناك مكافأة لقتلهم.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||‮إخطار بشأن جنود مفقودين.
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|‮لكن لماذا أتيت؟ لتسهل عليّ مهمتي؟
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||‮أريد أن أهرب معك لنقضي بعض الوقت بمفردنا.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|‮المآدب في (سكيلدج) - يمكن توقعها. المخمورون والتباهي والعراكات التي تنتج عن ذلك لا محالة...
@@ -57453,7 +57471,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||‮دروس في لعبة (الجوينت)
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||‮أعكف حاليًا على إعطاء اللاعبين الجدد دروسًا في لعبة (الجوينت). وستقتصر مهمة تعليمي على أولئك الذين يظهرون قدرًا من الالتزام ورغبة في التعلم ويتمتعون بعقلية منطقية. ومرحّب أيضًا بأولئك الذين يتمتعون بذكاء خاص. يجب أن يحصل التلاميذ على مجموعة البطاقات الخاصة بهم بأنفسهم.<br><br> كما أنني أبحث عن لاعبين مخضرمين يمثلون تحديًا لي ويرحبون بفرص التحسين المتبادل لمهاراتنا.<br><br>(إرميون)، كاهن
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||‮ارتفع شأن كل من تواضع
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||‮مفتاح وكر مصاص دماء (كاتاكان)
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||‮مفتاح صدئ قليلًا.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||‮مفتاح مشرحة (أوكسينفورت)
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||‮المفتاح الملطخ القديم
@@ -57597,6 +57614,7 @@
 1077442|00000000||CJournalResource "gameplay\journal\quests\sunken treasure.journal"|Journal||‮اعثر على الكنز الغارق مسترشدًا بحواس (الويتشر).
 1077456|5bad976f|item_desc_mq1028_muggs_papers|CUSTOM|Book||‮ صك لحامله يخص أحد الديار.
 1077465|00000000||CStoryScene "living_world\dialogue\skellige\ard_skellig\shop_herbalist_community_herbalist_01.w2scene"|Line text|SDRU2_SHOP_01077465|‮آه! ها هو! منقذي! أنا أعيش مع عائلتي مجددًا بفضلك أنت.
+1077467|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_ferlund_blacksmith_01.w2scene"|Line text|SBH2_SHOP_01077467|‮
 1077468|00000000||CJournalResource "gameplay\journal\bestiary\icegolem.journal"|Journal||‮‮الوحوش الثلجية
 1077469|00000000||Unnamed CJournalResource|Journal||‮‮الوحوش النارية
 1077470|00000000||CJournalResource "gameplay\journal\bestiary\lycanthrope.journal"|Journal||‮‮مستذئب (أولفهيدين)
@@ -57959,6 +57977,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||‮خريطة (أدالبيرت كيرميث) الأولى
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||‮خريطة تبين أماكن الرموز المرتبطة بمدرسة (القط للويتشر) التي يمكن العثور عليها بالاستعانة بهذه الرموز.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||‮‮ اقتل رجال العصابة.
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||‮مفتاح مخبأ مصاص دماء (كاتاكان).
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||‮‮‮بعد أن اختارني الأستاذ (سلافكو أتيمشتاين) لأنضم إلى فريق الأبحاث لديه، بدأت في دراسة عن مدرسة (الفتخاء للويتشر). وكان مقر عملياتي يقع في مقبرة تحت تلة (كروكباك). فلقد زعم الأستاذ أن هذا المكان هو المثوى الأخير لأحد وحوش (االفتخاء) وأراد مني أن أجد طريقًا داخلها.<br><br>وسرعان ما اكتشفت مجموعة من الأماكن المهمة، كلٌ منها مميز برسم على شكل ميدالية (ويتشر) خاصة بمدرسة (الفتخاء). ولقد قمت بتمييز هذه النقاط على هذه الخريطة.<br><br>(إدوين جيرلوف)، مساعد بقسم التاريخ الطبيعي في أكاديمية (أوكسينفورت).
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||‮اللعنة، لقد أضعت الخريطة الأولى التي أعددتها للأستاذ (أتيمشتاين) في لعبة (جوينت). يجب أن أعود الآن إلى معسكري الأساسي بالقرب من المقبرة أسفل تلة (كروكباك) وأبدأ من جديد. وفي هذه الأثناء، سأقوم بتمييز المزيد من النقاط المهمة على هذه الخريطة.<br><br>(إدوين جيرلوف)، مساعد بقسم التاريخ الطبيعي في أكاديمية (أوكسينفورت).
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||‮هذا جميل! سيشتاط الأستاذ (سلافكو أتيمشتاين) غضبًا. لقد أضعت الخريطة الأولى التي أعددتها للأستاذ (أتيمشتاين) في لعبة (جوينت)، وسُرقت الثانية مني في الكازينو عندما كنت متوعكًا بعد ليلة عمل شاقة. لا يمكنني الوصول إلى المحطة القريبة من المقبرة أسفل تلة (كروكباك) خالي اليدين، وإلا، فسيمزقني الأستاذ إربًا في لمح البصر. قد تكون المواقع الأربعة الجديدة التي قمت بتحديدها في هذه الخريطة كافية لحمايتي من غضبه.<br><br>(إدوين جيرلوف)، مساعد بقسم التاريخ الطبيعي في أكاديمية (أوكسينفورت).
@@ -62919,6 +62938,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||‮مدير - مشروع GALAXY
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||‮مدير - مشروع الموقع الإلكتروني
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||‮فريق العمل الرئيسي
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||‮المهندسون
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||‮البرمجة الإضافية
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||‮الأعمال الفنية الإضافية
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||‮تسلسلات كتاب القصص المتحركة
@@ -73997,7 +74017,7 @@
 1143305|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7020_songs_of_glory\scenes\mq7020_02_hook_dialog.w2scene"|Line text|LEPA_MQ7020_01143305|‮‮‮‮وجدت النهاية المثالية للقصيدة - "كل شيء من أجل مجد سعادة الدوقة!"
 1143307|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7020_songs_of_glory\scenes\mq7020_02_hook_dialog.w2scene"|Line text|GRLT_MQ7020_01143307|‮‮‮‮ظننت أن القصيدة تدور حول (ويتشر) ومصفف شعر. ما دخل الدوقة في هذا الأمر؟
 1143310|c0d82aa6|panel_mainmenu_start_newgame_description|CUSTOM|EP1||‮‮ابدأ لعبة جديدة من <i>The Witcher 3: Wild Hunt</i> تشمل أية توسعات مثبتة.
-1143311|0fadb37a|panel_mainmenu_start_ep1_description|CUSTOM|EP1||‮‮مهام القصة الرئيسية لـ<i>The Witcher 3: Wild Hunt</i> غير مفعلة. معدات (جيرالت) ومستواه مناسبان لتوسع <i>Hearts of Stone</i>.
+1143311|0fadb37a|panel_mainmenu_start_ep1_description|CUSTOM|EP1||‮‮مهام القصة الرئيسية لـ<i>The Witcher 3: Wild Hunt</i> غير مفعلة. معدات (جيرالت) ومستواه مناسبان لتوسع <i>Hearts of Stone</i>.
 1143312|65abcfd9|panel_mainmenu_start_ngplus_description|CUSTOM|EP1||‮استمتع باللعب في وضع "لعبة جديدة إضافية"، مع تضمين أي توسيعات مثبتة. لبدء اللعب في هذا الوضع، قم بتحميل لعبة محفوظة قمت بإنشائها بعد إكمال اللعبة الأساسية.
 1143315|36aa5002|new_game_tw3|CUSTOM|EP1||‮البدء من جديد
 1144255|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\vset_beauclair_bastard_01.w2scene"|Line text|BBA01_VSET_01144255|‮‮الحراس يؤمنون السلام لمجالاتنا - تنتهك سلطتها وتتعفن في السلاسل!
@@ -75323,7 +75343,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|‮‮‮الحل الأخير؟ تبا. لماذا؟
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|‮‮‮آه. ثمة كائن باستطاعته استدعاء (ديتلاف). لديه السلطة، وحتى القوة لإجباره على الظهور في مكان محدد.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|‮‮‮عملية الاستخلاص في تقدم؟ هل يتم الأمر على خير؟
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||‮تشارلز لانزانو
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|‮لا تبدو كعامل محجر بالنسبة لي.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|‮أنت مجددا؟ حسنا، تكلم، ماذا تريد؟
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||‮هلا تريني بضاعتك؟
@@ -90950,9 +90969,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||‮ملاحظات من المأمور إلى عصابة (فيلبرت فورفينجيرس)
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||‮أرباح شهر (بلاث) وخسائره<br><br> اليوم الثالث < br > تبني الزواحف الطائرة أعشاشها في تلال (الشامب ديزوليه). وقد تعودت على التغذي على رجالنا. في الآونة الأخيرة أكلوا (جيلبرت)، حيث التقطه أحدهم من قبالة الحائط. كان (جيلبرت) في العادة منبهًا، ولكن كل الرجال يقل انتباههم قليلاً بينما يقضون حاجتهم. وغضب (فيلبرت)، فتكلفة تعليم عضو جديد وتحويله إلى فرد منتج في مجموعتنا كانت تكلفة لا يُستهان به، وأن تتحول تلك التكلفة إلى روث الوحش فهو شيء يدعو للأسف. < br > اليوم السابع < br >  صنعنا كمينًا لقافلة تجار كانت تشق طريقها من (توسينت) الشرقية. لم يكن يصحبهم حراس، كما لم يقاوموا، ورغم ذلك لم نحصل على أي ربح تقريبًا – فالخرق البالية التي كانوا يحملوها لن تفيد إلا رجال برية (سكيلدج) العرايا، ولم تكن لدى أي مننا خططاً للذهاب في هذا الاتجاه. ازداد غضب (فيلبرت) مرة أخرى وقتل أحد التجار، رجل يدعى (لوميير)، وترك البقية يتجهون شرقًا. < br >  اليوم الحادي عشر < br > تمكن كشافتنا من تعقب الرجال الثلاثة الذين كانوا يتسللون في الغابة، وكانوا جميعًا يرتدون ملابس متسولين ويدّعون أنهم كذلك، لكننا لم ننخدع. بعد القليل من العنف، اكتشفنا أنهم تجار مجوهرات يحملون الذهب من مناجم (ميشت). كانوا يحملون المادة الخام فقط غير المكررة ولكنها كانت ذات جودة واعدة. أمر( فيلبرت) بقتل تجار المجوهرات، فهو يكره الكذابين الذين يكذبون بشغف < br > اليوم السابع عشر < br >  رحلة استكشافية من الأكاديمية الإمبراطورية في (كاستل جراوبيان) ضربت خيمتها على الجانب الآخر من الـ(سانسريتور). معروف أن العلماء لا يعانون من فائض ثروة، ومع ذلك فلديهم خيام رحيبة وكميات وفيرة من المشروبات. وهكذا فقد تم تحديد مصيرهم. أرسل (فيلبرت) عددًا قليلاً من رجاله لقطع الطريق عليهم. < br > اليوم الثالث والعشرون< br >  مر ما يقرب من أسبوعين تقريبا على حدوث أي شيء مثير للاهتمام. ومن ناحية أخرى، فقد استطاع الفرسان في رحلاتهم القبض على المزيد من فتياننا. مات اثنان، أما الثالث فأصيب بجروح ونجا، كما فقدنا معدات قيمتها العديد من العملات. أمر (فيلبرت) بجلد الجريح بالسوط عقابًا له على الإهمال، إلا أن جسده المُتعب لم يتحمل ومات. < br > اليوم الرابع والعشرون< br > تغير حظنا فقد اعترضنا قافلة بائعي نبيذ عائدين من الجنوب، كانوا قد باعوا بضائعهم ويحملون كمية كبيرة من النقود. تقدير الحسابات الأولية أظهرت استيلاء كل منا على نحو أربعمائة عملة لكل واحد. لكن كان على (فيلبرت) أن يقرر ما إذا كان سوف يقسم الغنيمة بالتساوي. < br >  اليوم الثامن والعشرون < br > الوحدة التي أرسلت إلى مزرعة (باسان) لم تعد بأي إمدادات. وأصبح وضعنا سيئاً فلا يمكن أن يعيش الرجل على المشروب وحده، ولم يجد أي شخص حتى الآن طريقة لأكل الذهب، لذا فيجب أن ننهب بعض القرى. < br >  اليوم الثلاثون < br > سأقوم الآن بحصر نهائي لشهر (بلاث). نحن في حال سيئة. يبدو أنا سنبقى في هذه المنطقة مدة شهر آخر.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|‮‮لمَ أنت هنا يا سيدي؟! هذا اجتماع خاص. (جيرالت)، ماذا يعني هذا؟ هل هذه مؤامرة خططتماها علي؟
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||‮ملاحظة من كاتب السباق.
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||‮ملاحظة من كاتب السباق.
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||‮‮السباق الدولي للفرسان تحت رعاية السيدة فيفيان دي تابري لعام 1275<br><br> المشاركون المسجلون والمؤهلون للاشتراك في المنافسة:<br><br>جريجوار دي جورجون، الفائز بالسباق الماضي. لن يشارك في المنافسة العامة ولكنه سيقاتل في الجولة النهائية ضد الفارس الذي يفوز بمعظم النقاط. (تشير الأدلة إلى أن جريجوار سيدافع عن لقبه.)<br><br>أونسيز، أمير ليريا وريڤيا، ينضم إلينا للمرة الثالثة على التوالي<br><br>هورم أكيرسبارك، أمير ماكيت، ويشاع أنه من أقارب الإمبراطور إمهير، ينضم إلينا للمرة الرابعة على التوالي<br><br>البارون بالميرين دي لونفال، مرته السادسة في السباق<br><br>دونيمير من تروي، فارس من ريدانيا، وهذه مرته الأولى في السباق<br><br>(رينفارن) من (أتر) مرته السابعة في السباق، فائز نسخة 1269<br><br>(جاي دي بوا-فرين) من (ميتينا) (ابن العم الثاني لـ(رينارت دي بوا-فرين)، أحد فرسان سموها المغامرين)، مرته الثالثة في السباق<br><br>(ديلوين) من (كريجيو)، فارس شاب يشارك في السباق للمرة الأولى<br><br>(تاي) من (دورندال)، فارس من نظام الزهرة المتوهجة، مرته الأولى في السباق<br><br>(لينوس) من (ميتينا)، مرته الثالثة في السباق<br><br>(غيوم دي لونفال) (ابن أخ البارون (بالميرين))، مرته الأولى في السباق. *ملحق متأخر* بسبب الإصابة، تنازل (غيوم) عن مكانه في السباق لفارس آخر.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||‮مذكرات (فيفيان)
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||‮مذكرات (فيفيان)
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||‮بلاث - فياين - المصاريف<br><br>14 ذراعًا من القماش: 80 كراون<br>حذاء (من جلد التنين): 140 كراون<br>سرج سباق: 280 كراون<br>مرهم سحري: 1400 كراون (إجمالي)
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||‮مذكرات
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||‮مذكراتي العزيزة!<br>لقد مرت ثلاثة أسابيع منذ أن أخذتني السيدة (أوريانا) من الشارع. لدي أخيرًا شيء آكله وأشربه، وألعب مع الأطفال الآخرين كل يوم. الوضع أفضل حتى من المنزل لأنه في المنزل كان من النادر أن يوجد أي شيء للأكل وعندما ماتت أمي، لم يكن هناك طعام على الإطلاق.<br><br>لعبت اليوم مع (ميري) و(توم) - لعبنا أولاً لعبة البطة والإوزة ثم لعبة الاختفاء والبحث ثم لعبة اختيار العصا. ثم لعبنا بالعلامات. حظيت بالكثير من المرح! ثم أتت عربة من السيدة (أوريانا) وكان هناك الكثير من الطعام. كانت هناك لفائف حلوي وفاكهة وكعك والكثير من الأشياء اللذيذة الأخرى. السيدة (أوريانا) هي الأفضل!<br><br>زارتنا السيدة أوريانا في الصباح الباكر. تحدثت معنا أولاً ثم غنت لنا ثم أخذت جوني إلى الغرفة الأخرى. كنا جميعًا نشعر بالغيرة منه. عندما عاد كان شاحبًا قليلاً وكانت لديه علامات حمراء صغيرة على عنقه، لكن كانت معه أيضًا حقيبة ضخمة من الشوكولاتة! تقول (ميري) إن السيدة (أوريانا) تأخذ أحد الأطفال أحيانًا وتفعل شيئًا معه. لم أفهم حقيقةً ما هو، لكنهم يحصلون بعدها على هدية منها. آمل أن تأخذني في المرة القادمة!<br><br>اليوم ممطر وأشعر بملل حقيقي. قال (توم) إنني غبي، لكني لا أصدقه لأنه غبي أيضًا. ربما تأتي السيدة (أوريانا) غدًا وسأحصل على هدية منها. سيكون هذا ردًا عليه!<br><br>لقد اختارتني! أتت السيدة (أوريانا) واختارتني! ذهبت إلى الغرفة الأخرى معها. أخبرتني أن أبين لها عنقي، ثم عضتني بطريقة ما. لم يكن الأمر مؤلمًا في الحقيقة. شعرت فقط بالغثيان لاحقًا. لكن هذا ليس مهمًا لأنها أعطتني سيفًا خشبيًا! لم يكن لدى أحد سيف مثل هذا! سيشعر (توم) بالغيرة!
@@ -91552,7 +91571,7 @@
 1208501|0d07c368|displayname_crinfrid reaver|CEntityTemplate "dlc\bob\data\quests\minor_quests\quest_files\mq7018_last_one\characters\mq7018_hunters.w2ent"|Entity display name||‮كرنفريد ريفر
 1208502|e852596b|map_description_questavailablebaw|CUSTOM|Blood and Wine Gameplay||‮‮الموقع الذي تستطيع منه بداية المهام مرتبط بتوّسع <i>Blood and wine</i>.
 1208503|36aa16d9|new_game_ep2|CUSTOM|Blood and Wine Gameplay||‮‮<i>Blood and Wine</i> فقط
-1208504|fe30b9fb|panel_mainmenu_start_ep2_description|CUSTOM|Blood and Wine Gameplay||‮مهام القصة الرئيسية لـ<i>The Witcher 3: Wild Hunt</i> غير مفعلة. معدات (جيرالت) ومستواه مناسبان لتوسع <i>Blood and Wine</i>.
+1208504|fe30b9fb|panel_mainmenu_start_ep2_description|CUSTOM|Blood and Wine Gameplay||‮مهام القصة الرئيسية لـ<i>The Witcher 3: Wild Hunt</i> غير مفعلة. معدات (جيرالت) ومستواه مناسبان لتوسع <i>Blood and Wine</i>.
 1208505|00000000||CJournalResource "dlc\bob\journal\quests\q704bfairyland.journal"|Journal||‮‮اهزم شبح (لونغلوكس).
 1208506|00000000||CJournalResource "dlc\bob\journal\quests\q704bfairyland.journal"|Journal||‮فتّش بداخل البرج.
 1208511|46ec14c5|map_location_hideout|CUSTOM|Blood and Wine Locations||‮قاعدة (هانز)
@@ -94040,7 +94059,6 @@
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||‮‮‮المصممون
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||‮‮القسم الهندسي
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||‮‮‮المدير
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||‮‮المهندسون
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||‮‮‮منسق أفكار الرسوم
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||‮‮‮الفنان المتخصص في أفكار الرسوم
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||‮‮‮الفنان المتخصص في الشخصيات
@@ -94166,8 +94184,12 @@
 1224574|093e1906|panel_video_quality_mode_tooltip|CUSTOM|NGU||‮‮‮لتمكين إضاءة شاملة بتتبع الأشعة وانعكاسات ذات جودة أعلى لدقة بصرية محسنة. يستهدف اللعب 30 إطارًا في الثانية مع دقة ديناميكية.
 1224575|cf7479f5|panel_video_performance_mode_tooltip|CUSTOM|NGU||‮‮‮‮يعطي الأولوية للعب أكثر سلاسة يستهدف 60 إطارًا في الثانية مع دقة ديناميكية.
 1224576|c113ebe0|panel_video_value_ray_tracing|CUSTOM|NGU||‮‮‮تتبع الأشعة
+1224588|111372d6|item_desc_ngu_hwando_steel_sword|CUSTOM|NGU||‮‮
+1224589|25ad2b9e|item_desc_ngu_hwando_silver_sword|CUSTOM|NGU||‮‮
 1224590|b2162ae9|item_name_newgame_ngu_hwando_steel_sword|CUSTOM|NGU||‮‮‮‮سيف الثعلبة ذات التسعة ذيول الفولاذي
 1224591|a50175eb|item_name_newgame_ngu_hwando_silver_sword|CUSTOM|NGU||‮‮‮‮سيف الثعلبة ذات التسعة ذيول الفضي
+1224592|84cba623|item_desc_newgame_ngu_hwando_steel_sword|CUSTOM|NGU||‮‮
+1224593|28fb61f1|item_desc_newgame_ngu_hwando_silver_sword|CUSTOM|NGU||‮‮
 1224594|165c7591|panel_video_frame_rate_mode|CUSTOM|NGU||‮‮‮وضع معدل الإطارات
 1224596|29e29663|panel_video_value_performance|CUSTOM|NGU||‮‮‮‮الأداء
 1224598|ddcb5b27|item_name_newgame_ngu_tiger_armor|CUSTOM|NGU||‮‮‮درع نمر الغرب الأبيض
@@ -94246,6 +94268,10 @@
 1225051|00000000||Unnamed CJournalResource|Journal||يمكنك الآن الاختيار بين الإلقاء القياسي أو الإلقاء السريع من خيارات اللعب.
 1225053|00000000||CJournalResource "gameplay\journal\tutorial\nge_roach_gwent.journal"|Journal||‮تم إضافة (روتش) - بطاقة (جوينت) إلى مجموعة بطاقات لعب (جوينت) الخاصة بك.
 1225057|36f5feda|inventory_cant_apply_dye_netflix|CUSTOM|NGU||‮‮‮لا يمكن استخدام الطلاء على هذا العتاد.
+1225059|305b91e6|MinimapDuringFocusCombat|CUSTOM|NGU||‮‮
+1225060|aa43e755|deprecated_subtitle_font_scale|CUSTOM|NGU||‮‮
+1225061|aadb032c|deprecated_choice_font_scale|CUSTOM|NGU||‮‮
+1225062|8c495b15|deprecated_oneliner_font_scale|CUSTOM|NGU||‮‮
 1225063|559ed6e4|enable_rt_radiance|CUSTOM|NGU||‮‮‮انعكاسات تتبع الأشعة
 1225064|2aa8ae92|enable_rt_shadows|CUSTOM|NGU||‮‮‮ظلال تتبع الأشعة
 1225065|dcfc18a8|dlss_quality|CUSTOM|NGU||‮‮‮‮الجودة
@@ -94286,7 +94312,7 @@
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||‮‮أغلق
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||‮‮‮للمطالبة بمكافآتك، سجّل الدخول إلى GOG GALAXY 2.0 ثم افتح اللعبة.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||‮‮‮‮للمطالبة بمكافآتك والوصول إلى قائمة التعديلات، سجّل الدخول إلى REDlauncher وافتح اللعبة.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||‮‮‮مجال الرؤية
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||‮‮‮الكاميرا
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||‮‮‮التأثير
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||‮‮‮التركيز التلقائي
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||‮‮‮البؤرة
@@ -95432,7 +95458,7 @@
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||يمكن أن تؤثر علامة (آكسي) في هدفين معًا لكن يضعف الأثر بنسبة $I$%.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||يمكن أن تؤثر علامة (آكسي) في هدفين معًا.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||‮درع متفجرة
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||عندما تنكسر درع (كوين)، تدفع الأعداء إلى الخلف. تزيد قوة الدفع إلى الخلف حسب الرتبة. 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||عندما تنكسر درع (كوين)، تدفع الأعداء إلى الخلف. تزيد قوة الدفع إلى الخلف حسب الرتبة. ‮يعكس $I$% من الضرر الممتص ويوجهه إلى المهاجم. 
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||‮علامة (آرد) واسعة النطاق
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||تزيد من نطاق علامة (آرد) بمقدار $I$ من الياردات.
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||‮فخ سحري
@@ -95503,7 +95529,7 @@
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||عنصر المفاجأة
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||ضرب أعداء بقنبلة يزيد ضرر اشتباكاتك بنسبة $I$% لمدة 10 ثوانٍ.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||‮أساليب مدرسة (الجريفين)
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من قوة العلامة بنسبة $I$% ويزيد من تجدد قوة التحمل بمقدار $I$/ث.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من قوة العلامة بنسبة $I$% ويزيد من تجدد قوة التحمل بمقدار $F$/ث.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||‮أساليب مدرسة (مانتيكور)
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من ضرر السيف بنسبة $I$% ويزيد من ضرر القنبلة بنسبة $I$%.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||التعزيز الحيوي
@@ -95656,8 +95682,8 @@
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||نسمة الشمال
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||برج (تور لارا)
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||برج (تور زيريال)
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||‮‮‮مجال الرؤية
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||‮‮‮الميل
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||‮‮‮الكاميرا
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||درع متينة مهيئة لأن تصمد عقودًا في (الطريق). 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||درع العرف القرمزي
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||حذاء العرف القرمزي
@@ -95762,8 +95788,8 @@
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||‮لا يتحرك الهدف باتجاه (جيرالت) في أثناء استخدامه علامة (آكسي). تزيد من فعالية علامة (آكسي) في المحادثات.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||‮لا يتحرك الهدف باتجاه (جيرالت) في أثناء استخدامه علامة (آكسي). تزيد من فعالية علامة (آكسي) في المحادثات.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||يمكن أن تؤثر علامة (آكسي) في هدفين معًا لكن يضعف الأثر بنسبة $I$%.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||عندما تنكسر درع (كوين)، تدفع الأعداء إلى الخلف. تزيد قوة الدفع إلى الخلف حسب الرتبة. 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||عندما تنكسر درع (كوين)، تدفع الأعداء إلى الخلف. تزيد قوة الدفع إلى الخلف حسب الرتبة. 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||عندما تنكسر درع (كوين)، تدفع الأعداء إلى الخلف. تزيد قوة الدفع إلى الخلف حسب الرتبة. ‮يعكس $I$% من الضرر الممتص ويوجهه إلى المهاجم. 
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||عندما تنكسر درع (كوين)، تدفع الأعداء إلى الخلف. تزيد قوة الدفع إلى الخلف حسب الرتبة. ‮يعكس $I$% من الضرر الممتص ويوجهه إلى المهاجم. 
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||تزيد من نطاق علامة (آرد) بمقدار $I$ من الياردات.
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||تزيد من نطاق علامة (آرد) بمقدار $I$ من الياردات.
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||تطلق شحنة سحرية تُلحق الضرر بالأعداء وتبطئهم في نطاق قطره 14 ياردة. تزيد من الضرر بنسبة $I$%.
@@ -95831,8 +95857,8 @@
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||استهلاك الطعام يجدد الحيوية لمدة $I$ من الدقائق.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||ضرب أعداء بقنبلة يزيد ضرر اشتباكاتك بنسبة $I$% لمدة 10 ثوانٍ.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||ضرب أعداء بقنبلة يزيد ضرر اشتباكاتك بنسبة $I$% لمدة 10 ثوانٍ.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من قوة العلامة بنسبة $I$% ويزيد من تجدد قوة التحمل بمقدار $I$/ث.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من قوة العلامة بنسبة $I$% ويزيد من تجدد قوة التحمل بمقدار $I$/ث.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من قوة العلامة بنسبة $I$% ويزيد من تجدد قوة التحمل بمقدار $F$/ث.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من قوة العلامة بنسبة $I$% ويزيد من تجدد قوة التحمل بمقدار $F$/ث.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من ضرر السيف بنسبة $I$% ويزيد من ضرر القنبلة بنسبة $I$%.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||‮كل جزء من درع متوسطة يزيد من ضرر السيف بنسبة $I$% ويزيد من ضرر القنبلة بنسبة $I$%.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||تستهلك أدرينالين وتقلل تكلفة السُمّية للجرعات بنسبة $I$% لكل نقطة أدرينالين. لا تؤثر في مستخلصات مولدات الطفرات.

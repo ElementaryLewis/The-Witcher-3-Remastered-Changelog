@@ -2083,7 +2083,7 @@
 356122|99e5cd3a|Guildhall_crowd|CEntityTemplate "quests\part_1\quest_files\q302_mafia\characters\q302_guildhall_crowd.w2ent"|Entity display name||Толпа в Зале Гильдии
 356170|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Бывай.
 356340|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Как ты познакомился с Присциллой?
-356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|ASTD_DANDELION_00356364|Ревела улица, гремя со всех сторон. В глубоком трауре, стан тонкий изгибая, вдруг мимо женщина прошла, едва качая рукою пышною край платья и фестон, с осанкой гордою, с ногами древних статуй…
+356364|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Line text|DAND_DANDELION_00356364|Ревела улица, гремя со всех сторон. В глубоком трауре, стан тонкий изгибая, вдруг мимо женщина прошла, едва качая рукою пышною край платья и фестон, с осанкой гордою, с ногами древних статуй…
 356380|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Графомания.
 356382|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Где-то я это уже слышал.
 356384|00000000||CStoryScene "quests\main_npcs\default_dialogues\dandelion_default.w2scene"|Choice line||Прекрасно.
@@ -3050,6 +3050,7 @@
 378633|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||Отыскать лешего, идя на звук с помощью ведьмачьего чутья.
 378634|00000000||CJournalResource "gameplay\journal\quests\sq204forestspirit.journal"|Journal||Убить лешего.
 378676|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Line text|GRLT_SET_00378676|[EN] [DEBUG] Did I keep my cool with the baron's men in q101agent? [DEBUG]
+378678|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Да, и я избежал боя [DEBUG]
 378680|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Нет, я надрал им задницы [DEBUG]
 378682|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|GRLT_Q303_00378682|Ещё раз… Давай поговорим.
 378684|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_03_02_cyclops_interview.w2scene"|Line text|CCLP_Q303_00378684|Тебя Сиги любит. Давай.
@@ -5479,6 +5480,7 @@
 412649|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|NVGT_Q202_00412649|Ещё один… любитель приключений. Хм, ну слушай внимательно, если не хочешь пойти на дно.
 412650|3abcbb2d|item_name_mh104_contract_text|CUSTOM|Notices||Сим объявляется, что императорской армии нужен человек, знающий здешние края, — охотник ли, следопыт ли, — который поможет отыскать пропавший патруль.<br><br>Вероятно, солдаты стали добычей чудовища. Если подозрение подтвердится, тому, кто доставит голову монстра, нижеподписавшийся выплатит установленную награду. Он же, в случае необходимости, готов предоставить дополнительные сведения о происшествии.<br><br>Слава императору!<br><br>Милан Норан, командир отряда, стоящего в деревне Рудник
 412833|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\nml_burrows_soltis_default.w2scene"|Choice line||Кто такие Хозяйки Леса?
+412838|00000000||CStoryScene "gameplay\community\dialogues\skellige\shops\shop_kaer_trolde_sjusta.w2scene"|Comment text||EXT. Dialogue with Sjusta the tailor, in front of his workshop.
 412917|00000000||CJournalResource "gameplay\journal\quests\giant.journal"|Journal||Осмотреть руины Урскара и поискать следы Хьялмара, используя ведьмачье чутьё.
 413007|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|HJOR_Q201_00413007|Сердце было деформировано. Это всегда плохой знак.
 413009|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_20h_udalryk_and_hjort_at_feast.w2scene"|Line text|UDAL_Q201_00413009|И для меня тоже? Слышишь? Что будет со мной?
@@ -7060,6 +7062,7 @@
 426289|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1045_damsel_in_distress\scenes\mq1045_enc_02_03_final.w2scene"|Line text|GRLT_MQ1045_00426289|Я не могу их принять. Жаль, я не привёл его живым.
 426331|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|GRLT_Q202_00426331|Эти сирены, о которых ты говорил… Много их на Ундвике?
 426333|00000000||CStoryScene "quests\part_1\quest_files\q202_giant\scenes\q202_01_talk_with_navigator.w2scene"|Line text|SFM2_Q202_00426333|Уж-ж-жасно много… Больше, чем на других островах.
+426468|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_09_geralt_tricking_menge.w2scene"|Choice line||[DEBUG] SKIP TO CHEATING MENGE
 426470|00000000||CStoryScene "quests\secondary_npcs\default_dialogues\dijkstra_default.w2scene"|Line text|DJKS_DIJKSTRA_00426470|В каналах, под Золотым кварталом, но вход туда из кварталов бедноты, в Обрезках.
 426510|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426510|Может, за него награду дадут?
 426512|00000000||CStoryScene "quests\main_npcs\voicesets\geralt_vset.w2scene"|Line text|GRLT_GERALT_00426512|Интересно, положена за него награда? Возьму-ка я трофей с собой.
@@ -14793,6 +14796,10 @@
 491887|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491887|Ты не найдёшь в Новиграде ни монстров, ни чудовищ, ибо здесь пылает Вечный Огонь.
 491889|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_eternal_fire_priest_03.w2scene"|Line text|EFP3_VSET_00491889|Жар в моем сердце пылает, жар!
 491891|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Мечи и вареники
+491892|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to the merchants
+491893|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Read notice board
+491894|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Talk to Ernst
+491895|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] HOOK: Hear the clients talking
 491899|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491899|Лейф, сын Эрика…
 491902|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SPR1_Q205_00491902|Кьялль, сын Олафа…
 491904|00000000||CStoryScene "quests\part_1\quest_files\q205_frozen_coast\scenes\q205_01c_freya_ritual_gameplay.w2scene"|Line text|SWO5_Q205_00491904|Почил во славе.
@@ -22603,11 +22610,14 @@
 531816|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|WHSP_Q105_00531816|Ах-ха-ха-ха-ха-ха-ха-ха! Ах-ха-ха-ха-ха-ха-ха-ха!
 531818|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531818|Скоро свидимся! Хи-хи-хи-хи-хи!
 531820|00000000||CStoryScene "quests\part_1\quest_files\q105_witches\scenes\q105_18_cs105_witches_final_standoff.w2scene"|Line text|BREW_Q105_00531820|Хи-хи-хи-хи-хи-хи-хи-хи!
+531824|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
+531825|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook1: Pig Roasters
 531828|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|CIRI_Q403_00531828|Геральт дал сигнал!
 531830|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18b_ciri_and_triss.w2scene"|Line text|TRSS_Q403_00531830|Я готова!
 531833|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531833|А пусть льёт хоть до самого Рагнарёка!
 531835|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531835|Слава!
 531837|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531837|Хаэль!
+531844|00000000||CJournalResource "gameplay\journal\quests\sq107pigs.journal"|Journal||[PL] [DEBUG] [!debug only!] Hook: Closed Vault Gate
 531850|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531850|Пришелец?
 531851|00000000||CStoryScene "gameplay\community\dialogues\skellige\voicesets\vset_skellige_warrior_01.w2scene"|Line text|SWR1_VSET_00531851|И лучшее оружие ни к чему, если слабая рука его держит, правда?
 531907|00000000||CStoryScene "quests\part_2\quest_files\q403_battle\scenes\q403_18e_back_to_castle.w2scene"|Line text|LMBT_Q403_00531907|Интересно, он сдох?
@@ -23007,6 +23017,7 @@
 534012|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NPRO2_MQ3008_00534012|Не порти нам веселье, а?
 534013|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|NTS2_MQ3008_00534013|Нет, ну… ну взял и всю атмосферу разрушил.
 534014|00000000||CStoryScene "quests\minor_quests\novigrad\quest_files\mq3008_prostitute_in_distress\scenes\mq3008_enc_02_working_girl.w2scene"|Line text|GRLT_MQ3008_00534014|Ладно, не смею мешать… Нашли бы себе место поукромнее?
+534018|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Quest Start
 534030|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534030|Карантир верен Эредину, а Ге'эльс — совсем другое дело…
 534033|00000000||CStoryScene "quests\part_3\quest_files\q311_geels\scenes\q311_01_avallach_plan.w2scene"|Line text|AVLC_Q311_00534033|А так вышло, что именно Эредин его и отравил.
 534047|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_19_ciri_owing_money_start.w2scene"|Line text|GRLT_Q310_00534047|Дай мне минуту, я сейчас вернусь.
@@ -23014,6 +23025,7 @@
 534050|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534050|Жалкий вид… Просто жалкий.
 534051|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534051|Что скажешь перед смертью?
 534052|00000000||CStoryScene "quests\part_3\quest_files\q501_eredin\scenes\q501_07_gmpl_crach_n_eredin_shouts.w2scene"|Line text|ERDN_Q501_00534052|Уйди с дороги, старик… И я подарю тебе жизнь.
+534053|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] [!debug only!] Fast forward time by meditating
 534054|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Сказать Сукрусу, что ящики можно забирать.
 534055|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Встать на стрёме.
 534056|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||Узнать, чего хочет Сукрус.
@@ -30150,6 +30162,7 @@
 573554|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00573554|Я ужасненько виновата, дядюшка Весемир.
 573556|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00573556|«…по отметинам, яко же у пантеры тигриной, в Зеррикании живущей и телом нездраво бледной».
 573557|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|VSMR_Q001_00573557|Хм. Значит, ты прочла раздел. Но ты всё равно должна была спросить, а не…
+573584|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq306_maverick\set_dependent_variables.w2scene"|Line text|GRLT_SET_00573584|[PL] Nothing to Chicken Test for q306maverick right now.
 573592|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_dockworker_02.w2scene"|Line text|NDKWR2_VSET_00573592|Вижу, здоровьем ты не обижен.
 573594|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_dockworker_02.w2scene"|Line text|NDKWR2_VSET_00573594|Эй! Да что сразу так-то… Успокойся!
 573596|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_dockworker_02.w2scene"|Line text|NDKWR2_VSET_00573596|Ну сука…
@@ -30805,6 +30818,7 @@
 576811|00000000||CStoryScene "quests\epilogues\quest_files\q505_ciri_free\scenes\q505_03_ciri.w2scene"|Line text|GRLT_Q505_00576811|Понятия не имею.
 576812|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|GRLT_Q001_00576812|Нет, не как все. Эта пахнет сиренью и крыжовником. Одевается в чёрное и белое.
 576814|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Line text|MRRR_Q001_00576814|Два шнапса!
+576815|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||G and V look at each other surprised, then with admiration at CY, then they pause.
 576818|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Line text|CIRIY_Q001_00576818|Но ты же спал, дядюшка Весемир.
 576819|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Choice line||Не верти хвостом.
 576821|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_7d_mephisto_about_yenn.w2scene"|Choice line||Ладно, выпью.
@@ -31838,6 +31852,10 @@
 580354|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Остальное я знаю.
 580356|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580356|Привет!
 580358|00000000||CStoryScene "gameplay\community\dialogues\novigrad\voicesets\vset_novigrad_female_bard_16.w2scene"|Line text|NFBA16_VSET_00580358|Дам тебе совет. Не умеешь петь красиво, пой громко!
+580359|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Check in with the sentinels
+580360|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Place an Yrden trap OR dispatch the guard with Axii or Sword
+580361|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Ignite the woodcart
+580362|00000000||CJournalResource "gameplay\journal\quests\sq304armorsmith.journal"|Journal||[PL] [DEBUG] Signal the all clear at the warehouse
 580365|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Choice line||Знаю, я шёл за вами следом.
 580367|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|GRLT_Q402_00580367|Ты попала к ведьмам и барону, а он — к Кейре.
 580369|00000000||CStoryScene "quests\part_2\quest_files\q402_ciri\scenes\q402_9_ciri_wake_up.w2scene"|Line text|CIRI_Q402_00580369|Я прошла через портал, но вместо убежища Аваллак'ха вывалилась посреди Кривоуховых топей.
@@ -33807,6 +33825,7 @@
 589857|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_08b_yen_about_megascope.w2scene"|Line text|YENN_SQ302_00589857|Кристалл мегаскопа? Проклятье, он треснул… но не окончательно.
 589877|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|ARNV_Q206_00589877|Почему вы мне помогли?
 589879|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b04a_03a_arnvald_rescued.w2scene"|Line text|BECC_Q206_00589879|Потому что я хотела, чтобы ты сказал мне прямо в глаза, зачем ты предал моего брата, отца и наш клан!
+589896|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_b_sparring_start.w2scene"|Comment text||EXT. KAER MORHEN LOWER COURTYARD. D - The lower courtyard is full of training equipment
 589898|00000000||CStoryScene "quests\part_2\quest_files\q206_berserkers\scenes\q206_05_b05a_01_returned_with_arnvald.w2scene"|Line text|GRLT_Q206_00589898|Говори, почему ты их предал. Или я закончу то, что начал.
 589901|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|PHIL_SQ302_00589901|Вильгефорц смог. Я использую тот же метод — выращиваю ткани на драгоценных камнях.
 589902|00000000||CStoryScene "quests\sidequests\novigrad\quest_files\sq302_philippa\scenes\sq302_09_reading_crystal.w2scene"|Line text|MGLA_SQ302_00589902|Это безумие… нужно… или… твой… опасность…
@@ -41131,7 +41150,7 @@
 1028677|9c6faf34|Ghost_of_boy|CEntityTemplate "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\characters\mq4004_boy.w2ent"|Entity display name||Дух мальчика
 1028678|00000000||CJournalResource "gameplay\journal\quests\q001yennsearch.journal"|Journal||Убить гулей.
 1028700|00000000||CStoryScene "quests\prologue\quest_files\q001_beggining\scenes\q001_3_ciri_exploration.w2scene"|Line text|CIRIY_Q001_01028700|Не отвлекай меня, Геральт! Я споткнусь и упаду!
-1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHLPW01_MQ4004_01028723|Ты мечом машешь или цепом? Режущий удар от запястья, не от локтя! Ещё раз!
+1028723|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4004_bastion\scenes\mq4004_02_ghost_scenes.w2scene"|Line text|GHWT_MQ4004_01028723|Ты мечом машешь или цепом? Режущий удар от запястья, не от локтя! Ещё раз!
 1028725|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Choice line||Ты должен отдать мне документы.
 1028727|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|GRLT_MQ1037_01028727|Пропусти меня.
 1028728|00000000||CStoryScene "quests\minor_quests\no_mans_land\quest_files\mq1037_deadly_crossing\scenes\mq1037_enc_03_extortion.w2scene"|Line text|VPEA1_MQ1037_01028728|Ну ладно, прошу…
@@ -44443,6 +44462,10 @@
 1043764|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043764|Это уже становится скучным. Какая-то огромная скотина перебила целую стаю утопцев, живших в озере.
 1043766|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\scenes\q102_v_03_geralt_on_searching_village.w2scene"|Line text|GRLT_Q102_01043766|Может, кто из местных жителей всё-таки отважится мне помочь?
 1043767|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||Поговорить с охотником.
+1043770|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Да [DEBUG]
+1043771|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Нет [DEBUG]
+1043774|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Да [DEBUG]
+1043775|00000000||CStoryScene "quests\part_1\quest_files\q102_baron\set_dependent_variables.w2scene"|Choice line||[DEBUG] Нет [DEBUG]
 1043777|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_01_investigating_lake.w2scene"|Line text|GRLT_MQ4003_01043777|Тролль. Давно я не видел такого крупного экземпляра… Наверно, он очень старый.
 1043798|00000000||CJournalResource "gameplay\journal\quests\q002griffin.journal"|Journal||Пройти по следам нильфгаардских солдат, используя ведьмачье чутьё.
 1043810|00000000||CStoryScene "quests\minor_quests\kaer_morhen\quest_files\mq4003_lake\scenes\mq4003_02_lair.w2scene"|Line text|GRLT_MQ4003_01043810|Раз уж я попал в уютный домик тролля, стоит осмотреться.
@@ -50370,6 +50393,7 @@
 1058848|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Но когда Геральт попытался покинуть башню, призрак показал своё истинное обличье. Дух девушки оказался моровой девой, ужасным призраком смерти и чумы.<br>
 1058849|00000000||CJournalResource "gameplay\journal\characters\anabelle.journal"|Journal||Может быть, в словах девушки Геральту послышалось нечто подозрительное, а может, ведьмачьи инстинкты вовремя предупредили его — но буквально за секунду до того, как Анабелль показала своё истинное обличье, Геральт понял, с кем имеет дело. Дух девушки был моровой девой, ужасным призраком смерти и чумы.<br>
 1058855|00000000||Unnamed CJournalResource|Journal||Дезертиры
+1058856|00000000||Unnamed CJournalResource|Journal||Несколько солдат, служивших под темерскими знамёнами, оставили посты и дезертировали. Люди эти отлично обучены и нападут на любого, кого увидят. Последний раз они вроде бы встали лагерем в лесу неподалёку (пролог).<br>
 1058857|00000000||Unnamed CJournalResource|Journal||Дезертиры в лесу
 1058858|00000000||CJournalResource "gameplay\journal\quests\lwprologuedeserters.journal"|Journal||Геральт нашёл лагерь дезертиров и перебил их всех! Ох уж эти дезертиры! Они молили о пощаде, но Геральт был неколебим. После убийства он забрал их вещи и продал.<br>
 1058877|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_05_12_cave_entrance.w2scene"|Choice line||Проверим. На всякий случай.
@@ -51449,6 +51473,7 @@
 1062160|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Давайте развлечёмся.
 1062161|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Может, сыграем в карты?
 1062162|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||Пора ложиться спать.
+1062163|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_06_04_reunion_part_02.w2scene"|Choice line||[DEBUG] [Skip to Eskel Drunk.]
 1062165|00000000||CStoryScene "quests\part_3\quest_files\q310_pregeels\scenes\q310_26_ciri_stealing_horses_gp.w2scene"|Line text|GRLT_Q310_01062165|А. А вот и ключ.
 1062167|55cbf765|item_name_sq305_notice|CUSTOM|Notices||Заказ: лесное чудовище
 1062168|a15274c3|item_name_sq104_werewolf|CUSTOM|Additional||Пропавшая жена
@@ -51651,7 +51676,6 @@
 1062559|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062559|Сменял стрижа на ежа.
 1062561|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|GRLT_Q301_01062561|Я люблю нюхать тюльпаны.
 1062563|00000000||CStoryScene "quests\part_1\quest_files\q301_dreamer\scenes\q301_07a_gatekeeper.w2scene"|Line text|NTS2_Q301_01062563|Не-а. Пароль неверный.
-1062564|d7dd1caa|item_name_mq1051_contract|CUSTOM|Notices||Пропали солдаты — награда
 1062565|797d3ba2|item_name_mq1051_contract_text|CUSTOM|Notices||Объявление<br><br>Солдаты на службе Его Императорского Величества Эмгыра вар Эмрейса пропали при исполнении. За помощь в их обнаружении назначена награда. Подробности у квартирмейстера лагеря группы армий «Центр».
 1062566|dac913ce|item_desc_sq106_manuscript|CUSTOM|Book||Письмо Роланда Тройггера к Хаммонду.
 1062567|bcde2672|item_name_q302_casino_register_text|CUSTOM|Book||Игорный салон номер 1. Приходно-расходная книга.<br><br>Текущий месяц.<br><br>Расходы — 38 756 крон<br><br>Содержание прислуги — 5 294 кроны<br><br>Организационные расходы — 3 875 крон<br><br>Должники<br><br>Граф Тибальт — 1 285 крон — срок оплаты — конец месяца — без права продления<br><br>Саха — 956 крон — срок оплаты — середина следующего месяца — при повышении ставки до 35 процентов можно продлить на две недели.<br><br>Финнеас — 5 148 крон — оплата просрочена — последнее предупреждение.<br><br>Бернард Тулле — долг оплачен.<br><br>Патрик Лещина — предупреждение отправлено — начата процедура взыскания долга.
@@ -54006,6 +54030,7 @@
 1067785|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067785|Я постараюсь. Увидимся.
 1067786|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Спросить, видели ли в обозе похитителя Лютика.
 1067788|00000000||CStoryScene "quests\part_3\quest_files\q210_precanaris\scenes\q210_13k_outside_lab_skjall.w2scene"|Line text|CIRI_Q210_01067788|Угу. Пока.
+1067789|00000000||CStoryScene "quests\part_1\quest_files\q303_treasure\scenes\q303_05_04_witch_hunters_gate_with_triss.w2scene"|Choice line||[EN] [DEBUG] SKIP TO END [DEBUG]
 1067790|00000000||CJournalResource "gameplay\journal\quests\q305lookingfordandelion.journal"|Journal||Придумать, как попасть в хату.
 1067792|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||Я этим займусь.
 1067793|00000000||CStoryScene "quests\generic_quests\novigrad\quest_files\mh302_leshy\scenes\mh302_01_halfling.w2scene"|Choice line||У меня другие расценки.
@@ -56794,6 +56819,7 @@
 1075661|00000000||CJournalResource "gameplay\journal\quests\mq1046_burning_down_the_house.journal"|Journal||Расчистить проход и освободить эльфку.
 1075662|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Плавание под водой
 1075663|00000000||CJournalResource "gameplay\journal\tutorial\jediving.journal"|Journal||Зажмите <<DiveDown>>, чтобы нырнуть, и <<DiveUp>>, чтобы выплыть к поверхности.<br><br>Следите за запасом воздуха — иначе утонете!
+1075664|00000000||CStoryScene "quests\part_1\quest_files\q401_konsylium\scenes\q401_04_03_eskel_on_forktail.w2scene"|Choice line||[DEBUG] [Skip to end.]
 1075665|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Choice line||Вот моё приглашение.
 1075667|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|GRLT_Q302_01075667|Вот моё приглашение. Могу отдать вам, если хотите.
 1075669|00000000||CStoryScene "quests\part_1\quest_files\q302_mafia\scenes\q302_14_bouncers_casino.w2scene"|Line text|NTW1_Q302_01075669|Мы не откажемся.
@@ -56892,6 +56918,7 @@
 1075887|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075887|Хватит, чтобы прикупить усадьбу в Ковире и жить там припеваючи до конца дней.
 1075889|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|LETO_SQ102_01075889|Неплохо. Не каждому везёт узнать цену за собственную голову.
 1075891|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075891|Большинство не хотят этого знать.
+1075893|51d37c8a|Item_name_mq1051_contract|CUSTOM|Quest items||Объявление о пропавших солдатах.
 1075895|00000000||CStoryScene "quests\sidequests\no_mans_land\quest_files\sq102_letho\scenes\sq102_04_03_lethos_gambit.w2scene"|Line text|NILF3_SQ102_01075895|Но зачем ты пришёл? Решил облегчить мне жизнь?
 1075897|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Choice line||Вот бы сбежать и побыть вдвоём.
 1075899|00000000||CStoryScene "quests\part_1\quest_files\q201_pirates\scenes\q201_08_burial.w2scene"|Line text|YENN_Q201_01075899|Пиры на Скеллиге ужасно предсказуемы. Пьянство, безудержное хвастовство и затем — неизбежное мордобитие.
@@ -57501,7 +57528,6 @@
 1076980|3e972727|item_name_cg_notice_mousesack|CUSTOM|Notices||Уроки гвинта
 1076981|1cc73745|item_name_cg_notice_mousesack_text|CUSTOM|Notices||Даю уроки игры в гвинт. От учеников требуются: дисциплина, логическое мышление и желание учиться. Особо приветствуются ученики с душевной предрасположенностью к игре. Приносите собственную колоду.<br><br>Кроме того, ищу опытных игроков для совместной игры ко взаимной выгоде, ибо лишь сражаясь с равными, в суровом бою, можно отточить навыки.<br><br>Мышовур, друид
 1076983|db0d3e62|poster_th1103_lynx_riddle|CUSTOM|Posters||Чтобы подняться, вглядись в глубины.
-1076984|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Item||Ключ от логова катакана
 1076985|b2a52dd0|item_desc_mh304_katakan_hideout_door_key|CUSTOM|Item||Немного заржавевший ключ.
 1076986|f21ea72a|item_name_mh304_morge_door_key|CUSTOM|Item||Ключ от оксенфуртского морга
 1076987|686002e4|item_desc_mh304_morge_door_key|CUSTOM|Default||Старый, потёртый ключ
@@ -58007,6 +58033,7 @@
 1077987|ec26c888|item_name_th1003_map_lynx_upgrade1a|CUSTOM|Book||Первая карта Адальберта Кермита
 1077988|bcebb10e|item_desc_th1003_map_lynx_upgrade1a|CUSTOM|Book||Карта показывает, где находятся символы ведьмачьей Школы Кота.
 1078008|00000000||CJournalResource "gameplay\journal\quests\q309novigradundercontrol.journal"|Journal||Убить бандитов.
+1078009|dfefb296|item_name_mh304_katakan_hideout_door_key|CUSTOM|Additional||Ключ от укрытия катакана
 1078010|1b42afdc|item_name_th1005_map_gryphon_upgrade1a_text|CUSTOM|Book||Попав в рабочую группу профессора Славко Атимштейна, я начал исследования ведьмачьей Школы Грифона. Базовым лагерем экспедиции стала гробница на Кривоуховых холмах. Профессор считает, что это место погребения одного из «грифонов», и пытается пробраться внутрь.<br><br>Я быстро определил расположение других мест — каждое из них обозначено пиктограммой в виде ведьмачьего медальона Школы Грифона, — и нанёс эти места на карту.<br><br>Эдвин Грелофф, адъюнкт кафедры естественной истории Оксенфуртской академии.
 1078011|1cf7887b|item_name_th1005_map_gryphon_upgrade1b_text|CUSTOM|Book||Чума, сифилис и гонорея! Я проиграл в гвинт первую карту, которую приготовил для профессора Атимштейна! Теперь надо возвращаться в базовый лагерь у Кривоуховых холмов и начинать всё сначала. А пока что обозначаю на карте новые пункты.<br><br>Эдвин Грелофф, адъюнкт кафедры естественной истории Оксенфуртской академии.
 1078012|5517c2fa|item_name_th1005_map_gryphon_upgrade2_text|CUSTOM|Book||Прекрасно. Профессор Славко Атимштейн будет в бешенстве. Первую карту я проиграл в гвинт, вторую у меня украли после тяжёлой ночи в казино, когда я был слегка рассеян. Я не могу появиться в лагере у гробницы на Кривоуховых холмах с пустыми руками — профессор мне вивисекцию устроит — прямо там же. Боюсь, новых четырёх точек может не хватить, чтобы уберечь меня от его гнева.<br><br>Эдвин Грелофф, адъюнкт кафедры естественной истории Оксенфуртской академии.
@@ -59061,7 +59088,7 @@
 1081076|3c85b56f|fluff_larvik_notice_board_03|CUSTOM|Noticeboard TW3||Просьба от друидов
 1081077|6e9e55fd|fluff_larvik_notice_board_03_text|CUSTOM|Noticeboard TW3||Сыновья и дочери Скеллиге!<br><br>Когда ловите акулу, не годится отрезать только плавники, а остальное выбрасывать в море. Такая расточительность не мила природе и богам. Тело каждого убитого существа, как ласки, так и кита, нужно использовать полностью, до последней жилы и кости.<br><br>Мышовур
 1081078|3c85b570|fluff_larvik_notice_board_04|CUSTOM|Noticeboard TW3||Смерть Гардара
-1081079|70532e9c|fluff_larvik_notice_board_04_text|CUSTOM|Noticeboard TW3||Ґардар, син Гакона, загинув під час останньої виправи. Три стріли влучили йому в груди, але він спромігся розчавити голову лучника голими руками, перш ніж віддав останній подих. Його тіло вже покоїться в чорній землі, зате душа бенкетує з предками. Виплесніть часом трохи меду з келихів на пам’ять про нього.<br><br>— Дурута
+1081079|70532e9c|fluff_larvik_notice_board_04_text|CUSTOM|Noticeboard TW3||Гардар, сын Хакона, погиб в последнем набеге. Ему в грудь попали три стрелы, но он успел раздавить руками голову лучника, прежде чем испустил свой последний вздох. Его тело покоится под курганом чёрной земли, его душа уже пирует с предками. Поминайте его иногда чаркой мёда.<br><br>Дурута
 1081080|3c85b571|fluff_larvik_notice_board_05|CUSTOM|Noticeboard TW3||Не признаю сына
 1081081|7208073b|fluff_larvik_notice_board_05_text|CUSTOM|Noticeboard TW3||Я не признаю сына, коего родила моя жена Элдрид. Если кто захочет взять его, пусть приходит в наш дом до следующего полнолуния. Потом отнесу его в горы и там брошу.<br><br>Эгин
 1081082|3c85b572|fluff_larvik_notice_board_06|CUSTOM|Noticeboard TW3||Просьба от Брингерда
@@ -62962,6 +62989,7 @@
 1088254|ce943138|credits_DIRECTOR_GALAXY_PROJECT|CUSTOM|Credits||ДИРЕКТОР ПРОЕКТА GALAXY
 1088255|8682a087|credits_DIRECTOR_WEBSITE_PROJECT|CUSTOM|Credits||ДИРЕКТОР ПО САЙТУ
 1088256|20a41092|credits_LEADS|CUSTOM|Credits||ВЕДУЩИЕ СПЕЦИАЛИСТЫ
+1088257|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ИНЖЕНЕРЫ
 1088258|5dafd1e6|credits_ADDITIONAL_PROGRAMMING|CUSTOM|Credits||ДОПОЛНИТЕЛЬНЫЕ ПРОГРАММИСТЫ
 1088259|79085870|credits_ADDITIONAL_ART|CUSTOM|Credits||ДОПОЛНИТЕЛЬНЫЕ ХУДОЖНИКИ
 1088260|37dda3da|credits_ANIMATED_STORYBOOK_SEQUENCES|CUSTOM|Credits||СОЗДАТЕЛИ АНИМИРОВАННЫХ СБОРНИКОВ
@@ -75231,6 +75259,12 @@
 1154231|29b1a878|Turysta|CEntityTemplate "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\characters\mq7015_tourist_man.w2ent"|Entity display name||Турист
 1154248|0c83681f|Turystka|CEntityTemplate "dlc\bob\data\quests\minor_quests\quest_files\mq7015_souvenir\characters\mq7015_tourist_woman.w2ent"|Entity display name||Туристка
 1154250|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7004_bleeding_tree\scenes\mq7004_07_ending.w2scene"|Line text|JLBJ_MQ7004_01154250|Ну хоть барышня не будет больше в дереве мучиться. Забирай свои деньги и иди отсюда.
+1154255|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Choice line||The blackmailers are at Dun Tynne.
+1154256|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Choice line||Didn't run into any trouble?
+1154259|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01154259|Похитители во дворце Дун Тынне. И я подозреваю, что Рена с ними…
+1154261|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|DTLF_Q703_01154261|Дун Тынне… Им конец.
+1154265|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01154265|Бандиты пытались заполучить драгоценность под названием Сердце Туссента, но я нашёл её первым.
+1154267|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01154267|Я отправлюсь к ним — предложу им сделку относительно камня. Как только буду уверен, что Рена там… я дам вам знак. И тогда мы вместе её освободим и закончим это дело.
 1154305|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_08_match_girl.w2scene"|Line text|GRLT_Q704_01154305|Хорошо, давай сыграем. Проиграешь — отдаёшь ленточку.
 1154307|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_08_match_girl.w2scene"|Line text|TG02_Q704_01154307|Ладно, только не надейся: в гвинт мне равных нет.
 1154324|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704b_fairy_tale\scenes\q704_ft_08_match_girl.w2scene"|Line text|TG02_Q704_01154324|Ты проиграл, приятель. Если всё ещё хочешь ленточку, придётся заплатить.
@@ -75360,7 +75394,6 @@
 1155171|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155171|Херово… А почему так?
 1155173|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|REGI_Q702_01155173|Хм, есть одно существо, у которого есть право — точнее, власть — призвать Детлаффа в нужное место.
 1155204|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q702_hunt\scenes\q702_04_cemetary_regis.w2scene"|Line text|GRLT_Q702_01155204|Как у тебя с микстурой?
-1155207|3bc70ae5|Charles Lanzano|CUSTOM|Entity display name||Шарль Ланзано
 1155209|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155209|Вы не очень-то похожи на каменолома.
 1155211|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Line text|TBST03_SHOP_01155211|Опять вы? Ладно, и чего вы хотите?
 1155212|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_24_quarry_blacksmith.w2scene"|Choice line||Покажи, что у тебя есть.
@@ -76486,6 +76519,9 @@
 1161842|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|TNM02_Q701_01161842|Попробуем добыть следующую подсказку.
 1161852|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|GRLT_Q701_01161852|Хотите драться? Милости просим.
 1161854|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|TNM01_Q701_01161854|Негодяй!
+1161876|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|GRLT_Q703_01161876|Я выяснил, где находятся похитители. Я знаю, как туда добраться, и…
+1161882|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|DTLF_Q703_01161882|Значит, чтишь кодекс… А если бы ты решил, что на меня он не распространяется… Ты бы меня убил?
+1161884|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\obsolete\q703_12_meeting_regis_and_dettlaff.w2scene"|Line text|DTLF_Q703_01161884|Не отвечай. Я знаю ответ и не терплю лжи. Убил бы. Вот и славно. Это значит, у тебя и правда есть какие-то принципы.
 1161898|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_gp_unicorn_grlt_cmnts.w2scene"|Line text|GRLT_Q701_01161898|Ну-ну. Спокойней.
 1161900|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_gp_unicorn_grlt_cmnts.w2scene"|Line text|GRLT_Q701_01161900|А-а. Почти поймал.
 1161902|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_gp_unicorn_grlt_cmnts.w2scene"|Line text|GRLT_Q701_01161902|Зараза.
@@ -78779,10 +78815,15 @@
 1172526|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\vset_toussaint_armourer_13.w2scene"|Line text|TARR13_VSET_01172526|Пардон, это от меня чесноком пахнуло!
 1172528|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\vset_toussaint_armourer_13.w2scene"|Line text|TARR13_VSET_01172528|Ты тоже такой голодный?
 1172530|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_00_contract.w2scene"|Line text|KNOB_SQ703_01172530|Разумеется, можно и так. Но им тоже полагается минута отдыха, правда, господа? А-ха-ха… Кроме того, я богат. Кто мне запретит?
+1172569|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01172569|[PL] Moja rodzina zajmuje się winiarstwem od czterech pokoleń...
+1172571|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01172571|[PL] Z marnym skutkiem - dlatego to mnie, a nie jemu powinien pan sprzedać Belgaard.
+1172579|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|KMRL_LW_01172579|[PL] Ekhm, jako urzędnik działam w imieniu księstwa, a Belgaard jest teraz własnością skarbu państwa.
 1172581|293b3b0f|item_name_q705_dirty_clothes|CUSTOM|Blood and Wine_Quest||Грязная одежда
 1172590|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Choice line||Отцепитесь, мне нужно спасти человека.
+1172592|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|KMRL_LW_01172592|[PL] Osobistym życzeniem ministra skarbu jest, aby Belgaard trafiła w ręce odpowiedzialnego zarządcy, a ponoć oboje macie problemy w swoich posiadłościach. Dopóki się z nimi nie uporacie, o sprzedaży Belgaard nie ma mowy.
 1172596|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|GRLT_Q701_01172596|Пустите, речь идёт о человеческой жизни.
 1172598|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q701_wine_festival\scenes\q701_25b_geralt_cheater_fistfight.w2scene"|Line text|TNM01_Q701_01172598|Какая наглая ложь.
+1172600|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01172600|[PL] No i co? Zadowolony jesteś? Wszystko przez ciebie!
 1172604|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7018_last_one\scenes\mq7018_01_meeting_count.w2scene"|Line text|TNM02_MQ7018_01172604|И вот осталась единственная, последняя особь. Самка. Ещё в прошлом году их было двое. Но партнёр Иокасты погиб.
 1172622|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_07a_mangragora_investigation_gpl.w2scene"|Line text|GRLT_Q703_01172622|Запах духов очень отчётливый.
 1172624|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_07a_mangragora_investigation_gpl.w2scene"|Line text|ANHE_Q703_01172624|Пойдём на запах. Нельзя терять времени.
@@ -78803,6 +78844,9 @@
 1172657|00000000||CStoryScene "dlc\bob\data\gameplay\community\dialogues\voicesets\vset_toussaint_barber_01.w2scene"|Line text|TBRB01_VSET_01172657|Раны пророка Лебеды!
 1172666|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_02_contract_completed.w2scene"|Line text|GRLT_SQ703_01172666|Я буду. До встречи.
 1172670|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_02_contract_completed.w2scene"|Line text|GRLT_SQ703_01172670|Хорошо, загляну, если буду поблизости. Удачи.
+1172677|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01172677|[PL] Przeze mnie? Jesteś obłąkana, dziewczyno.
+1172681|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|GRLT_LW_01172681|[PL] Nie wygląda mi na przeklętą. Za to na bardzo, bardzo wściekłą. Musiałeś jej się nieźle narazić...
+1172683|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01172683|[PL] Ta? A ty co za jeden? Znawca kobiet?
 1172686|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q705_epilog\scenes\q705_11_talkto_shoemaker.w2scene"|Line text|REGI_Q705_01172686|Мы как раз говорили с молодым человеком о странном составе местных почв.
 1172689|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q705_epilog\scenes\q705_11_talkto_shoemaker.w2scene"|Line text|GRLT_Q705_01172689|Мы хотим тебя спросить.
 1172691|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q705_epilog\scenes\q705_11_talkto_shoemaker.w2scene"|Line text|TBY01_Q705_01172691|Опять? Милости просим, сам я за свободу слова, так что любыми сведениями охотно поделюсь. А что бы вам и обувку не вычистить по случаю?
@@ -78911,6 +78955,8 @@
 1172990|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_02_tutorials.w2scene"|Choice line||Вернёмся к этому позже.
 1172992|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7018_last_one\scenes\mq7018_01_meeting_count.w2scene"|Line text|GRLT_MQ7018_01172992|Я и сам его найду. У него очень характерные следы. И второе тело поищу. Ты говорил, что купцов было двое.
 1172996|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_16_arena_team_start.w2scene"|Line text|LEPA_SQ701_01172996|И мира здесь не будет, пока одна из них на землю не повергнет соперников своих.
+1172997|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Choice line||[PL] Pomogę ci.
+1172998|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Choice line||[PL] Porozmawiajmy o nagrodzie.
 1173000|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02_search_for_damien_oneliners.w2scene"|Line text|GRLT_Q704_01173000|Дамьен? Дамьен!
 1173002|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02_search_for_damien_oneliners.w2scene"|Line text|REGI_Q704_01173002|Он не отвечает… Но среди убитых его тоже нет.
 1173004|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q704_truth\scenes\q704_02_search_for_damien_oneliners.w2scene"|Line text|GRLT_Q704_01173004|Пора осмотреться.
@@ -79055,15 +79101,29 @@
 1173472|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_01_safari_trip.w2scene"|Line text|KNOB_SQ703_01173472|Можно идти дальше.
 1173474|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_01_safari_trip.w2scene"|Line text|GRLT_SQ703_01173474|Прости, что-то меня занесло.
 1173481|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7011_wheres_my_money\scenes\mq7011_02_gp_geralt_comment.w2scene"|Line text|GRLT_MQ7011_01173481|Чёрт бы побрал эту бюрократию…
+1173494|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01173494|[PL] Na tyle mnie nie stać.
+1173496|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01173496|[PL] Nie mógłbyś trochę spuścić?
+1173498|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|GRLT_LW_01173498|[PL] Mógłbym się tym zająć, ale nie za darmo.
+1173500|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01173500|[PL] Ma się rozumieć. Jaka jest twoja stawka?
 1173509|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_01_safari_trip.w2scene"|Line text|KNOB_SQ703_01173509|Я скорее думал о ведьмачьей магии. Вы ведь, говорят, умеете воздействовать на простых существ.
 1173511|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_01_safari_trip.w2scene"|Line text|GRLT_SQ703_01173511|Ну-у… да. Можно попробовать. Но ничего не обещаю.
+1173513|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01173513|[PL] Brzmi uczciwie.
+1173515|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01173515|[PL] Może i jestem w potrzebie, ale nie dam sie ograbić!
 1173517|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_01_safari_trip.w2scene"|Line text|GRLT_SQ703_01173517|Посмотрим, что я смогу сделать…
 1173519|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_01_safari_trip.w2scene"|Line text|GRLT_SQ703_01173519|Ищи, куда встать.
 1173521|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_13_vivienne_tent.w2scene"|Line text|GRLT_SQ701_01173521|Похоже, птица куда-то меня ведёт.
 1173523|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq703_wine_wars\scenes\sq703_01_safari_trip.w2scene"|Line text|KNOB_SQ703_01173523|Не убивай их!
+1173533|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01173533|[PL] Moja winnica leży na [zachód] stąd. Na pewno trafisz. A teraz wybacz, ale muszę pogadać z urzędnikiem. Może coś jeszcze wskóram.
+1173534|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Choice line||[PL] Pomogę ci.
+1173541|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01173541|[PL] Przykro mi, na tyle mnie nie stać.
+1173543|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01173543|[PL] Czuję, że wkrótce sie dogadamy...
+1173545|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01173545|[PL] Dobrze, niech będzie.
 1173548|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_08_talk_with_lounge_guard.w2scene"|Line text|BTHGS01_Q703_01173548|Мне жаль, вход только для членов «Мандрагоры».
 1173550|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_08_talk_with_lounge_guard.w2scene"|Line text|BTHGS01_Q703_01173550|Я уже говорил, вход только для членов «Мандрагоры». Ничем не могу помочь.
 1173552|00000000||CStoryScene "dlc\bob\data\quests\main_quests\quest_files\q703_all_for_one\scenes\q703_08_talk_with_lounge_guard.w2scene"|Line text|ANHE_Q703_01173552|Пойдём, что-нибудь придумаем…
+1173570|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01173570|[PL] Chcesz wykorzystać moje nieszczęście! Myślałam, że pomożesz mi bez takich podłych sztuczek...
+1173578|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01173578|[PL] Gdybyś mnie szukał, będę tutaj, muszę dopilnować, żeby Liam nie wykręcił mi jakiegoś numeru za plecami.
+1173582|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01173582|[PL] Zresztą, nieważne. Zaczepiłam cię, bo tak się składa, że też chcę kupić Belgaard, ale w mojej winnicy, Vermentino, nie dzieje się ostatnio najlepiej.
 1173584|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_28_lake_village_barber.w2scene"|Line text|GRLT_SHOP_01173584|Угу.
 1173586|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_28_lake_village_barber.w2scene"|Line text|TBRB02_SHOP_01173586|Людей перебил, овец сожрал, хозяйство разрушил… Ой, хорошо, что всё уже кончилось. Спасибо!
 1173588|00000000||CStoryScene "dlc\bob\data\living_world\merchants\shop_28_lake_village_barber.w2scene"|Line text|TBRB02_SHOP_01173588|Если хочешь, я тебя постригу. Только подожди минутку, а то у меня ещё руки трясутся!
@@ -80868,6 +80928,18 @@
 1179431|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7021_left_behind\scenes\mq7021_02_brothers_vs_geralt_outside.w2scene"|Line text|BCM02_MQ7021_01179431|Мы думали, это подешевле будет… Но не намного… Может, уступишь чуть-чуть?
 1179433|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7021_left_behind\scenes\mq7021_02_brothers_vs_geralt_outside.w2scene"|Line text|BCM02_MQ7021_01179433|Цена честная…
 1179435|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7021_left_behind\scenes\mq7021_02_brothers_vs_geralt_outside.w2scene"|Line text|BCM02_MQ7021_01179435|Мы не Крёзы, у нас столько не наберётся.
+1179516|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179516|[PL] To stanowczo za dużo.
+1179518|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179518|[PL] To stanowczo za drogo.
+1179520|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01179520|[PL] To przesada.
+1179522|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179522|[PL] Nie dałoby się trochę taniej?
+1179524|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179524|[PL] Spuść jeszcze odrobinę, dobrze?
+1179526|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179526|[PL] Dobrze, mamy umowę.
+1179528|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179528|[PL] Nie, to przesada. Weź, proszę, co dajemy, na więcej naprawdę nas nie stać.
+1179530|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179530|[PL] Uczciwa propozycja.
+1179532|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|MTHL_LW_01179532|[PL] Przykro mi, na tyle mnie nie stać. Ale liczę, że i tak mi pomożesz.
+1179534|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01179534|[PL] Opuść trochę, co? Jeszcze nie jestem milionerem.
+1179536|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01179536|[PL] Brzmi sensownie, zgoda.
+1179538|00000000||CStoryScene "dlc\bob\data\living_world\quests\lw_wine_wars\scenes\lw_ww_old.w2scene"|Line text|LIAM_LW_01179538|[PL] Mam wrażenie, że wykorzystujesz to, że jestem w potrzebie. Weź, ile daję, na więcej nprawdę mnie nie stać.
 1179554|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7001_rest_in_peace\scenes\mq7001_10_investigation_comments.w2scene"|Line text|GRLT_MQ7001_01179554|Ладно, уже темно. Где бы тут спрятаться?
 1179556|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7001_rest_in_peace\scenes\mq7001_10_investigation_comments.w2scene"|Line text|GRLT_MQ7001_01179556|Может, за статуей?
 1179566|00000000||CStoryScene "dlc\bob\data\quests\minor_quests\quest_files\mq7002_stubborn_knight\scenes\mq7002_00a_fiancee_proposal.w2scene"|Line text|GRLT_MQ7002_01179566|Так близко к городу? И что, ни один смельчак не пытался от него избавиться?
@@ -90989,9 +91061,9 @@
 1206854|3a91f126|item_name_poi_bar_a_01_b_note|CUSTOM|Blood and Wine LW||Записки первого казначея ганзы Филиберта Четырёхпалого
 1206855|3e45d4a6|item_name_poi_bar_a_01_b_note_text|CUSTOM|Blood and Wine LW||Доходы и расходы за месяц блате<br><br>День третий<br>На взгорьях Пустоши гнездятся летучие ящеры. Убивают наших людей. Последний раз схватили Гилберта. Чудище похитило его прямо со стены. Гилберт всегда был чуткий, только какая чуткость, когда ссышь? Филиберт в бешенстве. Стоимость обучения полноправного бойца в нашем отряде немалая, и если его чудовище сожрёт, так это просто расточительность.<br>День седьмой<br>Караван купцов из Восточного Туссента попал в засаду. Охраны нет, сопротивления никакого. Доходы небольшие: ткани, которые они везли, интересны, скорее, дикарям со Скеллиге, только никто из наших туда не собирается. Филиберт перенервничал и убил купца по имени Люмирекс. Остальные купцы отправились в обратный путь, на восток.<br>День одиннадцатый<br>Наши разъезды выследили троих людей, пробиравшихся через лес. Все они выглядели как нищие и выдавали себя за нищих. Не дали мы себя провести. Схватили их. Оказалось, это ювелиры, которые несут золото из шахты в Мехте. Сырая руда, но пробы хорошие. Филиберт велел убить ювелиров, он обманщиков терпеть не может, как язву.<br>День семнадцатый.<br>По другую сторону реки Сансретур расположилась экспедиция Имперской академии из Кастель-Гропеана. У учёных обычно деньга не водится, зато у них удобные шатры и много выпивки. Так что вынесли приговор. Филиберт послал туда нескольких людей.<br>День двадцать третий.<br>Почти что две недели на большаке ничего не происходит. Зато странствующие рыцари напали на нескольких наших. Погибли двое, один, раненый, бежал. Мы потеряли амуницию, а она стоит немало. Филиберт велел бить раненого батогами за неосторожность, тот не выдержал и умер.<br>День двадцать четвёртый.<br>Повезло нам. Мы перехватили караван виноторговцев, идущий с юга. Они продали товар и держали при себе много денег. По предварительным подсчётам, получается по 400 крон на каждого из наших. Филиберт ещё не решил, будем ли делиться поровну.<br>День двадцать восьмой<br>Отряд, посланный в хозяйство Базан за продовольствием, не вернулся. С провиантом скверно. Одним алкоголем сыт не будешь, да и золотом ещё никто не наедался. Надо будет ограбить пару деревень.<br>День тридцатый<br>Подвожу итоги месяца блате. Мы вышли в плюс, и намного. Похоже, останемся в этих местах на следующий месяц.
 1206857|00000000||CStoryScene "dlc\bob\data\quests\sidequests\quest_files\sq701_tournament\scenes\sq701_19_vivienne_decision.w2scene"|Line text|VIVI_SQ701_01206857|Что ты тут делаешь, рыцарь?! Это личный разговор. Геральт, что это значит? Ты с ним что-то замышляешь за моей спиной?
-1206859|b01e100b|item_name_sq701_registration_note|CUSTOM|Blood and Wine_Quest||Запись турнирного писаря.
+1206859|427f05d7|item_name_sq701_registration_note_duplicate|CUSTOM|Blood and Wine_Quest||Запись турнирного писаря.
 1206861|18623ce1|item_name_sq701_registration_note_text|CUSTOM|Blood and Wine_Quest||Международный рыцарский турнир под патронажем девы Вивиенны де Табрис, 1275 г.<br><br>Участники зарегистрированы и квалифицированы, чтобы принять участие в соревнованиях:<br><br>Грегуар де Горгон, победитель предыдущего турнира. Не будет участвовать в отдельных соревнованиях и выйдет на поединок в финальном поединке с тем, кто наберёт наибольшее количество очков (всё указывает на то, что Грегуар защитит свой титул).<br><br>Анси, принц Лирии и Ривии, участвует третий раз подряд.<br><br>Хорм Акерспаарк, принц Мехта, родной брат императора Эмгыра, четвёртый раз на турнире.<br><br>Пальмерин, барон де Лонфаль, шестой раз на турнире.<br><br>Донимир из Труа, рыцарь реданский, первый раз на турнире.<br><br>Раинфарн из Аттре, седьмой раз на турнире, победитель 1269 года.<br><br>Ги де Буа-Фресне из Метинны, в родстве второй степени с Ренаром де Буа-Фресне, странствующим рыцарем её сиятельства, третий раз на турнире.<br><br>Дельвин из Крижо, молодой рыцарь, первый раз на турнире.<br><br>Тайллес из Дорндаля, рыцарь Ордена Пылающей Розы, первый раз на турнире.<br><br>Ллинос из Метинны, третий раз на турнире.<br><br>Гильом де Лонфаль, племянник барона Пальмерина по отцу, первый раз на турнире. [позднейшая дописка] В результате травмы Гильом отказался от участия в пользу другого рыцаря.
-1206862|65112c9e|item_name_sq701_vivienne_note|CUSTOM|Blood and Wine_Quest||Записки Вивиенны
+1206862|2691c6aa|item_name_sq701_vivienne_note_duplicate|CUSTOM|Blood and Wine_Quest||Записки Вивиенны
 1206864|45d9042e|item_name_sq701_vivienne_note_text|CUSTOM|Blood and Wine_Quest||Расходы, блате-феаинн<br><br>14 локтей сукна: 80 крон<br>сапоги (драконьей шкуры): 140 крон<br>седло скаковое: 280 крон<br>мазь магическая: 1400 крон (всего)
 1206865|821137d2|item_name_q704_fluff_orphanage_journal|CUSTOM|Blood and Wine Fluff||Дневничок
 1206866|66e3d97a|item_name_q704_fluff_orphanage_journal_text|CUSTOM|Blood and Wine Fluff||Дорогой дневничок!<br><br>Вот уже третья неделя, как госпожа Ориана забрала меня с улицы. Наконец-то у меня есть что есть и пить. Каждый день я играю с другими детьми. Здесь даже лучше, чем дома, потому что там редко что можно было достать из кастрюли, а как мама умерла, так и вообще ничего не было.<br><br>Сегодня я играл с Мири и Томмом. Сперва в колечко, потом в прятки и в шашки. В конце мы играли в пятнашки. Вот это игра! Приехала повозка от госпожи Орианы, вся нагруженная едой. Там были сладкие булки, фрукты и пирожные, много, много вкусных вещей. Госпожа Ориана лучше всех!<br><br>С самого утра нас навестила госпожа Ориана. Сначала она немножко с нами поговорила, потом она нам пела, а потом взяла Ясю в другую комнату. Все дети ему завидовали. Когда он вышел, он был немного бледный и на шее у него были такие маленькие красные точечки. Зато он нёс с собой целый кулёк шоколадок. Мири говорит, что иногда госпожа Ориана забирает какого-нибудь ребёнка и что-то с ним делает, только я не понял что. А потом даёт подарок. Хорошо бы в следующий раз она меня взяла.<br><br>Сегодня весь день шёл дождь и было немножко скучно. Томм сказал, что я глупый, но я ему не верю, потому что он сам глупый. Может, завтра приедет госпожа Ориана и я получу от неё подарок. Вот тогда я ему покажу…<br><br>Получилось! Приехала госпожа Ориана и выбрала меня. Я пошёл с ней в ту маленькую комнату, она велела мне открыть шею, а потом вроде бы меня укусила. Сильно больно не было, только потом немного кружилась голова. Но это неважно, потому что она мне подарила деревянный меч! Ни у кого такого нет! Томм умрёт от зависти!
@@ -94078,7 +94150,6 @@
 1224028|3635cd63|credits_DESIGNERS|CUSTOM|Credits||ДИЗАЙНЕРЫ
 1224029|1b2c5ece|credits_ENGINEERING|CUSTOM|Credits||ИНЖЕНЕРЫ
 1224030|b6aabce8|credits_MANAGER|CUSTOM|Credits||МЕНЕДЖЕР
-1224031|f6f8965f|credits_ENGINEERS|CUSTOM|Credits||ИНЖЕНЕРЫ
 1224032|b0588c34|credits_CONCEPT_ARTIST_COORDINATOR|CUSTOM|Credits||КООРДИНАТОР КОНЦЕПТ-ХУДОЖНИКОВ
 1224033|0cf281ee|credits_EXPERT_CONCEPT_ARTIST|CUSTOM|Credits||ЭКСПЕРТНЫЙ КОНЦЕПТ-ХУДОЖНИК
 1224034|5f251e0d|credits_EXPERT_CHARACTER_ARTIST|CUSTOM|Credits||ЭКСПЕРТНЫЙ ХУДОЖНИК ПЕРСОНАЖЕЙ
@@ -94323,7 +94394,7 @@
 1226821|ff31fdfb|ui_gog_error_close_button|CUSTOM|NGU||Закрыть
 1226822|93ea9721|ui_gog_pc_signin_instructions|CUSTOM|NGU||Чтобы получить награды, войдите в учётную запись GOG GALAXY 2.0 и запустите игру.
 1226823|6766a77c|ui_gog_red_launcher_signin_instructions|CUSTOM|W310||Чтобы получить награды и воспользоваться меню модификаций, выполните вход в REDlauncher и запустите игру.
-1226886|3d4ba23e|photomode_params_fov|CUSTOM|NGU||Угол обзора
+1226885|c984189c|photomode_tabs_camera|CUSTOM|NGU||Камера
 1226888|cd310f08|photomode_tabs_effect|CUSTOM|NGU||Эффекты
 1226889|3dac293a|photomode_params_autofocus|CUSTOM|NGU||Автофокусировка
 1226890|4b7104bf|photomode_params_aperture|CUSTOM|NGU||Диафрагма
@@ -95468,7 +95539,7 @@ Joy-Con 2 (R) её заменит — просто отсоедините е�
 1449798|85b18c03|skill_domination_description_level_1_2|CUSTOM|All||Аксий может действовать на две цели одновременно, но его эффективность при этом снижается на $I$%.
 1449799|1db55452|skill_domination_description_level_3|CUSTOM|All||Аксий может действовать на две цели одновременно.
 1449800|78cff8d2|skill_exploding_shield_name|CUSTOM|All||Взрывной щит
-1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Когда щит Квена разрушается, он отбрасывает врагов назад. Сила отбрасывания увеличивается с ростом ранга. 
+1449801|1ca2b7d5|skill_exploding_shield_description|CUSTOM|All||Когда щит Квена разрушается, он отбрасывает врагов назад. Сила отбрасывания увеличивается с ростом ранга. Отражает $I$% поглощённого урона обратно в атакующего.
 1449802|2a4a657e|skill_far_reaching_aard_name|CUSTOM|All||Дальнобойный Аард
 1449803|7820f1a9|skill_far_reaching_aard_description|CUSTOM|All||Увеличивает радиус поражения Аарда на $I$ м.
 1449804|f161425d|skill_magic_trap_name|CUSTOM|All||Магическая ловушка
@@ -95539,7 +95610,7 @@ Joy-Con 2 (R) её заменит — просто отсоедините е�
 1449914|a32902ca|skill_element_of_surprise_name|CUSTOM|All||Элемент неожиданности
 1449915|d8e106dd|skill_element_of_surprise_description|CUSTOM|All||Попадание бомбой по врагам на 10 секунд увеличивает ваш урон в рукопашном бою на $I$%.
 1449916|1f023a06|skill_griffin_school_techniques_name|CUSTOM|All||Техника Школы Грифона
-1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Каждый элемент среднего доспеха увеличивает мощь Знаков на $I$% и скорость восстановления энергии на $I$/сек.
+1449917|c0527421|skill_griffin_school_techniques_description|CUSTOM|All||Каждый элемент среднего доспеха увеличивает мощь Знаков на $I$% и скорость восстановления энергии на $F$/сек.
 1449918|75befc7b|skill_manticore_school_techniques_name|CUSTOM|All||Техника Школы Мантикоры
 1449919|bc00f40c|skill_manticore_school_techniques_description|CUSTOM|All||Каждый элемент среднего доспеха увеличивает урон от меча на $I$% и урон от бомб на $I$%.
 1449920|021f5b8f|skill_metabolism_boost_name|CUSTOM|All||Ускорение метаболизма
@@ -95554,7 +95625,7 @@ Joy-Con 2 (R) её заменит — просто отсоедините е�
 1449929|045a3e77|skill_sun_and_starts_description|CUSTOM|All||Днём вне боя здоровье восстанавливается на $I$ ед. в секунду быстрее. Ночью в бою энергия восстанавливается на $I$ ед. в секунду быстрее.
 1449930|0e89bfbb|skill_survival_instinct_name|CUSTOM|All||Инстинкт выживания
 1449931|097008cc|skill_survival_instinct_description|CUSTOM|All||Увеличивает максимальный уровень здоровья на $I$%.
-1449932|116f57df|skill_viper_school_techniques_name|CUSTOM|All||Техника Школы Гадюки
+1449932|116f57df|skill_viper_school_techniques_name|CUSTOM|All||Техника Школы Змеи
 1449933|3939c028|skill_viper_school_techniques_description|CUSTOM|All||Каждый элемент среднего доспеха увеличивает максимум очков здоровья на $I$% и урон от яда на $I$%.
 1449934|00b70d22|skill_wolven_school_techniques_name|CUSTOM|All||Техника Школы Волка
 1449935|40bb2985|skill_wolven_school_techniques_description|CUSTOM|All||Каждый элемент среднего доспеха увеличивает урон от оружия на $I$% и мощь Знаков на $I$%.
@@ -95692,8 +95763,8 @@ Joy-Con 2 (R) её заменит — просто отсоедините е�
 1453581|c75da5f4|pm_prop_breath_of_the_north|CUSTOM|All||Дыхание Севера
 1453582|c87b96e6|pm_prop_tor_lara|CUSTOM|All||Тор Лара
 1453583|b04616c7|pm_prop_tor_zirael|CUSTOM|All||Тор Зираэль
+1453645|3d4ba23e|photomode_params_fov|CUSTOM|Menu||Угол обзора
 1453646|6c2eeb6c|photomode_params_tilt|CUSTOM|Menu||Наклон
-1453649|c984189c|photomode_tabs_camera|CUSTOM|Menu||Камера
 1453666|6b70b8f1|item_category_w3r_fire_armor_description|CUSTOM|W310||Крепкая броня, которая не один десяток лет прослужит вам на Пути. 
 1453667|081da587|item_name_w3r_fire_armor|CUSTOM|W310||Доспех алой птицы
 1453668|082a6809|item_name_w3r_fire_boots|CUSTOM|W310||Сапоги алой птицы
@@ -95798,8 +95869,8 @@ Joy-Con 2 (R) её заменит — просто отсоедините е�
 1458301|ad399362|skill_delusion_description_level_2|CUSTOM|All||Цель не приближается к Геральту, пока тот накладывает Аксий. Эффективность Аксия в диалогах увеличивается.
 1458302|ad399363|skill_delusion_description_level_3|CUSTOM|All||Цель не приближается к Геральту, пока тот накладывает Аксий. Эффективность Аксия в диалогах увеличивается.
 1458303|1db55451|skill_domination_description_level_2|CUSTOM|All||Аксий может действовать на две цели одновременно, но его эффективность при этом снижается на $I$%.
-1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Когда щит Квена разрушается, он отбрасывает врагов назад. Сила отбрасывания увеличивается с ростом ранга. 
-1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Когда щит Квена разрушается, он отбрасывает врагов назад. Сила отбрасывания увеличивается с ростом ранга. 
+1458304|33a48fcd|skill_exploding_shield_description_level_2|CUSTOM|All||Когда щит Квена разрушается, он отбрасывает врагов назад. Сила отбрасывания увеличивается с ростом ранга. Отражает $I$% поглощённого урона обратно в атакующего.
+1458305|33a48fce|skill_exploding_shield_description_level_3|CUSTOM|All||Когда щит Квена разрушается, он отбрасывает врагов назад. Сила отбрасывания увеличивается с ростом ранга. Отражает $I$% поглощённого урона обратно в атакующего.
 1458306|3685b5a1|skill_far_reaching_aard_description_level_2|CUSTOM|All||Увеличивает радиус поражения Аарда на $I$ м.
 1458307|3685b5a2|skill_far_reaching_aard_description_level_3|CUSTOM|All||Увеличивает радиус поражения Аарда на $I$ м.
 1458308|796b9ee3|skill_magic_trap_description_level_3|CUSTOM|All||Выпускает магический разряд, наносящий урон и замедляющий врагов в радиусе 14 метров. Урон увеличивается на $I$%.
@@ -95867,8 +95938,8 @@ Joy-Con 2 (R) её заменит — просто отсоедините е�
 1458377|0ca15dff|skill_gourmet_description_level_3|CUSTOM|All||Восстановление здоровья после еды длится $I$ мин.
 1458378|924756d5|skill_element_of_surprise_description_level_2|CUSTOM|All||Попадание бомбой по врагам на 10 секунд увеличивает ваш урон в рукопашном бою на $I$%.
 1458379|924756d6|skill_element_of_surprise_description_level_3|CUSTOM|All||Попадание бомбой по врагам на 10 секунд увеличивает ваш урон в рукопашном бою на $I$%.
-1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Каждый элемент среднего доспеха увеличивает мощь Знаков на $I$% и скорость восстановления энергии на $I$/сек.
-1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Каждый элемент среднего доспеха увеличивает мощь Знаков на $I$% и скорость восстановления энергии на $I$/сек.
+1458380|fe294019|skill_griffin_school_techniques_description_level_2|CUSTOM|All||Каждый элемент среднего доспеха увеличивает мощь Знаков на $I$% и скорость восстановления энергии на $F$/сек.
+1458381|fe29401a|skill_griffin_school_techniques_description_level_3|CUSTOM|All||Каждый элемент среднего доспеха увеличивает мощь Знаков на $I$% и скорость восстановления энергии на $F$/сек.
 1458382|79baa504|skill_manticore_school_techniques_description_level_2|CUSTOM|All||Каждый элемент среднего доспеха увеличивает урон от меча на $I$% и урон от бомб на $I$%.
 1458383|79baa505|skill_manticore_school_techniques_description_level_3|CUSTOM|All||Каждый элемент среднего доспеха увеличивает урон от меча на $I$% и урон от бомб на $I$%.
 1458384|6215bb70|skill_metabolism_boost_description_level_2|CUSTOM|All||Накопление интоксикации от эликсиров снижается на $I$% за каждое потраченное очко адреналина. Не действует на мутагенные отвары.
@@ -96560,7 +96631,7 @@ Joy-Con 2 (R) её заменит — просто отсоедините е�
 1478733|e63c4b61|credits_SENIOR_CQA_AND_L_D_MANAGER|CUSTOM|Credits||СТАРШИЙ МЕНЕДЖЕР ПО СООТВЕТСТВИЮ СТАНДАРТАМ (QA) И КОРПОРАТИВНОМУ ОБУЧЕНИЮ
 1479191|00000000||CStoryScene "dlc\dlc2\data\quests\scenes\shop_whitebridge_barber_01.w2scene"|Choice line||Бунтарская причёска.
 1479505|9f0ce14f|credits_CDPR_OTHER_DEV|CUSTOM|Credits||ОТДЕЛЫ РАЗРАБОТКИ CD PROJEKT RED
-1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||СОЗДАТЕЛЬ МОДИФИКАЦИЙ HDPR
+1479506|942725f3|credits_HDPR_MOD_CREATOR|CUSTOM|Credits||СОЗДАТЕЛЬ МОДИФИКАЦИЙ HDRP
 1479507|fd0194e2|credits_SENIOR_AUDIO_ENGINEER|CUSTOM|Credits||СТАРШИЙ ИНЖЕНЕР ЗВУКА
 1479508|9de40e10|credits_EXPERT_GAMEPLAY_ANIMATOR|CUSTOM|Credits||ЭКСПЕРТНЫЙ АНИМАТОР ИГРОВОГО ПРОЦЕССА
 1479509|2c4a6a10|credits_EXPERT_ENGINEER_COORDINATOR|CUSTOM|Credits||ЭКСПЕРТНЫЙ ИНЖЕНЕР, КООРДИНАТОР
