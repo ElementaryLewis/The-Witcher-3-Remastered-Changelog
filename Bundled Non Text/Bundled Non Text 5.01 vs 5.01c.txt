@@ -1,0 +1,13 @@
+Sorted by Notepad++; Group by Lewis Elementary (human)
+
+<==> fla (2) <==>
+gameplay\gui_new\fla\witcher3\gwint\DeckBuilder.fla
+gameplay\gui_new\fla\witcher3\menus\journal\panel_journal_quests.fla
+
+<==> w2anims (3) <==>
+animations\animals\pig\pig_animation.w2anims
+animations\animals\wolf\wolf_animation.w2anims
+animations\mimics\ep1_geralt_mimic_animation.w2anims
+
+<==> w2beh (1) <==>
+gameplay\behaviors\pc\behaviorgraph\pc_overlay.w2beh
