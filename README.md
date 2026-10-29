@@ -40,14 +40,15 @@ For instance:
 | [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/15e2b662b3a9145e7d24e72c4e8ab37aac0f2db3 "XML 4.02 vs 4.03") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/bbdc09e016e5c0add4321a1140e19deff0e402eb "Scripts 4.04b vs 5.00b") | 2026/09/29 |
 | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/bbdc09e016e5c0add4321a1140e19deff0e402eb "XML 4.04b vs 5.00") | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/21100530393759f26995511355feb37de88d1ad9 "XML 5.00b vs 5.01") | 2026/10/08 |
 | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/21100530393759f26995511355feb37de88d1ad9 "XML 5.00b vs 5.01") | [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7b971b4b137db9379ab4ccef91d5f6d32670dad8 "XML 5.01 vs 5.01c") | 2026/29/10 |
-| [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7b971b4b137db9379ab4ccef91d5f6d32670dad8 "XML 5.01 vs 5.01c") | [5.0X]( "XML 5.01 vs 5.XX") | 2026/XX/XX |
+| [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7b971b4b137db9379ab4ccef91d5f6d32670dad8 "XML 5.01 vs 5.01c") | [5.0X]( "XML 5.01c vs 5.XX") | 2026/XX/XX |
 
 ### CSV
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
 | ---------------- |:-----------:| ------------:|
 | [4.04b](https://github.com/ElementaryLewis/Witcher-3-Next-Gen-Changelog/commit/d0e37d82188654cd5e4abb2f4ff70edfcc097688 "CSV 4.04 vs 4.04a_REDkit") | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7907fdbb70f3fd2609b787eba84478ab498caefb "Scripts 4.04b vs 5.00b") | 2026/09/29 |
 | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7907fdbb70f3fd2609b787eba84478ab498caefb "CSV 4.04b vs 5.00b") | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/d2f39e02a1b794adb52eff3d04f456b4dbeada7f "CSV 5.00b vs 5.01") | 2026/10/08 |
-| [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/d2f39e02a1b794adb52eff3d04f456b4dbeada7f "CSV 5.00b vs 5.01") | [5.XX]("CSV 5.00b vs 5.01") | 2026/XX/XX |
+| [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/d2f39e02a1b794adb52eff3d04f456b4dbeada7f "CSV 5.00b vs 5.01") | [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/3a55a70d1b75b56ffe1d6b070c1f1f3ff072a9bf "CSV 5.00b vs 5.01") | 2026/29/10 |
+| [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/3a55a70d1b75b56ffe1d6b070c1f1f3ff072a9bf "CSV 5.01 vs 5.01c") | [5.XX]("CSV 5.01c vs 5.XX") | 2026/XX/XX |
 
 ### W3STRINGS
 | PREVIOUS VERSION | NEW VERSION | DATE RELEASE |
@@ -62,7 +63,7 @@ For instance:
 | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%204.04b%20vs%205.00b.txt "Bundled 4.04b vs 5.00b") | [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00b%20vs%205.00c.txt "Bundled 5.00b vs 5.00c") | 2026/10/01 |
 | [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00b%20vs%205.00c.txt "Bundled 5.00b vs 5.00c") | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00c%20vs%205.01.txt "Bundled 5.00c vs 5.01") | 2026/10/08 |
 | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.00c%20vs%205.01.txt "Bundled 5.00c vs 5.01") | [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.01%20vs%205.01c.txt "Bundled 5.01 vs 5.01c") | 2026/10/29 |
-| [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.01%20vs%205.01c.txt "Bundled 5.01 vs 5.01c") | [5.XX]( Bundled 5.01 vs 5.XX") | 2026/XX/XX |
+| [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/blob/main/Bundled%20Non%20Text/Bundled%20Non%20Text%205.01%20vs%205.01c.txt "Bundled 5.01 vs 5.01c") | [5.XX]( Bundled 5.01c vs 5.XX") | 2026/XX/XX |
 
 
 #### Our Discord Servers:
