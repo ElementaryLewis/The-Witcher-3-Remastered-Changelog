@@ -590,15 +590,7 @@ class BTTaskArchesporManager extends IBehTreeTask
 				OpenBaseEntity( bulb );
 			}
 		}
-		else if( eventName == 'CloseQ803' )
-		{
-			bulb = GetFarthestBaseEntity();
-			
-			if( bulb )
-			{
-				TeleportUnderBaseEntity( bulb );
-			}
-		}
+
 		else if( eventName == 'RefreshBaseEntitiesList' )
 		{
 			if( !data.manualBulbCleanup )
@@ -706,7 +698,7 @@ class BTTaskArchesporManagerDef extends IBehTreeTaskDefinition
 		listenToGameplayEvents.PushBack( 'CloseAndResetBulb' );
 		listenToGameplayEvents.PushBack( 'CloseBulb' );
 		listenToGameplayEvents.PushBack( 'RepositionToFarthest' );
-		listenToGameplayEvents.PushBack( 'CloseQ803' );
+
 		listenToGameplayEvents.PushBack( 'RefreshBaseEntitiesList' );
 		listenToGameplayEvents.PushBack( 'OnMonsterCombatStart' );
 		listenToGameplayEvents.PushBack( 'EmergencyCreateBulb' );

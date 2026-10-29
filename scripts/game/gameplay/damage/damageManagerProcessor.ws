@@ -3391,11 +3391,7 @@ class W3DamageManagerProcessor extends CObject
 			dismember = true;
 			dismemberExplosion = true;
 		}
-		else if ( actorVictim.HasTag( 'q803_ScoloForceFinisher' ) && playerAttacker && attackAction && attackAction.IsActionMelee() ) 
-		{			
-			dismember = true;
-			dismemberExplosion = false;
-		}
+
 		else
 		{
 			inv = actorAttacker.GetInventory();
