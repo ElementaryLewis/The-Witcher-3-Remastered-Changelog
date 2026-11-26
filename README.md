@@ -31,7 +31,8 @@ For instance:
 | [5.00b](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/e026f253c8790ebcfe545188eb0ae77978dc1178 "Scripts 4.04b vs 5.00b") | [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/214904d1349a26ee174a2c2f7721c5d73ba6357c "Scripts 5.00b vs 5.00c") | 2026/10/01 |
 | [5.00c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/214904d1349a26ee174a2c2f7721c5d73ba6357c "Scripts 5.00b vs 5.00c") | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7459ce831d2b9f2ded4b5541fc5004b4d67efcca "Scripts 5.00c vs 5.01") | 2026/10/08 |
 | [5.01](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/7459ce831d2b9f2ded4b5541fc5004b4d67efcca "Scripts 5.00c vs 5.01") | [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/94c56bdbdba2ce6b7af05eb80c67d040ed143230 "Scripts 5.01 vs 5.01c") | 2026/10/29 |
-| [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/94c56bdbdba2ce6b7af05eb80c67d040ed143230 "Scripts 5.01 vs 5.01c") | [5.XX]("Scripts 5.01c vs 5.XX") | 2026/XX/XX |
+| [5.01c](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/94c56bdbdba2ce6b7af05eb80c67d040ed143230 "Scripts 5.01 vs 5.01c") | [5.02](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/398d59587b416654f468e5b8d9d9e32a45efc9b8 "Scripts 5.01c vs 5.02") | 2026/11/26 |
+| [5.02](https://github.com/ElementaryLewis/The-Witcher-3-Remastered-Changelog/commit/398d59587b416654f468e5b8d9d9e32a45efc9b8 "Scripts 5.01c vs 5.02") | [5.XX]("Scripts 5.01c vs 5.XX") | 2026/XX/XX |
 
 
 ### XML
