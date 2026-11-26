@@ -553,7 +553,7 @@
 		localisation_key_description	="item_desc_gloves"
 		icon_path						="icons/inventory/armors/gauntlet-01.png"
 	>
-		<tags>							Armor, mod_armor
+		<tags>							Armor, mod_armor, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Ciri gloves 01 _Stats</a>										

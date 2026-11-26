@@ -63,7 +63,7 @@
 					localisation_key_description 	="item_category_secondary_desc"
 					icon_path						="icons/inventory/weapons/mace_knight_1_64x128.png"
 				>
-					<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeMace, SecondaryWeapon, mod_secondary
+					<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, TypeMace, SecondaryWeapon, mod_secondary, NoTransmog
 					</tags>
 					<recycling_parts>				<parts count="2">Steel ingot</parts>
 													<parts count="1">Silver ingot</parts>

@@ -182,8 +182,27 @@
 			</card>
 			
 			<!-- No Man's Land Leaders -->
-		
+			
+			<!-- Eredin Commander of the Red Riders -->
+			<!-- "Have some dignity. You know how this will end." -->
 			<card	index="4001"
+				title="gwint_name_eredin_copper" name="eredin_copper"
+				item=""
+				description="gwint_desc_eredin_bronze"
+				power="0"
+				picture="nml_ldr_eredin_silver"
+				faction_index="F_NO_MANS_LAND" >
+				<type_flags>
+					<flag name="TYPE_KING" />
+				</type_flags>
+				<effect_flags>
+					<flag name="CP_MELEE_HORN"/>
+				</effect_flags>
+			</card>
+			
+			<!-- Eredin King of the Wild Hunt -->
+			<!-- "I've long awaited this..." -->
+			<card	index="4002"
 				title="gwint_name_eredin_bronze" name="eredin_bronze"
 				description="gwint_desc_eredin_gold"
 				power="0"
@@ -197,23 +216,10 @@
 				</effect_flags>
 			</card>
 			
-			<card	index="4002"
-				title="gwint_name_eredin_copper" name="eredin_copper"
-				description="gwint_desc_eredin_bronze"
-				item=""
-				power="0"
-				picture="nml_ldr_eredin_silver"
-				faction_index="F_NO_MANS_LAND" >
-				<type_flags>
-					<flag name="TYPE_KING" />
-				</type_flags>
-				<effect_flags>
-					<flag name="CP_MELEE_HORN"/>
-				</effect_flags>
-			</card>
-						
+			<!-- Eredin Destroyer of Worlds -->
+			<!-- "It is unavoidable." -->
 			<card	index="4003"
-				title="gwint_name_eredin_gold" name="eredin_gold"
+				title="gwint_name_eredin_gold" name="eredin_silver"
 				description="gwint_desc_eredin_silver"
 				power="0"
 				picture="nml_ldr_eredin_gold"
@@ -226,8 +232,10 @@
 				</effect_flags>
 			</card>
 			
+			<!-- Eredin Bringer of Death -->
+			<!-- "Go on. Show me your spins, pirouettes and feints. I want to watch." -->
 			<card	index="4004"
-				title="gwint_name_eredin_silver" name="eredin_silver"
+				title="gwint_name_eredin_silver" name="eredin_gold"
 				description="gwint_desc_eredin_copper"
 				power="0"
 				picture="nml_ldr_eredin_bronze"

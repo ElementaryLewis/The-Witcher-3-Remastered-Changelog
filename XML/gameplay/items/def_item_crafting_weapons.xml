@@ -1816,7 +1816,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/skellige_sword_lvl3_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_skellige
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_skellige, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Skellige sword 3_crafted _Stats</a>
@@ -2159,7 +2159,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/scoiataels_sword_lvl4_64x128.png"
 	>
-		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_nonhuman
+		<tags>							PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_origin_nonhuman, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Scoiatael sword 4_crafted _Stats</a>

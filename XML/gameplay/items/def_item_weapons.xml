@@ -3062,7 +3062,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/wildhunt_sword_lvl1_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 1 _Stats</a>
@@ -3131,7 +3131,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/wildhunt_sword_lvl2_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 2 _Stats</a>
@@ -3200,7 +3200,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/wildhunt_sword_lvl3_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 3 _Stats</a>
@@ -3270,7 +3270,7 @@
 		localisation_key_description	="item_desc_steel_sword"
 		icon_path						="icons/inventory/weapons/wildhunt_sword_lvl4_64x128.png"
 	>
-		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon
+		<tags>							Autogen, PlayerSteelWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default weapon _Stats</a>
 										<a>Wild Hunt sword 4 _Stats</a>

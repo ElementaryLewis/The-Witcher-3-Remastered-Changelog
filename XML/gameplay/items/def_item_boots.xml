@@ -898,7 +898,7 @@
 		localisation_key_description	="item_desc_boots"
 		icon_path						="icons/inventory/armors/common_heavy_boots_lvl1_64x128.png"
 	>
-		<tags>							Armor, HeavyArmor, mod_armor
+		<tags>							Armor, HeavyArmor, mod_armor, NoTransmog
 		</tags>
 		<base_abilities>				<a>Default armor _Stats</a>
 										<a>Radovid boots 01 _Stats</a>

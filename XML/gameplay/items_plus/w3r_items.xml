@@ -363,7 +363,7 @@
 				</base_abilities>
 			</item>
 
-			<item name="head_2_scar" category="head" equip_template="h_08_mg__geralt_beard_short.w2ent" ability_mode="OnMount">
+			<item name="head_2_scar" category="head" equip_template="h_08_mg__geralt_beard_short" ability_mode="OnMount">
 				<tags>NoShow,NoDrop,Body</tags>
 				<base_abilities>
 				</base_abilities>
@@ -417,7 +417,7 @@
 				</base_abilities>
 			</item>
 
-			<item name="head_2_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_short_tatoo.w2ent" ability_mode="OnMount">
+			<item name="head_2_scar_tattoo" category="head" equip_template="h_08_mg__geralt_beard_short_tatoo" ability_mode="OnMount">
 				<tags>NoShow,NoDrop,Body</tags>
 				<base_abilities>
 				</base_abilities>

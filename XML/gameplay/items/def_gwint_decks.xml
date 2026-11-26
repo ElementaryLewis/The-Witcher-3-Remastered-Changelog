@@ -158,15 +158,15 @@
 			<deck_collection name="nml">
 
 				<!-- Difficulty Easy -->
-				<deck difficulty="1" leaderCard="eredin_bronze" specialCard="">
+				<deck difficulty="1" leaderCard="eredin_copper" specialCard="">
 				</deck>
 
 				<!-- Difficulty Normal -->
-				<deck difficulty="2" leaderCard="eredin_bronze" specialCard="">
+				<deck difficulty="2" leaderCard="eredin_copper" specialCard="">
 				</deck>
 
 				<!-- Difficulty Hard -->
-				<deck difficulty="3" leaderCard="eredin_bronze" specialCard="">
+				<deck difficulty="3" leaderCard="eredin_copper" specialCard="">
 				</deck>
 
 				<dynamicCards>

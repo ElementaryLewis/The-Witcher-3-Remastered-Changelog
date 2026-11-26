@@ -123,7 +123,7 @@
         <tags>sword_s2,attack_heavy</tags>
 		<armor_reduction min="1000" max="1000"/>
 		<adrenaline_damage_bonus type="mult" min="0.1" />
-		<stamina_max_dmg_bonus type="mult" min="1.5" />
+		<stamina_max_dmg_bonus type="mult" min="0.75" />
 		
 		<stamina_cost type="add" min="0" />
         <stamina_cost_per_sec type="add" min="50" />
@@ -250,7 +250,7 @@
 	
       <ability name="magic_staminaregen">
         <tags></tags>
-        <staminaRegen type="mult" always_random="false" min="0.005" max="0.005" />
+        <staminaRegen type="mult" always_random="false" min="0.0025" max="0.0025" />
       </ability>
 	
       <!-- Base Skills -->
@@ -725,7 +725,7 @@
       <ability name="sword_s29">
         <tags>sword_s29</tags>
         <damage_increase type="mult" min="0.1" max="0.1" />
-        <duration type="add" min="3" max="6" />
+        <duration type="add" min="6" max="6" />
       </ability>
 
       <!-- Deadly Precision -->
@@ -820,7 +820,7 @@
       <!-- Catalyst -->
       <ability name="magic_s35">
           <tags>magic_s35, Catalyst</tags>
-          <spell_power_aard_igni type="mult" min="0.3" />
+          <spell_power_aard_igni type="mult" min="0.2" />
           <burn_chance_bonus type="add" min="0.1" />
       </ability>
 
@@ -869,7 +869,7 @@
         <!-- +100% -->
         <charge_count type="add" min="2" />
         <trap_count type="add" min="1" />
-        <trap_duration type="add" min="5" />
+        <trap_duration type="add" min="2" />
         <range type="mult" min="0.1" />
       </ability>
 
@@ -1330,7 +1330,7 @@
 		<!-- Channeling -->
         <skill skill_name="magic_s4" isUnchangedLegacy="1" gridRow="3" gridColumn="9" requiredPointsSpent="6" maxLevel="3" priority="20" guiPositionID="5"
             localisationName="skill_active_shield_name"  localisationDescriptionNotAcquired="skill_active_shield_description_level_1_2"
-            localisationDescription="skill_active_shield_description_level_1_2"  localisationDescriptionLevel2="skill_active_shield_description_level_1_2"
+            localisationDescription="skill_active_shield_description_level_1_2"  localisationDescriptionLevel2="skill_active_shield_description_level_2"
             localisationDescriptionLevel3="skill_active_shield_description_level_3"
             cost="1" pathType_name="Signs" subpathType_name="Signs_Quen" isAlternative="1"
             iconPath="icons\Skills\Signs\magic_s4.png"
@@ -1479,8 +1479,8 @@
         <skill skill_name="alchemy_s18"
             isUnchangedLegacy="1" gridRow="9" gridColumn="6" requiredPointsSpent="0"  maxLevel="3" priority="37" guiPositionID="17"
             localisationName="skill_acquired_tolerance_name" localisationDescriptionNotAcquired="skill_acquired_tolerance_description"
-            localisationDescription="skill_acquired_tolerance_description" localisationDescriptionLevel2="skill_acquired_tolerance_description"
-            localisationDescriptionLevel3="skill_acquired_tolerance_description"
+            localisationDescription="skill_acquired_tolerance_description" localisationDescriptionLevel2="skill_acquired_tolerance_description_level_2"
+            localisationDescriptionLevel3="skill_acquired_tolerance_description_level_3"
             cost="1" pathType_name="Alchemy" subpathType_name="Alchemy_Mutagens" isAlternative="1"
             iconPath="icons\Skills\Alchemy\alchemy_s18.png"
             iconPathTest="icons\Skills\Alchemy\skills_rework\acquired_tolerance.png"

@@ -3226,7 +3226,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/wolf_school_steel_sword_1.png"
 	>
-		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary, NoTransmog
 		</tags>
 		<base_abilities>				<a>WitcherSilverWolf_Stats</a>
 		</base_abilities>
@@ -3979,7 +3979,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/silver_unique_blade_of_ys_64x128.png"
 	>
-		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary, NoTransmog
 		</tags>
 		<base_abilities>				<a>Bladeofys_Stats</a>
 		</base_abilities>
@@ -5406,7 +5406,7 @@
 		localisation_key_description	="item_desc_silver_sword"
 		icon_path						="icons/inventory/weapons/silver_legendary_breath_of_the_north_64x128.png"
 	>
-		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary
+		<tags>							Autogen, PlayerSilverWeapon, Weapon, sword1h, 1handedWeapon, mod_weapon, mod_legendary, NoTransmog
 		</tags>
 		<base_abilities>				<a>Breathofthenorth_Stats</a>
 		</base_abilities>

@@ -157,7 +157,7 @@
 
 			<!-- No Man's Land (Monsters) Leaders -->
 				<item name="gwint_card_eredin_platinium" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="60"
-					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
+					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin_platinium" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCard</tags>
 					<base_abilities>
 						<a>max_card_1</a> <!-- Given by EP1 Merchant -->
@@ -165,7 +165,7 @@
 				</item>
 
 				<item name="gwint_card_eredin_gold" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="60"
-					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
+					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin_gold" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
 					<base_abilities>
 						<a>max_card_0</a> <!-- Given in Mverics quest -->
@@ -173,7 +173,7 @@
 				</item>
 
 				<item name="gwint_card_eredin_silver" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="55"
-					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
+					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin_silver" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
 					<base_abilities>
 						<a>max_card_1</a>
@@ -181,7 +181,7 @@
 				</item>
 
 				<item name="gwint_card_eredin_bronze" hold_slot="" equip_slot="" template="" stackable="20" ability_slots="0" category="gwint" price="50"
-					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin" localisation_key_description = "gwint_desc_gwint_card" >
+					icon_path="icons/inventory/gwint/ico_gwent_hero_no_mans_land.png" localisation_key_name = "gwint_name_eredin_bronze" localisation_key_description = "gwint_desc_gwint_card" >
 					<tags>GwintCardLeader,NoShowInPlayersInventory,EncumbranceOff,Lootable,GwintCollectorAchievement,GwintCard</tags>
 					<base_abilities>
 						<a>max_card_1</a>
