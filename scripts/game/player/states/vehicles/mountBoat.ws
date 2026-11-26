@@ -24,11 +24,11 @@ state MountBoat in CR4Player extends MountTheVehicle
 		
 		if( vehicleSlot == EVS_passenger_slot )
 		{
-			theInput.SetContext( 'BoatPassenger' );
+			theInput.SetNextContext( 'BoatPassenger' );
 		}
 		else
 		{
-			theInput.SetContext( 'Boat' );
+			theInput.SetNextContext( 'Boat' );
 		}
 	}
 	

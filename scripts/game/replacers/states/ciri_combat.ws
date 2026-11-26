@@ -8,7 +8,7 @@ state CombatSword in W3ReplacerCiri extends Combat
 	event OnEnterState( prevStateName : name )
 	{
 		super.OnEnterState(prevStateName);	
-		theInput.SetContext(parent.GetCombatInputContext());
+		theInput.SetNextContext(parent.GetCombatInputContext());
 		parent.OnEquipMeleeWeapon( PW_Steel, true );
 		theGame.GetBehTreeReactionManager().CreateReactionEvent( thePlayer, 'DrawWeapon', 0.0f, 10.0f, 2.0f, -1 );
 		
@@ -20,7 +20,7 @@ state CombatSword in W3ReplacerCiri extends Combat
 	
 	event OnLeaveState( nextStateName : name )
 	{
-		theInput.SetContext(parent.GetExplorationInputContext());
+		theInput.SetNextContext(parent.GetExplorationInputContext());
 		Interrupt();
 		super.OnLeaveState(nextStateName);
 	}

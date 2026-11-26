@@ -49,6 +49,7 @@ statemachine abstract import class CR4Player extends CPlayer
 
 	private			var combatStance					: EPlayerCombatStance;	
 	private			var lastUsedSign					: ESignType;
+	private			var isLastUsedSignTimerFinished		: bool;
 
 	public			var approachAttack					: int;					
 					default approachAttack 				= 1;
@@ -759,6 +760,21 @@ statemachine abstract import class CR4Player extends CPlayer
 	public function SetLastUsedSign( currentSign: ESignType )
 	{
 		lastUsedSign = currentSign;
+	}
+
+	public function GetIsLastUsedSignTimerFinished() : bool
+	{
+		return isLastUsedSignTimerFinished;
+	}
+
+	public function SetIsLastUsedSignTimerFinished( isFinished : bool )
+	{
+		isLastUsedSignTimerFinished = isFinished;
+	}
+
+	timer function StartLastUsedSignTimer( dt : float, id : int )
+	{
+		isLastUsedSignTimerFinished = true;
 	}
 	
 	timer function UnmountCrossbowTimer( dt : float, id : int )
@@ -6886,7 +6902,7 @@ statemachine abstract import class CR4Player extends CPlayer
 
 	timer function CheckSkillActivationOnProjectileDodgeRoll( dt : float, id : int )
 	{
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		
 		thePlayer.RemoveTimer( 'SetDefaultForWasAttackActionDodged' );
 		thePlayer.AddTimer( 'SetDefaultForWasAttackActionDodged', 5.0 );
@@ -9168,7 +9184,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		var shakeCam : bool;
 		var inGameConfigWrapper : CInGameConfigWrapper;
 		var isAccessibilityAutoHealOn : bool;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		var attribValue:SAbilityAttributeValue;
 
 		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();			
@@ -9527,28 +9543,6 @@ statemachine abstract import class CR4Player extends CPlayer
 			if ( !tempLockTarget )
 			{
 				
-				closestEnemyIndex = -1;
-				for ( i = 0; i < hostileEnemies.Size(); i += 1 )
-				{
-					if ( !hostileEnemies[i].GetGameplayVisibility() || !IsEnemyVisible( hostileEnemies[i] ) || !IsThreat( hostileEnemies[i] ) || !CanBeTargetedIfSwimming( hostileEnemies[i] ) )
-						continue;
-
-					playerToEnemyDistance = VecDistanceSquared( GetWorldPosition(), hostileEnemies[i].GetWorldPosition() );
-
-					if ( playerToEnemyDistance < lowestDistance )
-					{
-						lowestDistance = playerToEnemyDistance;
-						closestEnemyIndex = i;
-					}
-				}
-
-				if ( closestEnemyIndex >= 0 )
-					tempLockTarget = hostileEnemies[closestEnemyIndex];
-			}
-
-			if ( !tempLockTarget )
-			{
-				
 				tempLockTarget = GetNewLockTarget( GetDisplayTarget(), 180.f, 1.f, 0.f );
 			}
 		}
@@ -9719,8 +9713,9 @@ statemachine abstract import class CR4Player extends CPlayer
 		var skillSword23Id	: ESkill;
 		var skillSword24Id	: ESkill;
 		var skillSword25Id	: ESkill;
-		var swordEntity		: CWitcherSword;
+		var swordEntity		: CItemEntity;
 		var attribValue		: SAbilityAttributeValue;
+		var skillCooldown	: SAbilityAttributeValue;
 		var disableSword22	: Bool;
 		var disableSword23	: Bool;
 		var disableSword24	: Bool;
@@ -9818,20 +9813,25 @@ statemachine abstract import class CR4Player extends CPlayer
 				swordEntity = witcherPlayer.GetHeldSwordEntity();
 
 				
-				if(IsHeavyAttack(animData.attackName) && swordEntity && witcherPlayer.IsSkillComboEffectEnabled(skillSword23Id, swordEntity, 'strong_attack_buff') )
+				if( IsLightAttack(animData.attackName) && swordEntity )
 				{
-					attribValue = witcherPlayer.GetSkillAttributeValue(skillSword23Id, 'duration', false, true);
-					witcherPlayer.IncrementSkillComboCounter(skillSword23Id, (float)attribValue.valueAdditive);
-					witcherPlayer.PlaySkillComboEffect(skillSword23Id, swordEntity, 'strong_attack_buff_hit');
-				}
-				else
-				{
-					disableSword23 = true;
-					LogNewCombatSkill(skillSword23Id, "Buff Disable Requested: Invalid attack or weapon");
-				}
+					attribValue = witcherPlayer.GetSkillAttributeValue(skillSword23Id, 'trigger_at_attack_count', false, true);
+					skillCooldown = witcherPlayer.GetSkillAttributeValue(skillSword23Id, 'duration', false, true);;
 
-				if(!disableSword23 )
+					witcherPlayer.IncrementSkillComboCounter(skillSword23Id, skillCooldown.valueAdditive);
+
+					comboCounter = witcherPlayer.GetSkillComboCounter(skillSword23Id);
+
+					if( comboCounter >= (int)attribValue.valueBase )
+					{
+						
+						witcherPlayer.PlaySkillComboEffect(skillSword23Id, swordEntity, 'strong_attack_buff');
+					}
+				}
+				else if( IsHeavyAttack(animData.attackName) && swordEntity && witcherPlayer.IsSkillComboEffectEnabled(skillSword23Id, swordEntity, 'strong_attack_buff') )
 				{
+					witcherPlayer.PlaySkillComboEffect(skillSword23Id, swordEntity, 'strong_attack_buff_hit');
+
 					
 					comboCounter = witcherPlayer.GetSkillComboCounter(skillSword23Id);
 					LogNewCombatSkill(skillSword23Id, "Attack Num : " + comboCounter);
@@ -9843,6 +9843,11 @@ statemachine abstract import class CR4Player extends CPlayer
 						disableSword23 = true;
 						LogNewCombatSkill(skillSword23Id, "Buff Disable Requested: Attacks Spent");
 					}
+				}
+				else
+				{
+					disableSword23 = true;
+					LogNewCombatSkill(skillSword23Id, "Buff Disable Requested: Invalid attack or weapon");
 				}
 			}
 		}
@@ -9881,17 +9886,9 @@ statemachine abstract import class CR4Player extends CPlayer
 				if(IsHeavyAttack(animData.attackName) && swordEntity && witcherPlayer.IsSkillComboEffectEnabled(skillSword25Id, swordEntity, 'strong_attack_buff') )
 				{
 					attribValue = witcherPlayer.GetSkillAttributeValue(skillSword25Id, 'duration', false, true);
-					
 					witcherPlayer.PlaySkillComboEffect(skillSword25Id, swordEntity, 'strong_attack_buff_hit');
-				}
-				else
-				{
-					disableSword25 = true;
-					LogNewCombatSkill(skillSword25Id, "Buff Disable Requested: Invalid attack or weapon");
-				}
 
-				if(!disableSword25 )
-				{
+					
 					
 					comboCounter = witcherPlayer.GetSkillComboCounter(skillSword25Id);
 					LogNewCombatSkill(skillSword25Id, "Attack Num : " + comboCounter);
@@ -9904,6 +9901,11 @@ statemachine abstract import class CR4Player extends CPlayer
 						LogNewCombatSkill(skillSword25Id, "Buff Disable Requested: Attacks Spent");
 					}
 				}
+				else if(!swordEntity)
+				{
+					disableSword25 = true;
+					LogNewCombatSkill(skillSword25Id, "Buff Disable Requested: Invalid attack or weapon");
+				}
 			}
 		}
 
@@ -9912,7 +9914,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		if( witcherPlayer && disableSword22 )
 		{
 			LogNewCombatSkill(skillSword22Id, "Buff Disabled");
-			witcherPlayer.ResetSkillCombo(skillSword22Id);
+			witcherPlayer.AddTimer('ResetSkillComboAfterGlobalTime_Sword_s22', 1.f, false, false, TICK_Main, false, false);
 			witcherPlayer.SetWasAttackActionDodgedInCombat(false);
 
 			if(swordEntity)
@@ -9925,7 +9927,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		if( witcherPlayer && disableSword23 )
 		{
 			LogNewCombatSkill(skillSword23Id, "Buff Disabled");
-			witcherPlayer.ResetSkillCombo(skillSword23Id);
+			witcherPlayer.AddTimer('ResetSkillComboAfterGlobalTime_Sword_s23', 1.f, false, false, TICK_Main, false, false);
 
 			if(swordEntity)
 			{
@@ -9935,7 +9937,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		if( witcherPlayer && disableSword25 )
 		{
 			LogNewCombatSkill(skillSword25Id, "Buff Disabled");
-			witcherPlayer.ResetSkillCombo(skillSword25Id);
+			witcherPlayer.AddTimer('ResetSkillComboAfterGlobalTime_Sword_s25', 1.f, false, false, TICK_Main, false, false);
 
 			if(swordEntity)
 			{
@@ -13830,7 +13832,7 @@ statemachine abstract import class CR4Player extends CPlayer
 		
 		SetIsInAir(false);	
 		
-		theInput.SetContext('Exploration');
+		theInput.SetNextContext('Exploration');
 		
 		ResetDeathType();
 		

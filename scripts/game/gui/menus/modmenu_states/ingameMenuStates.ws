@@ -7,6 +7,7 @@ statemachine class CR4IngameMenuModStates extends CR4IngameMenu
 {
 	public var m_menuReference	: CR4IngameMenu;
 	public var m_mods : array< SModioModID >;
+	public var m_failedScriptMods : array< string >;
 	public var m_missing : bool; default m_missing = true;
 	public var m_startup : bool; default m_startup = false;
 	public var m_continue : bool; default m_continue = false;
@@ -30,6 +31,8 @@ statemachine class CR4IngameMenuModStates extends CR4IngameMenu
 	public function GetMissingModList( mods : array< SModioModID >, continu : bool )
 	{
 		m_mods = mods;
+		m_failedScriptMods.Clear();
+		m_failed = false;
 		m_missing = true;
 		m_startup = false;
 		m_continue = continu;
@@ -39,6 +42,8 @@ statemachine class CR4IngameMenuModStates extends CR4IngameMenu
 	public function GetVersionModList( mods : array< SModioModID >, continu : bool )
 	{
 		m_mods = mods;
+		m_failedScriptMods.Clear();
+		m_failed = false;
 		m_missing = false;
 		m_startup = false;
 		m_continue = continu;
@@ -48,22 +53,25 @@ statemachine class CR4IngameMenuModStates extends CR4IngameMenu
 	public function GetStartupModList( mods : array< SModioModID > )
 	{
 		m_mods = mods;
+		m_failedScriptMods.Clear();
+		m_failed = false;
 		m_missing = false;
 		m_startup = true;
 		m_continue = false;
 		GotoState('GetModList');
 	}
 	
-	public function GetFailedModList( mods : array< SModioModID > )
+	public function GetFailedModList( mods : array< SModioModID >, failedScriptMods : array< string > )
 	{
 		m_mods = mods;
+		m_failedScriptMods = failedScriptMods;
 		m_missing = false;
 		m_startup = true;
 		m_continue = false;
 		m_failed = true;
 		GotoState('GetModList');
 	}
-	
+
 	public function OnLaunchModMenu()
 	{
 		GotoState('LaunchModMenu');
@@ -132,43 +140,57 @@ state GetModList in CR4IngameMenuModStates
 		var i : int;
 		var ugcAllowed : bool;
 		var modioAvailable : bool;
+
+		l_modids = parent.m_mods;
+
 		
-		modioAvailable = theGame.GetModHandlerSystem().IsModioAvailableLatent();
-		ugcAllowed = theGame.GetModHandlerSystem().CheckPlatformUGCAllowed( false );
-		
-		if(modioAvailable){
-			l_modids = parent.m_mods;
-			for(i = 0; i < l_modids.Size(); i+= 1)
+		for(i = 0; i < parent.m_failedScriptMods.Size(); i+= 1)
+		{
+			l_currentMod.displayname = parent.m_failedScriptMods[i];
+			l_mods.PushBack(l_currentMod);
+		}
+
+		if(l_modids.Size() > 0)
+		{
+			modioAvailable = theGame.GetModHandlerSystem().IsModioAvailableLatent();
+			ugcAllowed = theGame.GetModHandlerSystem().CheckPlatformUGCAllowed( false );
+
+			if(modioAvailable && (!parent.m_failed || ugcAllowed))
 			{
-				l_currentId = l_modids[i];
-				l_currentMod = theGame.GetModHandlerSystem().GetRemoteModDataByID(l_currentId);
-				l_mods.PushBack(l_currentMod);
-			}
-		
-			if ( parent.m_failed )
-			{
-				
-				parent.m_menuReference.CreateModLoadFailedPopup(
-					l_mods, 
-					ugcAllowed);
-			}
-			
-			else if ( parent.m_missing )
-			{
-				
-				parent.m_menuReference.CreateModVerificationPopup(
-					l_mods, 
-					parent.m_missing, 
-					parent.m_startup, 
-					parent.m_continue, 
-					ugcAllowed);
+				for(i = 0; i < l_modids.Size(); i+= 1)
+				{
+					l_currentId = l_modids[i];
+					l_currentMod = theGame.GetModHandlerSystem().GetRemoteModDataByID(l_currentId);
+					l_mods.PushBack(l_currentMod);
+				}
 			}
 		}
-		else 
+		else
+		{
+			modioAvailable = true;
+			ugcAllowed = true;
+		}
+
+		if(parent.m_failed && l_mods.Size() > 0)
+		{
+			parent.m_menuReference.CreateModLoadFailedPopup(
+				l_mods,
+				ugcAllowed || parent.m_failedScriptMods.Size() > 0);
+		}
+		else if(modioAvailable && parent.m_missing)
+		{
+			parent.m_menuReference.CreateModVerificationPopup(
+				l_mods,
+				parent.m_missing,
+				parent.m_startup,
+				parent.m_continue,
+				ugcAllowed);
+		}
+		else if(!modioAvailable)
 		{
 			theGame.GetGuiManager().ShowNotification(GetLocStringByKeyExt("error_modio_connection"));
 		}
-		
+
 		parent.OnNullState();
 	}
 }

@@ -52,10 +52,10 @@ state MountHorse in CR4Player extends MountTheVehicle
 		
 		if ( (W3ReplacerCiri)thePlayer )
 		{
-			theInput.SetContext( 'Horse_Replacer_Ciri' );
+			theInput.SetNextContext( 'Horse_Replacer_Ciri' );
 		}
 		else
-			theInput.SetContext( 'Horse' );
+			theInput.SetNextContext( 'Horse' );
 	}
 	
 	event OnLeaveState( nextStateName : name )

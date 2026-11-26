@@ -2778,7 +2778,7 @@ class CPlayerInput
 		var arrowEntity : W3ArrowProjectile;
 		var casterEntity : W3PlayerWitcher;
 		var victimEntity : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		var pos : Vector;
 		var i : int;
 

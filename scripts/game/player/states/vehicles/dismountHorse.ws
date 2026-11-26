@@ -171,7 +171,7 @@ state DismountHorse in CR4Player extends DismountTheVehicle
 			playerPosition = thePlayer.GetWorldPosition() + VecRotateAxis(vectorDeltaToApply, Vector(0, 0, 1), Deg2Rad(AngleDistance(vehicle.GetHeading() + targetOffset, initialHeading)));
 			if (!theGame.GetWorld().NavigationComputeZ( playerPosition, playerPosition.Z - 1, playerPosition.Z + 0.2, navigableZ ))
 			{
-				theGame.GetWorld().NavigationComputeZ( playerPosition, playerPosition.Z - 100, playerPosition.Z + 100, navigableZ );
+				theGame.GetWorld().NavigationComputeZ( playerPosition, playerPosition.Z - 10, playerPosition.Z + 10, navigableZ );
 				playerPosition.Z = navigableZ + 0.4;
 				thePlayer.TeleportWithRotation( playerPosition, thePlayer.GetWorldRotation());
 			}
@@ -221,7 +221,7 @@ state DismountHorse in CR4Player extends DismountTheVehicle
 		else
 		{
 			parent.OnRangedForceHolster( true, true );
-			theInput.SetContext( thePlayer.GetExplorationInputContext() );
+			theInput.SetNextContext( thePlayer.GetExplorationInputContext() );
 			while( true )
 			{
 				if ( riderData.GetRidingManagerCurrentTask() == RMT_None && riderData.sharedParams.mountStatus == VMS_dismounted )

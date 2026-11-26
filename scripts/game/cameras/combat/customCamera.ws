@@ -112,6 +112,9 @@ import class CCustomCamera extends CEntity
 	import final function GetCameraWorldOffset() : Vector;
 	import final function SetCameraWorldPosition( pos : Vector );
 	import final function SetCameraWorldRotation( rot : EulerAngles );
+	import final function LerpCameraToTarget( pos : Vector, rot : EulerAngles);
+	import final function LerpCameraToTargetActor( actor : CActor );
+	import final function StopFollowingTargetActor();
 	import final function UpdateWithoutInput( force : bool );
 	
 	function ResetCollisionOffset()

@@ -220,8 +220,10 @@ state Aiming in PlayerAiming
 	
 	entry function Aim()
 	{
+		var isSloMoEnabled : Bool;
 
 
+		isSloMoEnabled = true;
 		parent.SetCleanupFunction( 'AimCleanup' );	
 		thePlayer.SetIsAiming( true );
 
@@ -242,6 +244,10 @@ state Aiming in PlayerAiming
 				break;
 		}
 
+		if (isSloMoEnabled)
+		{
+			SloMo();
+		}
 		
 		while( !stopAiming )
 		{

@@ -92,7 +92,7 @@ class W3WhiteFrost extends W3Petard
 		ProcessEntitiesInRange( l_entities );
 		
 		
-		thePlayer.GetVisualDebug().AddSphere(EffectTypeToName(RandRange((int)EET_EffectTypesSize)), totalTime * shaderSpeed, GetWorldPosition(), true, Color(0,0,255), 0.15);
+		thePlayer.GetVisualDebug().AddSphere(EffectTypeToName(RandRange(GetEffectRangeEnd())), totalTime * shaderSpeed, GetWorldPosition(), true, Color(0,0,255), 0.15);
 		
 		
 		if(totalTime >= impactParams.surfaceFX.fxFadeInTime)

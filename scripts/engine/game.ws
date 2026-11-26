@@ -314,6 +314,8 @@ import class CGame extends CObject
 	import final function SetPhotomodeEnabled( photomodeEnabled: bool ) : void;
 	
 	import final function SetPhotomodeCameraCanMove( canMove : bool ) : void;
+	import final function SetPhotomodeCameraDraggable( draggable : bool ) : void;
+	import final function SetPhotomodeCameraWheelEnabled( wheelEnabled : bool ) : void;
 
 	public function GetToggleButtonCaption() : string
 	{

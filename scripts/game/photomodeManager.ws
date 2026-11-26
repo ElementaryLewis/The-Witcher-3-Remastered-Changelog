@@ -20,7 +20,7 @@ class PhotomodeManager
 	private var m_photomodeEnabledStep2 : bool; default m_photomodeEnabledStep2 = false;
 	
 	private var m_lastActiveCam : CCustomCamera;
-	private var m_lastActiveContext : name;
+	public var m_lastActiveContext : name;
 	
 	public function Initialize()
 	{		
@@ -32,6 +32,15 @@ class PhotomodeManager
 	
 	event OnPhotomodeEnableStep( action : SInputAction )
 	{
+		var inGameConfigWrapper : CInGameConfigWrapper;
+		var disablePhotomode : bool;
+
+		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+		disablePhotomode = inGameConfigWrapper.GetVarValue( 'Controls', 'DisablePhotomode' );
+
+		if(disablePhotomode)
+		 return false;
+
 		if( IsPressed( action ) && action.aName == 'EnablePhotoMode_Step1' )
 		{
 			m_photomodeEnabledStep1 = true;
@@ -58,7 +67,16 @@ class PhotomodeManager
 	}
 	
 	event OnPhotomodeEnable( action : SInputAction )
-	{		
+	{	
+		var inGameConfigWrapper : CInGameConfigWrapper;
+		var disablePhotomode : bool;
+
+		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+		disablePhotomode = inGameConfigWrapper.GetVarValue( 'Controls', 'DisablePhotomode' );
+
+		if(disablePhotomode)
+		 return false;
+
 		if(!IsPressed(action))
 			return false;
 			
@@ -117,8 +135,7 @@ class PhotomodeManager
 		thePlayer.ApplyCastSettings();
 		thePlayer.SetPhotoModeHorseKick(true);
 		
-		
-		theGame.SetPhotomodeCameraCanMove(false);
+		theGame.SetPhotomodeCameraCanMove(true);
 
 		
 		DoFakeTick();

@@ -834,6 +834,7 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 	var enableIfPreviewOptionsEnabled	: bool;
 
 	var enableIfNewHorseControls	: bool;
+	var displayIfNewBalancingSystem	: bool;
 	
 	var inGameConfigWrapper	: CInGameConfigWrapper;
 	var forceDisplay : bool; 
@@ -981,9 +982,10 @@ function IngameMenu_FillSubMenuOptionsList(flashStorageUtility : CScriptedFlashV
 		enableIfPreviewOptionsEnabled = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfPreviewOptionsEnabled');
 
 		enableIfNewHorseControls = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'enableIfNewHorseControls');
+		displayIfNewBalancingSystem = inGameConfigWrapper.DoVarHasTag(groupName, optionName, 'displayIfNewBalancingSystem');
 
 	
-		if( optionName == 'DeveloperMode' || (enableIfHDREnabled && !isHDREnabled) || (enableIfSDREnabled && isHDREnabled) )
+		if( optionName == 'DeveloperMode' || (enableIfHDREnabled && !isHDREnabled) || (enableIfSDREnabled && isHDREnabled) || (displayIfNewBalancingSystem && !theGame.GetNewBalancingSystemEnabled()) )
 			continue;
 			
 		

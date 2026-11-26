@@ -65,6 +65,18 @@ import class CR4Game extends CCommonGame
 
 	private saved var uberMovement : bool; 	default uberMovement = false;
 
+	private var newBalancingSystemEnabled : bool; default newBalancingSystemEnabled = false;
+
+	public function ToggleNewBalancingSystemEnabled()
+	{
+		newBalancingSystemEnabled = !newBalancingSystemEnabled;
+	}
+
+	public function GetNewBalancingSystemEnabled() : bool
+	{
+		return newBalancingSystemEnabled;
+	}
+
 	function EnableUberMovement( flag : bool )
 	{
 		uberMovement = flag;
@@ -625,7 +637,7 @@ import class CR4Game extends CCommonGame
 	import final function EnableNewGamePlus( enable : bool );
 
 	
-	import final function StartNewGamePlus( save : SSavegameInfo ) : ENewGamePlusStatus;
+	import final function StartNewGamePlus( save : SSavegameInfo, optional choseBardsBallad : bool ) : ENewGamePlusStatus;
 
 	public function OnConfigValueChanged( varName : name, value : string ) : void
 	{

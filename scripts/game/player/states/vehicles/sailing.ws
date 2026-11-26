@@ -61,7 +61,7 @@ state Sailing in CR4Player extends UseGenericVehicle
 	{ 
 		var commonMapManager : CCommonMapManager = theGame.GetCommonMapManager();
 		
-		theInput.SetContext( parent.GetExplorationInputContext() );	
+		theInput.SetNextContext( parent.GetExplorationInputContext() );	
 		
 		parent.SetBehaviorVariable( 'keepSpineUpright', 1.f );
 		commonMapManager.NotifyPlayerDismountedBoat();		

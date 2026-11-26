@@ -30,7 +30,7 @@ class W3DamageManagerProcessor extends CObject
 		var trailFxName : name;
 		
 		
-		var swordEntity : CWitcherSword;
+		var swordEntity : CItemEntity;
 		var swordItem : SItemUniqueId;
 		var bloodType : EBloodType;
 		
@@ -255,7 +255,7 @@ class W3DamageManagerProcessor extends CObject
 				swordItem = GetWitcherPlayer().GetHeldSword();
 				if(swordItem != GetInvalidUniqueId())
 				{
-					swordEntity = (CWitcherSword)thePlayer.GetInventory().GetItemEntityUnsafe( swordItem );	
+					swordEntity = thePlayer.GetInventory().GetItemEntityUnsafe( swordItem );	
 					if(swordEntity)
 					{
 						bloodType = npc.GetBloodType();
@@ -1039,7 +1039,7 @@ class W3DamageManagerProcessor extends CObject
 	private function ProcessNewSkill_StrengthTraining_Counter()
 	{
 		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		var skillId:ESkill;
 		var triggerAtAttackCount:int;
 		var currentAttackCount:int;
@@ -1076,7 +1076,7 @@ class W3DamageManagerProcessor extends CObject
 	private function ProcessNewSkill_StrengthTraining_Damage(out dmgInfos : array< SRawDamage >)
 	{
 		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 
 		var skillId:ESkill;
 		var damageIncreaseMultiplier:float;
@@ -1100,14 +1100,14 @@ class W3DamageManagerProcessor extends CObject
 
 			LogNewCombatSkill(skillId, "Damage Multiplier : " + damageIncreaseMultiplier);
 
-			witcherAttacker.ResetSkillCombo(skillId);
+			
 		}
 	}
 
 	private function ProcessNewSkill_PreciseBlows(out dmgInfos : array< SRawDamage >, variation:EPreciseBlowsCounterId)
 	{
 		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		var skillId:ESkill;
 		var damageMultiplierValue:SAbilityAttributeValue;
 		var i:int;
@@ -1192,7 +1192,7 @@ class W3DamageManagerProcessor extends CObject
 	private function ProcessNewSkill_CrushingBlows(out dmgInfos : array< SRawDamage >)
 	{
 		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		var skillId:ESkill;
 		var damageMultiplierValue:SAbilityAttributeValue;
 		var triggerAtAttackCount:int;
@@ -1233,7 +1233,7 @@ class W3DamageManagerProcessor extends CObject
 			{
 				
 					
-
+			
 				
 				damageMultiplierValue = witcherAttacker.GetSkillAttributeValue(skillId, 'damage_increase', false, true);
 				for (i = 0; i < dmgInfos.Size(); i += 1)
@@ -1324,7 +1324,7 @@ class W3DamageManagerProcessor extends CObject
 	private function ProcessNewSkill_SunderArmor()
 	{
 		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		var skillId:ESkill;
 		var armorReducAddValue:SAbilityAttributeValue;
 		var attackCount:int;
@@ -1364,7 +1364,7 @@ class W3DamageManagerProcessor extends CObject
 	private function ProcessNewSkill_CripplingStrikes()
 	{
 		var witcherAttacker : W3PlayerWitcher;
-		var swordEntity:CWitcherSword;
+		var swordEntity:CItemEntity;
 		var skillId:ESkill;
 		var damageMultiplier:float;
 		var attackCount:int;
@@ -1419,10 +1419,7 @@ class W3DamageManagerProcessor extends CObject
 				{
 					ProcessNewSkill_MuscleMemory(dmgInfos);
 				}
-				if(witcherAttacker.CanUseSkill(S_Sword_s23)) 
-				{
-					ProcessNewSkill_StrengthTraining_Counter();
-				}
+				
 				if(witcherAttacker.CanUseSkill(S_Sword_s24)) 
 				{
 					witcherAttacker.ResetSkillComboEx(S_Sword_s24, PreciseBlowsCounterId_Strong); 
@@ -1468,6 +1465,7 @@ class W3DamageManagerProcessor extends CObject
 		var hadFrostDamage, signSkillCatalystActive : bool;
 		var mpac : CMovingPhysicalAgentComponent;
 		var rendBonusPerPoint, staminaRendBonus, perk20Bonus, minCatalyst, maxCatalyst, minEnhanced, maxEnhanced : SAbilityAttributeValue;
+		var wasCatalystBonusAdded : bool;
 		var witcherAttacker : W3PlayerWitcher;
 		var damageVal, damageBonus, min, max			: SAbilityAttributeValue;		
 		var npcVictim : CNewNPC;
@@ -1476,7 +1474,7 @@ class W3DamageManagerProcessor extends CObject
 		var aerondight	: W3Effect_Aerondight;
 		var conjunctionDamageMult, spellPowerIgni : float;
 		var toxicShockDamage : SRawDamage;
-		var swordEntity: CWitcherSword;
+		var swordEntity: CItemEntity;
 		var inv			: CInventoryComponent;
 
 		
@@ -1593,6 +1591,7 @@ class W3DamageManagerProcessor extends CObject
 		}
 
 		
+		wasCatalystBonusAdded = false;
 		if ( actorVictim && playerAttacker && GetWitcherPlayer().CanUseSkill( S_Magic_s35 ) )
 		{
 			yrdens = GetWitcherPlayer().yrdenEntities;
@@ -1606,17 +1605,18 @@ class W3DamageManagerProcessor extends CObject
 
 				spellPower = action.GetDamageValueTotal();
 
-				for(i=0; i<yrdens.Size(); i+=1)
+				for( i=0; i<yrdens.Size(); i+=1 )
 				{
-					for(j=0; j<yrdens[i].validTargetsInArea.Size(); j+=1)
+					for( j=0; j<yrdens[i].validTargetsInArea.Size(); j+=1 )
 					{			
-						if(yrdens[i].validTargetsInArea[j] == actorVictim )
+						if( yrdens[i].validTargetsInArea[j] == actorVictim && !wasCatalystBonusAdded )
 						{
 							
 							for ( dmgIdx = 0; dmgIdx < dmgInfos.Size(); dmgIdx += 1 )
 							{
 								dmgInfos[dmgIdx].dmgVal *= ( 1 + extraSignDamageMult );
 							}
+							wasCatalystBonusAdded = true;
 						}
 					}
 				}
@@ -1731,11 +1731,10 @@ class W3DamageManagerProcessor extends CObject
 			{
 				rendBonusPerPoint = witcherAttacker.GetSkillAttributeValue(S_Sword_s02, 'adrenaline_damage_bonus', false, true);
 				rendBonus = FloorF(rendLoad) * rendBonusPerPoint.valueMultiplicative * witcherAttacker.GetSkillLevel(S_Sword_s02);
-				
-				for(i=0; i<dmgInfos.Size(); i+=1)
-				{
-					dmgInfos[i].dmgVal *= (1 + rendBonus);
-				}
+			}
+			else
+			{
+				rendBonus = 0.f;
 			}
 			
 			
@@ -1743,7 +1742,7 @@ class W3DamageManagerProcessor extends CObject
 			
 			for(i=0; i<dmgInfos.Size(); i+=1)
 			{
-				dmgInfos[i].dmgVal *= (1 + rendRatio * staminaRendBonus.valueMultiplicative);
+				dmgInfos[i].dmgVal *= (1 + (rendRatio * staminaRendBonus.valueMultiplicative) + rendBonus);
 			}
 			
 			
@@ -2622,10 +2621,11 @@ class W3DamageManagerProcessor extends CObject
 						skillArmorReduction = playerAttacker.GetSkillAttributeValue(S_Sword_s06, 'armor_reduction_perc', false, true);
 						armorReductionPerc += skillArmorReduction * playerAttacker.GetSkillLevel(S_Sword_s06);				
 					}
-					if(playerAttacker.CanUseSkill(S_Sword_s28) && (CNewNPC)actorVictim)
-					{
-						armorReductionPerc.valueAdditive += ((CNewNPC)actorVictim).GetSunderArmorPercent();
-					}
+				}
+
+				if(playerAttacker.CanUseSkill(S_Sword_s28) && (CNewNPC)actorVictim)
+				{
+					armorReductionPerc.valueAdditive += ((CNewNPC)actorVictim).GetSunderArmorPercent();
 				}
 			}
 		}
@@ -2769,26 +2769,26 @@ class W3DamageManagerProcessor extends CObject
 			finalDamage *= 1 - resistPercents;
 		}
 		
-		
-		curStats = GetWitcherPlayer().GetOffenseStatsList();
-		playerStlDmg = MaxF(0, curStats.steelStrongDmg - resistPoints);
-		playerStlDmg *= 1 - resistPercents;
-		playerStlDmg /= 6;
-		
-		playerFastSlvDmg = MaxF(0, curStats.silverFastDmg - resistPoints);
-		playerFastSlvDmg *= 1 - resistPercents;
-		playerFastSlvDmg /= 6;
-
-		playerSlvDmg = MaxF(0, curStats.silverStrongDmg - resistPoints);
-		playerSlvDmg *= 1 - resistPercents;
-		playerSlvDmg /= 6;
-		
-		playerSlvCritDmg = MaxF(0, curStats.silverStrongCritDmg - resistPoints);
-		playerSlvCritDmg *= 1 - resistPercents;
-		playerSlvCritDmg /= 6;
-		
 		if( !playerAttacker && actorVictim && !action.IsDoTDamage() && !thePlayer.IsFistFightMinigameEnabled() && (GetAttitudeBetween( thePlayer, actorAttacker ) == AIA_Friendly || actorAttacker.HasBuff(EET_AxiiGuardMe)) && !thePlayer.IsCiri()  )
 		{
+			
+			curStats = GetWitcherPlayer().GetOffenseStatsList();
+			playerStlDmg = MaxF(0, curStats.steelStrongDmg - resistPoints);
+			playerStlDmg *= 1 - resistPercents;
+			playerStlDmg /= 6;
+
+			playerFastSlvDmg = MaxF(0, curStats.silverFastDmg - resistPoints);
+			playerFastSlvDmg *= 1 - resistPercents;
+			playerFastSlvDmg /= 6;
+
+			playerSlvDmg = MaxF(0, curStats.silverStrongDmg - resistPoints);
+			playerSlvDmg *= 1 - resistPercents;
+			playerSlvDmg /= 6;
+
+			playerSlvCritDmg = MaxF(0, curStats.silverStrongCritDmg - resistPoints);
+			playerSlvCritDmg *= 1 - resistPercents;
+			playerSlvCritDmg /= 6;
+
 			if(finalDamage > playerStlDmg && !actorAttacker.HasAbility( 'ForceInstantKill' ))
 			{
 				if ( actorAttacker.HasTag( 'regis' ) )

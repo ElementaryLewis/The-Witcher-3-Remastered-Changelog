@@ -154,19 +154,19 @@ statemachine class W3YrdenEntity extends W3SignEntity
 		}
 
 		trapDurationAtt += owner.GetActor().GetTotalSignSpellPower(skillEnum);
-		trapDurationAtt.valueMultiplicative -= 1;	
-		
-		charges = (int)CalculateAttributeValue(chargesAtt);
-		trapDuration = CalculateAttributeValue(trapDurationAtt);
-		
+
 		
 		player = (CR4Player)owner.GetActor();
 		if(player.CanUseSkill(S_Magic_s36))
 		{
 			fortifiedSignsAtt = player.GetSkillAttributeValue(S_Magic_s36, 'duration', false, true);
-			trapDuration *= 1 + fortifiedSignsAtt.valueMultiplicative * player.GetSkillLevel(S_Magic_s36);
+			trapDurationAtt.valueMultiplicative += fortifiedSignsAtt.valueMultiplicative * player.GetSkillLevel(S_Magic_s36);
 		}
 
+		trapDurationAtt.valueMultiplicative -= 1;	
+		
+		charges = (int)CalculateAttributeValue(chargesAtt);
+		trapDuration = CalculateAttributeValue(trapDurationAtt);
 	}
 	
 	event OnStarted()

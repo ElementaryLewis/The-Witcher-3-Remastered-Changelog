@@ -864,8 +864,6 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 	private function TransitionToSlide( prevState : ELadderState )
 	{
 		var exploration : SExplorationQueryToken;
-		var ladderWidth : float;
-		var ladderBbox : Box;
 
 		exploration = m_ExplorationO.m_SharedDataO.GetLastExploration();
 		m_ExplorationO.SetBehaviorParamBool( behCanStartSlide, true );
@@ -904,6 +902,7 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 		{
 			ladderEntity.CalcBoundingBox( ladderBbox );
 			ladderWidth = MaxF( ladderBbox.Max.X - ladderBbox.Min.X, ladderBbox.Max.Y - ladderBbox.Min.Y );
+			ladderWidth = MinF( ladderWidth, 0.92f );
 
 			if( estimated )
 			{
@@ -1446,14 +1445,15 @@ class CExplorationStateInteraction extends CExplorationStateAbstract
 		
 		
 		distFromLadder = DistanceFromLadder(m_ExplorationO.m_SharedDataO.GetLastExploration());
-		if( 
+   		if( 
 			ladderRemasterFeaturesEnabled &&
 			( 
 				( 
 					tryingToJumpToLadder && 
 					m_ExplorationO.m_InputO.IsJumpJustPressed() && 
 					theInput.GetActionValue( 'GI_AxisLeftY' ) > 0.5 &&
-					distFromLadder < ladderJumpDistance 
+					distFromLadder < ladderJumpDistance  &&
+					m_ExplorationO.GetStateCur() != 'Jump' 
 				) ||  
 				( 
 					tryingToGrabLadder &&  

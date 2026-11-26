@@ -229,6 +229,7 @@ import abstract class CActor extends CGameplayEntity
 
 	public final function IsAbilityBlocked(abilityName : name) : bool											{return abilityManager.IsAbilityBlocked(abilityName);}
 	public final function BlockAbility(abilityName : name, block : bool, optional cooldown : float) : bool		{return abilityManager.BlockAbility(abilityName, block, cooldown);}
+	public final function GetBlockedAbilityCooldown(abilityName : name) : float									{return abilityManager.GetBlockedAbilityCooldown(abilityName);}
 	
 	import public function MuteHeadAudio( mute: bool );
 	import public function CanPush( canPush: bool );
@@ -4090,7 +4091,7 @@ import abstract class CActor extends CGameplayEntity
 	{
 		var i, size : int;
 		
-		size = (int)EET_EffectTypesSize;
+		size = GetEffectRangeEnd();
 		
 		for( i=0; i<size; i+=1 )
 		{
@@ -4161,7 +4162,7 @@ import abstract class CActor extends CGameplayEntity
 		var i, size : int;
 	
 		
-		size = (int)EET_EffectTypesSize;
+		size = GetEffectRangeEnd();
 		for(i=0; i<size; i+=1)
 		{
 			if(IsCriticalEffectType(i))

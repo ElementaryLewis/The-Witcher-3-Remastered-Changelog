@@ -864,21 +864,23 @@ state NormalCast in W3SignEntity extends BaseCast
 		
 
 		player = GetWitcherPlayer();
-		if(player)
+		if(player && caster.GetActor() == thePlayer)
 		{
 			
 			currentSign = virtual_parent.GetSignType();
 			hasConvergenceTheoryBuff = player.HasBuff( EET_ConvergenceTheory );
 			
-			if ( currentSign != GetWitcherPlayer().GetLastUsedSign() && player.CanUseSkill(S_Magic_s37) )
+			if ( ( currentSign != player.GetLastUsedSign() || ( player.GetIsLastUsedSignTimerFinished() && !hasConvergenceTheoryBuff ) ) && player.CanUseSkill(S_Magic_s37) )
 			{
 				player.AddEffectDefault( EET_ConvergenceTheory, NULL, "ConvergenceTheoryEffect" );
+				thePlayer.AddTimer( 'StartLastUsedSignTimer', CalculateAttributeValue( GetWitcherPlayer().GetSkillAttributeValue( S_Magic_s37, 'duration', false, false ) ) );
 			}
 			else
 			{
 				if (hasConvergenceTheoryBuff)
 				{
 					GetWitcherPlayer().RemoveBuff( EET_ConvergenceTheory, false, "ConvergenceTheoryEffect" );
+					player.SetIsLastUsedSignTimerFinished( true );
 				}
 			}
 			GetWitcherPlayer().SetLastUsedSign(currentSign);
@@ -923,7 +925,7 @@ state Channeling in W3SignEntity extends BaseCast
 		theGame.GetBehTreeReactionManager().CreateReactionEventIfPossible( parent.owner.GetActor(), 'CastSignAction', -1, 8.0f, 0.2f, -1, true );
 		theGame.GetBehTreeReactionManager().CreateReactionEventIfPossible( parent, 'CastSignActionFar', -1, 30.0f, -1.f, -1, true );
 	
-		if(player)
+		if(player && caster.GetActor() == thePlayer)
 		{
 			
 			currentSign = virtual_parent.GetSignType();

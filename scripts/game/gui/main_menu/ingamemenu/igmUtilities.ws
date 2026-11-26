@@ -19,7 +19,7 @@ function IngameMenu_PopulateSaveDataForSlotType(flashStorageUtility : CScriptedF
 	var i				: int;
 	var saveGames		: array< SSavegameInfo >;
 	var numSavesAdded	: int;
-	var isModdedSave	: bool;
+	var wasEverModdedSave : bool;
 	
 	
 	theGame.ListSavedGames( saveGames, saveType );
@@ -84,9 +84,9 @@ function IngameMenu_PopulateSaveDataForSlotType(flashStorageUtility : CScriptedF
 			currentData.SetMemberFlashUInt("saveType", currentSave.slotType);
 			currentData.SetMemberFlashUInt("cloudStatus", currentSave.comboStatus );
 			
-			isModdedSave = theGame.GetModHandlerSystem().IsModdedSave(currentSave);
-			currentData.SetMemberFlashBool("modded", isModdedSave);
-			currentData.SetMemberFlashBool("trophiesDisabled", theGame.GetPlatform() != Platform_PC && theGame.GetPlatform() != Platform_PC_GDK && isModdedSave);
+			wasEverModdedSave = theGame.GetModHandlerSystem().WasEverModdedSave(currentSave);
+			currentData.SetMemberFlashBool("modded", wasEverModdedSave);
+			currentData.SetMemberFlashBool("trophiesDisabled", theGame.GetPlatform() != Platform_PC && theGame.GetPlatform() != Platform_PC_GDK && wasEverModdedSave);
 			
 			parentObject.PushBackFlashObject(currentData);
 		}
@@ -100,7 +100,7 @@ function IngameMenu_PopulateImportSaveData(flashStorageUtility : CScriptedFlashV
 	var i				: int;
 	var saveDisplayName : string;
 	var currentData		: CScriptedFlashObject;
-	var isModdedSave	: bool;
+	var wasEverModdedSave : bool;
 	
 	theGame.ListW2SavedGames( saveGames );
 	
@@ -120,9 +120,9 @@ function IngameMenu_PopulateImportSaveData(flashStorageUtility : CScriptedFlashV
 		currentData.SetMemberFlashUInt("saveType", currentSave.slotType);
 		currentData.SetMemberFlashUInt("cloudStatus", currentSave.comboStatus );
 	
-		isModdedSave = theGame.GetModHandlerSystem().IsModdedSave(currentSave);
-		currentData.SetMemberFlashBool("modded", isModdedSave);
-		currentData.SetMemberFlashBool("trophiesDisabled", theGame.GetPlatform() != Platform_PC && theGame.GetPlatform() != Platform_PC_GDK && isModdedSave);
+		wasEverModdedSave = theGame.GetModHandlerSystem().WasEverModdedSave(currentSave);
+		currentData.SetMemberFlashBool("modded", wasEverModdedSave);
+		currentData.SetMemberFlashBool("trophiesDisabled", theGame.GetPlatform() != Platform_PC && theGame.GetPlatform() != Platform_PC_GDK && wasEverModdedSave);
 	
 		parentObject.PushBackFlashObject(currentData);
 	}

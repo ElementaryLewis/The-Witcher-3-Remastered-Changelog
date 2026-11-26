@@ -767,7 +767,7 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 			PopulateDataForTabWithSkills(CharacterMenuTab_Alchemy, ESP_Alchemy, skillId);
 			break;
 		case CharacterMenuTab_Perks:
-			PopulateDataForTabWithSkills(CharacterMenuTab_Perks, ESP_Perks);
+			PopulateDataForTabWithSkills(CharacterMenuTab_Perks, ESP_Perks, skillId);
 			break;
 		case CharacterMenuTab_Mutagens:
 			PopulateDataForMutagenTab();
@@ -2133,6 +2133,8 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 			case S_Sword_s29:
 				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s29, 'damage_increase', false, false) * skillLevel;
 				argsInt.PushBack(RoundMath(ability.valueMultiplicative*100));
+				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Sword_s29, 'duration', false, false);
+				argsInt.PushBack(RoundMath(ability.valueAdditive));
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				break;
 			case S_Sword_s30:
@@ -2503,8 +2505,9 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
 				break;
 			case S_Alchemy_s18:
-				argsInt.PushBack(skillLevel);
-				baseString = GetLocStringByKeyExtWithParams(locKey, argsInt);
+				ability = GetWitcherPlayer().GetSkillAttributeValue(S_Alchemy_s18, 'toxicity', false, true);
+				argsFloat.PushBack( ability.valueAdditive );
+				baseString = GetLocStringByKeyExtWithParams(locKey, , argsFloat);
 				break;
 			case S_Perk_43:
 				arg = CalculateAttributeValue(GetWitcherPlayer().GetSkillAttributeValue(S_Perk_43, 'synergy_bonus', false, false)) * skillLevel;
@@ -2791,12 +2794,12 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 		return baseString;
 	}
 		
-	private function GetSkillTooltipDescription(targetSkill : SSkill, isGridView : bool, out currentLevelDesc : string, out nextLevelDesc : string ) : void
+	private function GetSkillTooltipDescription(targetSkill : SSkill, isGridView : bool, requestedLevel : int, out currentLevelDesc : string, out differentLevelDesc : string ) : void
 	{
 		var skillLevel : int;
 		
 		currentLevelDesc = "";
-		nextLevelDesc = "";
+		differentLevelDesc = "";
 		
 		
 		
@@ -2805,19 +2808,21 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 		else
 			skillLevel = GetWitcherPlayer().GetSkillLevel(targetSkill.skillType);
 		
-		if (GetWitcherPlayer().GetSkillLevel(targetSkill.skillType) > 0)
+		if (skillLevel == requestedLevel)
 		{
 			if (!targetSkill.isCoreSkill)
 			{
 				currentLevelDesc += "<font color=\"#ecdda8\">" + GetLocStringByKeyExt("panel_character_tooltip_skill_desc_current_level") + ":</font>&#10;";
 			}
-			currentLevelDesc += GetSkillTooltipDescriptionForSkillLevel(targetSkill, skillLevel);
+			currentLevelDesc += GetSkillTooltipDescriptionForSkillLevel(targetSkill, requestedLevel);
 		}
-		
-		if (skillLevel < targetSkill.maxLevel)
+		else
 		{
-			nextLevelDesc += "<font color=\"#A09588\">" + GetLocStringByKeyExt("panel_character_tooltip_skill_desc_next_level") + ":</font>&#10;";
-			nextLevelDesc += GetSkillTooltipDescriptionForSkillLevel(targetSkill, skillLevel + 1);
+			
+			
+			
+			differentLevelDesc += "<font color=\"#A09588\">" + GetLocStringByKeyExt("skill_description_title_level_" + requestedLevel) + "</font>&#10;";
+			differentLevelDesc += GetSkillTooltipDescriptionForSkillLevel(targetSkill, requestedLevel);
 		}
 	}
 	
@@ -2827,17 +2832,17 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 		showNotification(GetLocStringByKeyExt("message_common_not_enough_skill_points"));
 	}
 	
-	event  OnGetGridSkillTooltipData(targetSkill : ESkill, compareItemType : int)
+	event  OnGetGridSkillTooltipData(targetSkill : ESkill, requestedLevel : int, optional fastReplace : bool)
 	{
-		GetSkillTooltipData(targetSkill, compareItemType, true);
+		GetSkillTooltipData(targetSkill, requestedLevel, true, fastReplace);
 	}
 	
-	event  OnGetSlotSkillTooltipData(targetSkill : ESkill, compareItemType : int)
+	event  OnGetSlotSkillTooltipData(targetSkill : ESkill, requestedLevel : int, optional fastReplace : bool)
 	{
-		GetSkillTooltipData(targetSkill, compareItemType, false);
+		GetSkillTooltipData(targetSkill, requestedLevel, false, fastReplace);
 	}
 	
-	private function GetSkillTooltipData(targetSkill : ESkill, compareItemType : int, isGridView : bool)
+	private function GetSkillTooltipData(targetSkill : ESkill, requestedLevel : int, isGridView : bool, optional fastReplace : bool)
 	{
 		var abilityMgr 			  : W3PlayerAbilityManager;
 		var resultGFxData 	      : CScriptedFlashObject;
@@ -2868,11 +2873,16 @@ class CR4CharacterDupeMenu extends CR4MenuBase
 		resultGFxData.SetMemberFlashString('skillSubCategory', targetSubPathLocName);
 		resultGFxData.SetMemberFlashString('skillName', GetLocStringByKeyExt(targetSkillData.localisationNameKey));
 		
-		GetSkillTooltipDescription(targetSkillData, isGridView, skillCurrentLevelDesc, skillNextLevelDesc);
+		GetSkillTooltipDescription(targetSkillData, isGridView, requestedLevel, skillCurrentLevelDesc, skillNextLevelDesc);
 		
 		
 		resultGFxData.SetMemberFlashString('nextLevelDescription', skillNextLevelDesc);
 		resultGFxData.SetMemberFlashString('isCoreSkill', targetSkillData.isCoreSkill);
+
+		resultGFxData.SetMemberFlashInt('totalLevels', targetSkillData.maxLevel);
+		resultGFxData.SetMemberFlashInt('sentLevel', requestedLevel);
+
+		resultGFxData.SetMemberFlashBool('fastReplace', fastReplace);
 		
 		if (targetSkillData.isCoreSkill)
 		{

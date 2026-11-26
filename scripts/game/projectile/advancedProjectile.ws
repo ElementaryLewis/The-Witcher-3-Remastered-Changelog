@@ -415,250 +415,6 @@ class W3BoulderProjectile extends W3AdvancedProjectile
 }
 
 
-class W3ThrallBoulderProjectile extends W3DeflectableAdvancedProjectile
-{
-	editable var initFxName 					: name;
-	editable var onCollisionFxName 				: name;
-	editable var spawnEntityTemplate 			: CEntityTemplate;
-	editable var onCollisionAppearanceName 		: name;
-	private editable var soundRockBreaking              : name;
-	private editable var soundRockImpact                : name;
-	
-	private var projectileHitGround : bool;
-	private var bounce				: bool;
-	private var myTemplate 			: CEntityTemplate;
-	private	var parryInfo 			: SParryInfo;
-	private var abs 				: array<name>;
-	private var npcCaster 			: CNewNPC;
-	private var defaultTrail		: name;
-	
-	default defaultTrail = 'arrow_trail';
-	
-	hint soundRockBreaking					= "Sound played when the rock hits the ground and breaks.";
-    hint soundRockImpact					= "Sound played when the rock hits the creature.";
-	
-	
-	event OnProjectileShot( targetCurrentPosition : Vector, optional target : CNode )
-	{
-		super.OnProjectileShot(targetCurrentPosition,target);
-		
-		ActivateTrail( defaultTrail );
-		
-		npcCaster = (CNewNPC)caster;
-		npcCaster.SetCounterWindowStartTime(theGame.GetEngineTime());
-	}
-	
-	event OnProjectileInit()
-	{
-		
-		projectileHitGround = false;
-		isActive = true;
-	}
-	
-	event OnProjectileCollision( pos, normal : Vector, collidingComponent : CComponent, hitCollisionsGroups : array< name >, actorIndex : int, shapeIndex : int )
-	{
-		if ( !isActive )
-		{
-			return true;
-		}
-		
-		if(collidingComponent)
-			victim = (CGameplayEntity)collidingComponent.GetEntity();
-		else
-			victim = NULL;
-		
-		super.OnProjectileCollision(pos, normal, collidingComponent, hitCollisionsGroups, actorIndex, shapeIndex);
-		
-		PlayEffect('boulder_hit'); 
-		
-		
-		
-		if ( victim == thePlayer )
-		{
-			bounce = false;
-			
-			if(thePlayer.HasAbility( 'Glyphword 1 _Stats', true ))
-			{
-				
-				thePlayer.PlayEffect('glyphword_reflection');
-				
-				
-				myTemplate = (CEntityTemplate)LoadResource('glyphword_1');
-				theGame.CreateEntity(myTemplate, GetWorldPosition(), thePlayer.GetWorldRotation(), , , true);
-
-				if(ProcessCombat_ArrowDeflection())
-					return true;
-
-				this.SoundEvent( "cmb_arrow_bounce" );
-				bounce = true;
-			}
-			
-			else if(thePlayer.CanParryAttack() && (thePlayer.CanUseSkill(S_Sword_s10) || thePlayer.CanUseSkill(S_Sword_s33)) )
-			{			
-
-				
-				parryInfo = thePlayer.ProcessParryInfo(((CActor)caster),((CActor)victim),AST_Jab,ASD_NotSet,'attack_light',((CActor)caster).GetInventory().GetItemFromSlot('r_weapon'), true);
-
-				if ( thePlayer.PerformParryCheck(parryInfo) )
-				{
-					if(ProcessCombat_ArrowDeflection())
-						return true;
-						
-					bounce = true;
-				}
-			}
-			
-			if(!bounce)
-			{
-				thePlayer.GetCharacterStats().GetAbilities(abs, true);				
-				bounce = abs.Contains(theGame.params.BOUNCE_ARROWS_ABILITY);
-				
-				if(bounce)
-				{
-					FactsAdd("sq108_arrow_deflected");
-					thePlayer.PlayEffect( 'bolt_bump' );
-				}
-			}
-			
-			if(bounce)
-			{	
-				StopProjectile();
-				ActivateTrail('arrow_trail_orange');
-				
-				
-				casterPos = thePlayer.GetWorldPosition() + thePlayer.GetHeadingVector() * 1.5;
-				casterPos.Z += 1.5;
-				casterPos.Y += RandRangeF(0.5, -0.5);
-				this.Init(thePlayer);
-				this.ShootProjectileAtPosition(22,projSpeed*0.5,casterPos);
-				return true;
-			}
-			else
-			{
-				VictimCollision(victim);
-			}
-		}
-		else if ( victim && !hitCollisionsGroups.Contains( 'Static' ) && !projectileHitGround && !collidedEntities.Contains(victim) )
-		{
-			VictimCollision(victim);
-		}
-		else if ( hitCollisionsGroups.Contains( 'Terrain' ) || hitCollisionsGroups.Contains( 'Static' ) )
-		{
-			ProjectileHitGround();
-		}
-		else if ( hitCollisionsGroups.Contains( 'Water' ) )
-		{
-			ProjectileHitGround();
-		}
-	}
-	
-	
-	
-	protected function VictimCollision( victim : CGameplayEntity )
-	{	
-		DealDamageToVictim(victim);
-		DeactivateProjectile(victim);
-	}
-
-	protected function DealDamageToVictim( victim : CGameplayEntity )
-	{
-		var action : W3DamageAction;
-		
-		this.SoundEvent( soundRockImpact );
-		
-		action = new W3DamageAction in this;
-		action.Initialize((CGameplayEntity)caster,victim,this,caster.GetName(),EHRT_Heavy,CPS_AttackPower,false,true,false,false);
-		if ( projEfect != EET_Undefined )
-		{
-			action.AddEffectInfo(projEfect);
-		}
-
-
-
-		
-		action.AddDamage( theGame.params.DAMAGE_NAME_RENDING, projDMG ); 
-		
-		if ( ((CActor)victim).UsesEssence() )
-		{
-			
-		}
-		
-		else
-		{
-			action.SetIgnoreArmor( ignoreArmor );
-		}
-		action.SetCanPlayHitParticle(false);
-		theGame.damageMgr.ProcessAction( action );
-		delete action;
-		
-		collidedEntities.PushBack(victim);
-	}
-	
-	protected function PlayCollisionEffect( optional victim : CGameplayEntity )
-	{
-		if ( victim == thePlayer && thePlayer.GetCurrentlyCastSign() == ST_Quen && ((W3PlayerWitcher)thePlayer).IsCurrentSignChanneled() )
-		{}
-		else
-			this.PlayEffect(onCollisionFxName);
-	}
-	
-	protected function DeactivateProjectile( optional victim : CGameplayEntity )
-	{
-		StopProjectile();
-		this.StopEffect(initFxName);
-		StopActiveTrail();
-		if ( IsNameValid( onCollisionAppearanceName ))
-		{
-			this.ApplyAppearance( onCollisionAppearanceName );
-		}
-		PlayCollisionEffect ( victim );
-		isActive = false;
-		this.DestroyAfter(5.0);
-	}
-	
-	protected function ProjectileHitGround()
-	{
-		var ent : CEntity;
-		var damageAreaEntity : CDamageAreaEntity;
-		
-		if ( spawnEntityTemplate )
-		{
-			ent = theGame.CreateEntity( spawnEntityTemplate, this.GetWorldPosition(), this.GetWorldRotation() );
-			damageAreaEntity = (CDamageAreaEntity)ent;
-			if ( damageAreaEntity )
-			{
-				damageAreaEntity.owner = (CActor)caster;
-				this.StopEffect(initFxName);
-				projectileHitGround = true;
-			}
-		}
-		DeactivateProjectile();
-	}
-	
-	
-	event OnAardHit( sign : W3AardProjectile )
-	{
-		var rigidMesh		 	: CMeshComponent;
-		var randAngleOffset 	: float;
-		var level 				: int;
-		
-		super.OnAardHit(sign);
-		
-		StopProjectile();
-		ActivateTrail('arrow_trail_orange');
-				
-		
-		casterPos = thePlayer.GetWorldPosition() + thePlayer.GetHeadingVector() * 3.0;
-		casterPos.Z += 1.5;
-		casterPos.Y += RandRangeF(0.5, -0.5);
-		this.Init(thePlayer);
-		this.ShootProjectileAtPosition(22,projSpeed*0.4,casterPos);
-				
-	}
-	
-}
-
-
 class W3TraceGroundProjectile extends W3AdvancedProjectile
 {
 	editable var samplingFreq : float;
@@ -684,9 +440,8 @@ class W3TraceGroundProjectile extends W3AdvancedProjectile
 		{
 			isActive = true;
 			AddTimer('Sampling', samplingFreq, true);
-			Sampling(0.f);
+			Sampling(0.f);			
 		}
-		
 	}
 	
 	event OnRangeReached()
@@ -770,6 +525,8 @@ class W3SpawnEntityProjectile extends W3TraceGroundProjectile
 		}
 	}
 }
+
+
 
 class W3ElementalIfrytProjectile extends W3TraceGroundProjectile
 {
@@ -1994,12 +1751,38 @@ class W3MeteorProjectile extends W3FireballProjectile
 	editable var destroyMarkerAfter		: float;
 
 	var markerEntity 			: CEntity;
+
+	var lastPos : Vector;
 	
 	default projSpeed = 10;
 	default projAngle = 0;
 	
 	default explosionRadius = 3;
 	default destroyMarkerAfter = 2.f;
+
+	event OnSpawned( spawnData : SEntitySpawnData )
+	{
+		super.OnSpawned( spawnData );
+
+		lastPos = GetWorldPosition();
+		AddTimer( 'HACK_DeactivateStuckProjectile', 15.f, true );
+	}
+
+	private timer function HACK_DeactivateStuckProjectile( time : float , id : int )
+	{
+		var currentPos : Vector;
+
+		currentPos = GetWorldPosition();
+
+		if ( VecDistanceSquared( lastPos, currentPos ) < 0.1f )
+		{
+			DeactivateProjectile();
+		}
+		else
+		{
+			lastPos = currentPos;
+		}
+	}
 	
 	protected function VictimCollision( victim : CGameplayEntity )
 	{
@@ -2010,6 +1793,8 @@ class W3MeteorProjectile extends W3FireballProjectile
 	{
 		if ( !isActive )
 			return;
+		
+		RemoveTimer( 'HACK_DeactivateStuckProjectile' );
 		
 		Explode();
 		
@@ -2022,6 +1807,16 @@ class W3MeteorProjectile extends W3FireballProjectile
 		
 		super.DeactivateProjectile(victim);
 		
+	}
+
+	event OnDestroyed()
+	{
+		
+		if ( markerEntity )
+		{
+			markerEntity.StopAllEffects();
+			markerEntity.DestroyAfter( destroyMarkerAfter );
+		}
 	}
 	
 	protected function Explode()

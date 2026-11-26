@@ -92,7 +92,7 @@ import class CCommonGame extends CGame
 	import final function LeaveTutorialReplay() : void;
 
 	import final function CanStartStandaloneDLC( dlc : name ) : bool;
-	import final function InitStandaloneDLCLoading( dlc : name, difficulty : int ) : ELoadGameResult;
+	import final function InitStandaloneDLCLoading( dlc : name, difficulty : int, optional choseBardsBallad : bool ) : ELoadGameResult;
 	
 	
 	
@@ -133,7 +133,7 @@ import class CCommonGame extends CGame
 	
 	import final function ShouldShowSaveCompatibilityWarning() : bool;
 	
-	import final function RequestNewGame( gameResourceFilename : string ) : bool;
+	import final function RequestNewGame( gameResourceFilename : string, optional choseBardsBallad : bool ) : bool;
 	import final function RequestEndGame();
 	import final function RequestExit();
 	import final function GetGameResourceList() : array< string >;

@@ -419,6 +419,7 @@ class CR4MeditationClockMenu extends CR4MenuBase
 					MoveMeditationPanel(PANEL_MOVE_TIME);
 				}
 				m_commonMenuRef.SetMeditationMode(true, 1, m_sleepMode);
+				m_commonMenuRef.SignalMeditationStarted();
 			}
 		}
 	} 

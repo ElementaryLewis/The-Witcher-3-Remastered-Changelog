@@ -1306,10 +1306,12 @@ class CR4IngameMenu extends CR4MenuBase
 	private function prepareBigMessageFailedMods()
 	{
 		var modArray : array< SModioModID >;
+		var failedScriptMods : array< string >;
 		theGame.GetModHandlerSystem().GetFailedMods(modArray);
-		m_igmStateMachine.GetFailedModList(modArray);
+		theGame.GetModHandlerSystem().GetFailedScriptMods(failedScriptMods);
+		m_igmStateMachine.GetFailedModList(modArray, failedScriptMods);
 	}
-	
+
 	public function StartShowCustomDialogGalaxySignIn()
 	{
 		var l_DataFlashObject 		: CScriptedFlashObject;
@@ -2986,7 +2988,11 @@ class CR4IngameMenu extends CR4MenuBase
 			theGame.GetGuiManager().ForceProcessFlashStorage();
 		}
 
+		
 		updateAutohealOptionChanged();
+		
+		if (GetWitcherPlayer())
+			GetWitcherPlayer().UpdateEncumbrance();
 	}
 
 	protected function updateFGorLLOptionChangedCommon():void
@@ -3341,6 +3347,8 @@ class CR4IngameMenu extends CR4MenuBase
 		
 		thePlayer.SetAutoCameraCenter( inGameConfigBufferedWrapper.GetVarValue( 'Gameplay', 'AutoCameraCenter' ) );
 		thePlayer.SetEnemyUpscaling( inGameConfigBufferedWrapper.GetVarValue( 'Gameplay', 'EnemyUpscaling' ) );
+		thePlayer.SetLevelBalancing( inGameConfigBufferedWrapper.GetVarValue( 'Gameplay', 'LevelBalancing' ) );
+		thePlayer.SetLevelBalancingModifier( StringToInt( inGameConfigBufferedWrapper.GetVarValue( 'Gameplay', 'LevelBalancingModifier' ) ) );
 	}
 	
 	event  OnNavigatedBack()
@@ -3766,7 +3774,7 @@ class CR4IngameMenu extends CR4MenuBase
 						if (currentNewGameConfig.bardsBalladOn)
 							updateAccessibilityPresetValues(AP_BardsTale, false);
 						
-						if ( theGame.RequestNewGame( theGame.GetNewGameDefinitionFilename() ) )
+						if ( theGame.RequestNewGame( theGame.GetNewGameDefinitionFilename(), currentNewGameConfig.bardsBalladOn ) )
 						{
 							OnPlaySoundEvent("gui_global_game_start");
 							OnPlaySoundEvent("mus_intro_usm");
@@ -3820,7 +3828,7 @@ class CR4IngameMenu extends CR4MenuBase
 			if (currentNewGameConfig.bardsBalladOn)
 				updateAccessibilityPresetValues(AP_BardsTale, false);
 			
-			startGameStatus = theGame.StartNewGamePlus(saveGameRef);
+			startGameStatus = theGame.StartNewGamePlus(saveGameRef, currentNewGameConfig.bardsBalladOn);
 			
 			if (startGameStatus == NGP_Success)
 			{
@@ -4109,14 +4117,14 @@ class CR4IngameMenu extends CR4MenuBase
 			if ((optionsArray & IGMC_EP2_Save) == IGMC_EP2_Save)
 			{
 				
-				theGame.InitStandaloneDLCLoading('bob_000_000', currentNewGameConfig.difficulty);
+				theGame.InitStandaloneDLCLoading('bob_000_000', currentNewGameConfig.difficulty, currentNewGameConfig.bardsBalladOn);
 				theGame.EnableUberMovement( true );
 				((CInGameConfigWrapper)theGame.GetInGameConfigWrapper()).SetVarValue( 'Gameplay', 'EnableUberMovement', 1 );
 			}
 			else if ((optionsArray & IGMC_EP1_Save) == IGMC_EP1_Save)
 			{
 				
-				theGame.InitStandaloneDLCLoading('ep1', currentNewGameConfig.difficulty);
+				theGame.InitStandaloneDLCLoading('ep1', currentNewGameConfig.difficulty, currentNewGameConfig.bardsBalladOn);
 				theGame.EnableUberMovement( true );
 				((CInGameConfigWrapper)theGame.GetInGameConfigWrapper()).SetVarValue( 'Gameplay', 'EnableUberMovement', 1 );
 			}
@@ -4188,7 +4196,7 @@ class CR4IngameMenu extends CR4MenuBase
 		if (currentNewGameConfig.bardsBalladOn)
 			updateAccessibilityPresetValues(AP_BardsTale, false);
 		
-		StartNewGame();
+		StartNewGame(currentNewGameConfig.bardsBalladOn);
 	}
 	
 	event  OnUpdateRescale(hScale : float, vScale : float)
@@ -4227,14 +4235,14 @@ class CR4IngameMenu extends CR4MenuBase
 		StartNewGame();
 	}
 	
-	public function StartNewGame():void
+	public function StartNewGame(optional choseBardsBallad : bool):void
 	{
 		if (theGame.GetGuiManager().GetPopup('MessagePopup') && theGame.GetGuiManager().lastMessageData.messageId == UMID_ControllerDisconnected)
 		{
 			return;
 		}
 		
-		if ( theGame.RequestNewGame( theGame.GetNewGameDefinitionFilename() ) )
+		if ( theGame.RequestNewGame( theGame.GetNewGameDefinitionFilename(), choseBardsBallad ) )
 		{
 			theGame.GetGuiManager().RequestMouseCursor(false);
 			OnPlaySoundEvent("gui_global_game_start");
@@ -4528,13 +4536,13 @@ class CR4IngameMenu extends CR4MenuBase
 	
 	event  OnCheckScreenshotDataReady():void
 	{
-		var moddedSave : bool;
+		var wasEverModdedSave : bool;
 	
 		if (theGame.IsScreenshotDataReady())
 		{
 			m_fxOnSaveScreenshotRdy.InvokeSelf();
-			moddedSave = theGame.GetModHandlerSystem().IsModdedSave(m_lastRequestedSaveInfo);
-			m_fxOnSetModioBorderVis.InvokeSelfOneArg( FlashArgBool(moddedSave) );
+			wasEverModdedSave = theGame.GetModHandlerSystem().WasEverModdedSave(m_lastRequestedSaveInfo);
+			m_fxOnSetModioBorderVis.InvokeSelfOneArg( FlashArgBool(wasEverModdedSave) );
 		}
 	}
 	
@@ -5113,6 +5121,7 @@ class CR4IngameMenu extends CR4MenuBase
 	{
 		var inGameConfigWrapper	: CInGameConfigWrapper;
 		var value : string;
+		var text : string;
 	
 		inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
 
@@ -5121,7 +5130,10 @@ class CR4IngameMenu extends CR4MenuBase
 		if(value == "0")
 			m_fxUpdateBardsBalladText.InvokeSelfOneArg(FlashArgString(""));
 		else 
-			m_fxUpdateBardsBalladText.InvokeSelfOneArg(FlashArgString("[[accessibility_presets_bardsballad_desc]]"));
+		{	
+			text = GetLocStringByKeyExt("accessibility_presets_bardsballad_desc"); 
+			m_fxUpdateBardsBalladText.InvokeSelfOneArg(FlashArgString(text));
+		}
 	}
 	
 	public function ShowMyRewardsPanel( out unlockedIds : array< int > ) : void

@@ -36,6 +36,8 @@ statemachine import abstract class CPlayer extends CActor
 	public 				var bIsFirstAttackInCombo		: bool;
 	protected			var bIsInHitAnim				: bool;
 	import				var enemyUpscaling				: bool;
+	import				var levelBalancing				: bool;
+	import				var levelBalancingModifier		: int;
 	
 	public editable		var FarZoneDistMax				: float;
 	public editable 	var DangerZoneDistMax			: float;
@@ -252,6 +254,8 @@ statemachine import abstract class CPlayer extends CActor
 		SetAutoCameraCenter( ((CInGameConfigWrapper)theGame.GetInGameConfigWrapper()).GetVarValue( 'Gameplay', 'AutoCameraCenter' ) );
 
 		SetEnemyUpscaling( ((CInGameConfigWrapper)theGame.GetInGameConfigWrapper()).GetVarValue( 'Gameplay', 'EnemyUpscaling' ) );
+		SetLevelBalancing( ((CInGameConfigWrapper)theGame.GetInGameConfigWrapper()).GetVarValue( 'Gameplay', 'LevelBalancing' ) );
+		SetLevelBalancingModifier( StringToInt(((CInGameConfigWrapper)theGame.GetInGameConfigWrapper()).GetVarValue( 'Gameplay', 'LevelBalancingModifier' ) ) );
 		
 		if( !IsNameValid(GetCurrentStateName()) )
 		{
@@ -2118,6 +2122,12 @@ statemachine import abstract class CPlayer extends CActor
 	
 	import function SetEnemyUpscaling( b : bool );
 	import public function GetEnemyUpscaling() : bool;
+
+	import function SetLevelBalancing( b : bool );
+	import public function GetLevelBalancing() : bool;
+
+	import function SetLevelBalancingModifier( mod : int );
+	import public function GetLevelBalancingModifier() : int;
 	
 	public function SetAutoCameraCenter( on : bool ) { autoCameraCenterToggle = on; }
 	public function GetAutoCameraCenter() : bool

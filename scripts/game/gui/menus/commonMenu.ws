@@ -52,6 +52,7 @@ class CR4CommonMenu extends CR4MenuBase
 	private var m_fxOnTouchMove					: CScriptedFlashFunction;
 	private var m_fxOnTap						: CScriptedFlashFunction;
 	private var m_fxSetMenuHubVisibility		: CScriptedFlashFunction;
+	private var m_fxOnMeditationStarted			: CScriptedFlashFunction;
 	
 	private var m_fxSetSelectedTab	: CScriptedFlashFunction;
 	private var m_fxEnterCurrentlySelectedTab	: CScriptedFlashFunction;
@@ -202,6 +203,7 @@ class CR4CommonMenu extends CR4MenuBase
 		m_fxOnTouchMove					= m_flashModule.GetMemberFlashFunction( "onTouchMove" );
 		m_fxOnTap						= m_flashModule.GetMemberFlashFunction( "onTap" );
 		m_fxSetMenuHubVisibility 		= m_flashModule.GetMemberFlashFunction( "setMenuHubVisibility" );
+		m_fxOnMeditationStarted 		= m_flashModule.GetMemberFlashFunction( "onMeditationStarted" );
 		
 		stateName = '';
 		initData = (W3MenuInitData)GetMenuInitData();
@@ -1680,6 +1682,11 @@ class CR4CommonMenu extends CR4MenuBase
 				}
 			}
 		}
+	}
+
+	public function SignalMeditationStarted() : void
+	{
+		m_fxOnMeditationStarted.InvokeSelf();
 	}
 	
 	public function StopMeditation()

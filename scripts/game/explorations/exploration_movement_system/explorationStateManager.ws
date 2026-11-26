@@ -1450,16 +1450,16 @@ class CExplorationStateManager extends CSelfUpdatingComponent
 			case EGCI_Ignore:
 				break;
 			case EGCI_Exploration:
-				theInput.SetContext( thePlayer.GetExplorationInputContext() ); 
+				theInput.SetNextContext( thePlayer.GetExplorationInputContext() ); 
 				break;
 			case EGCI_JumpClimb:
-				theInput.SetContext( 'JumpClimb' );
+				theInput.SetNextContext( 'JumpClimb' );
 				break;	
 			case EGCI_Combat:
-				theInput.SetContext( thePlayer.GetCombatInputContext() ); 
+				theInput.SetNextContext( thePlayer.GetCombatInputContext() ); 
 				break;
 			case EGCI_Swimming:
-				theInput.SetContext( 'Swimming' );
+				theInput.SetNextContext( 'Swimming' );
 				break;		
 		}
 		

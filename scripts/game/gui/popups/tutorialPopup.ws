@@ -24,8 +24,9 @@ class CR4TutorialPopup extends CR4PopupBase
 	var forcedhideCounter	  : int;
 	var isVisible			  : bool;
 	
-	var m_fxPlayFeedbackAnim    : CScriptedFlashFunction;
-	var m_fxResetInput          : CScriptedFlashFunction;
+	var m_fxPlayFeedbackAnim    	: CScriptedFlashFunction;
+	var m_fxResetInput          	: CScriptedFlashFunction;
+	var m_fxUpdateAspectRatio       : CScriptedFlashFunction;
 	
 	private var m_contextStored : bool;
 	
@@ -41,6 +42,7 @@ class CR4TutorialPopup extends CR4PopupBase
 		
 		m_fxResetInput = m_flashModule.GetMemberFlashFunction( "resetInput" );
 		m_fxPlayFeedbackAnim = m_flashModule.GetMemberFlashFunction( "playFeedbackAnimation" );
+		m_fxUpdateAspectRatio 	= m_flashModule.GetMemberFlashFunction( "UpdateAspectRatio" );
 		initData = (W3TutorialPopupData)GetPopupInitData();
 		
 		if (!initData || initData.closeRequested)
@@ -57,6 +59,8 @@ class CR4TutorialPopup extends CR4PopupBase
 		{
 			SetInvisible(isHidden, isForceHidden);
 		}
+
+		UpdateAspectRatio();
 	}
 	
 	public function UpdateInputDevice():void
@@ -401,6 +405,14 @@ class CR4TutorialPopup extends CR4PopupBase
 			m_flashValueStorage.SetFlashArray("tutorial.area.highlight", GFxAreaList);
 		}
 		m_flashValueStorage.SetFlashObject("tutorial.hint.data", GFxHintObject);
+	}
+
+	public function UpdateAspectRatio()
+	{
+		var width : int;
+		var height : int;
+		theGame.GetCurrentViewportResolution( width, height );
+		m_fxUpdateAspectRatio.InvokeSelfTwoArgs(FlashArgInt(width), FlashArgInt(height));
 	}
 }
 

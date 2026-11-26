@@ -284,9 +284,14 @@ import class CInventoryComponent extends CComponent
 
     import private final function BalanceItemsWithPlayerLevel( playerLevel : int );
 
-    public function ForceSpawnItemOnStart( itemId : SItemUniqueId ) : bool
+	
+	
+    public function ShouldForceSpawnItemOnStart( itemId : SItemUniqueId ) : bool
 	{
-		return ItemHasTag(itemId, 'MutagenIngredient');
+		
+		
+		
+		return ItemHasTag( itemId, 'MutagenIngredient' ) || GetItemCategory( itemId ) == 'monster_weapon';
 	}	
 
     

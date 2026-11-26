@@ -189,7 +189,7 @@ state Swimming in CR4Player extends ExtendedMovable
 	
 	function SwimmingInitGeneral( prevStateName : name )
 	{
-		theInput.SetContext( 'Swimming' );
+		theInput.SetNextContext( 'Swimming' );
 		
 		StateBlockInputActions(true);
 
@@ -260,7 +260,7 @@ state Swimming in CR4Player extends ExtendedMovable
 		if ( parent.IsRagdolled() )
 		{
 			ToggleDiving( true );
-			theInput.SetContext('Diving');		
+			theInput.SetNextContext('Diving');		
 		}
 		
 
@@ -273,7 +273,7 @@ state Swimming in CR4Player extends ExtendedMovable
 		if ( diving )
 		{
 			TurnOnDivingCamera();
-			theInput.SetContext('Diving');		
+			theInput.SetNextContext('Diving');		
 		}
 	}
 	
@@ -770,7 +770,7 @@ state Swimming in CR4Player extends ExtendedMovable
 			parentMAC.SetDiving( true );
 			LogSwimming("Entered Diving");
 			TurnOnDivingCamera();
-			theInput.SetContext('Diving');
+			theInput.SetNextContext('Diving');
 			ToggleSwimStagger(false);
 			
 			cachedVerCameraTimeout = theGame.GetGameCamera().GetManualRotationVerTimeout();
@@ -803,7 +803,7 @@ state Swimming in CR4Player extends ExtendedMovable
 			theGame.GetGameCamera().ChangePivotRotationController( 'Swimming' );
 			theGame.GetGameCamera().ChangePivotPositionController( 'Default' );
 			theGame.GetGameCamera().ChangePivotDistanceController( 'Default' );
-			theInput.SetContext('Swimming');
+			theInput.SetNextContext('Swimming');
 			thePlayer.SoundEvent('g_swim_emerge');
 			LogSwimming("Left Diving");
 			theGame.GetGameCamera().SetManualRotationVerTimeout(cachedVerCameraTimeout);

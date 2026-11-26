@@ -1676,6 +1676,11 @@ exec function rmvabl(ablName : name)
 	thePlayer.RemoveAbility(ablName);
 }
 
+exec function balancingSystem()
+{
+	theGame.ToggleNewBalancingSystemEnabled();
+}
+
 exec function DispSkeleton( entTag : name )
 {
 	var ent : CEntity;
@@ -4121,7 +4126,7 @@ exec function addvaluables()
 {
 	thePlayer.inv.AddAnItem('Amber',1);
 	thePlayer.inv.AddAnItem('Amethyst',1);
-	thePlayer.inv.AddAnItem('Diamond ',1);
+	thePlayer.inv.AddAnItem('Diamond',1);
 	thePlayer.inv.AddAnItem('Emerald',1);
 	thePlayer.inv.AddAnItem('Pearl',1);
 	thePlayer.inv.AddAnItem('Ruby',1);
@@ -6565,7 +6570,7 @@ function Debug_stats(actor : CActor)
 	
 	LogStats("");
 	LogStats("Buff immunitites:");
-	size = (int)EET_EffectTypesSize ;
+	size = GetEffectRangeEnd();
 	for(i=0; i<size; i+=1)
 	{
 		if(actor.IsImmuneToBuff(i))
@@ -14485,9 +14490,13 @@ exec function printAllGameplayBlocks()
 	}
 }
 
-exec function addchain()
+
+
+exec function unmarktut(optional tutName : name)
 {
-	thePlayer.inv.AddAnItem('Chain Proto',1);
-	thePlayer.inv.AddAnItem('RopeAndHook Projectile',1);
-	thePlayer.inv.AddAnItem('RopeAndHook',1);
+	if(tutName != '')
+	{
+		tutName = 'TutorialCharDevOpen';
+	}
+	theGame.GetTutorialSystem().UnmarkMessageAsSeen('TutorialReminderDeath1');
 }

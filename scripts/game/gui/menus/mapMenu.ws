@@ -147,13 +147,16 @@ class CR4MapMenu extends CR4MenuBase
 		var manager: CCommonMapManager;
 	    var worldPath : String;
 	    var currentJournalArea : name;
+		var areaString : string;
 
 		manager = theGame.GetCommonMapManager();
 		worldPath = theGame.GetWorld().GetDepotPath();
 		m_currentArea = manager.GetAreaFromWorldPath( worldPath );
 		manager.GetCurrentJournalArea( currentJournalArea );
 
-		GetMenuFlashValueStorage().SetFlashString( "worldmap.global.universe.area", NameToString( currentJournalArea ) );
+		areaString = ConvertAreaNameToWorldName(currentJournalArea);
+
+		GetMenuFlashValueStorage().SetFlashString( "worldmap.global.universe.area",areaString );
 
 		
 		SwitchToHubMap( currentJournalArea, true );
@@ -279,10 +282,10 @@ class CR4MapMenu extends CR4MenuBase
 			case 'AN_NMLandNovigrad': return "novigrad";
 			case 'AN_Velen': return "no_mans_land";
 			case 'AN_Prologue_Village': return "prolog_village";
-			default: return "";
+			default: return NameToString(an);
 		}
 
-		return "";
+		return NameToString(an);
 	}
 
 	public  function SetMenuState(newState : name) : void
@@ -1097,6 +1100,11 @@ class CR4MapMenu extends CR4MenuBase
 				pin.visibleType = GetStoryQuestVisibleType(pin);
 			}
 
+			if(AbsF(pin.position.X - 1050) < 10 && AbsF(pin.position.Y - 1716) < 10)
+			{
+				LogChannel('JIFIX', "WTF IS FOUND HERE? " + pin.tag);
+			}
+
 				l_flashObject = GetMenuFlashValueStorage().CreateTempFlashObject( "red.game.witcher3.data.StaticMapPinData" );
 				l_flashObject.SetMemberFlashUInt(   "id",       NameToFlashUInt( pin.tag ) );
 				l_flashObject.SetMemberFlashUInt(	"areaId",   NameToFlashUInt( m_shownArea) );
@@ -1779,6 +1787,7 @@ class CR4MapMenu extends CR4MenuBase
 
 		{
 			ReinitializeMap();
+			UpdateData();	
 		}
 		else
 		{

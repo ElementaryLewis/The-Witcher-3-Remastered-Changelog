@@ -159,7 +159,7 @@ statemachine class W3QuenEntity extends W3SignEntity
 		dots.PushBack(EET_Swarm);
 		
 		
-		size = (int)EET_EffectTypesSize;
+		size = GetEffectRangeEnd();
 		for(i=0; i<size; i+=1)
 		{
 			if(IsCriticalEffectType(i) && !dots.Contains(i))

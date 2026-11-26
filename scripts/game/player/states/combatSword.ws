@@ -16,7 +16,7 @@ state CombatSword in W3PlayerWitcher extends Combat
 		var npcs 	: array<CActor>;
 		var i		: int;
 		
-		theInput.SetContext(parent.GetCombatInputContext());
+		theInput.SetNextContext(parent.GetCombatInputContext());
 		super.OnEnterState(prevStateName);
 		
 		parent.AddAnimEventCallback('FinishSpecialHeavyAttack','OnAnimEvent_FinishSpecialHeavyAttack');

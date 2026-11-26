@@ -15,7 +15,7 @@ state Skating in CR4Player extends ExtendedMovable
 	
 	event OnEnterState( prevStateName : name )
 	{
-		theInput.SetContext( 'Skating' );
+		theInput.SetNextContext( 'Skating' );
 		
 		parent.SetBIsCombatActionAllowed(false);
 		

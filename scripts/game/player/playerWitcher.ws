@@ -220,6 +220,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 
 
 
+
 		amountOfSetPiecesEquipped.Resize( EnumGetMax( 'EItemSetType' ) + 1 );
 
 		runewordInfusionType = ST_None;
@@ -3014,13 +3015,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 					
 					actorVictim.GetCharacterStats().GetAbilities(abs, false);
 					dm = theGame.GetDefinitionsManager();
-					value = GetSkillAttributeValue(S_Sword_s27, 'duration', true, true) * GetSkillLevel(S_Sword_s27);
+					value = GetSkillAttributeValue(S_Sword_s27, 'duration', false, false) * GetSkillLevel(S_Sword_s27);
 					duration = CalculateAttributeValue(value);
 
 					i = 0;
 					while(i<abs.Size())
 					{
-						if(dm.AbilityHasTag(abs[i], theGame.params.TAG_MONSTER_SKILL) && !actorVictim.IsAbilityBlocked(abs[i]))
+						if(dm.AbilityHasTag(abs[i], theGame.params.TAG_MONSTER_SKILL) &&
+						  (!actorVictim.IsAbilityBlocked(abs[i]) || (actorVictim.IsAbilityBlocked(abs[i]) && actorVictim.GetBlockedAbilityCooldown(abs[i]) != -1)))
 						{
 							i+=1;
 						}
@@ -3030,9 +3032,14 @@ statemachine class W3PlayerWitcher extends CR4Player
 						}
 					}
 
-					if(abs.Size() > 0)
+					i = 0;
+					while(i<abs.Size())
 					{
-						actorVictim.BlockAbility(abs[ RandRange(0, abs.Size()) ], true, duration);
+						if (actorVictim.GetBlockedAbilityCooldown(abs[i]) < duration)
+						{
+							actorVictim.BlockAbility(abs[i], true, duration);
+						}
+						i+=1;
 					}
 					
 					ResetCripplingShot();
@@ -3768,7 +3775,9 @@ statemachine class W3PlayerWitcher extends CR4Player
 			}
 			else
 			{
-				if ( IsInCombatAction() && GetBehaviorVariable( 'combatActionType' ) == (int)CAT_Attack )
+
+				if ( IsInCombatAction() && (GetBehaviorVariable( 'combatActionType' ) == (int)CAT_Attack))
+
 				{
 					if ( CanPlayHitAnim() && IsThreatened() )
 					{
@@ -4649,13 +4658,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 
 			case EPMT_Mutation7 :
 				
+				dm.GetAbilityAttributeValue( 'Mutation7BuffEffect', 'duration', min, max );
+				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
+				
+				
 				dm.GetAbilityAttributeValue( 'Mutation7Buff', 'attack_power', min, max );
 				buffPerc = (int) ( 100 * min.valueMultiplicative );
 				arrStr.PushBack( NoTrailZeros( buffPerc ) );
-
-				
-				dm.GetAbilityAttributeValue( 'Mutation7BuffEffect', 'duration', min, max );
-				arrStr.PushBack( NoTrailZeros( min.valueAdditive ) );
 
 				
 				exampleEnemyCount = 11;
@@ -5464,13 +5473,13 @@ statemachine class W3PlayerWitcher extends CR4Player
 		return GetInvalidUniqueId();
 	}
 
-	public function GetHeldSwordEntity() : CWitcherSword
+	public function GetHeldSwordEntity() : CItemEntity
 	{
 		var swordItem : SItemUniqueId;
 		swordItem = GetWitcherPlayer().GetHeldSword();
 		if(swordItem != GetInvalidUniqueId())
 		{
-			return (CWitcherSword)thePlayer.GetInventory().GetItemEntityUnsafe( swordItem );
+			return thePlayer.GetInventory().GetItemEntityUnsafe( swordItem );
 		}
 		return NULL;
 	}
@@ -7536,7 +7545,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 		var potParams : W3PotionParams;
 		var potionParams : SCustomEffectParams;
 		var factPotionParams : W3Potion_Fact_Params;
-		var adrenaline, hpGainValue, duration, finalPotionToxicity, toxicityOffset, toxicityThreshold : float;
+		var adrenaline, hpGainValue, duration, finalPotionToxicity, toxicityOffset, toxicity, toxicityThreshold : float;
 		var ret : EEffectInteract;
 		var effectType : EEffectType;
 		var item : SItemUniqueId;
@@ -7684,7 +7693,8 @@ statemachine class W3PlayerWitcher extends CR4Player
 
 			
 			toxicityThreshold = thePlayer.GetStatMax(BCS_Toxicity) * GetWitcherPlayer().GetAlchemyS03Threshold();
-			if (CanUseSkill(S_Alchemy_s03) && thePlayer.GetStat(BCS_Toxicity, true) > toxicityThreshold)
+			toxicity = GetWitcherPlayer().GetStat(BCS_Toxicity, false) / GetWitcherPlayer().GetStatMax(BCS_Toxicity);
+			if (CanUseSkill(S_Alchemy_s03) && (toxicity * 100) > toxicityThreshold)
 			{
 				buffs = GetPotionBuffs();
 				for(i=0; i<buffs.Size(); i+=1)
@@ -8054,7 +8064,10 @@ statemachine class W3PlayerWitcher extends CR4Player
 		{
 			disableActionBlend = false;
 		}
+
+
 	}
+
 
 
 	event OnAnimEvent_Sign( animEventName : name, animEventType : EAnimationEventType, animInfo : SAnimationEventAnimInfo )
@@ -8482,7 +8495,7 @@ statemachine class W3PlayerWitcher extends CR4Player
 			StopAllSkillComboEffectsEx(S_Sword_s24, PreciseBlowsCounterId_Fast);
 			StopAllSkillComboEffectsEx(S_Sword_s24, PreciseBlowsCounterId_Strong);
 		}
-		if(thePlayer.CanUseSkill(S_Sword_s19) && tempLearnedSignSkills.Size() > 0)
+		if(thePlayer.CanUseSkill(S_Sword_s19) && tempLearnedSignSkills.Size() > 0 && !damageAction.IsDoTDamage())
 		{
 			pam = (W3PlayerAbilityManager)abilityManager;
 			for(i=0; i<tempLearnedSignSkills.Size(); i+=1)
@@ -12709,6 +12722,26 @@ statemachine class W3PlayerWitcher extends CR4Player
 	public function ResetSkillCombo(skill:ESkill)
 	{
 		ResetSkillComboEx(skill, -1);
+	}
+
+	public timer function ResetSkillComboAfterGlobalTime_Sword_s22( td : float, id : int )
+	{
+		ResetSkillCombo(S_Sword_s22);
+	}
+
+	public timer function ResetSkillComboAfterGlobalTime_Sword_s23( td : float, id : int )
+	{
+		ResetSkillCombo(S_Sword_s23);
+	}
+
+	public timer function ResetSkillComboAfterGlobalTime_Sword_s24( td : float, id : int )
+	{
+		ResetSkillCombo(S_Sword_s24);
+	}
+
+	public timer function ResetSkillComboAfterGlobalTime_Sword_s25( td : float, id : int )
+	{
+		ResetSkillCombo(S_Sword_s25);
 	}
 
 	public function ResetSkillComboEx(skill:ESkill, counterId:int)

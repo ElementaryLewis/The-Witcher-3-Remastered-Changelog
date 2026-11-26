@@ -216,7 +216,7 @@ class CExplorationSkatingGlobal extends CObject
 		if( enable )
 		{
 			
-			theInput.SetContext( 'Skating' );
+			theInput.SetNextContext( 'Skating' );
 		}
 	}
 	

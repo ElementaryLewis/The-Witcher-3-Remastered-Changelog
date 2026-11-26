@@ -32,7 +32,7 @@ state AimThrow in CR4Player extends ExtendedMovable
 		camera = (CCustomCamera)theCamera.GetTopmostCameraObject();
 		
 
-			theInput.SetContext( 'ThrowHold' );
+			theInput.SetNextContext( 'ThrowHold' );
 			theGame.GetGameCamera().ChangePivotDistanceController('AimThrow');
 			theGame.GetGameCamera().ChangePivotRotationController('AimThrow');			
 

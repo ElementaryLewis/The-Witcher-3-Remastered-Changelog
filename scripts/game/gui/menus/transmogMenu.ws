@@ -520,6 +520,13 @@ class CR4TransmogMenu extends CR4MenuBase
 
 	function IsRealAppearance(itemName : name) : bool
 	{
+		var dm : CDefinitionsManagerAccessor = theGame.GetDefinitionsManager();
+		if(dm.ItemHasTag(itemName, 'NoTransmog'))
+		{
+			return false;
+		}
+
+		
 		
 		switch(itemName)
 		{
@@ -1169,7 +1176,7 @@ class CR4TransmogMenu extends CR4MenuBase
 				itemDataObject.SetMemberFlashBool( "transmog", true );
 			}
 
-			if(!dm.CanItemBeColoredByName(itemTemplateOverride))
+			if(!dm.CanItemBeColoredByName(itemTemplateOverride) && _inv.HasTransmogAppearance(itemsList[i]))
 			{
 				itemDataObject.SetMemberFlashString( "itemColor", "" );
 			}

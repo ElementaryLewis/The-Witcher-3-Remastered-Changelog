@@ -42,6 +42,20 @@ import class CInputManager
 	import final function SetContext( contextName : name );						
 	import final function GetContext() : name;									
 	
+	function SetNextContext( contextName : name )
+	{
+		var photomodeManager : PhotomodeManager;
+		if (theGame.GetPhotomodeEnabled())
+		{
+			photomodeManager = thePlayer.GetPhotomodeManager();
+			photomodeManager.m_lastActiveContext = contextName;
+		}
+		else
+		{
+			SetContext(contextName);
+		}
+	}
+
 	
 	
 	import final function StoreContext( newContext : name );

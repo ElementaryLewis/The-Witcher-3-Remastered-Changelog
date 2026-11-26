@@ -10,7 +10,7 @@ class W3GameEffectManager
 	private var isReady : bool;									
 	private var effectIconTypes : array<SEffectIconType>;		
 
-		default isReady = false;
+	default isReady = false;
 
 	
 	function Initialize()
@@ -56,7 +56,7 @@ class W3GameEffectManager
 			}
 		}
 
-		effects.Grow( (int)EET_EffectTypesSize );
+		UpdateEffectsArraySize();
 
 		
 		for(i=0; i<effectNames.Size(); i+=1)
@@ -64,6 +64,16 @@ class W3GameEffectManager
 				CacheEffect(i);
 
 		isReady = true;
+	}
+
+	private function UpdateEffectsArraySize()
+	{
+		var end : int;
+		end = (int)EnumGetMax('EEffectType') + 1;
+		if ( effects.Size() < end )
+		{
+			effects.Resize( end );
+		}
 	}
 
 	
@@ -84,6 +94,8 @@ class W3GameEffectManager
 	
 	public function GetEffectNameLocalisationKey( effect : EEffectType ) : string
 	{
+		UpdateEffectsArraySize(); 
+
 		if( !effects[effect] )
 			CacheEffect( effect );
 
@@ -93,6 +105,8 @@ class W3GameEffectManager
 	
 	public function GetEffectDescriptionLocalisationKey( effect : EEffectType ) : string
 	{
+		UpdateEffectsArraySize(); 
+
 		if( !effects[effect] )
 			CacheEffect( effect );
 
@@ -102,6 +116,8 @@ class W3GameEffectManager
 	
 	public function GetEffectIconPath( effect : EEffectType ) : string
 	{
+		UpdateEffectsArraySize(); 
+
 		if( !effects[effect] )
 			CacheEffect( effect );
 
@@ -113,6 +129,8 @@ class W3GameEffectManager
 	
 	public function GetEffectTypeFlags(effect : EEffectType, out potion, positive, neutral, negative, immobilize, confuse, damage : bool)
 	{
+		UpdateEffectsArraySize(); 
+
 		if( !effects[effect] )
 			CacheEffect( effect );
 
@@ -147,6 +165,8 @@ class W3GameEffectManager
 		if(effect == EET_Undefined || effect == EET_Unused1)
 			return NULL;
 
+		UpdateEffectsArraySize(); 
+
 		
 		if(!effects[effect])
 			CacheEffect(effect);
@@ -175,6 +195,7 @@ class W3GameEffectManager
 	}
 
 	
+	
 	private function CacheEffect(effect : EEffectType)
 	{
 		var ret : bool;
@@ -198,6 +219,7 @@ class W3GameEffectManager
 		}
 	}
 
+	
 	private function HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part1(effect : EEffectType) : bool
 	{
 		var found : bool;
@@ -369,6 +391,7 @@ class W3GameEffectManager
 		return found;
 	}
 
+	
 	private function HACK_NO_MEMORY_TO_COMPILE_CacheEffect_Part2(effect : EEffectType) : bool
 	{
 		var found : bool;

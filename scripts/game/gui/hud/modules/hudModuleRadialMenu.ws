@@ -812,7 +812,7 @@ class CR4HudModuleRadialMenu extends CR4HudModuleBase
 	{
 		if(force || GetWitcherPlayer().GetEquippedSign() == ST_None)
 		{
-			if(lastItemCategory == 'bomb' && _currentSelection == "slot1")
+			if(lastItemCategory == 'bomb' && _currentSelection == "slot1" && !m_desaturatedFields.Contains("Slot1"))
 			{
 				GetWitcherPlayer().EquipItem( lastSelectedItem, EES_Petard1);
 				GetWitcherPlayer().SelectQuickslotItem( EES_Petard1 );

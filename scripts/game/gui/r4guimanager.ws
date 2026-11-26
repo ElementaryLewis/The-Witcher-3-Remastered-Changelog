@@ -1886,6 +1886,30 @@ import class CR4GuiManager extends CGuiManager
 	{
 		m_initialModVerifWasShown = true;
 	}
+
+	event  OnMainMenuMainOpen()
+	{
+		var menuType : int;
+
+		
+		theSound.SoundEvent( "play_music_main_menu" );
+
+		menuType = theGame.GetChosenMainMenuType();
+		switch ( menuType )
+		{
+			case 1:
+				theSound.SoundEvent( "mus_main_menu_theme_ep1" );
+				break;
+			case 2:
+				theSound.SoundEvent( "play_music_toussaint" );
+				theSound.SoundEvent( "mus_main_menu_ep2" );
+				break;
+			case 0:
+			default:
+				theSound.SoundEvent( "mus_main_menu_theme" );
+				break;
+		}
+	}
 }
 
 exec function ShowItemNames( show : bool )

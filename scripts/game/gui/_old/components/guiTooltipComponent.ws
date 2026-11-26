@@ -1719,8 +1719,8 @@ class W3TooltipComponent
 					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_clear_weather");
 					break;
 				case GwintEffect_PickWeatherCard:
-					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_pick_weather_title");
-					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_pick_weather");
+					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_melee_horn_title");		
+					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_pick_weather");	
 					break;
 				case GwintEffect_PickRainCard:
 					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_pick_rain_title");
@@ -1739,20 +1739,20 @@ class W3TooltipComponent
 					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_view_enemy");
 					break;
 				case GwintEffect_ResurectCard:
-					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_resurect_title");
-					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_resurect");
+					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_bin_pick_title");	
+					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_resurect");	
 					break;
 				case GwintEffect_ResurectFromEnemy:
 					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_resurect_enemy_title");
 					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_resurect_enemy");
 					break;
 				case GwintEffect_Bin2Pick1:
-					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_bin_pick_title");
-					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_bin_pick");
+					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_resurect_title");	
+					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_bin_pick");	
 					break;
 				case GwintEffect_MeleeHorn:
-					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_melee_horn_title");
-					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_melee_horn");
+					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_pick_weather_title");	
+					abilityDescription = GetLocStringByKeyExt("gwint_card_tooltip_ldr_melee_horn");		
 					break;
 				case GwintEffect_RangedHorn:
 					abilityName = GetLocStringByKeyExt("gwint_card_tooltip_ldr_range_horn_title");

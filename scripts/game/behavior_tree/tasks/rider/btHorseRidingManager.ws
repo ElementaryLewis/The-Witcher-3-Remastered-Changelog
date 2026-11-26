@@ -251,7 +251,7 @@ class CBTTaskRidingManagerPlayerHorseMount extends CBTTaskRidingManagerHorseMoun
 		riderActor.EnableCharacterCollisions( true );
 		riderActor.RegisterCollisionEventsListener();		
 
-		theInput.SetContext( thePlayer.GetExplorationInputContext() );
+		theInput.SetNextContext( thePlayer.GetExplorationInputContext() );
 		super.OnMountFailed( riderData, vehicleComponent );
 	}
 

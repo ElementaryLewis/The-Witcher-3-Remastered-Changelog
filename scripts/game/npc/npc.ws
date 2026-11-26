@@ -31,6 +31,7 @@ statemachine import class CNewNPC extends CActor
 	
 	editable var RemainsTags 		: array<name>;		hint RemainsTags="If set then the NPC's remains will be tagged with given tags";
 	editable var level 				: int;				default level = 1;
+	editable var levelTrailing : int;					default levelTrailing = -1; hint levelTrailing="The level diff the NPC should follow behind the player. Any value < 0 will be invalid and the skill from ability xmls will be used (if defined).";
 	var currentLevel		: int;
 	editable saved var levelFakeAddon     : int;				default levelFakeAddon = 0;
 	private	 saved var newGamePlusFakeLevelAddon : bool;		default newGamePlusFakeLevelAddon = false;
@@ -222,13 +223,26 @@ statemachine import class CNewNPC extends CActor
 		}	
 		
 		levelBonusesComputedAtPlayerLevel = -1;
-		AddTimer('AddLevelBonuses', 0.1, true, false, , true);
+		if (thePlayer.GetLevelBalancing() && theGame.GetNewBalancingSystemEnabled())
+		{
+			AddTimer('AddLevelBonusesBalancing', 0.1, true, false, , true);
+		}
+		else
+		{
+			AddTimer('AddLevelBonuses', 0.1, true, false, , true);
+		}
 	}
 	
 	event OnLevelUpscalingChanged()
 	{
 		levelBonusesComputedAtPlayerLevel = -1;
 		AddTimer('AddLevelBonuses', RandRangeF(0.05,0.2), true, false, , true);
+	}
+
+	event OnLevelBalancingChanged()
+	{
+		levelBonusesComputedAtPlayerLevel = -1;
+		AddTimer('AddLevelBonusesBalancing', RandRangeF(0.05,0.2), true, false, , true);
 	}
 	
 	timer function ResetTalkInteractionFlag( td : float , id : int)
@@ -514,7 +528,6 @@ statemachine import class CNewNPC extends CActor
 		AddAnimEventCallback('extensionWalkStartStopNormalSpeed' ,	'OnAnimEvent_extensionWalkStartStopNormalSpeed');
 		AddAnimEventCallback('weaponSoundType' ,					'OnAnimEvent_weaponSoundType');
 		AddAnimEventCallback('disableCrowdOverride' ,				'OnAnimEvent_disableCrowdOverride');
-
 		
 		if ( IsAnimal() )
 		{
@@ -701,7 +714,14 @@ statemachine import class CNewNPC extends CActor
 	{
 		currentLevel = _level;
 		levelBonusesComputedAtPlayerLevel = -1;
-		AddTimer('AddLevelBonuses', 0.1, true, false, , true);
+		if (thePlayer.GetLevelBalancing() && theGame.GetNewBalancingSystemEnabled())
+		{
+			AddTimer('AddLevelBonusesBalancing', 0.1, true, false, , true);
+		}
+		else
+		{
+			AddTimer('AddLevelBonuses', 0.1, true, false, , true);
+		}
 	}
 	
 	private function SetThreatLevel()
@@ -1015,7 +1035,14 @@ statemachine import class CNewNPC extends CActor
 		if(!IsAlive())
 			return;
 			
-		AddLevelBonuses(0, 0);
+		if (thePlayer.GetLevelBalancing() && theGame.GetNewBalancingSystemEnabled())
+		{
+			AddLevelBonusesBalancing(0, 0);
+		}
+		else
+		{
+			AddLevelBonuses(0, 0);
+		}
 	}
 	
 	
@@ -1421,6 +1448,256 @@ statemachine import class CNewNPC extends CActor
 			
 		}
 		
+	}
+
+	private function ShouldApplyLevelBalancing(npcLevel : int) : bool
+	{
+		var playerLevel	: int = thePlayer.GetLevel();
+		return thePlayer.GetLevelBalancing() && npcLevel + levelFakeAddon < playerLevel;
+	}
+
+	private function CalculateLevelBalancing(out npcLevel : int)
+	{
+		var inGameConfigBufferedWrapper : CInGameConfigBufferedWrapper;
+		var levelDelta : int;
+		var playerLevel	: int;
+		var settingsLevel : int;
+
+		if(levelTrailing < 0)
+		{
+			levelDelta = (int)CalculateAttributeValue( GetAttributeValue( 'levelTrailing',,true ) );
+		}
+		else
+		{
+			levelDelta = levelTrailing;
+		}
+		
+		playerLevel = thePlayer.GetLevel();
+		if(npcLevel + levelFakeAddon >= playerLevel - levelDelta)
+		{
+			return;
+		}
+
+		if ( xmlLevel.valueAdditive != npcLevel )
+		{
+			npcLevel = playerLevel - (int)xmlLevel.valueAdditive + 1 - levelFakeAddon;
+		}
+		else
+		{
+			npcLevel = playerLevel - levelFakeAddon;
+		}
+
+		
+
+		inGameConfigBufferedWrapper = theGame.GetGuiManager().GetInGameConfigBufferedWrapper();
+		if (inGameConfigBufferedWrapper)
+		{
+			settingsLevel = StringToInt( inGameConfigBufferedWrapper.GetVarValue( 'Gameplay', 'LevelBalancingModifier' ) );
+		}
+
+		npcLevel = npcLevel - levelDelta - settingsLevel;
+	}
+
+	timer function AddLevelBonusesBalancing (dt : float, id : int)
+	{
+		var ciriEntity  		: W3ReplacerCiri;
+		var ignoreLowLevelCheck : bool;
+		var lvlDiff 			: int;
+		var npcLevel 			: int;
+		var ngpLevel 			: int;
+		var i 					: int;
+		var playerLevel			: int;
+		var stats				: CCharacterStats;
+		var npcGroupType		: ENPCGroupType;
+		
+		RemoveTimer( 'AddLevelBonusesBalancing' );
+		
+		playerLevel = thePlayer.GetLevel();
+		
+		
+		if ( levelBonusesComputedAtPlayerLevel == playerLevel && !fistFightForcedFromQuest )
+		{ 
+			return;
+		}
+		stats = GetCharacterStats();
+		
+		
+		if ( stats.HasAbility( 'NPCDoNotGainBoost' ) ) return;
+		if ( stats.HasAbility( 'animal_rat_base' ) ) return;
+		if ( stats.HasAbility( 'mon_djinn' ) ) return;
+		if ( IsAnimal() ) return;
+		
+		
+		levelBonusesComputedAtPlayerLevel = playerLevel;
+		
+		ciriEntity = (W3ReplacerCiri)thePlayer;
+		npcLevel = currentLevel;
+		npcGroupType = GetNPCType();
+		ignoreLowLevelCheck = thePlayer.GetLevelBalancing() && ( npcGroupType == ENGT_Enemy || npcGroupType == ENGT_Quest );
+		
+		if ( npcGroupType != ENGT_Guard && !ignoreLowLevelCheck && npcLevel + (int)CalculateAttributeValue( GetAttributeValue( 'level',,true ) ) <= 2 ) return;
+		if ( stats.HasAbilityWithTag('Boss') && !ciriEntity )
+		{
+			if ( ShouldApplyLevelBalancing(npcLevel) )
+			{
+				stats.AddAbilityMultiple( theGame.params.BOSS_NGP_BONUS, playerLevel - npcLevel );
+			}
+			else if ( FactsQuerySum( "NewGamePlus" ) > 0 && theGame.params.NewGamePlusLevelDifference() > 0 )
+			{
+				stats.AddAbilityMultiple( theGame.params.BOSS_NGP_BONUS, theGame.params.NewGamePlusLevelDifference() );
+				return ;
+			}
+		}
+
+		
+		
+		if ( !ciriEntity && ShouldApplyLevelBalancing(npcLevel)
+			&& !stats.HasAbility( 'fistfight_minigame' ) && !fistFightForcedFromQuest )
+		{
+			
+			npcLevelToUpscaledLevelDifference = playerLevel - npcLevel;
+			CalculateLevelBalancing(npcLevel);
+		}
+		else
+		{
+			npcLevelToUpscaledLevelDifference = 0;
+		}
+		
+		if ( stats.HasAbility(theGame.params.ENEMY_BONUS_DEADLY) ) stats.RemoveAbility(theGame.params.ENEMY_BONUS_DEADLY); else
+		if ( stats.HasAbility(theGame.params.ENEMY_BONUS_HIGH) ) stats.RemoveAbility(theGame.params.ENEMY_BONUS_HIGH); else
+		if ( stats.HasAbility(theGame.params.ENEMY_BONUS_LOW) ) stats.RemoveAbility(theGame.params.ENEMY_BONUS_LOW); else
+		if ( stats.HasAbility(theGame.params.MONSTER_BONUS_DEADLY) ) stats.RemoveAbility(theGame.params.MONSTER_BONUS_DEADLY); else
+		if ( stats.HasAbility(theGame.params.MONSTER_BONUS_HIGH) ) stats.RemoveAbility(theGame.params.MONSTER_BONUS_HIGH); else
+		if ( stats.HasAbility(theGame.params.MONSTER_BONUS_LOW) ) stats.RemoveAbility(theGame.params.MONSTER_BONUS_LOW);
+		stats.RemoveAbilityAll(theGame.params.ENEMY_BONUS_PER_LEVEL);
+		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED);
+		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP);
+		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED );
+		stats.RemoveAbilityAll(theGame.params.MONSTER_BONUS_PER_LEVEL);
+		
+		CheckInitialPercResistances(); 
+		
+		if ( IsHuman() && GetStat( BCS_Essence, true ) < 0 )
+		{
+			if ( npcGroupType != ENGT_Guard )
+			{
+				if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_PER_LEVEL) )
+				{
+					stats.AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, npcLevel-1);
+				}
+		    }
+			else
+		    {
+				if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_PER_LEVEL) ) 
+				{
+					
+					
+					stats.AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, 1 + GetWitcherPlayer().GetLevel() + RandRange( 1, 4 ) );
+					 
+				}
+		    }
+		    
+			if ( thePlayer.IsCiri() && theGame.GetDifficultyMode() == EDM_Hardcore && !stats.HasAbility('CiriHardcoreDebuffHuman') )
+			{
+				stats.AddAbility('CiriHardcoreDebuffHuman');
+			}
+		    
+			if ( !ciriEntity ) 
+			{
+				lvlDiff = (int)CalculateAttributeValue( GetAttributeValue( 'level',,true ) ) - playerLevel;
+				if ( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_DEADLY) )
+				{
+					stats.AddAbility(theGame.params.ENEMY_BONUS_DEADLY, true); }
+					
+					
+					
+				}	
+				else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )
+				{
+					if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_HIGH) )
+					{
+						stats.AddAbility(theGame.params.ENEMY_BONUS_HIGH, true);
+					}
+				}
+				else if ( lvlDiff > -theGame.params.LEVEL_DIFF_HIGH )
+				{
+				}
+				else
+				{
+					if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_LOW) )
+					{
+						stats.AddAbility(theGame.params.ENEMY_BONUS_LOW, true);
+					}
+				}
+			}	 
+		} 
+		else
+		{
+			if ( GetStat( BCS_Vitality, true ) > 0 ) 
+			{
+				if ( !ciriEntity ) 
+				{
+					lvlDiff = (int)CalculateAttributeValue( GetAttributeValue( 'level',,true ) ) - playerLevel;
+					
+					
+					if ( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_DEADLY) ) { stats.AddAbility(theGame.params.ENEMY_BONUS_DEADLY, true); } }	
+					
+					else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )  { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_HIGH) ) stats.AddAbility(theGame.params.ENEMY_BONUS_HIGH, true);}
+					else if ( lvlDiff > -theGame.params.LEVEL_DIFF_HIGH )  { }
+					else 					  { if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_LOW) ) stats.AddAbility(theGame.params.ENEMY_BONUS_LOW, true); }
+					
+					if ( !stats.HasAbility(theGame.params.ENEMY_BONUS_PER_LEVEL) ) stats.AddAbilityMultiple(theGame.params.ENEMY_BONUS_PER_LEVEL, npcLevel-1);
+				}
+			}
+			else
+			{
+				
+				if(	!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED) &&
+					!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED) &&
+					!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP) &&
+					!stats.HasAbility(theGame.params.MONSTER_BONUS_PER_LEVEL)
+				)
+				{				
+					if ( CalculateAttributeValue(GetTotalArmor()) > 0.f )
+					{
+						if ( GetIsMonsterTypeGroup() )
+						{
+							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP_ARMORED, npcLevel-1);
+						}
+						else
+						{
+							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_ARMORED, npcLevel-1);
+						}
+					}
+					else
+					{
+						if ( GetIsMonsterTypeGroup() )
+						{
+							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL_GROUP, npcLevel-1);
+						}
+						else
+						{
+							stats.AddAbilityMultiple(theGame.params.MONSTER_BONUS_PER_LEVEL, npcLevel-1);
+						}
+					}
+				}
+				
+				if ( thePlayer.IsCiri() && theGame.GetDifficultyMode() == EDM_Hardcore && !stats.HasAbility('CiriHardcoreDebuffMonster') ) stats.AddAbility('CiriHardcoreDebuffMonster');
+					
+				if ( !ciriEntity ) 
+				{
+					lvlDiff = (int)CalculateAttributeValue(GetAttributeValue('level',,true)) - playerLevel;
+					
+					
+					if ( lvlDiff >= theGame.params.LEVEL_DIFF_DEADLY ) { if ( !stats.HasAbility(theGame.params.MONSTER_BONUS_DEADLY) ) { stats.AddAbility(theGame.params.MONSTER_BONUS_DEADLY, true); } }	
+					
+					else if ( lvlDiff >= theGame.params.LEVEL_DIFF_HIGH )  { if ( !stats.HasAbility(theGame.params.MONSTER_BONUS_HIGH) ) stats.AddAbility(theGame.params.MONSTER_BONUS_HIGH, true); }
+					else if ( lvlDiff > -theGame.params.LEVEL_DIFF_HIGH )  { }
+					else 					  { if ( !stats.HasAbility(theGame.params.MONSTER_BONUS_LOW) ) stats.AddAbility(theGame.params.MONSTER_BONUS_LOW, true); }		
+				}
+			}	 
+			
+		}
 	}
 	
 	public function SetParentEncounter( encounter : CEncounter )

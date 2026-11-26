@@ -199,6 +199,21 @@ import abstract class W3AbilityManager extends IScriptable
 		var null : array<name>;
 		return null;
 	}
+
+	public function GetBlockedAbilityCooldown(abilityName : name) : float
+	{
+		var i : int;
+		
+		for(i = blockedAbilities.Size()-1; i>=0; i-=1)
+		{
+			if(blockedAbilities[i].abilityName == abilityName)
+			{
+				return blockedAbilities[i].timeWhenEnabledd;
+			}
+		}
+
+		return -1;
+	}
 	
 	
 	

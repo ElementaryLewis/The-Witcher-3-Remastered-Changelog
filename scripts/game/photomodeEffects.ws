@@ -37,6 +37,7 @@ import class CR4PhotomodeEffects extends CObject
 	import final function RestoreWeather();
 	import final function SetTimeOfDay( value : float );
 	import final function GetTimeOfDay() : float;
+	import final function SetPhotomodeTimeScale( value : float );
 	import final function GetEnvDef( out definition : CEnvironmentDefinition );
 	import final function SetEnvDefUsingPath( definition : string );
 	import final function SetEnvDefNull();

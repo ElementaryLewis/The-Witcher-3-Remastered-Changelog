@@ -303,7 +303,7 @@ class W3ModVerificationPopupData extends ConfirmationPopupData
 	
 	private function GetGFxLibraryPreviewItem(l_ModArray : array<SModioModData>, index : int, out GFxObjectData:CScriptedFlashObject):void
 	{
-		var enabled : bool = !theGame.GetModHandlerSystem().IsLocalModDisabled(l_ModArray[index].id);
+		var enabled : bool = m_isFailed || !theGame.GetModHandlerSystem().IsLocalModDisabled(l_ModArray[index].id);
 
 		GFxObjectData.SetMemberFlashUInt("id", index);
 		GFxObjectData.SetMemberFlashString("modid", theGame.GetModHandlerSystem().ConvertModIDToString(l_ModArray[index].id));

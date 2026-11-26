@@ -194,7 +194,7 @@ state MeditationWaiting in W3PlayerWitcher extends MeditationBase
 			stepCounter += 1;
 			timeScale += timeScaleStep;
 			
-			currentTargetHpm = stepCounter * hpmStep;
+			currentTargetHpm = storedHoursPerMinute + stepCounter * hpmStep;
 			blendedHPM = currentTargetHpm / timeScale;
 
 			SetTimeScales( timeScale, blendedHPM );

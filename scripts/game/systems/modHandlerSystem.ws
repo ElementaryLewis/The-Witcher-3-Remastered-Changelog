@@ -120,6 +120,7 @@ import class CModHandlerSystem extends IGameSystem
 	import latent function RequestModListLatent( filterParams : SModFilterParams, out output : array< SModioModData >, optional timeout : float );	
 	import latent function RequestModDependencies( modidScr : SModioModID, out outModDependencies : array< SModDependency >, optional timeout : float ) : bool;
 	import final function IsModdedSave( info : SSavegameInfo ) : bool;
+	import final function WasEverModdedSave( info : SSavegameInfo ) : bool;
 	import final function GetModNamesInSave( info : SSavegameInfo, out modNames : array< string > );
 	import final function CheckHasAllModsInSave( info : SSavegameInfo, out missingModNames : array< SModioModID > ) : bool;
 	import final function CheckGameVersionModsInSave( info : SSavegameInfo, out oldVersionModNames : array< SModioModID > ) : bool;
@@ -168,6 +169,7 @@ import class CModHandlerSystem extends IGameSystem
 	import function HasFailedMods() : bool;
 	import function GetOutdatedMods( out outOutdatedMods : array< SModioModID > ) : bool;
 	import function GetFailedMods( out outOutdatedMods : array< SModioModID > ) : bool;
+	import function GetFailedScriptMods( out outFailedMods : array< string > ) : bool;
 	import final function NotifyScriptedListeners( notify : bool );
 	import final function GetCurrentUserName() : string;
 	import final function GetLastFilteredPageCount() : int;

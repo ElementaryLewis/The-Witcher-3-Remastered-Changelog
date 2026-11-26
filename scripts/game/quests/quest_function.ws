@@ -13,6 +13,8 @@ quest function SetTimeScaleQuest(timeScale : float)
 	theGame.SetTimeScale(timeScale, 'SetTimeScaleQuest', 100, false, true );
 }
 
+
+
 quest function LaunchCredits()
 {
 	theGame.GetGuiManager().RequestCreditsMenu(CreditsIndex_Wither3);
@@ -1161,6 +1163,8 @@ quest function CopyPlayersEquipmentToNPCQuest(npcTag : name, copyHead : bool, do
 	var acs : array< CComponent >;
 	var head : name;
 
+	var templateOverride : name;
+
 	npc = theGame.GetNPCByTag(npcTag);
 	if(!npc)
 	{
@@ -1176,48 +1180,8 @@ quest function CopyPlayersEquipmentToNPCQuest(npcTag : name, copyHead : bool, do
 	}
 	
 	witcher = GetWitcherPlayer();
-	if(witcher.GetItemEquippedOnSlot(EES_Armor, item))
-	{
-		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
-		inv.MountItem(ids[0]);
-	}
 
-	if(witcher.GetItemEquippedOnSlot(EES_Boots, item))
-	{
-		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
-		inv.MountItem(ids[0]);
-	}
 	
-	if(witcher.GetItemEquippedOnSlot(EES_Pants, item))
-	{
-		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
-		inv.MountItem(ids[0]);
-	}
-	
-	if(witcher.GetItemEquippedOnSlot(EES_Gloves, item))
-	{
-		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
-		inv.MountItem(ids[0]);
-	}
-	
-	if(witcher.GetItemEquippedOnSlot(EES_RangedWeapon, item))
-	{
-		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
-		inv.MountItem(ids[0]);
-	}
-	
-	if(witcher.GetItemEquippedOnSlot(EES_SilverSword, item))
-	{
-		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
-		inv.MountItem(ids[0]);
-	}
-	
-	if(witcher.GetItemEquippedOnSlot(EES_SteelSword, item))
-	{
-		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
-		inv.MountItem(ids[0]);
-	}
-
 	
 	if(!dontCopyHair)
 	{
@@ -1234,6 +1198,83 @@ quest function CopyPlayersEquipmentToNPCQuest(npcTag : name, copyHead : bool, do
 				}
 			}
 		}
+	}
+
+	if(witcher.GetItemEquippedOnSlot(EES_Armor, item))
+	{
+		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
+		templateOverride = witcher.inv.GetItemTemplateOverride(item);
+		if (templateOverride)
+		{
+			inv.SetItemTemplateOverride(ids[0], templateOverride);
+		}
+		inv.MountItem(ids[0]);
+	}
+
+	if(witcher.GetItemEquippedOnSlot(EES_Boots, item))
+	{
+		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
+		templateOverride = witcher.inv.GetItemTemplateOverride(item);
+		if (templateOverride)
+		{
+			inv.SetItemTemplateOverride(ids[0], templateOverride);
+		}
+		inv.MountItem(ids[0]);
+	}
+	
+	if(witcher.GetItemEquippedOnSlot(EES_Pants, item))
+	{
+		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
+		templateOverride = witcher.inv.GetItemTemplateOverride(item);
+		if (templateOverride)
+		{
+			inv.SetItemTemplateOverride(ids[0], templateOverride);
+		}
+		inv.MountItem(ids[0]);
+	}
+	
+	if(witcher.GetItemEquippedOnSlot(EES_Gloves, item))
+	{
+		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
+		templateOverride = witcher.inv.GetItemTemplateOverride(item);
+		if (templateOverride)
+		{
+			inv.SetItemTemplateOverride(ids[0], templateOverride);
+		}
+		inv.MountItem(ids[0]);
+	}
+	
+	if(witcher.GetItemEquippedOnSlot(EES_RangedWeapon, item))
+	{
+		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
+		templateOverride = witcher.inv.GetItemTemplateOverride(item);
+		if (templateOverride)
+		{
+			inv.SetItemTemplateOverride(ids[0], templateOverride);
+		}
+		inv.MountItem(ids[0]);
+	}
+	
+	if(witcher.GetItemEquippedOnSlot(EES_SilverSword, item))
+	{
+		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
+		templateOverride = witcher.inv.GetItemTemplateOverride(item);
+		if (templateOverride)
+		{
+			inv.SetItemTemplateOverride(ids[0], templateOverride);
+		}
+		inv.MountItem(ids[0]);
+	}
+	
+	if(witcher.GetItemEquippedOnSlot(EES_SteelSword, item))
+	{
+		ids = inv.AddAnItem(witcher.inv.GetItemName(item));
+		templateOverride = witcher.inv.GetItemTemplateOverride(item);
+		if (templateOverride)
+		{
+			inv.SetItemTemplateOverride(ids[0], templateOverride);
+		}
+		inv.MountItem(ids[0]);
 	}
 	
 	if(copyHead)

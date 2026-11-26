@@ -12,6 +12,7 @@ class W3NonPlayerAbilityManager extends W3AbilityManager
 		var ret : bool;
 		var i : int;
 		var npc : CNewNPC;
+		var inGameConfigWrapper : CInGameConfigWrapper;
 		
 		if(!ownr)
 		{
@@ -32,9 +33,17 @@ class W3NonPlayerAbilityManager extends W3AbilityManager
 		weatherBonuses.Clear();
 		
 		
-		if ( ! isFromLoad )
+		if ( !isFromLoad )
 		{
-			npc.AddTimer('AddLevelBonuses', 0.1, true, false, , true);
+			inGameConfigWrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();		
+			if( inGameConfigWrapper && inGameConfigWrapper.GetVarValue( 'Gameplay', 'LevelBalancing' ) && theGame.GetNewBalancingSystemEnabled() )
+			{
+				npc.AddTimer('AddLevelBonusesBalancing', 0.1, true, false, , true);
+			}
+			else
+			{
+				npc.AddTimer('AddLevelBonuses', 0.1, true, false, , true);
+			}
 		}
 		
 		ret = super.Init(ownr,cStats, isFromLoad, diff);

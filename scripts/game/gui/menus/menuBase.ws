@@ -760,6 +760,20 @@ class CR4MenuBase extends CR4Menu
 	{
 		RemoveGFxButtonById(actionId);
 	}
+
+	event  OnRemoveGFxButtonByLabel(label:string)
+	{
+		var idx, len:int;
+		
+		len = m_GFxInputBindings.Size();
+		for (idx = 0; idx < len; idx+=1)
+		{
+			if (m_GFxInputBindings[idx].LocalizationKey == label)
+			{
+				m_GFxInputBindings.Erase(idx);
+			}
+		}
+	}
 	
 	protected function RemoveGFxButtonById(actionId:int):void
 	{

@@ -73,7 +73,7 @@ class CBTTaskPlayerActionDecorator extends IBehTreeTask
 		
 		if( IsNameValid( contextName ) )
 		{
-			theInput.SetContext( contextName );
+			theInput.SetNextContext( contextName );
 			
 		}
 	}

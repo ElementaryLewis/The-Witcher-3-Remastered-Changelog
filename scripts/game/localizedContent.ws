@@ -1328,6 +1328,12 @@ function GetPadFileName(type : string) : string
 		{
 			platformPrefix = "_Xbox_";
 		}
+
+		
+		if(deviceType == IDT_Xbox1 && type == "TouchPad")
+		{
+			return "ICO" + platformPrefix + "Start";
+		}
 		
 		switch(type)
 		{

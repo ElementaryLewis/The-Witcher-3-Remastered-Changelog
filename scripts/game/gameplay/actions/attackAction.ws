@@ -315,7 +315,7 @@ class W3Action_Attack extends W3DamageAction
 			}
 
 			
-			if((witcherAttacker.HasRecentlyCountered() || witcherAttacker.HasRecentlyDodged()) && witcherAttacker.CanUseSkill(S_Sword_s31) && attackName != 'counter_attack_light')
+			if((witcherAttacker.HasRecentlyCountered() || witcherAttacker.HasRecentlyDodged()) && witcherAttacker.CanUseSkill(S_Sword_s31) && attackName != 'counter_attack_light' && !IsDoTDamage())
 			{
 				tempAttr = witcherAttacker.GetSkillAttributeValue(S_Sword_s31, PowerStatEnumToName(CPS_AttackPower), false, true) * witcherAttacker.GetSkillLevel(S_Sword_s31);
 				if(attackName == 'bolt')

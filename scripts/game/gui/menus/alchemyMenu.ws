@@ -355,7 +355,10 @@ class CR4AlchemyMenu extends CR4ListBaseMenu
 				}
 				
 				PopulateData();
-				UpdateItemsById(recipeIndex);
+
+				if(!theGame.GetDefinitionsManager().IsItemSingletonItem(recipe.cookedItemName))
+					UpdateItemsById(recipeIndex);
+
 				cookedItemName = GetLocStringByKeyExt(m_definitionsManager.GetItemLocalisationKeyName( recipe.cookedItemName ));
 				showNotification(GetLocStringByKeyExt("panel_crafting_successfully_crafted") + ": " + cookedItemName);
 				OnPlaySoundEvent("gui_crafting_craft_item_complete");

@@ -38,7 +38,7 @@ state Exploration in CR4Player extends ExtendedMovable
 		
 		
 		
-		theInput.SetContext( parent.GetExplorationInputContext() );
+		theInput.SetNextContext( parent.GetExplorationInputContext() );
 		
 		virtual_parent.SetPlayerCombatStance( PCS_Normal, true );
 		

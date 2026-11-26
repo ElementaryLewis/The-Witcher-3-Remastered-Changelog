@@ -21,7 +21,7 @@ state CombatFists in W3PlayerWitcher extends Combat
 	
 	event OnEnterState( prevStateName : name )
 	{
-		theInput.SetContext(parent.GetCombatInputContext());
+		theInput.SetNextContext(parent.GetCombatInputContext());
 		super.OnEnterState(prevStateName);
 		
 		parent.OnEquipMeleeWeapon( PW_Fists, true );

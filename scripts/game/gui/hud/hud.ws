@@ -273,6 +273,11 @@ class CR4ScriptedHud extends CR4Hud
 		ratio = ( (float)currentWidth ) / currentHeight;
 		
 		
+		
+		
+		
+		
+		
 		if ( AbsF( ratio - 4.0 / 3.0 ) < 0.01 )
 		{
 			m_scaleformWidth   = 1920;
@@ -292,6 +297,13 @@ class CR4ScriptedHud extends CR4Hud
 			m_scaleformWidth   = 2580;
 			m_scaleformHeight  = 1080;
 			m_scaleformOffsetX = -330;
+			m_scaleformOffsetY = 0;
+		}
+		else if ( AbsF( ratio - 32.0 / 9.0 ) < 0.01 )
+		{
+			m_scaleformWidth   = 3840;
+			m_scaleformHeight  = 1080;
+			m_scaleformOffsetX = -960;
 			m_scaleformOffsetY = 0;
 		}
 		else

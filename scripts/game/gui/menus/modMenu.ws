@@ -33,10 +33,22 @@ class CModFilterData
 	public var m_searchWords : array< string >;
 	public var m_filtersChanged : bool; default m_filtersChanged = true;
 	public var m_cachedParams : SModFilterParams;
+	public var m_authorSearch : bool; default m_authorSearch = false;
 	public var m_view : EModViewMode;
 
 	public var m_currentPage : int; default m_currentPage = 1;
 	public var m_maxPages : int; default m_maxPages = 1;
+
+	public function IsDefault() : bool
+	{
+		if(m_appliedTags.Size() > 0) return false;
+		if(m_excludedTags.Size() > 0) return false;
+		if(m_searchWords.Size() > 0) return false;
+
+		if(m_authorSearch) return false;
+
+		return true;
+	}
 }
 
 struct SModDetailsData
@@ -533,6 +545,7 @@ class CR4ModMenu extends CR4MenuBase
 			m_flashValueStorage.SetFlashArray( "panel.mod.browse.update_data", l_flashSubArray);
 		else
 			m_flashValueStorage.SetFlashArray( "panel.mod.browse.setup", l_flashSubArray);
+		m_flashValueStorage.SetFlashBool("mods.browse.default.search", m_browseFilters.IsDefault());
 		m_flashValueStorage.SetFlashInt("mods.update.mods.found", m_modHandler.GetLastFilteredResultCount());
 		SendGFxFilterStruct(m_browseFilters);
 		StopLoadingIndicator("browse");
@@ -990,6 +1003,8 @@ class CR4ModMenu extends CR4MenuBase
 		filters.m_currentPage = 1;
 		filters.m_filtersChanged = true;
 		SearchWithFilterParams(filters, true, true);
+
+		filters.m_authorSearch = true;
 	}
 	
 	event OnCategoryOpened( categoryName : int, opened : bool )
@@ -1204,6 +1219,8 @@ class CR4ModMenu extends CR4MenuBase
 		CreateCachedParams(filters, useCached);
 		
 		m_modStateMachine.OnRefreshWithParams(filters.m_cachedParams);
+
+		filters.m_authorSearch = false;
 	}
 	
 	
@@ -1251,6 +1268,8 @@ class CR4ModMenu extends CR4MenuBase
 		
 		l_flashSubArray = m_flashValueStorage.CreateTempFlashArray();
 		GetGFxInstalledModsStruct(l_flashSubArray);
+
+		m_flashValueStorage.SetFlashBool("mods.installed.default.search", m_installedFilters.IsDefault());
 		
 		m_flashValueStorage.SetFlashArray( "panel.mod.installed.setup", l_flashSubArray);
 		StopLoadingIndicator("library");
@@ -1792,8 +1811,8 @@ class CR4ModMenu extends CR4MenuBase
 			
 			if(m_modHandler.ConvertModIDToString(m_lastSelectedLibraryIndex) == m_modHandler.ConvertModIDToString(modidScr))
 			{
-				m_closedCount += 1;
-				m_flashValueStorage.SetFlashInt( "panel.mod.deselect.details", m_closedCount); 
+				
+				
 			}
 				
 		}

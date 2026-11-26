@@ -416,6 +416,7 @@ function AddCharacterStatSigns(tag : string, varKey:name, locKey:string, iconTag
 	var final_name : string;
 	var min, max : float;
 	var sp, mutDmgMod, mutMin, mutMax : SAbilityAttributeValue;
+	var abilitySkill : SAbilityAttributeValue;
 	var sword : SItemUniqueId;
 	var conjunctionDamageMult : float;
 	
@@ -553,6 +554,12 @@ function AddCharacterStatSigns(tag : string, varKey:name, locKey:string, iconTag
 	{
 		sp += GetWitcherPlayer().GetSkillAttributeValue(S_Magic_3, 'trap_duration', false, true);
 		sp += GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_3);
+		if ( thePlayer.CanUseSkill( S_Magic_s36 ) )
+		{
+			abilitySkill = GetWitcherPlayer().GetSkillAttributeValue( S_Magic_s36, 'duration', false, true);
+			valueAbility = thePlayer.GetSkillLevel( S_Magic_s36 ) * abilitySkill.valueMultiplicative;
+			sp.valueMultiplicative += valueAbility;
+		}
 		sp.valueMultiplicative -= 1;
 		valueStr = FloatToStringPrec( CalculateAttributeValue(sp), 2 ) + GetLocStringByKeyExt("per_second");
 	}
@@ -560,6 +567,12 @@ function AddCharacterStatSigns(tag : string, varKey:name, locKey:string, iconTag
 	{
 		sp = GetWitcherPlayer().GetTotalSignSpellPower(S_Magic_5);
 		sp += GetWitcherPlayer().GetSkillAttributeValue(S_Magic_5, 'duration', false, true);
+		if ( thePlayer.CanUseSkill( S_Magic_s36 ) )
+		{
+			abilitySkill = GetWitcherPlayer().GetSkillAttributeValue( S_Magic_s36, 'duration', false, true);
+			valueAbility = thePlayer.GetSkillLevel( S_Magic_s36 ) * abilitySkill.valueMultiplicative;
+			sp.valueMultiplicative += valueAbility;
+		}
 		valueStr = FloatToStringPrec( CalculateAttributeValue(sp), 2 ) + GetLocStringByKeyExt("per_second");
 	}
 	

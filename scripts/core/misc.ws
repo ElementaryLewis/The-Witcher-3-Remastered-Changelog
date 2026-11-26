@@ -193,7 +193,7 @@ function FormatNewCombatSkillMessage(skillId:ESkill, str : string) : string
 
 function LogNewCombatSkill(skillId:ESkill, str : string)
 {
-	if (theGame.GetPlatform() == Platform_PC)
+	if (theGame.GetPlatform() == Platform_PC && theGame.CanLog())
 	{
 		LogChannel('NewCombatSkills', FormatNewCombatSkillMessage(skillId, str));
 	}
@@ -201,7 +201,7 @@ function LogNewCombatSkill(skillId:ESkill, str : string)
 
 function LogNewCombatSkill_InGame(skillId:ESkill, str : string)
 {
-	if (theGame.GetPlatform() == Platform_PC)
+	if (theGame.GetPlatform() == Platform_PC && theGame.CanLog())
 	{
 		LogNewCombatSkill_InGameColor(skillId, str, "#b1302b");
 	}
@@ -209,7 +209,7 @@ function LogNewCombatSkill_InGame(skillId:ESkill, str : string)
 
 function LogNewCombatSkill_InGameColor(skillId:ESkill, str : string, colorHex:string)
 {
-	if (theGame.GetPlatform() == Platform_PC)
+	if (theGame.GetPlatform() == Platform_PC && theGame.CanLog())
 	{
 		if(colorHex == "")
 			theGame.witcherLog.AddMessage(FormatNewCombatSkillMessage(skillId, str));

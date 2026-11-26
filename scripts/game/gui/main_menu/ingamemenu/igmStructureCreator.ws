@@ -67,10 +67,13 @@ class IngameMenuStructureCreator
 		
 		if (parentMenu.isMainMenu)
 		{
+			parentMenu.SetModdedTooltipText();
+
 			if (hasSaveDataToLoad())
 			{
 				
 				l_DataFlashObject = CreateMenuItem("continue", "panel_continue", NameToFlashUInt('Continue'), IGMActionType_LoadLastSave, true);
+				l_DataFlashObject.SetMemberFlashBool( "unavailable", theGame.GetModHandlerSystem().HasUninstalledMods() );
 				l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
 				
 			}
@@ -121,6 +124,7 @@ class IngameMenuStructureCreator
 		{
 			
 			l_DataFlashObject = CreateMenuItem("mainmenu_loadgame", "panel_mainmenu_loadgame", NameToFlashUInt('LoadGame'), IGMActionType_Load, true);
+			l_DataFlashObject.SetMemberFlashBool( "unavailable", theGame.GetModHandlerSystem().HasUninstalledMods() );
 			l_DataFlashArray.PushBackFlashObject(l_DataFlashObject);
 			
 		}

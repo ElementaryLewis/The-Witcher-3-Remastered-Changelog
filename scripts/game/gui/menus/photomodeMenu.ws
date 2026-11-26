@@ -73,6 +73,7 @@ struct SPhotomodeRendererExtraParams
 	var m_callbackFunctionNameSecondary : string;
 	var m_callbackDelay : float;
 	var m_disabled : bool; default m_disabled = false;
+	var m_selectedButton : int;
 }
 
 struct SPhotoAspectRatio
@@ -109,6 +110,7 @@ struct SSpawnedCharacter
 	var m_pose : name;
 	var m_poseDetails : SSpawnableCharacterPose;
 	var m_posesets : array<string>;
+	var m_animationSpeed : float;
 	var m_mimic : name;
 	var m_mimic_id : int;
 	var m_mimicsets : array<string>;
@@ -165,7 +167,7 @@ struct SSpawnedProp
 	var m_location : Vector;
 	var m_rotation : EulerAngles;
 	var m_relativeLocation : Vector;
-	var m_relativeRotation : float;
+	var m_relativeRotationAngles : EulerAngles;
 	var m_snapToCamera : bool;
 	var m_disableGravity : bool;
 }
@@ -203,7 +205,6 @@ class CR4PhotomodeMenu extends CR4MenuBase
 	private var m_photoModeState					: PhotomodeState; default m_photoModeState = PMS_TabSelection;
 
 	private var m_queuedOverrideElements : CScriptedFlashArray;
-	private var m_queuedCharUpdate : bool;
 	private var m_queuedFakeTickN : int;
 	private var m_queuedSelectedCharacterVisibility : bool;
 	private var m_queuedSpawnedCharacterVisibility : bool;
@@ -233,16 +234,14 @@ class CR4PhotomodeMenu extends CR4MenuBase
 	
 	private var m_cameraLocked : bool; default m_cameraLocked = false;
 	private var m_cameraDraggable : bool; default m_cameraDraggable = false;
+	private var m_mouseScrollEnabled : bool; default m_mouseScrollEnabled = false;
 
 	private var m_targetCameraPosition : Vector;
 	private var m_targetCameraRotation : EulerAngles;
-	private var m_cameraBlendSmoothTime : float; default m_cameraBlendSmoothTime = 0.1f;
-	private var m_cameraBlendInProgress : bool; default m_cameraBlendInProgress = false;
-	private var m_cameraPositionDamper : VectorSpringDamper;
-	private var m_cameraRotationDamper : EulerAnglesSpringDamper;
 	private var m_lastLocationSlot : int; default m_lastLocationSlot = 0;
 
 	private var m_hideNPCsEnabled : bool;
+	private var m_hidePlayerEnabled : bool; default m_hidePlayerEnabled = false;
 	private var m_hiddenNPCs : array< CNewNPC >;
 	
 	private var m_envDefs : array<string>;
@@ -253,13 +252,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 	private var m_characterFiltering : ECharacterFiltering; default m_characterFiltering = ECF_All;
 	private var m_addCharacterFiltering : EAddCharacterFiltering; default m_addCharacterFiltering = EACF_All;
 	private var m_cachedAppearanceList : array < name >;
-	private var m_maxNPCDistance : float; default m_maxNPCDistance = 30;
+	private var m_maxNPCDistance : float; default m_maxNPCDistance = 150;
 	
 	private var m_censoredAppearances : C2dArray;
-	private var m_isCharacterSelected : bool; default m_isCharacterSelected = false;
+	private var m_isHightlightVisible : bool; default m_isHightlightVisible = false;
 	private var m_aspectRatios : array<SPhotoAspectRatio>;
 
-	private var m_maxLocationSlots : int; default m_maxLocationSlots = 5;
+	private var m_maxLocationSlots : int; default m_maxLocationSlots = 13;
 	private var m_locationPresets : array<string>;
 	private var m_locationSlotToId : map<int, int>;
 
@@ -285,6 +284,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 	private var m_spawnCameraOffset : float; default m_spawnCameraOffset = 4;
 	private var m_spawnCameraSnapMaxLength : float; default m_spawnCameraSnapMaxLength = 10.f;
+	private var m_cameraSelectionOffset : float; default m_cameraSelectionOffset = 2;
 	private var m_spawnedCharacters : array < SSpawnedCharacter >;
 	private var m_spawnedCharactersBySlot : map < int, SSpawnedCharacter >;
 	private var m_selectedSpawnedCharacter : SSpawnedCharacter;
@@ -300,6 +300,9 @@ class CR4PhotomodeMenu extends CR4MenuBase
 	private var m_selectedCharacter, m_selectedCharacter_World, m_selectedCharacter_Spawned : CActor;
 	private var m_selectedCharValid, m_selectedCharValid_World, m_selectedCharValid_Spawned : bool;
 	default m_selectedCharValid = false; default m_selectedCharValid_World = false; default m_selectedCharValid_Spawned = false;
+	private var m_selectedCharTracking : bool; default m_selectedCharTracking = false;
+	private var m_selectedCharWorldTracking : bool; default m_selectedCharWorldTracking = false;
+	private var m_selectedCharSpawnedTracking : bool; default m_selectedCharSpawnedTracking = false;
 	private var m_selectedProp : CEntity;
 	private var m_selectedPropValid : bool; default m_selectedPropValid = false;
 
@@ -320,7 +323,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		
 		FillAllSlotWithDefault();
 
-		FillTabbedMenu();	
+		FillTabbedMenu();
 
 		FillPlacableCharacterList();
 		FillPlacablePropList();
@@ -351,7 +354,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_updatePhotoModeState = GetMenuFlash().GetMemberFlashFunction( "updatePhotoModeState" );
 		m_fxStartExitDelayTimer = GetMenuFlash().GetMemberFlashFunction( "startExitDelayTimer" );
 
-		OnRequestCursor(true);
+		OnRequestCursor(true);	
 
 		UpdateThirdsLinesAspectRatio();
 		UpdatePhotoAspectRatio(-1, -1);
@@ -359,11 +362,6 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		InitCollisionGroups();
 		CacheOriginalAppearances();
 		SaveCurrentCameraPosition( m_noLocationPresetPos, m_noLocationPresetRot );
-
-		m_cameraPositionDamper = new VectorSpringDamper in this;
-		m_cameraRotationDamper = new EulerAnglesSpringDamper in this;
-		m_cameraPositionDamper.SetSmoothTime(m_cameraBlendSmoothTime);
-		m_cameraRotationDamper.SetSmoothTime(m_cameraBlendSmoothTime);
 	}
 
 	public function FillAllSlotWithDefault()
@@ -448,7 +446,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_raycastCollisionGroupsNames.PushBack( 'Debris' );
 	}
 
-	event OnScreenShotRequested()
+	event  OnScreenShotRequested()
 	{
 		if( theGame.GetPlatform() != Platform_PC && theGame.GetPlatform() != Platform_PC_GDK)
 			return false;
@@ -456,8 +454,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		theGame.TakeScreenshot();
 		m_fxOnScreenshotSaved.InvokeSelf();
 	}
+
+	event  OnHideUIChanged(isUIHidden : bool)
+	{
+		OnRequestCursor(!isUIHidden);
+	}
 	
-	event OnMenuShown()
+	event  OnMenuShown()
 	{
 		super.OnMenuShown();
 
@@ -465,7 +468,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		theGame.GetPhotomodeEffects().SetEnabled( true );
 	}
 	
-	event OnClosingMenu()
+	event  OnClosingMenu()
 	{
 		super.OnClosingMenu();
 
@@ -479,6 +482,12 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		theGame.GetPhotomodeEffects().SetEnabled( false );
 		OnRequestCursor(false);
 		RestoreOriginalAppearances();
+		if (m_hidePlayerEnabled)
+		{
+			GetWitcherPlayer().SetVisibility(true);
+		}
+		if (m_selectedCharTracking)
+			SwitchSelectedNPCTracking(false);
 	}
 	
 	private function SetPhotoAspectRatioIndexed(index:int)
@@ -567,6 +576,17 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				else 
 					theGame.GetPhotomodeEffects().SetEnvDefUsingPath(m_envDefs[ (int)(value - 1) ]);
 				break;
+			case PM_TimeScale:
+				theGame.GetPhotomodeEffects().SetPhotomodeTimeScale( value );
+				if (value > 0)
+				{
+					theSound.SoundEvent( "system_resume" );
+				}
+				else
+				{
+					theSound.SoundEvent( "system_pause" );
+				}
+				break;
 			case PM_UI_Thirds:
 				UpdateThirdsLinesVisibility(AbsF(value - 1) < 0.01);
 				break;
@@ -579,12 +599,17 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				{
 					ShowNPCs();
 				}
+				OnWorldNPCChanged();
+				break;
+			case PM_Player_Hide:
+				m_hidePlayerEnabled = value != 0;
+				GetWitcherPlayer().SetVisibility(!m_hidePlayerEnabled);
 				break;
 			case PM_NPC_Filtering:
 				if(m_characterFiltering != (ECharacterFiltering)RoundF(value))
 				{
 					m_characterFiltering = (ECharacterFiltering)RoundF(value);
-					OnCharacterFilteringChanged();
+					OnWorldNPCChanged();
 				}
 				break;
 			case PM_AddCharacter_Filtering:
@@ -609,6 +634,10 @@ class CR4PhotomodeMenu extends CR4MenuBase
 						m_selectedCharacter = m_cachedCharacterList[(int)value];
 						m_selectedCharacter_World = m_selectedCharacter;
 						OnCharacterChanged();
+						if (m_selectedCharTracking)
+						{
+							SwitchSelectedNPCTracking(true);
+						}
 					}
 				}
 				break;
@@ -620,6 +649,28 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				m_spawnedCharactersBySlot[m_currentCharacterSlotId].m_appearance = m_selectedCharacter.GetAppearance();
 				m_selectedSpawnedCharacter = m_spawnedCharactersBySlot[m_currentCharacterSlotId];
 				PlayCurrentAnimation();
+				break;
+			case PM_NPC_Hide:
+				SwitchSelectedNPCVisibility(value == 0);
+				break;
+			case PM_NPC_Track:
+				SwitchSelectedNPCTracking(value);
+				m_selectedCharWorldTracking = value == 1;
+				if (m_selectedCharWorldTracking)
+				{
+					UpdateParam(PM_AddCharacter_Track, 0);
+					m_selectedCharSpawnedTracking = false;
+				}
+				break;
+			case PM_AddCharacter_Track:
+				SwitchSelectedNPCTracking(value);
+				m_selectedCharSpawnedTracking = value == 1;
+				if (m_selectedCharSpawnedTracking)
+				{
+					UpdateParam(PM_NPC_Track, 0);
+					m_selectedCharWorldTracking = false;
+					UpdateParamWithEvent(PM_Char_SnapCamera, 0);
+				}
 				break;
 			case PM_Char_SlotSelector:
 				break;
@@ -634,6 +685,11 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				break;
 			case PM_Char_Pose:
 				OnPoseChanged(value);
+				break;
+			case PM_AddCharacter_AnimationSpeed:
+				m_spawnedCharactersBySlot[m_currentCharacterSlotId].m_animationSpeed = value;
+				m_selectedSpawnedCharacter = m_spawnedCharactersBySlot[m_currentCharacterSlotId];
+				PlayCurrentAnimation();
 				break;
 			case PM_Char_LookAtCamera:
 				OnCharacterLookCameraChanged(value);
@@ -655,8 +711,16 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			case PM_Prop_TempSelector:
 				
 				break;
-			case PM_Prop_Transform_Rotate:
-				m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotation = value;
+			case PM_Prop_Transform_Rotate_Yaw:
+				m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles.Yaw = value;
+				OnPropsTransformChanged();
+				break;
+			case PM_Prop_Transform_Rotate_Pitch:
+				m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles.Pitch = value;
+				OnPropsTransformChanged();
+				break;
+			case PM_Prop_Transform_Rotate_Roll:
+				m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles.Roll = value;
 				OnPropsTransformChanged();
 				break;
 			case PM_Prop_Transform_LeftRight:
@@ -694,7 +758,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			case PM_Light_Luminance:
 				OnLightParameterChanged();
 				break;
-			case PM_Hide_AddCharacters:
+			case PM_AddCharacter_Hide:
 				m_spawnedCharactersBySlot[m_currentCharacterSlotId].m_hidden = value;
 				OnCharacterHiddenChanged();
 				break;
@@ -721,6 +785,10 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				break;
 			case PM_Char_SnapCamera:
 				OnCharacterSnapToCameraChanged(value);
+				if (m_selectedCharSpawnedTracking && value > 0)
+				{
+					UpdateParamWithEvent(PM_AddCharacter_Track, 0);
+				}
 				break;
 			case PM_Prop_SnapCamera:
 				OnPropSnapToCameraChanged(value);
@@ -741,9 +809,9 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		switch(paramId)
 		{
 			case PM_AddCharacter_Filtering:
-			case PM_Char_SlotSelector:
 			case PM_Char_TempSelector:
-			case PM_Hide_AddCharacters:
+			case PM_AddCharacter_Hide:
+			case PM_AddCharacter_AnimationSpeed:
 			case PM_AddChar_Appearance:
 			case PM_Char_FacialExpression:
 			case PM_Char_PoseCategory:
@@ -756,13 +824,32 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			case PM_Char_Transform_UpDown:
 			case PM_Char_ResetButtons:
 			case PM_NPC_Filtering:
+			case PM_NPC_Hide:
+			case PM_NPC_SelectButtons:
+			case PM_NPC_Track:
+			case PM_AddCharacter_Track:
 			case PM_Selected_NPC:
 			case PM_Camera_Noclip:
+			case PM_Player_Hide:
 			case PM_Appearance:
-				EnableCharacterHighlight(true);
+			case PM_Prop_TempSelector:
+			case PM_Prop_Filtering:
+			case PM_Prop_SnapCamera:
+			case PM_Prop_Transform_Rotate_Yaw:
+			case PM_Prop_Transform_Rotate_Pitch:
+			case PM_Prop_Transform_Rotate_Roll:
+			case PM_Prop_Transform_LeftRight:
+			case PM_Prop_Transform_CloseFar:
+			case PM_Prop_Transform_UpDown:
+			case PM_Prop_ResetButtons:
+				EnableSelectedEntityHighlight(true);
 				break;
 			case PM_Char_EnableGravity:
-				EnableCharacterHighlight(m_selectedCharValid);
+			case PM_Char_SlotSelector:
+				EnableSelectedEntityHighlight(m_selectedCharValid);
+			case PM_Prop_SlotSelector:
+			case PM_Prop_EnableGravity:
+				EnableSelectedEntityHighlight(m_selectedPropValid);
 				break;
 
 			case PM_Camera_FOV:
@@ -770,39 +857,19 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				
 				break;
 
-			case PM_Prop_SlotSelector:
-			case PM_Prop_TempSelector:
-			case PM_Prop_Filtering:
-			case PM_Prop_SnapCamera:
-			case PM_Prop_EnableGravity:
-			case PM_Prop_Transform_Rotate:
-			case PM_Prop_Transform_LeftRight:
-			case PM_Prop_Transform_CloseFar:
-			case PM_Prop_Transform_UpDown:
-			case PM_Prop_ResetButtons:
-			case PM_Light_SlotSelector:
-			case PM_Light_SnapCamera:
-			case PM_Light_State:
-			case PM_Light_Shadow:
-			case PM_Light_Brightness:
-			case PM_Light_Range:
-			case PM_Light_Hue:
-			case PM_Light_Saturation:
-			case PM_Light_Luminance:
-			case PM_Light_ResetButtons:
 			default:
-				EnableCharacterHighlight(false);
+				EnableSelectedEntityHighlight(false);
 				break;
 		}
 	}
 
-	private function HandlePresetChanged( prevValue : float, value : float )
+	private function HandlePresetChanged( prevValue : float, value : float, optional force : bool )
 	{
 		var presetMap : map<int, float>;
 		var locationSlot : int;
 		var prevLocationSlot : int;
 
-		if ( prevValue == value )
+		if ( prevValue == value && !force )
 			return;
 
 		if ( prevValue == 0 )
@@ -835,9 +902,9 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_lastLocationSlot = locationSlot;
 	}
 
-	private function HandleLocationPresetChanged( prevValue : float, value : float )
+	private function HandleLocationPresetChanged( prevValue : float, value : float, optional force : bool )
 	{
-		if ( prevValue == value )
+		if ( prevValue == value && !force )
 			return;
 
 		if ( prevValue == 0 )
@@ -851,11 +918,11 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_lastLocationSlot = (int) value;
 	}
 	
-	private function EnableCharacterHighlight(value : bool)
+	private function EnableSelectedEntityHighlight(value : bool)
 	{
-		if ( m_isCharacterSelected != value )
+		if ( m_isHightlightVisible != value )
 			m_fxSetCharacterHighlightVisibility.InvokeSelfOneArg(FlashArgBool(value));
-		m_isCharacterSelected = value;
+		m_isHightlightVisible = value;
 	}
 	
 	
@@ -872,33 +939,19 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			switch( temp )
 			{
 				case 9000 	: 	return -4;
-			
 				case 8000 	: 	return -3;
-			
 				case 7500 	: 	return -2;
-			
 				case 7000 	: 	return -1;
-
 				case 6550 	:  	return 0;
-
 				case 5000 	:  	return 1;
-	
 				case 4500 	:  	return 2;
-
 				case 4000 	:	return 3;
-
 				case 3500 	:	return 4;
-
 				case 3000 	: 	return 5;
-
 				case 2500 	: 	return 6;
-
 				case 2300 	: 	return 7;
-			
 				case 2000 	:	return 8;
-
 				case 1500 	: 	return 9;
-
 				case 1000 	: 	return 10;
 			}
 		}
@@ -918,35 +971,20 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			switch( temp )
 			{
 				case -5 	:	return ( (temp * -1000.0) + 5000.0 ); 
-
 				case -4		: 	return 9000;
-			
 				case -3		: 	return 8000;
-			
 				case -2		: 	return 7500;
-			
 				case -1		: 	return 7000;
-
 				case 0		:  	return 6550;
-
 				case 1		:  	return 5000;
-	
 				case 2		:  	return 4500;
-
 				case 3		:	return 4000;
-
 				case 4 		:	return 3500;
-
 				case 5 		: 	return 3000;
-
 				case 6 		: 	return 2500;
-
 				case 7 		: 	return 2300;
-			
 				case 8 		:	return 2000;
-
 				case 9 		: 	return 1500;
-
 				case 10 	: 	return 1000;
 			}
 		}
@@ -1076,6 +1114,8 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		var char : CActor;
 		var i : int;
 		var found : bool;
+		var tags : array<name>;
+		
 		theGame.GetPhotomodeEffects().GetEditableCharacterList(m_maxNPCDistance, charList);
 
 		
@@ -1093,7 +1133,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				charList.Erase(i);
 			else if(m_characterFiltering == ECF_Monster && !char.IsMonster())
 				charList.Erase(i);
+
+			tags = char.GetTags();
+			if (tags.Contains('photomode_spawned'))
+				charList.Erase(i);
 		}
+
+		SortCharacterList(charList);
 
 		m_cachedCharacterList = charList;
 
@@ -1131,7 +1177,48 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			}
 			m_selectedCharacter_World = m_selectedCharacter;
 			m_selectedCharValid_World = m_selectedCharValid;
+			if (m_selectedCharWorldTracking)
+			{
+				SwitchSelectedNPCTracking(true);
+			}
 		}
+	}
+
+	private function SortCharacterList(out charList : array<CActor>)
+	{
+		var topCharWeight : float;
+		var tempCharA, tempCharB : CActor;
+		var i, j, topCharID : int;
+
+		for (i = 0; i < charList.Size(); i += 1)
+		{
+			for (j = i; j < charList.Size(); j += 1)
+			{
+				if (GetCharacterWeight(charList[j]) < topCharWeight || topCharWeight == 0.f)
+				{
+					topCharID = j;
+					topCharWeight = GetCharacterWeight(charList[j]);
+				}
+			}
+
+			tempCharA = charList[i];
+			tempCharB = charList[topCharID];
+			charList[i] = tempCharB;
+			charList[topCharID] = tempCharA;
+			topCharWeight = 0.f;
+		}
+	}
+
+	private function GetCharacterWeight(character : CActor) : float
+	{
+		var charWeight, angleWeight, distanceWeight : float;
+		var distanceWeightMultiplier : float = 2.f;
+
+		angleWeight = VecGetAngleBetween(RotForward(theGame.GetPhotomodeCamera().GetCameraWorldRotation()), character.GetWorldPosition() - GetWitcherPlayer().GetWorldPosition());
+		distanceWeight = VecDistance(character.GetWorldPosition(), GetWitcherPlayer().GetWorldPosition());
+		charWeight = angleWeight + distanceWeight * distanceWeightMultiplier;
+
+		return charWeight;
 	}
 	
 	private function GetAppearanceList(out stringsArray : array<string>, out selected : int, useNames : bool) : void
@@ -1236,21 +1323,6 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		
 	}
 
-	private function OnSelectedCharacterChanged(out tabData : CScriptedFlashArray)
-	{
-		var stringsArray : array<string>;
-		var extraParams : SPhotomodeRendererExtraParams;
-		var selected : int;
-
-		stringsArray.Clear();
-		GetAppearanceList(stringsArray, selected, false);
-		if(stringsArray.Size() == 0) stringsArray.PushBack(GetLocStringByKeyExt("input_device_key_name_IK_none"));
-		extraParams.m_disabled = m_cachedAppearanceList.Size() < 2;
-		extraParams.m_callbackFunctionName = "OnRequestFakeTick";
-		extraParams.m_callbackDelay = 0.01;
-		tabData.PushBackFlashObject(CreateStringSelector(PM_Appearance, "photomode_params_selected_appearance" , stringsArray, selected, extraParams, true));
-	}
-
 	private function UpdateAddCharacterTab()
 	{
 		var elemObj : CScriptedFlashObject;	
@@ -1267,6 +1339,30 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 		elemObj = CreatePropSlotSelector(PM_Prop_SlotSelector, "photomode_params_prop_selector", 0 ,extraParams, true);
 		QueueOverrideElement( elemObj, PM_Prop_SlotSelector );
+	}
+
+	private function UpdateResetButtons(type:  string , buttonIndex :int  )
+	{
+		var elemObj : CScriptedFlashObject;
+		var extraParams : SPhotomodeRendererExtraParams;
+		extraParams.m_selectedButton = buttonIndex;
+
+		if(type == "props")
+		{
+			extraParams.m_callbackFunctionName = "OnResetPropTransformToOrigin";
+			extraParams.m_callbackFunctionNameSecondary = "OnResetPropTransformToCamera";
+			extraParams.m_disabled = !m_selectedPropValid;
+			elemObj = CreateButtonRenderer(PM_Prop_ResetButtons,"photomode_props_reset_transform_origin","photomode_props_reset_transform_camera", 0 ,extraParams);
+			QueueOverrideElement( elemObj, PM_Prop_ResetButtons );
+		}
+		else if(type == "chars")
+		{
+			extraParams.m_callbackFunctionName = "OnResetAddCharacterTransformToOrigin";
+			extraParams.m_callbackFunctionNameSecondary = "OnResetAddCharacterTransformToCamera";
+			extraParams.m_disabled = !m_selectedCharValid;
+			elemObj = CreateButtonRenderer(PM_Char_ResetButtons,"photomode_char_reset_transform_origin","photomode_char_reset_transform_camera", 0 ,extraParams);
+			QueueOverrideElement( elemObj, PM_Char_ResetButtons );
+		}
 	}
 
 	private function CreateCameraTab(rootArray : CScriptedFlashArray)
@@ -1303,8 +1399,9 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		stringsArray.Clear();
 		stringsArray.PushBack("panel_mainmenu_option_value_off");
 		stringsArray.PushBack("panel_mainmenu_option_value_on");
-
 		tabData.PushBackFlashObject(CreateStringSlider(PM_Hide_NPCs, "photomode_params_hide_npcs", stringsArray, 0));
+
+		tabData.PushBackFlashObject(CreateStringSlider(PM_Player_Hide, "photomode_params_char_hide_player", stringsArray, 0));
 
 		theGame.GetPhotomodeEffects().GetEditableCharacterList(m_maxNPCDistance, charList);
 
@@ -1323,7 +1420,29 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		extraParams.m_disabled = m_cachedCharacterList.Size() < 2;
 		tabData.PushBackFlashObject(CreateStringSelector(PM_Selected_NPC, "photomode_params_selected_npc", stringsArray, selected, extraParams, true));
 
-		OnSelectedCharacterChanged(tabData);
+		stringsArray.Clear();
+		GetAppearanceList(stringsArray, selected, false);
+		if(stringsArray.Size() == 0) stringsArray.PushBack(GetLocStringByKeyExt("input_device_key_name_IK_none"));
+		extraParams.m_disabled = m_cachedAppearanceList.Size() < 2;
+		extraParams.m_callbackFunctionName = "OnRequestFakeTick";
+		extraParams.m_callbackDelay = 0.01;
+		tabData.PushBackFlashObject(CreateStringSelector(PM_Appearance, "photomode_params_selected_appearance" , stringsArray, selected, extraParams, true));
+
+		extraParams.m_disabled = !m_selectedCharValid_World;
+
+		stringsArray.Clear();
+		stringsArray.PushBack("panel_mainmenu_option_value_off");
+		stringsArray.PushBack("panel_mainmenu_option_value_on");
+		tabData.PushBackFlashObject(CreateStringSlider(PM_NPC_Hide, "photomode_params_char_hide_selected", stringsArray, m_hiddenNPCs.Contains((CNewNPC)m_selectedCharacter_World) ? 1 : 0, extraParams));
+
+		stringsArray.Clear();
+		stringsArray.PushBack("panel_mainmenu_option_value_off");
+		stringsArray.PushBack("panel_mainmenu_option_value_on");
+		tabData.PushBackFlashObject(CreateStringSlider(PM_NPC_Track, "photomode_params_char_track", stringsArray, 0, extraParams));
+
+		extraParams.m_callbackFunctionName = "OnSelectNPCInFront";
+		extraParams.m_callbackFunctionNameSecondary = "OnResetAllNPCChanges";
+		tabData.PushBackFlashObject(CreateButtonRenderer(PM_NPC_SelectButtons,"photomode_params_char_button_select","photomode_params_char_button_reset_changes", 0 ,extraParams));
 
 		rootArray.PushBackFlashObject(CreateTab("photomode_tabs_character", tabData, "character")); 
 	}
@@ -1352,7 +1471,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		stringsArray.Clear();
 		stringsArray.PushBack("panel_mainmenu_option_value_off");
 		stringsArray.PushBack("panel_mainmenu_option_value_on");
-		tabData.PushBackFlashObject(CreateStringSlider(PM_Hide_AddCharacters, "photomode_params_hide_addcharacters", stringsArray, (int)m_selectedSpawnedCharacter.m_hidden, extraParams));
+		tabData.PushBackFlashObject(CreateStringSlider(PM_AddCharacter_Hide, "photomode_params_hide_addcharacters", stringsArray, (int)m_selectedSpawnedCharacter.m_hidden, extraParams));
+
+		extraParams.m_disabled = !m_selectedCharValid;
+		stringsArray.Clear();
+		stringsArray.PushBack("panel_mainmenu_option_value_off");
+		stringsArray.PushBack("panel_mainmenu_option_value_on");
+		tabData.PushBackFlashObject(CreateStringSlider(PM_AddCharacter_Track, "photomode_params_addchar_track", stringsArray, 0, extraParams));
 
 		extraParams.m_callbackFunctionName = "OnRequestFakeTick";
 		extraParams.m_callbackDelay = 0.01;
@@ -1386,6 +1511,8 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		extraParams.m_callbackDelay = 0;
 		extraParams.m_disabled = !m_selectedCharValid;
 
+		tabData.PushBackFlashObject(CreateBasicSlider(PM_AddCharacter_AnimationSpeed, "photomode_params_char_animation_speed", 0.0, 1.0, 0.1, m_selectedSpawnedCharacter.m_animationSpeed, extraParams));
+
 		stringsArray.Clear();
 		stringsArray.PushBack("photomode_params_char_lookcamera_off"); 
 		stringsArray.PushBack("photomode_params_char_lookcamera_on");  
@@ -1404,8 +1531,9 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 		extraParams.m_callbackFunctionName = "OnResetAddCharacterTransformToOrigin";
 		extraParams.m_callbackFunctionNameSecondary = "OnResetAddCharacterTransformToCamera";
-	
-		tabData.PushBackFlashObject(CreateButtonRenderer(PM_Char_ResetButtons,"photomode_char_reset_transform_origin","photomode_char_reset_transform_camera", 0 ,extraParams, true));
+		extraParams.m_selectedButton = 0;
+		
+		tabData.PushBackFlashObject(CreateButtonRenderer(PM_Char_ResetButtons,"photomode_char_reset_transform_origin","photomode_char_reset_transform_camera", 0 ,extraParams));
 
 		rootArray.PushBackFlashObject(CreateTab("photomode_tabs_addcharacter", tabData, "addcharacter"));
 
@@ -1437,7 +1565,9 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		stringsArray.PushBack("photomode_params_prop_snapcamera_on");  
 		tabData.PushBackFlashObject(CreateStringSlider(PM_Prop_SnapCamera, "photomode_params_prop_snapcamera", stringsArray, (int)m_selectedSpawnedProp.m_snapToCamera, extraParams)); 
 
-		tabData.PushBackFlashObject(CreateBasicSlider(PM_Prop_Transform_Rotate, "photomode_params_prop_rotate", -360.0, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotation, extraParams));
+		tabData.PushBackFlashObject(CreateBasicSlider(PM_Prop_Transform_Rotate_Yaw, "photomode_params_prop_rotate_yaw", -360.0, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotationAngles.Yaw, extraParams));
+		tabData.PushBackFlashObject(CreateBasicSlider(PM_Prop_Transform_Rotate_Pitch, "photomode_params_prop_rotate_pitch", -360.0, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotationAngles.Pitch, extraParams));
+		tabData.PushBackFlashObject(CreateBasicSlider(PM_Prop_Transform_Rotate_Roll, "photomode_params_prop_rotate_roll", -360.0, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotationAngles.Roll, extraParams));
 
 		extraParams.m_disabled = !m_selectedPropValid || m_selectedSpawnedProp.m_snapToCamera;
 		tabData.PushBackFlashObject(CreateBasicSlider(PM_Prop_Transform_LeftRight, "photomode_params_prop_leftright", -10.0, 10.0, 0.05, m_selectedSpawnedProp.m_relativeLocation.X, extraParams));
@@ -1446,8 +1576,8 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 		extraParams.m_callbackFunctionName = "OnResetPropTransformToOrigin";
 		extraParams.m_callbackFunctionNameSecondary = "OnResetPropTransformToCamera";
-
-		tabData.PushBackFlashObject(CreateButtonRenderer(PM_Prop_ResetButtons,"photomode_props_reset_transform_origin","photomode_props_reset_transform_camera", 0 ,extraParams, true));
+		extraParams.m_selectedButton = 0;
+		tabData.PushBackFlashObject(CreateButtonRenderer(PM_Prop_ResetButtons,"photomode_props_reset_transform_origin","photomode_props_reset_transform_camera", 0 ,extraParams));
 
 		rootArray.PushBackFlashObject(CreateTab("photomode_tabs_prop", tabData, "prop"));
 		
@@ -1517,6 +1647,8 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		min = GameTimeMinutes( gameTime );
 		currentTime = hour * 60 + min;
 		tabData.PushBackFlashObject(CreateStringSlider(PM_TimeOfDay, "photomode_params_timeofday", stringsArray, currentTime, extraParams, true)); 
+
+		tabData.PushBackFlashObject(CreateBasicSlider(PM_TimeScale, "photomode_params_timespeed", 0.0, 1.0, 0.1, 0.0, extraParams));
 
 		
 		stringsArray.Clear();
@@ -1615,7 +1747,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		stringsArray.Clear();
 		stringsArray.PushBack("panel_mainmenu_option_value_off"); 
 		stringsArray.PushBack("panel_mainmenu_option_value_on");  
-		tabData.PushBackFlashObject(CreateStringSlider(PM_UI_Thirds, "photomode_params_thirds_lines", stringsArray, 1)); 
+		tabData.PushBackFlashObject(CreateStringSlider(PM_UI_Thirds, "photomode_params_thirds_lines", stringsArray, 0)); 
 
 		
 		stringsArray.Clear();
@@ -1663,7 +1795,12 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		stringsArray.Clear();
 		stringsArray.PushBack(GetLocStringByKeyExt("input_device_key_name_IK_none"));
 		tabData.PushBackFlashObject(CreateStringSelector(PM_Camera_Location, "photomode_params_camera_location", stringsArray, 0, extraParams, true));
-		tabData.PushBackFlashObject(CreateSaver(PM_Camera_Location, "photomode_params_camera_location_saver", ""));
+
+		extraParams.m_callbackFunctionName = "OnCameraSaved";
+		extraParams.m_callbackFunctionNameSecondary = "OnCameraDeleted";
+		tabData.PushBackFlashObject(CreateButtonRenderer(PM_Camera_Buttons,"photomode_params_camera_button_save","photomode_params_camera_button_delete", 0 ,extraParams));
+
+		
 
 		rootArray.PushBackFlashObject(CreateTab("photomode_tabs_load_save", tabData, "load_save"));
 	}
@@ -2121,6 +2258,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		buttonRendererObj = m_flashValueStorage.CreateTempFlashObject();
 		buttonRendererArgsObj = m_flashValueStorage.CreateTempFlashObject();
 	
+
 		buttonRendererArgsObj.SetMemberFlashInt("id", id);
 		buttonRendererArgsObj.SetMemberFlashString("defIdx", defIdx);
 
@@ -2133,8 +2271,10 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			buttonRendererObj.SetMemberFlashString("callbackSecondary", extraParams.m_callbackFunctionNameSecondary);
 		}
 
-		buttonRendererArgsObj.SetMemberFlashString("label1", GetLocStringByKeyExt(button1Label));
-		buttonRendererArgsObj.SetMemberFlashString("label2", GetLocStringByKeyExt(button2Label));
+		buttonRendererArgsObj.SetMemberFlashString("label1", dontLocalizeValue ? button1Label : GetLocStringByKeyExt(button1Label));
+		buttonRendererArgsObj.SetMemberFlashString("label2", dontLocalizeValue ? button2Label : GetLocStringByKeyExt(button2Label));
+		
+		buttonRendererArgsObj.SetMemberFlashInt("selectedButton", extraParams.m_selectedButton);
 
 		if(extraParams.m_disabled)
 			buttonRendererObj.SetMemberFlashBool("disabled", true);
@@ -2264,13 +2404,16 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		return tabObj;
 	}
 	
-	private function OnCharacterFilteringChanged():void
+	private function OnWorldNPCChanged():void
 	{
-		OnCharacterFilteringChanged_SelectedNPC();
-		OnCharacterFilteringChanged_Appearance();
+		OnWorldNPCChanged_SelectedNPC();
+		OnWorldNPCChanged_Appearance();
+		OnWorldNPCChanged_Hide();
+		OnWorldNPCChanged_Track();
+		OnWorldNPCChanged_SelectButtons();
 	}
 
-	private function OnCharacterFilteringChanged_SelectedNPC():void
+	private function OnWorldNPCChanged_SelectedNPC():void
 	{
 		var elemObj : CScriptedFlashObject;	
 		var extraParams : SPhotomodeRendererExtraParams;
@@ -2284,7 +2427,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		QueueOverrideElement(elemObj, PM_Selected_NPC);
 	}
 
-	private function OnCharacterFilteringChanged_Appearance():void
+	private function OnWorldNPCChanged_Appearance():void
 	{
 		var elemObj : CScriptedFlashObject;	
 		var extraParams : SPhotomodeRendererExtraParams;
@@ -2300,18 +2443,61 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		QueueOverrideElement(elemObj, PM_Appearance);
 	}
 
+	private function OnWorldNPCChanged_Hide():void
+	{
+		var elemObj : CScriptedFlashObject;	
+		var extraParams : SPhotomodeRendererExtraParams;
+		var stringsArray : array<string>;
+
+		stringsArray.Clear();
+		stringsArray.PushBack("panel_mainmenu_option_value_off");
+		stringsArray.PushBack("panel_mainmenu_option_value_on");
+		extraParams.m_disabled = !m_selectedCharValid_World;
+		elemObj = CreateStringSlider(PM_NPC_Hide, "photomode_params_char_hide_selected", stringsArray, m_hiddenNPCs.Contains((CNewNPC)m_selectedCharacter_World) ? 1 : 0);
+		QueueOverrideElement(elemObj, PM_NPC_Hide);
+	}
+
+	private function OnWorldNPCChanged_Track():void
+	{
+		var elemObj : CScriptedFlashObject;	
+		var extraParams : SPhotomodeRendererExtraParams;
+		var stringsArray : array<string>;
+
+		stringsArray.Clear();
+		stringsArray.PushBack("panel_mainmenu_option_value_off");
+		stringsArray.PushBack("panel_mainmenu_option_value_on");
+		extraParams.m_disabled = !m_selectedCharValid_World;
+		elemObj = CreateStringSlider(PM_NPC_Track, "photomode_params_char_track", stringsArray, (int)m_selectedCharWorldTracking, extraParams);
+		QueueOverrideElement(elemObj, PM_NPC_Track);
+	}
+
+	private function OnWorldNPCChanged_SelectButtons():void
+	{
+		var elemObj : CScriptedFlashObject;	
+		var extraParams : SPhotomodeRendererExtraParams;
+
+		extraParams.m_callbackFunctionName = "OnSelectNPCInFront";
+		extraParams.m_callbackFunctionNameSecondary = "OnResetAllNPCChanges";
+		extraParams.m_disabled = !m_selectedCharValid_World;
+		elemObj = CreateButtonRenderer(PM_NPC_SelectButtons,"photomode_params_char_button_select","photomode_params_char_button_reset_changes", 0 ,extraParams);
+		QueueOverrideElement(elemObj, PM_NPC_SelectButtons);
+	}
+
 	private function OnSelectedAddCharacterChanged():void
 	{
 		OnSelectedAddCharacterChanged_EnableGravity();
+		OnSelectedAddCharacterChanged_Track();
 		OnSelectedAddCharacterChanged_Appearance();
 		OnSelectedAddCharacterChanged_FacialAnimations();
 		OnSelectedAddCharacterChanged_HideCharacter();
 		
 		OnSelectedAddCharacterChanged_Pose();
+		OnSelectedAddCharacterChanged_AnimationSpeed();
 		OnSelectedAddCharacterChanged_LookAtCamera();
 		OnSelectedAddCharacterChanged_SnapToCamera();
 		OnSelectedAddCharacterChanged_Rotation();
 		OnSelectedAddCharacterChanged_Position();
+		UpdateResetButtons("chars",0);
 	}
 
 	private function OnSelectedAddCharacterChanged_Transform():void
@@ -2361,8 +2547,8 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		stringsArray.PushBack("panel_mainmenu_option_value_off");
 		stringsArray.PushBack("panel_mainmenu_option_value_on");
 		extraParams.m_disabled = !m_selectedCharValid;
-		elemObj = CreateStringSlider(PM_Hide_AddCharacters, "photomode_params_hide_addcharacters", stringsArray, (int)m_selectedSpawnedCharacter.m_hidden, extraParams);
-		QueueOverrideElement(elemObj, PM_Hide_AddCharacters);
+		elemObj = CreateStringSlider(PM_AddCharacter_Hide, "photomode_params_hide_addcharacters", stringsArray, (int)m_selectedSpawnedCharacter.m_hidden, extraParams);
+		QueueOverrideElement(elemObj, PM_AddCharacter_Hide);
 	}
 
 	private function OnSelectedAddCharacterChanged_PoseCategory():void
@@ -2397,6 +2583,15 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		QueueOverrideElement(elemObj, PM_Char_Pose);
 	}
 
+	private function OnSelectedAddCharacterChanged_AnimationSpeed():void
+	{
+		var elemObj : CScriptedFlashObject;	
+		var extraParams : SPhotomodeRendererExtraParams;
+
+		extraParams.m_disabled = !m_selectedCharValid;
+		QueueOverrideElement(CreateBasicSlider(PM_AddCharacter_AnimationSpeed, "photomode_params_char_animation_speed", 0.0, 1.0, 0.1, m_selectedSpawnedCharacter.m_animationSpeed, extraParams), PM_AddCharacter_AnimationSpeed);
+	}
+
 	private function OnSelectedAddCharacterChanged_LookAtCamera():void
 	{
 		var elemObj : CScriptedFlashObject;	
@@ -2429,11 +2624,25 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		var extraParams : SPhotomodeRendererExtraParams;
 		var stringsArray : array<string>;
 
-		extraParams.m_disabled = false;
+		extraParams.m_disabled =  false;
 		stringsArray.PushBack("photomode_params_char_snapcamera_off"); 
 		stringsArray.PushBack("photomode_params_char_snapcamera_on");  
 		elemObj = CreateStringSlider(PM_Char_EnableGravity, "photomode_params_char_enable_gravity", stringsArray, (int)(!m_selectedSpawnedCharacter.m_disableGravity), extraParams);
 		QueueOverrideElement(elemObj, PM_Char_EnableGravity);
+	}
+
+	private function OnSelectedAddCharacterChanged_Track():void
+	{
+		var elemObj : CScriptedFlashObject;	
+		var extraParams : SPhotomodeRendererExtraParams;
+		var stringsArray : array<string>;
+
+		stringsArray.Clear();
+		stringsArray.PushBack("panel_mainmenu_option_value_off");
+		stringsArray.PushBack("panel_mainmenu_option_value_on");
+		extraParams.m_disabled = !m_selectedCharValid_Spawned;
+		elemObj = CreateStringSlider(PM_AddCharacter_Track, "photomode_params_addchar_track", stringsArray, (int)m_selectedCharSpawnedTracking, extraParams);
+		QueueOverrideElement(elemObj, PM_AddCharacter_Track);
 	}
 
 	private function OnSelectedAddCharacterChanged_Rotation():void
@@ -2460,13 +2669,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		QueueOverrideElement(elemObj, PM_Char_Transform_UpDown);
 	}
 
-
 	private function OnSelectedAddPropChanged():void
 	{
 		OnSelectedAddPropChanged_EnableGravity();
 		OnSelectedAddPropChanged_SnapToCamera();
 		OnSelectedAddPropChanged_Rotation();
 		OnSelectedAddPropChanged_Position();
+		UpdateResetButtons("props",0);
 	}
 
 	private function OnSelectedAddPropChanged_Transform():void
@@ -2507,8 +2716,12 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		var extraParams : SPhotomodeRendererExtraParams;
 
 		extraParams.m_disabled = !m_selectedPropValid;
-		elemObj = CreateBasicSlider(PM_Prop_Transform_Rotate, "photomode_params_prop_rotate", -360, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotation, extraParams);
-		QueueOverrideElement(elemObj, PM_Prop_Transform_Rotate);
+		elemObj = CreateBasicSlider(PM_Prop_Transform_Rotate_Yaw, "photomode_params_prop_rotate_yaw", -360, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotationAngles.Yaw, extraParams);
+		QueueOverrideElement(elemObj, PM_Prop_Transform_Rotate_Yaw);
+		elemObj = CreateBasicSlider(PM_Prop_Transform_Rotate_Pitch, "photomode_params_prop_rotate_pitch", -360, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotationAngles.Pitch, extraParams);
+		QueueOverrideElement(elemObj, PM_Prop_Transform_Rotate_Pitch);
+		elemObj = CreateBasicSlider(PM_Prop_Transform_Rotate_Roll, "photomode_params_prop_rotate_roll", -360, 360.0, 5.0, m_selectedSpawnedProp.m_relativeRotationAngles.Roll, extraParams);
+		QueueOverrideElement(elemObj, PM_Prop_Transform_Rotate_Roll);
 	}
 
 	private function OnSelectedAddPropChanged_Position():void
@@ -2527,25 +2740,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 	private function OnAddCharacterFilteringChanged():void
 	{
-
+		
 	}
 	
 	private function OnCharacterChanged():void
 	{
-		var extraParams : SPhotomodeRendererExtraParams;
-
-		var stringsArray : array<string>;
-		var selected : int;
-
-		var elemObj : CScriptedFlashObject;	
-	
-		GetAppearanceList(stringsArray, selected, false);
-		if(stringsArray.Size() == 0) stringsArray.PushBack(GetLocStringByKeyExt("input_device_key_name_IK_none"));
-		extraParams.m_callbackFunctionName = "OnRequestFakeTick";
-		extraParams.m_callbackDelay = 0.01;
-		extraParams.m_disabled = m_cachedAppearanceList.Size() < 2;
-		elemObj = CreateStringSelector(PM_Appearance, "photomode_params_selected_appearance", stringsArray, selected, extraParams, true);
-		QueueOverrideElement(elemObj, PM_Appearance);
+		OnWorldNPCChanged_Appearance();
+		OnWorldNPCChanged_Hide();
 	}
 
 	event OnSelectCharacterFromList( entityName : String, iconPath : String, index : int)
@@ -2609,8 +2810,6 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_selectedSpawnedCharacter = m_spawnedCharactersBySlot[m_currentCharacterSlotId];
 		PlayCurrentAnimation();
 		WarmupClothsSimulation();
-
-		m_queuedCharUpdate = true;
 	}
 	
 	private function OnCharacterLookCameraChanged(value : float):void
@@ -2747,8 +2946,8 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 		m_spawnedCharactersBySlot[m_currentCharacterSlotId].m_actor.TeleportWithRotation(newLocation, newRotation);
 
-		RecalculateCharacterHighlightPosition();
-		UpdateCharacterHighlightPosition();
+		RecalculateSelectedEntityHighlightPosition();
+		UpdateSelectedEntityHighlightPosition();
 
 		DoFakeTick();
 		WarmupClothsSimulation();
@@ -2763,9 +2962,14 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 		newLocation = m_selectedSpawnedProp.m_location + m_selectedSpawnedProp.m_relativeLocation;
 		newRotation = m_selectedSpawnedProp.m_rotation;
-		newRotation.Yaw += m_selectedSpawnedProp.m_relativeRotation;
+		newRotation.Yaw += m_selectedSpawnedProp.m_relativeRotationAngles.Yaw;
+		newRotation.Pitch += m_selectedSpawnedProp.m_relativeRotationAngles.Pitch;
+		newRotation.Roll += m_selectedSpawnedProp.m_relativeRotationAngles.Roll;
 
 		m_selectedSpawnedProp.m_entity.TeleportWithRotation(newLocation, newRotation);
+
+		RecalculateSelectedEntityHighlightPosition();
+		UpdateSelectedEntityHighlightPosition();
 
 		DoFakeTick();
 	}
@@ -2795,6 +2999,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_spawnedCharactersBySlot[m_currentCharacterSlotId].m_relativeRotation = 0;
 		OnCharacterTransformChanged();
 		OnSelectedAddCharacterChanged_Transform();
+		UpdateResetButtons("chars",0);
 	}
 
 	event   OnResetPropTransformToOrigin()
@@ -2803,15 +3008,14 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			return false;
 
 		m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeLocation = Vector(0,0,0);
-		m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotation = 0;
+		m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles = EulerAngles(0,0,0);
 		OnPropsTransformChanged();
-		OnSelectedAddPropChanged_Position();
+		OnSelectedAddPropChanged_Transform();
+		UpdateResetButtons("props",0);
 	}
 
 	event   OnResetAddCharacterTransformToCamera()
 	{
-		LogChannel('PHOTOMODE', "Debug UI OnResetAddCharacterTransformToCamera");
-
 		if (!m_selectedCharValid)
 			return false;
 
@@ -2821,6 +3025,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_spawnedCharactersBySlot[m_currentCharacterSlotId].m_rotation = GetSpawnRotation(m_spawnedCharactersBySlot[m_currentCharacterSlotId].m_location);
 		OnCharacterTransformChanged();
 		OnSelectedAddCharacterChanged_Transform();
+		UpdateResetButtons("chars",1);
 	}
 
 	event  OnResetPropTransformToCamera()
@@ -2829,13 +3034,71 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			return false;
 
 		m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeLocation = Vector(0,0,0);
-		m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotation = 0;
+		m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles = EulerAngles(0,0,0);
 		m_spawnedPropsBySlot[m_currentPropSlotId].m_location = GetSpawnLocation(m_spawnedPropsBySlot[m_currentPropSlotId].m_entity, m_spawnedPropsBySlot[m_currentPropSlotId].m_disableGravity);
 		m_spawnedPropsBySlot[m_currentPropSlotId].m_rotation = GetSpawnRotation(m_spawnedPropsBySlot[m_currentPropSlotId].m_location);
 		OnPropsTransformChanged();
 		OnSelectedAddPropChanged_Transform();
+		UpdateResetButtons("props",1);
 	}
 	
+	event  OnSelectNPCInFront()
+	{
+		var cameraWorldPosition : Vector = theGame.GetPhotomodeCamera().GetCameraWorldPosition();
+		var cameraWorldRotation : EulerAngles = theGame.GetPhotomodeCamera().GetCameraWorldRotation();
+		var cameraForwardVector : Vector = RotForward(cameraWorldRotation);
+		var cameraFrontPosition : Vector = cameraWorldPosition + cameraForwardVector * m_cameraSelectionOffset;
+		var i : int;
+		var closestNPCID : int = -1;
+		var closestNPCDistance, distanceUnderTest : float;
+
+		if (m_cachedCharacterList.Size() == 0)
+			return false;
+
+		for (i = 0; i < m_cachedCharacterList.Size(); i+=1)
+		{
+			distanceUnderTest = VecDistance(cameraFrontPosition, m_cachedCharacterList[i].GetWorldPosition());
+			if (closestNPCID == -1 || distanceUnderTest <= closestNPCDistance)
+			{
+				closestNPCID = i;
+				closestNPCDistance = distanceUnderTest;
+			}
+		}
+
+		if(closestNPCID >= 0 && closestNPCID < m_cachedCharacterList.Size())
+		{
+			if(!m_selectedCharValid || m_selectedCharacter != m_cachedCharacterList[(int)closestNPCID])
+			{
+				m_selectedCharacter = m_cachedCharacterList[(int)closestNPCID];
+				m_selectedCharacter_World = m_selectedCharacter;
+				if (m_selectedCharTracking)
+				{
+					SwitchSelectedNPCTracking(true);
+				}
+				OnWorldNPCChanged();
+			}
+		}
+	}
+	
+	event  OnResetAllNPCChanges()
+	{
+		ShowNPCs();
+		RestoreOriginalAppearances();
+		OnCharacterChanged();
+	}
+
+	event  OnCameraSaved()
+	{
+		SaveCurrentCameraLocation();
+		
+	}
+
+	event  OnCameraDeleted()
+	{
+		DeleteCurrentCameraLocation();
+		
+	}
+
 	private function DoFakeTick() : void
 	{
 		
@@ -2860,11 +3123,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		switch ( idx )
 		{
 			case PM_Camera_Location:
-				if ( m_UIValues[PM_Camera_Location] == 0 ) 
-					CreateNewCameraLocationSave();
-				else
-					SaveCameraLocationToSlot( (int) m_UIValues[PM_Camera_Location] );
-
+				SaveCurrentCameraLocation();
 				break;
 		}
 	}
@@ -2885,16 +3144,14 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		switch ( idx )
 		{
 			case PM_Camera_Location:
-				if ( m_UIValues[PM_Camera_Location] == 0 ) 
-					break;
-
-				DeleteCameraLocation( (int) m_UIValues[PM_Camera_Preset], (int) m_UIValues[PM_Camera_Location] );
+				DeleteCurrentCameraLocation();
 				break;
 		}
 	}
 
 	event OnCharSlotSelect(slotId : int )
 	{	
+		LogChannel('DEBUGPHOTOMODE',"OnCharSlotSelect slotId: " + slotId );
 		if(m_currentCharacterSlotId != slotId)
 		{
 			m_currentCharacterSlotId = slotId;
@@ -3075,11 +3332,6 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		var compList : array<CComponent>;
 		var npcLocationPair : SNPCLocationPair;
 
-		if( !m_hideNPCsEnabled )
-		{
-			return;
-		}
-
 		for( i=0; i < m_hiddenNPCs.Size(); i+=1 )
 		{
 			if( m_hiddenNPCs[i] )
@@ -3094,12 +3346,51 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		thePlayer.GetPhotomodeManager().DoFakeTick();
 	}
 
+	private function SwitchSelectedNPCVisibility(visibility : bool)
+	{
+		if (!m_selectedCharValid_World)
+			return;
+
+		m_selectedCharacter_World.SetVisibility( visibility );
+		if (visibility)
+		{
+			m_hiddenNPCs.Remove( (CNewNPC)m_selectedCharacter_World );
+		}
+		else
+		{
+			m_hiddenNPCs.PushBack( (CNewNPC)m_selectedCharacter_World );
+		}
+	}
+
+	private function SwitchSelectedNPCTracking(doTrack : bool)
+	{
+		if (!m_selectedCharValid)
+			return;
+
+		if (doTrack)
+		{
+			theGame.GetPhotomodeCamera().LerpCameraToTargetActor(m_selectedCharacter);
+			UpdateParam(PM_Camera_Location, 0);
+			UpdateParamWithEvent(PM_Camera_Noclip, 1);
+		}
+		else
+		{
+			theGame.GetPhotomodeCamera().StopFollowingTargetActor();
+			m_selectedCharWorldTracking = false;
+			m_selectedCharSpawnedTracking = false;
+		}
+
+		m_selectedCharTracking = doTrack;
+	}
+
 	private function PlayCurrentAnimation()
 	{
 		var animatedComponent : CAnimatedComponent;
 
 		animatedComponent = ( CAnimatedComponent ) m_selectedCharacter.GetComponentByClassName( 'CAnimatedComponent' );
-		animatedComponent.PlayAnimationOnSkeleton(m_selectedSpawnedCharacter.m_pose, m_selectedSpawnedCharacter.m_poseDetails.m_startTime);
+		animatedComponent.PlayAnimationOnSkeleton(m_selectedSpawnedCharacter.m_pose, m_selectedSpawnedCharacter.m_poseDetails.m_startTime, true, true, 1.f, m_selectedSpawnedCharacter.m_animationSpeed == 0.f);
+		if (m_selectedSpawnedCharacter.m_animationSpeed > 0.f)
+			animatedComponent.SetAnimationSpeedMultiplier(m_selectedSpawnedCharacter.m_animationSpeed);
 		m_selectedSpawnedCharacter.m_actor.PlayMimicAnimationAsync(m_selectedSpawnedCharacter.m_mimic, 0, 0.5);
 
 		DoFakeTick();
@@ -3109,6 +3400,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 	{	
 		var spawnLocation, finalSpawnLocation : Vector;
 		var spawnRotation, finalSpawnRotation : EulerAngles;
+		var tags : array<name>;
 
 		var entityTemplate : CEntityTemplate;
 
@@ -3116,6 +3408,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		var spawnedEntity : CEntity;
 		var spawnedCharacter, lastSpawnedCharacter : SSpawnedCharacter;
 
+		tags.PushBack('photomode_spawned');
 		spawnedCharacter.m_disableGravity = m_selectedSpawnedCharacter.m_disableGravity;
 		if (m_spawnedCharactersBySlot.Contains(m_currentCharacterSlotId))
 		{
@@ -3144,6 +3437,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			spawnedCharacter.m_lookAtCamera = lastSpawnedCharacter.m_lookAtCamera;
 			spawnedCharacter.m_snapToCamera = lastSpawnedCharacter.m_snapToCamera;
 			spawnedCharacter.m_disableGravity = lastSpawnedCharacter.m_disableGravity;
+			spawnedCharacter.m_animationSpeed = lastSpawnedCharacter.m_animationSpeed;
 			spawnLocation = lastSpawnedCharacter.m_location;
 			spawnRotation = lastSpawnedCharacter.m_rotation;
 		}
@@ -3159,11 +3453,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 		entityTemplate = (CEntityTemplate)LoadResource(characterToSpawn);
 		spawnedEntity = theGame.CreateEntity(entityTemplate, finalSpawnLocation, finalSpawnRotation);
+		spawnedEntity.SetTags(tags);
 
 		spawnedCharacter.m_slot = m_currentCharacterSlotId;
 		spawnedCharacter.m_index = index;
 		spawnedCharacter.m_actor = (CNewNPC)spawnedEntity;
 		spawnedCharacter.m_actor.EnableCharacterCollisions(false);
+		spawnedCharacter.m_actor.SetAttitude(thePlayer, AIA_Friendly);
 		
 		spawnedCharacter.m_entityName = characterToSpawn;
 		spawnedCharacter.m_location = spawnLocation;
@@ -3287,17 +3583,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 
 	private function GetSpawnLocation(referenceEntity : CEntity, disableGravity : bool) : Vector
 	{
-		var cameraWorldPosition : Vector;
-		var cameraWorldRotation : EulerAngles;
-		var cameraForwardVector : Vector;
+		var cameraWorldPosition : Vector = theGame.GetPhotomodeCamera().GetCameraWorldPosition();
+		var cameraWorldRotation : EulerAngles = theGame.GetPhotomodeCamera().GetCameraWorldRotation();
+		var cameraForwardVector : Vector = RotForward(cameraWorldRotation);
 		var spawnLocation : Vector;
 		var bbox : Box;
 		var hitResults : array<SRaycastHitResult>;
 		var m_spawnCameraZOffset : float = 0;
-
-		cameraWorldPosition = theGame.GetPhotomodeCamera().GetCameraWorldPosition();
-		cameraWorldRotation = theGame.GetPhotomodeCamera().GetCameraWorldRotation();
-		cameraForwardVector = RotForward(cameraWorldRotation);
 
 		if (referenceEntity)
 		{
@@ -3389,12 +3681,20 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		if (m_selectedCharValid)
 		{
 			m_selectedSpawnedCharacter = m_spawnedCharactersBySlot[m_currentCharacterSlotId];
-			EnableCharacterHighlight(true);
+			EnableSelectedEntityHighlight(true);
+			if (m_selectedCharSpawnedTracking)
+			{
+				SwitchSelectedNPCTracking(true);
+			}
 		}
 		else
 		{
 			m_selectedSpawnedCharacter = noCharacterData;
-			EnableCharacterHighlight(false);
+			EnableSelectedEntityHighlight(false);
+			if (m_selectedCharSpawnedTracking)
+			{
+				SwitchSelectedNPCTracking(false);
+			}
 		}
 
 		UpdateSelectedCharacterPoses();
@@ -3419,10 +3719,12 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		{
 			
 			m_selectedSpawnedProp = m_spawnedPropsBySlot[m_currentPropSlotId];
+			EnableSelectedEntityHighlight(true);
 		}
 		else
 		{
 			m_selectedSpawnedProp = noPropData;
+			EnableSelectedEntityHighlight(false);
 		}
 
 		UpdatePropTab();
@@ -3496,31 +3798,52 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_spawnedPropsBySlot.Clear();
 	}
 
-	private function RecalculateCharacterHighlightPosition()
+	private function RecalculateSelectedEntityHighlightPosition()
 	{
 		var hud : CR4ScriptedHud;
 		var highlightPosition : Vector;
 		var headBoneIdx : int;
+		var bbox : Box;
 
-		
- 		headBoneIdx = m_selectedCharacter.GetHeadBoneIndex();
-		if ( headBoneIdx >= 0 )
+		hud = (CR4ScriptedHud)theGame.GetHud();
+		if ( m_lastPhotomodeTab == 4 ) 
 		{
-			highlightPosition = MatrixGetTranslation( m_selectedCharacter.GetBoneWorldMatrixByIndex( headBoneIdx ) );
-			hud = (CR4ScriptedHud)theGame.GetHud();
-			hud.SetCachedPositionForEntity(m_selectedCharacter, highlightPosition);
+			if (m_selectedProp)
+			{
+				m_selectedProp.CalcBoundingBox(bbox);
+				highlightPosition = (bbox.Max + bbox.Min) / 2;
+				highlightPosition.Z = bbox.Max.Z + 1.f;
+				
+				hud.SetCachedPositionForEntity(m_selectedProp, highlightPosition);
+			}
+		}
+		else
+		{
+			
+			headBoneIdx = m_selectedCharacter.GetHeadBoneIndex();
+			if ( headBoneIdx >= 0 )
+			{
+				highlightPosition = MatrixGetTranslation( m_selectedCharacter.GetBoneWorldMatrixByIndex( headBoneIdx ) );
+				hud.SetCachedPositionForEntity(m_selectedCharacter, highlightPosition);
+			}
 		}
 	}
 
-	private function UpdateCharacterHighlightPosition()
+	private function UpdateSelectedEntityHighlightPosition()
 	{
 		var charHighlightScreenPos : Vector;
+		var padding : int = 10;
+		var entity : CEntity;
+		if (m_lastPhotomodeTab == 4)
+			entity = m_selectedProp;
+		else
+			entity = m_selectedCharacter;
 
-		GetBaseScreenPosition( charHighlightScreenPos, m_selectedCharacter );
+		GetBaseScreenPosition( charHighlightScreenPos, entity );
 	
 		
-		charHighlightScreenPos.X = ClampF(charHighlightScreenPos.X, 0, 1920); 
-		charHighlightScreenPos.Y = ClampF(charHighlightScreenPos.Y, 0, 1080); 
+		charHighlightScreenPos.X = ClampF(charHighlightScreenPos.X, padding, 1920 - padding); 
+		charHighlightScreenPos.Y = ClampF(charHighlightScreenPos.Y, padding, 1080 - padding); 
 	
 		m_fxSetCharacterHighlightPosition.InvokeSelfTwoArgs(FlashArgNumber(charHighlightScreenPos.X), FlashArgNumber(charHighlightScreenPos.Y));
 	}
@@ -3560,7 +3883,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				if (m_selectedCharacter == m_spawnedCharactersBySlot[i].m_actor)
 				{
 					m_selectedSpawnedCharacter = m_spawnedCharactersBySlot[i];
-					RecalculateCharacterHighlightPosition();
+					RecalculateSelectedEntityHighlightPosition();
 				}
 			}
 		}
@@ -3594,42 +3917,23 @@ class CR4PhotomodeMenu extends CR4MenuBase
 			{
 				cameraRelativeLocation = m_spawnedPropsBySlot[i].m_location + m_spawnedPropsBySlot[i].m_relativeLocation;
 				finalRotation = m_spawnedPropsBySlot[i].m_rotation;
-				finalRotation.Yaw += m_spawnedPropsBySlot[i].m_relativeRotation;
+				finalRotation.Yaw += m_spawnedPropsBySlot[i].m_relativeRotationAngles.Yaw;
+				finalRotation.Pitch += m_spawnedPropsBySlot[i].m_relativeRotationAngles.Pitch;
+				finalRotation.Roll += m_spawnedPropsBySlot[i].m_relativeRotationAngles.Roll;
 				m_spawnedPropsBySlot[i].m_entity.TeleportWithRotation(cameraRelativeLocation, finalRotation);
 
 				if (m_selectedProp == m_spawnedPropsBySlot[i].m_entity)
 				{
 					m_selectedSpawnedProp = m_spawnedPropsBySlot[i];
+					RecalculateSelectedEntityHighlightPosition();
 				}
 			}
 		}
 	}
 
-	private function BlendCameraTransform(cameraPosition : Vector, cameraRotation : EulerAngles, timeDelta : float)
-	{
-		var newCameraPosition : Vector = m_cameraPositionDamper.UpdateAndGet(timeDelta, m_targetCameraPosition);
-		var newCameraRotation : EulerAngles = m_cameraRotationDamper.UpdateAndGet(timeDelta, m_targetCameraRotation);
-
-		theGame.GetPhotomodeCamera().SetCameraWorldPosition(newCameraPosition);
-		theGame.GetPhotomodeCamera().SetCameraWorldRotation(newCameraRotation);
-		theGame.GetPhotomodeCamera().UpdateWithoutInput( true );
-
-		
-		if ( VecDistance( theGame.GetPhotomodeCamera().GetCameraWorldPosition(), cameraPosition ) <= 0.01f )
-		{
-			m_cameraBlendInProgress = false;
-			theGame.GetPhotomodeCamera().SetCameraWorldPosition(m_targetCameraPosition);
-			theGame.GetPhotomodeCamera().SetCameraWorldRotation(m_targetCameraRotation);
-			theGame.GetPhotomodeCamera().UpdateWithoutInput( true );
-			UpdateParamWithEvent( PM_Camera_Noclip, 1 ); 
-			theGame.GetPhotomodeCamera().SetNoclip( m_UIValues[PM_Camera_Noclip] == 1 );
-			theGame.SetPhotomodeCameraCanMove(CanPhotomodeCameraMove());
-		}
-	}
-
 	public function CanPhotomodeCameraMove() : bool
 	{
-		return !m_cameraLocked && m_cameraDraggable && !m_cameraBlendInProgress;
+		return !m_cameraLocked;
 	}
 	
 	public function LoadCensoredAppearances():void
@@ -3805,11 +4109,27 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		}
 	}
 
+	private function SaveCurrentCameraLocation()
+	{
+		if ( m_UIValues[PM_Camera_Location] == 0 ) 
+			CreateNewCameraLocationSave();
+		else
+			SaveCameraLocationToSlot( (int) m_UIValues[PM_Camera_Location] );
+	}
+
+	private function DeleteCurrentCameraLocation()
+	{
+		if ( m_UIValues[PM_Camera_Location] == 0 ) 
+			return;
+
+		DeleteCameraLocation( (int) m_UIValues[PM_Camera_Preset], (int) m_UIValues[PM_Camera_Location] );
+	}
+
 	private function CreateCameraLocationSaveString() : string
 	{
-		var cameraWorldPosition : Vector;
-		var cameraWorldRotation : EulerAngles;
-		var playerWorldRotation : EulerAngles;
+		var cameraWorldPosition : Vector = theGame.GetPhotomodeCamera().GetCameraWorldPosition();
+		var cameraWorldRotation : EulerAngles = theGame.GetPhotomodeCamera().GetCameraWorldRotation();
+		var playerWorldRotation : EulerAngles = thePlayer.GetWorldRotation();
 
 		var posDiff : Vector;
 		var playerRotationYawRadian : float;
@@ -3818,10 +4138,6 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		var relativeYaw : float;
 
 		var saveString : string;
-
-		cameraWorldPosition = theGame.GetPhotomodeCamera().GetCameraWorldPosition();
-		cameraWorldRotation = theGame.GetPhotomodeCamera().GetCameraWorldRotation();
-		playerWorldRotation = thePlayer.GetWorldRotation();
 
 		posDiff = cameraWorldPosition - thePlayer.GetWorldPosition();
 		playerRotationYawRadian = playerWorldRotation.Yaw * ( Pi() / 180.f );
@@ -3848,6 +4164,7 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		if ( locationId < 0 )
 			return; 	
 
+		SaveCurrentCameraPosition( m_noLocationPresetPos, m_noLocationPresetRot );
 		SaveCameraLocationToConfig( locationId );
 
 		RefreshLocationPresetsUI( false, slotId );
@@ -3894,8 +4211,8 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		var savedCameraWorldRotation : EulerAngles;
 
 		var playerRotationYawRadian : float;
-		var cameraWorldRotation : EulerAngles;
-		var playerWorldRotation : EulerAngles;
+		var cameraWorldRotation : EulerAngles = theGame.GetPhotomodeCamera().GetCameraWorldRotation();
+		var playerWorldRotation : EulerAngles = thePlayer.GetWorldRotation();
 
 		var posDiff : Vector;
 		var newWorldPos : Vector;
@@ -3908,7 +4225,6 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		savedRelativeYaw = StringToFloat( value );
 		savedCameraWorldRotation = StringToEulerAngles( saveString );
 
-		playerWorldRotation = thePlayer.GetWorldRotation();
 		playerRotationYawRadian = playerWorldRotation.Yaw * ( Pi() / 180.f );
 
 		posDiff.X = CosF( playerRotationYawRadian ) * savedRelativePos.X - SinF( playerRotationYawRadian ) * savedRelativePos.Y;
@@ -3918,18 +4234,19 @@ class CR4PhotomodeMenu extends CR4MenuBase
 	
 		m_targetCameraPosition = newWorldPos;
 
-		cameraWorldRotation = theGame.GetPhotomodeCamera().GetCameraWorldRotation();
 		newRotation.Pitch = savedCameraWorldRotation.Pitch;
 		newRotation.Roll = cameraWorldRotation.Roll; 
 		newRotation.Yaw = savedRelativeYaw + playerWorldRotation.Yaw;
 
 		m_targetCameraRotation = newRotation;
 
-		m_cameraBlendInProgress = true;
-		m_cameraPositionDamper.Init(theGame.GetPhotomodeCamera().GetCameraWorldPosition(), m_targetCameraPosition);
-		m_cameraRotationDamper.Init(cameraWorldRotation, m_targetCameraRotation);
-		theGame.GetPhotomodeCamera().SetNoclip( true );
-		theGame.SetPhotomodeCameraCanMove(CanPhotomodeCameraMove());
+		theGame.GetPhotomodeCamera().LerpCameraToTarget(m_targetCameraPosition, m_targetCameraRotation);
+		UpdateParamWithEvent( PM_Camera_Noclip, 1 ); 
+		UpdateParam( PM_NPC_Track, 0 );
+		UpdateParam( PM_AddCharacter_Track, 0 );
+		m_selectedCharTracking = false;
+		m_selectedCharWorldTracking = false;
+		m_selectedCharSpawnedTracking = false;
 	}
 
 	private function DeleteCameraLocation( presetId : int, slot : int )
@@ -3965,11 +4282,13 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		m_targetCameraPosition = m_noLocationPresetPos;
 		m_targetCameraRotation = rot;
 
-		m_cameraBlendInProgress = true;
-		m_cameraPositionDamper.Init(theGame.GetPhotomodeCamera().GetCameraWorldPosition(), m_targetCameraPosition);
-		m_cameraRotationDamper.Init(theGame.GetPhotomodeCamera().GetCameraWorldRotation(), m_targetCameraRotation);
-		theGame.GetPhotomodeCamera().SetNoclip( true );
-		theGame.SetPhotomodeCameraCanMove(CanPhotomodeCameraMove());
+		theGame.GetPhotomodeCamera().LerpCameraToTarget(m_targetCameraPosition, m_targetCameraRotation);
+		UpdateParamWithEvent( PM_Camera_Noclip, 1 ); 
+		UpdateParam( PM_NPC_Track, 0 );
+		UpdateParam( PM_AddCharacter_Track, 0 );
+		m_selectedCharTracking = false;
+		m_selectedCharWorldTracking = false;
+		m_selectedCharSpawnedTracking = false;
 	}
 
 	private function GetLocationPresets( presetId : float, out locations : array<string> )
@@ -4059,26 +4378,15 @@ class CR4PhotomodeMenu extends CR4MenuBase
 		UpdateSpawnedCharactersTransformsIfNeeded(cameraPosition, cameraRotation, timeDelta);
 		UpdateSpawnedPropTransformsIfNeeded(cameraPosition, cameraRotation, timeDelta);
 
-		if (m_cameraBlendInProgress)
+		if (m_isHightlightVisible && (m_selectedCharValid || m_selectedPropValid))
 		{
-			BlendCameraTransform(cameraPosition, cameraRotation, timeDelta);
-		}
-
-		if (m_isCharacterSelected && m_selectedCharValid)
-		{
-			UpdateCharacterHighlightPosition();
+			RecalculateSelectedEntityHighlightPosition();
+			UpdateSelectedEntityHighlightPosition();
 		}
 
 		if (m_queuedOverrideElements.GetLength() > 0)
 		{
 			ProcessQueuedOverrideElements();
-		}
-
-		if (m_queuedCharUpdate)
-		{
-			m_queuedCharUpdate = false;
-			RecalculateCharacterHighlightPosition();
-			UpdateCharacterHighlightPosition();
 		}
 
 		if (m_queuedFakeTickN > 0)
@@ -4113,7 +4421,9 @@ class CR4PhotomodeMenu extends CR4MenuBase
 						m_spawnedPropsBySlot[m_currentPropSlotId].m_location = finalSpawnLocation;
 						finalSpawnLocation = finalSpawnLocation + m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeLocation;
 						finalSpawnRotation = m_spawnedPropsBySlot[m_currentPropSlotId].m_rotation;
-						finalSpawnRotation.Yaw += m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotation;
+						finalSpawnRotation.Yaw += m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles.Yaw;
+						finalSpawnRotation.Pitch += m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles.Pitch;
+						finalSpawnRotation.Roll += m_spawnedPropsBySlot[m_currentPropSlotId].m_relativeRotationAngles.Roll;
 						m_spawnedPropsBySlot[m_currentPropSlotId].m_entity.TeleportWithRotation(finalSpawnLocation, finalSpawnRotation);
 						m_selectedSpawnedProp = m_spawnedPropsBySlot[m_currentPropSlotId];
 					}
@@ -4132,6 +4442,11 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				}
 			}
 		}
+
+		
+		
+		
+		
 
 		m_lastCameraPosition = cameraPosition;
 		m_lastCameraRotation = cameraRotation;
@@ -4169,9 +4484,16 @@ class CR4PhotomodeMenu extends CR4MenuBase
 	{
 		m_cameraDraggable = val;
 
-		theGame.SetPhotomodeCameraCanMove(CanPhotomodeCameraMove());
+		theGame.SetPhotomodeCameraDraggable(m_cameraDraggable);
 	}
-	
+
+	event  OnSetMouseScrollEnabled(val : bool)
+	{
+		m_mouseScrollEnabled = val;
+
+		theGame.SetPhotomodeCameraWheelEnabled(m_mouseScrollEnabled);
+	}
+
 	event  OnSwapLockCamera()
 	{
 		m_cameraLocked = !m_cameraLocked;
@@ -4194,13 +4516,15 @@ class CR4PhotomodeMenu extends CR4MenuBase
 				m_selectedCharacter = m_selectedCharacter_World;
 				m_selectedCharValid = m_selectedCharValid_World;
 				OnCharacterChanged();
-				EnableCharacterHighlight(m_selectedCharValid);
-				m_queuedCharUpdate = true;
+				EnableSelectedEntityHighlight(m_selectedCharValid);
 				break;
 			case 3:
 				m_selectedCharacter = m_selectedCharacter_Spawned;
 				m_selectedCharValid = m_selectedCharValid_Spawned;
 				PostSelectCharacterBySlot();
+				break;
+			case 4:
+				EnableSelectedEntityHighlight(m_selectedPropValid);
 				break;
 			default:
 				break;

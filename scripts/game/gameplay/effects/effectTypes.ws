@@ -335,8 +335,17 @@ EET_Unused1,
 	EET_ElementOfSurprise,
 
 	
-EET_EffectTypesSize,
-EET_ForceEnumTo16Bit = 10000
+	
+	
+	
+	
+	
+	
+}
+
+function GetEffectRangeEnd() : int
+{
+	return (int)EnumGetMax('EEffectType') + 1;
 }
 
 

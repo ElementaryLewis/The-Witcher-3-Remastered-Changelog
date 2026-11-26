@@ -254,7 +254,7 @@ import class CAnimatedComponent extends CComponent
 	import final function SetAnimationTimeMultiplier( mult : float );
 
 	
-	import final function PlayAnimationOnSkeleton(animation : name, optional time : float, optional replace : bool, optional looped : bool, optional weight : float);
+	import final function PlayAnimationOnSkeleton(animation : name, optional time : float, optional replace : bool, optional looped : bool, optional weight : float, optional pause : bool);
 		
 	
 	public function SetAnimationSpeedMultiplier(mul : float) : int
